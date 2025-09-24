@@ -15,15 +15,15 @@ SessionLocal=sessionmaker(bind=engine)
 Base=declarative_base()
 
 
-# # fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
-# class Cliente(Base):
-#     __tablename__="cliente"
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     nome_cliente = Column(String, index=True) #// sujestão de melhoria: nome_cliente poderia ter tamanho máximo definido (String(100) por exemplo).
-#     data_nascimento = Column(DateTime, nullable=False)
-#     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
-#     email = Column(String, index=True)
-#     telefone = Column(String)
+# fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
+class Cliente(Base):
+    __tablename__="cliente"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome_cliente = Column(String, index=True) #// sujestão de melhoria: nome_cliente poderia ter tamanho máximo definido (String(100) por exemplo).
+    data_nascimento = Column(DateTime, nullable=False)
+    # data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
+    email = Column(String, index=True)
+    telefone = Column(String)
     
 #     #endereço
 #     rua = Column(String)
