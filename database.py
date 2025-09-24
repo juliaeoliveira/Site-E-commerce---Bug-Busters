@@ -15,11 +15,11 @@ SessionLocal=sessionmaker(bind=engine)
 Base=declarative_base()
 
 
-fuso = pytz.timezone('America/Sao_Paulo')
+fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
 class Cliente(Base):
     __tablename__="cliente"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nome_cliente = Column(String, index=True) 
+    nome_cliente = Column(String, index=True) #// sujestão de melhoria: nome_cliente poderia ter tamanho máximo definido (String(100) por exemplo).
     data_nascimento = Column(DateTime, nullable=False)
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
     email = Column(String, index=True)
@@ -33,11 +33,11 @@ class Cliente(Base):
     cidade = Column(String)
     estado = Column(String(2))  #"SP", "RJ"
     cep = Column(String(10))    #"12345-678"
-
-    #chave estrangeira da loja
+    # // sugestão de possíveis melhorias: telefone, email e cep poderiam ter validações (regex ou restrições na aplicação).
+    #chave estrangeira da loja // correto
     id_loja = Column(String, ForeignKey("loja.cnpj"), nullable=False)
 
-    #relacionamento com as tabelas
+    #relacionamento com as tabelas // relacionamentos corretos
     pagamentos = relationship("Pagamento", back_populates="cliente")
     pedidos = relationship("Pedido", back_populates="cliente")
     loja = relationship("Loja", back_populates="clientes")
@@ -45,8 +45,8 @@ class Cliente(Base):
 
 class Loja(Base):
     __tablename__="loja"
-    cnpj = Column(String, primary_key=True)
-    nome_loja = Column(String, index=True)
+    cnpj = Column(String, primary_key=True) 
+    nome_loja = Column(String, index=True) #// sujestão de melhoria: "nome_loja" poderia ter limite de caracteres.
 
     #endereço
     rua = Column(String)
@@ -59,25 +59,25 @@ class Loja(Base):
     telefone = Column(String)
     email = Column(String)
 
-    #relacionamento com as tabelas
+    #relacionamento com as tabelas // corretos
     pagamentos = relationship("Pagamento", back_populates="loja")
     clientes = relationship("Cliente", back_populates="loja")
     produtos = relationship("Produtos", back_populates="loja")
 
 class Pagamento(Base):
     __tablename__="pagamento"
-    id = Column(Integer,primary_key=True) 
+    id = Column(Integer,primary_key=True) #// será que não faria sentido por o ID como autoincrement= True? Ainda mais que é do tipo Integer
     data_pagamento = Column(DateTime, default=lambda: datetime.now(fuso))
     valor = Column(Float)
-    metodo_pagamento = Column(String)
+    metodo_pagamento = Column(String) #//sugestão melhoria: usar tipo Enum, ao invé de String
     status = Column(Boolean, default=True)
 
     #chave estrangeira
     id_cliente = Column(Integer, ForeignKey('cliente.id'), nullable=False)
     id_pedido = Column(Integer, ForeignKey('pedido.id'), unique=True)
-    cnpj_loja = Column(String, ForeignKey('loja.cnpj'))
+    cnpj_loja = Column(String, ForeignKey('loja.cnpj')) #// Também não deveria incluir nullable=False ?
     
-    #relacionamento com as tabelas
+    #relacionamento com as tabelas // corretos
     cliente = relationship("Cliente", back_populates="pagamentos")
     pedido = relationship("Pedido", back_populates="pagamento")
     loja = relationship("Loja", back_populates="pagamentos")
@@ -91,9 +91,10 @@ class Pedido(Base):
     #chave estrangeira
     id_cliente = Column(Integer, ForeignKey('cliente.id'), nullable=False)
     pagamento = relationship("Pagamento", uselist=False, back_populates="pedido")
-    #relacionamento com a tabela cliente
+    #relacionamento com a tabela cliente 
     cliente = relationship("Cliente", back_populates="pedidos")
-
+#// Na classe Pedido estão faltando os atributos tamanho (definir com a DBA s haverá quantidade)
+#// Está faltando o relacionamento entre Pedido e Produto
 class Produtos(Base):
     __tablename__="produtos"
     id = Column(Integer,primary_key=True) 
