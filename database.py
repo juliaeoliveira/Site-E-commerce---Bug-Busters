@@ -100,18 +100,18 @@ class Produtos(Base):
     id = Column(Integer,primary_key=True) 
     nome_produto = Column(String,index=True) 
     preco = Column(Float)
-    categoria = Column(String,index=True)
+    categoria = Column(String,index=True) #//será necessário rever conceitos diante das alterações comentadas em reunião, mas até então pode manter
     estoque = Column(Integer, default=0)
     # data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
     imagem_URL = Column(String)
     status = Column(Boolean, default=True)
-    descricao=Column(String) 
-
+    descricao=Column(String) #//sugestão de melhoria: poderia ter tamanho máximo (String(500) por exemplo)
+    #//está faltando o atributo "tamanho"
     #chave estrangeira
     loja_id = Column(String, ForeignKey("loja.cnpj"), nullable=False)
 
     #relação com a tabela
     loja = relationship("Loja", back_populates="produtos")
-
+    #// está faltando relacionar com a classe "Pedido"
 #criar todas tabelas e o banco de dados no sqlite
 Base.metadata.create_all(bind=engine)
