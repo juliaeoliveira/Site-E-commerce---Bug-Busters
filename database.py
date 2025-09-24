@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker,declarative_base, relationship
 
 #criar a tabela
 from sqlalchemy import Column,Integer,String,Float,Boolean,DateTime
-#Importação date
+#importação date
 from datetime import datetime
 import pytz
 
@@ -34,9 +34,13 @@ class Cliente(Base):
     estado = Column(String(2))  #"SP", "RJ"
     cep = Column(String(10))    #"12345-678"
 
-    #relacionamento com a tabela pagamento e Pedido
+    #chave estrangeira da loja
+    id_loja = Column(String, ForeignKey("loja.cnpj"), nullable=False)
+
+    #relacionamento com as tabelas
     pagamentos = relationship("Pagamento", back_populates="cliente")
     pedidos = relationship("Pedido", back_populates="cliente")
+    loja = relationship("Loja", back_populates="clientes")
     
 
 class Loja(Base):
@@ -52,12 +56,13 @@ class Loja(Base):
     cidade = Column(String)
     estado = Column(String(2))  #"SP", "RJ"
     cep = Column(String(10))    #"12345-678"
-    
     telefone = Column(String)
     email = Column(String)
 
-    # relacionamento com a tabela pagamento
+    #relacionamento com as tabelas
     pagamentos = relationship("Pagamento", back_populates="loja")
+    clientes = relationship("Cliente", back_populates="loja")
+    produtos = relationship("Produtos", back_populates="loja")
 
 class Pagamento(Base):
     __tablename__="pagamento"
@@ -70,9 +75,9 @@ class Pagamento(Base):
     #chave estrangeira
     id_cliente = Column(Integer, ForeignKey('cliente.id'), nullable=False)
     id_pedido = Column(Integer, ForeignKey('pedido.id'), unique=True)
-    cnpj_loja = Column(Integer, ForeignKey('loja.cnpj'))
+    cnpj_loja = Column(String, ForeignKey('loja.cnpj'))
     
-    #relacionamento com a tabela Clente 
+    #relacionamento com as tabelas
     cliente = relationship("Cliente", back_populates="pagamentos")
     pedido = relationship("Pedido", back_populates="pagamento")
     loja = relationship("Loja", back_populates="pagamentos")
@@ -99,7 +104,13 @@ class Produtos(Base):
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
     imagem_URL = Column(String)
     status = Column(Boolean, default=True)
-    descricao=Column(String)
+    descricao=Column(String) 
 
-#Criar todas tabela e o banco de dados no sqlite
+    #chave estrangeira
+    loja_id = Column(String, ForeignKey("loja.cnpj"), nullable=False)
+
+    #relação com a tabela
+    loja = relationship("Loja", back_populates="produtos")
+
+#criar todas tabelas e o banco de dados no sqlite
 Base.metadata.create_all(bind=engine)
