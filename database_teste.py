@@ -7,21 +7,12 @@ from sqlalchemy import Column,Integer,String,Float,Boolean,DateTime
 #importação date
 from datetime import datetime
 import pytz
-<<<<<<< HEAD
 
-=======
->>>>>>> 9706e46fb0ce2a80b64f086e9d073807a73b06a4
-
-engine=create_engine("sqlite:///loja.db")
+engine=create_engine("sqlite:///loja_teste.db")
 SessionLocal=sessionmaker(bind=engine)
 Base=declarative_base()
 
-<<<<<<< HEAD
-
-fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
-=======
 fuso = pytz.timezone('America/Sao_Paulo')
->>>>>>> 9706e46fb0ce2a80b64f086e9d073807a73b06a4
 class Cliente(Base):
     __tablename__="cliente"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -70,38 +61,12 @@ class Loja(Base):
     clientes = relationship("Cliente", back_populates="loja")
     produtos = relationship("Produtos", back_populates="loja")
 
-<<<<<<< HEAD
-# class Pedido(Base):
-#     __tablename__="pedido"
-#     id = Column(Integer,primary_key=True)
-#     data_pedido = Column(DateTime, default=lambda: datetime.now(fuso))
-#     valor_total = Column(Float)
-#     status = Column(Boolean, default=True)
-#     #chave estrangeira
-#     id_cliente = Column(Integer, ForeignKey('cliente.id'), nullable=False)
-#     pagamento = relationship("Pagamento", uselist=False, back_populates="pedido")
-#     #relacionamento com a tabela cliente 
-#     cliente = relationship("Cliente", back_populates="pedidos")
-# #// Na classe Pedido estão faltando os atributos tamanho (definir com a DBA s haverá quantidade)
-# #// Está faltando o relacionamento entre Pedido e Produto
-class Produtos(Base):
-    __tablename__="produtos"
-    id = Column(Integer,primary_key=True) 
-    nome_produto = Column(String,index=True) 
-    preco = Column(Float)
-    categoria = Column(String,index=True)
-    estoque = Column(Integer, default=0)
-    data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
-    imagem_URL = Column(String)
-=======
-
 class Pagamento(Base):
     __tablename__="pagamento"
     id = Column(Integer,primary_key=True, autoincrement=True) 
     data_pagamento = Column(DateTime, default=lambda: datetime.now(fuso))
     valor = Column(Float)
     metodo_pagamento = Column(String)
->>>>>>> 9706e46fb0ce2a80b64f086e9d073807a73b06a4
     status = Column(Boolean, default=True)
 
     #chave estrangeira
@@ -117,7 +82,7 @@ class Pagamento(Base):
 
 class Pedido(Base):
     __tablename__="pedido"
-    id = Column(Integer,primary_key=True) #autoincrement=True
+    id = Column(Integer,primary_key=True, autoincrement=True)
     data_pedido = Column(DateTime, default=lambda: datetime.now(fuso))
     valor_total = Column(Float)
     status = Column(Boolean, default=True)
@@ -132,13 +97,13 @@ class Pedido(Base):
     produto = relationship("Produtos", back_populates="pedido") #1:1
     
 
-class Produto(Base):
+class Produtos(Base):
     __tablename__="produtos"
     id = Column(Integer,primary_key=True, autoincrement=True) 
     nome_produto = Column(String,index=True) 
     descricao=Column(String) 
     tamanho = Column(String, index=True)
-    cor = Column(String, index=True) 
+    cor = Column(String, index=True)
     preco = Column(Float)
     quantidade_estoque = Column(Integer, default=0)
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
@@ -155,3 +120,55 @@ class Produto(Base):
 
 #criar todas tabelas e o banco de dados no sqlite
 Base.metadata.create_all(bind=engine)
+#teste - inserir dados na tabela loja 
+# função para inserir dados na tabela loja
+def dados_loja(
+    cnpj: str,
+    nome_loja: str,
+    rua: str,
+    numero: str,
+    complemento: str,
+    bairro: str,
+    cidade: str,
+    estado: str,
+    cep: str,
+    telefone: str,
+    email: str
+):
+    session = SessionLocal()
+    try:
+        loja = Loja(
+            cnpj=cnpj,
+            nome_loja=nome_loja,
+            rua=rua,
+            numero=numero,
+            complemento=complemento,
+            bairro=bairro,
+            cidade=cidade,
+            estado=estado,
+            cep=cep,
+            telefone=telefone,
+            email=email
+        )
+        session.add(loja)
+        session.commit()
+        print(f"✅ Loja {nome_loja} criada com sucesso!")
+    except Exception as e:
+        session.rollback()
+        print("❌ Erro ao inserir loja:", e)
+    finally:
+        session.close()
+
+dados_loja(
+    "A7K9Q2",
+    "Sob Véu",
+    "Rua Correia de Andrade",
+    "232",
+    "Escritório",
+    "Brás",
+    "São Paulo",
+    "SP",
+    "03008-020",
+    "(11) 3312-3550",
+    "sobveuoficial@gmail.com"
+)
