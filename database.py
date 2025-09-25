@@ -131,7 +131,7 @@ class Produto(Base):
     quantidade_estoque = Column(Integer, default=0)
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
     imagem_URL = Column(String)
-    categoria = Column(String,index=True)
+    # categoria = Column(String,index=True)
     status = Column(Boolean, default=True)
 
     #chave estrangeira

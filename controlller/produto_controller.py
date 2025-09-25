@@ -6,13 +6,14 @@ import sqlite3 as sq
 
 class Produto(BaseModel):
     nome_produto:str
+    descricao:str
+    tamanho:str
+    cor:str
     preco:float
-    categoria:str
-    estoque:int
+    quantida_estoque:int
     data_cadastro:datetime
     imagem_URL:str
     status:bool
-    descricao:str
     
 
 app = FastAPI(title="Rotas de Produtos")
