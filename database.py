@@ -38,7 +38,7 @@ class Cliente(Base):
     pagamentos = relationship("Pagamento", back_populates="cliente")
     pedidos = relationship("Pedido", back_populates="cliente")
     loja = relationship("Loja", back_populates="clientes")
-    
+
 
 class Loja(Base):
     __tablename__="loja"
@@ -61,6 +61,7 @@ class Loja(Base):
     clientes = relationship("Cliente", back_populates="loja")
     produtos = relationship("Produtos", back_populates="loja")
 
+
 class Pagamento(Base):
     __tablename__="pagamento"
     id = Column(Integer,primary_key=True, autoincrement=True) 
@@ -82,7 +83,7 @@ class Pagamento(Base):
 
 class Pedido(Base):
     __tablename__="pedido"
-    id = Column(Integer,primary_key=True)
+    id = Column(Integer,primary_key=True) #autoincrement=True
     data_pedido = Column(DateTime, default=lambda: datetime.now(fuso))
     valor_total = Column(Float)
     status = Column(Boolean, default=True)
@@ -94,16 +95,16 @@ class Pedido(Base):
     #relacionamento com a tabela cliente
     pagamento = relationship("Pagamento", uselist=False, back_populates="pedido")
     cliente = relationship("Cliente", back_populates="pedidos")
-    produto = relationship("Produtos", back_populates="pedidos")
+    produto = relationship("Produtos", back_populates="pedido") #1:1
     
 
-class Produtos(Base):
+class Produto(Base):
     __tablename__="produtos"
     id = Column(Integer,primary_key=True, autoincrement=True) 
     nome_produto = Column(String,index=True) 
     descricao=Column(String) 
     tamanho = Column(String, index=True)
-    cor = Column(String, index=True)
+    cor = Column(String, index=True) 
     preco = Column(Float)
     quantidade_estoque = Column(Integer, default=0)
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
@@ -116,7 +117,7 @@ class Produtos(Base):
 
     #relação com as tabelas
     loja = relationship("Loja", back_populates="produtos")
-    pedidos = relationship("Pedido", back_populates="produto")
+    pedido = relationship("Pedido", back_populates="produto") #1:1
 
 #criar todas tabelas e o banco de dados no sqlite
 Base.metadata.create_all(bind=engine)
