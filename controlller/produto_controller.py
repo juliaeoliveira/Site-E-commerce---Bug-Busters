@@ -1,16 +1,102 @@
-from database import Produtos, Base
+from database import Produtos, DateTime
 from fastapi import FastAPI
 from pydantic import BaseModel
-import sqlite3
+from datetime import datetime
+import sqlite3 as sq
+
+class Produto(BaseModel):
+    nome_produto:str
+    preco:float
+    categoria:str
+    estoque:int
+    data_cadastro:datetime
+    imagem_URL:str
+    status:bool
+    descricao:str
+    
 
 app = FastAPI(title="Rotas de Produtos")
 
-
+# Pegar todos os produtos 
 @app.get("/")
 async def listar_produtos():
-    conexao = sqlite3.connect("loja.db")
+    conexao = sq.connect("loja.db")
     cursor = conexao.cursor()
     cursor.execute("""SELECT * FROM produtos""")
     todos_produtos = cursor.fetchall()
     conexao.close()
     return{"produtos": todos_produtos}
+
+# Buscar produtos pelo id 
+@app.get("/produtos/{produtos_id}")
+async def buscar_produtos(produtos_id:int):
+    conexao = sq.connect("loja.db")
+    cursor = conexao.cursor()
+    cursor.execute("""SELECT * FROM produtos WHERE id=?""", (produtos_id))
+    produtos_i = cursor.fetchall()
+    if produtos_i:
+        return{"produto":produtos_i}
+    
+@app.get("/produtos/")
+async def buscar_produto_nome(produto_nome:str):
+        conexao = sq.connect("loja.db")
+        cursor = conexao.cursor()
+        cursor.execute("""SELECT * FROM produtos WHERE nome=?""", (produto_nome))
+        produto_n = cursor.fetchall()
+        if produto_n:
+            return{"produto":produto_n}
+        
+@app.post("/produto-criar/")
+async def adicionar_produto(produto:Produto):
+    conexao = sq.connect("loja.db")
+    cursor = conexao.cursor()
+    cursor.execute("""INSERT INTO produtos(
+                    nome_produto, 
+                    preco, 
+                    categoria, 
+                    estoque, 
+                    data_cadastro, 
+                    imagem_URL, 
+                    status, 
+                    descricao) VALUES (?,?,?,?,?,?,?,?)""",
+                    (produto.nome_produto, 
+                     produto.preco, 
+                     produto.categoria, 
+                     produto.estoque, 
+                     produto.data_cadastro.isoformat(), 
+                     produto.imagem_URL, 
+                     produto.status, 
+                     produto.descricao))
+    conexao.commit()
+    produto_id = cursor.lastrowid
+    return{"id":produto_id, "mensagem":"Produto Criado"}
+
+@app.put("/produtos-update/{produtos_id}")
+async def atualizar_produtos(produto_id:int, produto:Produto):
+    conexao = sq.connect("loja.db")
+    cursor = conexao.cursor()
+    cursor.execute("""UPDATE produtos SET 
+                   nome_produto=?, 
+                    preco=?, 
+                    categoria=?, 
+                    estoque=?, 
+                    data_cadastro=?, 
+                    imagem_URL=?, 
+                    status=?, 
+                    descricao=?
+                    WHERE id=?""",
+                    (produto.nome_produto, 
+                     produto.preco, 
+                     produto.categoria, 
+                     produto.estoque, 
+                     produto.data_cadastro.isoformat(), 
+                     produto.imagem_URL, 
+                     produto.status, 
+                     produto.descricao,
+                     produto_id))
+    conexao.commit()
+    update = cursor.rowcount
+    conexao.close()
+    if update:
+        return{"mensagem":f"Produto {produto_id} atualizado!"}
+    return{"ERRO":"Produto não encontrado"}
