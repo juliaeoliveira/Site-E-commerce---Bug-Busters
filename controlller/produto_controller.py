@@ -17,6 +17,8 @@ class Produto(BaseModel):
 
 app = FastAPI(title="Rotas de Produtos")
 
+# python -m uvicorn controlller.produto_controller:app --reload
+
 # Pegar todos os produtos 
 @app.get("/")
 async def listar_produtos():
