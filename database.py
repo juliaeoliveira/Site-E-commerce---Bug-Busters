@@ -7,21 +7,20 @@ from sqlalchemy import Column,Integer,String,Float,Boolean,DateTime
 #importação date
 from datetime import datetime
 import pytz
-<<<<<<< HEAD
 
-=======
->>>>>>> 9706e46fb0ce2a80b64f086e9d073807a73b06a4
+
+
 
 engine=create_engine("sqlite:///loja.db")
 SessionLocal=sessionmaker(bind=engine)
 Base=declarative_base()
 
-<<<<<<< HEAD
+
 
 fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
-=======
+
 fuso = pytz.timezone('America/Sao_Paulo')
->>>>>>> 9706e46fb0ce2a80b64f086e9d073807a73b06a4
+
 class Cliente(Base):
     __tablename__="cliente"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -70,7 +69,7 @@ class Loja(Base):
     clientes = relationship("Cliente", back_populates="loja")
     produtos = relationship("Produtos", back_populates="loja")
 
-<<<<<<< HEAD
+
 # class Pedido(Base):
 #     __tablename__="pedido"
 #     id = Column(Integer,primary_key=True)
@@ -93,7 +92,7 @@ class Produtos(Base):
     estoque = Column(Integer, default=0)
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
     imagem_URL = Column(String)
-=======
+
 
 class Pagamento(Base):
     __tablename__="pagamento"
@@ -101,7 +100,7 @@ class Pagamento(Base):
     data_pagamento = Column(DateTime, default=lambda: datetime.now(fuso))
     valor = Column(Float)
     metodo_pagamento = Column(String)
->>>>>>> 9706e46fb0ce2a80b64f086e9d073807a73b06a4
+
     status = Column(Boolean, default=True)
 
     #chave estrangeira
