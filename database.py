@@ -19,7 +19,6 @@ Base=declarative_base()
 
 fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
 
-fuso = pytz.timezone('America/Sao_Paulo')
 
 class Cliente(Base):
     __tablename__="cliente"
@@ -83,16 +82,6 @@ class Loja(Base):
 #     cliente = relationship("Cliente", back_populates="pedidos")
 # #// Na classe Pedido estão faltando os atributos tamanho (definir com a DBA s haverá quantidade)
 # #// Está faltando o relacionamento entre Pedido e Produto
-class Produtos(Base):
-    __tablename__="produtos"
-    id = Column(Integer,primary_key=True) 
-    nome_produto = Column(String,index=True) 
-    preco = Column(Float)
-    categoria = Column(String,index=True)
-    estoque = Column(Integer, default=0)
-    data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
-    imagem_URL = Column(String)
-
 
 class Pagamento(Base):
     __tablename__="pagamento"

@@ -1,4 +1,4 @@
-from database import Produtos, DateTime
+from database import DateTime
 from fastapi import FastAPI
 from pydantic import BaseModel
 from datetime import datetime
@@ -95,10 +95,23 @@ async def atualizar_produtos(produto_id:int, produto:Produto):
                      produto.imagem_URL, 
                      produto.status, 
                      produto.descricao,
-                     produto_id))
+                     produto_id,))
     conexao.commit()
     update = cursor.rowcount
     conexao.close()
     if update:
         return{"mensagem":f"Produto {produto_id} atualizado!"}
     return{"ERRO":"Produto não encontrado"}
+
+
+@app.delete("/delete-produto/{produto_id}")
+async def deletar_produto(produto_id:int):
+    conexao = sq.connect("loja.db")
+    cursor = conexao.cursor()
+    cursor.execute("""DELETE FROM produtos WHERE id=?""", 
+                   (produto_id,))
+    conexao.commit()
+    delete = cursor.rowcount
+    if delete:
+        return{"mensagem": f"Produto {produto_id} deletado"}
+    return{"mensagem":"Produto não encontrado!"}
