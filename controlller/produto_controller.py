@@ -1,4 +1,3 @@
-from database import DateTime
 from fastapi import FastAPI
 from pydantic import BaseModel
 from datetime import datetime
@@ -10,7 +9,7 @@ class Produto(BaseModel):
     tamanho:str
     cor:str
     preco:float
-    quantida_estoque:int
+    quantidade_estoque:int
     data_cadastro:datetime
     imagem_URL:str
     loja_id:int
@@ -53,25 +52,29 @@ async def buscar_produto_nome(produto_nome:str):
 async def adicionar_produto(produto:Produto):
     conexao = sq.connect("loja.db")
     cursor = conexao.cursor()
+    # ...existing code...
     cursor.execute("""INSERT INTO produtos(
-                    nome_produto, 
-                    descricao,
-                    tamanho,
-                    cor,
-                    preco,  
-                    quantidade_estoque, 
-                    data_cadastro, 
-                    imagem_URL) VALUES (?,?,?,?,?,?,?,?)""",
-                    (produto.nome_produto,
-                     produto.descricao,
-                     produto.tamanho,
-                     produto.cor, 
-                     produto.preco,
-                     produto.quantida_estoque, 
-                     produto.data_cadastro.isoformat(), 
-                     produto.imagem_URL,
-                     produto.loja_id
-                     ))
+    nome_produto, 
+    descricao,
+    tamanho,
+    cor,
+    preco,  
+    quantida_estoque, 
+    data_cadastro, 
+    imagem_URL,
+    loja_id
+) VALUES (?,?,?,?,?,?,?,?,?)""",
+(
+    produto.nome_produto,
+    produto.descricao,
+    produto.tamanho,
+    produto.cor, 
+    produto.preco,
+    produto.quantida_estoque,  # Corrigido aqui!
+    produto.data_cadastro.isoformat(), 
+    produto.imagem_URL,
+    produto.loja_id
+))
     conexao.commit()
     produto_id = cursor.lastrowid
     conexao.close()
