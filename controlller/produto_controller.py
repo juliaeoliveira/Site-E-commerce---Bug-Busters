@@ -13,7 +13,7 @@ class Produto(BaseModel):
     quantida_estoque:int
     data_cadastro:datetime
     imagem_URL:str
-    status:bool
+    loja_id:int
     
 
 app = FastAPI(title="Rotas de Produtos")
@@ -55,23 +55,26 @@ async def adicionar_produto(produto:Produto):
     cursor = conexao.cursor()
     cursor.execute("""INSERT INTO produtos(
                     nome_produto, 
-                    preco, 
-                    categoria, 
-                    estoque, 
+                    descricao,
+                    tamanho,
+                    cor,
+                    preco,  
+                    quantidade_estoque, 
                     data_cadastro, 
-                    imagem_URL, 
-                    status, 
-                    descricao) VALUES (?,?,?,?,?,?,?,?)""",
-                    (produto.nome_produto, 
-                     produto.preco, 
-                     produto.categoria, 
-                     produto.estoque, 
+                    imagem_URL) VALUES (?,?,?,?,?,?,?,?)""",
+                    (produto.nome_produto,
+                     produto.descricao,
+                     produto.tamanho,
+                     produto.cor, 
+                     produto.preco,
+                     produto.quantida_estoque, 
                      produto.data_cadastro.isoformat(), 
-                     produto.imagem_URL, 
-                     produto.status, 
-                     produto.descricao))
+                     produto.imagem_URL,
+                     produto.loja_id
+                     ))
     conexao.commit()
     produto_id = cursor.lastrowid
+    conexao.close()
     return{"id":produto_id, "mensagem":"Produto Criado"}
 
 @app.put("/produtos-update/{produtos_id}")
