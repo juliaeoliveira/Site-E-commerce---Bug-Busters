@@ -9,16 +9,11 @@ from datetime import datetime
 import pytz
 
 
-
-
 engine=create_engine("sqlite:///loja.db")
 SessionLocal=sessionmaker(bind=engine)
 Base=declarative_base()
 
-
-
 fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
-
 
 class Cliente(Base):
     __tablename__="cliente"
@@ -67,7 +62,6 @@ class Loja(Base):
     pagamentos = relationship("Pagamento", back_populates="loja")
     clientes = relationship("Cliente", back_populates="loja")
     produtos = relationship("Produtos", back_populates="loja")
-
 
 # class Pedido(Base):
 #     __tablename__="pedido"
@@ -131,7 +125,7 @@ class Produto(Base):
     quantidade_estoque = Column(Integer, default=0)
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
     imagem_URL = Column(String)
-    # categoria = Column(String,index=True)
+    categoria = Column(String,index=True)
     status = Column(Boolean, default=True)
 
     #chave estrangeira
