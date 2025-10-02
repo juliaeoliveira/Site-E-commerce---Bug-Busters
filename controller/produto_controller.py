@@ -59,7 +59,7 @@ async def adicionar_produto(produto:Produto):
     tamanho,
     cor,
     preco,  
-    quantida_estoque, 
+    quantidade_estoque, 
     data_cadastro, 
     imagem_URL,
     loja_id
@@ -70,7 +70,7 @@ async def adicionar_produto(produto:Produto):
     produto.tamanho,
     produto.cor, 
     produto.preco,
-    produto.quantida_estoque,  # Corrigido aqui!
+    produto.quantidade_estoque,  # Corrigido aqui!
     produto.data_cadastro.isoformat(), 
     produto.imagem_URL,
     produto.loja_id
