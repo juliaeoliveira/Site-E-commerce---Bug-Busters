@@ -1,0 +1,404 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+#logo {
+    
+    height: 80px; /* Define a altura do logo */
+    padding-left: 130px; /* Espaço à esquerda do logo */
+}
+
+.icons {
+    gap: 5px;
+    justify-content: center;
+    display: flex;
+    padding-right: 150px;
+}
+
+li{
+  margin-left: 40px ;
+  
+}
+
+.menu {
+    height: 90px;
+    margin-top: 10px;
+    position: fixed; /* Fixa o menu na tela */
+    z-index: 1; /* Garante que o menu fique acima de outros elementos */
+    display: flex; /* Organiza os itens do menu em linha */
+    width: 100%; /* O menu ocupa toda a largura da tela */
+    align-items: center; /* Centraliza os itens na vertical */
+    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
+    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
+    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
+    color: #ffffff; /* Cor do texto do menu */
+}
+
+header{
+  margin-top: -10px;
+}
+
+/* Estilo do menu de navegação */
+nav {
+    gap:200px;
+    justify-content: center;
+    display: flex;
+    font-family: "Libre Caslon Text";
+    font-size: 22px;
+    color: #523800;
+   
+}
+
+/* Estilo dos links dentro do nav */
+nav a {
+    color: #523800;
+    font-size: 20px; /* Define o tamanho da fonte */
+    padding: 25px; /* Espaçamento interno */
+    text-decoration: underline; /* Ativa o sublinhado */
+    text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
+}
+
+.paginas a:hover{
+  transform: scale(1.10); 
+}
+
+/* Reset */
+body {
+ flex-direction: column;
+  background-color: #EBE4D7;
+  color: #3a2d20;
+
+}
+
+/* Container principal */
+main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* Caminho inicial */
+
+
+main h1 { 
+  padding: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: normal;
+  color: #5a4635;
+  margin-bottom: 20px;
+  margin-top: 80px;
+}
+
+/* Grid das fotos */
+.fotos {
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  gap: 15px;
+  width: 45%;
+  float: left;
+}
+
+.fotos img {
+  width: 100%;
+  padding: -10;
+}
+
+/* Área de descrição */
+.descricao {
+  float: right;
+  width: 40%;
+  background-color: #DBCAA94D;
+  padding: 20px;
+  border-radius: 5px;
+  height: 600px;
+ margin-top: -17px;
+}
+.descricao li{
+  border-color: black;
+
+}
+
+.descricao .nome {
+  font-size: 22px;
+  color: #7b2d2d;
+  margin-bottom: 15px;
+}
+
+.descricao p {
+  font-size: 20px;
+  text-align: justify;
+}
+
+/* Botões */
+
+
+button {
+  margin: 40px 0;
+  padding: 10px 15px;
+  border: 1px solid #4E390299;
+  background: #ede2d2;
+  font-size: 15px;
+  border-radius: 4px;
+
+}
+
+.botoes{
+    flex-direction: column;
+    margin-left: 800px;
+    margin-top: 40px;
+}
+
+.compra {
+    color: black;
+    margin-left: -10px;
+    width: 300px;
+    height: 50px;
+    flex-shrink: 0;
+    background: none;
+}
+
+.carrinho {
+  margin-left: 17px;
+  width: 240px;
+  height: 60px;
+  flex-shrink: 0;
+  margin-top: -20px;
+  background: #d5c3a5;
+}
+
+
+.ver {
+    font-family: "Libre Caslon Text";
+    height: 50px;
+    width: 300px;
+    color: darkred;
+    background: rgba(237, 219, 190, 0.80);
+    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 5px;
+    margin-top: 100px;
+    
+}
+
+/* Mais variedades */
+h3 {
+  font-size: 100px;
+  text-align: center;
+  color: #720911;
+  font-family: "Aboreto", system-ui;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.linhavariedade {
+  text-align: center;
+  color: #000000;
+
+}
+
+
+.variedades {
+  text-align: center;
+  margin-top: 20px;
+  padding: 30px;
+  
+}
+
+.subtitulo{
+  color: #790000;
+  font-size: 22px;
+  font-family: "Libre Caslon Text";
+}
+
+.descricaovestido {
+  font-size: 18px;
+  font-family: "Libre Caslon Text";
+  font-weight: 200;
+}
+
+.descricao .nome{
+  font-size: 28px;
+}
+
+.linhadescricao{
+  font-size: 18px;
+ 
+}
+
+.nomevestido{
+  letter-spacing: 2.5px;
+  font-family: "Aboreto", system-ui;
+  color: #790000;
+  text-shadow: 2px 4px 4px color(display-p3 0 0 0 / 0.30);
+  -webkit-text-stroke-width: 0.5px;
+  margin-top: -5px;
+}
+
+button:focus {
+    border-color: darkred; 
+    transform: scale(1.10); 
+}
+button:hover {
+    border-color: darkred; 
+    transform: scale(1.05);
+}
+
+
+footer{
+    background-color: #5a0101;
+    color: white;
+    padding: 40px 0; /* aumenta altura */
+    display: flex;
+    justify-content: space-evenly;  
+    align-items: flex-start; /* alinhar tudo no topo */
+    width: 100%;
+    flex-wrap: wrap; /* quebra linha caso precise */
+    margin-top: 80px; /* espaço entre o footer e o conteúdo */
+}
+
+footer ul {
+  font-family: "Inter", sans-serif;
+    list-style: none;
+   text-align: center;
+}
+
+footer li {
+  margin-top: 40px;
+  text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    margin: 10px 0;
+}
+
+.linhafooter{
+  margin-top: 20px;
+    width: 170px;
+    transform: rotate(-90.164deg);
+    color: #FFF;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 420px;
+}
+
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-top: 50px; 
+    font-size: 15px;
+}
+
+.whatsapp, .telefone{
+    height: 20px;
+}
+
+
+.instagram, .facebook{
+  height: 40px;
+  text-align: right;
+}
+
+.sob{
+    height: 100px;
+    margin-top: -100px;
+    margin: -10px;
+}
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-left: 50px;
+    font-size: 15px;
+}
+
+.linha{
+    width: 170px;
+    transform: rotate(-90.164deg);
+    color: #FFF;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 420px;
+    margin-top: 50px;
+}
+
+
+
+
+/* Faz o footer ir para o final da página */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+footer p{
+  text-align: center;
+}
+
+.espacovariedades {
+    text-align: center; /* Ensures everything is centered */
+}
+
+.conteinervariedade {
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    margin-top: 70px;
+}
+
+.variedades {
+    display: flex;
+    justify-content: center; /* Centers the images horizontally */
+    gap: 30px; /* Space between images */
+    margin-top: 20px;
+    
+}
+
+.imagem-container {
+    text-align: center; /* Centers the image and text */
+    padding: 25px;
+}
+
+.imagem-container img {
+    max-width: 100%; /* Ensures the images are responsive */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.imagem-container p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* You can change the color if needed */
+}
+
+  .variedades .nome {
+  color: #000;
+  text-align: center;
+  font-family: "Arial, Helvetica, sans-serif";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 40px;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  margin-top: 40px;
+  font-weight: 500;
+  }
+
+  .midia{
+  float: right;
+   display: grid;
+  gap: 15px;
+}
+
+.outrosvestidos{
+  margin-right: 900px;
+}
+
+
+

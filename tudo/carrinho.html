@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Jim+Nightshade&family=Judson:ital,wght@0,400;0,700;1,400&family=Junge&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="carrinho.css">
+    <title>Sob Veu</title>
+</head>
+<body>
+    <div class="menu">
+    <a href="home.html">
+        <img id="logo"src="img/Sob.png" alt="Logo">
+    </a>
+        <nav class="categorias">
+            <a href="produtos.html">Vestidos</a>
+            <a href="#Colecoes">Coleções</a>
+            <a href="#Agendamentos">Agendamentos</a>
+        </nav>
+        <nav class="icons">
+            <a href="https://instagram.com" target="_blanck">
+                    <img src="img/login.png"
+                    width="20px"
+                    title="login"
+                    alt="login"
+                />
+                </a>
+            <a href="https://www.whatsapp.com/?lang=pt_BR" target="_blanck">
+                <img src="img/carrinho.png"
+                width="20px"
+                title="Carrinho"
+                alt="Carrinho"
+            />
+            </a>
+        </nav>
+    </div>
+<main>
+
+<section id="carrinho">
+    <div class="card-carrinho">
+        <div class="breadcrumb">
+            <nav>
+                <a href="carrinho.html">Carrinho</a>
+                <a href="pagamento.html">Pagamento</a>
+            </nav>
+        </div>
+        <div class="produto-vestido">
+            <h1>Carrinho de compras</h1>
+            <input type="checkbox" />
+            <div class="info"> 
+                <div class="imagem-carrinho"> 
+                <img src="imagemdescricao/frente.png" alt="Vestido" />
+                </div>           
+                <h3>Vestido Eternity</h3>
+                <p>Coleção Charm Secreta</p>
+                <label for="quantidade">Quantidade:</label>
+                <select id="quantidade">
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+                <p>R$ 12.000</p>
+            </div>
+            </div>
+        <div class="pedido-total">
+            <h1> Seu pedido </h1>
+            <h2>Sub total:</h2>
+            <button id="botao-pagamento">
+                <span class="fechar-pedido" >Fechar pedido</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+    
+
+<section id="variedades">
+  <h1>Mais variedades</h1>
+  <hr class="linha-titulo3">
+
+  <div class="lista-vestidos">
+      <div class="vestido"> 
+          <img src="img/noiva1.png" alt="Vestido de noiva branco modelo Jasmim">
+      </div>
+      <div class="vestido"> 
+          <img src="img/noiva2.png" alt="Vestido de noiva princesa modelo Âmbar">
+      </div>
+      <div class="vestido"> 
+          <img src="img/noiva3.png" alt="Vestido de noiva minimalista modelo Camélia">
+      </div>
+  </div>
+
+  <button id="voltar"> < continuar </button>
+</section>
+
+
+
+</main>
+</body>
+</html>
