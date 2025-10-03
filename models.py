@@ -69,6 +69,7 @@ class Loja(Base):
     pagamentos = relationship("Pagamento", back_populates="loja") #N:1
     clientes = relationship("Cliente", back_populates="loja") #N:1
     produtos = relationship("Produto", back_populates="loja") #N:1
+    endereco = relationship("Endereco", back_populates="loja", cascade="all, delete-orphan", uselist=False ) # porque uma loja tem 1 endereço)
 
 class Endereco(Base):
     __tablename__="endereco"
@@ -88,12 +89,6 @@ class Endereco(Base):
     #relacionamento com as tabelas
     clientes = relationship("Cliente", back_populates="endereco")
     loja = relationship("Loja", back_populates="endereco")
-    endereco = relationship(
-        "Endereco",
-        back_populates="loja",
-        cascade="all, delete-orphan",
-        uselist=False  # porque uma loja tem 1 endereço
-    )
 
 
 class Pagamento(Base):
@@ -172,4 +167,4 @@ class ItemPedido(Base):
     produto = relationship("Produto", back_populates="itens_pedido") #1:N
 
 #criar todas tabelas e o banco de dados no sqlite
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
