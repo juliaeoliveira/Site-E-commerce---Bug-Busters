@@ -2,16 +2,36 @@
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy.orm import sessionmaker,declarative_base, relationship
 #criar a tabela
-from sqlalchemy import Column,Integer,String,Float,Boolean,DateTime
+from sqlalchemy import Column,Integer,String,Float,Boolean,DateTime,Numeric
 #importação date
 from datetime import datetime
 import pytz
 
-engine=create_engine("sqlite:///loja.db")
-SessionLocal=sessionmaker(bind=engine)
-Base=declarative_base()
+import os
+from dotenv import load_dotenv
+
+# Carregar variáveis do .env
+load_dotenv()
+
+USER = os.getenv("user")
+PASSWORD = os.getenv("password")
+HOST = os.getenv("host")
+PORT = os.getenv("port")
+DBNAME = os.getenv("dbname")
+
+print("Tentando conectar em:")
+print(f"HOST={HOST}, PORT={PORT}, USER={USER}, DBNAME={DBNAME}")
+
+# String de conexão para SQLAlchemy
+DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+
+# Criar engine
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
 
 fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
+
 
 class Cliente(Base):
     __tablename__="cliente"
@@ -21,15 +41,6 @@ class Cliente(Base):
     data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
     email = Column(String, index=True)
     telefone = Column(String)
-    
-    #endereço
-    rua = Column(String)
-    numero = Column(String)
-    complemento = Column(String, nullable=True)
-    bairro = Column(String)
-    cidade = Column(String)
-    estado = Column(String(2))  #"SP", "RJ"
-    cep = Column(String(10))    #"12345-678"
 
     #chave estrangeira da loja
     id_loja = Column(String, ForeignKey("loja.cnpj"), nullable=False)
@@ -39,20 +50,18 @@ class Cliente(Base):
     pedidos = relationship("Pedido", back_populates="cliente") #N:1
     loja = relationship("Loja", back_populates="clientes") #1:N
 
+    endereco = relationship(
+        "Endereco",
+        back_populates="cliente",
+        cascade="all, delete-orphan",
+        uselist=False  # porque um cliente tem 1 endereço
+    )
+
 
 class Loja(Base):
     __tablename__="loja"
     cnpj = Column(String, primary_key=True)
     nome_loja = Column(String(100), index=True)
-
-    #endereço
-    rua = Column(String)
-    numero = Column(String)
-    complemento = Column(String, nullable=True)
-    bairro = Column(String)
-    cidade = Column(String)
-    estado = Column(String(2))  #"SP", "RJ"
-    cep = Column(String(10))    #"12345-678"
     telefone = Column(String)
     email = Column(String)
 
@@ -61,12 +70,37 @@ class Loja(Base):
     clientes = relationship("Cliente", back_populates="loja") #N:1
     produtos = relationship("Produto", back_populates="loja") #N:1
 
+class Endereco(Base):
+    __tablename__="endereco"
+    id = Column(Integer,primary_key=True, autoincrement=True) 
+    rua = Column(String)
+    numero = Column(String)
+    complemento = Column(String, nullable=True)
+    bairro = Column(String)
+    cidade = Column(String)
+    estado = Column(String(2))  #"SP", "RJ"
+    cep = Column(String(10))    #"12345-678"
+
+    #chave estrangeira com os donos de endereços
+    cliente_id = Column(Integer,ForeignKey("cliente.id"),nullable=True)
+    loja_id = Column(String,ForeignKey("loja.cnpj"),nullable=True)
+
+    #relacionamento com as tabelas
+    clientes = relationship("Cliente", back_populates="endereco")
+    loja = relationship("Loja", back_populates="endereco")
+    endereco = relationship(
+        "Endereco",
+        back_populates="loja",
+        cascade="all, delete-orphan",
+        uselist=False  # porque uma loja tem 1 endereço
+    )
+
 
 class Pagamento(Base):
     __tablename__="pagamento"
     id = Column(Integer,primary_key=True, autoincrement=True) 
     data_pagamento = Column(DateTime, default=lambda: datetime.now(fuso))
-    valor = Column(Float) #considerar o uso de Numeric(10,2), ao invés de float
+    valor = Column(Numeric(10,2)) #considerar o uso de Numeric(10,2), ao invés de float
     metodo_pagamento = Column(String)
     status = Column(Boolean, default=True)
 
@@ -83,9 +117,9 @@ class Pagamento(Base):
 
 class Pedido(Base):
     __tablename__="pedido"
-    id = Column(Integer,primary_key=True) #autoincrement=True
+    id = Column(Integer,primary_key=True,autoincrement=True)
     data_pedido = Column(DateTime, default=lambda: datetime.now(fuso))
-    valor_total = Column(Float) #soma de todos os itens_pedido
+    valor_total = Column(Numeric(10,2)) #soma de todos os itens_pedido
     status = Column(Boolean, default=True)
     
     #chave estrangeira
@@ -101,7 +135,7 @@ class Produto(Base):
     __tablename__="produtos"
     id = Column(Integer,primary_key=True, autoincrement=True) 
     nome_produto = Column(String,index=True)
-    preco = Column(Float)
+    preco = Column(Numeric(10,2))
     descricao=Column(String)
     cor = Column(String, index=True) # a cor será fixa, uma para cada vestido
     categoria = Column(String,index=True)
@@ -123,10 +157,10 @@ class Produto(Base):
 
 class ItemPedido(Base):
     __tablename__="item_pedido"
-    id = Column(Integer,primary_key=True) #autoincrement=True
+    id = Column(Integer,primary_key=True,autoincrement=True) 
     tamanho = Column(String, index=True)
     quantidade= Column(Integer, default=0)
-    preco_unitario = Column(Float)
+    preco_unitario = Column(Numeric(10,2))
     subtotal = Column(Float) #valor de (quantidade * preco_unitario)
 
     #chave estrangeira
