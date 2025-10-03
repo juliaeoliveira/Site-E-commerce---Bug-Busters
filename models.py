@@ -168,3 +168,84 @@ class ItemPedido(Base):
 
 #criar todas tabelas e o banco de dados no sqlite
 # Base.metadata.create_all(bind=engine)
+
+
+session = SessionLocal()
+"""
+#criando a loja pois é necessario uma loja para a criação de produtos
+loja = Loja(
+    cnpj="03.774.819/0005-28",
+    nome_loja="Sob Véu",
+    rua="Rua Correia de Andrade",
+    numero="232",
+    complemento = "Escritório",
+    bairro="Brás",
+    cidade="São Paulo",
+    estado="SP",
+    cep="03008-020",
+    telefone="(11) 3312-3550",
+    email="sobveuoficial@gmail.com"
+)
+session.add(loja)
+session.commit()
+session.close()
+"""
+
+produto = Produto(
+    nome_produto = "Nobreza Real",
+    preco = 12400,
+    descricao = '''
+    • Estilo: A-line (evasê) com toque de princesa. Estrutura elegante e imponente, valorizando a cintura.
+    • Cor: Branco puro.
+    • Tecido: Mikado de seda, liso e sofisticado, com caimento estruturado.
+    • Decote: Frente em “V” profundo, moderno e delicado; costas também em “V” suave.
+    • Mangas: alças largas, simples e elegantes.
+    • Saia: ampla, lisa e fluida, com pregas discretas que conferem volume natural.
+    • Cauda: média, estilo chapel train, imponente e clássica.
+    • Tamanho: P, M, G, GG.
+    ''',
+    cor = "branco",
+    categoria = "melodia_do_entardecer",
+    quantidade_estoque = 9,
+    imagem1_URL = "static/uploads/image1"
+    imagem2_URL = "static/uploads/image2"
+    imagem3_URL = "static/uploads/image3"
+    imagem4_URL = "static/uploads/image4"
+    status = True,
+    loja_id= "03.774.819/0005-28"
+)
+session.add(produto)
+session.commit()
+session.close()
+
+"""
+produto_update = session.query(Produto).filter_by(id = 8).first()
+#query=consula//filter= filtro de busca // first = trazer o dado
+if produto_update:
+    #novo dado
+    produto_update.nome_produto = "Encanto de Renda"
+    produto_update.preco = 15800
+    produto_update.descricao = '''
+    • Estilo: A-line (evasê). Estrutura leve e fluida, destacando a cintura com elegância.
+    • Cor: Branco off-white.
+    • Tecido: Renda delicada com aplicações florais e arabescos em toda a peça; saia em tule suave com forro acetinado.
+    • Decote: Tomara que caia reto, sofisticado e feminino.
+    • Mangas: longas destacáveis em renda transparente, ajustadas e bordadas.
+    • Saia: levemente armada, com bordados florais distribuídos de forma homogênea.
+    • Cauda: curta/média, estilo chapel train, discreta e funcional.
+    • Tamanho: P, M, G, GG.'''
+    produto_update.cor = "branco off-white"
+    produto_update.categoria = "melodia_do_entardecer"
+    produto_update.quantidade_estoque = 6
+    imagem1_URL = "static/uploads/image1"
+    imagem2_URL = "static/uploads/image2"
+    imagem3_URL = "static/uploads/image3"
+    imagem4_URL = "static/uploads/image4"
+    produto_update.status = True
+    produto_update.loja_id= "03.774.819/0005-28"
+    session.commit()
+    print('Produto atualizado.')
+else:
+    print('Produto não encontrado')
+
+"""
