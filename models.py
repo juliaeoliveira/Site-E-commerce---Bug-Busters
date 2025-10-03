@@ -87,7 +87,7 @@ class Endereco(Base):
     loja_id = Column(String,ForeignKey("loja.cnpj"),nullable=True)
 
     #relacionamento com as tabelas
-    clientes = relationship("Cliente", back_populates="endereco")
+    cliente = relationship("Cliente", back_populates="endereco")
     loja = relationship("Loja", back_populates="endereco")
 
 
@@ -169,13 +169,20 @@ class ItemPedido(Base):
 #criar todas tabelas e o banco de dados no sqlite
 # Base.metadata.create_all(bind=engine)
 
-
 session = SessionLocal()
-"""
+
 #criando a loja pois é necessario uma loja para a criação de produtos
 loja = Loja(
     cnpj="03.774.819/0005-28",
     nome_loja="Sob Véu",
+    telefone="(11) 3312-3550",
+    email="sobveuoficial@gmail.com"
+)
+session.add(loja)
+session.commit()
+session.close()
+
+endereco = Endereco(
     rua="Rua Correia de Andrade",
     numero="232",
     complemento = "Escritório",
@@ -183,34 +190,33 @@ loja = Loja(
     cidade="São Paulo",
     estado="SP",
     cep="03008-020",
-    telefone="(11) 3312-3550",
-    email="sobveuoficial@gmail.com"
+    loja_id = "03.774.819/0005-28"
 )
-session.add(loja)
+session.add(endereco)
 session.commit()
 session.close()
-"""
 
 produto = Produto(
-    nome_produto = "Nobreza Real",
-    preco = 12400,
+    nome_produto = "Aurora Royal",
+    preco = 14990,
     descricao = '''
-    • Estilo: A-line (evasê) com toque de princesa. Estrutura elegante e imponente, valorizando a cintura.
-    • Cor: Branco puro.
-    • Tecido: Mikado de seda, liso e sofisticado, com caimento estruturado.
-    • Decote: Frente em “V” profundo, moderno e delicado; costas também em “V” suave.
-    • Mangas: alças largas, simples e elegantes.
-    • Saia: ampla, lisa e fluida, com pregas discretas que conferem volume natural.
-    • Cauda: média, estilo chapel train, imponente e clássica.
-    • Tamanho: P, M, G, GG.
+    • Estilo: Princesa com corte evasê (A-line amplo). Estrutura sofisticada e imponente, destacando a cintura.
+    • Cor: Branco off-white elegante.
+    • Tecido: Cetim nobre e encorpado, com caimento liso e brilho acetinado.
+    • Decote: Frente reta e discreta; costas em decote quadrado profundo e delicado.
+    • Mangas: Alças finas em cetim, minimalistas.
+    • Saia: Ampla, com caimento volumoso e estruturado, sem bordados aparentes, destacando o tecido liso e sofisticado.
+    • Cauda: Longa, estilo cathedral train, dramática e luxuosa.
+    • Tamanho: P, M, G.
+    
     ''',
-    cor = "branco",
-    categoria = "melodia_do_entardecer",
-    quantidade_estoque = 9,
-    imagem1_URL = "static/uploads/image1"
-    imagem2_URL = "static/uploads/image2"
-    imagem3_URL = "static/uploads/image3"
-    imagem4_URL = "static/uploads/image4"
+    cor = "branco off-white",
+    categoria = "brilho_invernal",
+    quantidade_estoque = 7,
+    imagem1_URL = "static/uploads/image1",
+    imagem2_URL = "static/uploads/image2",
+    imagem3_URL = "static/uploads/image3",
+    imagem4_URL = "static/uploads/image4",
     status = True,
     loja_id= "03.774.819/0005-28"
 )
