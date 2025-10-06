@@ -1,25 +1,59 @@
-from fastapi import FastAPI, Depends
+from fastapi import APIRouter,Request,Form,UploadFile,File,Depends
+# APIRouter=rota api para o front-end,
+# Request=Requesição HTTP,
+# Form=Formulário para criar e editar,
+# UploadFile=Upload da foto,
+# File=Função para gravar o caminho da imagem,
+# Depends=dependência do banco de dados sqlite para o fastapi
 from pydantic import BaseModel
 from datetime import datetime
 from sqlalchemy.orm import Session
 from models import SessionLocal, Produto
 
+from fastapi.responses import HTMLResponse,RedirectResponse
+# HTMLResponse=resposta do html GET,POST,PUT,DELETE,
+# RedirectResponse=redirecionar a página ao receber o método'GET'
+from fastapi.templating import Jinja2Templates
 
-app = FastAPI(title="Rotas de Produtos")
+from models import SessionLocal
+#Jinja2Templates=responsável por renderizar o front-end,
+#html,css,javascript
+import os,shutil
+#os=função de sistema, pegar caminhos de pasta 'imagem'
+#shutil=salvar ou pegar o caminho do diretório 'caminho/imagem'
+from sqlalchemy.orm import Session
+#Session=modelagem dos daos ORM 'id,nome,preco'
+from models import DATABASE_URL
+#get_db=coletar o banco 'produtos.db' para a API
+from models import Produto
+#Produto manipular o models Produtos
+router=APIRouter()#rotas da api
+templates=Jinja2Templates(directory="templates")#pasta front-end
 
-# python -m uvicorn controlller.produto_controller:app --reload
+
+# app = FastAPI(title="Rotas de Produtos")
+
+# # python -m uvicorn controlller.produto_controller:app --reload
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+        
+@router.get("/", response_class=HTMLResponse)
+def listar_produtos(request: Request, db: Session = Depends(get_db)):
+    produtos = db.query(Produto).all()  # busca todos os produtos
+    return templates.TemplateResponse("index.html", {"request": request, "produtos": produtos})
+        
+        
+        
 
-# Pegar todos os produtos 
-@app.get("/")
-async def listar_produtos(db:Session = Depends(get_db)):
-    produtos = db.query(Produto).all()
-    return {"produtos": [p.nome_produto for p in produtos]}
+# # Pegar todos os produtos 
+# @app.get("/")
+# async def listar_produtos(db:Session = Depends(get_db)):
+#     produtos = db.query(Produto).all()
+#     return {"produtos": [p.nome_produto for p in produtos]}
 
 # # Buscar produtos pelo id 
 # @app.get("/produtos/{produtos_id}")
