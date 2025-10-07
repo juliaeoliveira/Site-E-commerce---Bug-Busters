@@ -14,8 +14,11 @@
                 Preço: R$ {{ produto.preco }}<br>
                 Cor: {{ produto.cor }}<br>
                 <img src="{{ produto.imagem1_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
+                <img src="{{ produto.imagem2_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
+                <img src="{{ produto.imagem3_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
+                <img src="{{ produto.imagem4_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
             </li>
-            <hr>
+            <br>
         {% endfor %}
     </ul>
 </body>
