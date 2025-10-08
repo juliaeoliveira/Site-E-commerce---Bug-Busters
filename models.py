@@ -150,79 +150,78 @@ class Produto(Base):
     # itens_pedido = relationship("ItemPedido", back_populates="produto") #N:1
 
 
-# # class ItemPedido(Base):
-# #     __tablename__="item_pedido"
-# #     id = Column(Integer,primary_key=True,autoincrement=True) 
-# #     tamanho = Column(String, index=True)
-# #     quantidade= Column(Integer, default=0)
-# #     preco_unitario = Column(Numeric(10,2))
-# #     subtotal = Column(Float) #valor de (quantidade * preco_unitario)
+class ItemPedido(Base):
+    __tablename__="item_pedido"
+    id = Column(Integer,primary_key=True,autoincrement=True) 
+    tamanho = Column(String, index=True)
+    quantidade= Column(Integer, default=0)
+    preco_unitario = Column(Numeric(10,2))
+    subtotal = Column(Float) #valor de (quantidade * preco_unitario)
 
-# #     #chave estrangeira
-# #     id_pedido = Column(Integer, ForeignKey('pedido.id'), nullable=False)
-# #     id_produto = Column(Integer, ForeignKey("produtos.id"), nullable=False) 
+    #chave estrangeira
+    id_pedido = Column(Integer, ForeignKey('pedido.id'), nullable=False)
+    id_produto = Column(Integer, ForeignKey("produtos.id"), nullable=False) 
     
-# #     #relacionamento com as tabelas produto e pedido
-# #     pedido = relationship("Pedido", back_populates="itens_pedido") #1:N 
-# #     produto = relationship("Produto", back_populates="itens_pedido") #1:N
+    #relacionamento com as tabelas produto e pedido
+    pedido = relationship("Pedido", back_populates="itens_pedido") #1:N 
+    produto = relationship("Produto", back_populates="itens_pedido") #1:N
 
-# # #criar todas tabelas e o banco de dados no sqlite
-# # Base.metadata.create_all(bind=engine)
+#criar todas tabelas e o banco de dados no sqlite
+Base.metadata.create_all(bind=engine)
+session = SessionLocal()
 
-# #session = SessionLocal()
+#criando a loja pois é necessario uma loja para a criação de produtos
+# loja = Loja(
+#         cnpj="03.774.819/0005-28",
+#         nome_loja="Sob Véu",
+#         telefone="(11) 3312-3550",
+#         email="sobveuoficial@gmail.com"
+#     )
+#     session.add(loja)
+#     session.commit()
+#     session.close()
 
-# #criando a loja pois é necessario uma loja para a criação de produtos
-# # loja = Loja(
-# #     cnpj="03.774.819/0005-28",
-# #     nome_loja="Sob Véu",
-# #     telefone="(11) 3312-3550",
-# #     email="sobveuoficial@gmail.com"
-# # )
-# # session.add(loja)
-# # session.commit()
-# # session.close()
+#     endereco = Endereco(
+#     rua="Rua Correia de Andrade",
+#     numero="232",
+#     complemento = "Escritório",
+#     bairro="Brás",
+#     cidade="São Paulo",
+#     estado="SP",
+#     cep="03008-020",
+#     loja_id = "03.774.819/0005-28"
+# )
+# session.add(endereco)
+# session.commit()
+# session.close()
 
-# # endereco = Endereco(
-# #     rua="Rua Correia de Andrade",
-# #     numero="232",
-# #     complemento = "Escritório",
-# #     bairro="Brás",
-# #     cidade="São Paulo",
-# #     estado="SP",
-# #     cep="03008-020",
-# #     loja_id = "03.774.819/0005-28"
-# # )
-# # session.add(endereco)
-# # session.commit()
-# # session.close()
-
-# # produto = Produto(
-# #     nome_produto = "Aurora Royal",
-# #     preco = 14990,
-# #     descricao = '''
-# #     • Estilo: Princesa com corte evasê (A-line amplo). Estrutura sofisticada e imponente, destacando a cintura.
-# #     • Cor: Branco off-white elegante.
-# #     • Tecido: Cetim nobre e encorpado, com caimento liso e brilho acetinado.
-# #     • Decote: Frente reta e discreta; costas em decote quadrado profundo e delicado.
-# #     • Mangas: Alças finas em cetim, minimalistas.
-# #     • Saia: Ampla, com caimento volumoso e estruturado, sem bordados aparentes, destacando o tecido liso e sofisticado.
-# #     • Cauda: Longa, estilo cathedral train, dramática e luxuosa.
-# #     • Tamanho: P, M, G.
+# produto = Produto(
+#     nome_produto = "Aurora Royal",
+#     preco = 14990,
+#     descricao = '''
+#     • Estilo: Princesa com corte evasê (A-line amplo). Estrutura sofisticada e imponente, destacando a cintura.
+#     • Cor: Branco off-white elegante.
+#     • Tecido: Cetim nobre e encorpado, com caimento liso e brilho acetinado.
+#     • Decote: Frente reta e discreta; costas em decote quadrado profundo e delicado.
+#     • Mangas: Alças finas em cetim, minimalistas.
+#     • Saia: Ampla, com caimento volumoso e estruturado, sem bordados aparentes, destacando o tecido liso e sofisticado.
+#     • Cauda: Longa, estilo cathedral train, dramática e luxuosa.
+#     • Tamanho: P, M, G.
     
-# #     ''',
-# #     cor = "branco off-white",
-# #     categoria = "brilho_invernal",
-# #     quantidade_estoque = 7,
-# #     imagem1_URL = "static/uploads/image1",
-# #     imagem2_URL = "static/uploads/image2",
-# #     imagem3_URL = "static/uploads/image3",
-# #     imagem4_URL = "static/uploads/image4",
-# #     status = True,
-# #     loja_id= "03.774.819/0005-28"
-# # )
-# # session.add(produto)
-# # session.commit()
-# # session.close()
+#     ''',
+#     cor = "branco off-white",
+#     categoria = "brilho_invernal",
+#     quantidade_estoque = 7,
+#     imagem1_URL = "static/uploads/image1",
+#     imagem2_URL = "static/uploads/image2",
+#     imagem3_URL = "static/uploads/image3",
+#     imagem4_URL = "static/uploads/image4",
+#     status = True,
+#     loja_id= "03.774.819/0005-28"
+# )
+# session.add(produto)
+# session.commit()
+# session.close()
 
 # """
 # produto_update = session.query(Produto).filter_by(id = 8).first()
