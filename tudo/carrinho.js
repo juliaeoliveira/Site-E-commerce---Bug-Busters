@@ -1,63 +1,65 @@
 
-// ======== Adiciona produto ao carrinho ==========
-function adicionarAoCarrinho(produto) {
-  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        // Função para carregar os itens do carrinho
+        function carregarCarrinho() {
+            return JSON.parse(localStorage.getItem('carrinho')) || [];
+        }
 
-  const index = carrinho.findIndex(item => item.id === produto.id);
+        // Função para atualizar o carrinho
+        function atualizarCarrinho() {
+            const carrinho = carregarCarrinho();
+            const containerCarrinho = document.getElementById('itens-carrinho');
+            const subtotalElement = document.getElementById('sub-total');
 
-  if (index !== -1) {
-    carrinho[index].quantidade += 1;
-  } else {
-    carrinho.push({ ...produto, quantidade: 1 });
-  }
+            if (carrinho.length === 0) {
+                containerCarrinho.innerHTML = "<p>Seu carrinho está vazio.</p>";
+                subtotalElement.textContent = 'R$ 0.00';
+                return;
+            }
 
-  if (index !== -8000) {
-    carrinho[index].preco += 8000;
-  } else{
-    carrinho.push({ ...produto, preco: 8000 });
-  }
+            let subtotal = 0;
+            containerCarrinho.innerHTML = carrinho.map(item => {
+                const itemSubtotal = item.preco * item.quantidade;
+                subtotal += itemSubtotal;
 
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert(`✅ Produto "${produto.nome}" adicionado ao carrinho!`);
-}
+                return `
+                    <div class="produto-item">
+                        <input class="checkbox-item" type="checkbox" checked /> 
+                        <img class="foto" src="${item.imagem}" alt="${item.nome}" />
+                        <div class="texto">
+                            <h3>${item.nome}</h3>
+                            <p class="colecao">Coleção: ${item.colecao}</p>
+                            <p class="estoque">${item.estoque}</p>
+                            <p class="tamanho">Tamanho: ${item.tamanho}</p>
+                            <p class="valor">R$ ${item.preco.toFixed(2)}</p>
+                            <select class="quantidade" data-id="${item.id}">
+                                <option value="1" ${item.quantidade === 1 ? 'selected' : ''}>1</option>
+                                <option value="2" ${item.quantidade === 2 ? 'selected' : ''}>2</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            }).join('');
 
+            subtotalElement.textContent = `R$ ${subtotal.toFixed(2)}`;
+        }
 
-// ========= Retorna o carrinho completo ============
-function carregarCarrinho() {
-  return JSON.parse(localStorage.getItem('carrinho')) || [];
-}
+        // Função para atualizar a quantidade e recalcular o subtotal
+        document.addEventListener('change', function(event) {
+            if (event.target.classList.contains('quantidade')) {
+                const carrinho = carregarCarrinho();
+                const itemId = event.target.dataset.id;
+                const novaQuantidade = parseInt(event.target.value, 10);
+                
+                const itemIndex = carrinho.findIndex(item => item.id == itemId);
+                if (itemIndex !== -1) {
+                    carrinho[itemIndex].quantidade = novaQuantidade;
+                    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                }
 
+                atualizarCarrinho();
+            }
+        });
 
-// ========= Exibe carrinho em HTML =================
-// Só use essa função em páginas de listagem (ex: carrinho.html)
-function exibirCarrinho(containerId) {
-  const carrinho = carregarCarrinho();
-  const container = document.getElementById(containerId);
-
-  if (!container) {
-    console.warn("Elemento do carrinho não encontrado.");
-    return;
-  }
-
-  if (carrinho.length === 0) {
-    container.innerHTML = "<p>Seu carrinho está vazio.</p>";
-    return;
-  }
-
-  let total = 0;
-
-  container.innerHTML = carrinho.map(item => {
-    const subtotal = item.preco * item.quantidade;
-    total += subtotal;
-
-    return `
-      <div class="item-carrinho">
-        <p><strong>${item.nome}</strong></p>
-        <p>Quantidade: ${item.quantidade}</p>
-        <p>Preço unitário: R$ ${item.preco.toFixed(2)}</p>
-        <p>Subtotal: R$ ${subtotal.toFixed(2)}</p>
-        <hr>
-      </div>
-    `;
-  }).join('') + `<p><strong>Total: R$ ${total.toFixed(2)}</strong></p>`;
-}
+        // Atualiza o carrinho ao carregar a página
+        atualizarCarrinho();
+ 

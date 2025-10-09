@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Jim+Nightshade&family=Judson:ital,wght@0,400;0,700;1,400&family=Junge&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <title>Sob Véu</title>
     <link rel="stylesheet" href="carrinho.css">
     <title>Sob Veu</title>
 </head>
 <body>
     <div class="menu">
-    <a href="home.html">
-        <img id="logo"src="img/Sob.png" alt="Logo">
-    </a>
+      <nav>
+        <a href="home.html">
+          <img id="logo" src="img/Sob.png" alt="Logo">
+        </a>
+      </nav>  
         <nav class="categorias">
             <a href="produtos.html">Vestidos</a>
             <a href="#Colecoes">Coleções</a>
@@ -36,67 +48,117 @@
             />
             </a>
         </nav>
-    </div>
+    </div> 
 <main>
-
+ <h1 class="localizacao"> Carrinho > Pagamento</h1>
+ <br><br><br><br>br
 <section id="carrinho">
-    <div class="card-carrinho">
-        <div class="breadcrumb">
-            <nav>
-                <a href="carrinho.html">Carrinho</a>
-                <a href="pagamento.html">Pagamento</a>
-            </nav>
+  <section class="compras">
+    <div class="breadcrumb">
+      <section class="produto-vestido">
+        <h1>Carrinho de compras</h1>
+
+        <!-- Linha de selecionar todos -->
+        <div class="linha-selecao">
+          <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
+          <label for="selecionar-todos">Selecionar todos </label>
         </div>
-        <div class="produto-vestido">
-            <h1>Carrinho de compras</h1>
-            <input type="checkbox" />
-            <div class="info"> 
-                <div class="imagem-carrinho"> 
-                <img src="imagemdescricao/frente.png" alt="Vestido" />
-                </div>           
-                <h3>Vestido Eternity</h3>
-                <p>Coleção Charm Secreta</p>
-                <label for="quantidade">Quantidade:</label>
-                <select id="quantidade">
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-                <p>R$ 12.000</p>
-            </div>
-            </div>
-        <div class="pedido-total">
-            <h1> Seu pedido </h1>
-            <h2>Sub total:</h2>
-            <button id="botao-pagamento">
-                <span class="fechar-pedido" >Fechar pedido</span>
-            </button>
+
+        <!-- Card do produto -->
+        <div class="produto-item">
+  <input class="checkbox-item" type="checkbox" /> 
+  <img class="foto" src="imagemcarrinho/frente.png" alt="Vestido" />
+
+
+
+          <div class="texto">
+            <h3>Vestido Eternity</h3> <img class="lixeira" src="imagemcarrinho/5366933-removebg-preview.png" alt="lixeira">
+            <p class="colecao">Coleção Chama Secreta</p>
+            <p class="estoque">Em estoque</p>
+            <select class="tamanho">
+              <option value="PP">PP</option>
+              <option value="P">P</option>
+              <option value="M">M</option>
+              <option value="G">G</option>
+            </select>
+<br>
+            <label class="quantidade" for="quantidade">Quantidade:</label>
+            <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
+            <p class="valor">R$ 12.000</p>
+          </div>
         </div>
+      </section>
     </div>
+  </section>
+
+            <section class="pedido-total">
+                <div>
+                   
+                    <h3> Seu pedido </h3>
+                    <br><br>
+                    <h2>Sub total: <spam>12.000</spam></h2>
+                </div>
+                <button id="botao-pagamento" >Fechar pedido</button>
+         
+            </section>
+  
 </section>
 
-    
+    <section id="variedades">
+    <h1>Mais variedades</h1>
+    <hr class="linha-titulo3">
 
-<section id="variedades">
-  <h1>Mais variedades</h1>
-  <hr class="linha-titulo3">
-
-  <div class="lista-vestidos">
-      <div class="vestido"> 
-          <img src="img/noiva1.png" alt="Vestido de noiva branco modelo Jasmim">
-      </div>
-      <div class="vestido"> 
-          <img src="img/noiva2.png" alt="Vestido de noiva princesa modelo Âmbar">
-      </div>
-      <div class="vestido"> 
-          <img src="img/noiva3.png" alt="Vestido de noiva minimalista modelo Camélia">
-      </div>
+    <div class="lista-vestidos">
+        <div class="vestido"> 
+            <img class="fotovariedades" src="imagemcarrinho/Image (7).png" alt="Vestido de noiva branco modelo Jasmim">
+            <p class="nome">Jasmim</p>
+        </div>
+        <div class="vestido"> 
+            <img class="fotovariedades" src="imagemcarrinho/Image (4).png" alt="Vestido de noiva princesa modelo Âmbar">
+            <p class="nome">Âmbar</p>
+        </div>
+        <div class="vestido"> 
+            <img class="fotovariedades" src="imagemcarrinho/Image (2).png" alt="Vestido de noiva minimalista modelo Camélia">
+            <p class="nome">Camélia</p>
+            </div>
+    </div>
+<br>
+<br>
+    <nav>
+        <div class="outrosvestidos">
+            <a href="produtos.html"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
+        </div> 
+    </nav>
+    </section>
+    </main>
+<br>
+<br>
+<footer>
+    <img class="sob" src="imagem/Sob.png" alt="">
+    <ul> <p>Contatos</p> <br>
+      <img class="telefone" src="imagem/2gokRbP1IDl3BuRCfgic0r5CGMf-desktop-Photoroom.png" alt="" li>(11) 4002-8922</li>
+      <br>
+      <img class="whatsapp" src="imagem/speech-bubble--v2-Photoroom.png" alt="" li>(11) 98291-1653</li>
+      <li>sobveuoficial@gmail.com</li>
+    </ul>
+    <p class="linha">___________</p>
+    <ul> <p> Sobre a loja: </p> <br>
+      <li>Sobre nós</li>  
+      <li>Trocas e Devoluções</li>
+      <li>Fretes e Entregas</li>
+    </ul>
+    <p class="linha">___________</p> 
+    <ul>
+      <li>Política de Privacidade</li>
+      <li>Termos de Uso</li>
+    </ul>
   </div>
-
-  <button id="voltar"> < continuar </button>
-</section>
-
-
-
-</main>
+  <section class="midia">
+    <img class="instagram" src="imagem/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+    <img class="facebook" src="imagem/facebook-f-Photoroom.png" alt="">
+  </section>
+    <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+   
+</footer>
 </body>
 </html>

@@ -6,14 +6,27 @@
 body {
     display: flex; 
     flex-direction: column; /* Organiza os itens na vertical (coluna) */
-    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+    min-height: 100%; /* Garante que o corpo ocupe toda a altura da tela */
     margin: 0; /* Remove a margem padrão */
     padding: 0; /* Remove o preenchimento padrão */
     overflow-x: hidden; /* Impede rolagem horizontal */
-    background-color: #EAE4D8; 
-    
+    background-color: #EAE4D8;
 }
 
+.lixeira{
+  height: 30px;
+  margin-left:400px;
+  margin-top: -30px;
+  position: absolute;
+}
+.lixeira:focus {
+    border-color: darkred; 
+    transform: scale(1.10); 
+}
+.lixeira:hover {
+    border-color: darkred; 
+    transform: scale(1.10);
+}
 /* MENU */
 #logo {
     
@@ -73,13 +86,18 @@ nav a {
 /* Estilo para os links do menu ao passar o mouse (hover) */
 
 
-
 /* breadcrumb  */
 
 .breadcrumb {
-    justify-content: center;
-    display: flex;
-    margin-top: 150px;
+    margin-top: -200px;
+}
+
+.produto-vestido{
+  height: 100px;
+}
+
+#carrinho{
+  height: 250px;
 }
 
 .breadcrumb a {
@@ -99,16 +117,11 @@ nav a {
 }
 
 
-.card-carrinho{
+.compras{
+    height: 850px;
     background-color: #EAE4D8; 
-    justify-content: center;
-
-    
 }
 
-main .card-carrinho{
-  margin-top: 100px;
-}
 
 /* card do carrinho */
 .produto-vestido h1{
@@ -119,18 +132,30 @@ main .card-carrinho{
   background-color: #E3D2AC; /* Cor do fundo */
   width: 700px;
   color: #000;
-  height: 350px;
+  height: 480px;
   margin: 60px 80px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  gap: 20px;   
+             /* espaço entre os elementos */
+}
 
-  align-items: center;        /* centraliza verticalmente */
-  gap: 20px;                  /* espaço entre os elementos */
 
+main h1{
+  text-align: center;
+  margin-top: 100px;
+
+}
+
+main #carrinho{
+  display: flex;
+  margin: 200px;
+  margin-top: 300px;
 }
 
 .produto-vestido input[type="checkbox"] {
   align-self: flex-start;      /* checkbox sobe (como na imagem) */
-  margin-top: 20px;
+  margin-top: 70px;
+
 }
 
 .imagem-carrinho img {
@@ -138,24 +163,84 @@ main .card-carrinho{
   border-radius: 4px;
 }
 
-.info {
+
+.quantia{
+  color: black;
+  background-color: #E3D2AC;
+  font-size: 15px;
+  margin-top: 10px;
+  width: 40px;
+  height: 25px;
+  text-align: center;
+}
+
+.foto{
+  height: 250px;
+  float: left;
+}
+
+/* Alinha a linha "Selecionar todos" */
+.linha-selecao {
   display: flex;
-  flex-direction: column;
-  justify-content: center;  /* centraliza verticalmente dentro da área */
-  gap: 5px;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 20px 20px;
+  font-family: "Libre Caslon Text";
+  color: #523800;
+  font-size: 16px;
 }
 
-.info h3 {
-  font-size: 18px;
-  margin: 0;
-  font-weight: bold;
+/* Card do produto */
+.produto-item {
+  align-items: flex-start;
+  gap: 15px;
+  margin-left: 20px;
+  margin-top: 60px;
 }
 
-#quantidade {
-  padding: 3px;
-  margin-top: 5px;
-  border: 1px solid #523800;
+.checkbox-item{
+  float: left;
+    
+}
+
+/* Checkbox de cada produto */
+.produto-item in {
+  margin-top: 90px
+
+}
+/* Imagem e texto do produto */
+.produto-item .foto {
+  height: 200px;
   border-radius: 4px;
+  margin-top: 0px;
+}
+
+.produto-item .texto {
+  
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: "Inter", sans-serif;
+}
+
+
+
+
+.texto{
+  margin: 40px;
+  margin-top: -10px;
+  float: left;
+  margin-left: 40px;
+}
+
+.texto , .foto{
+  margin: 20px;
+  margin-top: 100px;
+  font-size: 20px;
+}
+
+#carrinho .texto img{
+  text-align: center;
 }
 
 .pedido-total{
@@ -165,20 +250,31 @@ main .card-carrinho{
   height: 161px;
   margin: 60px 80px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  align-items: center;        /* centraliza verticalmente */
+        /* centraliza verticalmente */
   gap: 20px;                  /* espaço entre os elementos */
   padding: 20px;
+  margin-top: -100px;
 }
 
+.pedido-total button{
+
+  margin: 50px;
+  width: 200px;
+}
 
 /* sessao variedades */
 
-/* sessao variedades */
+#variedades img{
+  height: 600px;
+  align-items: center;
+}
+
 #variedades {
-  height: 90vh;
+  height: 100vh;
   background-color: #FFF9ED;
   text-align: center;
-  margin-top: 100px;
+  width: 100%;
+  height: 1100px;
 }
 
 .linha-titulo3 {
@@ -210,10 +306,11 @@ main .card-carrinho{
   background: none;
 }
 
+
 .vestido img {
   position: static;
   width: 352px;
-  height: 697px;
+  height: 90px;
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
@@ -247,61 +344,111 @@ main .card-carrinho{
   align-items: center;
 }
 
-#voltar {
+button:focus {
+    border-color: darkred; 
+    transform: scale(1.10); 
+}
+button:hover {
+    border-color: darkred; 
+    transform: scale(1.05);
+}
+
+
+.ver {
+  float: left;
   font-family: "Libre Caslon Text";
-  height: 50px;
-  width: 230px;
+  height: 60px;
+  width: 320px;
   color: darkred;
   background-color: #EADCC1CC;
   box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
   font-size: 19px;
-
-  display: block;
-  margin: 30px 0 0 40px; /* joga para a esquerda */
   text-align: left;
+  margin-top: 40px;
+  text-align: center;
+  margin-left: 60px;
 }
- 
+
+.localizacao{
+  text-align: center;
+  font-size: 20px;
+  margin-top: 200px;
+  position: absolute;
+  margin-left: 850px;
+}
+
 #voltarect {
-  border-color: red;
+  border-color: rgb(104, 0, 0);
   transform: scale(1.10);
 }
 
-#voltar:hover {
-  border-color: darkred;
-  transform: scale(1.05);
+.pedido-total #botao-pagamento{
+  color: white;
+  text-align: center;
+  height: 50px;
+  background-color: #790000;
+  margin-left: 120px;  
+}
+
+
+.compras{
+  float: right;
+  height: 130px;
 }
 
 
 
-/* foooter */
 footer{
-  background-color: #5a0101;
-  color: white;
-  padding: 40px 0; /* aumenta altura */
-  display: flex;
-  justify-content: space-evenly;  
-  align-items: flex-start; /* alinhar tudo no topo */
-  flex-wrap: wrap; /* quebra linha caso precise */
-  margin-top: 20px; /* espaço entre o footer e o conteúdo */
-
+    background-color: #5a0101;
+    color: white;
+    padding: 40px 0; /* aumenta altura */
+    display: flex;
+    justify-content: space-evenly;  
+    align-items: flex-start; /* alinhar tudo no topo */
+    width: 100%;
+    flex-wrap: wrap; /* quebra linha caso precise */
+    margin-top: 100px; /* espaço entre o footer e o conteúdo */
 }
 
 footer ul {
   font-family: "Inter", sans-serif;
-  list-style: none;
-  text-align:center; 
+    list-style: none;
+   text-align: center;
 }
 
 footer li {
   margin-top: 40px;
   text-align: center;
-  margin: 10px 0;
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
+    margin: 10px 0;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    margin: 10px 0;
 }
 
+h1{
+  font-size: 25px;
+}
+
+.linhafooter{
+  margin-top: 20px;
+    width: 170px;
+    transform: rotate(-90.164deg);
+    color: #FFF;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 420px;
+}
+
+
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-top: 50px; 
+    font-size: 15px;
+}
 
 .whatsapp, .telefone{
     height: 20px;
@@ -313,11 +460,17 @@ footer li {
   text-align: right;
 }
 
-
 .sob{
     height: 100px;
-    margin-top: 90px;
+    margin-top: -100px;
     margin: -10px;
+}
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-left: 50px;
+    font-size: 15px;
 }
 
 .linha{
@@ -330,12 +483,15 @@ footer li {
     margin-top: 50px;
 }
 
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-top: 160px;
-    font-size: 15px;
-    margin-left: 60px;
+html{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF9ED;
+}
+
+footer p{
+  text-align: center;
 }
 
 .midia{
@@ -343,3 +499,131 @@ footer li {
    display: grid;
   gap: 15px;
 }
+
+.outrosvestidos{
+  margin-right: 900px;
+}
+
+.compras h1{
+color: #523800;
+
+color: color(display-p3 0.3077 0.2228 0.0082);
+
+text-align: left;
+-webkit-text-stroke-color: #7C5051;
+
+
+font-family: "Aboreto", system-ui;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.quantidade{
+  background-color: #E3D2AC;
+  color: #5a0101;
+  height: 80px;
+}
+
+
+.nome {
+ color: #000;
+  text-align: center;
+  font-family: "Arial, Helvetica, sans-serif";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  margin-top: 40px;
+}
+
+.pedido-total {
+  background-color: white;
+  width: 800px;
+  padding: 20px;
+  height: 180px;
+  gap: 10px;
+  font-family: "Libre Caslon Text";
+}
+
+
+
+.pedido-total h1 {
+  font-size: 20px;
+}
+
+.pedido-total h2 {
+  font-size: 18px;
+ 
+}
+
+.foto .texto{
+  text-align: center;
+}
+
+#selecionar-todos{
+  margin-top: 1px;
+}
+#quantidade{
+  width: 100px;
+  margin-top: 10px;
+}
+
+h3{
+  color: #523800;
+ margin-top: -12px;
+font-family: "Libre Caslon Text";
+font-size: 28px;
+font-weight: 500
+}
+
+.colecao{
+  color: #523800;
+color: color(display-p3 0.3077 0.2228 0.0082);
+font-family: "Libre Caslon Text";
+font-size: 16px;
+margin-top: 10px;
+}
+
+.estoque{
+  font-family: "Inter", sans-serif;
+  color: #4E3902;
+ font-size: 16px;
+ margin-top: 10px;
+}
+
+.tamanho{
+  font-family: "Inter", sans-serif;
+  color: #4E3902;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.valor{
+  margin-top: 10px;
+}
+
+.produto-item .checkbox-item {            /* Coloca checkbox e imagem lado a lado */
+  align-items: center;       /* Centraliza verticalmente */
+  gap: 10px;    
+}
+
+.checkbox-item {
+  width: 18px;               /* Tamanho do checkbox */
+  height: 18px;
+  cursor: pointer;    
+  margin-top: 90px;       /* Mãozinha ao passar o mouse */
+}
+
+.foto {
+  width: 120px;              /* Ajuste o tamanho conforme o design */
+  height: auto;
+  border-radius: 6px;        /* Bordas suaves */
+}
+
+.checkbox-item {
+  position: relative;
+  top: 2px; /* ajuste fino — pode usar 1px, 2px, -1px, etc. */
+}
+
