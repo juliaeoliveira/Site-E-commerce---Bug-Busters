@@ -6,20 +6,18 @@
     <title>Lista de Produtos</title>
 </head>
 <body>
-    <h1>Produtos disponíveis</h1>
-    <ul>
+    <h1>Lista de Produtos</h1>
+    {% if produtos %}
         {% for produto in produtos %}
-            <li>
-                <strong>{{ produto.nome_produto }}</strong><br>
-                Preço: R$ {{ produto.preco }}<br>
-                Cor: {{ produto.cor }}<br>
-                <img src="{{ produto.imagem1_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
-                <img src="{{ produto.imagem2_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
-                <img src="{{ produto.imagem3_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
-                <img src="{{ produto.imagem4_URL }}" alt="{{ produto.nome_produto }}" width="200"><br>
-            </li>
-            <br>
+        <li>
+            <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="produto.nome_produto">
+            <h2>{{ produto.nome_produto }}</h2>
+            <p class="preco">R$ {{ produto.preco }}</p>
+            <a href="/produtos/{{produto.id}}">Ver Detalhes</a>
         {% endfor %}
-    </ul>
+        </li>
+    {% else %}
+            <p>Nenhum produto encontrado!</p>
+    {% endif %}   
 </body>
 </html>
