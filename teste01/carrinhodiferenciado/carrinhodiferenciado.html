@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - Sob Véu</title>
+    <link rel="stylesheet" href="carrinho.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu">
+        <img id="logo" src="img/Sob.png" alt="Logo">
+        <nav class="categorias">
+            <a href="#Vestidos">Vestidos</a>
+            <a href="#Colecoes">Coleções</a>
+            <a href="#Agendamentos">Agendamentos</a>
+        </nav>
+        <nav class="icons">
+            <a href="https://instagram.com" target="_blank">
+                <img src="img/login.png" width="20px" title="login" alt="login">
+            </a>
+            <a href="https://www.whatsapp.com/?lang=pt_BR" target="_blank">
+                <img src="img/carrinho.png" width="20px" title="Carrinho" alt="Carrinho">
+            </a>
+        </nav>
+    </div> 
+
+    <main>
+        <h1>Carrinho de Compras</h1>
+
+        <section id="carrinho">
+            <section class="compras">
+                <div class="breadcrumb">
+                    <section class="produto-vestido">
+                        <h2>Seu Carrinho</h2>
+
+                        <!-- Área onde os itens do carrinho vão aparecer -->
+                        <div id="itens-carrinho"></div>
+
+                    </section>
+                </div>
+            </section>
+
+            <!-- Pedido Total -->
+            <section class="pedido-total">
+                <div>
+                    <h3>Seu pedido</h3>
+                    <br>
+                    <h2>Sub total: <span id="sub-total">R$ 0.00</span></h2>
+                    <button id="botao-pagamento">Fechar pedido</button>
+                </div>
+            </section>
+        </section>
+
+        <section id="variedades">
+            <h1>Mais Variedades</h1>
+            <hr class="linha-titulo3">
+
+            <div class="lista-vestidos">
+                <div class="vestido"> 
+                    <img class="fotovariedades" src="imagemcarrinho/Image (7).png" alt="Vestido Jasmim">
+                    <p class="nome">Jasmim</p>
+                </div>
+                <div class="vestido"> 
+                    <img class="fotovariedades" src="imagemcarrinho/Image (4).png" alt="Vestido Âmbar">
+                    <p class="nome">Âmbar</p>
+                </div>
+                <div class="vestido"> 
+                    <img class="fotovariedades" src="imagemcarrinho/Image (2).png" alt="Vestido Camélia">
+                    <p class="nome">Camélia</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img class="sob" src="imagem/Sob.png" alt="Logo Sob Véu">
+        <ul>
+            <p>Contatos</p>
+            <li>(11) 4002-8922</li>
+            <li>(11) 98291-1653</li>
+            <li>sobveuoficial@gmail.com</li>
+        </ul>
+        <p class="linha">___________</p>
+        <ul> 
+            <p>Sobre a loja: </p>
+            <li>Sobre nós</li>  
+            <li>Trocas e Devoluções</li>
+            <li>Fretes e Entregas</li>
+        </ul>
+        <p class="linha">___________</p>
+        <ul>
+            <li>Política de Privacidade</li>
+            <li>Termos de Uso</li>
+        </ul>
+        <section class="midia">
+            <img class="instagram" src="imagem/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+            <img class="facebook" src="imagem/facebook-f-Photoroom.png" alt="">
+        </section>
+        <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="carrinho.js"></script>
+    
+</body>
+</html>
