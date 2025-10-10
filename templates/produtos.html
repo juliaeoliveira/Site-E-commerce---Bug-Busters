@@ -23,7 +23,7 @@
       <a href="home.html"> <img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a> 
     </nav>  
     <nav class="paginas">
-      <a href="produtos.html">Vestidos</a>
+      <a href="/">Vestidos</a>
       <a href="#Colecoes">Coleções</a>
       <a href="#Agendamentos">Agendamentos</a>
     </nav>
@@ -41,66 +41,25 @@
   
   <main>
     <h1>VESTIDOS DE NOIVA</h1>
-    <section>
-      <div class="vestido"> 
-        <nav class="descricao">
-          <a href="descricaoAurora.html">  
-            <img src="" alt="">
-          </a>  
-        </nav>
-            <p class="nome">Aurora</p>
-        </div>
-     
-
-        <div class="vestido"> 
-          <nav>
-            <a href="descricaoTereza.html">  
-              <img src="imagem/Image (1).png" alt=""> 
-            </a>
-            </nav>
-            <p class="nome">Tereza</p>
-        </div>
-
-        <div class="vestido"> 
-          <img src="imagem/Image (2).png" alt=""> 
-          <p class="nome">Camélia</p>
-        </div>
+    <section>    
+        {% if produtos %}
+          {% for produto in produtos %}
+            <div class="vestido">   
+              <nav>
+                <a href="/produtos/{{produto.id}}">  
+                  <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}"> 
+                </a>
+              </nav>
+              <p class="nome">{{produto.nome_produto}}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>Nenhum produto encontrado!</p>
+        {% endif %} 
+        
       </section>
   
-    
-    <section >
-      <div class="vestido"> 
-        <img src="imagem/Image (3).png" alt=""> 
-        <p class="nome">Eve</p>
-      </div>
 
-      <div class="vestido">
-        <img src="imagem/Image (4).png" alt="">
-        <p class="nome">Âmbar</p>
-      </div>
-
-      <div class="vestido">
-        <img src="imagem/Image (5).png" alt="">
-        <p class="nome">Serena</p>
-      </div>
-      </section>
-
-    <section>
-      <div class="vestido">
-        <img src="imagem/Image (6).png" alt="">
-        <p class="nome">Miranda</p>
-      </div>
-
-      <div class="vestido"> 
-        <img src="imagem/Image (7).png" alt=""> 
-        <p class="nome">Jasmin</p>
-      </div>
-      
-      <div class="vestido"> 
-        <img src="imagem/Image (8).png" alt=""> 
-        <p class="nome">Lottie</p>
-      </div>
-    </section>
     <nav>
       <a href="home.html">
         <button> ← Voltar à página inicial</button>

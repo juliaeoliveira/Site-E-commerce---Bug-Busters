@@ -23,7 +23,7 @@
       <a href="home.html"> <img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a> 
     </nav>  
     <nav class="paginas">
-      <a href="produtos.html">Vestidos</a>
+      <a href="/">Vestidos</a>
       <a href="#Colecoes">Coleções</a>
       <a href="#Agendamentos">Agendamentos</a>
     </nav>
@@ -44,36 +44,28 @@
 
     <section>
         <div class="fotos">
-            <div><img src="imgAurora/frente.png" alt="foto de frente"></div>
-            <div><img src="imgAurora/costa.png" alt="foto de costa"></div>
-            <div><img src="imgAurora/esquerda.png" alt="foto do lado esquerdo"></div>  
-            <div><img src="imgAurora/direito.png" alt="foto do lado direito"></div>
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem1_url)}}" alt="foto de frente"></div>
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem2_url)}}" alt="foto de costa"></div>
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}" alt="foto do lado esquerdo"></div>  
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem4_url)}}" alt="foto do lado direito"></div>
         </div>
         
     </section>
     <section>  
         <div class="descricao">
-            <h2 class="nomevestido">VESTIDO AURORA</h2> <br> <br>
+            <h2 class="nomevestido">{{produto.nome_produto}}</h2> <br> <br>
             <h2 class="descricaovestido">DETALHES DO VESTIDO</h2>
             <br>
-            <b class="subtitulo">Coleção: Chama Serena</b> 
+            <b class="subtitulo">Coleção: {{produto.categoria}}</b> 
          
             <ul>   
-                <br>
-                <li> <b class="linhadescricao">Estilo princesa/A-line (evasê). Estrutura elegante e sofisticada, ajustada na cintura e com saia ampla.</b></li> <br>
-                <li> <b class="linhadescricao">Cor: Branco off-white clássico. </b></li> <br>
-                <li> <b class="linhadescricao">Tecido: Mikado ou cetim estruturado, com caimento firme e acetinado. </b></li> <br>
-                <li> <b class="linhadescricao">Decote ombro a ombro reto, destacando o colo e trazendo sofisticação. </b></li> <br>
-                <li> <b class="linhadescricao">Mangas: estilo bardot (faixa sobre os ombros), sem mangas tradicionais. </b></li> <br>
-                <li> <b class="linhadescricao">Saia: ampla, levemente armada, com pregas sutis que valorizam o volume. </b></li> <br>
-                <li> <b class="linhadescricao">Cauda: longa e elegante, estilo chapel train. </b></li> <br>
-                <li> <b class="linhadescricao">Tamanho: P, M, G, GG. </b></li>
+                <p>{{produto.descricao}}</p>
             </ul>
 
         </div>
         <div class="botoes"> 
             <div>
-                <button class="compra"> <b> Compra:  R$8.000 </b></button>
+                <button class="compra"> <b> Compra: R${{produto.preco}} </b></button>
             </div>
             <div>   
                 <button class="carrinho"> Adicionar no carrinho 🛒 </button>
@@ -91,18 +83,14 @@
         <p class="linhavariedade">________________________________________________________________</p>
         
         <div class="variedades">
+          {% for sugestao in sugestoes %}
             <div class="imagem-container">
-                <img src="imagemdescricao/Image (13).png" alt="variedades">
-                <p class="nome">Jasmin</p>
+                <a href="/produtos/{{ sugestao.id }}">
+                    <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
+                    <p class="nome">{{ sugestao.nome_produto }}</p>
+                </a>
             </div>
-            <div class="imagem-container">
-                <img src="imagemdescricao/Image (14).png" alt="variedades">
-                <p class="nome">Âmbar</p>
-            </div>
-            <div class="imagem-container">
-                <img src="imagemdescricao/Image (15).png" alt="variedades">
-                <p class="nome">Camélia</p>
-            </div>
+          {% endfor %}
         </div>
     </div>
 </section>

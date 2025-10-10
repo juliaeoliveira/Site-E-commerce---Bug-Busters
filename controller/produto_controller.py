@@ -22,7 +22,7 @@ from fastapi.templating import Jinja2Templates
 import os,shutil
 #os=função de sistema, pegar caminhos de pasta 'imagem'
 #shutil=salvar ou pegar o caminho do diretório 'caminho/imagem'
-
+import random
 #Session=modelagem dos daos ORM 'id,nome,preco'
 #from models_teste import DATABASE_URL
 #get_db=coletar o banco 'produtos.db' para a API
@@ -43,9 +43,10 @@ async def listar_todos (request:Request,
                         db:Session=Depends(get_db)):
     produtos = db.query(Produto).all()
     return templates.TemplateResponse(
-        "index.html",
+        "produtos.html",
         {"request": request, "produtos": produtos}
     )        
+
 
 #rota detalhe do produto
 @router.get("/produtos/{id_produto}",
@@ -54,10 +55,17 @@ async def detalhe(request:Request,id_produto:int,
                   db:Session=Depends(get_db)):
     #query do produto
     produto=db.query(Produto).filter(Produto.id==id_produto).first()
-    return templates.TemplateResponse("produto.html",{
-        "request":request,"produto":produto
-    })  
-        
+    
+    # Todos os outros produtos (exceto o atual)
+    outros_produtos = db.query(Produto).filter(Produto.id != id_produto).all()
+
+    # Selecionar 3 aleatórios (ou menos se não houver suficientes)
+    sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
+
+    return templates.TemplateResponse("descricao.html",{
+        "request":request,"produto":produto,"sugestoes": sugestoes
+    })
+
 
 # # Pegar todos os produtos 
 # @app.get("/")
