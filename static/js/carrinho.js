@@ -61,5 +61,19 @@
         });
 
         // Atualiza o carrinho ao carregar a página
-        atualizarCarrinho();
+        function adicionarAoCarrinho(produto) {
+    const carrinho = carregarCarrinho();
+    const existente = carrinho.find(item => item.id === produto.id);
+
+    if (existente) {
+        existente.quantidade += 1;
+    } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+    }
+
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    atualizarCarrinho();
+}
+atualizarCarrinho();
  

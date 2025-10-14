@@ -15,6 +15,7 @@ from fastapi.responses import HTMLResponse,RedirectResponse
 # HTMLResponse=resposta do html GET,POST,PUT,DELETE,
 # RedirectResponse=redirecionar a página ao receber o método'GET'
 from fastapi.templating import Jinja2Templates
+from typing import Optional
 
 #from models_teste import SessionLocal
 #Jinja2Templates=responsável por renderizar o front-end,
@@ -38,6 +39,13 @@ templates=Jinja2Templates(directory="templates")#pasta front-end
 
 UPLOAD_DIR="static/uploads"
 os.makedirs(UPLOAD_DIR,exist_ok=True)
+
+@router.get("/home/", response_class=HTMLResponse)
+async def pagina_carrinho(request: Request):
+        return templates.TemplateResponse("home.html",{
+        "request":request
+    })
+
 @router.get("/", response_class=HTMLResponse)
 async def listar_todos (request:Request, 
                         db:Session=Depends(get_db)):
@@ -66,6 +74,36 @@ async def detalhe(request:Request,id_produto:int,
         "request":request,"produto":produto,"sugestoes": sugestoes
     })
 
+@router.get("/carrinho/", response_class=HTMLResponse)
+async def pagina_carrinho(request: Request,id_produto:int,
+                  db:Session=Depends(get_db)):
+    #query do produto
+    #produto=db.query(Produto).filter(Produto.id==id_produto).first()
+    
+    # Todos os outros produtos (exceto o atual)
+    #outros_produtos = db.query(Produto).filter(Produto.id != id_produto).all()
+
+    # Selecionar 3 aleatórios (ou menos se não houver suficientes)
+    #sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
+    return templates.TemplateResponse("carrinhodiferenciado.html", {"request": request})
+'''
+@router.get("/carrinho/",
+            response_class=HTMLResponse)
+async def detalhe(request:Request,id_produto:int,
+                  db:Session=Depends(get_db)):
+    #query do produto
+    produto=db.query(Produto).filter(Produto.id==id_produto).first()
+    
+    # Todos os outros produtos (exceto o atual)
+    outros_produtos = db.query(Produto).filter(Produto.id != id_produto).all()
+
+    # Selecionar 3 aleatórios (ou menos se não houver suficientes)
+    sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
+
+    return templates.TemplateResponse("carrinhodiferenciado.html",{
+        "request":request,"produto":produto,"sugestoes": sugestoes
+    })
+'''
 
 # # Pegar todos os produtos 
 # @app.get("/")
