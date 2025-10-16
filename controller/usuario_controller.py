@@ -17,7 +17,7 @@ def usuario_registrar(
     db_session: Session = Depends(get_db_session), #cria uma dependência que fornece uma sessão para a função, garantindo que ela seja aberta e fechada corretamente
 ):
      # Verificar se o nome de usuário já existe
-    usuarios_existente = db_session.query(Usuario_Model).filter(Usuario_Model.username == usuario.usuario).first()
+    usuarios_existente = db_session.query(Usuario_Model).filter(Usuario_Model.usuario == usuario.usuario).first()
     if usuarios_existente:
         raise HTTPException(status_code=400, detail="Usuário já existe.")
     
