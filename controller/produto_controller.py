@@ -86,7 +86,7 @@ async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
 
     #Selecionar 3 aleatórios (ou menos se não houver suficientes)
     #sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
-    return templates.TemplateResponse("carrinhodiferenciado.html", {"request": request})
+    return templates.TemplateResponse("carrinho.html", {"request": request})
 '''
 @router.get("/carrinho/",
             response_class=HTMLResponse)

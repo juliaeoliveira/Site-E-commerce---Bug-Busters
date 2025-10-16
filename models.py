@@ -144,6 +144,13 @@ class ItemPedido(Base):
     pedido = relationship("Pedido", back_populates="itens_pedido") #1:N 
     produto = relationship("Produto", back_populates="itens_pedido") #1:N
 
-#criar todas tabelas e o banco de dados no sqlite
-Base.metadata.create_all(bind=engine)
-db = SessionLocal()
+class Usuario_Model(Base):
+    __tablename__="usuarios"
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    usuario = Column(String, nullable=False, unique=True)
+    email = Column(String, nullable=False)
+    senha = Column(String, nullable=False)
+
+# #criar todas tabelas e o banco de dados no sqlite
+# Base.metadata.create_all(bind=engine)
+# db = SessionLocal()

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SOB Véu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            background-color: #e8dfd3;
+            color: #5a3e2b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: #f5f0ea;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Updated logo styling to accommodate image */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: #5a3e2b;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #8b6f47;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .header-icons a {
+            color: #5a3e2b;
+            font-size: 1.3rem;
+            text-decoration: none;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .login-container {
+            background-color: #f5f0ea;
+            padding: 3rem 2.5rem;
+            border-radius: 2px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .login-title {
+            font-size: 2.5rem;
+            color: #8b3a3a;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: #7a6a5a;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #5a3e2b;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid #d4c4b0;
+            background-color: #faf8f5;
+            color: #5a3e2b;
+            font-size: 1rem;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8b6f47;
+            box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.1);
+        }
+
+        .error-message {
+            color: #c74444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 1rem;
+            background-color: #5a3e2b;
+            color: #f5f0ea;
+            border: none;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-login:hover {
+            background-color: #6b4d35;
+        }
+
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+
+        .btn-login:disabled {
+            background-color: #a89885;
+            cursor: not-allowed;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #7a6a5a;
+        }
+
+        .form-footer a {
+            color: #8b6f47;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 1.5rem;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Replaced text logo with image logo -->
+        <div class="logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-o9IM5SnUyGWER65T5RZQFeQH0BLfrv.png" alt="SOB Véu">
+        </div>
+        <nav>
+        </nav>
+        <div class="header-icons">
+        </div>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <h1 class="login-title">LOGIN</h1>
+            <p class="login-subtitle">Acesse sua conta</p>
+
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="usuario">Usuário</label>
+                    <input 
+                        type="text" 
+                        id="usuario" 
+                        name="usuario" 
+                        required
+                        placeholder="Digite seu usuário"
+                    >
+                    <div class="error-message" id="usuarioError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input 
+                        type="password" 
+                        id="senha" 
+                        name="senha" 
+                        required
+                        placeholder="Digite sua senha"
+                    >
+                    <div class="error-message" id="senhaError"></div>
+                </div>
+
+                <button type="submit" class="btn-login" id="btnLogin">Entrar</button>
+            </form>
+
+            <div class="form-footer">
+                <p>Não tem uma conta? <a href="#" id="linkRegistrar">Cadastre-se</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000'; // Ajuste conforme necessário
+
+        const loginForm = document.getElementById('loginForm');
+        const btnLogin = document.getElementById('btnLogin');
+        const successMessage = document.getElementById('successMessage');
+
+        // Função para mostrar mensagens de erro
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(`${fieldId}Error`);
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
+
+        // Função para limpar mensagens de erro
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.classList.remove('show');
+                el.textContent = '';
+            });
+            successMessage.classList.remove('show');
+        }
+
+        // Função para mostrar mensagem de sucesso
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.classList.add('show');
+        }
+
+        // Handler do formulário de login
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearErrors();
+
+            const usuario = document.getElementById('usuario').value;
+            const senha = document.getElementById('senha').value;
+
+            btnLogin.disabled = true;
+            btnLogin.textContent = 'Entrando...';
+
+            try {
+                // Usando FormData para OAuth2PasswordRequestForm
+                const formData = new FormData();
+                formData.append('username', usuario);
+                formData.append('password', senha);
+
+                const response = await fetch(`${API_BASE_URL}/usuario/login`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Armazenar token
+                    localStorage.setItem('acesso_token', data.acesso_token);
+                    localStorage.setItem('token_expira', data.exp);
+                    
+                    showSuccess('Login realizado com sucesso!');
+                    
+                    // Redirecionar após 1.5 segundos
+                    setTimeout(() => {
+                        window.location.href = '/'; // Ajuste para sua página principal
+                    }, 1500);
+                } else {
+                    showError('senha', data.detail || 'Erro ao fazer login');
+                }
+            } catch (error) {
+                showError('senha', 'Erro de conexão com o servidor');
+                console.error('Erro:', error);
+            } finally {
+                btnLogin.disabled = false;
+                btnLogin.textContent = 'Entrar';
+            }
+        });
+
+        // Link para página de registro (você pode criar uma página separada)
+        document.getElementById('linkRegistrar').addEventListener('click', (e) => {
+            e.preventDefault();
+            // Aqui você pode redirecionar para uma página de registro
+            // ou criar um modal de registro
+            alert('Funcionalidade de registro - criar página separada ou modal');
+        });
+    </script>
+</body>
+</html>
