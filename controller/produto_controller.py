@@ -75,15 +75,16 @@ async def detalhe(request:Request,id_produto:int,
     })
 
 @router.get("/carrinho/", response_class=HTMLResponse)
-async def pagina_carrinho(request: Request,id_produto:int,
+async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
                   db:Session=Depends(get_db)):
     #query do produto
-    #produto=db.query(Produto).filter(Produto.id==id_produto).first()
+    if id_produto:
+         produto=db.query(Produto).filter(Produto.id==id_produto).first()
     
-    # Todos os outros produtos (exceto o atual)
+    #Todos os outros produtos (exceto o atual)
     #outros_produtos = db.query(Produto).filter(Produto.id != id_produto).all()
 
-    # Selecionar 3 aleatórios (ou menos se não houver suficientes)
+    #Selecionar 3 aleatórios (ou menos se não houver suficientes)
     #sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
     return templates.TemplateResponse("carrinhodiferenciado.html", {"request": request})
 '''
