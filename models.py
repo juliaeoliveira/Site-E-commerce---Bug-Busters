@@ -11,30 +11,31 @@ from datetime import datetime
 import pytz
 
 fuso = pytz.timezone('America/Sao_Paulo') # // timezone aplicado corretamente
-class Cliente(Base):
-    __tablename__="cliente"
+
+
+
+class Usuario_Model(Base):             #-----> Nova tabela clientes
+    __tablename__="usuarios"
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome_cliente = Column(String(100), index=True) 
     data_nascimento = Column(DateTime, nullable=False)
-    data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso))
-    email = Column(String, index=True)
+    data_cadastro = Column(DateTime, default=lambda: datetime.now(fuso), nullable=False)
+    email = Column(String, index=True, nullable=False)
     telefone = Column(String)
 
+    #informações para login
+    nome_usuario = Column(String, nullable=False, unique=True, index=True)
+    senha = Column(String, nullable=False)
+    tipo = Column(String, nullable=True, index=True)
+
     #chave estrangeira da loja
-    id_loja = Column(String, ForeignKey("loja.cnpj"), nullable=False)
+    id_loja = Column(String, ForeignKey("loja.cnpj"), nullable=True)
 
     #relacionamento com as tabelas
-    pagamentos = relationship("Pagamento", back_populates="cliente") #N:1
-    pedidos = relationship("Pedido", back_populates="cliente") #N:1
-    loja = relationship("Loja", back_populates="clientes") #1:N
-
-    endereco = relationship(
-        "Endereco",
-        back_populates="cliente",
-        cascade="all, delete-orphan",
-        uselist=False  # porque um cliente tem 1 endereço
-    )
-
+    pagamentos = relationship("Pagamento", back_populates="usuarios") #N:1
+    pedidos = relationship("Pedido", back_populates="usuarios") #N:1
+    loja = relationship("Loja", back_populates="usuarios") #1:N
+    endereco = relationship("Endereco", back_populates="usuario", cascade="all, delete-orphan", uselist=False)  # porque um usuario tem 1 endereço
 
 class Loja(Base):
     __tablename__="loja"
@@ -45,27 +46,29 @@ class Loja(Base):
 
     #relacionamento com as tabelas
     pagamentos = relationship("Pagamento", back_populates="loja") #N:1
-    clientes = relationship("Cliente", back_populates="loja") #N:1
+    usuarios = relationship("Usuario_Model", back_populates="loja") #N:1
     produtos = relationship("Produto", back_populates="loja") #N:1
     endereco = relationship("Endereco", back_populates="loja", cascade="all, delete-orphan", uselist=False ) # porque uma loja tem 1 endereço)
+
 
 class Endereco(Base):
     __tablename__="endereco"
     id = Column(Integer,primary_key=True, autoincrement=True) 
+    cep = Column(String(10)) 
     rua = Column(String)
     numero = Column(String)
     complemento = Column(String, nullable=True)
     bairro = Column(String)
     cidade = Column(String)
     estado = Column(String(2))  #"SP", "RJ"
-    cep = Column(String(10))    #"12345-678"
+       #"12345-678"
 
     #chave estrangeira com os donos de endereços
-    cliente_id = Column(Integer,ForeignKey("cliente.id"),nullable=True)
+    usuario_id = Column(Integer,ForeignKey("usuarios.id"),nullable=True)
     loja_id = Column(String,ForeignKey("loja.cnpj"),nullable=True)
 
     #relacionamento com as tabelas
-    cliente = relationship("Cliente", back_populates="endereco")
+    usuario = relationship("Usuario_Model", back_populates="endereco")
     loja = relationship("Loja", back_populates="endereco")
 
 
@@ -78,13 +81,13 @@ class Pagamento(Base):
     status = Column(Boolean, default=True)
 
     #chave estrangeira
-    id_cliente = Column(Integer, ForeignKey('cliente.id'), nullable=False)
+    id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
     id_pedido = Column(Integer, ForeignKey('pedido.id'), nullable=False)
     cnpj_loja = Column(String, ForeignKey('loja.cnpj'), nullable=False)
     
     #relacionamento com as tabelas
-    cliente = relationship("Cliente", back_populates="pagamentos") #1:N
-    pedido = relationship("Pedido", back_populates="pagamentos") #1:N
+    usuarios = relationship("Usuario_Model", back_populates="pagamentos") #1:N
+    pedido = relationship("Pedido", back_populates="pagamentos") #1:NM
     loja = relationship("Loja", back_populates="pagamentos") #1:N
 
 
@@ -96,11 +99,11 @@ class Pedido(Base):
     status = Column(Boolean, default=True)
     
     #chave estrangeira
-    id_cliente = Column(Integer, ForeignKey('cliente.id'), nullable=False)
+    id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
     
-    #relacionamento com a tabela cliente
+    #relacionamento com as tabelas
     pagamentos = relationship("Pagamento", back_populates="pedido") #N:1
-    cliente = relationship("Cliente", back_populates="pedidos") #1:N
+    usuarios = relationship("Usuario_Model", back_populates="pedidos") #1:N
     itens_pedido = relationship("ItemPedido", back_populates="pedido", cascade="all, delete-orphan") #N:1
     
 
@@ -144,13 +147,18 @@ class ItemPedido(Base):
     pedido = relationship("Pedido", back_populates="itens_pedido") #1:N 
     produto = relationship("Produto", back_populates="itens_pedido") #1:N
 
-class Usuario_Model(Base):
-    __tablename__="usuarios"
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    usuario = Column(String, nullable=False, unique=True)
-    email = Column(String, nullable=False)
-    senha = Column(String, nullable=False)
+#criar todas tabelas e o banco de dados no sqlite
+Base.metadata.create_all(bind=engine)
+db = SessionLocal()
 
-# #criar todas tabelas e o banco de dados no sqlite
-# Base.metadata.create_all(bind=engine)
-# db = SessionLocal()
+
+
+
+
+
+# class Usuario_Model(Base): -------------------------- Teste da autenticação
+#     __tablename__="usuarios"
+#     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+#     usuario = Column(String, nullable=False, unique=True)
+#     email = Column(String, nullable=False)
+#     senha = Column(String, nullable=False)

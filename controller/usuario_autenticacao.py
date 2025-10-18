@@ -6,8 +6,8 @@ from sqlalchemy.exc import IntegrityError
 from passlib.context import CryptContext
 from jose import jwt, JWTError
 from decouple import config
-from models import Usuario_Model
-from schemas import Usuario
+from models import Usuario_Model, Endereco as Endereco_Model
+from schemas import Usuario , Endereco , UsuarioLogin
 
 
 CHAVE_SECRETA = config('CHAVE_SECRETA')
@@ -21,23 +21,51 @@ class ServicosUsuario:
         self.db_session = db_session
 
 
-    def registrar_usuario(self, usuario: Usuario):
+    def registrar_usuario(self, usuario: Usuario , endereco : Endereco):
         usuario_model = Usuario_Model(
-            usuario= usuario.usuario,
+            nome_cliente = usuario.nome_cliente,
+            data_nascimento = usuario.data_nascimento,
+            data_cadastro = usuario.data_cadastro,
             email= usuario.email,
-            senha=crypt_context.hash(usuario.senha) # Senha hashada/criptografada 
+            telefone = usuario.telefone,
+            nome_usuario = usuario.nome_usuario,
+            senha = crypt_context.hash(usuario.senha), # Senha hashada/criptografada 
+            tipo = usuario.tipo
         )
         try:
             self.db_session.add(usuario_model)
             self.db_session.commit()
-        except IntegrityError:  # Se tentar mandar um dado que já existe no banco
+            self.db_session.refresh(usuario_model)
+
+            #somente depois de criar usuario, cria-se o endereço pra pegar o id e colocar no endereço direto
+            endereco_model = Endereco_Model(
+                rua=endereco.rua,
+                numero=endereco.numero,
+                complemento=endereco.complemento,
+                bairro=endereco.bairro,
+                cidade=endereco.cidade,
+                estado=endereco.estado,
+                cep=endereco.cep, 
+                usuario_id=endereco.usuario_id,
+                loja_id=endereco.loja_id
+            )
+            if usuario.tipo != "":
+                if usuario.tipo.lower() == "cliente":
+                    endereco_model.usuario_id = usuario_model.id # associa o endereço ao usuário
+                if usuario.tipo.lower() == "adm" or "administrador": 
+                    endereco_model.loja_id = '03.774.819/0005-28'
+
+            self.db_session.add(endereco_model)
+            self.db_session.commit()
+
+        except IntegrityError:  #se tentar mandar um dado que já existe no banco
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail='O usuário já existe'
             )
 
-    def usuario_login(self, usuario: Usuario, expira_em: int = 90):
-        usuario_existe = self.db_session.query(Usuario_Model).filter_by(usuario=usuario.usuario).first() #busca no banco o usuario
+    def usuario_login(self, usuario: UsuarioLogin, expira_em: int = 90):
+        usuario_existe = self.db_session.query(Usuario_Model).filter_by(nome_usuario=usuario.usuario).first() #busca no banco o usuario
 
         if usuario_existe is None: 
             raise HTTPException(
@@ -65,20 +93,4 @@ class ServicosUsuario:
             'acesso_token': acesso_token,
             'exp': expira.isoformat()#passando o datetime em formato de string
         }
-
-    def verificar_token(self, acesso_token):
-        try:
-            dados = jwt.decode(acesso_token, CHAVE_SECRETA, algorithms=[ALGORITMO])
-        except JWTError: #se o acesso token estiver expirado da esse erro
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail='Token de acesso inválido'
-            )
         
-        usuario_existe = self.db_session.query(Usuario_Model).filter_by(usuario=dados['sub']).first()
-
-        if usuario_existe is None: #se o usuario não existir retorna novamente o erro
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail='Token de acesso inválido'
-            )

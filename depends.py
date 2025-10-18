@@ -14,11 +14,3 @@ def get_db_session():
         yield session
     finally:
         session.close()
-
-
-def verificar_token(
-    db_session: Session = Depends(get_db_session),
-    token = Depends(esquema_oauth)
-):
-    uc = ServicosUsuario(db_session=db_session)
-    uc.verify_token(access_token=token)
