@@ -20,7 +20,7 @@ from typing import Optional
 #from models_teste import SessionLocal
 #Jinja2Templates=responsável por renderizar o front-end,
 #html,css,javascript
-import os,shutil
+import os#shutil
 #os=função de sistema, pegar caminhos de pasta 'imagem'
 #shutil=salvar ou pegar o caminho do diretório 'caminho/imagem'
 import random
