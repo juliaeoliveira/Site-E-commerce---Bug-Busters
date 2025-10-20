@@ -154,3 +154,10 @@ def dashboard(request:Request):
 #         content=dados_autenticacao,
 #         status_code=status.HTTP_200_OK
 #         )
+
+
+
+############################################################
+
+#CRUD de usuarios
+
