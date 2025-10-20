@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from controller.produto_controller import router
-from controller.usuario_controller import caminho_prefixo_usuario, teste_router
+from controller.usuario_controller import caminho_prefixo_usuario
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Loja de Vestidos")
@@ -22,6 +22,5 @@ app.include_router(router)
 
 app.include_router(caminho_prefixo_usuario)
 
-app.include_router(teste_router)
 # python -m uvicorn main:app --reload
 
