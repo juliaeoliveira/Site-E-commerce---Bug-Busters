@@ -81,66 +81,50 @@ nav a {
   text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
 }
 
-/* breadcrumb */
-.breadcrumb {
-  margin-top: -200px;
-}
 
-.produto-vestido {
-  height: 100px;
-}
+/* card carrinho */
 
 #carrinho {
-  height: 250px;
+  height: 40vh;
+  margin-top: 200px;
+  
 }
 
-.breadcrumb a {
-  text-decoration: none;
-  color: #5a3d1c;
-  font-size: 18px;
-  gap: 3px;
-  font-family: "Libre Caslon Text";
+.area-carrinho{
+  display: flex;
+  justify-content: center;      /* centraliza horizontalmente */
+  align-items: flex-start;      /* alinha pelo topo */
+  gap: 60px;                    /* espaço entre os dois blocos */
+  width: 100%;
+  margin-top: 200px;    
 }
-
-.breadcrumb a::after {
-  content: " > ";
-}
-
-.breadcrumb a:last-child::after {
-  content: ""; /* remove o último > */
-}
-
-.compras {
-  height: 850px;
-  background-color: #EAE4D8;
-}
-
-/* card do carrinho */
+/* div produto*/
 .produto-vestido h1 {
   background-color: #FFF;
-  padding: 20px;
+  width: calc(100% + 40px); /* cobre todo o espaço horizontal + padding da section */
+  margin: -20px -20px 20px -20px; /* remove o espaçamento interno da section */
+  padding: 20px 0;
+  text-align: center;
+  border-radius: 8px 8px 0 0; /* mantém cantos arredondados só no topo */
+  font-family: "Aboreto", system-ui;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
 }
+
+
 
 .produto-vestido {
-  background-color: #E3D2AC; /* Cor do fundo */
+  background-color: #E3D2AC;
   width: 700px;
   color: #000;
-  height: 480px;
-  margin: 60px 80px;
+  height: 300px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  gap: 20px; /* espaço entre os elementos */
+  padding: 20px;
+  border-radius: 8px;
 }
 
-main h1 {
-  text-align: center;
-  margin-top: 100px;
-}
 
-main #carrinho {
-  display: flex;
-  margin: 200px;
-  margin-top: 300px;
-}
 
 .produto-vestido input[type="checkbox"] {
   align-self: flex-start; /* checkbox sobe (como na imagem) */
@@ -227,16 +211,16 @@ main #carrinho {
 }
 
 .pedido-total {
-  background-color: #E3D2AC; /* Cor do fundo */
-  width: 368px;
   color: #000;
-  height: 161px;
-  margin: 60px 80px;
+  min-height: 200px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  gap: 20px; /* espaço entre os elementos */
   padding: 20px;
-  margin-top: -100px;
+  border-radius: 8px;
+  background-color: white;
+  width: 400px;
+  height: 200px;
 }
+
 
 .pedido-total button {
   margin: 50px;
@@ -348,6 +332,7 @@ button:hover {
   margin-top: 200px;
   position: absolute;
   margin-left: 850px;
+  margin-bottom: 30px;
 }
 
 #voltarect {
@@ -476,14 +461,7 @@ footer p {
   height: 80px;
 }
 
-.pedido-total {
-  background-color: white;
-  width: 800px;
-  padding: 20px;
-  height: 180px;
-  gap: 10px;
-  font-family: "Libre Caslon Text";
-}
+
 
 .pedido-total h1 {
   font-size: 20px;

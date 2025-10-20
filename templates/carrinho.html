@@ -49,55 +49,49 @@
         </nav>
     </div> 
 <main>
-<h1 class="localizacao"> Carrinho > Pagamento</h1>
-<br><br><br><br>
-<section id="carrinho">
-  <section class="compras">
-    <div class="breadcrumb">
-      <section class="produto-vestido">
-          <h1>Carrinho de compras</h1>
-          <!-- Linha de selecionar todos -->
-          <div class="linha-selecao">
-            <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
-            <label for="selecionar-todos">Selecionar todos </label>
-          </div>
-          <!-- Card do produto -->
-          <div class="produto-item">
-            <input class="checkbox-item" type="checkbox" /> 
-            <img class="foto" src="" alt="Vestido" />
-          </div>
-          <div class="texto">
-            <h3>Vestido Eternity</h3> <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira">
-            <p class="colecao">Coleção Chama Secreta</p>
-            <p class="estoque">Em estoque</p>
-            <select class="tamanho">
-              <option value="PP">PP</option>
-              <option value="P">P</option>
-              <option value="M">M</option>
-              <option value="G">G</option>
-            </select>
-            <br>
-            <label class="quantidade" for="quantidade">Quantidade:</label>
-            <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
-            <p class="valor">R$ 12.000</p>
-          </div>
-      </div>
-      </section>
-    </div>
-</section>
-
-            <section class="pedido-total">
-                <div>
-                   
-                    <h3> Seu pedido </h3>
-                    <br><br>
-                    <h2>Sub total: <spam>12.000</spam></h2>
+    <h1 class="localizacao"> Carrinho > Pagamento</h1>
+    <br><br><br><br>
+    <section id="carrinho">
+        <div class="area-carrinho" >
+            <section class="produto-vestido">
+                <h1>Carrinho de compras</h1>
+                <div class="linha-selecao">
+                    <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
+                    <label for="selecionar-todos">Selecionar todos </label>
                 </div>
-                <button id="botao-pagamento" >Fechar pedido</button>
-         
+                <div class="produto-item">
+                    <input class="checkbox-item" type="checkbox" /> 
+                    <img class="foto" src="" alt="Vestido" />
+                    <div class="texto">
+                        <h3>Vestido Eternity</h3> <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira">
+                        <p class="colecao">Coleção Chama Secreta</p>
+                        <p class="estoque">Em estoque</p>
+                        <select class="tamanho">
+                            <option value="PP">PP</option>
+                            <option value="P">P</option>
+                            <option value="M">M</option>
+                            <option value="G">G</option>
+                        </select>
+                        <br>
+                        <label class="quantidade" for="quantidade">Quantidade:</label>
+                        <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
+                        <p class="valor">R$ 12.000</p>
+                    </div>
+                </div>
             </section>
-  
-</section>
+            <section class="pedido-total">
+            <div>
+                <h3> Seu pedido </h3>
+                <br><br>
+                <h2>Sub total: <spam>12.000</spam></h2>
+            </div>
+            <button id="botao-pagamento" >Fechar pedido</button>
+            </section>
+        </div>
+    </section>
+    
+    
+
 
     <section id="variedades">
     <h1>Mais variedades</h1>
