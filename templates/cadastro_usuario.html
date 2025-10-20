@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuário</title>
+</head>
+<body>
+    <h1>Cadastro de Usuário</h1>
+    <form action="/usuario/registrar" method="post">
+        <h2>Dados do Usuário</h2>
+        <label>Nome Completo:</label>
+        <input type="text" name="nome_cliente" required><br>
+
+        <label>Data de Nascimento:</label>
+        <input type="date" name="data_nascimento" required><br>
+
+        <label>Data de Cadastro:</label>
+        <input type="date" name="data_cadastro" required><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label>Telefone:</label>
+        <input type="text" name="telefone" required><br>
+
+        <label>Nome de Usuário:</label>
+        <input type="text" name="nome_usuario" required><br>
+
+        <label>Senha:</label>
+        <input type="password" name="senha" required><br>
+
+        <label>Tipo de Usuário (cliente, adm):</label>
+        <input type="text" name="tipo" required><br>
+
+        <h2>Endereço</h2>
+        <label>Rua:</label>
+        <input type="text" name="rua" required><br>
+
+        <label>Número:</label>
+        <input type="text" name="numero" required><br>
+
+        <label>Complemento:</label>
+        <input type="text" name="complemento"><br>
+
+        <label>Bairro:</label>
+        <input type="text" name="bairro" required><br>
+
+        <label>Cidade:</label>
+        <input type="text" name="cidade" required><br>
+
+        <label>Estado:</label>
+        <input type="text" name="estado" required><br>
+
+        <label>CEP:</label>
+        <input type="text" name="cep" required><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

@@ -180,10 +180,4 @@ class Endereco(BaseModel):
             raise ValueError(f'Estado inválido: "{valor}". Use apenas a sigla, ex: "SP".')
 
         return valor 
-    
-class UsuarioLogin(BaseModel):
-    usuario: str
-    senha: str
-
-
 

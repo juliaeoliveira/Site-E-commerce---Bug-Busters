@@ -4,17 +4,19 @@ from fastapi.exceptions import HTTPException #para caso ocorrer erros
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from passlib.context import CryptContext
-from jose import jwt, JWTError
+from jose import jwt, JWSError
 from decouple import config
 from models import Usuario_Model, Endereco as Endereco_Model
-from schemas import Usuario , Endereco , UsuarioLogin
+from schemas import Usuario , Endereco
 
 
 CHAVE_SECRETA = config('CHAVE_SECRETA')
 ALGORITMO = config('ALGORITMO')
 
-crypt_context = CryptContext(schemes=['sha256_crypt']) # esquema mais popular para fazer o hash de senha
+#tempo do token de usuário 
+ACCESS_TOKEN=30#30 MINUTOS de tempo de token
 
+crypt_context = CryptContext(schemes=['sha256_crypt']) # esquema mais popular para fazer o hash de senha
 
 class ServicosUsuario:
     def __init__(self, db_session: Session):
@@ -49,11 +51,10 @@ class ServicosUsuario:
                 usuario_id=endereco.usuario_id,
                 loja_id=endereco.loja_id
             )
-            if usuario.tipo != "":
-                if usuario.tipo.lower() == "cliente":
-                    endereco_model.usuario_id = usuario_model.id # associa o endereço ao usuário
-                if usuario.tipo.lower() == "adm" or "administrador": 
-                    endereco_model.loja_id = '03.774.819/0005-28'
+            if usuario.tipo.lower() == "cliente":
+                endereco_model.usuario_id = usuario_model.id # associa o endereço ao usuário
+            if usuario.tipo.lower() == "adm" or usuario.tipo.lower() == "administrador":
+                endereco_model.loja_id = usuario_model.id
 
             self.db_session.add(endereco_model)
             self.db_session.commit()
@@ -63,34 +64,29 @@ class ServicosUsuario:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail='O usuário já existe'
             )
+#função de gerar o hash da senha
+def gerar_hash_senha(senha:str):
+    return crypt_context.hash(senha)
 
-    def usuario_login(self, usuario: UsuarioLogin, expira_em: int = 90):
-        usuario_existe = self.db_session.query(Usuario_Model).filter_by(nome_usuario=usuario.usuario).first() #busca no banco o usuario
+#função para verificar o hash da senha
+def verificar_hash_senha(senha:str , senha_hash:str):
+    return crypt_context.verify(senha , senha_hash)
 
-        if usuario_existe is None: 
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail='Usuário ou senha inválido!' #se não achar no banco o usuário retorna essa mensagem
-            )
-        
-        if not crypt_context.verify(usuario.senha, usuario_existe.senha): #verifica se as senha limpa e a hashada que esta no banco batem
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail='Usuário ou senha inválido!' #se a senha não bater retorna essa mensagem
-            )
-        
-        expira = datetime.utcnow() + timedelta(minutes=expira_em) #expira em 90 minutos, apos isso o usuario recebe um HTTP 401 (Unauthorized),
-        #com a mensagem: "Token has expired" e ele precisa realizar login novamente
+#criar token de usuário
+def criar_token(dados:dict):
+    dados_token=dados.copy()
+    expira=datetime.utcnow()+timedelta(minutes=ACCESS_TOKEN)
+    dados_token.update({"exp":expira})
+    token_jwt=jwt.encode(dados_token,CHAVE_SECRETA,
+                         algorithm=ALGORITMO)
+    return token_jwt
 
-        payload = {
-            'sub': usuario.usuario,
-            'exp': expira
-        }
 
-        acesso_token = jwt.encode(payload, CHAVE_SECRETA, algorithm=ALGORITMO) #cria a o token de acesso
-
-        return {
-            'acesso_token': acesso_token,
-            'exp': expira.isoformat()#passando o datetime em formato de string
-        }
-        
+#verificar token do usuário
+def verificar_token(token:str):
+    try:
+        payload=jwt.decode(token,CHAVE_SECRETA,
+                           algorithms=[ALGORITMO])
+        return payload
+    except JWSError:
+        return None
