@@ -51,8 +51,8 @@ def cadastrar_usuario( request:Request,
     else:
         tipo = "cliente"
 
-    email=db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
-    if email:
+    usuario_email=db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
+    if usuario_email:
         return {"mensagem":"Email já cadastrado!"}
     novo_usuario=Usuario(
         nome_cliente=nome_cliente,
@@ -77,10 +77,7 @@ def cadastrar_usuario( request:Request,
    #se passar por todas as validações add usuario
     su = ServicosUsuario(db_session=db)
     su.registrar_usuario(usuario=novo_usuario,endereco=endereco)
-    return JSONResponse(
-        content={'msg': 'sucesso'},
-        status_code=status.HTTP_201_CREATED
-    ) , RedirectResponse(url="/",status_code=303)
+    return RedirectResponse(url="/usuario/login",status_code=303)
 
 #rota login usuário
 @caminho_prefixo_usuario.get("/login",response_class=HTMLResponse)
