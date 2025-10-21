@@ -37,7 +37,7 @@ templates=Jinja2Templates(directory="view/templates")#pasta front-end
 
 # # python -m uvicorn controlller.produto_controller:app --reload
 
-UPLOAD_DIR="static/uploads"
+UPLOAD_DIR="view/static/uploads"
 os.makedirs(UPLOAD_DIR,exist_ok=True)
 
 @router.get("/home/", response_class=HTMLResponse)
