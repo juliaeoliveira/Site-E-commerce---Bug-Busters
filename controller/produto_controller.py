@@ -30,7 +30,7 @@ import random
 #from models_teste import Produto
 #Produto manipular o models Produtos
 router=APIRouter()#rotas da api
-templates=Jinja2Templates(directory="templates")#pasta front-end
+templates=Jinja2Templates(directory="view/templates")#pasta front-end
 
 
 # app = FastAPI(title="Rotas de Produtos")
