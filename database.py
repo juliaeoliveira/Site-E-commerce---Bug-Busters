@@ -22,6 +22,7 @@ print(f"HOST={HOST}, PORT={PORT}, USER={USER}, DBNAME={DBNAME}")
 # String de conexão para SQLAlchemy
 DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
 
+# DATABASE_URL = "sqlite:///loja.db"
 
 # Criar engine
 engine = create_engine(DATABASE_URL)

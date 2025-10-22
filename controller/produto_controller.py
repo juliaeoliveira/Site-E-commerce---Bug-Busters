@@ -20,7 +20,10 @@ from typing import Optional
 #from models_teste import SessionLocal
 #Jinja2Templates=responsável por renderizar o front-end,
 #html,css,javascript
+<<<<<<< HEAD
 
+=======
+>>>>>>> 271195c313743e77941dc2c83af658bd48f50078
 import os    #,shutil
 #os=função de sistema, pegar caminhos de pasta 'imagem'
 #shutil=salvar ou pegar o caminho do diretório 'caminho/imagem'
@@ -31,14 +34,14 @@ import random
 #from models_teste import Produto
 #Produto manipular o models Produtos
 router=APIRouter()#rotas da api
-templates=Jinja2Templates(directory="templates")#pasta front-end
+templates=Jinja2Templates(directory="view/templates")#pasta front-end
 
 
 # app = FastAPI(title="Rotas de Produtos")
 
 # # python -m uvicorn controlller.produto_controller:app --reload
 
-UPLOAD_DIR="static/uploads"
+UPLOAD_DIR="view/static/uploads"
 os.makedirs(UPLOAD_DIR,exist_ok=True)
 
 @router.get("/home/", response_class=HTMLResponse)
