@@ -1,112 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - SOB Véu</title>
-    <link rel="stylesheet" href="/static/css/cadastro_usuario.css">
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-            <h1>Cadastre-se</h1>
-            <p class="subtitle">Crie sua conta para começar</p>
-            
-            <form action="/usuario/registrar" method="POST">
-                <div class="form-section">
-                    <h2>Dados Pessoais</h2>
-                    
-                    <div class="form-group">
-                        <label for="nome_cliente">Nome Completo</label>
-                        <input type="text" id="nome_cliente" name="nome_cliente" required>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="data_nascimento">Data de Nascimento</label>
-                            <input type="date" id="data_nascimento" name="data_nascimento" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="telefone">Telefone</label>
-                            <input type="tel" id="telefone" name="telefone" placeholder="00 00000 0000" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                </div>
-                
-                <div class="form-section">
-                    <h2>Dados de Acesso</h2>
-                    
-                    <div class="form-group">
-                        <label for="nome_usuario">Nome de Usuário</label>
-                        <input type="text" id="nome_usuario" name="nome_usuario" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" required>
-                    </div>
-                </div>
-                
-                <div class="form-section">
-                    <h2>Endereço</h2>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="cep">CEP</label>
-                            <input type="text" id="cep" name="cep" placeholder="00000-000" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <input type="text" id="estado" name="estado" maxlength="2" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="cidade">Cidade</label>
-                        <input type="text" id="cidade" name="cidade" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="bairro">Bairro</label>
-                        <input type="text" id="bairro" name="bairro" required>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group flex-2">
-                            <label for="rua">Rua</label>
-                            <input type="text" id="rua" name="rua" required>
-                        </div>
-                        
-                        <div class="form-group flex-1">
-                            <label for="numero">Número</label>
-                            <input type="text" id="numero" name="numero" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="complemento">Complemento (opcional)</label>
-                        <input type="text" id="complemento" name="complemento">
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn-submit">Cadastrar</button>
-                
-                <div class="links">
-                    <a href="/usuario/login">Já tem uma conta? Entre aqui</a>
-                </div>
-            </form>
-        </div>
-        
-        <footer>
-            <p>© 2025 SOB Véu. Todos os direitos reservados.</p>
-        </footer>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/static/css/cadastro_usuario.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="menu">
+      <img id="logo" src="/static/assets/img_cadastro/Sob1.png" alt="Logo" />
+      <nav>
+        <a href="/">Vestidos</a>
+        <a href="#Colecoes">Coleções</a>
+        <a href="#Agendamentos">Agendamentos</a>
+      </nav>
+      <nav class="icons">
+        <a href="/usuario/login">
+          <img
+            src="/static/assets/img_cadastro/login.png"
+            width="20px"
+            title="login"
+            alt="login"
+          />
+        </a>
+        <a href="/carrinho/">
+          <img
+            src="/static/assets/img_cadastro/carrinho.png"
+            width="20px"
+            title="Carrinho"
+            alt="Carrinho"
+          />
+        </a>
+      </nav>
     </div>
-</body>
+    <main>
+      <form action="/usuario/registrar" method="post">
+        <section class="cadastro">
+          <h1 class="titulo_cadastro">CADASTRO DE USUÁRIO</h1>
+          <div class="informacoes">
+            <label for="Nome">Nome completo:</label>
+            <input
+              class="posicao"
+              type="text"
+              id="Nome"
+              name="nome_cliente"
+              required
+              placeholder="Henrique Nascimento de Sales"
+            />
+
+            <!-- Agrupamento lado a lado -->
+            <div class="senhas">
+              <div>
+                <label for="senha">Senha:</label>
+                <input
+                  class="posicao"
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  required
+                  placeholder="*******"
+                />
+
+                <label for="confirmacao_senha">Confirmação de senha:</label>
+                <input
+                  class="posicao"
+                  type="password"
+                  id="confirmacao_senha"
+                  name="confirmar_senha"
+                  required
+                  placeholder="*******"
+                />
+              </div>
+            </div>
+
+            <label for="email">E-mail:</label>
+            <input
+              class="posicao"
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="exemplo@exemplo.com"
+            />
+
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input
+              class="posicao"
+              type="date"
+              id="data_nascimento"
+              name="data_nascimento"
+              required
+            />
+
+            <label for="Telefone">Telefone:</label>
+            <input
+              class="posicao"
+              type="tel"
+              id="Telefone"
+              name="telefone"
+              required
+              placeholder="(11) 4002-8922"
+            />
+
+            <div>
+              <label for="rua">Rua:</label>
+              <input
+                class="posicao"
+                type="text"
+                id="rua"
+                name="rua"
+                required
+                placeholder="Rua: Loucos"
+              />
+            </div>
+            <div class="endereco">
+              <div class="campo">
+                <label for="bairro">Bairro:</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="bairro"
+                  name="bairro"
+                  required
+                  placeholder="PQ. Novo Mundo"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="numero">N°:</label>
+                <input
+                  class="posicao"
+                  type="number"
+                  id="numero"
+                  name="numero"
+                  required
+                  placeholder="N° 120"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="cep">CEP:</label>
+                <input
+                  class="posicao"
+                  type="number"
+                  id="cep"
+                  name="cep"
+                  required
+                  placeholder="18180-970"
+                />
+              </div>
+              <div class="campo">
+                <label for="complemento">Complemento <b>(opcional)</b>:</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="complemento"
+                  name="complemento"
+                  placeholder="Apartamento 76, Torre 2"
+                />
+              </div>
+
+              <div class="campo">
+                <label for="estado">Estado:</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="estado"
+                  name="estado"
+                  required
+                  placeholder="RJ"
+                />
+              </div>
+              <div class="campo">
+                <label for="cidade">Cidade:</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="cidade"
+                  name="cidade"
+                  required
+                  placeholder="Tiradentes"
+                />
+              </div>
+            </div>
+
+            <button class="cadastrar" type="submit" id="acao">
+              Criar conta
+            </button>
+          </div>
+        </section>
+      </form>
+      <div class="outrosvestidos">
+        <a href="/"><button class="ver">← Voltar á páginos inicial</button></a>
+      </div>
+    </main>
+  </body>
 </html>

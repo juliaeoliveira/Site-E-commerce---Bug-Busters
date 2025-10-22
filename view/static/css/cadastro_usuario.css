@@ -1,160 +1,213 @@
 * {
-    margin: 0;
+    margin:0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: #e8e3db;
-    min-height: 100vh;
-    display: flex;
+    display: flex; 
+    flex-direction: column; /* Organiza os itens na vertical (coluna) */
+    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o preenchimento padrão */
+    overflow-x: hidden; /* Impede rolagem horizontal */
+    background: #EBE4D7;
+    background-image: url("/static/assets/img_cadastro/fundo-cadastro.png");
+    background-repeat: no-repeat;
+}
+
+
+/* MENU */
+#logo {
+    
+    height: 80px; /* Define a altura do logo */
+    padding-left: 130px; /* Espaço à esquerda do logo */
+}
+
+.icons {
+    gap: 5px;
     justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-}
-
-.container {
-    width: 100%;
-    max-width: 600px;
-}
-
-.card {
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 48px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    margin-bottom: 24px;
-}
-
-h1 {
-    color: #8b7355;
-    font-size: 32px;
-    font-weight: 400;
-    text-align: center;
-    margin-bottom: 8px;
-}
-
-.subtitle {
-    color: #6b6b6b;
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 32px;
-}
-
-.form-section {
-    margin-bottom: 32px;
-}
-
-.form-section h2 {
-    color: #8b7355;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #e8e3db;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    color: #6b6b6b;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid #d4cfc7;
-    border-radius: 8px;
-    font-size: 16px;
-    color: #333;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #8b7355;
-}
-
-.form-group input::placeholder {
-    color: #a0a0a0;
-}
-
-.form-row {
     display: flex;
-    gap: 16px;
+    padding-right: 150px;
 }
 
-.form-row .form-group {
-    flex: 1;
+
+
+.menu {
+    position: fixed; /* Fixa o menu na tela */
+    z-index: 1; /* Garante que o menu fique acima de outros elementos */
+    display: flex; /* Organiza os itens do menu em linha */
+    width: 100%; /* O menu ocupa toda a largura da tela */
+    align-items: center; /* Centraliza os itens na vertical */
+    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
+    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
+    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
+    color: #ffffff; /* Cor do texto do menu */
+  
 }
 
-.form-row .flex-1 {
-    flex: 1;
+/* Estilo do menu de navegação */
+nav {
+    gap:200px;
+    justify-content: center;
+    display: flex;
+    font-family: "Libre Caslon Text";
+    font-size: 22px;
+    color: #523800;
+   
 }
 
-.form-row .flex-2 {
-    flex: 2;
+/* Estilo dos links dentro do nav */
+nav a {
+    color: #523800;
+    font-size: 20px; /* Define o tamanho da fonte */
+    padding: 25px; /* Espaçamento interno */
+    text-decoration: underline; /* Ativa o sublinhado */
+    text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
 }
 
-.btn-submit {
-    width: 100%;
-    padding: 16px;
-    background-color: #8b7355;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
+
+h1{
+    color: #000;
+    font-family: "Aboreto", system-ui;
+    font-size: 20px;
+    font-weight: 0;
+    margin-left: 150px;
+}
+
+.cadastro{
+    margin-left: 1050px;
+    margin-top: 90px;
+}
+
+.informacoes{
+    float: left;
+    font-size: 20px;
+    margin-top: 10px;
+    color: #000;
+    font-family: "Inter", sans-serif;
     font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 8px;
+    font-style: normal;
+    font-weight: 0;
 }
 
-.btn-submit:hover {
-    background-color: #75614a;
+label, input{
+    display:block;  /*Ocupar toda largura*/
+    width: 500px;     /*Largura*/
+    padding: 10px;  /*Espaçamento interno*/
+    font-family: "Anton", serif;
+    border-radius: 8px; /*Arredonda as bordas*/
+    margin-bottom: 0px; /*Espaçamento inferior*/
 }
 
-.links {
-    text-align: center;
+input{
+    background-color: #DBCAA966;
+}
+
+input[type="checkbox"], input[type="radio"]{
+    margin-right: 0; /*remove margen da direita*/
+    margin-left:15px; /*remove margem da esquerda*/
+    transform:scale(1.2); /*Aumentar escala*/
+}
+
+input:focus, select:focus, textarea:focus{
+    outline:none; /*Remover borda*/
+    border: solid 2px rgb(153, 153, 153); /*Cria uma cor na borda*/
+}
+
+label{
+    height: 20px;
+}
+
+#acao{
+    width: 130px;
+    margin-left: 210px;
+    background: #790000;
+    color: white;
     margin-top: 20px;
 }
 
-.links a {
-    color: #4a7c9e;
-    text-decoration: none;
-    font-size: 14px;
+.posicao{
+    margin-left: 40px;
 }
 
-.links a:hover {
-    text-decoration: underline;
-}
-
-footer {
+.cadastrar{
     text-align: center;
+    font-family: "Libre Caslon Text", serif;
+    font-size: 15px;
+    font-weight: 0;
+    height: 50px ;
+    border-radius: 4px;
+    background: #790000;
+    margin-top: 40px;
+
 }
 
-footer p {
-    color: #6b6b6b;
+.senhas {
+    display: flex;
+    gap: 20px; /* espaço entre os dois campos */
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.senhas div  {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.posicao {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
     font-size: 14px;
 }
 
-@media (max-width: 640px) {
-    .card {
-        padding: 32px 24px;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
-    
-    h1 {
-        font-size: 28px;
-    }
+.outrosvestidos{
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 700px;
+   
+}
+
+.ver{
+    color: #790000;
+    height: 35px;
+    width: 200px;
+    font-family: "Libre Caslon Text", serif;
+    color: darkred;
+    background: rgba(237, 219, 190, 0.80);
+    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 3px;
+}
+
+button:focus {
+    border-color: darkred; 
+    transform: scale(1.10); 
+}
+button:hover {
+    border-color: darkred; 
+    transform: scale(1.05);
+}
+
+.endereco {
+  display: grid;
+  grid-template-columns: repeat(2, 230px); /* duas colunas de 200px */
+  grid-gap: 10px 40px; /* espaçamento entre linhas e colunas */
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+#bairro, #complemento,
+#numero, #cep,
+#cidade, #estado {
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #DBCAA966;
+  box-sizing: border-box;
+  padding: 8px;
 }

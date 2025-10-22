@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status, Request, Form
-from fastapi.responses import JSONResponse,HTMLResponse,RedirectResponse
+from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from database import get_db
@@ -29,8 +29,8 @@ def cadastrar_usuario( request:Request,
     data_nascimento: str = Form(...),
     email: str = Form(...),
     telefone: str = Form(...),
-    nome_usuario: str = Form(...),
     senha: str = Form(...),
+    confirmar_senha: str = Form(...),
 
     rua: str = Form(...),
     numero: str = Form(...),
@@ -44,13 +44,18 @@ def cadastrar_usuario( request:Request,
 ):
     
     email = email.strip().lower()
+
+    #validação da confirmação de senha
+    if senha != confirmar_senha:
+        return {"mensagem": "As senhas não coincidem."}
     
     #define o tipo com base no domínio do e-mail
     if email.endswith("@adm_sobveu.com"):
         tipo = "adm"
     else:
         tipo = "cliente"
-
+    
+    
     usuario_email=db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
     if usuario_email:
         return {"mensagem":"Email já cadastrado!"}
@@ -60,7 +65,6 @@ def cadastrar_usuario( request:Request,
         data_cadastro=datetime.now(fuso),
         email=email,
         telefone=telefone,
-        nome_usuario=nome_usuario,
         senha=senha,
         tipo=tipo
     )
