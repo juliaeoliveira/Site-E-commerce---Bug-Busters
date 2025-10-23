@@ -55,39 +55,39 @@
         <div class="area-carrinho" >
             <section class="produto-vestido">
                 <h1>Carrinho de compras</h1>
-                <div class="linha-selecao">
-                    <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
-                    <label for="selecionar-todos">Selecionar todos </label>
-                </div>
-                <div class="produto-item">
-                    <input class="checkbox-item" type="checkbox" /> 
-                    <img class="foto" src="" alt="Vestido" />
-                    <div class="texto">
-                        <h3>Vestido Eternity</h3> <img class="lixeira" src="/static/img_home/teste_lixeira.png" alt="lixeira">
-                        <p class="colecao">Coleção Chama Secreta</p>
-                        <p class="estoque">Em estoque</p>
-                        <select class="tamanho">
-                            <option value="PP">PP</option>
-                            <option value="P">P</option>
-                            <option value="M">M</option>
-                            <option value="G">G</option>
-                        </select>
-                        <br>
-                        <label class="quantidade" for="quantidade">Quantidade:</label>
-                        <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
-                        <p class="valor">R$ 12.000</p>
+                    <div class="linha-selecao">
+                        <!-- <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
+                        <label for="selecionar-todos">Selecionar todos</label> -->
                     </div>
-                </div>
+                    <div class="produto-item">
+                        <input class="checkbox-item" type="checkbox" /> 
+                        <img class="foto" src="" alt="Vestido" />
+                        <div class="texto">
+                            <h3>Vestido Eternity</h3> <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira">
+                            <p class="colecao">Coleção Chama Secreta</p>
+                            <p class="estoque">Em estoque</p>
+                            <select class="tamanho">
+                                <option value="PP">PP</option>
+                                <option value="P">P</option>
+                                <option value="M">M</option>
+                                <option value="G">G</option>
+                            </select>
+                            <br>
+                            <label class="quantidade" for="quantidade">Quantidade:</label>
+                            <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
+                            <p class="valor">R$ 12.000</p>
+                        </div>
+                    </div>
             </section>
             <section class="pedido-total">
-            <div>
-                <h3> Seu pedido </h3>
-                <br><br>
-                <h2>Sub total: <spam>12.000</spam></h2>
-            </div>
-            <form action="/pedido/fechar" method="post"> 
-                <button id="botao-pagamento" type="submit">Fechar pedido</button>
-            </form>
+                <div>
+                    <h3> Seu pedido </h3>
+                    <br><br>
+                    <h2><span>Sub total:</span> <span>12.000</span></h2>
+                </div>
+                <form action="/pedido/fechar" method="post"> 
+                    <button id="botao-pagamento" type="submit">Fechar pedido</button>
+                </form>
             </section>
         </div>
     </section>
@@ -190,11 +190,29 @@
             const container = document.querySelector(".produto-vestido");
 
             // Seleciona o elemento onde aparece o total (obs: "spam" deveria ser "span")
-            const totalElement = document.querySelector(".pedido-total h2 spam");
+            // Linha 44: Antigo: const totalElement = document.querySelector(".pedido-total h2 span");
+            const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
 
             // Começa colocando o título "Carrinho de compras" no container
             container.innerHTML = "<h1>Carrinho de compras</h1>";
 
+            // ✅ Adiciona o checkbox "Selecionar todos"
+            const linhaSelecao = document.createElement("div");
+            linhaSelecao.classList.add("linha-selecao");
+            linhaSelecao.innerHTML = `
+            <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
+            <label for="selecionar-todos">Selecionar todos</label>
+            `;
+            container.appendChild(linhaSelecao);
+
+            // Se o carrinho estiver vazio, mostra a mensagem e zera o total
+            if (carrinho.length === 0) {
+                container.innerHTML += "<p>Seu carrinho está vazio!</p>";
+                totalElement.textContent = "0,00";
+                return;
+            }
+
+            
             // Se o carrinho estiver vazio, mostra a mensagem e zera o total
             if (carrinho.length === 0) {
                 container.innerHTML += "<p>Seu carrinho está vazio!</p>";
@@ -210,29 +228,29 @@
 
                 // Adiciona dentro da div as informações do produto
                 div.innerHTML = `
-    <input class="checkbox-item" type="checkbox"> <!-- checkbox (sem função no momento) -->
-    <img class="foto" src="${produto.imagem}" alt="${produto.nome}"> <!-- imagem do produto -->
-    <div class="texto">
-      <h3>${produto.nome}</h3> <!-- nome do produto -->
-      <img class="lixeira" src="imagemcarrinho/5366933-removebg-preview.png" alt="lixeira" data-index="${index}"> <!-- botão para excluir o produto -->
-      <br>
-      <label class="tamanho-label">Tamanho:</label>
-      <!-- seletor de tamanhos -->
-      <select class="tamanho">
-        <option value="PP" ${produto.tamanho === "PP" ? "selected" : ""}>PP</option>
-        <option value="P" ${produto.tamanho === "P" ? "selected" : ""}>P</option>
-        <option value="M" ${produto.tamanho === "M" ? "selected" : ""}>M</option>
-        <option value="G" ${produto.tamanho === "G" ? "selected" : ""}>G</option>
-        <option value="GG" ${produto.tamanho === "GG" ? "selected" : ""}>GG</option>
-      </select>
-      <br>
-      <label class="quantidade">Quantidade:</label>
-      <!-- campo para alterar a quantidade -->
-      <input type="number" class="quantia" min="1" max="10" value="${produto.quantidade}">
-      <!-- mostra o preço -->
-      <p class="valor">${produto.preco}</p>
-    </div>
-  `;
+                <input class="checkbox-item" type="checkbox">
+                <img class="foto" src="${produto.imagem}" alt="${produto.nome}"> <!-- imagem do produto -->
+                <div class="texto">
+                <h3>${produto.nome}</h3> <!-- nome do produto -->
+                <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira" data-index="${index}"><!-- botão para excluir o produto -->
+                <br>
+                <label class="tamanho-label">Tamanho:</label>
+                <!-- seletor de tamanhos -->
+                <select class="tamanho">
+                    <option value="PP" ${produto.tamanho === "PP" ? "selected" : ""}>PP</option>
+                    <option value="P" ${produto.tamanho === "P" ? "selected" : ""}>P</option>
+                    <option value="M" ${produto.tamanho === "M" ? "selected" : ""}>M</option>
+                    <option value="G" ${produto.tamanho === "G" ? "selected" : ""}>G</option>
+                    <option value="GG" ${produto.tamanho === "GG" ? "selected" : ""}>GG</option>
+                </select>
+                <br>
+                <label class="quantidade">Quantidade:</label>
+                <!-- campo para alterar a quantidade -->
+                <input type="number" class="quantia" min="1" max="10" value="${produto.quantidade}">
+                <!-- mostra o preço -->
+                <p class="valor">${produto.preco}</p>
+                </div>
+            `;
                 // adiciona a div do produto no container
                 container.appendChild(div);
             });
@@ -265,26 +283,31 @@
         }
 
         // ================================
-        // ATUALIZA TOTAL DO CARRINHO
-        // ================================
+          // ATUALIZA TOTAL DO CARRINHO
+         // ================================
         function updateTotal() {
-            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-            const totalElement = document.querySelector(".pedido-total h2 spam");
-            let total = 0;
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
+        let total = 0;
 
-            // Soma o preço de todos os produtos
-            carrinho.forEach(produto => {
-                // Converte o preço de "R$xx,xx" para número
-                let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
-                total += preco * produto.quantidade;
+        // Soma o preço de todos os produtos
+        carrinho.forEach(produto => {
+        // Converte o preço de "R$xx,xx" para número
+        let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
+        total += preco * produto.quantidade;
+        });
+
+         // [LINHA 171] MUDANÇA AQUI: Adicionar style: 'currency' e currency: 'BRL'
+        totalElement.textContent = total.toLocaleString("pt-BR", { 
+                style: 'currency', 
+                currency: 'BRL' 
             });
 
-            // Mostra o total formatado (ex: 120,50)
-            totalElement.textContent = total.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+        // Guarda o total na variável global
+         totalAmount = total;
+         }
 
-            // Guarda o total na variável global
-            totalAmount = total;
-        }
+// ... (Resto do código) ...
 
         // ================================
         // ATUALIZA QUANTIDADE DE UM PRODUTO
@@ -310,12 +333,18 @@
         // REMOVE UM PRODUTO DO CARRINHO
         // ================================
         function removeProduct(event) {
-            const index = event.target.dataset.index; // índice do produto clicado
-            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-            carrinho.splice(index, 1); // remove o produto do array
-            localStorage.setItem("carrinho", JSON.stringify(carrinho)); // atualiza o localStorage
-            loadCartFromLocalStorage(); // recarrega o carrinho na tela
+        const btn = event.target;
+        const index = parseInt(btn.dataset.index);
+
+        if (isNaN(index)) return; // segurança extra
+
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        carrinho.splice(index, 1);
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+        loadCartFromLocalStorage(); // recarrega o carrinho
         }
+
 
         // ================================
         // FINALIZA A COMPRA

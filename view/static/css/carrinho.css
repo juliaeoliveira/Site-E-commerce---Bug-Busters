@@ -104,22 +104,29 @@ nav a {
 /* div produto*/
 .produto-vestido h1 {
   background-color: #FFF;
-  width: calc(100% + 40px); /* cobre todo o espaço horizontal + padding da section */
+  width: calc(96% + 40px); /* cobre todo o espaço horizontal + padding da section */
   margin: -20px -20px 20px -20px; /* remove o espaçamento interno da section */
   padding: 20px 0;
-  
+  padding-left: 30px;
   border-radius: 8px 8px 0 0; /* mantém cantos arredondados só no topo */
   font-family: "Aboreto", system-ui;
   font-size: 24px;
   font-weight: bold;
-  color: #000;
+  color: #4E3902;
 }
 
+.linha-selecao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 20px; /* alinha com o título */
+  margin-top: 10px;
+}
 
 
 .produto-vestido {
   background-color: #E3D2AC;
-  width: 700px;
+  width: 710px;
   color: #000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -134,10 +141,18 @@ nav a {
 
 
 
-.produto-vestido input[type="checkbox"] {
-  align-self: flex-start; /* checkbox sobe (como na imagem) */
-  margin-top: 70px;
+.produto-item {
+  display: flex;
+  align-items: center; /* centraliza checkbox e imagem */
+  gap: 15px;
+  margin-left: 20px;
 }
+
+.produto-item input[type="checkbox"] {
+  margin-top: 0; /* remove empurrão */
+  align-self: center; /* garante alinhamento */
+}
+
 
 .imagem-carrinho img {
   width: 150px;
@@ -159,23 +174,31 @@ nav a {
   float: left;
 }
 
+
+
 /* Alinha a linha "Selecionar todos" */
 .linha-selecao {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 15px;
   margin: 10px 0 20px 20px;
   font-family: "Libre Caslon Text";
   color: #523800;
   font-size: 16px;
 }
 
+#selecionar-todos {
+  position: relative;
+  top: 2px;
+}
+
+
 /* Card do produto */
 .produto-item {
   align-items: flex-start;
   gap: 15px;
   margin-left: 20px;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 .checkbox-item {
@@ -226,15 +249,15 @@ nav a {
   border-radius: 8px;
   background-color: white;
   width: 400px;
-  height: 200px;
- 
+  height: 100px;
+  margin-bottom: 30px;
 }
 
 
 .pedido-total button {
-  margin: 50px;
   width: 200px;
-  
+  margin-top: 25px;
+  border-radius: 5px;
 }
 
 /* Sessão variedades */
@@ -275,7 +298,7 @@ nav a {
   align-items: center; /* centraliza horizontalmente */
   height: auto;
   padding-bottom: 20px;
-  margin: 40px 120px;
+  margin: 40px 20px;
   background: none;
 }
 
@@ -291,17 +314,7 @@ nav a {
   transform: scale(1.10);
 }
 
-.nome {
-  color: #000;
-  text-align: center;
-  font-family: "Arial, Helvetica, sans-serif";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: 0.96px;
-  margin-top: 40px;
-}
+
 
 .lista-vestidos {
   display: flex;
@@ -343,6 +356,9 @@ button:hover {
   position: absolute;
   margin-left: 850px;
   margin-bottom: 30px;
+  font-family: "Libre Caslon Text";
+  color: #4E3902;
+  font-size: 18px;
 }
 
 #voltarect {
@@ -350,12 +366,14 @@ button:hover {
   transform: scale(1.10);
 }
 
-.pedido-total #botao-pagamento {
+ #botao-pagamento {
   color: white;
   text-align: center;
   height: 50px;
   background-color: #790000;
-  margin-left: 120px;
+  margin-left: 110px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
 }
 
 footer {
@@ -369,7 +387,7 @@ footer {
   flex-wrap: wrap; /* quebra linha caso precise */
   margin-top: 100px; /* espaço entre o footer e o conteúdo */
 }
-
+.nome
 footer ul {
   font-family: "Inter", sans-serif;
   list-style: none;
@@ -496,8 +514,8 @@ footer p {
 
 h3 {
   color: #523800;
-  margin-top: -12px;
-  font-family: "Libre Caslon Text";
+
+  font-family: "Inter", sans-serif;
   font-size: 28px;
   font-weight: 500;
 }
@@ -563,3 +581,45 @@ h3 {
   height: auto;
 }
 
+#selecionar-todos {
+  transform: scale(1.5);
+  transform-origin: left center;
+  margin-left: -20px;
+  margin-top: -2px;
+}
+
+
+
+.pedido-total h2 {
+    font-family: "Inter", sans-serif;
+    color: #4E3902;
+    /* Novas propriedades */
+    display: flex;
+    justify-content: space-between; /* ESSENCIAL: Empurra os elementos para os lados */
+}
+
+
+.lista-vestidos a {
+    text-decoration: none; 
+    color: #000; 
+    display: block;
+    text-align: center;
+}
+
+/* 2. Opcional: Estilo específico para o nome */
+.lista-vestidos .nome {
+    
+    font-family: "Libre Caslon Text";
+    font-size: 16px; 
+    margin-top: 10px; 
+   
+}
+
+.nome {
+  color: #000;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 40px;
+  text-decoration: none;
+
+}
