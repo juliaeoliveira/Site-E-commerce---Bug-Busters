@@ -20,10 +20,6 @@ from typing import Optional
 #from models_teste import SessionLocal
 #Jinja2Templates=responsável por renderizar o front-end,
 #html,css,javascript
-<<<<<<< HEAD
-
-=======
->>>>>>> 271195c313743e77941dc2c83af658bd48f50078
 import os    #,shutil
 #os=função de sistema, pegar caminhos de pasta 'imagem'
 #shutil=salvar ou pegar o caminho do diretório 'caminho/imagem'
@@ -44,13 +40,13 @@ templates=Jinja2Templates(directory="view/templates")#pasta front-end
 UPLOAD_DIR="view/static/uploads"
 os.makedirs(UPLOAD_DIR,exist_ok=True)
 
-@router.get("/home/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse)
 async def pagina_carrinho(request: Request):
         return templates.TemplateResponse("home.html",{
         "request":request
     })
 
-@router.get("/", response_class=HTMLResponse)
+@router.get("/produtos/", response_class=HTMLResponse)
 async def listar_todos (request:Request, 
                         db:Session=Depends(get_db)):
     produtos = db.query(Produto).all()

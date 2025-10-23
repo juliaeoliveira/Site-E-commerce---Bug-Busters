@@ -22,14 +22,14 @@
 <body>
     <div class="menu">
       <nav>
-        <a href="/home/">
+        <a href="/">
           <img id="logo" src="/static/img_home/Sob.png" alt="Logo">
         </a>
       </nav>  
         <nav class="categorias">
-            <a href="/">Vestidos</a>
+            <a href="/produtos/">Vestidos</a>
             <a href="#Colecoes">Coleções</a>
-            <a href="#Agendamentos">Agendamentos</a>
+            <a href="/#Agendamentos">Agendamentos</a>
         </nav>
         <nav class="icons">
             <a href="/usuario/login">
@@ -39,11 +39,7 @@
                     alt="login"
                 />
                 </a>
-<<<<<<< HEAD:templates/carrinho.html
-            <a href="/carrinho/" >
-=======
             <a href="/carrinho/">
->>>>>>> 271195c313743e77941dc2c83af658bd48f50078:view/templates/carrinho.html
                 <img src="/static/img_home/carrinho.png"
                 width="20px"
                 title="Carrinho"
@@ -89,7 +85,9 @@
                 <br><br>
                 <h2>Sub total: <spam>12.000</spam></h2>
             </div>
-            <button id="botao-pagamento" >Fechar pedido</button>
+            <form action="/pedido/fechar" method="post"> 
+                <button id="botao-pagamento" type="submit">Fechar pedido</button>
+            </form>
             </section>
         </div>
     </section>
@@ -118,7 +116,7 @@
 <br>
     <nav>
         <div class="outrosvestidos">
-            <a href="/"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
+            <a href="/produtos/"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
         </div> 
     </nav>
     </section>
