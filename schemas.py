@@ -13,10 +13,6 @@ class Usuario(BaseModel):
     telefone : str
 
     #informações para login
-<<<<<<< HEAD
-    nome_usuario : str
-=======
->>>>>>> 271195c313743e77941dc2c83af658bd48f50078
     senha : str
     tipo : Optional[str] = None 
 
@@ -24,61 +20,6 @@ class Usuario(BaseModel):
 
     #validação do nome do cliente
     @field_validator('nome_cliente')
-<<<<<<< HEAD
-    @classmethod
-    def validar_nome(cls, valor):
-        nome = valor.strip()#remove espaços extras no início/fim
-        if len(nome) < 3:
-            raise ValueError('O nome deve conter pelo menos 3 caracteres.')
-        #usa expressão para permitir apenas letras (com acentos) e espaços
-        #A–Z e À–ÿ permitem letras com acentos --> validação feita com o chat para nn perder tempo
-        if not re.match(r'^[A-Za-zÀ-ÿ\s]+$', nome):
-            raise ValueError('O nome deve conter apenas letras e espaços.')
-        return nome.title()
-    
-    #validação da data de nascimento
-    @field_validator('data_nascimento')
-    @classmethod
-    def validar_data_nascimento(cls, valor):
-        hoje = datetime.now(timezone.utc)
-        if valor.tzinfo is None:
-            valor = valor.replace(tzinfo=timezone.utc)
-        if valor > hoje:
-            raise ValueError('A data de nascimento não pode ser no futuro.')
-        return valor
-    
-    #validação da data de cadastro
-    @field_validator('data_cadastro')
-    @classmethod
-    def validar_data_cadastro(cls, valor, info):
-       hoje = datetime.now(timezone.utc)
-       if valor.tzinfo is None:
-        valor = valor.replace(tzinfo=timezone.utc)
-        if valor > hoje:
-            raise ValueError("A data de cadastro não pode ser no futuro.")
-        return valor
-    
-    #validação do telefone
-    @field_validator('telefone')
-    @classmethod
-    def validar_telefone(cls, valor):
-        numero_telefone = re.sub(r'\D', '', valor) #remove todos os caracteres que não são dígitos (ex: espaços, parênteses, hífens)
-
-        #garante que o telefone tenha 10 ou 11 dígitos (formato brasileiro)
-        #10 → fixo com DDD | 11 → celular com DDD
-        if not re.match(r'^\d{10,11}$', numero_telefone):
-            raise ValueError('Telefone deve conter 10 ou 11 dígitos numéricos [ ex: 11 99748-1839 ].')
-        return numero_telefone
-
-    #validação do usuario
-    @field_validator('nome_usuario')
-    @classmethod
-    def validacao_usuario(classe, valor):
-        if not re.match(r'^[a-zA-Z0-9_.-]{3,20}$', valor):
-            raise ValueError('Usuario deve ter entre 3 e 20 caracteres e conter apenas letras, números, ".", "_" ou "-".')
-        return valor
-    
-=======
     @classmethod
     def validar_nome(cls, valor):
         nome = valor.strip()#remove espaços extras no início/fim
@@ -124,7 +65,6 @@ class Usuario(BaseModel):
             raise ValueError('Telefone deve conter 10 ou 11 dígitos numéricos [ ex: 11 99748-1839 ].')
         return numero_telefone
     
->>>>>>> 271195c313743e77941dc2c83af658bd48f50078
     #validação da senha
     @field_validator('senha')
     @classmethod
