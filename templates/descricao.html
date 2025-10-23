@@ -1,0 +1,179 @@
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
+  <title>Sob Véu</title>
+  <link rel="stylesheet" href="/static/css/descricao.css"> 
+  <!-- <script src="{{ url_for('static', path='js/carrinho.js') }}"></script> -->
+</head>
+
+
+<header>
+  <section class="menu">
+    <nav>
+      <a href="/home/"> <img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a> 
+    </nav>  
+    <nav class="paginas">
+      <a href="/">Vestidos</a>
+      <a href="#Colecoes">Coleções</a>
+      <a href="#Agendamentos">Agendamentos</a>
+    </nav>
+    <nav class="icons">
+      <a href="carrinho.html" target="_blanck">
+        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+      </a>
+      <a href="/carrinho/" >
+        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
+      </a>
+    </nav>
+  </section>
+</header>
+<body>
+
+    <main>
+        <h1>Início  >  Vestidos  >  Detalhes do vestido</h1>
+
+    <section>
+        <div class="fotos">
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem1_url)}}" alt="foto de frente"></div>
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem2_url)}}" alt="foto de costa"></div>
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}" alt="foto do lado esquerdo"></div>  
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem4_url)}}" alt="foto do lado direito"></div>
+        </div>
+        
+    </section>
+    <section>  
+        <div class="descricao">
+            <h2 class="nomevestido">{{produto.nome_produto}}</h2> <br> <br>
+            <h2 class="descricaovestido">DETALHES DO VESTIDO</h2>
+            <br>
+            <b class="subtitulo">Coleção: {{produto.categoria}}</b> 
+         
+            <ul>   
+                <p>{{produto.descricao}}</p>
+            </ul>
+
+        </div>
+        <div class="botoes"> 
+            <div>
+                <button class="compra"> <b> Compra: R${{produto.preco}} </b></button>
+            </div>
+            <div>   
+                <button class="carrinho"> Adicionar no carrinho 🛒 </button>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="outrosvestidos">
+                <a href="/"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
+            </div> 
+        </nav>
+    <section class="espacovariedades">
+    <div class="conteinervariedade"> 
+        <h3>MAIS VARIEDADES</h3>
+        <p class="linhavariedade">________________________________________________________________</p>
+        
+        <div class="variedades">
+          {% for sugestao in sugestoes %}
+            <div class="imagem-container">
+                <a href="/produtos/{{ sugestao.id }}">
+                    <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
+                    <p class="nome">{{ sugestao.nome_produto }}</p>
+                </a>
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+</section>
+
+</main>
+<footer>
+    <img class="sob" src="/static/img_home/Sob copy.png" alt="">
+    <ul> <p>Contatos</p> <br>
+      <img class="telefone" src="/static/img_home/telefone.png" alt="" li>(11) 4002-8922</li>
+      <br>
+      <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt="" li>(11) 98291-1653</li>
+      <li>sobveuoficial@gmail.com</li>
+    </ul>
+    <p class="linha">___________</p>
+    <ul> <p> Sobre a loja: </p> <br>
+      <li>Sobre nós</li>  
+      <li>Trocas e Devoluções</li>
+      <li>Fretes e Entregas</li>
+    </ul>
+    <p class="linha">___________</p>
+    <ul>
+      <li>Política de Privacidade</li>
+      <li>Termos de Uso</li>
+    </ul>
+  </div>
+  <section class="midia">
+    <img class="instagram" src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+    <img class="facebook" src="/static/img_home/facebook-f-Photoroom.png" alt="">
+  </section>
+    <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+   
+    </footer>
+    
+       <!-- <script src="carrinho.js"></script> -->
+
+  <script>
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", ready);
+} else {
+  ready();
+}
+
+function ready() {
+  // Botão "Adicionar no carrinho"
+  const addButton = document.querySelector(".carrinho");
+  if (addButton) {
+    addButton.addEventListener("click", addProductToCart);
+  }
+}
+
+function addProductToCart() {
+  // Pegando informações do produto
+  const nome = document.querySelector(".nomevestido").innerText.trim();
+  const preco = document.querySelector(".compra b").innerText.match(/R\$[0-9.,]+/)[0];
+  const imagem = document.querySelector(".fotos img").src;
+
+  // 🆕 Pegando o tamanho selecionado
+  const tamanhoSelect = document.querySelector(".tamanho");
+  const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
+
+  // Pega carrinho atual (ou cria vazio)
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+  // Verifica se o mesmo produto com o mesmo tamanho já existe
+  const existente = carrinho.find(p => p.nome === nome && p.tamanho === tamanho);
+
+  if (existente) {
+    existente.quantidade++;
+  } else {
+    carrinho.push({
+      nome: nome,
+      preco: preco,
+      imagem: imagem,
+      tamanho: tamanho, // 🆕 adicionando tamanho
+      quantidade: 1
+    });
+  }
+
+  // Salva no localStorage
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  alert(`✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`);
+}
+</script>
+
+</body>
+</html>
