@@ -24,7 +24,6 @@ class Usuario_Model(Base):             #-----> Nova tabela clientes
     telefone = Column(String)
 
     #informações para login
-    nome_usuario = Column(String, nullable=False, unique=True, index=True)
     senha = Column(String, nullable=False)
     tipo = Column(String, nullable=True, index=True)
 

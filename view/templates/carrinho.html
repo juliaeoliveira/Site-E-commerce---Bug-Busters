@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <title>Sob Véu</title>
+  <link rel="stylesheet" href="/static/css/carrinho.css">
+</head>
+<body>
+    <div class="menu">
+      <nav>
+        <a href="/">
+          <img id="logo" src="/static/img_home/Sob.png" alt="Logo">
+        </a>
+      </nav>  
+        <nav class="categorias">
+            <a href="/produtos/">Vestidos</a>
+            <a href="#Colecoes">Coleções</a>
+            <a href="/#Agendamentos">Agendamentos</a>
+        </nav>
+        <nav class="icons">
+            <a href="/usuario/login">
+                    <img src="/static/img_home/login.png"
+                    width="20px"
+                    title="login"
+                    alt="login"
+                />
+                </a>
+            <a href="/carrinho/">
+                <img src="/static/img_home/carrinho.png"
+                width="20px"
+                title="Carrinho"
+                alt="Carrinho"
+            />
+            </a>
+        </nav>
+    </div> 
+<main>
+    <section id="carrinho">
+        <h1 class="localizacao"> Carrinho > Pagamento</h1>
+        <br><br><br><br>
+        <div class="area-carrinho" >
+            <section class="produto-vestido">
+                <h1>Carrinho de compras</h1>
+                <div class="linha-selecao">
+                    <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
+                    <label for="selecionar-todos">Selecionar todos </label>
+                </div>
+                <div class="produto-item">
+                    <input class="checkbox-item" type="checkbox" /> 
+                    <img class="foto" src="" alt="Vestido" />
+                    <div class="texto">
+                        <h3>Vestido Eternity</h3> <img class="lixeira" src="/static/img_home/teste_lixeira.png" alt="lixeira">
+                        <p class="colecao">Coleção Chama Secreta</p>
+                        <p class="estoque">Em estoque</p>
+                        <select class="tamanho">
+                            <option value="PP">PP</option>
+                            <option value="P">P</option>
+                            <option value="M">M</option>
+                            <option value="G">G</option>
+                        </select>
+                        <br>
+                        <label class="quantidade" for="quantidade">Quantidade:</label>
+                        <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
+                        <p class="valor">R$ 12.000</p>
+                    </div>
+                </div>
+            </section>
+            <section class="pedido-total">
+            <div>
+                <h3> Seu pedido </h3>
+                <br><br>
+                <h2>Sub total: <spam>12.000</spam></h2>
+            </div>
+            <form action="/pedido/fechar" method="post"> 
+                <button id="botao-pagamento" type="submit">Fechar pedido</button>
+            </form>
+            </section>
+        </div>
+    </section>
+    
+    
+
+
+    <section id="variedades">
+    <h1>Mais variedades</h1>
+    <hr class="linha-titulo3">
+
+    <div class="lista-vestidos">
+        {% for sugestao in sugestoes %}
+            <div class="vestido"> 
+            <!-- <div class="imagem-container"> -->
+                <a href="/produtos/{{ sugestao.id }}">
+                    <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}" class="fotovariedades">
+                    <p class="nome">{{ sugestao.nome_produto }}</p>
+                </a>
+            <!-- </div>             -->
+            </div>
+        {% endfor %}
+
+    </div>
+<br>
+<br>
+    <nav>
+        <div class="outrosvestidos">
+            <a href="/produtos/"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
+        </div> 
+    </nav>
+    </section>
+    </main>
+<br>
+<br>
+
+
+<footer>
+    <img class="sob" src="/static/img_home/Sob copy.png" alt="">
+    <ul> <p>Contatos</p> <br>
+      <img class="telefone" src="/static/img_home/telefone.png" alt="" li>(11) 4002-8922</li>
+      <br>
+      <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt="" li>(11) 98291-1653</li>
+      <li>sobveuoficial@gmail.com</li>
+    </ul>
+    <p class="linha">___________</p>
+    <ul> <p> Sobre a loja: </p> <br>
+      <li>Sobre nós</li>  
+      <li>Trocas e Devoluções</li>
+      <li>Fretes e Entregas</li>
+    </ul>
+    <p class="linha">___________</p> 
+    <ul>
+      <li>Política de Privacidade</li>
+      <li>Termos de Uso</li>
+    </ul>
+  </div>
+  <section class="midia">
+    <img class="instagram" src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+    <img class="facebook" src="/static/img_home/facebook-f-Photoroom.png" alt="">
+  </section>
+    <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+   
+</footer>
+
+<script>
+        // Verifica se o documento ainda está sendo carregado
+        if (document.readyState === "loading") {
+            // Se sim, adiciona um evento para rodar a função "ready" quando o DOM estiver pronto
+            document.addEventListener("DOMContentLoaded", ready);
+        } else {
+            // Caso o documento já tenha sido carregado, executa a função imediatamente
+            ready();
+        }
+
+        // Variável global para guardar o valor total da compra
+        let totalAmount = 0;
+
+        // Função que é executada quando o site termina de carregar
+        function ready() {
+            loadCartFromLocalStorage(); // Carrega os produtos salvos no carrinho (localStorage)
+
+            // Pega o botão de pagamento pelo ID
+            const purchaseButton = document.getElementById("botao-pagamento");
+
+            // Se o botão existir na página, adiciona o evento de clique
+            if (purchaseButton) {
+                purchaseButton.addEventListener("click", makePurchase);
+            }
+        }
+
+        // ================================
+        // CARREGA CARRINHO DO LOCALSTORAGE
+        // ================================
+        function loadCartFromLocalStorage() {
+            // Pega o carrinho do localStorage (ou cria um array vazio se não existir)
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+            // Seleciona o container onde os produtos serão exibidos
+            const container = document.querySelector(".produto-vestido");
+
+            // Seleciona o elemento onde aparece o total (obs: "spam" deveria ser "span")
+            const totalElement = document.querySelector(".pedido-total h2 spam");
+
+            // Começa colocando o título "Carrinho de compras" no container
+            container.innerHTML = "<h1>Carrinho de compras</h1>";
+
+            // Se o carrinho estiver vazio, mostra a mensagem e zera o total
+            if (carrinho.length === 0) {
+                container.innerHTML += "<p>Seu carrinho está vazio!</p>";
+                totalElement.textContent = "0,00";
+                return; // Sai da função
+            }
+
+            // Para cada produto no carrinho...
+            carrinho.forEach((produto, index) => {
+                // Cria uma nova div para representar o produto
+                const div = document.createElement("div");
+                div.classList.add("produto-item"); // adiciona a classe CSS
+
+                // Adiciona dentro da div as informações do produto
+                div.innerHTML = `
+    <input class="checkbox-item" type="checkbox"> <!-- checkbox (sem função no momento) -->
+    <img class="foto" src="${produto.imagem}" alt="${produto.nome}"> <!-- imagem do produto -->
+    <div class="texto">
+      <h3>${produto.nome}</h3> <!-- nome do produto -->
+      <img class="lixeira" src="imagemcarrinho/5366933-removebg-preview.png" alt="lixeira" data-index="${index}"> <!-- botão para excluir o produto -->
+      <br>
+      <label class="tamanho-label">Tamanho:</label>
+      <!-- seletor de tamanhos -->
+      <select class="tamanho">
+        <option value="PP" ${produto.tamanho === "PP" ? "selected" : ""}>PP</option>
+        <option value="P" ${produto.tamanho === "P" ? "selected" : ""}>P</option>
+        <option value="M" ${produto.tamanho === "M" ? "selected" : ""}>M</option>
+        <option value="G" ${produto.tamanho === "G" ? "selected" : ""}>G</option>
+        <option value="GG" ${produto.tamanho === "GG" ? "selected" : ""}>GG</option>
+      </select>
+      <br>
+      <label class="quantidade">Quantidade:</label>
+      <!-- campo para alterar a quantidade -->
+      <input type="number" class="quantia" min="1" max="10" value="${produto.quantidade}">
+      <!-- mostra o preço -->
+      <p class="valor">${produto.preco}</p>
+    </div>
+  `;
+                // adiciona a div do produto no container
+                container.appendChild(div);
+            });
+
+            // Atualiza o valor total dos produtos
+            updateTotal();
+
+            // Adiciona eventos para quando a quantidade for alterada
+            document.querySelectorAll(".quantia").forEach(input => {
+                input.addEventListener("change", updateQuantity);
+            });
+
+            // Adiciona eventos para quando clicar na lixeira (remover produto)
+            document.querySelectorAll(".lixeira").forEach(btn => {
+                btn.addEventListener("click", removeProduct);
+            });
+
+            // Adiciona eventos para quando mudar o tamanho
+            document.querySelectorAll(".tamanho").forEach(select => {
+                select.addEventListener("change", event => {
+                    // Pega o índice do produto que teve o tamanho alterado
+                    const index = Array.from(document.querySelectorAll(".tamanho")).indexOf(event.target);
+
+                    // Atualiza o tamanho no localStorage
+                    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+                    carrinho[index].tamanho = event.target.value;
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+                });
+            });
+        }
+
+        // ================================
+        // ATUALIZA TOTAL DO CARRINHO
+        // ================================
+        function updateTotal() {
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            const totalElement = document.querySelector(".pedido-total h2 spam");
+            let total = 0;
+
+            // Soma o preço de todos os produtos
+            carrinho.forEach(produto => {
+                // Converte o preço de "R$xx,xx" para número
+                let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
+                total += preco * produto.quantidade;
+            });
+
+            // Mostra o total formatado (ex: 120,50)
+            totalElement.textContent = total.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+
+            // Guarda o total na variável global
+            totalAmount = total;
+        }
+
+        // ================================
+        // ATUALIZA QUANTIDADE DE UM PRODUTO
+        // ================================
+        function updateQuantity(event) {
+            // Pega o índice do produto alterado
+            const index = Array.from(document.querySelectorAll(".quantia")).indexOf(event.target);
+
+            // Pega o carrinho atual
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+            // Atualiza a quantidade com o novo valor
+            carrinho[index].quantidade = parseInt(event.target.value) || 1;
+
+            // Salva de volta no localStorage
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+            // Recalcula o total
+            updateTotal();
+        }
+
+        // ================================
+        // REMOVE UM PRODUTO DO CARRINHO
+        // ================================
+        function removeProduct(event) {
+            const index = event.target.dataset.index; // índice do produto clicado
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            carrinho.splice(index, 1); // remove o produto do array
+            localStorage.setItem("carrinho", JSON.stringify(carrinho)); // atualiza o localStorage
+            loadCartFromLocalStorage(); // recarrega o carrinho na tela
+        }
+
+        // ================================
+        // FINALIZA A COMPRA
+        // ================================
+        function makePurchase() {
+            // Se o total for 0, o carrinho está vazio
+            if (totalAmount <= 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            // Mostra uma mensagem de agradecimento com o valor da compra
+            alert(`✅ Obrigado pela sua compra! Valor do pedido: R$${totalAmount.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`);
+
+            // Limpa o carrinho do localStorage
+            localStorage.removeItem("carrinho");
+
+            // Atualiza a tela (mostra que o carrinho está vazio)
+            loadCartFromLocalStorage();
+        }
+    </script>
+</body>
+</html>

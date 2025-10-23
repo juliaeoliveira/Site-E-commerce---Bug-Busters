@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SOB Noiva</title>
+    <link rel="stylesheet" href="/static/css/login.css"> <!-- Link para o arquivo CSS externo -->
+</head>
+<body>
+
+   <!-- MENU SUPERIOR FIXO -->
+    <div class="menu">
+        <!-- LOGO DA EMPRESA -->
+        <a href="/home/">
+            <img id="logo" src="/static/assets/img_login/Sob1.png" alt="Logo">
+        </a>
+
+        <!-- LINKS DE NAVEGAÇÃO -->
+        <nav class="categorias">
+            <a href="/">Vestidos</a>
+            <a href="#Colecoes">Coleções</a>
+            <a href="#Agendamentos">Agendamentos</a>
+        </nav>
+
+        <!-- ÍCONES DE LOGIN E CARRINHO -->
+        <nav class="icons">
+            <a href="#">
+                <img src="/static/assets/img_login/login.png" width="20px" title="Login" alt="Login">
+            </a>
+            <a href="#">
+                <img src="/static/assets/img_login/carrinho.png" width="20px" title="Carrinho" alt="Carrinho">
+            </a>
+        </nav>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL DIVIDIDO EM DUAS PARTES -->
+    <main class="container">
+        <!-- IMAGEM À ESQUERDA -->
+        <div class="imagem-esquerda">
+            <img src="/static/assets/img_login/fundo-login.jpg" alt="Imagem de mãos com alianças">
+            <a href="/home/" class="voltar-btn">← Voltar à página inicial</a>
+        </div>
+
+        <!-- FORMULÁRIO DE LOGIN -->
+        <div class="formulario-login">
+            <h2>LOGIN</h2> <br><br><br><br><br>
+            <form action="/usuario/login" method="post">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
+                <button type="submit" class="entrar-btn">Entrar</button> <br> <br>
+            </form>
+
+            <p class="criar-conta-texto">Não possui uma conta?</p> <br>
+            <a href="/usuario/registrar" class="criar-conta-btn">Criar conta</a>
+        </div>
+    </main>
+
+</body>
+</html>

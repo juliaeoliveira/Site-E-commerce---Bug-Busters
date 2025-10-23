@@ -1,0 +1,565 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Organiza os itens na vertical (coluna) */
+  min-height: 100%; /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0; /* Remove a margem padrão */
+  padding: 0; /* Remove o preenchimento padrão */
+  overflow-x: hidden; /* Impede rolagem horizontal */
+  background-color: #EAE4D8;
+}
+
+.lixeira {
+  height: 20px;
+  margin-left: 400px;
+  margin-top: -30px;
+  position: absolute;
+  
+}
+
+.lixeira:focus {
+  border-color: darkred;
+  transform: scale(1.10);
+}
+
+.lixeira:hover {
+  border-color: darkred;
+  transform: scale(1.10);
+}
+
+/* MENU */
+#logo {
+  height: 80px; /* Define a altura do logo */
+  padding-left: 130px; /* Espaço à esquerda do logo */
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  position: fixed; /* Fixa o menu na tela */
+  z-index: 1; /* Garante que o menu fique acima de outros elementos */
+  display: flex; /* Organiza os itens do menu em linha */
+  width: 100%; /* O menu ocupa toda a largura da tela */
+  align-items: center; /* Centraliza os itens na vertical */
+  justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
+  background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
+  font-family: 'Open Sans', sans-serif; /* Fonte do menu */
+  color: #ffffff; /* Cor do texto do menu */
+}
+
+.menu nav {
+  justify-content: center;
+  display: flex;
+  font-family: "Libre Caslon Text";
+  font-size: 22px;
+  color: #523800;
+}
+
+.categorias {
+  justify-content: center;
+  display: flex;
+  font-family: "Libre Caslon Text";
+  font-size: 22px;
+  color: #523800;
+  gap: 200px;
+}
+
+/* Estilo dos links dentro do nav */
+nav a {
+  color: #523800;
+  font-size: 20px; /* Define o tamanho da fonte */
+  padding: 25px; /* Espaçamento interno */
+  text-decoration: underline; /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
+}
+
+
+/* card carrinho */
+
+#carrinho {
+  height: auto;
+  background-color: #EAE4D8;
+  
+
+  
+}
+
+.area-carrinho{
+  display: flex;
+  justify-content: center;      /* centraliza horizontalmente */
+  align-items: flex-start;      /* alinha pelo topo */
+  gap: 60px;                    /* espaço entre os dois blocos */
+  width: 100%;
+  margin-top: 200px;    
+}
+/* div produto*/
+.produto-vestido h1 {
+  background-color: #FFF;
+  width: calc(100% + 40px); /* cobre todo o espaço horizontal + padding da section */
+  margin: -20px -20px 20px -20px; /* remove o espaçamento interno da section */
+  padding: 20px 0;
+  
+  border-radius: 8px 8px 0 0; /* mantém cantos arredondados só no topo */
+  font-family: "Aboreto", system-ui;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+}
+
+
+
+.produto-vestido {
+  background-color: #E3D2AC;
+  width: 700px;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: auto;
+  margin-bottom: 30px;
+
+}
+
+
+
+.produto-vestido input[type="checkbox"] {
+  align-self: flex-start; /* checkbox sobe (como na imagem) */
+  margin-top: 70px;
+}
+
+.imagem-carrinho img {
+  width: 150px;
+  border-radius: 4px;
+}
+
+.quantia {
+  color: black;
+  background-color: #E3D2AC;
+  font-size: 15px;
+  margin-top: 10px;
+  width: 40px;
+  height: 25px;
+  text-align: center;
+}
+
+.foto {
+  height: 250px;
+  float: left;
+}
+
+/* Alinha a linha "Selecionar todos" */
+.linha-selecao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 20px 20px;
+  font-family: "Libre Caslon Text";
+  color: #523800;
+  font-size: 16px;
+}
+
+/* Card do produto */
+.produto-item {
+  align-items: flex-start;
+  gap: 15px;
+  margin-left: 20px;
+  margin-top: 60px;
+}
+
+.checkbox-item {
+  float: left;
+}
+
+.produto-item in {
+  margin-top: 90px;
+}
+
+/* Imagem e texto do produto */
+.produto-item .foto {
+  height: 200px;
+  border-radius: 4px;
+  margin-top: 0px;
+}
+
+.produto-item .texto {
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: "Inter", sans-serif;
+}
+
+.texto {
+  margin: 40px;
+  margin-top: -10px;
+  float: left;
+  margin-left: 40px;
+}
+
+.texto,
+.foto {
+  margin: 20px;
+  margin-top: 100px;
+  font-size: 20px;
+}
+
+#carrinho .texto img {
+  text-align: center;
+}
+
+.pedido-total {
+  color: #000;
+  min-height: 200px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  background-color: white;
+  width: 400px;
+  height: 200px;
+ 
+}
+
+
+.pedido-total button {
+  margin: 50px;
+  width: 200px;
+  
+}
+
+/* Sessão variedades */
+#variedades img {
+  height: 600px;
+  align-items: center;
+}
+
+#variedades {
+  /* height: 1100px; */
+  background-color: #FFF9ED;
+  text-align: center;
+  /* width: 100%; */
+}
+
+.linha-titulo3 {
+  width: 456px;
+  color: #4E3902;
+  margin: 0 auto 15px; /* centraliza e dá espaçamento */
+}
+
+#variedades h1 {
+  margin-top: 40px;
+  color: #681616;
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+  font-family: "Aboreto";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 44.8px */
+}
+
+.vestido {
+  display: flex;
+  flex-direction: column; /* alinha imagem e texto verticalmente */
+  align-items: center; /* centraliza horizontalmente */
+  height: auto;
+  padding-bottom: 20px;
+  margin: 40px 120px;
+  background: none;
+}
+
+.vestido img {
+  position: static;
+  width: 352px;
+  height: 90px;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.vestido:hover img {
+  transform: scale(1.10);
+}
+
+.nome {
+  color: #000;
+  text-align: center;
+  font-family: "Arial, Helvetica, sans-serif";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  margin-top: 40px;
+}
+
+.lista-vestidos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+button:focus {
+  border-color: darkred;
+  transform: scale(1.10);
+}
+
+button:hover {
+  border-color: darkred;
+  transform: scale(1.05);
+}
+
+.ver {
+  float: left;
+  font-family: "Libre Caslon Text";
+  height: 60px;
+  width: 320px;
+  color: darkred;
+  background-color: #EADCC1CC;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 19px;
+  text-align: center;
+  margin-top: 40px;
+  margin-left: 60px;
+}
+
+.localizacao {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 200px;
+  position: absolute;
+  margin-left: 850px;
+  margin-bottom: 30px;
+}
+
+#voltarect {
+  border-color: rgb(104, 0, 0);
+  transform: scale(1.10);
+}
+
+.pedido-total #botao-pagamento {
+  color: white;
+  text-align: center;
+  height: 50px;
+  background-color: #790000;
+  margin-left: 120px;
+}
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 40px 0; /* aumenta altura */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start; /* alinhar tudo no topo */
+  width: 100%;
+  flex-wrap: wrap; /* quebra linha caso precise */
+  margin-top: 100px; /* espaço entre o footer e o conteúdo */
+}
+
+footer ul {
+  font-family: "Inter", sans-serif;
+  list-style: none;
+  text-align: center;
+}
+
+footer li {
+  margin-top: 40px;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+.linhafooter {
+  margin-top: 20px;
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: #FFF;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+}
+
+.direitos {
+  width: 100%;
+  text-align: left;
+  margin-top: 50px;
+  font-size: 15px;
+  margin-left: 50px;
+}
+
+.whatsapp,
+.telefone {
+  height: 20px;
+}
+
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+.sob {
+  height: 100px;
+  margin-top: -100px;
+  margin: -10px;
+}
+
+.linha {
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: #FFF;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+  margin-top: 50px;
+}
+
+html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF9ED;
+}
+
+footer p {
+  text-align: center;
+}
+
+.midia {
+  float: right;
+  display: grid;
+  gap: 15px;
+}
+
+.outrosvestidos {
+  margin-right: 900px;
+}
+
+.compras h1 {
+  color: #523800;
+  color: color(display-p3 0.3077 0.2228 0.0082);
+  text-align: left;
+  -webkit-text-stroke-color: #7C5051;
+  font-family: "Aboreto", system-ui;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.quantidade {
+  background-color: #E3D2AC;
+  color: #5a0101;
+  height: 80px;
+}
+
+
+
+.pedido-total h1 {
+  font-size: 20px;
+}
+
+.pedido-total h2 {
+  font-size: 18px;
+}
+
+.foto .texto {
+  text-align: center;
+}
+
+#selecionar-todos {
+  margin-top: 1px;
+}
+
+#quantidade {
+  width: 100px;
+  margin-top: 10px;
+}
+
+h3 {
+  color: #523800;
+  margin-top: -12px;
+  font-family: "Libre Caslon Text";
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.colecao {
+  color: #523800;
+  font-family: "Libre Caslon Text";
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.estoque {
+  font-family: "Inter", sans-serif;
+  color: #4E3902;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.tamanho {
+  font-family: "Inter", sans-serif;
+  color: #4E3902;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.valor {
+  margin-top: 10px;
+}
+
+.produto-item .checkbox-item {
+  /* Coloca checkbox e imagem lado a lado */
+  align-items: center; /* Centraliza verticalmente */
+  gap: 10px;
+}
+
+.checkbox-item {
+  width: 18px; /* Tamanho do checkbox */
+  height: 18px;
+  cursor: pointer;
+  margin-top: 90px; /* Mãozinha ao passar o mouse */
+}
+
+.foto {
+  width: 120px; /* Ajuste o tamanho conforme o design */
+  height: auto;
+  border-radius: 6px; /* Bordas suaves */
+}
+
+.checkbox-item {
+  position: relative;
+  top: 2px; /* ajuste fino — pode usar 1px, 2px, -1px, etc. */
+}
+
+
+#carrinho, .produto-item, .compras{
+  height: auto;
+  min-height: 200px;
+
+}
+
+#variedades {
+  min-height: 100vh;
+  height: auto;
+}
+

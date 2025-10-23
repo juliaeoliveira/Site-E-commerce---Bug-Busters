@@ -13,7 +13,6 @@ class Usuario(BaseModel):
     telefone : str
 
     #informações para login
-    nome_usuario : str
     senha : str
     tipo : Optional[str] = None 
 
@@ -65,14 +64,6 @@ class Usuario(BaseModel):
         if not re.match(r'^\d{10,11}$', numero_telefone):
             raise ValueError('Telefone deve conter 10 ou 11 dígitos numéricos [ ex: 11 99748-1839 ].')
         return numero_telefone
-
-    #validação do usuario
-    @field_validator('nome_usuario')
-    @classmethod
-    def validacao_usuario(classe, valor):
-        if not re.match(r'^[a-zA-Z0-9_.-]{3,20}$', valor):
-            raise ValueError('Usuario deve ter entre 3 e 20 caracteres e conter apenas letras, números, ".", "_" ou "-".')
-        return valor
     
     #validação da senha
     @field_validator('senha')

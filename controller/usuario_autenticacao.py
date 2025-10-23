@@ -30,7 +30,6 @@ class ServicosUsuario:
             data_cadastro = usuario.data_cadastro,
             email= usuario.email,
             telefone = usuario.telefone,
-            nome_usuario = usuario.nome_usuario,
             senha = crypt_context.hash(usuario.senha), # Senha hashada/criptografada 
             tipo = usuario.tipo
         )
