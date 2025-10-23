@@ -50,7 +50,7 @@ def cadastrar_usuario( request:Request,
         return {"mensagem": "As senhas não coincidem."}
     
     #define o tipo com base no domínio do e-mail
-    if email.endswith("@adm_sobveu.com"):
+    if email.endswith("@admsobveu.com"):
         tipo = "adm"
     else:
         tipo = "cliente"
