@@ -149,8 +149,6 @@ class Endereco(BaseModel):
     def validar_cidade(cls, valor):
         if len(valor.strip()) < 2:
             raise ValueError('O nome da cidade deve conter pelo menos 2 caracteres.')
-        if not re.match(r'^[A-Za-zÀ-ÿ\s]+$', valor.strip()):
-            raise ValueError('O nome da cidade deve conter apenas letras e espaços.')
         return valor.strip().title()
 
     # Validação do estado (UF)

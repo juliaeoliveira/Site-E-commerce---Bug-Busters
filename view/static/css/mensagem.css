@@ -1,0 +1,342 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #eae4d8 0%, #f5f0e8 100%);
+  font-family: "Open Sans", sans-serif;
+}
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 130px;
+  transition: transform 0.3s ease;
+}
+
+#logo:hover {
+  transform: scale(1.05);
+}
+
+.icons {
+  gap: 15px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.icons a {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: inline-block;
+}
+
+.icons a:hover {
+  transform: translateY(-3px);
+  opacity: 0.8;
+}
+
+.menu {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  font-family: "Open Sans", sans-serif;
+  color: #523800;
+  box-shadow: 0 2px 20px rgba(82, 56, 0, 0.08);
+  padding: 10px 0;
+}
+
+.menu nav {
+  justify-content: center;
+  display: flex;
+  font-family: "Libre Caslon Text", serif;
+  font-size: 22px;
+  color: #523800;
+}
+
+.categorias {
+  gap: 40px;
+}
+
+.categorias a {
+  color: #523800;
+  text-decoration: none;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.categorias a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #5a0101;
+  transition: width 0.3s ease;
+}
+
+.categorias a:hover {
+  color: #5a0101;
+}
+
+.categorias a:hover::after {
+  width: 100%;
+}
+
+/* MENSAGEM SECTION */
+.mensagem {
+  margin-top: 180px;
+  padding: 60px 40px;
+  text-align: center;
+  background: white;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(82, 56, 0, 0.12);
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mensagem h2 {
+  font-family: "Libre Caslon Text", serif;
+  font-size: 28px;
+  color: #523800;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.mensagem a {
+  display: inline-block;
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #5a0101 0%, #7a0101 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(90, 1, 1, 0.3);
+}
+
+.mensagem a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(90, 1, 1, 0.4);
+  background: linear-gradient(135deg, #7a0101 0%, #5a0101 100%);
+}
+
+/* BOTÃO CONTINUAR VENDO */
+.outrosvestidos {
+  text-align: center;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.ver {
+  padding: 16px 50px;
+  background: white;
+  color: #523800;
+  border: 2px solid #523800;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(82, 56, 0, 0.1);
+}
+
+.ver:hover {
+  background: #523800;
+  color: white;
+  transform: translateX(-5px);
+  box-shadow: 0 6px 25px rgba(82, 56, 0, 0.2);
+}
+
+/* FOOTER */
+footer {
+  background: linear-gradient(135deg, #5a0101 0%, #4a0101 100%);
+  color: white;
+  padding: 60px 40px 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: auto;
+  box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.2);
+}
+
+footer ul {
+  font-family: "Inter", sans-serif;
+  list-style: none;
+  text-align: center;
+}
+
+footer ul p {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff9ed;
+  letter-spacing: 0.5px;
+}
+
+footer li {
+  margin: 15px 0;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+footer li:hover {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.linhafooter {
+  margin-top: 20px;
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: #fff;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+}
+
+.direitos {
+  width: 100%;
+  text-align: left;
+  margin-top: 50px;
+  font-size: 13px;
+  margin-left: 50px;
+  opacity: 0.8;
+  font-family: "Inter", sans-serif;
+}
+
+.whatsapp,
+.telefone {
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+  filter: brightness(0) invert(1);
+}
+
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+  filter: brightness(0) invert(1);
+}
+
+.instagram:hover,
+.facebook:hover {
+  transform: scale(1.1) rotate(5deg);
+  opacity: 0.8;
+}
+
+.sob {
+  height: 100px;
+  margin-top: -20px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.linha {
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+  margin-top: 50px;
+}
+
+html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff9ed;
+}
+
+footer p {
+  text-align: center;
+}
+
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  #logo {
+    padding-left: 20px;
+    height: 60px;
+  }
+
+  .icons {
+    padding-right: 20px;
+    gap: 10px;
+  }
+
+  .categorias {
+    gap: 20px;
+    font-size: 18px;
+  }
+
+  .mensagem {
+    margin-top: 140px;
+    padding: 40px 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .mensagem h2 {
+    font-size: 22px;
+  }
+
+  .ver {
+    padding: 12px 30px;
+    font-size: 14px;
+  }
+
+  footer {
+    padding: 40px 20px 20px;
+  }
+
+  .direitos {
+    margin-left: 20px;
+    font-size: 12px;
+  }
+}

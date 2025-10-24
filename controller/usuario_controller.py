@@ -86,6 +86,14 @@ def cadastrar_usuario( request:Request,
 #rota login usuário
 @caminho_prefixo_usuario.get("/login",response_class=HTMLResponse)
 def home(request:Request):
+    # #VALIDAÇÂO PROVISÓRIA ENAQUANTO A DASH NN TA 100%
+    # token = request.cookies.get("token")
+    # if token:
+    #     return templates.TemplateResponse("mensagem.html", {
+    #         "request": request,
+    #         "mensagem": "Você já está logado, deseja logar em outra conta?",
+    #         "link_login": "/usuario/login"
+    #     })
     return templates.TemplateResponse("login.html",
                             {"request":request})
 #post login do usuário
@@ -93,6 +101,7 @@ def home(request:Request):
 def login(request:Request, email:str=Form(...),
         senha:str=Form(...), db:Session=Depends(get_db)
 ):
+    
     usuario=db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
     if not usuario or not verificar_hash_senha(senha,
                                                usuario.senha):

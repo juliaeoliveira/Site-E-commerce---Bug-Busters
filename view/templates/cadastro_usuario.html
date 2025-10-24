@@ -43,66 +43,66 @@
             </nav>
         </div>
     <main>
-        <form action="">
+        <form action="/usuario/registrar" method="post">
             <section class="cadastro">
                 <h1 class="titulo_cadastro">CADASTRO DE USUÁRIO</h1>
                 <div class="informacoes">
                     <label for="Nome">Nome completo:*</label>
-                    <input class="posicao" type="text" id="Nome" required placeholder="Henrique Nascimento de Sales" />
+                    <input class="posicao" type="text" id="Nome" name="nome_cliente" required placeholder="Henrique Nascimento de Sales" />
          
 
                     <!-- Agrupamento lado a lado -->
                     <div class="senhas">
                       <div>
                         <label for="senha">Senha:*</label>
-                        <input class="posicao" type="password" id="senha" required placeholder="*******" />
+                        <input class="posicao" type="password" id="senha" name="senha" required placeholder="*******" />
 
                           <!-- Aqui vai aparecer as mensagens -->
                           <p id="mensagem_erro" style="color:red;"></p>
                         </div>
                       </div>
                       <label for="confirmacao_senha">Confirmação de senha:*</label>
-                      <input class="posicao" type="password" id="confirmacao_senha" required placeholder="*******" />
+                      <input class="posicao" type="password" id="confirmacao_senha" name="confirmar_senha" required placeholder="*******" />
 
 
 
                
                     <label for="email">E-mail:</label>
-                    <input class="posicao" type="email" id="email" required placeholder="exemplo@exemplo.com" />
+                    <input class="posicao" type="email" id="email" name="email" required placeholder="exemplo@exemplo.com" />
               
 
                     <label for="data_nascimento">Data de Nascimento:</label>
-                    <input class="posicao" type="date" id="data_nascimento" required />
+                    <input class="posicao" type="date" id="data_nascimento" name="data_nascimento" required />
           
 
                     <label for="Telefone">Telefone:</label>
-                    <input class="posicao" type="tel" id="Telefone" required placeholder="(11) 4002-8922" />
+                    <input class="posicao" type="tel" id="Telefone" name="telefone" required placeholder="(11) 4002-8922" />
        
                     <div >
                       <label for="rua">Rua:</label>
-                      <input class="posicao" type="text" id="rua" required placeholder="Rua: Loucos" />
+                      <input class="posicao" type="text" id="rua" name="rua" required placeholder="Rua: Loucos" />
                     </div>
                    <div class="endereco">
 
                     <div class="campo">
                       <label for="bairro">Bairro:</label>
-                      <input class="posicao" type="text" id="bairro" required placeholder="PQ. Novo Mundo" />
+                      <input class="posicao" type="text" id="bairro" name="bairro" required placeholder="PQ. Novo Mundo" />
                     </div>
 
                     <div class="campo">
                       <label for="numero">N°:</label>
-                      <input class="posicao" type="number" id="numero" required placeholder="N° 120" />
+                      <input class="posicao" type="number" id="numero" name="numero" required placeholder="N° 120" />
                     </div>
 
                     <div class="campo">
                       <label for="cep">CEP:</label>
-                      <input class="posicao" type="text" id="cep" required placeholder="18180-970" />
+                      <input class="posicao" type="text" id="cep" name="cep" required placeholder="18180-970" />
                       <p id="mensagem_cep" style="color:red;"></p>
                     </div>
 
                     <div class="campo">
                       <label for="complemento">Complemento <b>(opcional)</b>:</label>
-                      <input class="posicao" type="text" id="complemento" required placeholder="Apartamento 76, Torre 2" />
+                      <input class="posicao" type="text" id="complemento" placeholder="Apartamento 76, Torre 2" />
                     </div>
 
                     <div class="campo">
@@ -140,7 +140,7 @@
                    </div>
                      <div class="campo">
                       <label for="cidade">Cidade:</label>
-                      <input class="posicao" type="text" id="cidade" required placeholder="Tiradentes"/>
+                      <input class="posicao" type="text" id="cidade" name="cidade" required placeholder="Tiradentes"/>
                     </div>
                   </div>
 
