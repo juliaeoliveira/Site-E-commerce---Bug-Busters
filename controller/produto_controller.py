@@ -10,6 +10,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Produto
+from .usuario_autenticacao import verificar_token
 
 from fastapi.responses import HTMLResponse,RedirectResponse
 # HTMLResponse=resposta do html GET,POST,PUT,DELETE,
@@ -77,6 +78,15 @@ async def detalhe(request:Request,id_produto:int,
 @router.get("/carrinho/", response_class=HTMLResponse)
 async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
                   db:Session=Depends(get_db)):
+    #validação para ter ctz que o usuario esta logado, caso nn exibir a mensagem com link do login 
+    token = request.cookies.get("token")
+    if not token or not verificar_token(token):
+        return templates.TemplateResponse("msg_carrinho.html", {
+            "request": request,
+            # "mensagem": "Para acessar seu carrinho, por favor faça login na sua conta.",
+            # "link_login": "/usuario/login"
+        })
+
     #query do produto
     if id_produto:
          produto=db.query(Produto).filter(Produto.id==id_produto).first()

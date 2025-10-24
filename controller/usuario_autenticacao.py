@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from passlib.context import CryptContext
 from jose import jwt, JWSError
 from decouple import config
-from models import Usuario_Model, Endereco as Endereco_Model
+from models import Usuario_Model, Endereco as Endereco_Model, Pedido as Pedido_Model
 from schemas import Usuario , Endereco
 
 
@@ -63,6 +63,7 @@ class ServicosUsuario:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail='O usuário já existe'
             )
+        
 #função de gerar o hash da senha
 def gerar_hash_senha(senha:str):
     return crypt_context.hash(senha)
