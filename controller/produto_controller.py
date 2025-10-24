@@ -81,12 +81,11 @@ async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
     #validação para ter ctz que o usuario esta logado, caso nn exibir a mensagem com link do login 
     token = request.cookies.get("token")
     if not token or not verificar_token(token):
-        return templates.TemplateResponse("mensagem.html", {
+        return templates.TemplateResponse("msg_carrinho.html", {
             "request": request,
-            "mensagem": "Para acessar seu carrinho, por favor faça login na sua conta.",
-            "link_login": "/usuario/login"
+            # "mensagem": "Para acessar seu carrinho, por favor faça login na sua conta.",
+            # "link_login": "/usuario/login"
         })
-
 
     #query do produto
     if id_produto:
