@@ -67,7 +67,7 @@ nav a {
 
 
 #frames {
-    background-image: url('video/video.png'); 
+    background-image: url('/static/video/video.png'); 
     height: 90vh;
     background-repeat: no-repeat;
     background-size: 100%;
