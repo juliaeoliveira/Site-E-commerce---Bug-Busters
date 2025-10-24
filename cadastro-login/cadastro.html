@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu">
+        <img id="logo" src="img_cadastro/Sob1.png" alt="Logo">
+            <nav>
+                <a href="/Site-E-commerce---Bug-Busters/tudo/produtos/produtos.html">Vestidos</a>
+                <a href="#Colecoes">Coleções</a>
+                <a href="#Agendamentos">Agendamentos</a>
+            </nav>
+            <nav class="icons">
+                <a href="/Site-E-commerce---Bug-Busters/tudo/cadastro-login/login.html" target="_blanck">
+                        <img src="img_cadastro/login.png"
+                        width="20px"
+                        title="login"
+                        alt="login"
+                    />
+                    </a>
+                <a href="/Site-E-commerce---Bug-Busters/tudo/carrinho/carrinho.html" target="_blanck">
+                    <img src="img_cadastro/carrinho.png"
+                    width="20px"''
+                    title="Carrinho"
+                    alt="Carrinho"
+                />
+                </a>
+            </nav>
+        </div>
+    <main>
+        <form action="">
+            <section class="cadastro">
+                <h1 class="titulo_cadastro">CADASTRO DE USUÁRIO</h1>
+                <div class="informacoes">
+                    <label for="Nome">Nome completo:*</label>
+                    <input class="posicao" type="text" id="Nome" required placeholder="Henrique Nascimento de Sales" />
+         
+
+                    <!-- Agrupamento lado a lado -->
+                    <div class="senhas">
+                      <div>
+                        <label for="senha">Senha:*</label>
+                        <input class="posicao" type="password" id="senha" required placeholder="*******" />
+
+                          <!-- Aqui vai aparecer as mensagens -->
+                          <p id="mensagem_erro" style="color:red;"></p>
+                        </div>
+                      </div>
+                      <label for="confirmacao_senha">Confirmação de senha:*</label>
+                      <input class="posicao" type="password" id="confirmacao_senha" required placeholder="*******" />
+
+
+
+               
+                    <label for="email">E-mail:</label>
+                    <input class="posicao" type="email" id="email" required placeholder="exemplo@exemplo.com" />
+              
+
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input class="posicao" type="date" id="data_nascimento" required />
+          
+
+                    <label for="Telefone">Telefone:</label>
+                    <input class="posicao" type="tel" id="Telefone" required placeholder="(11) 4002-8922" />
+       
+                    <div >
+                      <label for="rua">Rua:</label>
+                      <input class="posicao" type="text" id="rua" required placeholder="Rua: Loucos" />
+                    </div>
+                   <div class="endereco">
+
+                    <div class="campo">
+                      <label for="bairro">Bairro:</label>
+                      <input class="posicao" type="text" id="bairro" required placeholder="PQ. Novo Mundo" />
+                    </div>
+
+                    <div class="campo">
+                      <label for="numero">N°:</label>
+                      <input class="posicao" type="number" id="numero" required placeholder="N° 120" />
+                    </div>
+
+                    <div class="campo">
+                      <label for="cep">CEP:</label>
+                      <input class="posicao" type="text" id="cep" required placeholder="18180-970" />
+                      <p id="mensagem_cep" style="color:red;"></p>
+                    </div>
+
+                    <div class="campo">
+                      <label for="complemento">Complemento <b>(opcional)</b>:</label>
+                      <input class="posicao" type="text" id="complemento" required placeholder="Apartamento 76, Torre 2" />
+                    </div>
+
+                    <div class="campo">
+                      <label  for="uf">Estado (UF):</label>
+                      <select class="posicao" id="estado" name="estado" required>
+                        <option value="" disabled selected>Selecione um estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                      </select>
+                   </div>
+                     <div class="campo">
+                      <label for="cidade">Cidade:</label>
+                      <input class="posicao" type="text" id="cidade" required placeholder="Tiradentes"/>
+                    </div>
+                  </div>
+
+
+                    <button class="cadastrar" type="submit" id="acao">Criar conta</button>
+                </div>
+            </section>
+        </form>
+        <div class="outrosvestidos">
+           <a href="/Site-E-commerce---Bug-Busters/tudo/produtos/produtos.html"><button class="ver"> ← Voltar á páginos inicial</button></a>
+       </div> 
+    </main>
+
+    <p id="mensagem_erro" style="color:red;"></p>
+
+<script>
+const senha = document.getElementById('senha');
+const mensagem_erro = document.getElementById('mensagem_erro');
+
+senha.addEventListener('input', () => {
+    const s = senha.value;
+    let mensagens = [];
+
+    if (s.length < 8) mensagens.push("A senha deve ter pelo menos 8 caracteres.");
+    if (!/[A-Z]/.test(s)) mensagens.push("A senha deve conter pelo menos uma letra maiúscula.");
+    if (!/[a-z]/.test(s)) mensagens.push("A senha deve conter pelo menos uma letra minúscula.");
+    if (!/[0-9]/.test(s)) mensagens.push("A senha deve conter pelo menos um número.");
+    if (!/[@#$%^&+=!-]/.test(s)) mensagens.push("A senha deve conter pelo menos um caractere especial (@#$%^&+=!-).");
+    if (/\s/.test(s)) mensagens.push("A senha não pode conter espaços.");
+
+    // Se todas as regras forem cumpridas, a mensagem some
+    mensagem_erro.innerHTML = mensagens.length ? mensagens.join("<br>") : "";
+});
+</script>
+
+<script>
+const cep = document.getElementById('cep');
+const mensagem_cep = document.getElementById('mensagem_cep');
+
+cep.addEventListener('input', () => {
+    const valor = cep.value;
+
+    // Regex que aceita 12345678 ou 12345-678
+    const regex = /^\d{5}-?\d{3}$/;
+
+    if (valor === "" || regex.test(valor)) {
+        // CEP válido ou campo vazio → sem mensagem
+        mensagem_cep.textContent = "";
+    } else {
+        // CEP inválido
+        mensagem_cep.textContent = "CEP inválido.";
+    }
+});
+</script>
+
+
+</body>
+</html>
