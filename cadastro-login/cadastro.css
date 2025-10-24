@@ -11,7 +11,7 @@ body {
     padding: 0; /* Remove o preenchimento padrão */
     overflow-x: hidden; /* Impede rolagem horizontal */
     background: #EBE4D7;
-    background-image: url("/static/assets/img_cadastro/fundo-cadastro.png");
+    background-image: url("img_cadastro/fundo-cadastro.png");
     background-repeat: no-repeat;
 }
 
