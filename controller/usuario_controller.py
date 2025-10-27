@@ -108,8 +108,8 @@ def login(request:Request, email:str=Form(...),
         return {"mensagem":"Credenciais inválidas"}
     token=criar_token({"sub":usuario.email})
     response=RedirectResponse(url="/usuario/dashboard",status_code=303)
-    response.set_cookie(key="token",value=token,
-                        httponly=True)
+    response.set_cookie(key="token",value=token,httponly=True,samesite="Lax", secure=False, max_age=60 * 60, path="/"        
+    )
     return response
 
 #criar rota do dashboard do usuário , página protegida

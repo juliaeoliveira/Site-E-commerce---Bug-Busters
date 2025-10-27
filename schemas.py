@@ -1,6 +1,6 @@
 import re
 from pydantic import BaseModel, field_validator,EmailStr
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime,timezone
 
 
@@ -169,4 +169,16 @@ class Endereco(BaseModel):
             raise ValueError(f'Estado inválido: "{valor}". Use apenas a sigla, ex: "SP".')
 
         return valor 
+    
+
+class ItemPedidoCreate(BaseModel):
+    id_produto: int
+    tamanho: str
+    quantidade: int
+    preco_unitario: float
+    subtotal: float
+
+class PedidoCreate(BaseModel):
+    valor_total: float
+    itens_pedido: List[ItemPedidoCreate]
 

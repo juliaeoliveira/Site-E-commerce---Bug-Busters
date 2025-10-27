@@ -346,25 +346,70 @@
         }
 
 
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+            }
+        
         // ================================
-        // FINALIZA A COMPRA
+        // FINALIZA A COMPRA (ENVIA AO BACKEND)
         // ================================
-        function makePurchase() {
-            // Se o total for 0, o carrinho está vazio
-            if (totalAmount <= 0) {
+        async function makePurchase(event) {
+            event.preventDefault(); // evita o comportamento padrão do <form>
+            
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            
+            if (carrinho.length === 0) {
                 alert("Seu carrinho está vazio!");
                 return;
             }
-
-            // Mostra uma mensagem de agradecimento com o valor da compra
-            alert(`✅ Obrigado pela sua compra! Valor do pedido: R$${totalAmount.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`);
-
-            // Limpa o carrinho do localStorage
-            localStorage.removeItem("carrinho");
-
-            // Atualiza a tela (mostra que o carrinho está vazio)
-            loadCartFromLocalStorage();
+        
+            // Monta o payload do pedido
+            const pedidoData = {
+              valor_total: totalAmount, // totalAmount deve ser um número
+              itens_pedido: carrinho.map(item => ({
+                id_produto: Number(item.id),
+                tamanho: item.tamanho,
+                quantidade: Number(item.quantidade),
+                preco_unitario: parseFloat(
+                  item.preco.replace("R$", "").replace(".", "").replace(",", ".")
+                ),
+                subtotal:
+                  parseFloat(
+                    item.preco.replace("R$", "").replace(".", "").replace(",", ".")
+                  ) * Number(item.quantidade)
+              }))
+            };
+        
+            try {
+                const response = await fetch("/pedido/salvar", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(pedidoData),
+                    credentials: "include"
+                });
+            
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || "Erro ao criar o pedido");
+                }
+            
+                const data = await response.json();
+                console.log("Pedido salvo com sucesso:", data);
+            
+                alert(`✅ Pedido realizado com sucesso! Número do pedido: ${data.pedido_id}`);
+            
+                // Limpa o carrinho e atualiza tela
+                localStorage.removeItem("carrinho");
+                loadCartFromLocalStorage();
+            } catch (err) {
+                console.error("Erro ao enviar pedido:", err);
+                alert("❌ Não foi possível concluir o pedido. Tente novamente.");
+            }
         }
+
     </script>
 </body>
 </html>

@@ -81,7 +81,7 @@ class Pagamento(Base):
 
     #chave estrangeira
     id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
-    id_pedido = Column(Integer, ForeignKey('pedido.id'), nullable=False)
+    id_pedido = Column(Integer, ForeignKey('pedido2.id'), nullable=False)
     cnpj_loja = Column(String, ForeignKey('loja.cnpj'), nullable=False)
     
     #relacionamento com as tabelas
@@ -91,7 +91,7 @@ class Pagamento(Base):
 
 
 class Pedido(Base):
-    __tablename__="pedido"
+    __tablename__="pedido2"
     id = Column(Integer,primary_key=True,autoincrement=True)
     data_pedido = Column(DateTime, default=lambda: datetime.now(fuso))
     valor_total = Column(Numeric(10,2)) #soma de todos os itens_pedido
@@ -139,7 +139,7 @@ class ItemPedido(Base):
     subtotal = Column(Float) #valor de (quantidade * preco_unitario)
 
     #chave estrangeira
-    id_pedido = Column(Integer, ForeignKey('pedido.id'), nullable=False)
+    id_pedido = Column(Integer, ForeignKey('pedido2.id'), nullable=False)
     id_produto = Column(Integer, ForeignKey("produtos.id"), nullable=False) 
     
     #relacionamento com as tabelas produto e pedido

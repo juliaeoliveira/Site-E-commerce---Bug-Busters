@@ -68,7 +68,7 @@
                 <button class="compra"> <b> Compra: R${{produto.preco}} </b></button>
             </div>
             <div>   
-                <button class="carrinho"> Adicionar no carrinho 🛒 </button>
+                <button class="carrinho" data-id="{{ produto.id }}"> Adicionar no carrinho 🛒 </button>
             </div>
         </div>
         
@@ -151,6 +151,9 @@ function addProductToCart() {
   const tamanhoSelect = document.querySelector(".tamanho");
   const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
 
+  // 🆕 Pegando o ID do produto do botão
+  const idProduto = document.querySelector(".carrinho").dataset.id;
+
   // Pega carrinho atual (ou cria vazio)
   let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
@@ -161,6 +164,7 @@ function addProductToCart() {
     existente.quantidade++;
   } else {
     carrinho.push({
+      id: Number(idProduto),
       nome: nome,
       preco: preco,
       imagem: imagem,

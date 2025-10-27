@@ -1,14 +1,18 @@
 from datetime import datetime, timedelta
-from fastapi import status
+from fastapi import Request, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 from fastapi.exceptions import HTTPException #para caso ocorrer erros
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from passlib.context import CryptContext
-from jose import jwt, JWSError
+from jose import jwt, JWSError, JWTError
 from decouple import config
 from models import Usuario_Model, Endereco as Endereco_Model, Pedido as Pedido_Model
 from schemas import Usuario , Endereco
+from database import get_db
 
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/usuario/login")
 
 CHAVE_SECRETA = config('CHAVE_SECRETA')
 ALGORITMO = config('ALGORITMO')
@@ -90,3 +94,26 @@ def verificar_token(token:str):
         return payload
     except JWSError:
         return None
+
+
+# Função que decodifica o token e retorna o usuário logado
+def obter_usuario_logado(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token não encontrado no cookie."
+        )
+
+    try:
+        payload = jwt.decode(token, CHAVE_SECRETA, algorithms=[ALGORITMO])
+        usuario_email = payload.get("sub")
+        if not usuario_email:
+            raise HTTPException(status_code=401, detail="Token inválido.")
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado.")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == usuario_email).first()
+    if not usuario:
+        raise HTTPException(status_code=401, detail="Usuário não encontrado.")
+    return usuario
