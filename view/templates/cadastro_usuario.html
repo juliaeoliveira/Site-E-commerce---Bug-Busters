@@ -47,103 +47,31 @@
             <section class="cadastro">
                 <h1 class="titulo_cadastro">CADASTRO DE USUÁRIO</h1>
                 <div class="informacoes">
-                    <label for="Nome">Nome completo:*</label>
-                    <input class="posicao" type="text" id="Nome" name="nome_cliente" required placeholder="Henrique Nascimento de Sales" />
+                    <label for="Nome">Nome completo:</label>
+                    <input class="posicao" type="text" id="Nome" name="nome_cliente" required placeholder="Ex: João Martins Souza" />
          
-
                     <!-- Agrupamento lado a lado -->
                     <div class="senhas">
                       <div>
-                        <label for="senha">Senha:*</label>
-                        <input class="posicao" type="password" id="senha" name="senha" required placeholder="*******" />
+                        <label for="senha">Senha:</label>
+                        <input class="posicao" type="password" id="senha" name="senha" required placeholder="Crie uma senha segura" />
 
                           <!-- Aqui vai aparecer as mensagens -->
                           <p id="mensagem_erro" style="color:red;"></p>
                         </div>
                       </div>
-                      <label for="confirmacao_senha">Confirmação de senha:*</label>
-                      <input class="posicao" type="password" id="confirmacao_senha" name="confirmar_senha" required placeholder="*******" />
-
-
-
+                      <label for="confirmacao_senha">Confirmação de senha:</label>
+                      <input class="posicao" type="password" id="confirmacao_senha" name="confirmar_senha" required placeholder="Confirme a senha" />
                
                     <label for="email">E-mail:</label>
-                    <input class="posicao" type="email" id="email" name="email" required placeholder="exemplo@exemplo.com" />
-              
+                    <input class="posicao" type="email" id="email" name="email" required placeholder="Digite seu e-mail" />
 
                     <label for="data_nascimento">Data de Nascimento:</label>
                     <input class="posicao" type="date" id="data_nascimento" name="data_nascimento" required />
           
 
                     <label for="Telefone">Telefone:</label>
-                    <input class="posicao" type="tel" id="Telefone" name="telefone" required placeholder="(11) 4002-8922" />
-       
-                    <div >
-                      <label for="rua">Rua:</label>
-                      <input class="posicao" type="text" id="rua" name="rua" required placeholder="Rua: Loucos" />
-                    </div>
-                   <div class="endereco">
-
-                    <div class="campo">
-                      <label for="bairro">Bairro:</label>
-                      <input class="posicao" type="text" id="bairro" name="bairro" required placeholder="PQ. Novo Mundo" />
-                    </div>
-
-                    <div class="campo">
-                      <label for="numero">N°:</label>
-                      <input class="posicao" type="number" id="numero" name="numero" required placeholder="N° 120" />
-                    </div>
-
-                    <div class="campo">
-                      <label for="cep">CEP:</label>
-                      <input class="posicao" type="text" id="cep" name="cep" required placeholder="18180-970" />
-                      <p id="mensagem_cep" style="color:red;"></p>
-                    </div>
-
-                    <div class="campo">
-                      <label for="complemento">Complemento <b>(opcional)</b>:</label>
-                      <input class="posicao" type="text" id="complemento" placeholder="Apartamento 76, Torre 2" />
-                    </div>
-
-                    <div class="campo">
-                      <label  for="uf">Estado (UF):</label>
-                      <select class="posicao" id="estado" name="estado" required>
-                        <option value="" disabled selected>Selecione um estado</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">SP</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                      </select>
-                   </div>
-                     <div class="campo">
-                      <label for="cidade">Cidade:</label>
-                      <input class="posicao" type="text" id="cidade" name="cidade" required placeholder="Tiradentes"/>
-                    </div>
-                  </div>
-
+                    <input class="posicao" type="tel" id="Telefone" name="telefone" required placeholder="Informe seu telefone com DDD" />
 
                     <button class="cadastrar" type="submit" id="acao">Criar conta</button>
                 </div>

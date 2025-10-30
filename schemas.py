@@ -8,12 +8,12 @@ class Usuario(BaseModel):
     #informações pessoais e contato
     nome_cliente : str
     data_nascimento : datetime
-    data_cadastro : datetime
     email : EmailStr 
     telefone : str
 
     #informações para login
     senha : str
+    confirmar_senha: str
     tipo : Optional[str] = None 
 
     id_loja : Optional[str] = None 
@@ -40,17 +40,6 @@ class Usuario(BaseModel):
             valor = valor.replace(tzinfo=timezone.utc)
         if valor > hoje:
             raise ValueError('A data de nascimento não pode ser no futuro.')
-        return valor
-    
-    #validação da data de cadastro
-    @field_validator('data_cadastro')
-    @classmethod
-    def validar_data_cadastro(cls, valor, info):
-       hoje = datetime.now(timezone.utc)
-       if valor.tzinfo is None:
-        valor = valor.replace(tzinfo=timezone.utc)
-        if valor > hoje:
-            raise ValueError("A data de cadastro não pode ser no futuro.")
         return valor
     
     #validação do telefone

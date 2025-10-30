@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do admin</title>
+</head>
+<body>
+    <h2>Gerenciamento de Produtos</h2>
+    <form action="/usuario/admin/produto" method="post" enctype="multipart/form-data">
+        <label for="nome_produto">Nome do Produto:</label>
+        <input type="text" id="nome_produto" name="nome_produto" required>
+
+        <label for="preco">Preço:</label>
+        <input type="number" id="preco" name="preco" step="0.01" required>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" rows="4" required></textarea>
+
+        <label for="cor">Cor:</label>
+        <input type="text" id="cor" name="cor" required>
+
+        <label for="categoria">Categoria:</label>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <label for="quantidade_estoque">Quantidade em Estoque:</label>
+        <input type="number" id="quantidade_estoque" name="quantidade_estoque" required>
+
+        <label for="imagem1_url">Imagem 1:</label>
+        <input type="file" id="imagem1_url" name="imagem1_url" accept="image/*" required>
+
+        <label for="imagem2_url">Imagem 2:</label>
+        <input type="file" id="imagem2_url" name="imagem2_url" accept="image/*" required>
+
+        <label for="imagem3_url">Imagem 3:</label>
+        <input type="file" id="imagem3_url" name="imagem3_url" accept="image/*" required>
+
+        <label for="imagem4_url">Imagem 4:</label>
+        <input type="file" id="imagem4_url" name="imagem4_url" accept="image/*" required>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="true">Ativo</option>
+            <option value="false">Inativo</option>
+        </select>
+
+        <label for="loja_id">CNPJ da loja dona do produto:</label>
+        <input type="text" id="loja_id" name="loja_id" required>
+
+        <button type="submit">Adicionar Produto</button>
+    </form>
+
+        <h3>Produtos Cadastrados</h3>
+        <table border="1">
+            <tr>
+                <th>Nome</th><th>Preço</th><th>QTD</th><th>Imagem</th><th>Editar</th><th>Deletar</th>            
+            </tr>
+            {% for i in produtos %}
+                <tr>
+                    <td>{{i.nome_produto}}</td>
+                    <td>{{i.preco}}</td>
+                    <td>{{i.quantidade_estoque}}</td>
+                    <td>
+                        {% for img in [i.imagem1_url, i.imagem2_url, i.imagem3_url, i.imagem4_url] %}
+                            {% if img %}
+                                <img src="{{ url_for('static', path='uploads/' + img) }}" width="50">
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="/admin/produto/editar/{{i.id}}">Editar</a>
+                    </td>
+                    <td>
+                        <form action="/admin/produto/deletar/{{i.id}}" method="post">
+                            <button type="submit">Deletar</button>                        
+                        </form>
+                </td>        
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
