@@ -197,37 +197,76 @@ def criar_produto(request:Request,nome_produto:str=Form(...),
 def editar_produto(id: int, request: Request, db: Session=Depends(get_db)):
     token = request.cookies.get("token")
     payload = verificar_token(token)
-    if not payload or not payload.get("is_admin"):
+    if not payload or not payload.get("adm"):
         return RedirectResponse(url="/", status_code=303)
     produto=db.query(Produto).filter(Produto.id==id).first()
     if not produto:
-        return RedirectResponse(url="/admin",status_code=303)
+        return RedirectResponse(url="/usuario/admin",status_code=303)
     return templates.TemplateResponse("editar.html",{
-        "request":request, produto:produto
+        "request":request, "produto":produto
     })
 
 #rota editar produto
 @caminho_prefixo_usuario.post("/admin/produto/atualizar/{id}")
-def atualizar_produto(id:int,nome:str=Form(...),
-    preco:float=Form(...),quantidade:int=Form(...),
-    imagem:UploadFile=File(None),db:Session=Depends(get_db)
+def atualizar_produto(
+    id:int,
+    nome_produto:str=Form(...),
+    preco:float=Form(...),
+    descricao:str=Form(...),
+    cor:str=Form(...),
+    categoria:str=Form(...),
+    quantidade_estoque:int=Form(...),
+    imagem1_url:UploadFile=File(None),
+    imagem2_url:UploadFile=File(None),
+    imagem3_url:UploadFile=File(None),
+    imagem4_url:UploadFile=File(None),
+    status:bool=Form(...),
+    loja_id:str=Form(...),
+    db:Session=Depends(get_db)
             ):
+
     produto=db.query(Produto).filter(Produto.id==id).first()
     if not produto:
-        return RedirectResponse(url="/admin",status_code=303)
+        return RedirectResponse(url="/usuario/admin",status_code=303)
     #atualizar os campos
-    produto.nome=nome
+    produto.nome_produto=nome_produto
     produto.preco=preco
-    produto.quantidade=quantidade
-    #atualizar a imagem se tiver
-    if imagem and imagem.filename !="":
-        caminho_arquivo = f'{UPLOAD_DIR}/{imagem.filename}'
+    produto.descricao=descricao
+    produto.cor=cor
+    produto.categoria=categoria
+    produto.quantidade_estoque=quantidade_estoque
+
+    #atualizar a imagens se tiver
+    if imagem1_url and imagem1_url.filename !="":
+        caminho_arquivo = f'{UPLOAD_DIR}/{imagem1_url.filename}'
     with open(caminho_arquivo, "wb") as arquivo:
-        shutil.copyfileobj(imagem.file,arquivo)
-    produto.imagem = imagem.filename
+        shutil.copyfileobj(imagem1_url.file,arquivo)
+    produto.imagem1_url= imagem1_url.filename
+
+    if imagem2_url and imagem2_url.filename !="":
+        caminho_arquivo = f'{UPLOAD_DIR}/{imagem2_url.filename}'
+    with open(caminho_arquivo, "wb") as arquivo:
+        shutil.copyfileobj(imagem2_url.file,arquivo)
+    produto.imagem2_url= imagem2_url.filename
+
+    if imagem3_url and imagem3_url.filename !="":
+        caminho_arquivo = f'{UPLOAD_DIR}/{imagem3_url.filename}'
+    with open(caminho_arquivo, "wb") as arquivo:
+        shutil.copyfileobj(imagem3_url.file,arquivo)
+    produto.imagem3_url= imagem3_url.filename
+
+    if imagem4_url and imagem4_url.filename !="":
+        caminho_arquivo = f'{UPLOAD_DIR}/{imagem4_url.filename}'
+    with open(caminho_arquivo, "wb") as arquivo:
+        shutil.copyfileobj(imagem4_url.file,arquivo)
+    produto.imagem4_url= imagem4_url.filename
+
+    produto.status=status
+    produto.loja_id=loja_id
+
     db.commit()
     db.refresh(produto)
-    return RedirectResponse(url="/adimin",status_code=303)
+    return RedirectResponse(url="/usuario/admin",status_code=303)
 
 
 #deletar produto
@@ -237,7 +276,7 @@ def deletar_produto(id:int,db:Session=Depends(get_db)):
     if produto:
         db.delete(produto)
         db.commit()
-    return RedirectResponse(url="/admin",status_code=303)
+    return RedirectResponse(url="/usuario/admin",status_code=303)
 
 
 

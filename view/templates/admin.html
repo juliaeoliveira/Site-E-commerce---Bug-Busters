@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do admin</title>
+    <title>Painel do Admin - SobVéu</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
 </head>
 <body>
     <h2>Gerenciamento de Produtos</h2>
@@ -44,36 +45,38 @@
             <option value="false">Inativo</option>
         </select>
 
-        <label for="loja_id">CNPJ da loja dona do produto:</label>
-        <input type="text" id="loja_id" name="loja_id" required>
+        <label for="loja_id">Loja:</label>
+        <select id="loja_id" name="loja_id" required>
+            <option value="03.774.819/0005-28">SobVéu</option>
+        </select>
 
         <button type="submit">Adicionar Produto</button>
     </form>
 
-        <h3>Produtos Cadastrados</h3>
-        <table border="1">
+    <h3>Produtos Cadastrados</h3>
+    <table border="1">
+        <tr>
+            <th>Nome</th><th>Preço</th><th>QTD</th><th>Imagem</th><th>Editar</th><th>Deletar</th>            
+        </tr>
+        {% for i in produtos %}
             <tr>
-                <th>Nome</th><th>Preço</th><th>QTD</th><th>Imagem</th><th>Editar</th><th>Deletar</th>            
-            </tr>
-            {% for i in produtos %}
-                <tr>
-                    <td>{{i.nome_produto}}</td>
-                    <td>{{i.preco}}</td>
-                    <td>{{i.quantidade_estoque}}</td>
-                    <td>
-                        {% for img in [i.imagem1_url, i.imagem2_url, i.imagem3_url, i.imagem4_url] %}
-                            {% if img %}
-                                <img src="{{ url_for('static', path='uploads/' + img) }}" width="50">
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        <a href="/admin/produto/editar/{{i.id}}">Editar</a>
-                    </td>
-                    <td>
-                        <form action="/admin/produto/deletar/{{i.id}}" method="post">
-                            <button type="submit">Deletar</button>                        
-                        </form>
+                <td>{{i.nome_produto}}</td>
+                <td>{{i.preco}}</td>
+                <td>{{i.quantidade_estoque}}</td>
+                <td>
+                    {% for img in [i.imagem1_url, i.imagem2_url, i.imagem3_url, i.imagem4_url] %}
+                        {% if img %}
+                            <img src="{{ url_for('static', path='uploads/' + img) }}" width="50">
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="/usuario/admin/produto/editar/{{i.id}}">Editar</a>
+                </td>
+                <td>
+                    <form action="/usuario/admin/produto/deletar/{{i.id}}" method="post">
+                        <button type="submit">Deletar</button>                        
+                    </form>
                 </td>        
             </tr>
         {% endfor %}

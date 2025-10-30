@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Produto - SobVéu</title>
+    <link rel="stylesheet" href="/static/css/editar.css">
+</head>
+<body>
+    <form action="/usuario/admin/produto/atualizar/{{ produto.id }}" method="post" enctype="multipart/form-data">
+        <h1>Atualizar Produto</h1>
+        
+        <label for="nome_produto">Nome do Produto:</label>
+        <input type="text" id="nome_produto" name="nome_produto" required>
+
+        <label for="preco">Preço:</label>
+        <input type="number" id="preco" name="preco" step="0.01" required>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" rows="4" required></textarea>
+
+        <label for="cor">Cor:</label>
+        <input type="text" id="cor" name="cor" required>
+
+        <label for="categoria">Categoria:</label>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <label for="quantidade_estoque">Quantidade em Estoque:</label>
+        <input type="number" id="quantidade_estoque" name="quantidade_estoque" required>
+
+        <label for="imagem1_url">Imagem 1:</label>
+        <input type="file" id="imagem1_url" name="imagem1_url">
+
+        <label for="imagem2_url">Imagem 2:</label>
+        <input type="file" id="imagem2_url" name="imagem2_url">
+
+        <label for="imagem3_url">Imagem 3:</label>
+        <input type="file" id="imagem3_url" name="imagem3_url">
+
+        <label for="imagem4_url">Imagem 4:</label>
+        <input type="file" id="imagem4_url" name="imagem4_url">
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="true">Ativo</option>
+            <option value="false">Inativo</option>
+        </select>
+
+        <label for="loja_id">Loja:</label>
+        <select id="loja_id" name="loja_id" required>
+            <option value="03.774.819/0005-28">SobVéu</option>
+        </select>
+
+        <button type="submit">Atualizar Produto</button>
+    </form>
+</body>
+</html>
