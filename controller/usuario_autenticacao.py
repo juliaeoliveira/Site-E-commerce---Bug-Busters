@@ -18,7 +18,7 @@ CHAVE_SECRETA = config('CHAVE_SECRETA')
 ALGORITMO = config('ALGORITMO')
 
 #tempo do token de usuário 
-ACCESS_TOKEN=30#30 MINUTOS de tempo de token
+ACCESS_TOKEN=120#120 MINUTOS de tempo de token
 
 crypt_context = CryptContext(schemes=['sha256_crypt']) # esquema mais popular para fazer o hash de senha
 

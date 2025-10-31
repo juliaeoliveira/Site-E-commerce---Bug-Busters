@@ -111,19 +111,10 @@ def login(request:Request, email:str=Form(...),
     if usuario.tipo == "adm":
         destino="/usuario/admin"
     else:
-        destino="/usuario/dashboard"  
+        destino="/painel_usuario"  
     response=RedirectResponse(url=destino,status_code=303)
     response.set_cookie(key="token",value=token,httponly=True,samesite="Lax", secure=False, max_age=60 * 60, path="/")
     return response
-
-#criar rota do dashboard do usuário , página protegida
-@caminho_prefixo_usuario.get("/dashboard",response_class=HTMLResponse)
-def dashboard(request:Request):
-    token=request.cookies.get("token")
-    if not token or not verificar_token(token):
-        return RedirectResponse(url="/",status_code=303)
-    return templates.TemplateResponse("dashboard.html",
-                    {"request":request})
 
 ##ota de adm crud produtos
 @caminho_prefixo_usuario.get("/admin", response_class=HTMLResponse)

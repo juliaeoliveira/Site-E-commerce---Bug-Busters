@@ -75,7 +75,7 @@ async def detalhe(request:Request,id_produto:int,
         "request":request,"produto":produto,"sugestoes": sugestoes
     })
 
-@router.get("/carrinho/", response_class=HTMLResponse)
+@router.get("/painel_usuario/carrinho", response_class=HTMLResponse)
 async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
                   db:Session=Depends(get_db)):
     #validação para ter ctz que o usuario esta logado, caso nn exibir a mensagem com link do login 
@@ -96,7 +96,7 @@ async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
 
     # Selecionar 3 aleatórios (ou menos se não houver suficientes)
     sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
-    return templates.TemplateResponse("carrinho.html", {"request": request, "sugestoes":sugestoes})
+    return templates.TemplateResponse("painel_usuario_carrinho.html", {"request": request, "sugestoes":sugestoes})
 '''
 @router.get("/carrinho/",
             response_class=HTMLResponse)

@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from controller.produto_controller import router
-from controller.usuario_controller import caminho_prefixo_usuario
+from controller.usuario_controller import caminho_prefixo_usuario 
+from controller.painel_usuario_controller import caminho_prefixo_painelUsuario
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from controller import pedido_controller
@@ -25,6 +26,7 @@ app.include_router(router)
 app.include_router(pedido_controller.router)
 
 app.include_router(caminho_prefixo_usuario)
+app.include_router(caminho_prefixo_painelUsuario)
 
 @app.get("/historico")
 def historico(request: Request):
