@@ -29,6 +29,13 @@ def painel_usuario(request:Request):
     return templates.TemplateResponse("painel_usuario.html",
                     {"request":request})
 
+@caminho_prefixo_painelUsuario.get("/carrinho", response_class=HTMLResponse)
+def pagina_carrinho(request: Request):
+    token=request.cookies.get("token")
+    if not token or not verificar_token(token):
+        return RedirectResponse(url="/",status_code=303)
+    return templates.TemplateResponse("painel_usuario_carrinho.html", {"request": request})
+
 @caminho_prefixo_painelUsuario.get("/produtos", response_class=HTMLResponse)
 async def listar_todos (request:Request, 
                         db:Session=Depends(get_db)):

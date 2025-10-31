@@ -6,6 +6,7 @@ from controller.usuario_autenticacao import obter_usuario_logado
 from database import get_db
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
+from typing import List, Dict, Any
 
 from datetime import datetime
 import pytz
@@ -54,3 +55,70 @@ def criar_pedido(
 @router.post("/fechar")
 def fechar_pedido(request: Request):
     return RedirectResponse(url="/historico", status_code = 303)
+
+
+@router.get("/meus")
+def listar_meus_pedidos(
+    db: Session = Depends(get_db),
+    usuario = Depends(obter_usuario_logado)
+):
+    pedidos: List[Pedido] = (
+        db.query(Pedido)
+        .filter(Pedido.id_usuario == usuario.id)
+        .order_by(Pedido.data_pedido.desc())
+        .all()
+    )
+
+    def serialize_pedido(p: Pedido) -> Dict[str, Any]:
+        return {
+            "id": p.id,
+            "data_pedido": p.data_pedido,
+            "valor_total": float(p.valor_total) if p.valor_total is not None else 0.0,
+            "status": p.status,
+            "itens": [
+                {
+                    "id": i.id,
+                    "produto_id": i.id_produto,
+                    "tamanho": i.tamanho,
+                    "quantidade": i.quantidade,
+                    "preco_unitario": float(i.preco_unitario) if i.preco_unitario is not None else 0.0,
+                    "subtotal": float(i.subtotal) if i.subtotal is not None else 0.0,
+                }
+                for i in p.itens_pedido
+            ],
+        }
+
+    return [serialize_pedido(p) for p in pedidos]
+
+
+@router.get("/{pedido_id}")
+def detalhar_pedido(
+    pedido_id: int,
+    db: Session = Depends(get_db),
+    usuario = Depends(obter_usuario_logado)
+):
+    pedido: Pedido | None = (
+        db.query(Pedido)
+        .filter(Pedido.id == pedido_id, Pedido.id_usuario == usuario.id)
+        .first()
+    )
+    if not pedido:
+        raise HTTPException(status_code=404, detail="Pedido não encontrado")
+
+    return {
+        "id": pedido.id,
+        "data_pedido": pedido.data_pedido,
+        "valor_total": float(pedido.valor_total) if pedido.valor_total is not None else 0.0,
+        "status": pedido.status,
+        "itens": [
+            {
+                "id": i.id,
+                "produto_id": i.id_produto,
+                "tamanho": i.tamanho,
+                "quantidade": i.quantidade,
+                "preco_unitario": float(i.preco_unitario) if i.preco_unitario is not None else 0.0,
+                "subtotal": float(i.subtotal) if i.subtotal is not None else 0.0,
+            }
+            for i in pedido.itens_pedido
+        ],
+    }
