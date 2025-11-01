@@ -3,10 +3,10 @@ from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from database import get_db
-from controller.usuario_autenticacao import gerar_hash_senha, verificar_hash_senha, criar_token, verificar_token
+from controller.usuario_autenticacao import ServicosUsuario, verificar_hash_senha, criar_token, verificar_token
 from models import Usuario_Model, Produto
-from schemas import Usuario as UsuarioSchema
-import os,shutil
+from schemas import Usuario , Endereco
+import shutil
 
 from datetime import datetime
 import pytz
@@ -25,6 +25,7 @@ def pagina_cadastro(request:Request):
         "request":request
     })
 
+
 #formulário criar usuário
 @caminho_prefixo_usuario.post("/registrar")
 def cadastrar_usuario( request:Request,
@@ -34,21 +35,22 @@ def cadastrar_usuario( request:Request,
     telefone: str = Form(...),
     senha: str = Form(...),
     confirmar_senha: str = Form(...),
+
+    rua: str = Form(...),
+    numero: str = Form(...),
+    complemento: str = Form(None),
+    bairro: str = Form(...),
+    cidade: str = Form(...),
+    estado: str = Form(...),
+    cep: str = Form(...),
+
     db: Session = Depends(get_db)
 ):
-    usuario_dados = UsuarioSchema(
-        nome_cliente=nome_cliente,
-        data_nascimento=data_nascimento,
-        email=email,
-        telefone=telefone,
-        senha=senha,
-        confirmar_senha=confirmar_senha
-    )
-
-    email = usuario_dados.email.strip().lower()
+    
+    email = email.strip().lower()
 
     #validação da confirmação de senha
-    if usuario_dados.senha != usuario_dados.confirmar_senha:
+    if senha != confirmar_senha:
         return {"mensagem": "As senhas não coincidem."}
     
     #define o tipo com base no domínio do e-mail
@@ -60,26 +62,30 @@ def cadastrar_usuario( request:Request,
     
     usuario_email=db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
     if usuario_email:
-        return templates.TemplateResponse("mensagem.html", {
-            "request": request,
-            "mensagem": "Email já cadastrado! Deseja logar?",
-            "link_login": "/usuario/login"
-        })
-    
-    senha=gerar_hash_senha(usuario_dados.senha)
-    novo_usuario=Usuario_Model(
-        nome_cliente=usuario_dados.nome_cliente,
-        data_nascimento=usuario_dados.data_nascimento,
+        return {"mensagem":"Email já cadastrado!"}
+    novo_usuario=Usuario(
+        nome_cliente=nome_cliente,
+        data_nascimento=data_nascimento,
         data_cadastro=datetime.now(fuso),
         email=email,
-        telefone=usuario_dados.telefone,
+        telefone=telefone,
         senha=senha,
+        confirmar_senha=confirmar_senha,
         tipo=tipo
     )
+
+    endereco = Endereco(
+        rua=rua,
+        numero=numero,
+        complemento=complemento,
+        bairro=bairro,
+        cidade=cidade,
+        estado=estado,
+        cep=cep
+    )
    #se passar por todas as validações add usuario
-    db.add(novo_usuario)
-    db.commit()
-    db.refresh(novo_usuario)
+    su = ServicosUsuario(db_session=db)
+    su.registrar_usuario(usuario=novo_usuario,endereco=endereco)
     return RedirectResponse(url="/usuario/login",status_code=303)
 
 #rota login usuário

@@ -8,6 +8,7 @@ class Usuario(BaseModel):
     #informações pessoais e contato
     nome_cliente : str
     data_nascimento : datetime
+    data_cadastro: datetime = datetime.now()
     email : EmailStr 
     telefone : str
 
