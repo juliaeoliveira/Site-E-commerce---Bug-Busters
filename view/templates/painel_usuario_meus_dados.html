@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Dados</title>
+    <style>
+        body {
+            background: #f2f5f8;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #0077cc;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #0077cc;
+        }
+
+        .acoes {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #0077cc;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #005fa3;
+        }
+
+        .btn.secundario {
+            background: #777;
+        }
+
+        .btn.secundario:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Meus Dados</h1>
+
+        <div class="dados-usuario">
+            <h2>Informações da Conta</h2>
+            <ul>
+                <li><strong>Nome:</strong> {{ usuario.nome_cliente }}</li>
+                <li><strong>Email:</strong> {{ usuario.email }}</li>
+                <li><strong>Telefone:</strong> {{ usuario.telefone or "Não informado" }}</li>
+                <li><strong>Data de Nascimento:</strong> {{ usuario.data_nascimento.strftime('%d/%m/%Y') }}</li>
+                <li><strong>Data de Cadastro:</strong> {{ usuario.data_cadastro.strftime('%d/%m/%Y %H:%M') }}</li>
+            </ul>
+        </div>
+
+        <div class="dados-endereco">
+            <h2>Endereço</h2>
+
+            {% if endereco %}
+            <ul>
+                <li><strong>CEP:</strong> {{ endereco.cep }}</li>
+                <li><strong>Rua:</strong> {{ endereco.rua }}</li>
+                <li><strong>Número:</strong> {{ endereco.numero }}</li>
+                <li><strong>Complemento:</strong> {{ endereco.complemento or "—" }}</li>
+                <li><strong>Bairro:</strong> {{ endereco.bairro }}</li>
+                <li><strong>Cidade:</strong> {{ endereco.cidade }}</li>
+                <li><strong>Estado:</strong> {{ endereco.estado }}</li>
+            </ul>
+            {% else %}
+            <p>Você ainda não cadastrou um endereço.</p>
+            {% endif %}
+        </div>
+
+        <div class="acoes">
+            <a href="/usuario/editar" class="btn">Editar Conta</a>
+            <a href="/usuario/editar-endereco" class="btn secundario">Editar Endereço</a>
+        </div>
+    </div>
+</body>
+</html>

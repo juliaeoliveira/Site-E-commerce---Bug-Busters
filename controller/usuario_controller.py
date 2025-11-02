@@ -151,20 +151,20 @@ def criar_produto(request:Request,nome_produto:str=Form(...),
     loja_id:str=Form(...),
     db:Session=Depends(get_db)
             ):
-    caminho_arquivo = f'{UPLOAD_DIR}/{imagem1_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
+    caminho_arquivo1 = f'{UPLOAD_DIR}/{imagem1_url.filename}'
+    with open(caminho_arquivo1, "wb") as arquivo:
         shutil.copyfileobj(imagem1_url.file,arquivo)
 
-    caminho_arquivo = f'{UPLOAD_DIR}/{imagem2_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
+    caminho_arquivo2 = f'{UPLOAD_DIR}/{imagem2_url.filename}'
+    with open(caminho_arquivo2, "wb") as arquivo:
         shutil.copyfileobj(imagem2_url.file,arquivo)
 
-    caminho_arquivo = f'{UPLOAD_DIR}/{imagem3_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
+    caminho_arquivo3 = f'{UPLOAD_DIR}/{imagem3_url.filename}'
+    with open(caminho_arquivo3, "wb") as arquivo:
         shutil.copyfileobj(imagem3_url.file,arquivo)
 
-    caminho_arquivo = f'{UPLOAD_DIR}/{imagem3_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
+    caminho_arquivo4 = f'{UPLOAD_DIR}/{imagem3_url.filename}'
+    with open(caminho_arquivo4, "wb") as arquivo:
         shutil.copyfileobj(imagem3_url.file,arquivo)
 
     novo_produto=Produto(
