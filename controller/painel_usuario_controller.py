@@ -12,12 +12,25 @@ caminho_prefixo_painelUsuario = APIRouter(prefix='/painel_usuario')
 
 #criar rota do dashboard do usuário , página protegida
 @caminho_prefixo_painelUsuario.get("",response_class=HTMLResponse)
-def painel_usuario(request:Request):
+def painel_usuario(request:Request, db: Session = Depends(get_db)):
     token=request.cookies.get("token")
-    if not token or not verificar_token(token):
+    payload = verificar_token(token)
+
+    if not payload:
         return RedirectResponse(url="/",status_code=303)
+    
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload["sub"]).first()
+
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     return templates.TemplateResponse("painel_usuario.html",
-                    {"request":request})
+                    {"request":request, "primeiro_nome": primeiro_nome})
 
 @caminho_prefixo_painelUsuario.get("/carrinho", response_class=HTMLResponse)
 def pagina_carrinho(request: Request):
