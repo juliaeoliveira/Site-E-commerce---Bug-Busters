@@ -1,0 +1,295 @@
+
+/* Para não esconder o conteúdo atrás do menu */
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+#logo {
+    
+    height: 80px; /* Define a altura do logo */
+    padding-left: 130px; /* Espaço à esquerda do logo */
+}
+
+.icons {
+    gap: 5px;
+    justify-content: center;
+    display: flex;
+    padding-right: 150px;
+}
+
+
+
+.menu {
+  height: 90px;
+    margin-top: 30px;
+    position: fixed; /* Fixa o menu na tela */
+    z-index: 1; /* Garante que o menu fique acima de outros elementos */
+    display: flex; /* Organiza os itens do menu em linha */
+    width: 100%; /* O menu ocupa toda a largura da tela */
+    align-items: center; /* Centraliza os itens na vertical */
+    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
+    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
+    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
+    color: #ffffff; /* Cor do texto do menu */
+}
+
+header{
+  margin-top: -30px;
+}
+
+/* Estilo do menu de navegação */
+header nav {
+    gap:200px;
+    justify-content: center;
+    display: flex;
+    font-family: "Libre Caslon Text";
+    font-size: 22px;
+    color: #523800;
+   
+}
+
+
+
+/* Estilo dos links dentro do nav */
+header nav a {
+    color: #523800;
+    font-size: 20px; /* Define o tamanho da fonte */
+    padding: 25px; /* Espaçamento interno */
+    text-decoration: underline; /* Ativa o sublinhado */
+    text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
+}
+
+
+
+main{
+  margin-top: 50px;
+}
+
+body {
+  display: flex; 
+  flex-direction: column; /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0; /* Remove a margem padrão */
+  padding: 0; /* Remove o preenchimento padrão */
+  overflow-x: hidden; /* Impede rolagem horizontal */
+  background-color: #EAE4D8;
+  color: #ffffff;
+  
+}
+
+.paginas a:hover{
+    transform: scale(1.10); 
+}
+
+
+main div{
+    padding: 30px;
+    text-align: center;
+  }
+
+h1 {
+  margin-top: 50px;
+  color: #790000;
+  text-shadow: 2px 4px 4px color(display-p3 0 0 0 / 0.30);
+  -webkit-text-stroke-width: 0.5px;
+  font-family: "Aboreto", system-ui;
+  font-weight: 500;
+  letter-spacing: 2.4px;
+  margin-left: 120px;
+  padding-top: 100px;
+  font-size: 50px;
+}
+
+div {
+    position: relative; /* Permite usar posicionamento absoluto dentro do div */
+    background: black;
+    color: white;
+    margin: 120px;
+    padding: 40px;
+    height: 510px;
+    width: 300px;
+    float: left;
+    overflow: hidden; /* Garante que a imagem não saia do div */
+}
+
+
+div:focus{
+    border: black;
+    transform: scale(10); 
+
+}
+
+div:hover{
+    border-color: white;
+    transform: scale(10);
+
+}
+
+div:hover img {
+    transform: scale(10); /* Aumenta a imagem */
+    transition: 2s ease;
+}
+
+
+.menu div img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out; /* Transição suave */
+}
+
+button{
+    font-family: "Inter", sans-serif;
+    height: 50px;
+    width: 240px;
+    margin: 120px;
+    color: darkred;
+    background-color: #EADCC1CC;
+    box-shadow: 4px 5px 3px  rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+}
+button:focus {
+    border-color: darkred; 
+    transform: scale(1.10); 
+}
+button:hover {
+    border-color: darkred; 
+    transform: scale(1.05);
+}
+
+.linha{
+    width: 170px;
+    transform: rotate(-90.164deg);
+    color: #FFF;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 420px;
+    margin-top: 50px;
+}
+
+.vestido h3 {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #444;
+}
+
+  .vestido {
+    display: flex;
+    flex-direction: column; /* para alinhar a imagem e o texto verticalmente */
+    align-items: center; /* centraliza horizontalmente */
+    height: auto; /* permite altura automática para crescer com o texto */
+    padding-bottom: 20px; /* espaço para o texto */
+    margin: 40px 120px; /* ajuste margem para evitar excesso */
+    background: none; /* remover fundo preto para destacar melhor as imagens */
+  }
+  
+  .vestido img {
+    position: static; /* remove position absolute para o fluxo normal */
+    width: 350px; /* fixa a largura */
+    height: 650px; /* fixa a altura */
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .vestido:hover img {
+    transform: scale(1.10);
+  }
+  
+  .nome {
+  color: #000;
+  text-align: center;
+  font-family: "Arial, Helvetica, sans-serif";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  margin-top: 40px;
+  }
+  
+  div.vestido:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+.whatsapp{
+    height: 20px;
+}
+
+.telefone{
+    height: 20px;
+}
+.facebook{
+  height: 40px;
+}
+
+.instagram{
+  height: 40px;
+  text-align: right;
+}
+
+.sob{
+    height: 100px;
+    margin-top: -100px;
+    margin: -10px;
+}
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-left: 50px;
+    font-size: 15px;
+}
+
+footer{
+    background-color: #5a0101;
+    color: white;
+    padding: 40px 0; /* aumenta altura */
+    display: flex;
+    justify-content: space-evenly;  
+    align-items: flex-start; /* alinhar tudo no topo */
+    width: 100%;
+    flex-wrap: wrap; /* quebra linha caso precise */
+    margin-top: 80px; /* espaço entre o footer e o conteúdo */
+}
+
+footer ul {
+  font-family: "Inter", sans-serif;
+    list-style: none; 
+    text-align: center;
+}
+
+footer li {
+  margin-top: 40px;
+  text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    margin: 10px 0;
+}
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-top: 50px; 
+    font-size: 15px;
+}
+
+body,main{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.midia{
+  float: right;
+   display: grid;
+  gap: 15px;
+}
+

@@ -150,6 +150,54 @@ def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_d
         "itens": itens
     })
 
+#comprar novamente: Pagina de produtos que usuario já comprou novamente 
+@caminho_prefixo_painelUsuario.get("/comprar_novamente", response_class=HTMLResponse)
+def comprar_novamente(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    # Verifica se o token é válido
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu login expirou. Faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+
+    email=payload.get("sub")
+    
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
+    id_usuario = usuario.id
+
+    pedidos = db.query(Pedido).filter(Pedido.id_usuario == id_usuario).all()
+
+    if not pedidos:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Você ainda não realizou nenhum pedido.",
+            "link_login": "/painel_usuario/carrinho"
+        })
+
+    #extrai todos os produtos únicos comprados anteriormente
+    produtos_comprados = []
+    for pedido in pedidos:
+        for item in pedido.itens_pedido:
+            produtos_comprados.append(item.produto)
+
+    #remove duplicados
+    produtos_unicos = {p.id: p for p in produtos_comprados}.values()
+    #Cria um dicionário onde a chave é o ID do produto (p.id) e o valor é o próprio produto (p),
+    # garantindo que produtos com o mesmo ID (ou seja, duplicados) sejam substituídos e assim eliminados.
+    # Em seguida, .values() retorna apenas os produtos únicos (sem duplicatas).
+
+    return templates.TemplateResponse("painel_usuario_comprar_novamente.html", {
+        "request": request,
+        "produtos": produtos_unicos
+    })
+
+
+
+
 #remove o cookie do token do usuario
 @caminho_prefixo_painelUsuario.get("/lougout")
 def logout(request:Request):
