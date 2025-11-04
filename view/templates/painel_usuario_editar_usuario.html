@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            background: #fff;
+            padding: 30px;
+            margin: 50px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Editar Meus Dados</h2>
+        <form id="formEditar" action="/painel_usuario/editar_usuario" method="post">
+            <label for="nome_cliente">Nome Completo:</label>
+            <input type="text" id="nome_cliente" name="nome_cliente" value="{{ usuario.nome_cliente }}" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" value="{{ usuario.email }}" required>
+
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input type="date" id="data_nascimento" name="data_nascimento" value="{{ usuario.data_nascimento }}" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" value="{{ usuario.telefone }}" required>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+
+    <script>
+        // Intercepta o envio do formulário para exibir o alerta após sucesso
+        const form = document.getElementById('formEditar');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // impede envio imediato
+
+            // Envia via fetch para não recarregar a página de imediato
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.redirected) {
+                    alert('✅ Dados editados com sucesso!');
+                    window.location.href = response.url;
+                } else {
+                    alert('❌ Ocorreu um erro ao editar os dados.');
+                }
+            })
+            .catch(() => {
+                alert('❌ Erro de conexão ao enviar os dados.');
+            });
+        });
+    </script>
+</body>
+</html>

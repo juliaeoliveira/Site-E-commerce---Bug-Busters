@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -67,7 +67,7 @@ async def detalhe(request:Request,id_produto:int,
     })
 
 #dados do usuario
-@caminho_prefixo_painelUsuario.get("/me/dados", response_class=HTMLResponse)
+@caminho_prefixo_painelUsuario.get("/meus_dados", response_class=HTMLResponse)
 def meus_dados(request: Request, db: Session = Depends(get_db)):
     token = request.cookies.get("token")
     payload = verificar_token(token)
@@ -96,8 +96,156 @@ def meus_dados(request: Request, db: Session = Depends(get_db)):
         "endereco": endereco
     })
 
+@caminho_prefixo_painelUsuario.get("/editar_usuario")
+def editar_usuario(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    
+    email=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    return templates.TemplateResponse("painel_usuario_editar_usuario.html",{
+        "request":request, "usuario":usuario
+    })
+
+
+@caminho_prefixo_painelUsuario.post("/editar_usuario")
+def editar_usuario(request:Request,
+    nome_cliente: str = Form(...),
+    email: str = Form(...),
+    data_nascimento: str = Form(...),
+    telefone: str = Form(...),
+    db: Session = Depends(get_db)
+    ):
+    
+    token=request.cookies.get("token")
+    payload=verificar_token(token)
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    email_cadastrado=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email_cadastrado).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    #atualizar os campos
+    usuario.nome_cliente = nome_cliente
+    usuario.email = email
+    usuario.data_nascimento = data_nascimento
+    usuario.telefone = telefone
+
+    db.commit()
+    db.refresh(usuario)
+    return RedirectResponse(url="/painel_usuario/meus_dados",status_code=303)
+
+@caminho_prefixo_painelUsuario.get("/editar_endereco")
+def editar_endereco(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    
+    email=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    endereco = usuario.endereco
+
+    #caso o usuário ainda não tenha endereço cadastrado
+    if not endereco:
+        endereco = Endereco(
+            cep="",
+            rua="",
+            numero="",
+            complemento="",
+            bairro="",
+            cidade="",
+            estado=""
+        )
+    return templates.TemplateResponse("painel_usuario_editar_endereco.html",{
+        "request" : request, "endereco" : endereco
+    })
+
+@caminho_prefixo_painelUsuario.post("/editar_endereco")
+def editar_endereco(request:Request,
+    cep : str = Form(...),
+    rua : str = Form(...),
+    numero : str = Form(...),
+    complemento : str = Form(...),
+    bairro : str = Form(...),
+    cidade : str = Form(...),
+    estado : str = Form(...),
+    db: Session = Depends(get_db)
+    ):
+    
+    token=request.cookies.get("token")
+    payload=verificar_token(token)
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    email_cadastrado=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email_cadastrado).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    endereco = usuario.endereco
+    
+    #atualizar os campos
+    endereco.cep = cep
+    endereco.rua = rua
+    endereco.numero = numero
+    endereco.complemento = complemento
+    endereco.bairro = bairro
+    endereco.cidade = cidade
+    endereco.estado = estado
+
+    db.commit()
+    db.refresh(endereco)
+    return RedirectResponse(url="/painel_usuario/meus_dados",status_code=303)
+
+
 #listar pedidos do usuário
-@caminho_prefixo_painelUsuario.get("/meus-pedidos",response_class=HTMLResponse)
+@caminho_prefixo_painelUsuario.get("/meus_pedidos",response_class=HTMLResponse)
 def meus_pedidos(request:Request,db:Session=Depends(get_db)):
     token=request.cookies.get("token")
     payload=verificar_token(token)
@@ -194,8 +342,6 @@ def comprar_novamente(request: Request, db: Session = Depends(get_db)):
         "request": request,
         "produtos": produtos_unicos
     })
-
-
 
 
 #remove o cookie do token do usuario
