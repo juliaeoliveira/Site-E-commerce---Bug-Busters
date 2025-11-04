@@ -91,7 +91,7 @@ class Pagamento(Base):
 
 
 class Pedido(Base):
-    __tablename__="pedido2"
+    __tablename__="pedido"
     id = Column(Integer,primary_key=True,autoincrement=True)
     data_pedido = Column(DateTime, default=lambda: datetime.now(fuso))
     valor_total = Column(Numeric(10,2)) #soma de todos os itens_pedido

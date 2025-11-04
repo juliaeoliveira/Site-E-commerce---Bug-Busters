@@ -1,4 +1,6 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, status
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from controller.produto_controller import router
 from controller.usuario_controller import caminho_prefixo_usuario 
@@ -9,6 +11,20 @@ from controller import pedido_controller
 
 app = FastAPI(title="Loja de Vestidos")
 templates = Jinja2Templates(directory="view/templates")
+
+# Exception handler para erros de validação
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    errors = []
+    for error in exc.errors():
+        field = " -> ".join(str(loc) for loc in error["loc"])
+        errors.append(f"{field}: {error['msg']}")
+    error_msg = "Erro de validação: " + "; ".join(errors)
+    print(f"Erro de validação na requisição {request.url}: {error_msg}")
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"detail": error_msg}
+    )
 
 # #--------------------------------------------------------------
 # app.add_middleware(                                          #-

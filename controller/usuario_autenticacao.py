@@ -92,11 +92,13 @@ def criar_token(dados:dict):
 
 #verificar token do usuário
 def verificar_token(token:str):
+    if not token:
+        return None
     try:
         payload=jwt.decode(token,CHAVE_SECRETA,
                            algorithms=[ALGORITMO])
         return payload
-    except JWSError:
+    except (JWSError, JWTError):
         return None
 
 
