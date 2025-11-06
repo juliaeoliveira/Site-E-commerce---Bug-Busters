@@ -91,11 +91,11 @@ class Pagamento(Base):
 
 
 class Pedido(Base):
-    __tablename__="pedido"
+    __tablename__="pedido2"
     id = Column(Integer,primary_key=True,autoincrement=True)
     data_pedido = Column(DateTime, default=lambda: datetime.now(fuso))
     valor_total = Column(Numeric(10,2)) #soma de todos os itens_pedido
-    status = Column(Boolean, default=True)
+    status = Column(String)
     
     #chave estrangeira
     id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
