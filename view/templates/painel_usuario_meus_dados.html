@@ -3,116 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Dados</title>
-    <style>
-        body {
-            background: #f2f5f8;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            color: #444;
-            border-bottom: 2px solid #0077cc;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        strong {
-            color: #0077cc;
-        }
-
-        .acoes {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #0077cc;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #005fa3;
-        }
-
-        .btn.secundario {
-            background: #777;
-        }
-
-        .btn.secundario:hover {
-            background: #555;
-        }
-    </style>
+    <title>Sob Véu - Tela do Usuário</title>
+    <link rel="stylesheet" href="/static/css/painel_usuario_meus_dados.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Meus Dados</h1>
 
-        <div class="dados-usuario">
-            <h2>Informações da Conta</h2>
-            <ul>
-                <li><strong>Nome:</strong> {{ usuario.nome_cliente }}</li>
-                <li><strong>Email:</strong> {{ usuario.email }}</li>
-                <li><strong>Telefone:</strong> {{ usuario.telefone or "Não informado" }}</li>
-                <li><strong>Data de Nascimento:</strong> {{ usuario.data_nascimento.strftime('%d/%m/%Y') }}</li>
-                <li><strong>Data de Cadastro:</strong> {{ usuario.data_cadastro.strftime('%d/%m/%Y %H:%M') }}</li>
-            </ul>
-        </div>
+      <div class="menu">
+      <a href="/painel_usuario"><img id="logo" src="/static/assets/img_tela.usuario/Sob1.png" alt="Logo"></a>
+          <nav class="text-menu">
+              <a href="/painel_usuario/produtos">Vestidos</a>
+              <a href="/painel_usuario/meus_dados/#">Coleções</a>
+              <a href="/painel_usuario/meus_dados/#">Agendamentos</a>
+          </nav>
+        
+            <div class="login-dropdown-wrapper">
+              <img class="login"
+                src="/static/assets/img_tela.usuario/login.png"
+                width="20px"
+                title="login"
+                alt="login"
+                id="login-icon"
+              />
 
-        <div class="dados-endereco">
-            <h2>Endereço</h2>
+              <div id="login-dropdown" class="hidden">
+                <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
+                <ul>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+                  </div>
+                  </ul>
+                <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+              </div>
+                
+                  <a href="/painel_usuario/carrinho">
+                      <img src="/static/assets/img_tela.usuario/carrinho.png"
+                      width="20px"
+                      title="Carrinho"
+                      alt="Carrinho"
+                  />
+                  </a>
+                </nav>
+              </div>
+          </div>
+<main>
+      <div class="container">
+      <h2 class="titulo verm">SUA CONTA</h2> 
+    <div class="secao">
+      <div class="info-bloco">
+        <br> <br>
+        <label>Nome completo:</label>
+        <div class="info-box">{{ usuario.nome_cliente }}</div>
 
-            {% if endereco %}
-            <ul>
-                <li><strong>CEP:</strong> {{ endereco.cep }}</li>
-                <li><strong>Rua:</strong> {{ endereco.rua }}</li>
-                <li><strong>Número:</strong> {{ endereco.numero }}</li>
-                <li><strong>Complemento:</strong> {{ endereco.complemento or "—" }}</li>
-                <li><strong>Bairro:</strong> {{ endereco.bairro }}</li>
-                <li><strong>Cidade:</strong> {{ endereco.cidade }}</li>
-                <li><strong>Estado:</strong> {{ endereco.estado }}</li>
-            </ul>
-            {% else %}
-            <p>Você ainda não cadastrou um endereço.</p>
-            {% endif %}
-        </div>
+        <label>E-mail:</label>
+        <div class="info-box">{{ usuario.email }}</div>
 
-        <div class="acoes">
-            <a href="/painel_usuario/editar_usuario" class="btn">Editar Conta</a>
-            <a href="/painel_usuario/editar_endereco" class="btn secundario">Editar Endereço</a>
-        </div>
+        <label>Data de Nascimento:</label>
+        <div class="info-box">{{ usuario.data_nascimento.strftime('%d/%m/%Y') }}</div>
+
+        <label>Telefone:</label>
+        <div class="info-box">{{ usuario.telefone or "Não informado" }}</div>
+
+        <a href="/painel_usuario/editar_usuario" class="botao-editar">Editar</a>
+      </div>
     </div>
+
+    {% if endereco %}
+
+    <div class="secao">
+      <h3 class="titulo">ENDEREÇO</h3>
+      <div class="info-bloco">
+        <label>CEP:</label>
+        <div class="endereco-box">{{ endereco.cep }}</div>
+
+        <label>Rua:</label>
+        <div class="endereco-box">{{ endereco.rua }}</div>
+
+        <label>Bairro:</label>
+        <div class="endereco-box">{{ endereco.bairro }}</div>
+
+        <label>Cidade:</label>
+        <div class="endereco-box">{{ endereco.cidade }}</div>
+
+        <a href="/painel_usuario/editar_endereco" class="botao-editar">Editar</a>
+      </div>
+    </div>
+      <div class="outros">
+
+        <div class="info-endereco">
+          <label>Número:</label>
+          <div class="endereco-box1" class="tamanho">{{ endereco.numero }}</div>
+    <br> <br>
+          <label>Complemento:</label>
+          <div class="endereco-box1">{{ endereco.complemento or "—" }}</div>
+    <br> <br>
+          <label>Estado:</label>
+          <div class="endereco-box1">{{ endereco.estado }}</div>
+    {% else %}
+    <p>Você ainda não cadastrou um endereço.</p>
+    {% endif %}
+        
+        </div>
+      </div>
+    </div>
+    </div>
+
+  <nav>
+        <a href="/painel_usuario">
+          <button class="botao"> ← Voltar à página inicial</button>
+        </a>
+    </nav>
+</main>
+<footer>
+    <img class="sob" src="static/assets/img_tela.usuario/Sob.png" alt="">
+    <ul> <p>Contatos</p> <br>
+      <img class="telefone" src="static/assets/img_tela.usuario/2gokRbP1IDl3BuRCfgic0r5CGMf-desktop-Photoroom.png" alt="" li>(11) 4002-8922</li>
+      <br>
+      <img class="whatsapp" src="static/assets/img_tela.usuario/speech-bubble--v2-Photoroom.png" alt="" li>(11) 98291-1653</li>
+      <li>sobveuoficial@gmail.com</li>
+    </ul>
+    <p class="linha">___________</p>
+    <ul> <p> Sobre a loja: </p> <br>
+      <li>Sobre nós</li>  
+      <li>Trocas e Devoluções</li>
+      <li>Fretes e Entregas</li>
+    </ul>
+    <p class="linha">___________</p> 
+    <ul>
+      <li>Política de Privacidade</li>
+      <li>Termos de Uso</li>
+    </ul>
+  </div>
+  <section class="midia">
+    <img class="instagram" src="static/assets/img_tela.usuario/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+    <img class="facebook" src="static/assets/img_tela.usuario/facebook-f-Photoroom.png" alt="">
+  </section>
+    <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+   
+
+</footer>
+
+
+<script>
+  const loginIcon = document.getElementById('login-icon');
+const loginDropdown = document.getElementById('login-dropdown');
+
+loginIcon.addEventListener('click', () => {
+  const isVisible = loginDropdown.style.display === 'block';
+
+  loginDropdown.style.display = isVisible ? 'none' : 'block';
+  
+  // Ativa ou desativa a animação
+  loginIcon.classList.toggle('login-active', !isVisible);
+});
+
+window.addEventListener('click', function (e) {
+  if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+    loginDropdown.style.display = 'none';
+    loginIcon.classList.remove('login-active');
+  }
+});
+
+</script>
 </body>
 </html>

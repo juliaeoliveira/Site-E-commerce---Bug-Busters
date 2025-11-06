@@ -11,7 +11,7 @@ templates=Jinja2Templates(directory="view/templates")
 caminho_prefixo_painelUsuario = APIRouter(prefix='/painel_usuario')
 
 #criar rota do dashboard do usuário , página protegida
-@caminho_prefixo_painelUsuario.get("/",response_class=HTMLResponse)
+@caminho_prefixo_painelUsuario.get("",response_class=HTMLResponse)
 def painel_usuario(request:Request, db: Session = Depends(get_db)):
     token=request.cookies.get("token")
     payload = verificar_token(token)
@@ -33,19 +33,38 @@ def painel_usuario(request:Request, db: Session = Depends(get_db)):
                     {"request":request, "primeiro_nome": primeiro_nome})
 
 @caminho_prefixo_painelUsuario.get("/carrinho", response_class=HTMLResponse)
-def pagina_carrinho(request: Request):
+def pagina_carrinho(request: Request, db: Session = Depends(get_db)):
     token=request.cookies.get("token")
+    payload = verificar_token(token)
     if not token or not verificar_token(token):
         return RedirectResponse(url="/",status_code=303)
-    return templates.TemplateResponse("painel_usuario_carrinho.html", {"request": request})
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload["sub"]).first()
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
+    return templates.TemplateResponse("painel_usuario_carrinho.html", {"request": request , "primeiro_nome" : primeiro_nome})
 
 @caminho_prefixo_painelUsuario.get("/produtos", response_class=HTMLResponse)
 async def listar_todos (request:Request, 
                         db:Session=Depends(get_db)):
+    token=request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return RedirectResponse(url="/",status_code=303)
+    
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload["sub"]).first()
+
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     produtos = db.query(Produto).all()
     return templates.TemplateResponse(
         "painel_usuario_produtos.html",
-        {"request": request, "produtos": produtos}
+        {"request": request, "produtos": produtos, "primeiro_nome" : primeiro_nome}
     )        
 
 #rota detalhe do produto
@@ -53,6 +72,22 @@ async def listar_todos (request:Request,
             response_class=HTMLResponse)
 async def detalhe(request:Request,id_produto:int,
                   db:Session=Depends(get_db)):
+    token=request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return RedirectResponse(url="/",status_code=303)
+    
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload["sub"]).first()
+
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     #query do produto
     produto=db.query(Produto).filter(Produto.id==id_produto).first()
     
@@ -63,7 +98,7 @@ async def detalhe(request:Request,id_produto:int,
     sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
 
     return templates.TemplateResponse("painel_usuario_descricao.html",{
-        "request":request,"produto":produto,"sugestoes": sugestoes
+        "request":request,"produto":produto,"sugestoes": sugestoes, "primeiro_nome" : primeiro_nome
     })
 
 #dados do usuario
@@ -90,10 +125,12 @@ def meus_dados(request: Request, db: Session = Depends(get_db)):
     #Usando o id do usuário para buscar o endereço
     endereco = db.query(Endereco).filter(Endereco.usuario_id == usuario.id).first()
 
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     return templates.TemplateResponse("painel_usuario_meus_dados.html", {
         "request": request,
         "usuario": usuario,
-        "endereco": endereco
+        "endereco": endereco,
+        "primeiro_nome" : primeiro_nome
     })
 
 @caminho_prefixo_painelUsuario.get("/editar_usuario")
@@ -117,8 +154,10 @@ def editar_usuario(request: Request, db: Session = Depends(get_db)):
             "mensagem": "Usuário não encontrado.",
             "link_login": "/usuario/login"
         })
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     return templates.TemplateResponse("painel_usuario_editar_usuario.html",{
-        "request":request, "usuario":usuario
+        "request":request, "usuario":usuario, "primeiro_nome" : primeiro_nome
     })
 
 
@@ -194,8 +233,11 @@ def editar_endereco(request: Request, db: Session = Depends(get_db)):
             cidade="",
             estado=""
         )
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
+
     return templates.TemplateResponse("painel_usuario_editar_endereco.html",{
-        "request" : request, "endereco" : endereco
+        "request" : request, "endereco" : endereco, "primeiro_nome" : primeiro_nome
     })
 
 @caminho_prefixo_painelUsuario.post("/editar_endereco")
@@ -266,8 +308,9 @@ def meus_pedidos(request:Request,db:Session=Depends(get_db)):
         })
     
     pedidos=db.query(Pedido).filter(Pedido.id_usuario == usuario.id).order_by(Pedido.data_pedido.desc()).all()
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     return templates.TemplateResponse("painel_usuario_meus_pedidos.html",
-        {"request":request,"pedidos":pedidos})
+        {"request":request,"pedidos":pedidos,"primeiro_nome":primeiro_nome})
 
 #detalhes dos pedidos do usuario
 @caminho_prefixo_painelUsuario.get("/meus-pedidos/{id_pedido}", response_class=HTMLResponse)
@@ -281,7 +324,8 @@ def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_d
             "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
             "link_login": "/usuario/login"
         })
-
+    email=payload.get("sub")
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
     pedido = db.query(Pedido).filter(Pedido.id == id_pedido).first()
 
     if not pedido:
@@ -292,10 +336,12 @@ def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_d
         })
 
     itens = pedido.itens_pedido  
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     return templates.TemplateResponse("painel_usuario_detalhe_pedido.html", {
         "request": request,
         "pedido": pedido,
-        "itens": itens
+        "itens": itens,
+        "primeiro_nome" : primeiro_nome
     })
 
 #comprar novamente: Pagina de produtos que usuario já comprou novamente 
@@ -337,10 +383,11 @@ def comprar_novamente(request: Request, db: Session = Depends(get_db)):
     #Cria um dicionário onde a chave é o ID do produto (p.id) e o valor é o próprio produto (p),
     # garantindo que produtos com o mesmo ID (ou seja, duplicados) sejam substituídos e assim eliminados.
     # Em seguida, .values() retorna apenas os produtos únicos (sem duplicatas).
-
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     return templates.TemplateResponse("painel_usuario_comprar_novamente.html", {
         "request": request,
-        "produtos": produtos_unicos
+        "produtos": produtos_unicos,
+        "primeiro_nome" : primeiro_nome
     })
 
 
