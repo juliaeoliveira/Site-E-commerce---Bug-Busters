@@ -351,61 +351,27 @@
         }
     
     // ================================
-    // FINALIZA A COMPRA (ENVIA AO BACKEND)
+    // BOTÃO FECHAR PEDIDO (AGORA REDIRECIONA)
     // ================================
     async function makePurchase(event) {
-        event.preventDefault(); // evita o comportamento padrão do <form>
-        
+        event.preventDefault();
+
         const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-        
+
         if (carrinho.length === 0) {
             alert("Seu carrinho está vazio!");
             return;
         }
-    
-        // Monta o payload do pedido
-        const pedidoData = {
-          valor_total: totalAmount, // totalAmount deve ser um número
-          itens_pedido: carrinho.map(item => ({
-            id_produto: Number(item.id),
-            tamanho: item.tamanho,
-            quantidade: Number(item.quantidade),
-            preco_unitario: parseFloat(
-              item.preco.replace("R$", "").replace(".", "").replace(",", ".")
-            ),
-            subtotal:
-              parseFloat(
-                item.preco.replace("R$", "").replace(".", "").replace(",", ".")
-              ) * Number(item.quantidade)
-          }))
-        };
-    
-        try {
-            const response = await fetch("/pedido/salvar", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(pedidoData),
-                credentials: "include"
-            });
-        
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.detail || "Erro ao criar o pedido");
-            }
-        
-            const data = await response.json();
-            console.log("Pedido salvo com sucesso:", data);
-        
-            alert(`✅ Pedido realizado com sucesso! Número do pedido: ${data.pedido_id}`);
-        
-            // Limpa o carrinho e atualiza tela
-            localStorage.removeItem("carrinho");
-            loadCartFromLocalStorage();
-        } catch (err) {
-            console.error("Erro ao enviar pedido:", err);
-            alert("❌ Não foi possível concluir o pedido. Tente novamente.");
+
+        // Garante que o total foi calculado
+        if (totalAmount <= 0) {
+            updateTotal();
         }
+
+        // Apenas redireciona para o checkout (sem enviar pro backend ainda)
+        window.location.href = "/pedido/checkout";
     }
+
 
 </script>
 

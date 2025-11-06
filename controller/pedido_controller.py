@@ -135,6 +135,11 @@ def listar_meus_pedidos(
 
     return [serialize_pedido(p) for p in pedidos]
 
+    
+@router.get("/checkout", response_class=HTMLResponse)
+def pagina_checkout(request: Request):
+    return templates.TemplateResponse("checkout.html", {"request": request})
+
 
 @router.get("/{pedido_id}")
 def detalhar_pedido(
