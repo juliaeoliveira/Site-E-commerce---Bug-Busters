@@ -3,67 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Pedido</title>
-    <link rel="stylesheet" href="/static/css/painel_usuario_detalhe_pedido.css">
-    <style>
-        body {
-            background: #f2f5f8;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #0077cc;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background: #0077cc;
-            color: #fff;
-        }
-        .valor-total {
-            text-align: right;
-            font-size: 18px;
-            margin-top: 20px;
-            color: #333;
-        }
-        .voltar {
-            display: block;
-            margin-top: 30px;
-            text-align: center;
-        }
-        .voltar a {
-            background: #777;
-            color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .voltar a:hover {
-            background: #555;
-        }
-    </style>
+    <title>Sob Véu - Detalhes do Pedido</title>
+    <link rel="stylesheet" href="/static/css/painel_usuario_detalhe_pedido.css"> 
+
 </head>
 <body>
+    <div class="menu">
+    <a href="/painel_usuario"><img id="logo"src="/static/img_home/Sob.png" alt="Logo"></a>
+        <nav>
+            <a href="/painel_usuario/produtos">Vestidos</a>
+            <a href="/painel_usuario/#">Coleções</a>
+            <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+        </nav>
+        <br> <br> <br>
+        <div class="login-dropdown-wrapper">
+          <img class="login"
+            src="/static/img_home/login.png"
+            width="20px"
+            title="login"
+            alt="login"
+            id="login-icon"
+          />
+
+          <div id="login-dropdown" class="hidden">
+            <h3><strong>Boas-vindas, {{ primeiro_nome }}.</strong></h3>
+            <ul>
+              <div class="opcoes">
+                <a href="/painel_usuario/meus_dados">Sua Conta</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+              </div>
+              </ul>
+            <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+          </div>
+        </div>
+        <div class="carrinho">
+            <a href="/painel_usuario/carrinho" >
+                <img src="/static/img_home/carrinho.png"
+                width="20px"
+                title="Carrinho"
+                alt="Carrinho"
+            />
+            </a>
+          </nav>
+        </div>
+    </div>
+
+    <main>
     <div class="container">
         <h1>Pedido #{{ pedido.id }}</h1>
         <p><strong>Data:</strong> {{ pedido.data_pedido.strftime('%d/%m/%Y %H:%M') }}</p>
@@ -98,5 +91,55 @@
             <a href="/painel_usuario/meus-pedidos">← Voltar aos pedidos</a>
         </div>
     </div>
+    </main>
+<footer>
+  <img class="sob" src="/static/img_home/Sob copy.png" alt="">
+  <ul> <p>Contatos</p> <br>
+    <img class="telefone" src="/static/img_home/telefone.png" alt="" li>(11) 4002-8922</li>
+    <br>
+    <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt="" li>(11) 98291-1653</li>
+    <li>sobveuoficial@gmail.com</li>
+  </ul>
+  <p class="linha">_________</p>
+  <ul> <p> Sobre a loja: </p> <br>
+    <li>Sobre nós</li>
+    <li>Trocas e Devoluções</li>
+    <li>Fretes e Entregas</li>
+  </ul>
+  <p class="linha">_________</p>
+  <ul>
+    <li>Política de Privacidade</li>
+    <li>Termos de Uso</li>
+  </ul>
+</div>
+
+<section class="midia">
+  <img class="instagram" src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+  <img class="facebook" src="/static/img_home/facebook-f-Photoroom.png" alt="">
+</section>
+  <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+
+</footer>
+<script>
+  const loginIcon = document.getElementById('login-icon');
+const loginDropdown = document.getElementById('login-dropdown');
+
+loginIcon.addEventListener('click', () => {
+  const isVisible = loginDropdown.style.display === 'block';
+
+  loginDropdown.style.display = isVisible ? 'none' : 'block';
+  
+  // Ativa ou desativa a animação
+  loginIcon.classList.toggle('login-active', !isVisible);
+});
+
+window.addEventListener('click', function (e) {
+  if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+    loginDropdown.style.display = 'none';
+    loginIcon.classList.remove('login-active');
+  }
+});
+
+</script>
 </body>
 </html>
