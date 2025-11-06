@@ -45,53 +45,53 @@
 
                             <div class="linha-dupla">
                             <div>
-                                <label for="nome">Nome Completo *</label>
-                                <input id="nome" type="text" value="Júlia Evangelista" disabled>
+                                <label for="nome">Nome Completo:</label>
+                                <input id="nome" type="text" value="{{ usuario.nome_cliente }}" disabled>
                             </div>
                             <div>
-                                <label for="telefone">Número de Telefone *</label>
-                                <input id="telefone" type="text" value="11 4002-8922" disabled>
+                                <label for="telefone">Número de Telefone: </label>
+                                <input id="telefone" type="text" value="{{ usuario.telefone }}" disabled>
                             </div>
                             </div>
 
                             <div class="linha-dupla">
                             <div>
-                                <label for="cep">CEP *</label>
-                                <input id="cep" type="text" value="00000-000" disabled>
+                                <label for="cep">CEP: </label>
+                                <input id="cep" type="text" value="{{ endereco.cep }}" disabled>
                             </div>
                             <div>
-                                <label for="rua">Rua *</label>
-                                <input id="rua" type="text" value="Rua Alameda Santos" disabled>
+                                <label for="rua">Rua: </label>
+                                <input id="rua" type="text" value="{{ endereco.rua }}" disabled>
                             </div>
                             </div>
 
                             <div class="linha-dupla">
                             <div>
-                                <label for="numero">N° *</label>
-                                <input id="numero" type="text" value="80" disabled>
+                                <label for="numero">N°: </label>
+                                <input id="numero" type="text" value="{{ endereco.numero }}" disabled>
                             </div>
                             <div>
-                                <label for="complemento">Complemento (Opcional)</label>
-                                <input id="complemento" type="text" disabled>
+                                <label for="complemento">Complemento:</label>
+                                <input id="complemento" type="text" value="{{ endereco.complemento }}" disabled>
                             </div>
                             </div>
 
                             <div class="linha-dupla">
                             <div>
-                                <label for="estado">Estado *</label>
-                                <input id="estado" type="text" value="SP" disabled>
+                                <label for="estado">Estado:</label>
+                                <input id="estado" type="text" value="{{ endereco.estado }}" disabled>
                             </div>
                             <div>
-                                <label for="cidade">Cidade *</label>
-                                <input id="cidade" type="text" value="Paraíba" disabled>
+                                <label for="cidade">Cidade:</label>
+                                <input id="cidade" type="text" value="{{ endereco.cidade }}" disabled>
                             </div>
                             <div>
-                                <label for="bairro">Bairro *</label>
-                                <input id="bairro" type="text" value="Tchaca-Tchaca" disabled>
+                                <label for="bairro">Bairro:</label>
+                                <input id="bairro" type="text" value="{{ endereco.bairro }}" disabled>
                             </div>
                             </div>
 
-                            <button type="button" class="botao-enviar">Alterar informações de cadastro</button>
+                            <a href="/pedido/editar_endereco" type="button" class="botao-enviar">Alterar informações de cadastro</a>
                         </form>
                     </section>
 
@@ -101,24 +101,25 @@
                         <form class="form-pagamento">
                             <div class="opcao-pagamento">
                                 <label for="pix">Pix</label>
-                                <input type="checkbox" id="pix" name="metodo" value="pix">
+                                <input type="radio" id="pix" name="metodo" value="pix">
                             </div>
 
                             <div class="opcao-pagamento">
-                                <label for="credito">Cartão de Crédito:<br>(12x de R$ 1.000,00)</label>
-                                <input type="checkbox" id="credito" name="metodo" value="credito">
+                                <label for="credito">Cartão de Crédito:<br>(12x)</label>
+                                <input type="radio" id="credito" name="metodo" value="credito">
                             </div>
 
                             <div class="opcao-pagamento">
                                 <label for="debito">Cartão de Débito:</label>
-                                <input type="checkbox" id="debito" name="metodo" value="debito">
+                                <input type="radio" id="debito" name="metodo" value="debito">
                             </div>
 
                             <button type="submit" class="botao-confirmar">Confirmar pagamento</button>
                         </form>
                     </section>
-                    <section class="produto-vestido">
+                    <section class="produto-vestido" id="itens-pedido">
                         <h1>ITENS</h1>
+                        <div class="itens-container"></div> <!-- <- novo container -->
                         <div class="produto-item">
                             <!-- <input class="checkbox-item" type="checkbox">  -->
                             <img class="foto" src="" alt="Vestido">
@@ -241,14 +242,14 @@
         const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
         // Seleciona o container onde os produtos serão exibidos
-        const container = document.querySelector(".produto-vestido");
+        const container = document.querySelector("#itens-pedido .itens-container");
 
         // Seleciona o elemento onde aparece o total (obs: "spam" deveria ser "span")
         // Linha 44: Antigo: const totalElement = document.querySelector(".pedido-total h2 span");
         const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
 
         // Começa colocando o título "Carrinho de compras" no container
-        container.innerHTML = "<h1>Carrinho de compras</h1>";
+        // container.innerHTML = "<h1>Carrinho de compras</h1>";
 
         // ✅ Adiciona o checkbox "Selecionar todos"
         const linhaSelecao = document.createElement("div");

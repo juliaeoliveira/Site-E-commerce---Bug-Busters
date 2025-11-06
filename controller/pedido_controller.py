@@ -3,7 +3,7 @@ from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from models import Pedido, ItemPedido, Produto, Usuario_Model
+from models import Pedido, ItemPedido, Produto, Usuario_Model, Endereco
 from schemas import PedidoCreate, ItemPedidoCreate
 from controller.usuario_autenticacao import obter_usuario_logado,  verificar_token
 from database import get_db
@@ -11,7 +11,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from typing import List, Dict, Any
 import traceback
-import json
+import random
 
 from datetime import datetime
 import pytz
@@ -137,9 +137,140 @@ def listar_meus_pedidos(
 
     
 @router.get("/checkout", response_class=HTMLResponse)
-def pagina_checkout(request: Request):
-    return templates.TemplateResponse("checkout.html", {"request": request})
+def pagina_checkout(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
 
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    
+    email=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    endereco = usuario.endereco
+
+    #caso o usuário ainda não tenha endereço cadastrado
+    if not endereco:
+        endereco = Endereco(
+            cep="",
+            rua="",
+            numero="",
+            complemento="",
+            bairro="",
+            cidade="",
+            estado=""
+        )
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
+  
+    
+    # Todos os outros produtos (exceto o atual)
+    outros_produtos = db.query(Produto).all()
+
+    # Selecionar 3 aleatórios (ou menos se não houver suficientes)
+    sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
+    return templates.TemplateResponse("checkout.html", {
+        "request": request, "endereco" : endereco, "sugestoes" : sugestoes,
+        "primeiro_nome" : primeiro_nome, "usuario": usuario
+        })
+
+@router.get("/editar_endereco")
+def editar_endereco(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    
+    email=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    endereco = usuario.endereco
+
+    #caso o usuário ainda não tenha endereço cadastrado
+    if not endereco:
+        endereco = Endereco(
+            cep="",
+            rua="",
+            numero="",
+            complemento="",
+            bairro="",
+            cidade="",
+            estado=""
+        )
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
+
+    return templates.TemplateResponse("pedido_editar_endereco.html",{
+        "request" : request, "endereco" : endereco, "primeiro_nome" : primeiro_nome
+    })
+
+@router.post("/editar_endereco")
+def editar_endereco(request:Request,
+    cep : str = Form(...),
+    rua : str = Form(...),
+    numero : str = Form(...),
+    complemento : str = Form(...),
+    bairro : str = Form(...),
+    cidade : str = Form(...),
+    estado : str = Form(...),
+    db: Session = Depends(get_db)
+    ):
+    
+    token=request.cookies.get("token")
+    payload=verificar_token(token)
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    email_cadastrado=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email_cadastrado).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    endereco = usuario.endereco
+    
+    #atualizar os campos
+    endereco.cep = cep
+    endereco.rua = rua
+    endereco.numero = numero
+    endereco.complemento = complemento
+    endereco.bairro = bairro
+    endereco.cidade = cidade
+    endereco.estado = estado
+
+    db.commit()
+    db.refresh(endereco)
+    return RedirectResponse(url="/pedido/checkout",status_code=303)
 
 @router.get("/{pedido_id}")
 def detalhar_pedido(
