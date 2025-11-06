@@ -11,7 +11,7 @@ templates=Jinja2Templates(directory="view/templates")
 caminho_prefixo_painelUsuario = APIRouter(prefix='/painel_usuario')
 
 #criar rota do dashboard do usuário , página protegida
-@caminho_prefixo_painelUsuario.get("",response_class=HTMLResponse)
+@caminho_prefixo_painelUsuario.get("/painel_usuario",response_class=HTMLResponse)
 def painel_usuario(request:Request, db: Session = Depends(get_db)):
     token=request.cookies.get("token")
     payload = verificar_token(token)
