@@ -1,9 +1,19 @@
-  body {
-    background: #FBFCF7;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
+* {
+    margin:0;
     padding: 0;
 }
+
+body {
+    display: flex; 
+    flex-direction: column; /* Organiza os itens na vertical (coluna) */
+    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o preenchimento padrão */
+    overflow-x: hidden; /* Impede rolagem horizontal */
+    background-color: #FBFCF7;
+    
+}
+
 /* MENU */
 #logo {
     
@@ -52,126 +62,7 @@ nav a {
     text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
 }
 
-.container {
-    max-width: 900px;
-    margin: 50px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-h1 {
-    color: #0077cc;
-    text-align: center;
-    margin-bottom: 30px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-th {
-    background: #0077cc;
-    color: #fff;
-}
-.valor-total {
-    text-align: right;
-    font-size: 18px;
-    margin-top: 20px;
-    color: #333;
-}
-.voltar {
-    display: block;
-    margin-top: 30px;
-    text-align: center;
-}
-.voltar a {
-    background: #777;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-.voltar a:hover {
-    background: #555;
-}
-
-/* foooter */
-footer{
-  background-color: #5a0101;
-  color: white;
-  padding: 40px 0; /* aumenta altura */
-  display: flex;
-  justify-content: space-evenly;  
-  align-items: flex-start; /* alinhar tudo no topo */
-  flex-wrap: wrap; /* quebra linha caso precise */
-  margin-top: 20px; /* espaço entre o footer e o conteúdo */
-
-}
-
-footer ul {
-  font-family: "Inter", sans-serif;
-  list-style: none;
-  text-align:center; 
-}
-
-footer li {
-  margin-top: 40px;
-  text-align: center;
-  margin: 10px 0;
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
-}
-
-
-.whatsapp, .telefone{
-    height: 20px;
-}
-
-
-.instagram, .facebook{
-  height: 40px;
-  text-align: right;
-}
-
-
-.sob{
-    height: 100px;
-    margin-top: 90px;
-    margin: -10px;
-}
-
-.linha{
-    width: 170px;
-    transform: rotate(-90.164deg);
-    color: #FFF;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 420px;
-    margin-top: 50px;
-}
-
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-top: 160px;
-    font-size: 15px;
-    margin-left: 60px;
-}
-
-.midia{
-  float: right;
-   display: grid;
-  gap: 15px;
-}
-
-
+/* Estilo para os links do menu ao passar o mouse (hover) */
 
 /*TESTE DA ABERTURA DO LOGIN*/
 
@@ -286,12 +177,4 @@ footer li {
 
 .opcoes a:hover {
   color: #800000;
-}
-#logout-btn a {
-  color: #fff;
-}
-
-.hidden ul {
-  padding-inline-start: 0px;
-
 }

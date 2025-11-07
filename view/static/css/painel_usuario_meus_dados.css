@@ -421,3 +421,7 @@ main .botao{
 main{
   margin-left: 100px;
 }
+
+#logout-btn a {
+  color: #fff;
+}

@@ -14,22 +14,51 @@
 
     <!-- MENU -->
     <div class="menu">
+    <a href="/painel_usuario"><img id="logo"src="/static/img_home/Sob.png" alt="Logo"></a>
         <nav>
-            <a href="/"><img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a>
-        </nav>  
-        <nav class="categorias">
-            <a href="/produtos/">Vestidos</a>
-            <a href="#Colecoes">Coleções</a>
-            <a href="/#Agendamentos">Agendamentos</a>
+            <a href="/painel_usuario/produtos">Vestidos</a>
+            <a href="/painel_usuario/#">Coleções</a>
+            <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
         </nav>
-        <nav class="icons">
-            <a href="/usuario/login">
-                <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+        <br> <br> <br>
+        <div class="login-dropdown-wrapper">
+          <img class="login"
+            src="/static/img_home/login.png"
+            width="20px"
+            title="login"
+            alt="login"
+            id="login-icon"
+          />
+
+          <div id="login-dropdown" class="hidden">
+            <h3><strong>Boas-vindas, {{ primeiro_nome }}.</strong></h3>
+            <ul>
+              <div class="opcoes">
+                <a href="/painel_usuario/meus_dados">Sua Conta</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+              </div>
+              </ul>
+            <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+          </div>
+        </div>
+        <div class="carrinho">
+            <a href="/painel_usuario/carrinho" >
+                <img src="/static/img_home/carrinho.png"
+                width="20px"
+                title="Carrinho"
+                alt="Carrinho"
+            />
             </a>
-            <a href="/carrinho/">
-                <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
-            </a>
-        </nav>
+          </nav>
+        </div>
     </div> 
 
     <main>
@@ -122,22 +151,22 @@
                         <div class="itens-container"></div> <!-- <- novo container -->
                         <div class="produto-item">
                             <!-- <input class="checkbox-item" type="checkbox">  -->
-                            <img class="foto" src="" alt="Vestido">
+                            <!-- <img class="foto" src="" alt="Vestido"> -->
                             <div class="texto">
-                                <h3>Vestido Eternity</h3>
+                                <!-- <h3>Vestido Eternity</h3> -->
                                 <!-- <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira"> -->
-                                <p class="colecao">Coleção Chama Secreta</p>
-                                <p class="estoque">Em estoque</p>
-                                <select class="tamanho">
+                                <!-- <p class="colecao">Coleção Chama Secreta</p> -->
+                                <!-- <p class="estoque">Em estoque</p> -->
+                                <!-- <select class="tamanho">
                                     <option value="PP">PP</option>
                                     <option value="P">P</option>
                                     <option value="M">M</option>
                                     <option value="G">G</option>
-                                </select>
+                                </select> -->
                                 <br>
-                                <label class="quantidade" for="quantidade">Quantidade:</label>
+                                <!-- <label class="quantidade" for="quantidade">Quantidade:</label>
                                 <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
-                                <p class="valor">R$ 12.000</p>
+                                <p class="valor">R$ 12.000</p> -->
                             </div>
                         </div>
                     </section>
@@ -206,7 +235,27 @@
         </section>
         <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
+    <script>
+    const loginIcon = document.getElementById('login-icon');
+    const loginDropdown = document.getElementById('login-dropdown');
 
+    loginIcon.addEventListener('click', () => {
+    const isVisible = loginDropdown.style.display === 'block';
+
+    loginDropdown.style.display = isVisible ? 'none' : 'block';
+    
+    // Ativa ou desativa a animação
+    loginIcon.classList.toggle('login-active', !isVisible);
+    });
+
+    window.addEventListener('click', function (e) {
+    if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+        loginDropdown.style.display = 'none';
+        loginIcon.classList.remove('login-active');
+    }
+    });
+
+    </script>
     <!-- JAVASCRIPT (inalterado) -->
     <script>
     // Verifica se o documento ainda está sendo carregado
