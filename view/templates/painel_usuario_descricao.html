@@ -26,14 +26,44 @@
       <a href="/painel_usuario/produtos/{{produto.id}}/#">Coleções</a>
       <a href="/painel_usuario/produtos/{{produto.id}}/#Agendamentos">Agendamentos</a>
     </nav>
-    <nav class="icons">
-      <a href="/usuario/login" >
-        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
-      </a>
-      <a href="/painel_usuario/carrinho" >
-        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
-      </a>
-    </nav>
+    <br> <br> <br>
+        <div class="login-dropdown-wrapper">
+          <img class="login"
+            src="/static/img_home/login.png"
+            width="20px"
+            title="login"
+            alt="login"
+            id="login-icon"
+          />
+
+          <div id="login-dropdown" class="hidden">
+            <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
+            <ul>
+              <div class="opcoes">
+                <a href="/painel_usuario/meus_dados">Sua Conta</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+              </div>
+              <div class="opcoes">
+                <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+              </div>
+              </ul>
+            <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+          </div>
+        </div>
+        <div class="carrinho1">
+            <a href="/painel_usuario/carrinho" >
+                <img src="/static/img_home/carrinho.png"
+                width="20px"
+                title="Carrinho"
+                alt="Carrinho"
+            />
+            </a>
+        </div>
   </section>
 </header>
 
@@ -177,6 +207,26 @@ function addProductToCart() {
   alert(`✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`);
 }
 </script>
+<script>
+  const loginIcon = document.getElementById('login-icon');
+const loginDropdown = document.getElementById('login-dropdown');
 
+loginIcon.addEventListener('click', () => {
+  const isVisible = loginDropdown.style.display === 'block';
+
+  loginDropdown.style.display = isVisible ? 'none' : 'block';
+  
+  // Ativa ou desativa a animação
+  loginIcon.classList.toggle('login-active', !isVisible);
+});
+
+window.addEventListener('click', function (e) {
+  if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+    loginDropdown.style.display = 'none';
+    loginIcon.classList.remove('login-active');
+  }
+});
+
+</script>
 </body>
 </html>

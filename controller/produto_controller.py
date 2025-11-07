@@ -6,12 +6,11 @@ from fastapi import APIRouter,Request,Form,UploadFile,File,Depends
 # File=Função para gravar o caminho da imagem,
 # Depends=dependência do banco de dados sqlite para o fastapi
 from pydantic import BaseModel
-from datetime import datetime
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Produto
 from .usuario_autenticacao import verificar_token
-
+from models import Usuario_Model
 from fastapi.responses import HTMLResponse,RedirectResponse
 # HTMLResponse=resposta do html GET,POST,PUT,DELETE,
 # RedirectResponse=redirecionar a página ao receber o método'GET'
@@ -80,13 +79,23 @@ async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
                   db:Session=Depends(get_db)):
     #validação para ter ctz que o usuario esta logado, caso nn exibir a mensagem com link do login 
     token = request.cookies.get("token")
+    payload = verificar_token(token)
     if not token or not verificar_token(token):
         return templates.TemplateResponse("msg_carrinho.html", {
             "request": request,
             # "mensagem": "Para acessar seu carrinho, por favor faça login na sua conta.",
             # "link_login": "/usuario/login"
         })
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload["sub"]).first()
 
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    primeiro_nome = usuario.nome_cliente.split(' ')[0]
     #query do produto
     if id_produto:
          produto=db.query(Produto).filter(Produto.id==id_produto).first()
@@ -96,7 +105,7 @@ async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
 
     # Selecionar 3 aleatórios (ou menos se não houver suficientes)
     sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
-    return templates.TemplateResponse("painel_usuario_carrinho.html", {"request": request, "sugestoes":sugestoes})
+    return templates.TemplateResponse("painel_usuario_carrinho.html", {"request": request, "sugestoes":sugestoes, "primeiro_nome" : primeiro_nome})
 '''
 @router.get("/carrinho/",
             response_class=HTMLResponse)
