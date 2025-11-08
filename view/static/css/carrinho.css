@@ -13,6 +13,7 @@ body {
   background-color: #EAE4D8;
 }
 
+
 .lixeira {
   height: 20px;
   margin-left: 400px;
@@ -54,6 +55,15 @@ body {
   background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
   font-family: 'Open Sans', sans-serif; /* Fonte do menu */
   color: #ffffff; /* Cor do texto do menu */
+}
+
+nav {
+    gap: 200px;
+    justify-content: center;
+    display: flex;
+    font-family: "Libre Caslon Text";
+    font-size: 22px;
+    color: #523800;
 }
 
 .menu nav {

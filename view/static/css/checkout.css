@@ -56,6 +56,15 @@ body {
   color: #ffffff; /* Cor do texto do menu */
 }
 
+nav {
+    gap: 200px;
+    justify-content: center;
+    display: flex;
+    font-family: "Libre Caslon Text";
+    font-size: 22px;
+    color: #523800;
+}
+
 .menu nav {
   justify-content: center;
   display: flex;
@@ -371,11 +380,18 @@ button:hover {
  #botao-pagamento {
   color: white;
   text-align: center;
-  height: 50px;
   background-color: #790000;
   margin-left: 110px;
   font-family: "Inter", sans-serif;
-  font-size: 20px;
+  font-size: 18px;
+  width: auto;
+  margin-top: 43px;
+  border: none;
+  padding: 10px 25px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 footer {
@@ -732,6 +748,12 @@ h3 {
     margin-top: 10px;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    margin-top: 45px;
+    margin-right: 165px;
+}
+
+a.botao-enviar {
+    text-decoration: none;
 }
 
 .botao-enviar:hover {
@@ -782,7 +804,7 @@ h3 {
   align-self: flex-start; /* botão alinhado à esquerda */
   margin-top: 15px;
   transition: all 0.2s ease-in-out;
-  margin-left: 200px;
+  margin-left: 215px;
 }
 
 .botao-confirmar:hover {
@@ -799,14 +821,13 @@ h3 {
 /* ajustes do enedereço de  */
 /* Garante altura maior e mantém alinhamento */
 .produto-vestido:nth-child(1) {
-    min-height: 700px;
+    min-height: 550px;
     padding-bottom: 40px;
 }
 
 
 /* Aumentar largura dos inputs do endereço */
 .produto-vestido input {
-  width: 100%;
   padding: 12px;
   font-size: 14px;
   box-sizing: border-box;
