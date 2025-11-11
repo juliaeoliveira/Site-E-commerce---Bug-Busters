@@ -58,7 +58,7 @@
 </header>
     <main>
     <div class="container">
-        <h1>Pedido #{{ pedido.id }}</h1>
+        <h1>ID: {{ pedido.id }}</h1>
         <p><strong>Data:</strong> {{ pedido.data_pedido.strftime('%d/%m/%Y %H:%M') }}</p>
         <p><strong>Status:</strong> {{ "Ativo" if pedido.status else "Concluído" }}</p>
 
@@ -76,7 +76,7 @@
                 {% for item in itens %}
                 <tr>
                     <td>{{ item.produto.nome_produto }}</td>
-                    <td>{{ item.tamanho }}</td>
+                    <td>{{  "PP" if item.tamanho == "Único" else item.pedido }}</td>
                     <td>{{ item.quantidade }}</td>
                     <td>R$ {{ "%.2f"|format(item.preco_unitario) }}</td>
                     <td>R$ {{ "%.2f"|format(item.subtotal) }}</td>
@@ -88,9 +88,25 @@
         <p class="valor-total"><strong>Total:</strong> R$ {{ "%.2f"|format(pedido.valor_total) }}</p>
 
         <div class="voltar">
-            <a href="/painel_usuario/meus_pedidos">← Voltar aos pedidos</a>
+            <a href="/painel_usuario/meus_pedidos" id="voltar">← Voltar aos pedidos</a>
+            <a id="abrir-modal-cancelar" class="btn-abrir-cancelar">Cancelar pedido →</a>
         </div>
+
+       <!-- Modal de cancelamento de pedidos -->
+       <div id="modal-cancelar" class="modal-overlay hidden">
+           <div class="modal-cancelar">
+               <button id="fechar-modal" class="fechar-modal">✕</button>
+               <h2>Cancelar pedidos</h2>
+                <form action="/painel_usuario/meus-pedidos/cancelar_pedido" method="post">
+                  <p>Digite o ID do pedido que deseja cancelar</p>
+                  <input type="text" id="input-pedido-id" class="input-pedido" name="id_pedido">
+                  <button id="btn-cancelar-pedido" class="btn-cancelar" type="submit">Cancelar pedido</button>
+                </form>
+           </div>
+       </div>
+
     </div>
+
     </main>
 <footer>
   <img class="sob" src="/static/img_home/Sob copy.png" alt="">
@@ -137,6 +153,36 @@ window.addEventListener('click', function (e) {
   if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
     loginDropdown.style.display = 'none';
     loginIcon.classList.remove('login-active');
+  }
+});
+
+// JavaScript para controlar o modal de cancelamento
+const modalCancelar = document.getElementById('modal-cancelar');
+const btnAbrirModal = document.getElementById('abrir-modal-cancelar');
+const btnFecharModal = document.getElementById('fechar-modal');
+const btnCancelarPedido = document.getElementById('btn-cancelar-pedido');
+
+btnAbrirModal.addEventListener('click', () => {
+  modalCancelar.classList.remove('hidden');
+});
+
+btnFecharModal.addEventListener('click', () => {
+  modalCancelar.classList.add('hidden');
+});
+
+modalCancelar.addEventListener('click', (e) => {
+  if (e.target === modalCancelar) {
+    modalCancelar.classList.add('hidden');
+  }
+});
+
+btnCancelarPedido.addEventListener('click', () => {
+  const pedidoId = document.getElementById('input-pedido-id').value;
+  if (pedidoId) {
+    alert(`Pedido de id = ${pedidoId} foi cancelado.`);
+    // Aqui você pode adicionar a lógica para cancelar o pedido
+  } else {
+    alert('Por favor, digite o ID do pedido');
   }
 });
 

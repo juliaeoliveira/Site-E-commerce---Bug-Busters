@@ -329,10 +329,10 @@ def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_d
     pedido = db.query(Pedido).filter(Pedido.id == id_pedido).first()
 
     if not pedido:
-        return templates.TemplateResponse("mensagem.html", {
+        return templates.TemplateResponse("mensagem_pedido.html", {
             "request": request,
             "mensagem": "Nenhum pedido registrado.",
-            "link_login": "/painel_usuario/carrinho"
+            "link": "/painel_usuario/produtos"
         })
 
     itens = pedido.itens_pedido  
@@ -343,6 +343,40 @@ def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_d
         "itens": itens,
         "primeiro_nome" : primeiro_nome
     })
+
+@caminho_prefixo_painelUsuario.post("/meus-pedidos/cancelar_pedido", response_class=HTMLResponse)
+def cancelar_pedido(request: Request, db: Session = Depends(get_db), id_pedido : int=Form(...)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    # Verifica se o token é válido
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu login expirou. Faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+
+    email=payload.get("sub")
+    
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
+    id_usuario = usuario.id
+
+    # Busca apenas o pedido específico que pertence a este usuário
+    pedido = (db.query(Pedido).filter(Pedido.id == id_pedido, Pedido.id_usuario == id_usuario).first())
+
+    if not pedido:
+        return templates.TemplateResponse("mensagem_pedido.html", {
+            "request": request,
+            "mensagem": "Você ainda não realizou nenhum pedido.",
+            "link": "/painel_usuario/produtos"
+        })
+    
+    pedido.status = "cancelado"
+    db.commit()
+    db.refresh(pedido)
+
+    return RedirectResponse (url="/painel_usuario/meus_pedidos", status_code=303)
 
 #comprar novamente: Pagina de produtos que usuario já comprou novamente 
 @caminho_prefixo_painelUsuario.get("/comprar_novamente", response_class=HTMLResponse)
@@ -366,10 +400,10 @@ def comprar_novamente(request: Request, db: Session = Depends(get_db)):
     pedidos = db.query(Pedido).filter(Pedido.id_usuario == id_usuario).all()
 
     if not pedidos:
-        return templates.TemplateResponse("mensagem.html", {
+        return templates.TemplateResponse("mensagem_pedido.html", {
             "request": request,
             "mensagem": "Você ainda não realizou nenhum pedido.",
-            "link_login": "/painel_usuario/carrinho"
+            "link": "/painel_usuario/produtos"
         })
 
     #extrai todos os produtos únicos comprados anteriormente

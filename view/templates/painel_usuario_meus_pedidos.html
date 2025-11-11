@@ -61,11 +61,11 @@
             {% for pedido in pedidos %}
             <div class="pedido-card" onclick="window.location.href='/painel_usuario/meus-pedidos/{{ pedido.id }}'">
                 <div class="pedido-header">
-                    <h2>Pedido #{{ pedido.id }}</h2>
+                    <h2>Pedido: ID - {{ pedido.id }}</h2>
                     <span>{{ pedido.data_pedido.strftime('%d/%m/%Y %H:%M') }}</span>
                 </div>
                 <div class="pedido-info">
-                    <p><strong>Status:</strong> {{ "Pago" if pedido.status else "Ativo/Pendente" }}</p>
+                    <p><strong>Status:</strong> {{ pedido.status | capitalize }} </p>
                     <p><strong>Valor Total:</strong> R$ {{ "%.2f"|format(pedido.valor_total) }}</p>
                 </div>
             </div>
