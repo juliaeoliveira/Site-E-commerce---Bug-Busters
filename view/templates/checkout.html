@@ -58,28 +58,13 @@
         </div>
     </div>
 
-     <main>
-        <section id="carrinho">
-            <h1 class="localizacao">Carrinho > Pagamento</h1>
-            <br><br>
+    <main>
+        <form action="">
+            <section id="carrinho">
 
-            <div class="area-carrinho">
-                <div class="coluna-esquerda">
-                    <section class="produto-vestido">
-                        <h1>ENDEREÇO DE ENVIO</h1>
-                        <form class="form-endereco">
+                <h1 class="localizacao">Carrinho > Pagamento</h1>
+                <br><br>
 
-<<<<<<< HEAD
-                            <div class="linha-dupla">
-                            <div>
-                                <label for="nome">Nome Completo *</label>
-                                <input id="nome" type="text" value="Júlia Evangelista" disabled>
-                            </div>
-                            <div>
-                                <label for="telefone">Número de Telefone *</label>
-                                <input id="telefone" type="text" value="11 4002-8922" disabled>
-                            </div>
-=======
                 <div class="area-carrinho">
                     <div class="coluna-esquerda">
                         <section class="produto-vestido">
@@ -139,54 +124,10 @@
 
                                 <a href="/pedido/editar_endereco" type="button" class="botao-enviar">Alterar informações
                                     de cadastro</a>
->>>>>>> 1a8f1dd89259ce5021da8495afdfa81562285a77
                             </div>
+                        </section>
 
-                            <div class="linha-dupla">
-                            <div>
-                                <label for="cep">CEP *</label>
-                                <input id="cep" type="text" value="00000-000" disabled>
-                            </div>
-                            <div>
-                                <label for="rua">Rua *</label>
-                                <input id="rua" type="text" value="Rua Alameda Santos" disabled>
-                            </div>
-                            </div>
-
-                            <div class="linha-dupla">
-                            <div>
-                                <label for="numero">N° *</label>
-                                <input id="numero" type="text" value="80" disabled>
-                            </div>
-                            <div>
-                                <label for="complemento">Complemento (Opcional)</label>
-                                <input id="complemento" type="text" disabled>
-                            </div>
-                            </div>
-
-                            <div class="linha-dupla">
-                            <div class="primeiro">
-                                <label for="estado">Estado *</label>
-                                <input id="estado" type="text" value="SP" disabled>
-                            </div>
-                            <div class="segundo">
-                                <label for="cidade">Cidade *</label>
-                                <input id="cidade" type="text" value="Paraíba" disabled>
-                            </div>
-
-                            <div class="linha-dupla2">
-                            <div>
-                                <label for="bairro">Bairro *</label>
-                                <input id="bairro" type="text" value="Tchaca-Tchaca" disabled>
-                            </div>
-                            </div>
-                            </div>
-
-                            <button type="button" class="botao-enviar">Alterar informações de cadastro</button>
-                        </form>
-                    </section>
-
-                    <section class="produto-vestido">
+                        <section class="produto-vestido">
                             <h1>MÉTODOS DE PAGAMENTO</h1>
 
                             <div class="form-pagamento">
@@ -206,74 +147,10 @@
                                 </div>
 
                             </div>
-<<<<<<< HEAD
-                    </section>
-                    <section class="produto-vestido">
-                        <h1>ITENS</h1>
-                        <div class="produto-item">
-                            <!-- <input class="checkbox-item" type="checkbox">  -->
-                            <img class="foto" src="" alt="Vestido">
-                            <div class="texto">
-                                <h3>Vestido Eternity</h3>
-                                <!-- <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira"> -->
-                                <p class="colecao">Coleção Chama Secreta</p>
-                                <p class="estoque">Em estoque</p>
-                                <select class="tamanho">
-                                    <option value="PP">PP</option>
-                                    <option value="P">P</option>
-                                    <option value="M">M</option>
-                                    <option value="G">G</option>
-                                </select>
-                                <br>
-                                <label class="quantidade" for="quantidade">Quantidade:</label>
-                                <input type="number" class="quantidade-caixinha" name="quantidade" min="1" max="10" required placeholder="1"> 
-                                <p class="valor">R$ 12.000</p>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <section class="pedido-total">
-                    <div>
-                        <h3>Seu pedido</h3>
-                        <br>
-                        <h2><span>Sub total:</span> <span>12.000</span></h2>
-                        <h2 class="frete"><span>Frete:</span> <span>12.000</span></h2>
-                    </div>
-                    <form action="/pedido/fechar" method="post"> 
-                        <button id="botao-pagamento" type="submit">Fechar pedido</button>
-                    </form>
-                </section>
-            </div>
-            <div class="botoes-finais">
-                    <button class="botao-voltar">← Voltar para o carrinho</button>
-                    <button class="botao-confirmar-final">Confirmar pagamento →</button>
-                </div>
-            <div style="height: 30px;"></div>
-
-        </section>
-=======
                         </section>
                         <section class="produto-vestido" id="itens-pedido">
                             <h1>ITENS</h1>
                             <div class="itens-container"></div> <!-- <- novo container -->
-                            <div class="produto-item">
-                                <!-- <img class="foto" src="" alt="Vestido"> -->
-                                <div class="texto">
-                                    <!-- <h3>Vestido Eternity</h3> -->
-                                    <!-- <p class="colecao">Coleção Chama Secreta</p> -->
-                                    <!-- <p class="estoque">Em estoque</p> -->
-                                    <!-- <select class="tamanho">
-                                        <option value="PP">PP</option>
-                                        <option value="P">P</option>
-                                        <option value="M">M</option>
-                                        <option value="G">G</option>
-                                    </select> -->
-                                    <br>
-                                    <!-- <label class="quantidade" for="quantidade">Quantidade:</label>
-                                    <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
-                                    <p class="valor">R$ 12.000</p> -->
-                                </div>
-                            </div>
                         </section>
                     </div>
                     <section class="pedido-total">
@@ -303,7 +180,6 @@
                 <div style="height: 30px;"></div>
             </section>
         </form>
->>>>>>> 1a8f1dd89259ce5021da8495afdfa81562285a77
 
         <!-- MAIS VARIEDADES -->
         <section id="variedades">
@@ -358,67 +234,6 @@
         </section>
         <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
-<<<<<<< HEAD
-
-    <!-- JAVASCRIPT (inalterado) -->
-    <script>
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", ready);
-        } else {
-            ready();
-        }
-
-        let totalAmount = 0;
-
-        function ready() {
-            loadCartFromLocalStorage();
-            const purchaseButton = document.getElementById("botao-pagamento");
-            if (purchaseButton) purchaseButton.addEventListener("click", makePurchase);
-        }
-
-        function loadCartFromLocalStorage() {
-            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-            const container = document.querySelector(".produto-vestido")[2];
-            const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
-            container.innerHTML = "<h1>ITENS</h1>";
-
-            carrinho.forEach((produto, index) => {
-                const div = document.createElement("div");
-                div.classList.add("produto-item");
-                div.innerHTML = `
-                    <img class="foto" src="${produto.imagem}" alt="${produto.nome}">
-                    <div class="texto">
-                        <h3>${produto.nome}</h3>
-                        <label class="tamanho-label">Tamanho:</label>
-                        <select class="tamanho">
-                            <option value="PP" ${produto.tamanho === "PP" ? "selected" : ""}>PP</option>
-                            <option value="P" ${produto.tamanho === "P" ? "selected" : ""}>P</option>
-                            <option value="M" ${produto.tamanho === "M" ? "selected" : ""}>M</option>
-                            <option value="G" ${produto.tamanho === "G" ? "selected" : ""}>G</option>
-                            <option value="GG" ${produto.tamanho === "GG" ? "selected" : ""}>GG</option>
-                        </select>
-                        <br>
-                        <label class="quantidade">Quantidade:</label>
-                        <input type="number" class="quantia" min="1" max="10" value="${produto.quantidade}">
-                        <p class="valor">${produto.preco}</p>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-
-            updateTotal();
-
-            document.querySelectorAll(".quantia").forEach(input => input.addEventListener("change", updateQuantity));
-            document.querySelectorAll(".lixeira").forEach(btn => btn.addEventListener("click", removeProduct));
-            document.querySelectorAll(".tamanho").forEach(select => select.addEventListener("change", e => {
-                const index = Array.from(document.querySelectorAll(".tamanho")).indexOf(e.target);
-                let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-                carrinho[index].tamanho = e.target.value;
-                localStorage.setItem("carrinho", JSON.stringify(carrinho));
-            }));
-        }
-
-=======
     <script>
         const loginIcon = document.getElementById('login-icon');
         const loginDropdown = document.getElementById('login-dropdown');
@@ -563,54 +378,18 @@
         // ================================
         // ATUALIZA TOTAL DO CARRINHO
         // ================================
->>>>>>> 1a8f1dd89259ce5021da8495afdfa81562285a77
         function updateTotal() {
             const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
             const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
             let total = 0;
 
-<<<<<<< HEAD
-            carrinho.forEach(produto => {
-=======
             // Soma o preço de todos os produtos
             carrinho.forEach(produto => {
                 // Converte o preço de "R$xx,xx" para número
->>>>>>> 1a8f1dd89259ce5021da8495afdfa81562285a77
                 let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
                 total += preco * produto.quantidade;
             });
 
-<<<<<<< HEAD
-            totalElement.textContent = total.toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' });
-            totalAmount = total;
-        }
-
-        function updateQuantity(e) {
-            const index = Array.from(document.querySelectorAll(".quantia")).indexOf(e.target);
-            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-            carrinho[index].quantidade = parseInt(e.target.value) || 1;
-            localStorage.setItem("carrinho", JSON.stringify(carrinho));
-            updateTotal();
-        }
-
-        function removeProduct(e) {
-            const index = parseInt(e.target.dataset.index);
-            if (isNaN(index)) return;
-            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-            carrinho.splice(index, 1);
-            localStorage.setItem("carrinho", JSON.stringify(carrinho));
-            loadCartFromLocalStorage();
-        }
-
-        function makePurchase() {
-            if (totalAmount <= 0) {
-                alert("Seu carrinho está vazio!");
-                return;
-            }
-            alert(`✅ Obrigado pela sua compra! Valor do pedido: R$${totalAmount.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`);
-            localStorage.removeItem("carrinho");
-            loadCartFromLocalStorage();
-=======
             // [LINHA 171] MUDANÇA AQUI: Adicionar style: 'currency' e currency: 'BRL'
             totalElement.textContent = total.toLocaleString("pt-BR", {
                 style: 'currency',
@@ -738,7 +517,6 @@
                 console.error("Erro:", err);
                 alert("Erro inesperado ao processar o pedido.");
             }
->>>>>>> 1a8f1dd89259ce5021da8495afdfa81562285a77
         }
     </script>
 

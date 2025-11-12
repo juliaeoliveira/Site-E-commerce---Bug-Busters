@@ -378,7 +378,7 @@ button:hover {
 }
 
  #botao-pagamento {
-  /* color: white;
+  color: white;
   text-align: center;
   background-color: #790000;
   margin-left: 110px;
@@ -391,16 +391,7 @@ button:hover {
   transition: all 0.2s ease-in-out;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  border-radius: 4px; */
-  color: white;
-  text-align: center;
-  height: 50px;
-  width: 200px;
-  background-color: #790000;
-  margin-left: 100px;
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  margin-top: 50px;
+  border-radius: 4px;
 }
 
 footer {
@@ -511,6 +502,7 @@ footer p {
 }
 
 .quantidade {
+  background-color: #E3D2AC;
   color: #5a0101;
   
 }
@@ -542,7 +534,6 @@ footer p {
   margin-top: 10px;
 }
 
-.form-endereco
 h3 {
   color: #523800;
 
@@ -674,6 +665,7 @@ h3 {
 
 /* Coluna esquerda com os 3 cards empilhados */
 .coluna-esquerda {
+  display: flex;
   flex-direction: column; /* empilha os 3 cards */
   gap: 40px; /* espaçamento entre eles */
 }
@@ -696,7 +688,7 @@ h3 {
     color: #4E3902;
 }
 
-/* Cada linha de campos */
+/* Cada linha de campos (como Nome/Telefone ou CEP/Rua) */
 .linha-dupla {
     justify-content: space-between;
     gap: 70px;
@@ -728,7 +720,7 @@ h3 {
     gap: 60px;
 }
 
-/* Quando estiverem*/
+/* Quando estiverem*
 .form-endereco input:disabled {
     background-color: #fff;
     color: #4E3902;
@@ -736,13 +728,13 @@ h3 {
     cursor: default;
 }
 
-
+/* Distribuição das larguras dos campos */
 #nome, #telefone, #cep, #rua, #numero, #complemento,
 #estado, #cidade, #bairro {
     flex: 1;
 }
 
-
+/* Botão — visual igual ao do Figma */
 .botao-enviar {
     align-self: flex-end;
     width: 200px;
@@ -842,9 +834,8 @@ a.botao-enviar {
   align-self: flex-start; /* botão alinhado à esquerda */
   margin-top: 15px;
   transition: all 0.2s ease-in-out;
-  margin-left: 200px;
+  margin-left: 215px;
 }
-.opcao-pagamento
 
 .botao-confirmar:hover {
   background-color: #5a0101;
@@ -860,14 +851,13 @@ a.botao-enviar {
 /* ajustes do enedereço de  */
 /* Garante altura maior e mantém alinhamento */
 .produto-vestido:nth-child(1) {
-    min-height: 700px;
+    min-height: 550px;
     padding-bottom: 40px;
 }
 
 
 /* Aumentar largura dos inputs do endereço */
 .produto-vestido input {
-  width: 100%;
   padding: 12px;
   font-size: 14px;
   box-sizing: border-box;
@@ -884,79 +874,16 @@ a.botao-enviar {
 }
 
 /* Ajuste de espaçamento entre os campos */
-/* .produto-vestido form {
+.produto-vestido form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-} */
+}
 
 /* Aproximar o título dos campos */
 .produto-vestido h1 {
   margin-bottom: 15px;
 }
-
-.primeiro{
-  width: 200px;
-}
-
-.segundo{
-  position: absolute;
-  width: 100px;
-  margin-top: -65px;
-  margin-left: 430px;
-  width: 200px;
-
-}
-
-/* botao no final */
-.botoes-finais {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin: 40px 200px 0px 120px; 
-  
-  
-}
-
-.botao-voltar {
-  background-color: #EADCC1CC;
-  color: #6E0606;
-  font-family: "Inter";
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
-  height: 60px;
-  width: 300px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: 800px; /* afasta o da esquerda */
-}
-.botao-voltar:hover {
-  transform: scale(1.05);
-}
-
-.botao-confirmar-final {
-  margin-right: 200px;
-  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
-  background-color:  #EADCC1CC;
-  color:  #6E0606;
-  font-family: "Inter", sans-serif;
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  height: 60px;
-  width: 300px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-h3
-.botao-confirmar-final:hover {
-  background-color: #5a0101;
-  transform: scale(1.05);
-}
-
 
 /*TESTE DA ABERTURA DO LOGIN*/
 
@@ -1130,4 +1057,8 @@ h3
 .botao-confirmar-final:hover {
   background-color: #5a0101;
   transform: scale(1.05);
+}
+
+#itens-pedido {
+  height: auto
 }

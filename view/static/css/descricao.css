@@ -388,7 +388,9 @@ footer p{
   letter-spacing: 0.96px;
   margin-top: 40px;
   font-weight: 500;
+  text-decoration: none; /* Ativa o sublinhado */
   }
+
 
   .midia{
   float: right;
