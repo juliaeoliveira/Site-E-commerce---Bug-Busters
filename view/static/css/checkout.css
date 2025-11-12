@@ -365,7 +365,7 @@ button:hover {
   font-size: 20px;
   margin-top: 200px;
   position: absolute;
-  margin-left: 850px;
+  margin-left: 650px;
   margin-bottom: 30px;
   font-family: "Libre Caslon Text";
   color: #4E3902;
@@ -504,9 +504,13 @@ footer p {
 .quantidade {
   background-color: #E3D2AC;
   color: #5a0101;
-  height: 80px;
+  
 }
 
+.quantia {
+  width: 60px;
+  border-color:#320101;
+}
 
 
 .pedido-total h1 {
@@ -677,10 +681,8 @@ h3 {
 
 /* ===== CARD: ENDEREÇO DE ENVIO ===== */
 .form-endereco {
-    display: flex;
-    flex-direction: column; /* Coloca os grupos de campos empilhados */
+    min-height: 510px;
     gap: 20px; /* Espaço entre grupos de campos */
-    margin-top: 20px;
     padding: 20px 40px;
     font-family: "Inter", sans-serif;
     color: #4E3902;
@@ -688,9 +690,8 @@ h3 {
 
 /* Cada linha de campos (como Nome/Telefone ou CEP/Rua) */
 .linha-dupla {
-    display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 70px;
 }
 
 .linha-dupla > div {
@@ -699,7 +700,6 @@ h3 {
 
 /* Rótulos dos inputs */
 .form-endereco label {
-    display: block;
     font-family: "Libre Caslon Text";
     color: #4E3902;
     margin-bottom: 5px;
@@ -717,6 +717,7 @@ h3 {
     font-family: "Inter", sans-serif;
     font-size: 15px;
     color: #4E3902;
+    gap: 60px;
 }
 
 /* Quando estiverem*
@@ -736,7 +737,7 @@ h3 {
 /* Botão — visual igual ao do Figma */
 .botao-enviar {
     align-self: flex-end;
-    width: auto;
+    width: 200px;
     background-color: #790000;
     color: white;
     border: none;
@@ -745,11 +746,13 @@ h3 {
     font-family: "Inter", sans-serif;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    margin-top: 45px;
-    margin-right: 165px;
+    margin-left: 160px;
+}
+
+.linha-dupla2 {
+  margin-bottom: 30px;
 }
 
 a.botao-enviar {
@@ -761,6 +764,33 @@ a.botao-enviar {
     transform: scale(1.05);
 }
 
+
+/* Ajustar os campos que estão lado a lado */
+.produto-vestido .linha-dupla2 {
+  gap: 20px;
+} 
+
+.produto-vestido .linha-dupla > div {
+  flex: 1;
+}
+
+/* Aproximar o título dos campos */
+.produto-vestido h1 {
+  margin-bottom: 15px;
+}
+
+.primeiro{
+  width: 200px;
+}
+
+.segundo{
+  position: absolute;
+  width: 100px;
+  margin-top: -65px;
+  margin-left: 430px;
+  width: 200px;
+
+}
 
 /* metodo de pagamento */
 
@@ -835,7 +865,7 @@ a.botao-enviar {
 
 /* Ajustar os campos que estão lado a lado */
 .produto-vestido .linha-dupla {
-  display: flex;
+ 
   gap: 20px;
 }
 
@@ -970,4 +1000,60 @@ a.botao-enviar {
 
 .opcoes a:hover {
   color: #800000;
+}
+
+#itens-pedido {
+  height: 300px;
+}
+
+/* botao no final */
+.botoes-finais {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 40px 200px 0px 120px; 
+  
+  
+}
+
+/* Voltar */
+.botao-voltar {
+  background-color: #EADCC1CC;
+  color: #6E0606;
+  font-family: "Inter";
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  height: 60px;
+  width: 300px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 100px; /* afasta o da esquerda */
+}
+.botao-voltar:hover {
+  transform: scale(1.05);
+}
+
+/* Confirmar */
+.botao-confirmar-final {
+  margin-right: 200px;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  background-color:  #EADCC1CC;
+  color:  #6E0606;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  height: 60px;
+  width: 300px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+h3
+.botao-confirmar-final:hover {
+  background-color: #5a0101;
+  transform: scale(1.05);
 }
