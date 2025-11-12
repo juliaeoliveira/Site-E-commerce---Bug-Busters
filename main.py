@@ -37,6 +37,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 # #--------------------------------------------------------------
 
 app.mount("/static", StaticFiles(directory="view/static"), name="static")
+# Monta os arquivos de imagens da pasta 'coleção/img_colecao' em '/img_colecao'
+app.mount("/img_colecao", StaticFiles(directory="coleção/img_colecao"), name="img_colecao")
 
 app.include_router(router)
 app.include_router(pedido_controller.router)
