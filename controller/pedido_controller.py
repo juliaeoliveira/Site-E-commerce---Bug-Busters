@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Request, Form, Depends, HTTPException, status
+from fastapi import APIRouter, Request, Form, UploadFile, File, Depends, HTTPException, status, Query 
+from fastapi.exceptions import RequestValidationError
+from pydantic import ValidationError
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from models import Pedido, ItemPedido, Produto, Usuario_Model, Endereco,Pagamento
@@ -11,6 +13,7 @@ from typing import List, Dict, Any
 from decimal import Decimal
 import traceback
 import random
+import requests, math
 
 from datetime import datetime
 import pytz
@@ -179,12 +182,46 @@ def pagina_checkout(request: Request, db: Session = Depends(get_db)):
 
     # Selecionar 3 aleatórios (ou menos se não houver suficientes)
     sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
+#03008020
+    # Calcula frete usando o CEP do usuário (mesma lógica de /api/frete)
+    frete = None
+    cep_destino = (endereco.cep or "").replace('-', '').strip() if endereco else ""
+    if cep_destino and cep_destino.isdigit() and len(cep_destino) == 8:
+        via_cep_url = f"https://viacep.com.br/ws/{cep_destino}/json/"
+        try:
+            resp = requests.get(via_cep_url, timeout=5)
+            if resp.status_code == 200:
+                dados = resp.json()
+                if not dados.get("erro"):
+                    logradouro = dados.get("logradouro") or ""
+                    complemento = dados.get("complemento") or ""
+                    bairro = dados.get("bairro") or ""
+                    localidade = dados.get("localidade") or ""
+                    uf = dados.get("uf") or ""
+                    endereco_formatado = ", ".join(filter(None, [logradouro, complemento, bairro, f"{localidade}/{uf}"]))
 
-    
+                    # Valor e prazo de frete simulados (poderia depender de CEP/distância)
+                    valor_frete = 10.00
+                    prazo_estimado = 5
+
+                    frete = {
+                        "endereco": endereco_formatado,
+                        "valor_frete": float(valor_frete),
+                        "prazo_estimado_dias": prazo_estimado,
+                        "cep_consultado": cep_destino,
+                        "dados_viacep": dados
+                    }
+        except requests.RequestException:
+            frete = None
+
     return templates.TemplateResponse("checkout.html", {
-        "request": request, "endereco" : endereco, "sugestoes" : sugestoes,
-        "primeiro_nome" : primeiro_nome, "usuario": usuario
-        })
+        "request": request,
+        "endereco": endereco,
+        "sugestoes": sugestoes,
+        "primeiro_nome": primeiro_nome,
+        "usuario": usuario,
+        "frete": frete
+    })
     
 @router.post("/checkout")
 async def salvar_dados_pedido(
@@ -266,9 +303,6 @@ async def salvar_dados_pedido(
 
     return {"message": "Pedido e pagamento salvos com sucesso!", "id_pedido": novo_pedido.id}
     
-
-
-
 @router.get("/editar_endereco")
 def editar_endereco(request: Request, db: Session = Depends(get_db)):
     token = request.cookies.get("token")
@@ -388,49 +422,101 @@ def detalhar_pedido(
         ],
     }
 
-
 # checkout de pedidos 
-@router.post("/checkout")
-def checkout(
-    pedido: PedidoCreate,
-    db: Session = Depends(get_db),
-    usuario=Depends(obter_usuario_logado)
-):
-    # Valida se há itens no pedido
-    if not pedido.itens_pedido:
-        raise HTTPException(status_code=400, detail="Carrinho vazio")
+# @router.post("/checkout")
+# def checkout(
+#     pedido: PedidoCreate,
+#     db: Session = Depends(get_db),
+#     usuario=Depends(obter_usuario_logado)
+# ):
+#     # Valida se há itens no pedido
+#     if not pedido.itens_pedido:
+#         raise HTTPException(status_code=400, detail="Carrinho vazio")
     
-    try:
-        # Cria o pedido principal
-        novo_pedido = Pedido(
-            id_usuario=usuario.id,
-            data_pedido=datetime.now(fuso),
-            valor_total=pedido.valor_total,
-            status=True
-        )
-        db.add(novo_pedido)
-        db.flush()  # Garante que o ID seja gerado sem fazer commit ainda
-        db.refresh(novo_pedido)
+#     try:
+#         # Cria o pedido principal
+#         novo_pedido = Pedido(
+#             id_usuario=usuario.id,
+#             data_pedido=datetime.now(fuso),
+#             valor_total=pedido.valor_total,
+#             status=True
+#         )
+#         db.add(novo_pedido)
+#         db.flush()  # Garante que o ID seja gerado sem fazer commit ainda
+#         db.refresh(novo_pedido)
 
-        # Cria os itens do pedido
-        for item in pedido.itens_pedido:
-            produto = db.query(Produto).filter(Produto.id == item.id_produto).first()
-            if not produto:
-                db.rollback()
-                raise HTTPException(status_code=404, detail=f"Produto ID {item.id_produto} não encontrado.")
+#         # Cria os itens do pedido
+#         for item in pedido.itens_pedido:
+#             produto = db.query(Produto).filter(Produto.id == item.id_produto).first()
+#             if not produto:
+#                 db.rollback()
+#                 raise HTTPException(status_code=404, detail=f"Produto ID {item.id_produto} não encontrado.")
 
-            item_pedido = ItemPedido(
-                id_pedido=novo_pedido.id,
-                id_produto=item.id_produto,
-                tamanho=item.tamanho,
-                quantidade=item.quantidade,
-                preco_unitario=item.preco_unitario,
-                subtotal=item.subtotal
-            )
-            db.add(item_pedido)
+#             item_pedido = ItemPedido(
+#                 id_pedido=novo_pedido.id,
+#                 id_produto=item.id_produto,
+#                 tamanho=item.tamanho,
+#                 quantidade=item.quantidade,
+#                 preco_unitario=item.preco_unitario,
+#                 subtotal=item.subtotal
+#             )
+#             db.add(item_pedido)
 
-        db.commit()
-        return RedirectResponse(url="/painel_usuario/meus_pedidos", status_code=303)
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=f"Erro ao processar checkout: {str(e)}")
+#         db.commit()
+#         return RedirectResponse(url="/painel_usuario/meus_pedidos", status_code=303)
+#     except Exception as e:
+#         db.rollback()
+#         raise HTTPException(status_code=500, detail=f"Erro ao processar checkout: {str(e)}")
+    
+
+
+# # Rota frete simulada para o SOBVeu
+# CEP_LOJA = "08580300"
+# @router.get("/api/frete")
+# def calcular_frete(
+#     request:Request, cep_destino:str=Query(...)
+# ):
+#     # Verificação de Login 
+#     token = request.cookies.get("token")
+#     payload = verificar_token(token)
+#     if not payload:
+#         raise HTTPException(status_code=401, 
+#                             detail="Usuario não encontrado")
+#     # validar cep 
+#     elif not cep_destino.isdigit() or len(cep_destino) != 8:
+#         raise HTTPException(status_code=401, 
+#                             detail="CEP inválido")
+#     # consultar cep na api do viacep (usa requests, não o objeto Request do FastAPI)
+#     via_cep_url = f"https://viacep.com.br/ws/{cep_destino}/json/"
+#     try:
+#         resposta = requests.get(via_cep_url, timeout=5)
+#     except requests.RequestException as e:
+#         raise HTTPException(status_code=400, detail=f"Erro ao consultar o CEP: {str(e)}")
+
+#     if resposta.status_code != 200:
+#         raise HTTPException(status_code=400, detail="Erro ao consultar o CEP")
+
+#     dados = resposta.json()
+#     if dados.get("erro"):
+#         raise HTTPException(status_code=400, detail="CEP não encontrado")
+
+#     # Monta o endereço para retorno
+#     logradouro = dados.get("logradouro") or ""
+#     complemento = dados.get("complemento") or ""
+#     bairro = dados.get("bairro") or ""
+#     localidade = dados.get("localidade") or ""
+#     uf = dados.get("uf") or ""
+
+#     endereco_formatado = ", ".join(filter(None, [logradouro, complemento, bairro, f"{localidade}/{uf}"]))
+
+#     # Valor e prazo de frete simulados (poderia depender de CEP/distância)
+#     valor_frete = 10.00
+#     prazo_estimado = 5
+
+#     return {
+#         "endereco": endereco_formatado,
+#         "valor_frete": float(valor_frete),
+#         "prazo_estimado_dias": prazo_estimado,
+#         "cep_consultado": cep_destino,
+#         "dados_viacep": dados
+#     }

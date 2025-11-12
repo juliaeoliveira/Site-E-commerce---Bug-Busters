@@ -7,56 +7,10 @@
     <link rel="stylesheet" href="/static/css/painel_usuario_editar_endereco.css"/>
 </head>
 <body>
-      <div class="menu">
-      <a href="/painel_usuario"><img id="logo" src="/static/assets/img_tela.usuario/Sob1.png" alt="Logo"></a>
-          <nav class="text-menu">
-              <a href="/painel_usuario/produtos">Vestidos</a>
-              <a href="/painel_usuario/meus_dados/editar_endereco/#">Coleções</a>
-              <a href="/painel_usuario/meus_dados/editar_endereco/#">Agendamentos</a>
-          </nav>
-        
-            <div class="login-dropdown-wrapper">
-              <img class="login"
-                src="/static/assets/img_tela.usuario/login.png"
-                width="20px"
-                title="login"
-                alt="login"
-                id="login-icon"
-              />
 
-              <div id="login-dropdown" class="hidden">
-                <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
-                <ul>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-                  </div>
-                  </ul>
-                <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
-              </div>
-                
-                  <a href="/painel_usuario/carrinho">
-                      <img src="/static/assets/img_tela.usuario/carrinho.png"
-                      width="20px"
-                      title="Carrinho"
-                      alt="Carrinho"
-                  />
-                  </a>
-                </nav>
-              </div>
-          </div>
-<main>
     <div class="container">
         <h2>Editar Endereço</h2>
-        <form id="formEditarEndereco" action="/painel_usuario/editar_endereco" method="post">
+        <form id="formEditarEndereco" action="/usuario/admin/editar_endereco" method="post">
 
             <label for="cep">CEP:</label>
             <input type="text" id="cep" name="cep" value="{{ endereco.cep }}" required>
@@ -112,71 +66,6 @@
         </form>
     </div>
 
-    <footer>
-      <img class="sob" src="/static/img_home/Sob copy.png" alt="" />
-
-      <div class="footer-section">
-        <h4>Contatos</h4>
-        <ul>
-          <li>
-            <img
-              class="telefone"
-              src="/static/img_home/telefone.png"
-              alt="Telefone"
-            />
-            (11) 4002-8922
-          </li>
-          <li>
-            <img
-              class="whatsapp"
-              src="/static/img_home/speech-bubble--v2-Photoroom.png"
-              alt="WhatsApp"
-            />
-            (11) 98291-1653
-          </li>
-          <li>sobveuoficial@gmail.com</li>
-        </ul>
-      </div>
-
-      <p class="linha">___________</p>
-
-      <div class="footer-section">
-        <h4>Sobre a loja:</h4>
-        <ul>
-          <li>Sobre nós</li>
-          <li>Trocas e Devoluções</li>
-          <li>Fretes e Entregas</li>
-        </ul>
-      </div>
-
-      <p class="linha">___________</p>
-
-      <div class="footer-section">
-        <ul>
-          <li>Política de Privacidade</li>
-          <li>Termos de Uso</li>
-        </ul>
-      </div>
-
-      <section class="midia">
-        <img
-          class="instagram"
-          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
-          alt="Instagram"
-        />
-        <img
-          class="facebook"
-          src="/static/img_home/facebook-f-Photoroom.png"
-          alt="Facebook"
-        />
-      </section>
-
-      <p class="direitos">
-        &copy; 2025 Sob Véu. Todos os direitos reservados.
-      </p>
-    </footer>
-
-
     <script>
         const form = document.getElementById('formEditarEndereco');
 
@@ -201,22 +90,6 @@
                 alert('❌ Erro de conexão ao enviar os dados.');
             });
         });
-
-        const loginIcon = document.getElementById("login-icon");
-      const loginDropdown = document.getElementById("login-dropdown");
-
-      loginIcon.addEventListener("click", () => {
-        const isVisible = loginDropdown.style.display === "block";
-        loginDropdown.style.display = isVisible ? "none" : "block";
-        loginIcon.classList.toggle("login-active", !isVisible);
-      });
-
-      window.addEventListener("click", function (e) {
-        if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
-          loginDropdown.style.display = "none";
-          loginIcon.classList.remove("login-active");
-        }
-      });
     </script>
 </body>
 </html>

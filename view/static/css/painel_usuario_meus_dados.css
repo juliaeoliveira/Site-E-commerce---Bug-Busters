@@ -218,6 +218,11 @@ nav a {
   font-size: 15px;
 }
 
+#logout-btn a {
+  color: #fff;
+  text-decoration: none;
+}
+
 #logout-btn:hover {
   background-color: #5a0000;
 }
