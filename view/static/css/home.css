@@ -13,7 +13,7 @@ body {
     background-color: #FBFCF7;
     
 }
-
+.numero
 /* MENU */
 #logo {
     
@@ -197,6 +197,7 @@ h1 {
   font-family: "Afacad";
   font-weight: 400;
   font-size: 24px;
+  text-decoration: none;
   
 }
 
