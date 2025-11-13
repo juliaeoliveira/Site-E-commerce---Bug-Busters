@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Form, UploadFile, File, Depends, HTTPException, status
+from fastapi import APIRouter, Request, Form, UploadFile, File, Depends, HTTPException, status, HTTPExcepition, Query 
 from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
@@ -12,6 +12,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from typing import List, Dict, Any
 import traceback
 import random
+import requests, math
 
 from datetime import datetime
 import pytz
@@ -350,3 +351,38 @@ def checkout(
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro ao processar checkout: {str(e)}")
+    
+
+
+# Rota frete simulada para o SOBVeu
+CEP_LOJA = "08580300"
+@router.get("/api/frete")
+def calcular_frete(
+    request:Request, cep_destino:str=Query(...)
+):
+    # Verificação de Login 
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, 
+                            detail="Usuario não encontrado")
+    # validar cep 
+    elif not cep_destino.isdigit() or len(cep_destino) != 8:
+        raise HTTPException(status_code=401, 
+                            detail="CEP inválido")
+    # consultar cep na api do viacep
+    via_cep_url = f"https://viacep.com.br/ws/{cep_destino}/json/"
+    resposta = request.get(via_cep_url)
+    if resposta.status_code != 200:
+        raise HTTPException(status_code=400, 
+                            detail="Erro ao consulatar o CEP")
+    dados = resposta.json()
+    if "erro" in dados:
+        raise HTTPException(status_code=400, detail="CEP não encontrado")
+    
+    valor_frete = 15.00
+    prazo_estimado = 5
+
+    return {
+        "endereco": f"{dados.get('logradouro')} - {dados.get()}"
+    }
