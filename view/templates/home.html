@@ -74,23 +74,27 @@
     <h1>
       TOQUE DE <span class="destaque">eternidade</span> NO SEU GRANDE DIA
     </h1>
+
     <div class="galeria-vestidos">
+
       <div class="seta seta-esquerda">
         <img src="/static/img_home/seta esquerda2.png" alt="Anterior">
       </div>
+
+      <!-- CONTÊINER FIXO DO PAR DE IMAGENS -->
       <div class="items-produto">
-        <img src="/static/img_home/vestido-1.png" alt="Vestido 1">
+        <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
       </div>
 
       <div class="items-produto">
-        <img src="/static/img_home/vestido 2.png" alt="Vestido 2">
+        <img id="vestido2" src="/static/img_home/vestido-2.png" alt="">
       </div>
 
       <div class="seta seta-direita">
         <img src="/static/img_home/seta direita2.png" alt="Próximo">
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
@@ -191,5 +195,50 @@
   <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
 
 </footer>
+
+<script>
+  const paresVestidos = [
+    ["/static/img_home/vestido-1.png", "/static/img_home/vestido 2.png"],
+    ["/static/img_home/vestido-3.png", "/static/img_home/vestido-4.png"],
+    ["/static/img_home/vestido-5.png", "/static/img_home/vestido-6.png"],
+    ["/static/img_home/vestido-7.png", "/static/img_home/vestido-8.png"]
+  ];
+
+  let indice = 0; // Começa no primeiro par
+
+  const img1 = document.getElementById("vestido1");
+  const img2 = document.getElementById("vestido2");
+
+  const setaDir = document.querySelector(".seta-direita");
+  const setaEsq = document.querySelector(".seta-esquerda");
+
+  function atualizarImagens(direcao) {
+    // animação: sai para a esquerda ou direita
+    img1.classList.add(direcao);
+    img2.classList.add(direcao);
+
+    setTimeout(() => {
+      img1.src = paresVestidos[indice][0];
+      img2.src = paresVestidos[indice][1];
+
+      // reseta posição para animação de entrada
+      img1.classList.remove(direcao);
+      img2.classList.remove(direcao);
+    }, 300); // tempo da animação
+  }
+
+  setaDir.addEventListener("click", () => {
+    indice++;
+    if (indice >= paresVestidos.length) indice = 0;
+    atualizarImagens("sair-esquerda");
+  });
+
+  setaEsq.addEventListener("click", () => {
+    indice--;
+    if (indice < 0) indice = paresVestidos.length - 1;
+    atualizarImagens("sair-direita");
+  });
+</script>
+
 </body>
 </main>

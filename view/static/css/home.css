@@ -540,3 +540,16 @@ footer li {
   gap: 15px;
 }
 
+.items-produto img {
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+.sair-esquerda {
+  transform: translateX(-200px);
+  opacity: 0;
+}
+
+.sair-direita {
+  transform: translateX(200px);
+  opacity: 0;
+}
