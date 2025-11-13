@@ -51,7 +51,11 @@ def cadastrar_usuario( request:Request,
 
     #validação da confirmação de senha
     if senha != confirmar_senha:
-        return {"mensagem": "As senhas não coincidem."}
+        return templates.TemplateResponse("mensagem_senha=!confirmar_senha.html", {
+            "request": request,
+            "mensagem": "As senhas informadas não correspondem. Por favor, verifique e tente novamente.",
+            "link_login": "/usuario/registrar"
+        })
     
     #define o tipo com base no domínio do e-mail
     if email.endswith("@admsobveu.com"):
