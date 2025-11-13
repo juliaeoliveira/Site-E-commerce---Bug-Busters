@@ -1,15 +1,20 @@
+<<<<<<< HEAD
 from fastapi import APIRouter, Request, Form, UploadFile, File, Depends, HTTPException, status, HTTPExcepition, Query 
 from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
+=======
+from fastapi import APIRouter, Request, Form, Depends, HTTPException, status
+>>>>>>> 610f1a9616b0f3b33278a0cf4c5ab3d143ab614c
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from models import Pedido, ItemPedido, Produto, Usuario_Model, Endereco
-from schemas import PedidoCreate, ItemPedidoCreate
+from models import Pedido, ItemPedido, Produto, Usuario_Model, Endereco,Pagamento
+from schemas import PedidoCreate
 from controller.usuario_autenticacao import obter_usuario_logado,  verificar_token
 from database import get_db
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from typing import List, Dict, Any
+from decimal import Decimal
 import traceback
 import random
 import requests, math
@@ -181,10 +186,95 @@ def pagina_checkout(request: Request, db: Session = Depends(get_db)):
 
     # Selecionar 3 aleatórios (ou menos se não houver suficientes)
     sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
+
+    
     return templates.TemplateResponse("checkout.html", {
         "request": request, "endereco" : endereco, "sugestoes" : sugestoes,
         "primeiro_nome" : primeiro_nome, "usuario": usuario
         })
+    
+@router.post("/checkout")
+async def salvar_dados_pedido(
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    
+    email=payload.get("sub")
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+
+
+    dados = await request.json()    
+    metodo_pagamento = dados.get("metodo_pagamento")
+    status = ""
+    itens = dados.get("itens")
+
+    if not metodo_pagamento or not itens:
+        raise HTTPException(status_code=400, detail="Método de pagamento e itens são obrigatórios.")
+
+    cnpj_loja = "03.774.819/0005-28"  # fixo da sob veu
+
+    # Calcula o valor total
+    valor_total = sum(Decimal(str(i["subtotal"])) for i in itens)
+
+    if (metodo_pagamento == "debito") or (metodo_pagamento == "pix"):
+        status = "pago"
+    
+    if metodo_pagamento == "credito":
+        status = "pendente"
+
+    # Cria o pedido
+    novo_pedido = Pedido(
+        id_usuario=usuario.id,
+        valor_total=valor_total,
+        status=status,
+        data_pedido=datetime.now(fuso)
+    )
+    db.add(novo_pedido)
+    db.flush()  # Garante que o novo_pedido.id seja gerado antes de salvar os itens
+
+    # Cria os itens do pedido
+    for item in itens:
+        item_pedido = ItemPedido(
+            id_pedido=novo_pedido.id,
+            id_produto=item["id_produto"],
+            tamanho=item["tamanho"],
+            quantidade=item["quantidade"],
+            preco_unitario=Decimal(str(item["preco_unitario"])),
+            subtotal=item["subtotal"]
+        )
+        db.add(item_pedido)
+
+        # # Atualiza o estoque do produto 
+        # produto = db.query(Produto).filter(Produto.id == item["id_produto"]).first()
+        # if produto:
+        #     produto.quantidade_estoque = max(0, produto.quantidade_estoque - item["quantidade"])
+
+    # Cria o pagamento
+    pagamento = Pagamento(
+        valor=valor_total,
+        metodo_pagamento=metodo_pagamento,
+        id_usuario=usuario.id,
+        id_pedido=novo_pedido.id,
+        cnpj_loja=cnpj_loja,
+        status=True
+    )
+    db.add(pagamento)
+
+    db.commit()
+
+    return {"message": "Pedido e pagamento salvos com sucesso!", "id_pedido": novo_pedido.id}
+    
+
+
 
 @router.get("/editar_endereco")
 def editar_endereco(request: Request, db: Session = Depends(get_db)):

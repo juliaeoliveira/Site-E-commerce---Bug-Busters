@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +31,7 @@
           />
 
           <div id="login-dropdown" class="hidden">
-            <h3><strong>Boas-vindas, {{ primeiro_nome }}.</strong></h3>
+            <h3><strong>Bem-vindo(a), {{ primeiro_nome }}.</strong></h3>
             <ul>
               <div class="opcoes">
                 <a href="/painel_usuario/meus_dados">Sua Conta</a>
@@ -62,129 +62,131 @@
     </div> 
 
     <main>
-        <section id="carrinho">
-            <h1 class="localizacao">Carrinho > Pagamento</h1>
-            <br><br>
+        <form action="">
+            <section id="carrinho">
 
-            <div class="area-carrinho">
-                <div class="coluna-esquerda">
-                    <section class="produto-vestido">
-                        <h1>ENDEREÇO DE ENVIO</h1>
-                        <form class="form-endereco">
+                <h1 class="localizacao">Carrinho > Pagamento</h1>
+                <br><br>
 
-                            <div class="linha-dupla">
-                            <div>
-                                <label for="nome">Nome Completo:</label>
-                                <input id="nome" type="text" value="{{ usuario.nome_cliente }}" disabled>
-                            </div>
-                            <div>
-                                <label for="telefone">Número de Telefone: </label>
-                                <input id="telefone" type="text" value="{{ usuario.telefone }}" disabled>
-                            </div>
-                            </div>
+                <div class="area-carrinho">
+                    <div class="coluna-esquerda">
+                        <section class="produto-vestido">
+                            <h1>ENDEREÇO DE ENVIO</h1>
+                            <div class="form-endereco">
 
-                            <div class="linha-dupla">
-                            <div>
-                                <label for="cep">CEP: </label>
-                                <input id="cep" type="text" value="{{ endereco.cep }}" disabled>
-                            </div>
-                            <div>
-                                <label for="rua">Rua: </label>
-                                <input id="rua" type="text" value="{{ endereco.rua }}" disabled>
-                            </div>
-                            </div>
+                                <div class="linha-dupla">
+                                <div>
+                                    <label for="nome">Nome Completo:</label>
+                                    <input id="nome" type="text" value="{{ usuario.nome_cliente }}" disabled>
+                                </div>
+                                <div>
+                                    <label for="telefone">Número de Telefone: </label>
+                                    <input id="telefone" type="text" value="{{ usuario.telefone }}" disabled>
+                                </div>
+                                </div>
 
-                            <div class="linha-dupla">
-                            <div>
-                                <label for="numero">N°: </label>
-                                <input id="numero" type="text" value="{{ endereco.numero }}" disabled>
-                            </div>
-                            <div>
-                                <label for="complemento">Complemento:</label>
-                                <input id="complemento" type="text" value="{{ endereco.complemento }}" disabled>
-                            </div>
-                            </div>
+                                <div class="linha-dupla">
+                                <div>
+                                    <label for="cep">CEP: </label>
+                                    <input id="cep" type="text" value="{{ endereco.cep }}" disabled>
+                                </div>
+                                <div>
+                                    <label for="rua">Rua: </label>
+                                    <input id="rua" type="text" value="{{ endereco.rua }}" disabled>
+                                </div>
+                                </div>
 
-                            <div class="linha-dupla">
-                            <div>
-                                <label for="estado">Estado:</label>
-                                <input id="estado" type="text" value="{{ endereco.estado }}" disabled>
-                            </div>
-                            <div>
-                                <label for="cidade">Cidade:</label>
-                                <input id="cidade" type="text" value="{{ endereco.cidade }}" disabled>
-                            </div>
-                            <div>
-                                <label for="bairro">Bairro:</label>
-                                <input id="bairro" type="text" value="{{ endereco.bairro }}" disabled>
-                            </div>
-                            </div>
+                                <div class="linha-dupla">
+                                <div>
+                                    <label for="numero">N°: </label>
+                                    <input id="numero" type="text" value="{{ endereco.numero }}" disabled>
+                                </div>
+                                <div>
+                                    <label for="complemento">Complemento:</label>
+                                    <input id="complemento" type="text" value="{{ endereco.complemento }}" disabled>
+                                </div>
+                                </div>
 
-                            <a href="/pedido/editar_endereco" type="button" class="botao-enviar">Alterar informações de cadastro</a>
-                        </form>
-                    </section>
+                                <div class="linha-dupla">
+                                <div>
+                                    <label for="estado">Estado:</label>
+                                    <input id="estado" type="text" value="{{ endereco.estado }}" disabled>
+                                </div>
+                                <div>
+                                    <label for="cidade">Cidade:</label>
+                                    <input id="cidade" type="text" value="{{ endereco.cidade }}" disabled>
+                                </div>
+                                <div>
+                                    <label for="bairro">Bairro:</label>
+                                    <input id="bairro" type="text" value="{{ endereco.bairro }}" disabled>
+                                </div>
+                                </div>
 
-                    <section class="produto-vestido">
-                        <h1>MÉTODOS DE PAGAMENTO</h1>
-
-                        <form class="form-pagamento">
-                            <div class="opcao-pagamento">
-                                <label for="pix">Pix</label>
-                                <input type="radio" id="pix" name="metodo" value="pix">
+                                <a href="/pedido/editar_endereco" type="button" class="botao-enviar">Alterar informações de cadastro</a>
                             </div>
+                        </section>
 
-                            <div class="opcao-pagamento">
-                                <label for="credito">Cartão de Crédito:<br>(12x)</label>
-                                <input type="radio" id="credito" name="metodo" value="credito">
-                            </div>
+                        <section class="produto-vestido">
+                            <h1>MÉTODOS DE PAGAMENTO</h1>
 
-                            <div class="opcao-pagamento">
-                                <label for="debito">Cartão de Débito:</label>
-                                <input type="radio" id="debito" name="metodo" value="debito">
-                            </div>
+                            <div class="form-pagamento">
+                                <div class="opcao-pagamento">
+                                    <label for="pix">Pix</label>
+                                    <input type="radio" id="pix" name="metodo_pagamento" value="pix" required>
+                                </div>
 
-                            <button type="submit" class="botao-confirmar">Confirmar pagamento</button>
-                        </form>
-                    </section>
-                    <section class="produto-vestido" id="itens-pedido">
-                        <h1>ITENS</h1>
-                        <div class="itens-container"></div> <!-- <- novo container -->
-                        <div class="produto-item">
-                            <!-- <input class="checkbox-item" type="checkbox">  -->
-                            <!-- <img class="foto" src="" alt="Vestido"> -->
-                            <div class="texto">
-                                <!-- <h3>Vestido Eternity</h3> -->
-                                <!-- <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira"> -->
-                                <!-- <p class="colecao">Coleção Chama Secreta</p> -->
-                                <!-- <p class="estoque">Em estoque</p> -->
-                                <!-- <select class="tamanho">
-                                    <option value="PP">PP</option>
-                                    <option value="P">P</option>
-                                    <option value="M">M</option>
-                                    <option value="G">G</option>
-                                </select> -->
-                                <br>
-                                <!-- <label class="quantidade" for="quantidade">Quantidade:</label>
-                                <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
-                                <p class="valor">R$ 12.000</p> -->
+                                <div class="opcao-pagamento">
+                                    <label for="credito">Cartão de Crédito:<br>(12x)</label>
+                                    <input type="radio" id="credito" name="metodo_pagamento" value="credito">
+                                </div>
+
+                                <div class="opcao-pagamento">
+                                    <label for="debito">Cartão de Débito:</label>
+                                    <input type="radio" id="debito" name="metodo_pagamento" value="debito">
+                                </div>
+
                             </div>
-                        </div>
-                    </section>
-                </div>
-                <section class="pedido-total">
-                    <div>
-                        <h3>Seu pedido</h3>
-                        <br>
-                        <h2><span>Sub total:</span> <span>12.000</span></h2>
+                        </section>
+                        <section class="produto-vestido" id="itens-pedido">
+                            <h1>ITENS</h1>
+                            <div class="itens-container"></div> <!-- <- novo container -->
+                            <div class="produto-item">
+                                <!-- <input class="checkbox-item" type="checkbox">  -->
+                                <!-- <img class="foto" src="" alt="Vestido"> -->
+                                <div class="texto">
+                                    <!-- <h3>Vestido Eternity</h3> -->
+                                    <!-- <img class="lixeira" src="/static/img_home/lixeira.png" alt="lixeira"> -->
+                                    <!-- <p class="colecao">Coleção Chama Secreta</p> -->
+                                    <!-- <p class="estoque">Em estoque</p> -->
+                                    <!-- <select class="tamanho">
+                                        <option value="PP">PP</option>
+                                        <option value="P">P</option>
+                                        <option value="M">M</option>
+                                        <option value="G">G</option>
+                                    </select> -->
+                                    <br>
+                                    <!-- <label class="quantidade" for="quantidade">Quantidade:</label>
+                                    <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
+                                    <p class="valor">R$ 12.000</p> -->
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                    <form id="checkout-form"> 
-                        <button id="botao-pagamento" type="submit">Fechar pedido</button>
-                    </form>
+                    <section class="pedido-total">
+                        <div>
+                            <h3>Seu pedido</h3>
+                            <br>
+                            <h2><span>Sub total:</span> <span>12.000</span></h2>
+                        </div>
+                        <div id="checkout-form"> 
+                            <button id="botao-pagamento" type="submit">Fechar pedido</button>
+                        </div>
 
-                </section>
+                    </section>
 
-            </div>
-        </section>
+                </div>
+            </section>
+        </form>
 
         <!-- MAIS VARIEDADES -->
         <section id="variedades">
@@ -448,81 +450,64 @@
 
     loadCartFromLocalStorage(); // recarrega o carrinho
     }
+</script>
 
+<script>
+async function makePurchase(event) {
+    event.preventDefault();
 
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-        return null;
-        }
-    
-        // ================================
-    // FINALIZA A COMPRA (ENVIA AO BACKEND)
-    // ================================
-    async function makePurchase(event) {
-        event.preventDefault();
+    // Carrinho armazenado no localStorage
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    // Método de pagamento selecionado
+    const metodoPagamento = document.querySelector('input[name="metodo_pagamento"]:checked')?.value;
 
-        if (carrinho.length === 0) {
-            alert("Seu carrinho está vazio!");
-            return;
-        }
-
-        // Monta o payload do pedido
-        const pedidoData = {
-            valor_total: totalAmount,
-            itens_pedido: carrinho.map(item => ({
-                id_produto: Number(item.id),
-                tamanho: item.tamanho,
-                quantidade: Number(item.quantidade),
-                preco_unitario: parseFloat(
-                    item.preco.replace("R$", "").replace(".", "").replace(",", ".")
-                ),
-                subtotal:
-                    parseFloat(
-                        item.preco.replace("R$", "").replace(".", "").replace(",", ".")
-                    ) * Number(item.quantidade)
-            }))
-        };
-
-        try {
-            const response = await fetch("/pedido/salvar", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(pedidoData),
-                credentials: "include" // importante se usa JWT nos cookies
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.detail || "Erro ao criar o pedido");
-            }
-
-            const data = await response.json();
-            console.log("Pedido salvo com sucesso:", data);
-
-            alert(`✅ Pedido realizado com sucesso! Número do pedido: ${data.pedido_id}`);
-
-            // Limpa o carrinho e atualiza tela
-            localStorage.removeItem("carrinho");
-            loadCartFromLocalStorage();
-        } catch (err) {
-            console.error("Erro ao enviar pedido:", err);
-            alert("❌ Não foi possível concluir o pedido. Tente novamente.");
-        }
+    if (!metodoPagamento) {
+        alert("Selecione um método de pagamento!");
+        return;
     }
 
-    function ready() {
-        loadCartFromLocalStorage();
-        const form = document.getElementById("checkout-form");
-        if (form) form.addEventListener("submit", makePurchase);
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
     }
 
-    // Garante que tudo acima seja executado depois que o DOM estiver pronto
-    document.addEventListener("DOMContentLoaded", ready);
+    // Monta os dados a serem enviados ao backend
+    const payload = {
+        metodo_pagamento: metodoPagamento,
+        itens: carrinho.map(item => ({
+            id_produto: item.id, // o produto deve ter um 'id' salvo no localStorage
+            nome: item.nome,
+            tamanho: item.tamanho,
+            quantidade: item.quantidade,
+            preco_unitario: parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", ".")),
+            subtotal: parseFloat(item.quantidade) * parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", "."))
+        }))
+    };
 
+    try {
+        const response = await fetch("/pedido/checkout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert("Pedido realizado com sucesso!");
+            localStorage.removeItem("carrinho"); // limpa o carrinho
+            window.location.href = `/painel_usuario/meus_pedidos`;
+        } else {
+            alert("Erro ao salvar pedido: " + (result.detail || "Tente novamente."));
+        }
+    } catch (err) {
+        console.error("Erro:", err);
+        alert("Erro inesperado ao processar o pedido.");
+    }
+}
 </script>
 
 </body>
