@@ -1,66 +1,59 @@
-
-/* Para não esconder o conteúdo atrás do menu */
-
 *{
   padding: 0;
   margin: 0;
 }
 
+body {
+    background: #EAE4D8;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/* MENU */
 #logo {
-    
-    height: 80px; /* Define a altura do logo */
-    padding-left: 130px; /* Espaço à esquerda do logo */
+  height: 80px; /* Define a altura do logo */
+  padding-left: 130px; /* Espaço à esquerda do logo */
 }
 
 .icons {
-    gap: 5px;
-    justify-content: center;
-    display: flex;
-    padding-right: 150px;
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
 }
 
 
 
 .menu {
   height: 90px;
-    margin-top: 30px;
-    position: fixed; /* Fixa o menu na tela */
-    z-index: 1; /* Garante que o menu fique acima de outros elementos */
-    display: flex; /* Organiza os itens do menu em linha */
-    width: 100%; /* O menu ocupa toda a largura da tela */
-    align-items: center; /* Centraliza os itens na vertical */
-    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
-    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
-    color: #ffffff; /* Cor do texto do menu */
-}
-
-header{
-  margin-top: -30px;
+  position: fixed; /* Fixa o menu na tela */
+  z-index: 1; /* Garante que o menu fique acima de outros elementos */
+  display: flex; /* Organiza os itens do menu em linha */
+  width: 100%; /* O menu ocupa toda a largura da tela */
+  align-items: center; /* Centraliza os itens na vertical */
+  justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
+  background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
+  font-family: 'Open Sans', sans-serif; /* Fonte do menu */
+  color: #ffffff; /* Cor do texto do menu */
 }
 
 /* Estilo do menu de navegação */
-header nav {
-    gap:200px;
-    justify-content: center;
-    display: flex;
-    font-family: "Libre Caslon Text";
-    font-size: 22px;
-    color: #523800;
-   
+.text-menu {
+
+  gap:200px;
+  justify-content: center;
+  display: flex;
+  font-family: "Libre Caslon Text";
+  color: #523800;  
 }
-
-
-
 /* Estilo dos links dentro do nav */
-header nav a {
+nav a {
     color: #523800;
     font-size: 20px; /* Define o tamanho da fonte */
     padding: 25px; /* Espaçamento interno */
     text-decoration: underline; /* Ativa o sublinhado */
     text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
 }
-
 
 
 main{
@@ -102,7 +95,7 @@ h1 {
   font-size: 50px;
 }
 
-div {
+.vestido {
     position: relative; /* Permite usar posicionamento absoluto dentro do div */
     background: black;
     color: white;
@@ -115,25 +108,25 @@ div {
 }
 
 
-div:focus{
+.vestido:focus{
     border: black;
     transform: scale(10); 
 
 }
 
-div:hover{
+.vestido:hover{
     border-color: white;
     transform: scale(10);
 
 }
 
-div:hover img {
+.vestido:hover img {
     transform: scale(10); /* Aumenta a imagem */
     transition: 2s ease;
 }
 
 
-.menu div img {
+.menu .vestido img {
     position: absolute;
     top: 0;
     left: 0;
@@ -299,8 +292,8 @@ body,main{
 #login-dropdown {
   height: 880px;
   position: absolute;
-  top: 35px;
-  right: 0;
+  top: 13px;
+  left: 130px;
   background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
   width: 300px;
   font-family: 'Open Sans', sans-serif;
@@ -341,9 +334,11 @@ body,main{
   color: rgb(255, 255, 255);
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   font-size: 15px;
+  margin-left: 80px;
 }
 #logout-btn a {
   color: #fff;
+  text-decoration: none;
 }
 #logout-btn:hover {
   background-color: #5a0000;
@@ -408,4 +403,22 @@ body,main{
 
 .opcoes a:hover {
   color: #800000;
+}
+
+/* Correção para não empurrar o ícone do carrinho */
+.login-dropdown-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 60px; /* <-- afasta login e carrinho da borda direita */
+}
+
+.login {
+  margin-right: 60px; /* espaçamento entre login e carrinho */
+}
+
+body,main{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

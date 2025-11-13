@@ -16,42 +16,70 @@
   <link rel="stylesheet" href="/static/css/painel_usuario_comprar_novamente.css"> 
 </head>
 
-<!-- HEADER -->
-<header>
-  <section class="menu">
-    <nav>
-      <a href="/painel_usuario"> <img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a> 
-    </nav>  
-    <nav class="paginas">
-      <a href="/painel_usuario/produtos">Vestidos</a>
-      <a href="/painel_usuario/produtos/#">Coleções</a>
-      <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
-    </nav>
-    <nav class="icons">
-      <a href="/painel_usuario/comprar_novamente">
-        <img src="/static/img_home/login.png" width="20px" title="" alt=""/>
-      </a>
-      <a href="/painel_usuario/carrinho">
-        <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
-      </a>
-    </nav>
-  </section>
-</header>
 <body>
+
+    <div class="menu">
+      <a href="/painel_usuario"><img id="logo" src="/static/assets/img_tela.usuario/Sob1.png" alt="Logo"></a>
+          <nav class="text-menu">
+              <a href="/painel_usuario/produtos">Vestidos</a>
+              <a href="/painel_usuario/meus_dados/#">Coleções</a>
+              <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+          </nav>
+        
+            <div class="login-dropdown-wrapper">
+              <img class="login"
+                src="/static/assets/img_tela.usuario/login.png"
+                width="20px"
+                title="login"
+                alt="login"
+                id="login-icon"
+              />
+
+              <div id="login-dropdown" class="hidden">
+                <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
+                <ul>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+                  </div>
+                </ul>
+                <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+              </div>
+                
+                  <a href="/painel_usuario/carrinho">
+                      <img src="/static/assets/img_tela.usuario/carrinho.png"
+                      width="20px"
+                      title="Carrinho"
+                      alt="Carrinho"
+                  />
+                  </a>
+                </nav>
+              </div>
+          </div>
   
   <main>
     <h1>COMPRE NOVAMENTE</h1>
     <section>    
         {% if produtos %}
           {% for produto in produtos %}
-            <div class="vestido">   
-              <nav>
-                <a href="/painel_usuario/produtos/{{produto.id}}">  
-                  <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}"> 
-                </a>
-              </nav>
-              <p class="nome">{{produto.nome_produto}}</p>
-            </div>
+            {% if produto.quantidade_estoque > 0 %}  
+              <div class="vestido">   
+                <nav>
+                  <a href="/painel_usuario/produtos/{{produto.id}}">  
+                    <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}"> 
+                  </a>
+                </nav>
+                <p class="nome">{{produto.nome_produto}}</p>
+              </div>
+            {% endif %}
           {% endfor %}
         {% else %}
           <p>Nenhum produto encontrado!</p>
@@ -94,5 +122,28 @@
     <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
    
     </footer>
+
+    <script>
+  const loginIcon = document.getElementById('login-icon');
+const loginDropdown = document.getElementById('login-dropdown');
+
+loginIcon.addEventListener('click', () => {
+  const isVisible = loginDropdown.style.display === 'block';
+
+  loginDropdown.style.display = isVisible ? 'none' : 'block';
+  
+  // Ativa ou desativa a animação
+  loginIcon.classList.toggle('login-active', !isVisible);
+});
+
+window.addEventListener('click', function (e) {
+  if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+    loginDropdown.style.display = 'none';
+    loginIcon.classList.remove('login-active');
+  }
+});
+
+</script>
+
 </body>
 </html>

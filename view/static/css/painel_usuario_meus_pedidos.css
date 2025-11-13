@@ -1,3 +1,8 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
 body {
     background: #EAE4D8;
     font-family: 'Segoe UI', sans-serif;
@@ -43,7 +48,7 @@ body {
 /* Estilo dos links dentro do nav */
 nav a {
     color: #523800;
-    font-size: 25px; /* Define o tamanho da fonte */
+    font-size: 22px; /* Define o tamanho da fonte */
     padding: 25px; /* Espaçamento interno */
     text-decoration: underline; /* Ativa o sublinhado */
     text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
@@ -195,10 +200,10 @@ h1 {
   font-size: 15px;
 }
 
-#logout-btn:hover {
-  background-color: #5a0000;
+#logout-btn a {
+  color: #fff;
+  text-decoration: none;
 }
-
 .carrinho{
   margin-right: 90px;
 }
@@ -262,60 +267,18 @@ h1 {
 
 
 
-footer{
-    background-color: #5a0101;
-    color: white;
-    padding: 40px 0; /* aumenta altura */
-    display: flex;
-    justify-content: space-evenly;  
-    align-items: flex-start; /* alinhar tudo no topo */
-    width: 100%;
-    flex-wrap: wrap; /* quebra linha caso precise */
-    margin-top: 100px; /* espaço entre o footer e o conteúdo */
-}
-
-footer ul {
-  font-family: "Inter", sans-serif;
-    list-style: none;
-   text-align: center;
-}
-
-footer li {
-  margin-top: 40px;
-  text-align: center;
-    margin: 10px 0;
-    font-size: 14px;
-    font-family: "Inter", sans-serif;
-    margin: 10px 0;
-}
-
-h1{
-  font-size: 25px;
-}
-
-.linhafooter{
-  margin-top: 20px;
-    width: 170px;
-    transform: rotate(-90.164deg);
-    color: #FFF;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 420px;
-}
-
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-top: 50px; 
-    font-size: 15px;
-}
-
-.whatsapp, .telefone{
+.whatsapp{
     height: 20px;
 }
 
+.telefone{
+    height: 20px;
+}
+.facebook{
+  height: 40px;
+}
 
-.instagram, .facebook{
+.instagram{
   height: 40px;
   text-align: right;
 }
@@ -333,6 +296,51 @@ h1{
     font-size: 15px;
 }
 
+footer{
+    background-color: #5a0101;
+    color: white;
+    padding: 40px 0; /* aumenta altura */
+    display: flex;
+    justify-content: space-evenly;  
+    align-items: flex-start; /* alinhar tudo no topo */
+    width: 100%;
+    flex-wrap: wrap; /* quebra linha caso precise */
+    margin-top: 80px; /* espaço entre o footer e o conteúdo */
+}
+
+footer ul {
+  font-family: "Inter", sans-serif;
+    list-style: none; 
+    text-align: center;
+}
+
+footer li {
+  margin-top: 40px;
+  text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    margin: 10px 0;
+}
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-top: 50px; 
+    font-size: 15px;
+}
+
+body,main{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.midia{
+  float: right;
+   display: grid;
+  gap: 15px;
+}
 .linha{
     width: 170px;
     transform: rotate(-90.164deg);
@@ -343,12 +351,7 @@ h1{
     margin-top: 50px;
 }
 
-html{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: #FFF9ED;
-}
+
 
 footer p{
   text-align: center;
@@ -358,6 +361,18 @@ footer p{
    display: grid;
   gap: 15px;
 }
+
+.linha{
+    width: 170px;
+    transform: rotate(-90.164deg);
+    color: #FFF;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 420px;
+    margin-top: 50px;
+}
+
+
 
 /* Correção para não empurrar o ícone do carrinho */
 .login-dropdown-wrapper {
@@ -394,9 +409,7 @@ main .botao{
     transform: scale(1.05);
 }
 
-main{
-  margin-left: 100px;
-}
+
 
 #logout-btn a {
   color: #fff;
@@ -405,4 +418,10 @@ main{
 .hidden ul {
   padding-inline-start: 0px;
 
+}
+
+body,main{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

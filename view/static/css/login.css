@@ -41,8 +41,10 @@ body {
 
 /* ÍCONES À DIREITA */
 .icons {
+    gap: 5px;
+    justify-content: center;
     display: flex;
-    gap: 15px;
+    padding-right: 150px;
 }
 
 /* CONTAINER PRINCIPAL COM IMAGEM E FORMULÁRIO */

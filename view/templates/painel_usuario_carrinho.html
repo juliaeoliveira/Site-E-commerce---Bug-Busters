@@ -38,7 +38,7 @@
     </nav>
     <br> <br> <br>
     <div class="login-dropdown-wrapper">
-      <img class="login" src="/static/img_home/login.png" width="20px" title="login" alt="login" id="login-icon" />
+      <img class="login" src="/static/img_home/login.png" width="20px" title="Login" alt="login" id="login-icon" />
 
       <div id="login-dropdown" class="hidden">
         <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
@@ -119,15 +119,17 @@
 
       <div class="lista-vestidos">
         {% for sugestao in sugestoes %}
-        <div class="vestido">
-          <!-- <div class="imagem-container"> -->
-          <a href="/painel_usuario/produtos/{{ sugestao.id }}">
-            <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}"
-              class="fotovariedades">
-            <p class="nome">{{ sugestao.nome_produto }}</p>
-          </a>
-          <!-- </div>             -->
-        </div>
+          {% if sugestao.quantidade_estoque > 0%}
+            <div class="vestido">
+              <!-- <div class="imagem-container"> -->
+              <a href="/painel_usuario/produtos/{{ sugestao.id }}">
+                <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}"
+                  class="fotovariedades">
+                <p class="nome">{{ sugestao.nome_produto }}</p>
+              </a>
+              <!-- </div>             -->
+            </div>
+          {% endif %}
         {% endfor %}
 
       </div>
@@ -173,7 +175,7 @@
       <li>Termos de Uso</li>
     </ul>
     </div>
-    <section class="midia">
+    <section class="midia"> 
       <img class="instagram"
         src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
       <img class="facebook" src="/static/img_home/facebook-f-Photoroom.png" alt="">

@@ -397,11 +397,11 @@ footer {
   flex-wrap: wrap; /* quebra linha caso precise */
   margin-top: 100px; /* espaço entre o footer e o conteúdo */
 }
-.nome
 footer ul {
   font-family: "Inter", sans-serif;
   list-style: none;
   text-align: center;
+  text-decoration: none;
 }
 
 footer li {
@@ -409,6 +409,8 @@ footer li {
   text-align: center;
   margin: 10px 0;
   font-size: 14px;
+  text-decoration: none;
+  list-style: none;
 }
 
 h1 {
@@ -469,6 +471,7 @@ html {
 
 footer p {
   text-align: center;
+  text-decoration: none;
 }
 
 .midia {
@@ -685,6 +688,7 @@ h3 {
 }
 #logout-btn a {
   color: #fff;
+  text-decoration: none;
 }
 #logout-btn:hover {
   background-color: #5a0000;

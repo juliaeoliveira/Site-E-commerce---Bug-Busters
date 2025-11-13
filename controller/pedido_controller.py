@@ -252,8 +252,14 @@ async def salvar_dados_pedido(
 
     cnpj_loja = "03.774.819/0005-28"  # fixo da sob veu
 
-    # Calcula o valor total
-    valor_total = sum(Decimal(str(i["subtotal"])) for i in itens)
+    # Calcula o valor total (soma dos subtotais + frete, se informado)
+    frete_recebido = dados.get("frete", 0)
+    try:
+        frete_decimal = Decimal(str(frete_recebido))
+    except Exception:
+        frete_decimal = Decimal('0')
+
+    valor_total = sum(Decimal(str(i["subtotal"])) for i in itens) + frete_decimal
 
     if (metodo_pagamento == "debito") or (metodo_pagamento == "pix"):
         status = "pago"
@@ -303,9 +309,6 @@ async def salvar_dados_pedido(
 
     return {"message": "Pedido e pagamento salvos com sucesso!", "id_pedido": novo_pedido.id}
     
-
-
-
 @router.get("/editar_endereco")
 def editar_endereco(request: Request, db: Session = Depends(get_db)):
     token = request.cookies.get("token")
@@ -425,52 +428,51 @@ def detalhar_pedido(
         ],
     }
 
-
 # checkout de pedidos 
-@router.post("/checkout")
-def checkout(
-    pedido: PedidoCreate,
-    db: Session = Depends(get_db),
-    usuario=Depends(obter_usuario_logado)
-):
-    # Valida se há itens no pedido
-    if not pedido.itens_pedido:
-        raise HTTPException(status_code=400, detail="Carrinho vazio")
+# @router.post("/checkout")
+# def checkout(
+#     pedido: PedidoCreate,
+#     db: Session = Depends(get_db),
+#     usuario=Depends(obter_usuario_logado)
+# ):
+#     # Valida se há itens no pedido
+#     if not pedido.itens_pedido:
+#         raise HTTPException(status_code=400, detail="Carrinho vazio")
     
-    try:
-        # Cria o pedido principal
-        novo_pedido = Pedido(
-            id_usuario=usuario.id,
-            data_pedido=datetime.now(fuso),
-            valor_total=pedido.valor_total,
-            status=True
-        )
-        db.add(novo_pedido)
-        db.flush()  # Garante que o ID seja gerado sem fazer commit ainda
-        db.refresh(novo_pedido)
+#     try:
+#         # Cria o pedido principal
+#         novo_pedido = Pedido(
+#             id_usuario=usuario.id,
+#             data_pedido=datetime.now(fuso),
+#             valor_total=pedido.valor_total,
+#             status=True
+#         )
+#         db.add(novo_pedido)
+#         db.flush()  # Garante que o ID seja gerado sem fazer commit ainda
+#         db.refresh(novo_pedido)
 
-        # Cria os itens do pedido
-        for item in pedido.itens_pedido:
-            produto = db.query(Produto).filter(Produto.id == item.id_produto).first()
-            if not produto:
-                db.rollback()
-                raise HTTPException(status_code=404, detail=f"Produto ID {item.id_produto} não encontrado.")
+#         # Cria os itens do pedido
+#         for item in pedido.itens_pedido:
+#             produto = db.query(Produto).filter(Produto.id == item.id_produto).first()
+#             if not produto:
+#                 db.rollback()
+#                 raise HTTPException(status_code=404, detail=f"Produto ID {item.id_produto} não encontrado.")
 
-            item_pedido = ItemPedido(
-                id_pedido=novo_pedido.id,
-                id_produto=item.id_produto,
-                tamanho=item.tamanho,
-                quantidade=item.quantidade,
-                preco_unitario=item.preco_unitario,
-                subtotal=item.subtotal
-            )
-            db.add(item_pedido)
+#             item_pedido = ItemPedido(
+#                 id_pedido=novo_pedido.id,
+#                 id_produto=item.id_produto,
+#                 tamanho=item.tamanho,
+#                 quantidade=item.quantidade,
+#                 preco_unitario=item.preco_unitario,
+#                 subtotal=item.subtotal
+#             )
+#             db.add(item_pedido)
 
-        db.commit()
-        return RedirectResponse(url="/painel_usuario/meus_pedidos", status_code=303)
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=f"Erro ao processar checkout: {str(e)}")
+#         db.commit()
+#         return RedirectResponse(url="/painel_usuario/meus_pedidos", status_code=303)
+#     except Exception as e:
+#         db.rollback()
+#         raise HTTPException(status_code=500, detail=f"Erro ao processar checkout: {str(e)}")
     
 
 

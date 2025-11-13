@@ -161,7 +161,7 @@ nav a {
   margin-left: 20px;
 }
 
-.produto-item input[type="checkbox"] {
+.produto-item input[type="radio"] {
   margin-top: 0; /* remove empurrão */
   align-self: center; /* garante alinhamento */
 }
@@ -936,6 +936,7 @@ a.botao-enviar {
 }
 #logout-btn a {
   color: #fff;
+  text-decoration: none;
 }
 #logout-btn:hover {
   background-color: #5a0000;
@@ -1056,4 +1057,8 @@ h3
 .botao-confirmar-final:hover {
   background-color: #5a0101;
   transform: scale(1.05);
+}
+
+#itens-pedido {
+  height: auto
 }
