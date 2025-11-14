@@ -400,27 +400,12 @@ h1 {
   /* maior altura */
   /* z-index: 2;
   /* fica acima das outras */
-  /* margin-top: -30px; */ */
+  /* margin-top: -30px; */ 
 
 /* } */
 
 
-#botao-vercolecao {
-  background: transparent;
-  border: 1px solid #4E3902;
-  padding: 5px 28px;
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 4px;
-  color: #333;
-  margin-top: 20px;
-  /* espaçamento positivo abaixo da imagem */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  /* centraliza o botão */
-  margin-top: 30px;
-}
+
 
 .linha-colecao {
   margin: 20px auto;
@@ -428,15 +413,7 @@ h1 {
 
 }
 
-.ver {
-  text-align: center;
-  font-family: "Judson";
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%;
-  /* 44.8px */
-}
+
 
 /* DEPOIMENTOS */
 #depoimentos {
@@ -834,4 +811,36 @@ footer li {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+
+.botao-vercolecao {
+  background: transparent;
+  border: 1px solid #4E3902;
+  padding: 5px 28px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #333;
+  margin-top: 20px;
+  /* espaçamento positivo abaixo da imagem */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* centraliza o botão */
+  margin-top: 30px;
+}
+
+
+
+.ver a {
+  text-align: center;
+  font-family: "Judson";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  /* 44.8px */
+  padding: 20px 30px;
+  text-decoration: none;
 }
