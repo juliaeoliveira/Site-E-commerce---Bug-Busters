@@ -18,8 +18,10 @@
 
             let subtotal = 0;
             containerCarrinho.innerHTML = carrinho.map(item => {
-                const itemSubtotal = item.preco * item.quantidade;
-                subtotal += itemSubtotal;
+                    // garante que preco é número
+                    const precoNum = (typeof item.preco === 'number') ? item.preco : parseFloat(String(item.preco).replace(',', '.')) || 0;
+                    const itemSubtotal = precoNum * (Number(item.quantidade) || 0);
+                    subtotal += itemSubtotal;
 
                 return `
                     <div class="produto-item">
@@ -30,7 +32,7 @@
                             <p class="colecao">Coleção: ${item.colecao}</p>
                             <p class="estoque">${item.estoque}</p>
                             <p class="tamanho">Tamanho: ${item.tamanho}</p>
-                            <p class="valor">R$ ${item.preco.toFixed(2)}</p>
+                            <p class="valor">R$ ${precoNum.toFixed(2)}</p>
                             <select class="quantidade" data-id="${item.id}">
                                 <option value="1" ${item.quantidade === 1 ? 'selected' : ''}>1</option>
                                 <option value="2" ${item.quantidade === 2 ? 'selected' : ''}>2</option>
