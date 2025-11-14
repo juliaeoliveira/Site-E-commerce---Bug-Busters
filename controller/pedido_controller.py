@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-from fastapi import APIRouter, Request, Form, UploadFile, File, Depends, HTTPException, status, HTTPExcepition, Query 
+from fastapi import APIRouter, Request, Form, UploadFile, File, Depends, HTTPException, status, Query 
 from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
-=======
-from fastapi import APIRouter, Request, Form, Depends, HTTPException, status
->>>>>>> 610f1a9616b0f3b33278a0cf4c5ab3d143ab614c
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from models import Pedido, ItemPedido, Produto, Usuario_Model, Endereco,Pagamento
@@ -460,19 +456,37 @@ def calcular_frete(
     elif not cep_destino.isdigit() or len(cep_destino) != 8:
         raise HTTPException(status_code=401, 
                             detail="CEP inválido")
-    # consultar cep na api do viacep
+    # consultar cep na api do viacep (usa requests, não o objeto Request do FastAPI)
     via_cep_url = f"https://viacep.com.br/ws/{cep_destino}/json/"
-    resposta = request.get(via_cep_url)
+    try:
+        resposta = requests.get(via_cep_url, timeout=5)
+    except requests.RequestException as e:
+        raise HTTPException(status_code=400, detail=f"Erro ao consultar o CEP: {str(e)}")
+
     if resposta.status_code != 200:
-        raise HTTPException(status_code=400, 
-                            detail="Erro ao consulatar o CEP")
+        raise HTTPException(status_code=400, detail="Erro ao consultar o CEP")
+
     dados = resposta.json()
-    if "erro" in dados:
+    if dados.get("erro"):
         raise HTTPException(status_code=400, detail="CEP não encontrado")
-    
+
+    # Monta o endereço para retorno
+    logradouro = dados.get("logradouro") or ""
+    complemento = dados.get("complemento") or ""
+    bairro = dados.get("bairro") or ""
+    localidade = dados.get("localidade") or ""
+    uf = dados.get("uf") or ""
+
+    endereco_formatado = ", ".join(filter(None, [logradouro, complemento, bairro, f"{localidade}/{uf}"]))
+
+    # Valor e prazo de frete simulados (poderia depender de CEP/distância)
     valor_frete = 15.00
     prazo_estimado = 5
 
     return {
-        "endereco": f"{dados.get('logradouro')} - {dados.get()}"
+        "endereco": endereco_formatado,
+        "valor_frete": float(valor_frete),
+        "prazo_estimado_dias": prazo_estimado,
+        "cep_consultado": cep_destino,
+        "dados_viacep": dados
     }
