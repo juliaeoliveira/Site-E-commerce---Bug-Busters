@@ -18,30 +18,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="menu">
-        <a href="/"><img id="logo"src="/static/img_home/Sob.png" alt="Logo"></a>
-            <nav>
-                <a href="/produtos/">Vestidos</a>
-                <a href="#Colecoes">Coleções</a>
-                <a href="/#Agendamentos">Agendamentos</a>
-            </nav>
-            <nav class="icons">
-                <a href="/usuario/login">
-                        <img src="/static/img_home/login.png"
-                        width="20px"
-                        title="login"
-                        alt="login"
-                    />
-                    </a>
-                <a href="/painel_usuario/carrinho">
-                    <img src="/static/img_home/carrinho.png"
-                    width="20px"
-                    title="Carrinho"
-                    alt="Carrinho"
-                />
-                </a>
-            </nav>
-        </div>
+  <!-- MENU FIXO RESPONSIVO -->
+  <header class="menu">
+    <!-- LOGO -->
+    <a href="/painel_usuario">
+      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+    </a>
+
+    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      ☰
+    </button>
+
+    <!-- NAV PRINCIPAL -->
+    <nav class="text-menu" id="nav-menu">
+      <a href="/produtos">Vestidos</a>
+      <a href="/colecoes">Coleções</a>
+      <a href="/#Agendamentos">Agendamentos</a>
+    </nav>
+
+    <nav class="icons">
+      <a href="/usuario/login" >
+        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+      </a>
+      <a href="/painel_usuario/carrinho" >
+        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Overlay para escurecer o fundo no mobile -->
+  <div class="overlay" id="overlay"></div>
     <main>
         <form action="/usuario/registrar" method="post">
             <section class="cadastro">
@@ -133,7 +140,7 @@
                         <option value="RO">Rondônia</option>
                         <option value="RR">Roraima</option>
                         <option value="SC">Santa Catarina</option>
-                        <option value="SP">SP</option>
+                        <option value="SP">São Paulo</option>
                         <option value="SE">Sergipe</option>
                         <option value="TO">Tocantins</option>
                       </select>
@@ -195,7 +202,38 @@ cep.addEventListener('input', () => {
     }
 });
 </script>
+  <script>
+    const nav = document.getElementById("nav-menu");
+    const btn = document.getElementById("hamburger");
+    const overlay = document.getElementById("overlay");
 
+    function openMenu() {
+      nav.classList.add("active");
+      overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu() {
+      nav.classList.remove("active");
+      overlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    btn.addEventListener("click", () => {
+      if (nav.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    overlay.addEventListener("click", closeMenu);
+
+    // fecha no ESC
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+  </script>
 
 </body>
 </html>

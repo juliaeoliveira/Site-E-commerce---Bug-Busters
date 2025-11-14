@@ -1,74 +1,340 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Aviso</title>
-    <link rel="stylesheet" href="/static/css/mensagem.css">
-</head>
-<body>
-    <div class="menu">
-      <nav>
-        <a href="/">
-          <img id="logo" src="/static/img_home/Sob.png" alt="Logo">
+    <link rel="stylesheet" href="/static/css/mensagem.css" />
+    <style>
+      #login-dropdown {
+        /*alterado*/
+        position: absolute;
+        top: 90px; /* aparece logo abaixo do header fixo */
+        right: 0; /* alinhado ao canto direito, sempre certo */
+        width: 260px;
+        background-color: hsla(0, 0%, 100%, 0.89);
+        border-radius: 10px;
+        padding: 20px 0;
+        display: none;
+        z-index: 300; /* MAIOR que o menu, ícones e o hambúrguer */
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      #login-dropdown h3 {
+        margin-top: 60px;
+        font-size: 16px; /* Tamanho da fonte */
+        color: #7a4a1c; /* Cor marrom (estilo elegante) */
+        margin-bottom: 80px; /* Espaço abaixo do título */
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+      }
+
+      #login-dropdown ul {
+        list-style: none; /* Remove marcadores (bolinhas) da lista */
+        margin: 0; /* Remove espaçamento externo padrão */
+      }
+
+      #login-dropdown ul li a:hover {
+        text-decoration: underline;
+        color: #7a4a1c; /* Cor marrom ao passar o mouse (hover) */
+      }
+
+      #logout-btn {
+        background-color: #790000;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        width: 160px;
+        cursor: pointer;
+        height: 40px;
+        font-family: "Libre Caslon Text";
+        color: rgb(255, 255, 255);
+        box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+        font-size: 15px;
+      }
+
+      #logout-btn:hover {
+        background-color: #5a0000;
+      }
+
+      /* Ajuste do painel para telas pequenas (vertical) */
+      #login-dropdown {
+        max-height: calc(100vh - 120px); /* cabe sempre na tela */
+        overflow-y: auto; /* ativa rolagem se necessário */
+        padding: 20px;
+      }
+
+      /* Reduz os espaçamentos internos no mobile */
+      @media (max-height: 800px) {
+        #login-dropdown h3 {
+          margin-top: 20px;
+          margin-bottom: 30px;
+        }
+
+        .opcoes {
+          margin: 12px 0;
+        }
+
+        #logout-btn {
+          margin: 25px;
+        }
+      }
+
+      .carrinho {
+        margin-right: 90px;
+      }
+
+      /* .login{
+ margin-left: 270px;
+} */ /*alterado*/
+
+      /* Animação de pulsação */
+      @keyframes pulse-ring {
+        0% {
+          box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+        }
+      }
+
+      /* Classe para o efeito visual no ícone */
+      .login-active {
+        border-radius: 50%;
+        animation: pulse-ring 1.5s infinite;
+        box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3); /* anel visível mesmo quando não está no pico */
+      }
+
+      /*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+      /* Caixa de cada opção */
+      .opcoes {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.3); /* leve transparência */
+        backdrop-filter: blur(5px);
+        border: 2px solid #6e0606;
+        border-radius: 5px;
+        margin: 20px 0px; /* espaçamento entre as caixas */
+        text-align: center;
+      }
+
+      /* Texto das opções */
+      .opcoes a {
+        display: block;
+        padding: 10px;
+        color: #3d0b0b;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      /* Efeito hover — destaca ao passar o mouse */
+      .opcoes:hover {
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(1.02);
+      }
+
+      .opcoes a:hover {
+        color: #800000;
+      }
+
+      .login-dropdown-wrapper {
+        /*alterado*/
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 25px; /* distância natural entre login e carrinho */
+      }
+
+      .login {
+        /*alterado*/
+        margin: 0; /* Remove o margin-left: 270px que quebrava TUDO */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MENU FIXO RESPONSIVO -->
+    <header class="menu">
+      <!-- LOGO -->
+      <a href="/painel_usuario">
+        <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+      </a>
+
+      <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        ☰
+      </button>
+
+      <!-- NAV PRINCIPAL -->
+      <nav class="text-menu" id="nav-menu">
+        <a href="/painel_usuario/produtos">Vestidos</a>
+        <a href="/colecoes">Coleções</a>
+        <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+      </nav>
+
+      <!-- ÍCONES (login + carrinho) -->
+      <div class="login-dropdown-wrapper">
+        <img
+          class="login"
+          src="/static/img_home/login.png"
+          width="20px"
+          title="login"
+          alt="login"
+          id="login-icon"
+        />
+
+        <div id="login-dropdown" class="hidden" aria-hidden="true">
+          <h3><strong>Bem-vinda, {{primeiro_nome}}!</strong></h3>
+
+          <ul class="dropdown-list">
+            <li class="opcoes">
+              <a href="/painel_usuario/meus_dados">Sua Conta</a>
+            </li>
+            <li class="opcoes">
+              <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+            </li>
+            <li class="opcoes">
+              <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+            </li>
+            <li class="opcoes">
+              <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+            </li>
+          </ul>
+          <a href="/painel_usuario/lougout">
+            <button id="logout-btn" type="button">Sair da conta</button>
+          </a>
+        </div>
+
+        <a href="/painel_usuario/carrinho">
+          <img
+            src="/static/img_home/carrinho.png"
+            width="20px"
+            title="Carrinho"
+            alt="Carrinho"
+          />
         </a>
-      </nav>  
-        <nav class="categorias">
-            <a href="/painel_usuario/produtos">Vestidos</a>
-            <a href="/colecoes/#Colecoes">Coleções</a>
-            <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
-        </nav>
-        <nav class="icons">
-            <a href="#">
-                    <img src="/static/img_home/login.png"
-                    width="20px"
-                    title="login"
-                    alt="login"
-                />
-                </a>
-            <a href="/painel_usuario/carrinho">
-                <img src="/static/img_home/carrinho.png"
-                width="20px"
-                title="Carrinho"
-                alt="Carrinho"
-            />
-            </a>
-        </nav>
-    </div> 
+      </div>
+    </header>
+
+    <!-- Overlay para escurecer o fundo no mobile -->
+    <div class="overlay" id="overlay"></div>
     <div class="mensagem">
-        <h2>{{ mensagem }}</h2>
-        <a href="{{ link }}">Ir às compras</a>
+      <h2>{{ mensagem }}</h2>
+      <a href="{{ link }}">Ir às compras</a>
     </div>
     <nav>
-        <div class="outrosvestidos">
-            <a href="/painel_usuario"><button class="ver"> ←  Voltar para pagina principal</button></a>
-        </div> 
+      <div class="outrosvestidos">
+        <a href="/painel_usuario"
+          ><button class="ver">← Voltar para pagina principal</button></a
+        >
+      </div>
     </nav>
     <footer>
-    <img class="sob" src="/static/img_home/Sob copy.png" alt="">
-    <ul> <p>Contatos</p> <br>
-      <img class="telefone" src="/static/img_home/telefone.png" alt="" li>(11) 4002-8922</li>
-      <br>
-      <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt="" li>(11) 98291-1653</li>
-      <li>sobveuoficial@gmail.com</li>
-    </ul>
-    <p class="linha">___________</p>
-    <ul> <p> Sobre a loja: </p> <br>
-      <li>Sobre nós</li>  
-      <li>Trocas e Devoluções</li>
-      <li>Fretes e Entregas</li>
-    </ul>
-    <p class="linha">___________</p> 
-    <ul>
-      <li>Política de Privacidade</li>
-      <li>Termos de Uso</li>
-    </ul>
-  </div>
-  <section class="midia">
-    <img class="instagram" src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
-    <img class="facebook" src="/static/img_home/facebook-f-Photoroom.png" alt="">
-  </section>
-    <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
-   
-</footer>
-</body>
+      <!-- LOGO -->
+      <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
+
+      <!-- COLUNA 1 -->
+      <div class="coluna">
+        <p class="titulo">Contatos</p>
+        <ul>
+          <li>
+            <img
+              class="telefone"
+              src="/static/img_home/telefone.png"
+              alt="Telefone"
+            />
+            (11) 4002-8922
+          </li>
+
+          <li>
+            <img
+              class="whatsapp"
+              src="/static/img_home/speech-bubble--v2-Photoroom.png"
+              alt="WhatsApp"
+            />
+            (11) 98291-1653
+          </li>
+
+          <li>sobveuoficial@gmail.com</li>
+        </ul>
+      </div>
+
+      <div class="linha"></div>
+
+      <!-- COLUNA 2 -->
+      <div class="coluna">
+        <p class="titulo">Sobre a loja</p>
+        <ul>
+          <li>Sobre nós</li>
+          <li>Trocas e Devoluções</li>
+          <li>Fretes e Entregas</li>
+        </ul>
+      </div>
+
+      <div class="linha"></div>
+
+      <!-- COLUNA 3 -->
+      <div class="coluna">
+        <p class="titulo">Informações</p>
+        <ul>
+          <li>Política de Privacidade</li>
+          <li>Termos de Uso</li>
+          <br /><br />
+        </ul>
+      </div>
+
+      <!-- REDES SOCIAIS -->
+      <section class="midia">
+        <img
+          class="instagram"
+          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+          alt="Instagram"
+        />
+        <img
+          class="facebook"
+          src="/static/img_home/facebook-f-Photoroom.png"
+          alt="Facebook"
+        />
+      </section>
+
+      <!-- DIREITOS -->
+      <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+      const nav = document.getElementById("nav-menu");
+      const btn = document.getElementById("hamburger");
+      const overlay = document.getElementById("overlay");
+
+      function openMenu() {
+        nav.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      btn.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      overlay.addEventListener("click", closeMenu);
+
+      // fecha no ESC
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    </script>
+  </body>
 </html>

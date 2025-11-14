@@ -7,7 +7,7 @@ from urllib.parse import quote_plus
 import os
 from dotenv import load_dotenv
 
-#Carregar variáveis do .env
+# Carregar variáveis do .env
 load_dotenv()
 
 USER = os.getenv("user")
@@ -28,20 +28,8 @@ DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
-'''
-#conexão com o banco de dados sqlite
-DATABASE_URL="sqlite:///./produtos.db"
-#criar engine
-engine=create_engine(DATABASE_URL)
-#O engine é o objeto que mantém a conexão com o banco de dados.
-#Sessão
-SessionLocal=sessionmaker(bind=engine)
-#sessionmaker cria uma classe de sessão configurada para usar o engine.
-#base para models
-Base=declarative_base()
-'''
-#Base é a classe que será herdada pelos modelos
-#função para injetor sessão no fastapi
+
+
 def get_db():
     db=SessionLocal()
     try:

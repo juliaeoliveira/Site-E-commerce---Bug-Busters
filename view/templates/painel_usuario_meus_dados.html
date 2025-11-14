@@ -11,52 +11,59 @@
 </head>
 <body>
 
-      <div class="menu">
-      <a href="/painel_usuario"><img id="logo" src="/static/assets/img_tela.usuario/Sob1.png" alt="Logo"></a>
-          <nav class="text-menu">
-              <a href="/painel_usuario/produtos">Vestidos</a>
-              <a href="/colecoes/#">Coleções</a>
-              <a href="/painel_usuario/meus_dados/#">Agendamentos</a>
-          </nav>
-        
-            <div class="login-dropdown-wrapper">
-              <img class="login"
-                src="/static/assets/img_tela.usuario/login.png"
-                width="20px"
-                title="login"
-                alt="login"
-                id="login-icon"
-              />
+  <!-- MENU FIXO RESPONSIVO -->
+  <header class="menu">
+    <!-- LOGO -->
+    <a href="/painel_usuario">
+      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+    </a>
 
-              <div id="login-dropdown" class="hidden">
-                <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
-                <ul>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-                  </div>
-                  </ul>
-                <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
-              </div>
-                
-                  <a href="/painel_usuario/carrinho">
-                      <img src="/static/assets/img_tela.usuario/carrinho.png"
-                      width="20px"
-                      title="Carrinho"
-                      alt="Carrinho"
-                  />
-                  </a>
-                </nav>
-            </div>
+    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      ☰
+    </button>
+
+    <!-- NAV PRINCIPAL -->
+    <nav class="text-menu" id="nav-menu">
+      <a href="/painel_usuario/produtos">Vestidos</a>
+      <a href="/colecoes">Coleções</a>
+      <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+    </nav>
+
+    <!-- ÍCONES (login + carrinho) -->
+    <div class="login-dropdown-wrapper">
+      <img class="login" src="/static/img_home/login.png" width="20px" title="login" alt="login" id="login-icon" />
+
+      <div id="login-dropdown" class="hidden" aria-hidden="true">
+        <h3><strong>Bem-vinda, {{primeiro_nome}}!</strong></h3>
+
+        <ul class="dropdown-list">
+          <li class="opcoes">
+            <a href="/painel_usuario/meus_dados">Sua Conta</a>
+          </li>
+          <li class="opcoes">
+            <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+          </li>
+          <li class="opcoes">
+            <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+          </li>
+          <li class="opcoes">
+            <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+          </li>
+        </ul>
+        <a href="/painel_usuario/lougout">
+          <button id="logout-btn" type="button">Sair da conta</button>
+        </a>
       </div>
+
+      <a href="/painel_usuario/carrinho">
+        <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho" />
+      </a>
+    </div>
+  </header>
+
+  <!-- Overlay para escurecer o fundo no mobile -->
+  <div class="overlay" id="overlay"></div>
 <main>
       <div class="container">
       <h2 class="titulo verm">SUA CONTA</h2> 
@@ -96,20 +103,19 @@
         <label>Cidade:</label>
         <div class="endereco-box">{{ endereco.cidade }}</div>
 
+        <label>Número:</label>
+        <div class="endereco-box" class="tamanho">{{ endereco.numero }}</div>
+
+        <label>Complemento:</label>
+        <div class="endereco-box">{{ endereco.complemento or "—" }}</div>
+
+        <label>Estado:</label>
+        <div class="endereco-box">{{ endereco.estado }}</div>
+
         <a href="/painel_usuario/editar_endereco" class="botao-editar">Editar</a>
       </div>
     </div>
-      <div class="outros">
 
-        <div class="info-endereco">
-          <label>Número:</label>
-          <div class="endereco-box1" class="tamanho">{{ endereco.numero }}</div>
-    <br> <br>
-          <label>Complemento:</label>
-          <div class="endereco-box1">{{ endereco.complemento or "—" }}</div>
-    <br> <br>
-          <label>Estado:</label>
-          <div class="endereco-box1">{{ endereco.estado }}</div>
     {% else %}
     <p>Você ainda não cadastrou um endereço.</p>
     {% endif %}
@@ -125,56 +131,132 @@
         </a>
     </nav>
 </main>
-<footer>
-    <img class="sob" src="static/assets/img_tela.usuario/Sob.png" alt="">
-    <ul> <p>Contatos</p> <br>
-      <img class="telefone" src="static/assets/img_tela.usuario/2gokRbP1IDl3BuRCfgic0r5CGMf-desktop-Photoroom.png" alt="" li>(11) 4002-8922</li>
-      <br>
-      <img class="whatsapp" src="static/assets/img_tela.usuario/speech-bubble--v2-Photoroom.png" alt="" li>(11) 98291-1653</li>
-      <li>sobveuoficial@gmail.com</li>
-    </ul>
-    <p class="linha">___________</p>
-    <ul> <p> Sobre a loja: </p> <br>
-      <li>Sobre nós</li>  
-      <li>Trocas e Devoluções</li>
-      <li>Fretes e Entregas</li>
-    </ul>
-    <p class="linha">___________</p> 
-    <ul>
-      <li>Política de Privacidade</li>
-      <li>Termos de Uso</li>
-    </ul>
-  </div>
-  <section class="midia">
-    <img class="instagram" src="static/assets/img_tela.usuario/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
-    <img class="facebook" src="static/assets/img_tela.usuario/facebook-f-Photoroom.png" alt="">
-  </section>
-    <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
-   
+  <footer>
+      <!-- LOGO -->
+      <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
 
-</footer>
+      <!-- COLUNA 1 -->
+      <div class="coluna">
+        <p class="titulo">Contatos</p>
+        <ul>
+          <li>
+            <img
+              class="telefone"
+              src="/static/img_home/telefone.png"
+              alt="Telefone"
+            />
+            (11) 4002-8922
+          </li>
 
+          <li>
+            <img
+              class="whatsapp"
+              src="/static/img_home/speech-bubble--v2-Photoroom.png"
+              alt="WhatsApp"
+            />
+            (11) 98291-1653
+          </li>
 
-<script>
-  const loginIcon = document.getElementById('login-icon');
-const loginDropdown = document.getElementById('login-dropdown');
+          <li>sobveuoficial@gmail.com</li>
+        </ul>
+      </div>
 
-loginIcon.addEventListener('click', () => {
-  const isVisible = loginDropdown.style.display === 'block';
+      <div class="linha"></div>
 
-  loginDropdown.style.display = isVisible ? 'none' : 'block';
-  
-  // Ativa ou desativa a animação
-  loginIcon.classList.toggle('login-active', !isVisible);
-});
+      <!-- COLUNA 2 -->
+      <div class="coluna">
+        <p class="titulo">Sobre a loja</p>
+        <ul>
+          <li>Sobre nós</li>
+          <li>Trocas e Devoluções</li>
+          <li>Fretes e Entregas</li>
+        </ul>
+      </div>
 
-window.addEventListener('click', function (e) {
-  if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
-    loginDropdown.style.display = 'none';
-    loginIcon.classList.remove('login-active');
-  }
-});
+      <div class="linha"></div>
 
-</script>
+      <!-- COLUNA 3 -->
+      <div class="coluna">
+        <p class="titulo">Informações</p>
+        <ul>
+          <li>Política de Privacidade</li>
+          <li>Termos de Uso</li>
+          <br /><br />
+        </ul>
+      </div>
+
+      <!-- REDES SOCIAIS -->
+      <section class="midia">
+        <img
+          class="instagram"
+          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+          alt="Instagram"
+        />
+        <img
+          class="facebook"
+          src="/static/img_home/facebook-f-Photoroom.png"
+          alt="Facebook"
+        />
+      </section>
+
+      <!-- DIREITOS -->
+      <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+      const loginIcon = document.getElementById("login-icon");
+      const loginDropdown = document.getElementById("login-dropdown");
+
+      loginIcon.addEventListener("click", () => {
+        const isVisible = loginDropdown.style.display === "block";
+
+        loginDropdown.style.display = isVisible ? "none" : "block";
+
+        // Ativa ou desativa a animação
+        loginIcon.classList.toggle("login-active", !isVisible);
+      });
+
+      window.addEventListener("click", function (e) {
+        if (
+          !loginIcon.contains(e.target) &&
+          !loginDropdown.contains(e.target)
+        ) {
+          loginDropdown.style.display = "none";
+          loginIcon.classList.remove("login-active");
+        }
+      });
+    </script>
+    <script>
+      const nav = document.getElementById("nav-menu");
+      const btn = document.getElementById("hamburger");
+      const overlay = document.getElementById("overlay");
+
+      function openMenu() {
+        nav.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      btn.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      overlay.addEventListener("click", closeMenu);
+
+      // fecha no ESC
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    </script>
 </body>
 </html>
