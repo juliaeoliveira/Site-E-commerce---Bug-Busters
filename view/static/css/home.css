@@ -370,16 +370,17 @@ h1 {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
 }
 
 /* Inclinação das laterais */
-.items-colecao:first-child {
+/* .items-colecao:first-child {
   transform: rotate(-6deg);
 }
 
 .items-colecao:last-child {
   transform: rotate(6deg);
-}
+} */
 
 
 /* Itens laterais */
@@ -393,15 +394,15 @@ h1 {
 }
 
 /* Imagem central em destaque */
-.items-colecao.destaque {
-  width: 350px;
-  height: 500px;
+/* .items-colecao.destaque { */
+  /* width: 350px;
+  height: 500px; */
   /* maior altura */
-  z-index: 2;
+  /* z-index: 2;
   /* fica acima das outras */
-  margin-top: -30px;
+  /* margin-top: -30px; */ */
 
-}
+/* } */
 
 
 #botao-vercolecao {
@@ -604,19 +605,7 @@ footer li {
   gap: 15px;
 }
 
-.items-produto img {
-  transition: transform .3s ease, opacity .3s ease;
-}
 
-.sair-esquerda {
-  transform: translateX(-200px);
-  opacity: 0;
-}
-
-.sair-direita {
-  transform: translateX(200px);
-  opacity: 0;
-}
 
 #botao-boasvindas {
   display: inline-flex;
@@ -650,4 +639,199 @@ footer li {
     width: 100%;
     height: 100%;
     object-fit: cover; /* faz o vídeo se comportar igual a background-size: cover */
+}
+
+/* Permite posicionar o botão por cima */
+.items-colecao {
+  position: relative;
+}
+
+/* BOTÃO SOBRE A IMAGEM */
+.btn-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza perfeitamente */
+  background: rgba(255, 255, 255, 0.28);  /* igual ao efeito da foto */
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  text-align: center;
+  padding: 8px 3px;
+  width: 230px;
+}
+
+/* TEXTO DO BOTÃO */
+.btn-overlay span {
+  display: block;
+  font-weight: 400;
+}
+
+/* BOTÃO CENTRAL — CHAMA SERENA — fonte serif elegante */
+.btn-overlay.centro span {
+  font-family: "Georgia", serif;
+  font-size: 32px;
+  text-transform: none;
+  letter-spacing: 1px;
+}
+
+/* .items-colecao.destaque {
+  width: 400px;
+  height: 550px;
+} */
+
+/* .items-colecao {
+    transition: transform 0.5s ease;
+}
+
+.items-colecao.animando {
+    transition: transform 0.5s ease;
+} */
+
+/* ============================= */
+/*   CARROSSEL VIP FINAL        */
+/* ============================= */
+
+.items-colecao {
+  width: 380px;
+  height: 500px;
+  border-radius: 6px;
+  transition: 
+      transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+      z-index 0s;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+/* POSIÇÕES FIXAS */
+
+.items-colecao.esquerda {
+  transform: rotate(-6deg) scale(0.9) translateY(20px);
+  opacity: 0.75;
+  z-index: 1;
+}
+
+.items-colecao.direita {
+  transform: rotate(6deg) scale(0.9) translateY(20px);
+  opacity: 0.75;
+  z-index: 1;
+}
+
+.items-colecao.centro {
+  height: 560px;      /* ALTURA DO CENTRO */
+  width: 420px;  
+  margin-top: -30px;
+  transform: rotate(0deg) translateY(-30px);
+  z-index: 10;
+  opacity: 1;
+}
+
+/* DURANTE ANIMAÇÃO */
+
+.items-colecao.vai-centro {
+  transform: scale(0.0) translateY(-30px);
+  
+  z-index: 10;
+}
+
+.items-colecao.vai-esquerda {
+  transform: rotate(-6deg) scale(0.9) translateY(20px) translateX(-380px);
+  z-index: 1;
+}
+
+.items-colecao.vai-direita {
+  transform: rotate(6deg) scale(0.9) translateY(20px) translateX(380px);
+  z-index: 1;
+}
+
+
+/* BOTÃO CENTRAL MAIS DESTACADO */
+
+.items-colecao.centro .btn-overlay {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.items-colecao .btn-overlay {
+  transition: transform 0.6s ease;
+}
+
+.items-colecao.esquerda,
+.items-colecao.direita {
+  height: 520px;
+  width: 360px;
+  opacity: 0.85;
+}
+
+
+/* transição vestidos */
+
+.items-produto {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.items-produto .wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 
+    transform .6s ease,
+    opacity .6s ease;
+}
+
+.items-produto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* mantém tudo bonito */
+}
+
+/* SAÍDA */
+.sair-esquerda {
+  transform: translateX(-260px);
+  opacity: 1;
+}
+
+.sair-direita {
+  transform: translateX(260px);
+  opacity: 1;
+}
+
+/* ENTRADA */
+.entrar-esquerda {
+  transform: translateX(-260px);
+  opacity: 1;
+}
+
+.entrar-direita {
+  transform: translateX(260px);
+  opacity: 1;
+}
+
+.entrar-esquerda,
+.entrar-direita {
+  animation: entrar .1s ease forwards;
+}
+
+@keyframes entrar {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
