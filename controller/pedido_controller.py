@@ -182,12 +182,46 @@ def pagina_checkout(request: Request, db: Session = Depends(get_db)):
 
     # Selecionar 3 aleatórios (ou menos se não houver suficientes)
     sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
+#03008020
+    # Calcula frete usando o CEP do usuário (mesma lógica de /api/frete)
+    frete = None
+    cep_destino = (endereco.cep or "").replace('-', '').strip() if endereco else ""
+    if cep_destino and cep_destino.isdigit() and len(cep_destino) == 8:
+        via_cep_url = f"https://viacep.com.br/ws/{cep_destino}/json/"
+        try:
+            resp = requests.get(via_cep_url, timeout=5)
+            if resp.status_code == 200:
+                dados = resp.json()
+                if not dados.get("erro"):
+                    logradouro = dados.get("logradouro") or ""
+                    complemento = dados.get("complemento") or ""
+                    bairro = dados.get("bairro") or ""
+                    localidade = dados.get("localidade") or ""
+                    uf = dados.get("uf") or ""
+                    endereco_formatado = ", ".join(filter(None, [logradouro, complemento, bairro, f"{localidade}/{uf}"]))
 
-    
+                    # Valor e prazo de frete simulados (poderia depender de CEP/distância)
+                    valor_frete = 10.00
+                    prazo_estimado = 5
+
+                    frete = {
+                        "endereco": endereco_formatado,
+                        "valor_frete": float(valor_frete),
+                        "prazo_estimado_dias": prazo_estimado,
+                        "cep_consultado": cep_destino,
+                        "dados_viacep": dados
+                    }
+        except requests.RequestException:
+            frete = None
+
     return templates.TemplateResponse("checkout.html", {
-        "request": request, "endereco" : endereco, "sugestoes" : sugestoes,
-        "primeiro_nome" : primeiro_nome, "usuario": usuario
-        })
+        "request": request,
+        "endereco": endereco,
+        "sugestoes": sugestoes,
+        "primeiro_nome": primeiro_nome,
+        "usuario": usuario,
+        "frete": frete
+    })
     
 @router.post("/checkout")
 async def salvar_dados_pedido(
@@ -440,53 +474,53 @@ def checkout(
     
 
 
-# Rota frete simulada para o SOBVeu
-CEP_LOJA = "08580300"
-@router.get("/api/frete")
-def calcular_frete(
-    request:Request, cep_destino:str=Query(...)
-):
-    # Verificação de Login 
-    token = request.cookies.get("token")
-    payload = verificar_token(token)
-    if not payload:
-        raise HTTPException(status_code=401, 
-                            detail="Usuario não encontrado")
-    # validar cep 
-    elif not cep_destino.isdigit() or len(cep_destino) != 8:
-        raise HTTPException(status_code=401, 
-                            detail="CEP inválido")
-    # consultar cep na api do viacep (usa requests, não o objeto Request do FastAPI)
-    via_cep_url = f"https://viacep.com.br/ws/{cep_destino}/json/"
-    try:
-        resposta = requests.get(via_cep_url, timeout=5)
-    except requests.RequestException as e:
-        raise HTTPException(status_code=400, detail=f"Erro ao consultar o CEP: {str(e)}")
+# # Rota frete simulada para o SOBVeu
+# CEP_LOJA = "08580300"
+# @router.get("/api/frete")
+# def calcular_frete(
+#     request:Request, cep_destino:str=Query(...)
+# ):
+#     # Verificação de Login 
+#     token = request.cookies.get("token")
+#     payload = verificar_token(token)
+#     if not payload:
+#         raise HTTPException(status_code=401, 
+#                             detail="Usuario não encontrado")
+#     # validar cep 
+#     elif not cep_destino.isdigit() or len(cep_destino) != 8:
+#         raise HTTPException(status_code=401, 
+#                             detail="CEP inválido")
+#     # consultar cep na api do viacep (usa requests, não o objeto Request do FastAPI)
+#     via_cep_url = f"https://viacep.com.br/ws/{cep_destino}/json/"
+#     try:
+#         resposta = requests.get(via_cep_url, timeout=5)
+#     except requests.RequestException as e:
+#         raise HTTPException(status_code=400, detail=f"Erro ao consultar o CEP: {str(e)}")
 
-    if resposta.status_code != 200:
-        raise HTTPException(status_code=400, detail="Erro ao consultar o CEP")
+#     if resposta.status_code != 200:
+#         raise HTTPException(status_code=400, detail="Erro ao consultar o CEP")
 
-    dados = resposta.json()
-    if dados.get("erro"):
-        raise HTTPException(status_code=400, detail="CEP não encontrado")
+#     dados = resposta.json()
+#     if dados.get("erro"):
+#         raise HTTPException(status_code=400, detail="CEP não encontrado")
 
-    # Monta o endereço para retorno
-    logradouro = dados.get("logradouro") or ""
-    complemento = dados.get("complemento") or ""
-    bairro = dados.get("bairro") or ""
-    localidade = dados.get("localidade") or ""
-    uf = dados.get("uf") or ""
+#     # Monta o endereço para retorno
+#     logradouro = dados.get("logradouro") or ""
+#     complemento = dados.get("complemento") or ""
+#     bairro = dados.get("bairro") or ""
+#     localidade = dados.get("localidade") or ""
+#     uf = dados.get("uf") or ""
 
-    endereco_formatado = ", ".join(filter(None, [logradouro, complemento, bairro, f"{localidade}/{uf}"]))
+#     endereco_formatado = ", ".join(filter(None, [logradouro, complemento, bairro, f"{localidade}/{uf}"]))
 
-    # Valor e prazo de frete simulados (poderia depender de CEP/distância)
-    valor_frete = 15.00
-    prazo_estimado = 5
+#     # Valor e prazo de frete simulados (poderia depender de CEP/distância)
+#     valor_frete = 10.00
+#     prazo_estimado = 5
 
-    return {
-        "endereco": endereco_formatado,
-        "valor_frete": float(valor_frete),
-        "prazo_estimado_dias": prazo_estimado,
-        "cep_consultado": cep_destino,
-        "dados_viacep": dados
-    }
+#     return {
+#         "endereco": endereco_formatado,
+#         "valor_frete": float(valor_frete),
+#         "prazo_estimado_dias": prazo_estimado,
+#         "cep_consultado": cep_destino,
+#         "dados_viacep": dados
+#     }
