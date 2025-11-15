@@ -19,7 +19,7 @@ DBNAME = os.getenv("dbname")
 print("Tentando conectar em:")
 print(f"HOST={HOST}, PORT={PORT}, USER={USER}, DBNAME={DBNAME}")
 
-# String de conexão para SQLAlchemy
+# # String de conexão para SQLAlchemy
 DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
 
 # DATABASE_URL = "sqlite:///loja.db"
