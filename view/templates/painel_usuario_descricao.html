@@ -163,31 +163,58 @@
        <!-- <script src="carrinho.js"></script> -->
 
   <script>
-const produtoAtual = {
-  id: 1,
-  nome: "Vestido Aurora",
-  preco: 8000
-};
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", ready);
+} else {
+  ready();
+}
 
-const botaoCarrinho = document.querySelector('.carrinho');
-const iconeCarrinho = document.getElementById('icone-carrinho');
+function ready() {
+  // Botão "Adicionar no carrinho"
+  const addButton = document.querySelector(".carrinho");
+  if (addButton) {
+    addButton.addEventListener("click", addProductToCart);
+  }
+}
 
-botaoCarrinho.addEventListener('click', () => {
-  adicionarAoCarrinho(produtoAtual);
+function addProductToCart() {
+  // Pegando informações do produto
+  const nome = document.querySelector(".nomevestido").innerText.trim();
+  const preco = document.querySelector(".compra b").innerText.match(/R\$[0-9.,]+/)[0];
+  const imagem = document.querySelector(".fotos img").src;
 
-  // Define o estilo de transição e animação via JS
-  iconeCarrinho.style.transition = 'transform 0.3s ease';
-  iconeCarrinho.style.transform = 'scale(1.6)';
+  // 🆕 Pegando o tamanho selecionado
+  const tamanhoSelect = document.querySelector(".tamanho");
+  const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
 
-  // Após o tempo da animação, volta ao normal
-  setTimeout(() => {
-    iconeCarrinho.style.transform = 'scale(1)';
-  }, 300);
-});
+  // 🆕 Pegando o ID do produto do botão
+  const idProduto = document.querySelector(".carrinho").dataset.id;
 
-  </script>
+  // Pega carrinho atual (ou cria vazio)
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-  <script>
+  // Verifica se o mesmo produto com o mesmo tamanho já existe
+  const existente = carrinho.find(p => p.nome === nome && p.tamanho === tamanho);
+
+  if (existente) {
+    existente.quantidade++;
+  } else {
+    carrinho.push({
+      id: Number(idProduto),
+      nome: nome,
+      preco: preco,
+      imagem: imagem,
+      tamanho: tamanho, // 🆕 adicionando tamanho
+      quantidade: 1
+    });
+  }
+
+  // Salva no localStorage
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  alert(`✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`);
+}
+</script>
+<script>
   const loginIcon = document.getElementById('login-icon');
 const loginDropdown = document.getElementById('login-dropdown');
 
