@@ -161,7 +161,7 @@ nav a {
   margin-left: 20px;
 }
 
-.produto-item input[type="checkbox"] {
+.produto-item input[type="radio"] {
   margin-top: 0; /* remove empurrão */
   align-self: center; /* garante alinhamento */
 }

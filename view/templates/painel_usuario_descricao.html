@@ -1,81 +1,87 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
-  <title>Sob Véu</title>
-  <link rel="stylesheet" href="/static/css/painel_usuario_descricao.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sob Véu</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="/static/css/painel_usuario_descricao.css"> 
 </head>
-
 <body>
-<header>
-  <section class="menu">
-    <nav>
-      <a href="/painel_usuario"> <img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a> 
-    </nav>  
-    <nav class="paginas">
-      <a href="/painel_usuario/produtos">Vestidos</a>
-      <a href="/painel_usuario/produtos/{{produto.id}}/#">Coleções</a>
-      <a href="/painel_usuario/produtos/{{produto.id}}/#Agendamentos">Agendamentos</a>
-    </nav>
-    <br> <br> <br>
-        <div class="login-dropdown-wrapper">
-          <img class="login"
-            src="/static/img_home/login.png"
-            width="20px"
-            title="login"
-            alt="login"
-            id="login-icon"
-          />
 
-          <div id="login-dropdown" class="hidden">
-            <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
-            <ul>
-              <div class="opcoes">
-                <a href="/painel_usuario/meus_dados">Sua Conta</a>
-              </div>
-              <div class="opcoes">
-                <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-              </div>
-              <div class="opcoes">
-                <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-              </div>
-              <div class="opcoes">
-                <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-              </div>
-              </ul>
-            <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
-          </div>
-        </div>
-        <div class="carrinho1">
-            <a href="/painel_usuario/carrinho" >
-                <img src="/static/img_home/carrinho.png"
+      <div class="menu">
+        <a href="/painel_usuario"><img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a>
+          <nav class="text-menu">
+              <a href="/painel_usuario/produtos">Vestidos</a>
+              <a href="/painel_usuario/produtos/{{produto.id}}/#">Coleções</a>
+              <a href="/painel_usuario/produtos/{{produto.id}}/#Agendamentos">Agendamentos</a>
+          </nav>
+        
+            <div class="login-dropdown-wrapper">
+              <img class="login"
+                src="/static/img_home/login.png"
                 width="20px"
-                title="Carrinho"
-                alt="Carrinho"
-            />
-            </a>
-        </div>
-  </section>
-</header>
+                title="login"
+                alt="login"
+                id="login-icon"
+              />
 
+              <div id="login-dropdown" class="hidden">
+                <h3><strong>Bem-vinda, {{ primeiro_nome }}!</strong></h3>
+                <ul>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+                  </div>
+                  </ul>
+                <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+              </div>
+                
+                  <a href="/painel_usuario/carrinho">
+                      <img src="/static/img_home/carrinho.png"
+                      width="20px"
+                      title="Carrinho"
+                      alt="Carrinho"
+                  />
+                  </a>
+                
+              </div>
+          </div>
 
     <main>
-        <h1>Início  >  Vestidos  >  Detalhes do vestido</h1>
+        <h1>Início  >  Vestidos  >  Vestido Eternity</h1>
 
     <section>
         <div class="fotos">
             <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem1_url)}}" alt="foto de frente"></div>
             <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem2_url)}}" alt="foto de costa"></div>
-            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}" alt="foto do lado esquerdo"></div>  
+            <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}"></div>  
             <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem4_url)}}" alt="foto do lado direito"></div>
         </div>
         
@@ -139,7 +145,7 @@
       <li>Trocas e Devoluções</li>
       <li>Fretes e Entregas</li>
     </ul>
-    <p class="linha">___________</p>
+    <p class="linha">___________</p> 
     <ul>
       <li>Política de Privacidade</li>
       <li>Termos de Uso</li>
@@ -151,63 +157,37 @@
   </section>
     <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
    
-    </footer>
+
+</footer>
     
        <!-- <script src="carrinho.js"></script> -->
 
   <script>
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", ready);
-} else {
-  ready();
-}
+const produtoAtual = {
+  id: 1,
+  nome: "Vestido Aurora",
+  preco: 8000
+};
 
-function ready() {
-  // Botão "Adicionar no carrinho"
-  const addButton = document.querySelector(".carrinho");
-  if (addButton) {
-    addButton.addEventListener("click", addProductToCart);
-  }
-}
+const botaoCarrinho = document.querySelector('.carrinho');
+const iconeCarrinho = document.getElementById('icone-carrinho');
 
-function addProductToCart() {
-  // Pegando informações do produto
-  const nome = document.querySelector(".nomevestido").innerText.trim();
-  const preco = document.querySelector(".compra b").innerText.match(/R\$[0-9.,]+/)[0];
-  const imagem = document.querySelector(".fotos img").src;
+botaoCarrinho.addEventListener('click', () => {
+  adicionarAoCarrinho(produtoAtual);
 
-  // 🆕 Pegando o tamanho selecionado
-  const tamanhoSelect = document.querySelector(".tamanho");
-  const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
+  // Define o estilo de transição e animação via JS
+  iconeCarrinho.style.transition = 'transform 0.3s ease';
+  iconeCarrinho.style.transform = 'scale(1.6)';
 
-  // 🆕 Pegando o ID do produto do botão
-  const idProduto = document.querySelector(".carrinho").dataset.id;
+  // Após o tempo da animação, volta ao normal
+  setTimeout(() => {
+    iconeCarrinho.style.transform = 'scale(1)';
+  }, 300);
+});
 
-  // Pega carrinho atual (ou cria vazio)
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  </script>
 
-  // Verifica se o mesmo produto com o mesmo tamanho já existe
-  const existente = carrinho.find(p => p.nome === nome && p.tamanho === tamanho);
-
-  if (existente) {
-    existente.quantidade++;
-  } else {
-    carrinho.push({
-      id: Number(idProduto),
-      nome: nome,
-      preco: preco,
-      imagem: imagem,
-      tamanho: tamanho, // 🆕 adicionando tamanho
-      quantidade: 1
-    });
-  }
-
-  // Salva no localStorage
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  alert(`✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`);
-}
-</script>
-<script>
+  <script>
   const loginIcon = document.getElementById('login-icon');
 const loginDropdown = document.getElementById('login-dropdown');
 
@@ -226,7 +206,6 @@ window.addEventListener('click', function (e) {
     loginIcon.classList.remove('login-active');
   }
 });
-
 </script>
 </body>
 </html>

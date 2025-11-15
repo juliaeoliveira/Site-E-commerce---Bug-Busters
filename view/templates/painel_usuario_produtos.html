@@ -12,56 +12,78 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">  
+  
   <title>Sob Véu</title>
   <link rel="stylesheet" href="/static/css/painel_usuario_produtos.css"> 
 </head>
-
-<!-- HEADER -->
 <body>
-<header>
-  <section class="menu">
-    <nav>
-      <a href="/painel_usuario"> <img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a> 
-    </nav>  
-    <nav class="paginas">
-      <a href="/painel_usuario/produtos">Vestidos</a>
-      <a href="/painel_usuario/produtos/#">Coleções</a>
-      <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
-    </nav>
-    <nav class="icons">
-      <a href="#####">
-        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
-      </a>
-      
-      <a href="/painel_usuario/carrinho">
-        <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
-      </a>
-    </nav>
-  </section>
-</header>
-
   
+  <div class="menu">
+        <a href="/painel_usuario"><img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a>
+          <nav class="text-menu">
+              <a href="/painel_usuario/produtos">Vestidos</a>
+              <a href="/painel_usuario/produtos/#">Coleções</a>
+              <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+          </nav>
+        
+            <div class="login-dropdown-wrapper">
+              <img class="login"
+                src="/static/img_home/login.png"
+                width="20px"
+                title="login"
+                alt="login"
+                id="login-icon"
+              />
+
+              <div id="login-dropdown" class="hidden">
+                <h3><strong>Bem-vinda, {{ primeiro_nome }}!</strong></h3>
+                <ul>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+                  </div>
+                </ul>
+                <button id="logout-btn"><a href="/painel_usuario/lougout" >Sair da conta</a></button>
+              </div> 
+                
+                  <a href="/painel_usuario/carrinho">
+                      <img src="/static/img_home/carrinho.png"
+                      width="20px"
+                      title="Carrinho"
+                      alt="Carrinho"
+                  />
+                  </a>
+                
+              </div>
+          </div>
+
   <main>
     <h1>VESTIDOS DE NOIVA</h1>
-    <section>    
+    <section>
         {% if produtos %}
-          {% for produto in produtos %}
-            <div class="vestido">   
-              <nav>
-                <a href="/painel_usuario/produtos/{{produto.id}}">  
-                  <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}"> 
-                </a>
-              </nav>
-              <p class="nome">{{produto.nome_produto}}</p>
-            </div>
-          {% endfor %}
+            {% for produto in produtos %}
+                <div class="vestido"> 
+                    <nav class="descricao">
+                    <a href="/painel_usuario/produtos/{{produto.id}}">  
+                        <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}">
+                    </a>  
+                    </nav>
+                    <p class="nome">{{produto.nome_produto}}</p>
+                </div>
+            {% endfor %}
         {% else %}
           <p>Nenhum produto encontrado!</p>
-        {% endif %} 
-        
-      </section>
-  
-
+        {% endif %}
+     
+    </section>
     <nav>
       <a href="/painel_usuario">
         <button> ← Voltar à página inicial</button>
@@ -96,5 +118,28 @@
     <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
    
     </footer>
+
+    <script>
+  const loginIcon = document.getElementById('login-icon');
+const loginDropdown = document.getElementById('login-dropdown');
+
+loginIcon.addEventListener('click', () => {
+  const isVisible = loginDropdown.style.display === 'block';
+
+  loginDropdown.style.display = isVisible ? 'none' : 'block';
+  
+  // Ativa ou desativa a animação
+  loginIcon.classList.toggle('login-active', !isVisible);
+});
+
+window.addEventListener('click', function (e) {
+  if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+    loginDropdown.style.display = 'none';
+    loginIcon.classList.remove('login-active');
+  }
+});
+
+</script>
+
 </body>
 </html>
