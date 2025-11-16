@@ -303,9 +303,6 @@ async def salvar_dados_pedido(
 
     return {"message": "Pedido e pagamento salvos com sucesso!", "id_pedido": novo_pedido.id}
     
-
-
-
 @router.get("/editar_endereco")
 def editar_endereco(request: Request, db: Session = Depends(get_db)):
     token = request.cookies.get("token")
@@ -424,7 +421,6 @@ def detalhar_pedido(
             for i in pedido.itens_pedido
         ],
     }
-
 
 # checkout de pedidos 
 @router.post("/checkout")

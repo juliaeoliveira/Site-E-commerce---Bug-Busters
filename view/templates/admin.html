@@ -1,13 +1,212 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Admin - SobVéu</title>
-    <link rel="stylesheet" href="/static/css/admin.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Admin - SobVéu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Inter, sans-serif; background: #FBFCF7; padding: 30px; }
+
+    /* MENU INICIAL */
+    #menu-inicial { display: flex; flex-direction: column; align-items: center; margin-top: 80px; gap: 20px; }
+    .menu-btn {
+        width: 280px; padding: 15px 20px; background: #523800; color: white;
+        border: none; border-radius: 8px; font-size: 18px; cursor: pointer;
+        font-family: "Libre Caslon Text";
+        transition: 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    .menu-btn:hover { background: #3d2900; transform: translateY(-2px); }
+
+    /* ÁREAS OCULTAS */
+    .secao { display: none; animation: fade 0.4s ease; }
+    @keyframes fade { from { opacity: 0;} to { opacity: 1;} }
+
+    /* FORMULÁRIOS */
+    form {
+        background: white; padding: 30px; max-width: 700px; margin: auto;
+        border-radius: 12px; border: 1px solid #e8dcc8; box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    label { margin-top: 15px; display: block; font-weight: 600; color: #523800; }
+    input, textarea, select {
+        width: 100%; padding: 12px; margin-top: 5px;
+        border: 2px solid #e8dcc8; border-radius: 8px; background: white;
+    }
+    button { margin-top: 20px; padding: 12px; width: 100%; background: #7a4a1c; color: white;
+        border: none; border-radius: 8px; font-size: 16px; cursor: pointer;
+    }
+    button:hover { background: #523800; }
+
+    /* Estilização da seção de imagens */
+    .image-section {
+        background: #DBCAA966;
+        border: 1px solid #e8dcc8;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .image-section p {
+        margin: 0;
+        font-weight: 600;
+        color: #523800;
+        font-size: 14px;
+    }
+
+    .image-section p:first-child {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .image-section img {
+        margin: 8px 0;
+        border-radius: 4px;
+        border: 1px solid #e8dcc8;
+    }
+
+    .image-section input[type="file"] {
+        padding: 8px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    /* TABELA */
+    table { width: 90%; margin: 30px auto; border-collapse: collapse; background: white;
+        border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    th { background: #e8dcc8; padding: 12px; text-align: left; }
+    td { padding: 10px; border-bottom: 1px solid #e8dcc8; }
+
+    /* Estilização para o link Editar ficar igual ao botão Deletar */
+    .btn-editar-link {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 12px;
+        background: #7a4a1c;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+    
+    .btn-editar-link:hover {
+        background: #523800;
+    }
+
+    /* SEÇÃO CONTA */
+    .container {
+      display: flex;
+      gap: 250px;
+      padding-top: 180px;
+      padding-bottom: 100px;
+      font-family: 'Open Sans', sans-serif;
+      color: #523800;
+      margin-top: 40px;
+      margin-left: 60px;
+    }
+
+    .secao-conta-coluna { display: flex; flex-direction: column; }
+
+    .outros {
+      margin-top: 100px;
+      position: absolute;
+      margin-left: 1160px;
+    }
+
+    .titulo {
+      font-family: "Aboreto", system-ui;
+      font-size: 22px;
+      text-align: left;
+      margin-bottom: 20px;
+      color: #523800;
+    }
+
+    .titulo.verm {
+      color: #800000;
+      font-size: 30px;
+      position: absolute;
+      margin-right: 800px;
+      margin-top: -60px;
+    }
+
+    .info-bloco { display: flex; flex-direction: column; gap: 10px; }
+    .info-box, .endereco-box, .endereco-box1 {
+      background-color: #DBCAA966;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 2px;
+      font-size: 14px;
+      color: #000000B2;
+    }
+
+    .info-box { width: 550px; }
+    .endereco-box { width: 250px; }
+    .endereco-box1 { width: 120px; }
+
+    .botao-editar {
+      margin-top: 25px;
+      background-color: #4d3400;
+      color: white;
+      border: none;
+      padding: 8px 25px;
+      border-radius: 3px;
+      align-self: center;
+      cursor: pointer;
+      font-size: 15px;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .botao-editar:hover { background-color: #5c4200; }
+
+    /* LOGO COM ANIMAÇÃO */
+.logo {
+    height: 140px;
+    transition: 
+        transform 0.8s ease-in-out,
+        top 0.8s ease-in-out,
+        right 0.8s ease-in-out,
+        left 0.8s ease-in-out;
+    position: relative;
+}
+
+/* ESTADO ANIMADO – canto superior direito */
+.logo.mover-logo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    transform: scale(0.45); /* reduz */
+    z-index: 999;
+}
+
+
+</style>
 </head>
 <body>
-    <h2>Gerenciamento de Produtos</h2>
+
+<!-- MENU PRINCIPAL -->
+<div id="menu-inicial">
+
+    <img class="logo" src="/static/assets/img_login/Sob1.png" alt="Logo SobVéu">
+
+    <!-- defina type="button" para evitar comportamento submit acidental -->
+    <button type="button" class="menu-btn" onclick="mostrar('secao-cadastrar')">Cadastrar Produto</button>
+    <button type="button" class="menu-btn" onclick="mostrar('secao-gerenciar')">Gerenciar Produtos</button>
+    <button type="button" class="menu-btn" onclick="mostrar('secao-conta')">Sua Conta</button>
+</div>
+
+<!-- CADASTRAR PRODUTO -->
+<div id="secao-cadastrar" class="secao">
+    <h2 style="text-align:center; margin-bottom:20px; font-family:'Libre Caslon Text'; color:#523800;">Cadastrar Produto</h2>
     <form action="/usuario/admin/produto" method="post" enctype="multipart/form-data">
         <label for="nome_produto">Nome do Produto:</label>
         <input type="text" id="nome_produto" name="nome_produto" required>
@@ -25,7 +224,7 @@
         <input type="text" id="categoria" name="categoria" required>
 
         <label for="quantidade_estoque">Quantidade em Estoque:</label>
-        <input type="number" id="quantidade_estoque" name="quantidade_estoque" required>
+        <input type="number" id="quantidade_estoque" name="quantidade_estoque" required" required>
 
         <label for="imagem1_url">Imagem 1:</label>
         <input type="file" id="imagem1_url" name="imagem1_url" accept="image/*" required>
@@ -50,13 +249,20 @@
             <option value="03.774.819/0005-28">SobVéu</option>
         </select>
 
-        <button type="submit">Adicionar Produto</button>
-    </form>
 
-    <h3>Produtos Cadastrados</h3>
-    <table border="1">
+        <button type="submit">Cadastrar</button>
+    </form>
+    <button type="button" class="menu-btn" style="width:200px; margin:30px auto 0;" onclick="voltarMenu()">Voltar ao Menu</button>
+
+</div>
+
+<!-- GERENCIAR PRODUTOS -->
+<div id="secao-gerenciar" class="secao">
+    <h2 style="text-align:center; margin-bottom:20px; font-family:'Libre Caslon Text'; color:#523800;">Gerenciamento</h2>
+
+    <table>
         <tr>
-            <th>Nome</th><th>Preço</th><th>QTD</th><th>Imagem</th><th>Editar</th><th>Deletar</th>            
+            <th>Nome</th><th>Preço</th><th>Estoque</th><th>Imagem</th><th>Editar</th><th>Deletar</th>
         </tr>
         {% for i in produtos %}
             <tr>
@@ -70,16 +276,201 @@
                         {% endif %}
                     {% endfor %}
                 </td>
-                <td>
-                    <a href="/usuario/admin/produto/editar/{{i.id}}">Editar</a>
-                </td>
-                <td>
-                    <form action="/usuario/admin/produto/deletar/{{i.id}}" method="post">
-                        <button type="submit">Deletar</button>                        
-                    </form>
-                </td>        
+                <td><a href="/usuario/admin/produto/editar/{{i.id}}" class="btn-editar-link">Editar</a></td>
+
+                <form action="/usuario/admin/produto/deletar/{{i.id}}" method="post">
+                    <td><button type="submit">Deletar</button></td>
+                </form>
             </tr>
         {% endfor %}
     </table>
+
+<!-- POPUP DE EDIÇÃO -->
+<div id="popup-editar" style="
+    display:none;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.4);
+    justify-content:center; align-items:center;
+">
+    <div style="
+        background:white; padding:25px; width:400px;
+        border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);
+    ">
+        <h3 style="margin-bottom:15px; color:#523800;">Editar Produto</h3>
+
+        <label>Nome:</label>
+        <input id="edit-nome" type="text" style="width:100%; padding:8px; margin-bottom:10px;">
+
+        <label>Preço:</label>
+        <input id="edit-preco" type="number" step="0.01" style="width:100%; padding:8px; margin-bottom:10px;">
+
+        <label>Estoque:</label>
+        <input id="edit-estoque" type="number" style="width:100%; padding:8px; margin-bottom:15px;">
+
+        <button id="salvar-edicao" type="button" style="
+            width:100%; padding:10px; 
+            background:#523800; color:white; border:none; border-radius:6px;
+        ">Salvar</button>
+
+        <button type="button" onclick="fecharPopup()" style="
+            width:100%; padding:10px;
+            background:#999; color:white; border:none; border-radius:6px; margin-top:10px;
+        ">Cancelar</button>
+    </div>
+</div>
+
+
+    <button type="button" class="menu-btn" style="width:200px; margin:30px auto 0;" onclick="voltarMenu()">Voltar ao Menu</button>
+
+</div>
+
+<!-- SUA CONTA -->
+<div id="secao-conta" class="secao">
+    <div class="container">
+        <h2 class="titulo verm">SUA CONTA</h2>
+
+        <!-- COLUNA 1 -->
+        <div class="secao-conta-coluna">
+            <div class="info-bloco">
+                <br><br>
+                <label>Nome completo:</label>
+                <div class="info-box">{{ usuario.nome_cliente }}</div>
+
+                <label>E-mail:</label>
+                <div class="info-box">{{ usuario.email }}</div>
+
+                <label>Data de Nascimento:</label>
+                <div class="info-box">{{ usuario.data_nascimento }}</div>
+
+                <label>Telefone:</label>
+                <div class="info-box">{{ usuario.telefone }}</div>
+
+                <a href="/usuario/admin/editar_usuario" class="botao-editar">Editar</a>
+            </div>
+        </div>
+
+        <!-- COLUNA 2 -->
+        <div class="secao-conta-coluna">
+            <h3 class="titulo">ENDEREÇO</h3>
+
+            <div class="info-bloco">
+                <label>CEP:</label>
+                <div class="endereco-box">{{ endereco.cep }}</div>
+
+                <label>Rua:</label>
+                <div class="endereco-box">{{ endereco.rua }}</div>
+
+                <label>Bairro:</label>
+                <div class="endereco-box">{{ endereco.bairro }}</div>
+
+                <label>Cidade:</label>
+                <div class="endereco-box">{{ endereco.cidade }}</div>
+
+                <a href="/usuario/admin/editar_endereco" class="botao-editar">Editar</a>
+            </div>
+        </div>
+
+        <!-- COLUNA LATERAL -->
+        <div class="outros">
+            <label>Número:</label>
+            <div class="endereco-box1">{{ endereco.numero }}</div>
+
+            <br><br>
+            <label>Complemento:</label>
+            <div class="endereco-box1">{{ endereco.complemento if endereco.complemento else '' }}</div>
+
+            <br><br>
+            <label>Estado:</label>
+            <div class="endereco-box1">{{ endereco.estado }}</div>
+        </div>
+
+    </div>
+    <button type="button" class="menu-btn" style="width:200px; margin:30px auto 0;" onclick="voltarMenu()">Voltar ao Menu</button>
+
+</div>
+
+<script>
+// garantimos que o DOM foi carregado antes de selecionar elementos e usar funções
+document.addEventListener('DOMContentLoaded', () => {
+
+    const logo = document.querySelector(".logo");
+
+    // segurança: se não encontrar a logo, não quebra o script
+    function moverLogo() {
+        if (!logo) return;
+        logo.classList.add("mover-logo");
+    }
+
+    function voltarLogo() {
+        if (!logo) return;
+        logo.classList.remove("mover-logo");
+    }
+
+    // deixo as funções globais para manter compatibilidade com os onclick inline
+    window.moverLogo = moverLogo;
+    window.voltarLogo = voltarLogo;
+
+    window.mostrar = function(secao) {
+        document.querySelectorAll('.secao').forEach(s => s.style.display = 'none');
+        document.getElementById('menu-inicial').style.display = 'none';
+        const el = document.getElementById(secao);
+        if (el) el.style.display = 'block';
+        moverLogo();
+    }
+
+    window.voltarMenu = function() {
+        document.querySelectorAll('.secao').forEach(s => s.style.display = 'none');
+        document.getElementById('menu-inicial').style.display = 'flex';
+        voltarLogo();
+    }
+    
+}); // fim DOMContentLoaded
+</script>
+
+<script>const logo = document.querySelector(".logo");
+
+function moverLogo() {
+    logo.classList.add("mover-logo");
+}
+
+function voltarLogo() {
+    logo.classList.remove("mover-logo");
+}
+
+function mostrar(secao) {
+    document.querySelectorAll('.secao').forEach(s => s.style.display = 'none');
+    document.getElementById('menu-inicial').style.display = 'none';
+    document.getElementById(secao).style.display = 'block';
+
+    moverLogo(); // animação para o canto
+}
+
+function voltarMenu() {
+    document.querySelectorAll('.secao').forEach(s => s.style.display = 'none');
+    document.getElementById('menu-inicial').style.display = 'flex';
+
+    voltarLogo(); // animação voltando para o centro
+}
+</script>
+
+<script>
+function mostrarAlertas() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get("status");
+
+    if (status === "criado") {
+        alert("Produto cadastrado com sucesso! 🚀");
+    }
+    if (status === "deletado") {
+        alert("Produto deletado com sucesso! 🗑️");
+    }
+    if (status === "editado") {
+        alert("Produto atualizado com sucesso! ✏️");
+    }
+}
+mostrarAlertas();
+</script>
+
 </body>
 </html>
