@@ -100,7 +100,7 @@
                                     </div>
                                     <div>
                                         <label for="complemento">Complemento:</label>
-                                        <input id="complemento" type="text" value="{{ endereco.complemento }}" disabled>
+                                        <input id="complemento" type="text" value="{{ endereco.complemento if endereco.complemento else '' }}" disabled>
                                     </div>
                                 </div>
 

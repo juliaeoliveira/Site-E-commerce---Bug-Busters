@@ -68,7 +68,7 @@
             <input type="text" id="numero" name="numero" value="{{ endereco.numero }}" required>
 
             <label for="complemento">Complemento:</label>
-            <input type="text" id="complemento" name="complemento" value="{{ endereco.complemento }}">
+            <input type="text" id="complemento" name="complemento" value="{{ endereco.complemento if endereco.complemento else '' }}">
 
             <label for="bairro">Bairro:</label>
             <input type="text" id="bairro" name="bairro" value="{{ endereco.bairro }}" required>

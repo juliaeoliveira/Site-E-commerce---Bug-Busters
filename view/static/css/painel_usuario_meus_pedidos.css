@@ -195,10 +195,10 @@ h1 {
   font-size: 15px;
 }
 
-#logout-btn:hover {
-  background-color: #5a0000;
+#logout-btn a {
+  color: #fff;
+  text-decoration: none;
 }
-
 .carrinho{
   margin-right: 90px;
 }
