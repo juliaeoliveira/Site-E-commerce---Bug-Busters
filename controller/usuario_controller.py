@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from database import get_db
 from controller.usuario_autenticacao import ServicosUsuario, verificar_hash_senha, criar_token, verificar_token
-from models import Usuario_Model, Produto
+from models import Usuario_Model, Produto, Endereco as Endereco_Model
 from schemas import Usuario , Endereco
 import shutil
 
@@ -123,9 +123,23 @@ def pagina_adm(request: Request, db: Session = Depends(get_db)):
     payload = verificar_token(token)
     if not payload or not payload.get("adm"):
         return RedirectResponse(url="/", status_code=303)
+    
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload["sub"]).first()
+
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+
     produtos = db.query(Produto).all()
+
+    endereco = usuario.endereco
+
     return templates.TemplateResponse("admin.html",{
-        "request":request, "produtos":produtos
+        "request":request, "produtos":produtos, 
+        "usuario":usuario, "endereco":endereco
     })
 
 #rota criar produto
@@ -179,7 +193,7 @@ def criar_produto(request:Request,nome_produto:str=Form(...),
     db.add(novo_produto)
     db.commit()
     db.refresh(novo_produto)
-    return RedirectResponse(url="/usuario/admin",status_code=303) 
+    return RedirectResponse(url="/usuario/admin?status=criado",status_code=303) 
 
 #atualizar produto get edição do produto
 @caminho_prefixo_usuario.get("/admin/produto/editar/{id}",
@@ -229,34 +243,34 @@ def atualizar_produto(
     #atualizar a imagens se tiver
     if imagem1_url and imagem1_url.filename !="":
         caminho_arquivo = f'{UPLOAD_DIR}/{imagem1_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
-        shutil.copyfileobj(imagem1_url.file,arquivo)
-    produto.imagem1_url= imagem1_url.filename
+        with open(caminho_arquivo, "wb") as arquivo:
+            shutil.copyfileobj(imagem1_url.file,arquivo)
+        produto.imagem1_url= imagem1_url.filename
 
     if imagem2_url and imagem2_url.filename !="":
         caminho_arquivo = f'{UPLOAD_DIR}/{imagem2_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
-        shutil.copyfileobj(imagem2_url.file,arquivo)
-    produto.imagem2_url= imagem2_url.filename
+        with open(caminho_arquivo, "wb") as arquivo:
+            shutil.copyfileobj(imagem2_url.file,arquivo)
+        produto.imagem2_url= imagem2_url.filename
 
     if imagem3_url and imagem3_url.filename !="":
         caminho_arquivo = f'{UPLOAD_DIR}/{imagem3_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
-        shutil.copyfileobj(imagem3_url.file,arquivo)
-    produto.imagem3_url= imagem3_url.filename
+        with open(caminho_arquivo, "wb") as arquivo:
+            shutil.copyfileobj(imagem3_url.file,arquivo)
+        produto.imagem3_url= imagem3_url.filename
 
     if imagem4_url and imagem4_url.filename !="":
         caminho_arquivo = f'{UPLOAD_DIR}/{imagem4_url.filename}'
-    with open(caminho_arquivo, "wb") as arquivo:
-        shutil.copyfileobj(imagem4_url.file,arquivo)
-    produto.imagem4_url= imagem4_url.filename
+        with open(caminho_arquivo, "wb") as arquivo:
+            shutil.copyfileobj(imagem4_url.file,arquivo)
+        produto.imagem4_url= imagem4_url.filename
 
     produto.status=status
     produto.loja_id=loja_id
 
     db.commit()
     db.refresh(produto)
-    return RedirectResponse(url="/usuario/admin",status_code=303)
+    return RedirectResponse(url="/usuario/admin?status=editado",status_code=303)
 
 
 #deletar produto
@@ -266,6 +280,170 @@ def deletar_produto(id:int,db:Session=Depends(get_db)):
     if produto:
         db.delete(produto)
         db.commit()
+    return RedirectResponse(url="/usuario/admin?status=deletado",status_code=303)
+
+@caminho_prefixo_usuario.get("/admin/editar_usuario")
+def editar_usuario(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    
+    email=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    return templates.TemplateResponse("painel_admin_editar_usuario.html",{
+        "request":request, "usuario":usuario
+    })
+
+
+@caminho_prefixo_usuario.post("/admin/editar_usuario")
+def editar_usuario(request:Request,
+    nome_cliente: str = Form(...),
+    email: str = Form(...),
+    data_nascimento: str = Form(...),
+    telefone: str = Form(...),
+    db: Session = Depends(get_db)
+    ):
+    
+    token=request.cookies.get("token")
+    payload=verificar_token(token)
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    email_cadastrado=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email_cadastrado).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    #atualizar os campos
+    usuario.nome_cliente = nome_cliente
+    usuario.email = email
+    usuario.data_nascimento = data_nascimento
+    usuario.telefone = telefone
+
+    db.commit()
+    db.refresh(usuario)
+    return RedirectResponse(url="/usuario/admin",status_code=303)
+
+@caminho_prefixo_usuario.get("/admin/editar_endereco")
+def editar_endereco(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    
+    email=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    endereco = usuario.endereco
+
+    #caso o usuário ainda não tenha endereço cadastrado
+    if not endereco:
+        # apenas manda um dicionário vazio
+        endereco = {
+            "cep": "",
+            "rua": "",
+            "numero": "",
+            "complemento": "",
+            "bairro": "",
+            "cidade": "",
+            "estado": ""
+        }
+
+    return templates.TemplateResponse("painel_admin_editar_endereco.html",{
+        "request" : request, "endereco" : endereco
+    })
+
+@caminho_prefixo_usuario.post("/admin/editar_endereco")
+def editar_endereco(request:Request,
+    cep : str = Form(...),
+    rua : str = Form(...),
+    numero : str = Form(...),
+    complemento : str = Form(...),
+    bairro : str = Form(...),
+    cidade : str = Form(...),
+    estado : str = Form(...),
+    db: Session = Depends(get_db)
+    ):
+    
+    token=request.cookies.get("token")
+    payload=verificar_token(token)
+    if not payload:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Parece que seu token de login expirou, por favor faça login novamente.",
+            "link_login": "/usuario/login"
+        })
+    email_cadastrado=payload.get("sub")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email_cadastrado).first()
+    if not usuario:
+        return templates.TemplateResponse("mensagem.html", {
+            "request": request,
+            "mensagem": "Usuário não encontrado.",
+            "link_login": "/usuario/login"
+        })
+    
+    endereco = usuario.endereco
+    
+    #atualizar os campos
+    if endereco is None:
+        endereco = Endereco_Model(
+            usuario_id=usuario.id,
+            cep=cep,
+            rua=rua,
+            numero=numero,
+            complemento=complemento,
+            bairro=bairro,
+            cidade=cidade,
+            estado=estado
+        )
+        db.add(endereco)
+
+    else:
+        endereco.cep = cep
+        endereco.rua = rua
+        endereco.numero = numero
+        endereco.complemento = complemento
+        endereco.bairro = bairro
+        endereco.cidade = cidade
+        endereco.estado = estado
+
+    db.commit()
+    db.refresh(endereco)
     return RedirectResponse(url="/usuario/admin",status_code=303)
 
 
