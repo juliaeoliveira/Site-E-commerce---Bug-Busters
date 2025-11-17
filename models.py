@@ -86,7 +86,7 @@ class Pagamento(Base):
     
     #relacionamento com as tabelas
     usuarios = relationship("Usuario_Model", back_populates="pagamentos") #1:N
-    pedido = relationship("Pedido", back_populates="pagamentos") #1:NM
+    pedido = relationship("Pedido", back_populates="pagamento", uselist=False) #1:NM
     loja = relationship("Loja", back_populates="pagamentos") #1:N
 
 
@@ -101,7 +101,7 @@ class Pedido(Base):
     id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
     
     #relacionamento com as tabelas
-    pagamentos = relationship("Pagamento", back_populates="pedido") #N:1
+    pagamento = relationship("Pagamento", back_populates="pedido", uselist=False) #N:1
     usuarios = relationship("Usuario_Model", back_populates="pedidos") #1:N
     itens_pedido = relationship("ItemPedido", back_populates="pedido", cascade="all, delete-orphan") #N:1
     
