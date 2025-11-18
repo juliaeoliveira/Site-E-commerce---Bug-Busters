@@ -252,8 +252,14 @@ async def salvar_dados_pedido(
 
     cnpj_loja = "03.774.819/0005-28"  # fixo da sob veu
 
-    # Calcula o valor total
-    valor_total = sum(Decimal(str(i["subtotal"])) for i in itens)
+    # Calcula o valor total (soma dos subtotais + frete, se informado)
+    frete_recebido = dados.get("frete", 0)
+    try:
+        frete_decimal = Decimal(str(frete_recebido))
+    except Exception:
+        frete_decimal = Decimal('0')
+
+    valor_total = sum(Decimal(str(i["subtotal"])) for i in itens) + frete_decimal
 
     if (metodo_pagamento == "debito") or (metodo_pagamento == "pix"):
         status = "pago"

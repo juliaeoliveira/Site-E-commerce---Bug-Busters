@@ -495,6 +495,13 @@
                 }))
             };
 
+            // lê o valor do frete exibido na página (elemento com id 'frete-data' definido no template)
+            const freteDataEl = document.getElementById('frete-data');
+            const freteValor = freteDataEl ? parseFloat(freteDataEl.dataset.valor || 0) : 0;
+
+            // inclui o frete no payload (número em reais)
+            payload.frete = isNaN(freteValor) ? 0 : freteValor;
+
             try {
                 const response = await fetch("/pedido/checkout", {
                     method: "POST",
