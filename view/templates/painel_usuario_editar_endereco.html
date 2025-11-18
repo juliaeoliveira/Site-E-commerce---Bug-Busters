@@ -192,7 +192,7 @@
             .then(response => {
                 if (response.redirected) {
                     alert('✅ Endereço atualizado com sucesso!');
-                    window.location.href = response.url;
+                    window.location.href = "/pedido/checkout";
                 } else {
                     alert('❌ Ocorreu um erro ao atualizar o endereço.');
                 }

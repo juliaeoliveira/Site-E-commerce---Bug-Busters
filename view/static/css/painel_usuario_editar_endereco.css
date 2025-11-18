@@ -1,3 +1,10 @@
+/* Para não esconder o conteúdo atrás do menu */
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #EAE4D8;
@@ -288,9 +295,6 @@ main .botao{
     transform: scale(1.05);
 }
 
-main{
-  margin-left: 100px;
-}
 
 footer{
     background-color: #5a0101;
