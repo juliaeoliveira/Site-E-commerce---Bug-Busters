@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <title>Pagamento</title>
     <link rel="stylesheet" href="/static/css/checkout.css">
 </head>
+
 <body>
 
     <!-- MENU -->
     <div class="menu">
-    <a href="/painel_usuario"><img id="logo"src="/static/img_home/Sob.png" alt="Logo"></a>
+        <a href="/painel_usuario"><img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a>
         <nav>
             <a href="/painel_usuario/produtos">Vestidos</a>
             <a href="/painel_usuario/#">Coleções</a>
@@ -22,44 +28,35 @@
         </nav>
         <br> <br> <br>
         <div class="login-dropdown-wrapper">
-          <img class="login"
-            src="/static/img_home/login.png"
-            width="20px"
-            title="login"
-            alt="login"
-            id="login-icon"
-          />
+            <img class="login" src="/static/img_home/login.png" width="20px" title="login" alt="login"
+                id="login-icon" />
 
-          <div id="login-dropdown" class="hidden">
-            <h3><strong>Bem-vindo(a), {{ primeiro_nome }}.</strong></h3>
-            <ul>
-              <div class="opcoes">
-                <a href="/painel_usuario/meus_dados">Sua Conta</a>
-              </div>
-              <div class="opcoes">
-                <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-              </div>
-              <div class="opcoes">
-                <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-              </div>
-              <div class="opcoes">
-                <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-              </div>
-              </ul>
-            <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
-          </div>
+            <div id="login-dropdown" class="hidden">
+                <h3><strong>Bem-vindo(a), {{ primeiro_nome }}.</strong></h3>
+                <ul>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/meus_dados">Sua Conta</a>
+                    </div>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+                    </div>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+                    </div>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+                    </div>
+                </ul>
+                <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+            </div>
         </div>
         <div class="carrinho">
-            <a href="/painel_usuario/carrinho" >
-                <img src="/static/img_home/carrinho.png"
-                width="20px"
-                title="Carrinho"
-                alt="Carrinho"
-            />
+            <a href="/painel_usuario/carrinho">
+                <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho" />
             </a>
-          </nav>
+            </nav>
         </div>
-    </div> 
+    </div>
 
     <main>
         <form action="">
@@ -75,25 +72,25 @@
                             <div class="form-endereco">
 
                                 <div class="linha-dupla">
-                                <div>
-                                    <label for="nome">Nome Completo:</label>
-                                    <input id="nome" type="text" value="{{ usuario.nome_cliente }}" disabled>
-                                </div>
-                                <div>
-                                    <label for="telefone">Número de Telefone: </label>
-                                    <input id="telefone" type="text" value="{{ usuario.telefone }}" disabled>
-                                </div>
+                                    <div>
+                                        <label for="nome">Nome Completo:</label>
+                                        <input id="nome" type="text" value="{{ usuario.nome_cliente }}" disabled>
+                                    </div>
+                                    <div>
+                                        <label for="telefone">Número de Telefone: </label>
+                                        <input id="telefone" type="text" value="{{ usuario.telefone }}" disabled>
+                                    </div>
                                 </div>
 
                                 <div class="linha-dupla">
-                                <div>
-                                    <label for="cep">CEP: </label>
-                                    <input id="cep" type="text" value="{{ endereco.cep }}" disabled>
-                                </div>
-                                <div>
-                                    <label for="rua">Rua: </label>
-                                    <input id="rua" type="text" value="{{ endereco.rua }}" disabled>
-                                </div>
+                                    <div>
+                                        <label for="cep">CEP: </label>
+                                        <input id="cep" type="text" value="{{ endereco.cep }}" disabled>
+                                    </div>
+                                    <div>
+                                        <label for="rua">Rua: </label>
+                                        <input id="rua" type="text" value="{{ endereco.rua }}" disabled>
+                                    </div>
                                 </div>
 
                                 <div class="linha-dupla">
@@ -103,28 +100,30 @@
                                     </div>
                                     <div>
                                         <label for="complemento">Complemento:</label>
-                                        <input id="complemento" type="text" value="{{ endereco.complemento if endereco.complemento else '' }}" disabled>
+                                        <input id="complemento" type="text"
+                                            value="{{ endereco.complemento if endereco.complemento else '' }}" disabled>
                                     </div>
                                 </div>
 
                                 <div class="linha-dupla">
-                                <div class="primeiro">
-                                    <label for="estado">Estado:</label>
-                                    <input id="estado" type="text" value="{{ endereco.estado }}" disabled>
-                                </div>
-                                <div class="segundo">
-                                    <label for="cidade">Cidade:</label>
-                                    <input id="cidade" type="text" value="{{ endereco.cidade }}" disabled>
-                                </div>
-                                <div class="linha-dupla2">
-                                <div>
-                                    <label for="bairro">Bairro:</label>
-                                    <input id="bairro" type="text" value="{{ endereco.bairro }}" disabled>
-                                </div>
-                                </div>
+                                    <div class="primeiro">
+                                        <label for="estado">Estado:</label>
+                                        <input id="estado" type="text" value="{{ endereco.estado }}" disabled>
+                                    </div>
+                                    <div class="segundo">
+                                        <label for="cidade">Cidade:</label>
+                                        <input id="cidade" type="text" value="{{ endereco.cidade }}" disabled>
+                                    </div>
+                                    <div class="linha-dupla2">
+                                        <div>
+                                            <label for="bairro">Bairro:</label>
+                                            <input id="bairro" type="text" value="{{ endereco.bairro }}" disabled>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <a href="/pedido/editar_endereco" type="button" class="botao-enviar">Alterar informações de cadastro</a>
+                                <a href="/pedido/editar_endereco" type="button" class="botao-enviar">Alterar informações
+                                    de cadastro</a>
                             </div>
                         </section>
 
@@ -152,34 +151,23 @@
                         <section class="produto-vestido" id="itens-pedido">
                             <h1>ITENS</h1>
                             <div class="itens-container"></div> <!-- <- novo container -->
-                            <div class="produto-item">
-                                <!-- <img class="foto" src="" alt="Vestido"> -->
-                                <div class="texto">
-                                    <!-- <h3>Vestido Eternity</h3> -->
-                                    <!-- <p class="colecao">Coleção Chama Secreta</p> -->
-                                    <!-- <p class="estoque">Em estoque</p> -->
-                                    <!-- <select class="tamanho">
-                                        <option value="PP">PP</option>
-                                        <option value="P">P</option>
-                                        <option value="M">M</option>
-                                        <option value="G">G</option>
-                                    </select> -->
-                                    <br>
-                                    <!-- <label class="quantidade" for="quantidade">Quantidade:</label>
-                                    <input type="number" class="quantia" name="quantidade" min="1" max="10" required placeholder="1"> 
-                                    <p class="valor">R$ 12.000</p> -->
-                                </div>
-                            </div>
                         </section>
                     </div>
                     <section class="pedido-total">
                         <div>
                             <h3>Seu pedido</h3>
                             <br>
-                            <h2><span>Sub total:</span> <span>12.000</span></h2>
-                            <h2><span>Frete:</span> <span>12.000</span></h2>
+                            <h2><span>Sub total:</span> <span id="subtotal-value">R$ 0,00</span></h2>
+                            <h2>
+                                <span>Frete:</span>
+                                <span id="frete-value">R$ {{ '%.2f'|format(frete.valor_frete) if frete else '0.00'
+                                    }}</span>
+                            </h2>
+                            <div id="frete-data" data-valor="{{ frete.valor_frete if frete else 0 }}"
+                                style="display:none;"></div>
+                            <h2><span>Total:</span> <span id="total-with-frete">R$ 0,00</span></h2>
                         </div>
-                        <div id="checkout-form"> 
+                        <div id="checkout-form">
                             <button id="botao-pagamento" type="submit">Fechar pedido</button>
                         </div>
 
@@ -199,9 +187,10 @@
             <hr class="linha-titulo3">
             <div class="lista-vestidos">
                 {% for sugestao in sugestoes %}
-                <div class="vestido"> 
+                <div class="vestido">
                     <a href="/produtos/{{ sugestao.id }}">
-                        <img src="{{url_for('static', path='uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}" class="fotovariedades">
+                        <img src="{{url_for('static', path='uploads/' + sugestao.imagem1_url)}}"
+                            alt="{{ sugestao.nome_produto }}" class="fotovariedades">
                         <p class="nome">{{ sugestao.nome_produto }}</p>
                     </a>
                 </div>
@@ -211,7 +200,7 @@
             <nav>
                 <div class="outrosvestidos">
                     <a href="/produtos/"><button class="ver">← Continuar vendo outros vestidos</button></a>
-                </div> 
+                </div>
             </nav>
         </section>
     </main>
@@ -220,117 +209,120 @@
         <img class="sob" src="/static/img_home/Sob copy.png" alt="">
         <ul>
             <p>Contatos</p><br>
-            <img class="telefone" src="/static/img_home/telefone.png" alt=""><li>(11) 4002-8922</li><br>
-            <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt=""><li>(11) 98291-1653</li>
+            <img class="telefone" src="/static/img_home/telefone.png" alt="">
+            <li>(11) 4002-8922</li><br>
+            <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt="">
+            <li>(11) 98291-1653</li>
             <li>sobveuoficial@gmail.com</li>
         </ul>
         <p class="linha">___________</p>
         <ul>
             <p>Sobre a loja:</p><br>
-            <li>Sobre nós</li>  
+            <li>Sobre nós</li>
             <li>Trocas e Devoluções</li>
             <li>Fretes e Entregas</li>
         </ul>
-        <p class="linha">___________</p> 
+        <p class="linha">___________</p>
         <ul>
             <li>Política de Privacidade</li>
             <li>Termos de Uso</li>
         </ul>
         <section class="midia">
-            <img class="instagram" src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+            <img class="instagram"
+                src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
             <img class="facebook" src="/static/img_home/facebook-f-Photoroom.png" alt="">
         </section>
         <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
     <script>
-    const loginIcon = document.getElementById('login-icon');
-    const loginDropdown = document.getElementById('login-dropdown');
+        const loginIcon = document.getElementById('login-icon');
+        const loginDropdown = document.getElementById('login-dropdown');
 
-    loginIcon.addEventListener('click', () => {
-    const isVisible = loginDropdown.style.display === 'block';
+        loginIcon.addEventListener('click', () => {
+            const isVisible = loginDropdown.style.display === 'block';
 
-    loginDropdown.style.display = isVisible ? 'none' : 'block';
-    
-    // Ativa ou desativa a animação
-    loginIcon.classList.toggle('login-active', !isVisible);
-    });
+            loginDropdown.style.display = isVisible ? 'none' : 'block';
 
-    window.addEventListener('click', function (e) {
-    if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
-        loginDropdown.style.display = 'none';
-        loginIcon.classList.remove('login-active');
-    }
-    });
+            // Ativa ou desativa a animação
+            loginIcon.classList.toggle('login-active', !isVisible);
+        });
+
+        window.addEventListener('click', function (e) {
+            if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+                loginDropdown.style.display = 'none';
+                loginIcon.classList.remove('login-active');
+            }
+        });
 
     </script>
     <!-- JAVASCRIPT (inalterado) -->
     <script>
-    // Verifica se o documento ainda está sendo carregado
-    if (document.readyState === "loading") {
-        // Se sim, adiciona um evento para rodar a função "ready" quando o DOM estiver pronto
-        document.addEventListener("DOMContentLoaded", ready);
-    } else {
-        // Caso o documento já tenha sido carregado, executa a função imediatamente
-        ready();
-    }
-
-    // Variável global para guardar o valor total da compra
-    let totalAmount = 0;
-
-    // Função que é executada quando o site termina de carregar
-    function ready() {
-        loadCartFromLocalStorage(); // Carrega os produtos salvos no carrinho (localStorage)
-
-        // Pega o botão de pagamento pelo ID
-        const purchaseButton = document.getElementById("botao-pagamento");
-
-        // Se o botão existir na página, adiciona o evento de clique
-        if (purchaseButton) {
-            purchaseButton.addEventListener("click", makePurchase);
-        }
-    }
-
-    // ================================
-    // CARREGA CARRINHO DO LOCALSTORAGE
-    // ================================
-    function loadCartFromLocalStorage() {
-        // Pega o carrinho do localStorage (ou cria um array vazio se não existir)
-        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-        // Seleciona o container onde os produtos serão exibidos
-        const container = document.querySelector("#itens-pedido .itens-container");
-
-        // Seleciona o elemento onde aparece o total (obs: "spam" deveria ser "span")
-        // Linha 44: Antigo: const totalElement = document.querySelector(".pedido-total h2 span");
-        const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
-
-        // Começa colocando o título "Carrinho de compras" no container
-        // container.innerHTML = "<h1>Carrinho de compras</h1>";
-
-
-        // Se o carrinho estiver vazio, mostra a mensagem e zera o total
-        if (carrinho.length === 0) {
-            container.innerHTML += "<p>Seu carrinho está vazio!</p>";
-            totalElement.textContent = "0,00";
-            return;
+        // Verifica se o documento ainda está sendo carregado
+        if (document.readyState === "loading") {
+            // Se sim, adiciona um evento para rodar a função "ready" quando o DOM estiver pronto
+            document.addEventListener("DOMContentLoaded", ready);
+        } else {
+            // Caso o documento já tenha sido carregado, executa a função imediatamente
+            ready();
         }
 
-        
-        // Se o carrinho estiver vazio, mostra a mensagem e zera o total
-        if (carrinho.length === 0) {
-            container.innerHTML += "<p>Seu carrinho está vazio!</p>";
-            totalElement.textContent = "0,00";
-            return; // Sai da função
+        // Variável global para guardar o valor total da compra
+        let totalAmount = 0;
+
+        // Função que é executada quando o site termina de carregar
+        function ready() {
+            loadCartFromLocalStorage(); // Carrega os produtos salvos no carrinho (localStorage)
+
+            // Pega o botão de pagamento pelo ID
+            const purchaseButton = document.getElementById("botao-pagamento");
+
+            // Se o botão existir na página, adiciona o evento de clique
+            if (purchaseButton) {
+                purchaseButton.addEventListener("click", makePurchase);
+            }
         }
 
-        // Para cada produto no carrinho...
-        carrinho.forEach((produto, index) => {
-            // Cria uma nova div para representar o produto
-            const div = document.createElement("div");
-            div.classList.add("produto-item"); // adiciona a classe CSS
+        // ================================
+        // CARREGA CARRINHO DO LOCALSTORAGE
+        // ================================
+        function loadCartFromLocalStorage() {
+            // Pega o carrinho do localStorage (ou cria um array vazio se não existir)
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-            // Adiciona dentro da div as informações do produto
-            div.innerHTML = `
+            // Seleciona o container onde os produtos serão exibidos
+            const container = document.querySelector("#itens-pedido .itens-container");
+
+            // Seleciona o elemento onde aparece o total (obs: "spam" deveria ser "span")
+            // Linha 44: Antigo: const totalElement = document.querySelector(".pedido-total h2 span");
+            const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
+
+            // Começa colocando o título "Carrinho de compras" no container
+            // container.innerHTML = "<h1>Carrinho de compras</h1>";
+
+
+            // Se o carrinho estiver vazio, mostra a mensagem e zera o total
+            if (carrinho.length === 0) {
+                container.innerHTML += "<p>Seu carrinho está vazio!</p>";
+                totalElement.textContent = "0,00";
+                return;
+            }
+
+
+            // Se o carrinho estiver vazio, mostra a mensagem e zera o total
+            if (carrinho.length === 0) {
+                container.innerHTML += "<p>Seu carrinho está vazio!</p>";
+                totalElement.textContent = "0,00";
+                return; // Sai da função
+            }
+
+            // Para cada produto no carrinho...
+            carrinho.forEach((produto, index) => {
+                // Cria uma nova div para representar o produto
+                const div = document.createElement("div");
+                div.classList.add("produto-item"); // adiciona a classe CSS
+
+                // Adiciona dentro da div as informações do produto
+                div.innerHTML = `
             <img class="foto" src="${produto.imagem}" alt="${produto.nome}"> <!-- imagem do produto -->
             <div class="texto">
             <h3>${produto.nome}</h3> <!-- nome do produto -->
@@ -352,158 +344,182 @@
             <p class="valor">${produto.preco}</p>
             </div>
         `;
-            // adiciona a div do produto no container
-            container.appendChild(div);
-        });
-
-        // Atualiza o valor total dos produtos
-        updateTotal();
-
-        // Adiciona eventos para quando a quantidade for alterada
-        document.querySelectorAll(".quantia").forEach(input => {
-            input.addEventListener("change", updateQuantity);
-        });
-
-        // Adiciona eventos para quando clicar na lixeira (remover produto)
-        document.querySelectorAll(".lixeira").forEach(btn => {
-            btn.addEventListener("click", removeProduct);
-        });
-
-        // Adiciona eventos para quando mudar o tamanho
-        document.querySelectorAll(".tamanho").forEach(select => {
-            select.addEventListener("change", event => {
-                // Pega o índice do produto que teve o tamanho alterado
-                const index = Array.from(document.querySelectorAll(".tamanho")).indexOf(event.target);
-
-                // Atualiza o tamanho no localStorage
-                let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-                carrinho[index].tamanho = event.target.value;
-                localStorage.setItem("carrinho", JSON.stringify(carrinho));
+                // adiciona a div do produto no container
+                container.appendChild(div);
             });
-        });
-    }
 
-    // ================================
-      // ATUALIZA TOTAL DO CARRINHO
-     // ================================
-    function updateTotal() {
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
-    let total = 0;
+            // Atualiza o valor total dos produtos
+            updateTotal();
 
-    // Soma o preço de todos os produtos
-    carrinho.forEach(produto => {
-    // Converte o preço de "R$xx,xx" para número
-    let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
-    total += preco * produto.quantidade;
-    });
+            // Adiciona eventos para quando a quantidade for alterada
+            document.querySelectorAll(".quantia").forEach(input => {
+                input.addEventListener("change", updateQuantity);
+            });
 
-     // [LINHA 171] MUDANÇA AQUI: Adicionar style: 'currency' e currency: 'BRL'
-    totalElement.textContent = total.toLocaleString("pt-BR", { 
-            style: 'currency', 
-            currency: 'BRL' 
-        });
+            // Adiciona eventos para quando clicar na lixeira (remover produto)
+            document.querySelectorAll(".lixeira").forEach(btn => {
+                btn.addEventListener("click", removeProduct);
+            });
 
-    // Guarda o total na variável global
-     totalAmount = total;
-     }
+            // Adiciona eventos para quando mudar o tamanho
+            document.querySelectorAll(".tamanho").forEach(select => {
+                select.addEventListener("change", event => {
+                    // Pega o índice do produto que teve o tamanho alterado
+                    const index = Array.from(document.querySelectorAll(".tamanho")).indexOf(event.target);
 
-// ... (Resto do código) ...
-
-    // ================================
-    // ATUALIZA QUANTIDADE DE UM PRODUTO
-    // ================================
-    function updateQuantity(event) {
-        // Pega o índice do produto alterado
-        const index = Array.from(document.querySelectorAll(".quantia")).indexOf(event.target);
-
-        // Pega o carrinho atual
-        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-        // Atualiza a quantidade com o novo valor
-        carrinho[index].quantidade = parseInt(event.target.value) || 1;
-
-        // Salva de volta no localStorage
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-        // Recalcula o total
-        updateTotal();
-    }
-
-    // ================================
-    // REMOVE UM PRODUTO DO CARRINHO
-    // ================================
-    function removeProduct(event) {
-    const btn = event.target;
-    const index = parseInt(btn.dataset.index);
-
-    if (isNaN(index)) return; // segurança extra
-
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    carrinho.splice(index, 1);
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-    loadCartFromLocalStorage(); // recarrega o carrinho
-    }
-</script>
-
-<script>
-async function makePurchase(event) {
-    event.preventDefault();
-
-    // Carrinho armazenado no localStorage
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-    // Método de pagamento selecionado
-    const metodoPagamento = document.querySelector('input[name="metodo_pagamento"]:checked')?.value;
-
-    if (!metodoPagamento) {
-        alert("Selecione um método de pagamento!");
-        return;
-    }
-
-    if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
-        return;
-    }
-
-    // Monta os dados a serem enviados ao backend
-    const payload = {
-        metodo_pagamento: metodoPagamento,
-        itens: carrinho.map(item => ({
-            id_produto: item.id, // o produto deve ter um 'id' salvo no localStorage
-            nome: item.nome,
-            tamanho: item.tamanho,
-            quantidade: item.quantidade,
-            preco_unitario: parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", ".")),
-            subtotal: parseFloat(item.quantidade) * parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", "."))
-        }))
-    };
-
-    try {
-        const response = await fetch("/pedido/checkout", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            alert("Pedido realizado com sucesso!");
-            localStorage.removeItem("carrinho"); // limpa o carrinho
-            window.location.href = `/painel_usuario/meus_pedidos`;
-        } else {
-            alert("Erro ao salvar pedido: " + (result.detail || "Tente novamente."));
+                    // Atualiza o tamanho no localStorage
+                    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+                    carrinho[index].tamanho = event.target.value;
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+                });
+            });
         }
-    } catch (err) {
-        console.error("Erro:", err);
-        alert("Erro inesperado ao processar o pedido.");
-    }
-}
-</script>
+
+        // ================================
+        // ATUALIZA TOTAL DO CARRINHO
+        // ================================
+        function updateTotal() {
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
+            let total = 0;
+
+            // Soma o preço de todos os produtos
+            carrinho.forEach(produto => {
+                // Converte o preço de "R$xx,xx" para número
+                let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
+                total += preco * produto.quantidade;
+            });
+
+            // [LINHA 171] MUDANÇA AQUI: Adicionar style: 'currency' e currency: 'BRL'
+            totalElement.textContent = total.toLocaleString("pt-BR", {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            // Atualiza frete e total com frete
+            const freteDataEl = document.getElementById('frete-data');
+            const freteValor = freteDataEl ? parseFloat(freteDataEl.dataset.valor || 0) : 0;
+            const freteValueEl = document.getElementById('frete-value');
+            const totalWithFreteEl = document.getElementById('total-with-frete');
+
+            if (freteValueEl) {
+                // formata frete
+                freteValueEl.textContent = freteValor.toLocaleString("pt-BR", {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+            }
+
+            if (totalWithFreteEl) {
+                const totalWithFrete = (total + (isNaN(freteValor) ? 0 : freteValor));
+                totalWithFreteEl.textContent = totalWithFrete.toLocaleString("pt-BR", {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+            }
+
+
+            // Guarda o total na variável global
+            totalAmount = total;
+        }
+
+        // ... (Resto do código) ...
+
+        // ================================
+        // ATUALIZA QUANTIDADE DE UM PRODUTO
+        // ================================
+        function updateQuantity(event) {
+            // Pega o índice do produto alterado
+            const index = Array.from(document.querySelectorAll(".quantia")).indexOf(event.target);
+
+            // Pega o carrinho atual
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+            // Atualiza a quantidade com o novo valor
+            carrinho[index].quantidade = parseInt(event.target.value) || 1;
+
+            // Salva de volta no localStorage
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+            // Recalcula o total
+            updateTotal();
+        }
+
+        // ================================
+        // REMOVE UM PRODUTO DO CARRINHO
+        // ================================
+        function removeProduct(event) {
+            const btn = event.target;
+            const index = parseInt(btn.dataset.index);
+
+            if (isNaN(index)) return; // segurança extra
+
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            carrinho.splice(index, 1);
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+            loadCartFromLocalStorage(); // recarrega o carrinho
+        }
+    </script>
+
+    <script>
+        async function makePurchase(event) {
+            event.preventDefault();
+
+            // Carrinho armazenado no localStorage
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+            // Método de pagamento selecionado
+            const metodoPagamento = document.querySelector('input[name="metodo_pagamento"]:checked')?.value;
+
+            if (!metodoPagamento) {
+                alert("Selecione um método de pagamento!");
+                return;
+            }
+
+            if (carrinho.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            // Monta os dados a serem enviados ao backend
+            const payload = {
+                metodo_pagamento: metodoPagamento,
+                itens: carrinho.map(item => ({
+                    id_produto: item.id, // o produto deve ter um 'id' salvo no localStorage
+                    nome: item.nome,
+                    tamanho: item.tamanho,
+                    quantidade: item.quantidade,
+                    preco_unitario: parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", ".")),
+                    subtotal: parseFloat(item.quantidade) * parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", "."))
+                }))
+            };
+
+            try {
+                const response = await fetch("/pedido/checkout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("Pedido realizado com sucesso!");
+                    localStorage.removeItem("carrinho"); // limpa o carrinho
+                    window.location.href = `/painel_usuario/meus_pedidos`;
+                } else {
+                    alert("Erro ao salvar pedido: " + (result.detail || "Tente novamente."));
+                }
+            } catch (err) {
+                console.error("Erro:", err);
+                alert("Erro inesperado ao processar o pedido.");
+            }
+        }
+    </script>
 
 </body>
+
 </html>

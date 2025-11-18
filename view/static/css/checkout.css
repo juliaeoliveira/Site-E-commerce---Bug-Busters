@@ -1058,3 +1058,7 @@ h3
   background-color: #5a0101;
   transform: scale(1.05);
 }
+
+#itens-pedido {
+  height: auto
+}

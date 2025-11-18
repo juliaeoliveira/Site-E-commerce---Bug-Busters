@@ -1,9 +1,19 @@
-  body {
-    background: #FBFCF7;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
+  * {
+    margin:0;
     padding: 0;
 }
+
+body {
+    display: flex; 
+    flex-direction: column; /* Organiza os itens na vertical (coluna) */
+    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o preenchimento padrão */
+    overflow-x: hidden; /* Impede rolagem horizontal */
+    background-color: #FBFCF7;
+    
+}
+
 /* MENU */
 #logo {
     
@@ -17,6 +27,8 @@
     display: flex;
     padding-right: 150px;
 }
+
+
 
 .menu {
     position: fixed; /* Fixa o menu na tela */
@@ -162,49 +174,79 @@ tbody tr:hover {
   box-shadow: 0 4px 12px rgba(82, 56, 0, 0.4);
 }
 
-/* foooter */
-footer{
-  background-color: #5a0101;
-  color: white;
-  padding: 40px 0; /* aumenta altura */
-  display: flex;
-  justify-content: space-evenly;  
-  align-items: flex-start; /* alinhar tudo no topo */
-  flex-wrap: wrap; /* quebra linha caso precise */
-  margin-top: 20px; /* espaço entre o footer e o conteúdo */
+.whatsapp{
+    height: 20px;
+}
 
+.telefone{
+    height: 20px;
+}
+.facebook{
+  height: 40px;
+}
+
+.instagram{
+  height: 40px;
+  text-align: right;
+}
+
+.sob{
+    height: 100px;
+    margin-top: -100px;
+    margin: -10px;
+}
+
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-left: 50px;
+    font-size: 15px;
+}
+
+footer{
+    background-color: #5a0101;
+    color: white;
+    padding: 40px 0; /* aumenta altura */
+    display: flex;
+    justify-content: space-evenly;  
+    align-items: flex-start; /* alinhar tudo no topo */
+    width: 100%;
+    flex-wrap: wrap; /* quebra linha caso precise */
+    margin-top: 80px; /* espaço entre o footer e o conteúdo */
 }
 
 footer ul {
   font-family: "Inter", sans-serif;
-  list-style: none;
-  text-align:center; 
+    list-style: none; 
+    text-align: center;
 }
 
 footer li {
   margin-top: 40px;
   text-align: center;
-  margin: 10px 0;
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
+    margin: 10px 0;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    margin: 10px 0;
 }
 
-
-.whatsapp, .telefone{
-    height: 20px;
+.direitos{
+    width: 100%;
+    text-align: left;
+    margin-top: 50px; 
+    font-size: 15px;
 }
 
-
-.instagram, .facebook{
-  height: 40px;
-  text-align: right;
+body,main{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-
-.sob{
-    height: 100px;
-    margin-top: 90px;
-    margin: -10px;
+.midia{
+  float: right;
+   display: grid;
+  gap: 15px;
 }
 
 .linha{
@@ -216,21 +258,6 @@ footer li {
     font-weight: 420px;
     margin-top: 50px;
 }
-
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-top: 160px;
-    font-size: 15px;
-    margin-left: 60px;
-}
-
-.midia{
-  float: right;
-   display: grid;
-  gap: 15px;
-}
-
 
 
 /*TESTE DA ABERTURA DO LOGIN*/
