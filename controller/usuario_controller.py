@@ -62,7 +62,12 @@ def cadastrar_usuario( request:Request,
     
     usuario_email=db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
     if usuario_email:
-        return {"mensagem":"Email já cadastrado!"}
+        return templates.TemplateResponse("mensagem_email.html", {
+            "request": request,
+            "mensagem": "Este e-mail já esta em uso! Acesse sua conta ou crie com um outro e-mail.",
+            "link_login": "/usuario/login"
+        })
+    
     novo_usuario=Usuario(
         nome_cliente=nome_cliente,
         data_nascimento=data_nascimento,
@@ -101,9 +106,25 @@ def login(request:Request, email:str=Form(...),
 ):
     
     usuario=db.query(Usuario_Model).filter(Usuario_Model.email==email).first()
-    if not usuario or not verificar_hash_senha(senha,
-                                               usuario.senha):
-        return {"mensagem":"Credenciais inválidas"}
+    
+    # Verifica se o usuário existe
+    if not usuario:
+        return templates.TemplateResponse(
+            "mensagem_usuario_nao_encontrado.html",
+            {
+                "request": request,
+                "mensagem": "Usuário não encontrado, aparentemente você ainda não criou uma conta ou errou o seu email.",
+                "link_login": "/usuario/registrar"
+            }
+        )
+    
+    if not verificar_hash_senha(senha, usuario.senha):
+        return templates.TemplateResponse("mensagem_senha.html", {
+            "request": request,
+            "mensagem": "Senha incorreta! Tente novamente.",
+            "link_login": "/usuario/login"
+        })
+    
     token=criar_token({"sub":usuario.email, "adm":usuario.tipo == "adm"})
 
     #criar um if de admin ou user normal
