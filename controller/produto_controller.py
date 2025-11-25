@@ -106,6 +106,29 @@ async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
     # Selecionar 3 aleatórios (ou menos se não houver suficientes)
     sugestoes = random.sample(outros_produtos, min(3, len(outros_produtos)))
     return templates.TemplateResponse("painel_usuario_carrinho.html", {"request": request, "sugestoes":sugestoes, "primeiro_nome" : primeiro_nome})
+
+
+@router.get("/colecoes", response_class=HTMLResponse)
+async def pagina_colecoes(request: Request, db: Session = Depends(get_db)):
+    """Exibe a página de coleções com produtos agrupados por categoria.
+
+    Cada categoria é tratada como uma coleção.
+    """
+    produtos = db.query(Produto).all()
+
+    # Agrupa produtos por categoria
+    colecoes = {}
+    for p in produtos:
+        chave = (p.categoria or "Sem Categoria").strip()
+        colecoes.setdefault(chave, []).append(p)
+
+    # Ordena as categorias alfabeticamente para exibição consistente
+    categorias_ordenadas = sorted(colecoes.items(), key=lambda x: x[0].lower())
+
+    return templates.TemplateResponse("colecoes.html", {
+        "request": request,
+        "colecoes": categorias_ordenadas
+    })
 '''
 @router.get("/carrinho/",
             response_class=HTMLResponse)

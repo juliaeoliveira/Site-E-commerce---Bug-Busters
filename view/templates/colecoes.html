@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Coleções</title>
+	<link rel="stylesheet" href="/static/css/produtos.css">
+</head>
+<body>
+	<header>
+		<a href="/">Voltar</a>
+		<h1>Nossas Coleções</h1>
+	</header>
+
+	<main>
+		{% if colecoes %}
+			{% for categoria, produtos in colecoes %}
+				<section class="colecao">
+					<h2>{{ categoria }}</h2>
+					<div class="lista-vestidos-colecao">
+						{% for p in produtos %}
+							<div class="vestido">
+								<a href="/produtos/{{ p.id }}">
+									<img src="{{ url_for('static', path='uploads/' + (p.imagem1_url or '')) }}" alt="{{ p.nome_produto }}">
+									<h3>{{ p.nome_produto }}</h3>
+								</a>
+								<p class="preco">R$ {{ '%.2f'|format(p.preco) }}</p>
+							</div>
+						{% endfor %}
+					</div>
+				</section>
+			{% endfor %}
+		{% else %}
+			<p>Nenhuma coleção encontrada.</p>
+		{% endif %}
+	</main>
+</body>
+</html>
