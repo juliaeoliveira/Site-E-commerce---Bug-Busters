@@ -1,65 +1,87 @@
 * {
-    margin:0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: flex; 
-    flex-direction: column; /* Organiza os itens na vertical (coluna) */
-    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
-    margin: 0; /* Remove a margem padrão */
-    padding: 0; /* Remove o preenchimento padrão */
-    overflow-x: hidden; /* Impede rolagem horizontal */
-    background-color: #FBFCF7;
-    
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #FBFCF7;
+
 }
+
+
 
 /* MENU */
 #logo {
-    
-    height: 80px; /* Define a altura do logo */
-    padding-left: 130px; /* Espaço à esquerda do logo */
+
+  height: 80px;
+  /* Define a altura do logo */
+  padding-left: 130px;
+  /* Espaço à esquerda do logo */
 }
 
 .icons {
-    gap: 5px;
-    justify-content: center;
-    display: flex;
-    padding-right: 150px;
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
 }
 
 
 
 .menu {
-    position: fixed; /* Fixa o menu na tela */
-    z-index: 1; /* Garante que o menu fique acima de outros elementos */
-    display: flex; /* Organiza os itens do menu em linha */
-    width: 100%; /* O menu ocupa toda a largura da tela */
-    align-items: center; /* Centraliza os itens na vertical */
-    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
-    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
-    color: #ffffff; /* Cor do texto do menu */
+  position: fixed;
+  /* Fixa o menu na tela */
+  z-index: 1;
+  /* Garante que o menu fique acima de outros elementos */
+  display: flex;
+  /* Organiza os itens do menu em linha */
+  width: 100%;
+  /* O menu ocupa toda a largura da tela */
+  align-items: center;
+  /* Centraliza os itens na vertical */
+  justify-content: space-between;
+  /* Distribui os itens do menu com espaços entre eles */
+  background-color: hsla(0, 0%, 100%, 0.692);
+  /* Cor de fundo com transparência */
+  font-family: 'Open Sans', sans-serif;
+  /* Fonte do menu */
+  color: #ffffff;
+  /* Cor do texto do menu */
 }
 
 /* Estilo do menu de navegação */
 nav {
-    gap:200px;
-    justify-content: center;
-    display: flex;
-    font-family: "Libre Caslon Text";
-    font-size: 22px;
-    color: #523800;
-   
+  gap: 200px;
+  justify-content: center;
+  display: flex;
+  font-family: "Libre Caslon Text";
+  font-size: 22px;
+  color: #523800;
+
 }
 
 /* Estilo dos links dentro do nav */
 nav a {
-    color: #523800;
-    font-size: 20px; /* Define o tamanho da fonte */
-    padding: 25px; /* Espaçamento interno */
-    text-decoration: underline; /* Ativa o sublinhado */
-    text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
 }
 
 /* Estilo para os links do menu ao passar o mouse (hover) */
@@ -67,32 +89,35 @@ nav a {
 
 
 #frames {
-    background-image: url('/static/video/video.png'); 
-    height: 90vh;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-size: cover;
+  background-image: url('/static/video/video.png');
+  height: 90vh;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-size: cover;
 }
 
 /* PAGINA SOBRE NOS */
 
 
 #Sobre-nos {
-  background-color: #EDDBBE; 
+  background-color: #EDDBBE;
   display: flex;
   justify-content: center;
 
-  min-height: 738px; /* deixa adaptar ao conteúdo */
+  min-height: 738px;
+  /* deixa adaptar ao conteúdo */
   height: 10vh;
 }
 
 /* Container texto + imagem */
 .sobre-container {
   display: flex;
-  justify-content: center; /* centraliza os dois blocos */
+  justify-content: center;
+  /* centraliza os dois blocos */
   align-items: center;
-  gap: 200px; /* deixa mais próximo */
-  
+  gap: 200px;
+  /* deixa mais próximo */
+
 }
 
 /* Bloco de texto à esquerda */
@@ -101,14 +126,18 @@ nav a {
   flex-direction: column;
   gap: 20px;
   flex: 1;
-  max-width: 500px; /* deixa mais estreito */
-  border-left: 2px solid #d4b887; /* linha vertical ao lado */
-  padding-left: 25px; /* espaço entre a linha e o texto */
+  max-width: 500px;
+  /* deixa mais estreito */
+  border-left: 2px solid #d4b887;
+  /* linha vertical ao lado */
+  padding-left: 25px;
+  /* espaço entre a linha e o texto */
 }
 
 /* Título */
 .titulo-completo {
-  display: block; /* força ficar em coluna */
+  display: block;
+  /* força ficar em coluna */
   font-size: 25px;
   font-family: Junge, serif;
   color: #523800;
@@ -123,7 +152,7 @@ nav a {
   margin-bottom: 10px;
 }
 
-.texto1{
+.texto1 {
   display: block;
   font-family: "Junge", serif;
   font-size: 24px;
@@ -137,12 +166,15 @@ nav a {
   font-size: 20px;
   color: #523800;
   line-height: 1.6;
-  
+
 }
+
+.numero
 
 /* Imagem da noiva */
 #box-noiva-img img {
-  width: 570px; /* ajustado para não ficar muito grande */
+  width: 570px;
+  /* ajustado para não ficar muito grande */
   height: 650px;
   display: block;
 }
@@ -159,8 +191,8 @@ nav a {
   justify-content: center;
   align-items: center;
 
- 
-  
+
+
 }
 
 .agendamentos {
@@ -185,26 +217,30 @@ h1 {
   margin-top: -10px;
 }
 
-.linha-abaixo{
-  width: 300px;              /* largura da linha */
+.linha-abaixo {
+  width: 300px;
+  /* largura da linha */
   font-weight: 400px;
-  border-bottom:  1px solid #790000;
-  margin: 0 auto 20px auto;  /* centraliza e espaça abaixo */
-  margin-top:10px;
+  border-bottom: 1px solid #790000;
+  margin: 0 auto 20px auto;
+  /* centraliza e espaça abaixo */
+  margin-top: 10px;
 }
 
-.numero{
+.numero {
   font-family: "Afacad";
   font-weight: 400;
   font-size: 24px;
-  
+  text-decoration: none;
+  color: white; 
 }
 
 #botao-boasvindas {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* espaço entre número e ícone */
+  gap: 8px;
+  /* espaço entre número e ícone */
   margin-top: 20px;
   padding: 12px 24px;
   border: none;
@@ -230,52 +266,76 @@ h1 {
 
 /* Seção principal com ID "vestidos" */
 #vestidos {
-  height: 57vh; /* Altura fixa da seção */
-  padding: 60px 40px; /* Espaçamento interno (60px em cima/baixo, 40px nos lados) */
-  text-align: center; /* Centraliza o texto horizontalmente */
+  height: 57vh;
+  /* Altura fixa da seção */
+  padding: 60px 40px;
+  /* Espaçamento interno (60px em cima/baixo, 40px nos lados) */
+  text-align: center;
+  /* Centraliza o texto horizontalmente */
   margin-top: 30px;
 }
 
 /* Estilização do título (h1) dentro da seção "vestidos" */
 #vestidos h1 {
-  font-family: "Aboreto", serif; /* Fonte do título */
-  font-size: 28px; /* Tamanho da fonte */
-  color: #523800; /* Cor do texto */
-  margin-bottom: 40px; /* Espaço abaixo do título */
-  letter-spacing: 1px; /* Espaçamento entre as letras */
+  font-family: "Aboreto", serif;
+  /* Fonte do título */
+  font-size: 28px;
+  /* Tamanho da fonte */
+  color: #523800;
+  /* Cor do texto */
+  margin-bottom: 40px;
+  /* Espaço abaixo do título */
+  letter-spacing: 1px;
+  /* Espaçamento entre as letras */
 }
 
 /* Destaque para uma parte do título com a classe "destaque" */
 #vestidos h1 .destaque {
-  font-family: "Dancing Script", cursive; /* Fonte diferenciada */
-  font-style: italic; /* Estilo itálico */
-  font-weight: bold; /* Negrito */
-  color: #7a4a00; /* Cor diferenciada para destaque */
+  font-family: "Dancing Script", cursive;
+  /* Fonte diferenciada */
+  font-style: italic;
+  /* Estilo itálico */
+  font-weight: bold;
+  /* Negrito */
+  color: #7a4a00;
+  /* Cor diferenciada para destaque */
   font-size: 40px;
 }
 
 /* Container principal das imagens + setas (navegação) */
 .vestidos-iniciais .galeria-vestidos {
-  display: flex; /* Layout flexível em linha */
-  justify-content: center; /* Centraliza os elementos horizontalmente */
-  align-items: center; /* Centraliza os elementos verticalmente */
-  gap: 100px; /* Espaçamento entre os itens (imagens e setas) */
+  display: flex;
+  /* Layout flexível em linha */
+  justify-content: center;
+  /* Centraliza os elementos horizontalmente */
+  align-items: center;
+  /* Centraliza os elementos verticalmente */
+  gap: 100px;
+  /* Espaçamento entre os itens (imagens e setas) */
 }
 
 /* Estilização das imagens dos vestidos */
 .vestidos-iniciais .items-produto img {
-  width: 400px; /* Largura fixa das imagens */
-  height: 400px;; /* Altura proporcional à largura */
-  border-radius: 4px; /* Bordas levemente arredondadas */
-  display: block; /* Garante que a imagem ocupe toda a linha disponível */
+  width: 400px;
+  /* Largura fixa das imagens */
+  height: 400px;
+  ;
+  /* Altura proporcional à largura */
+  border-radius: 4px;
+  /* Bordas levemente arredondadas */
+  display: block;
+  /* Garante que a imagem ocupe toda a linha disponível */
 }
 
 /* Estilização das setas de navegação */
 .seta img {
-  width: 15px; /* Largura fixa das setas */
-  height: 20px; /* Altura proporcional */
-  cursor: pointer; /* Cursor muda para mãozinha ao passar o mouse */
-  
+  width: 15px;
+  /* Largura fixa das setas */
+  height: 20px;
+  /* Altura proporcional */
+  cursor: pointer;
+  /* Cursor muda para mãozinha ao passar o mouse */
+
 }
 
 
@@ -291,14 +351,16 @@ h1 {
 .linha-titulo {
   width: 456px;
   background: #FFC958;
-  margin: 0 auto 15px; /* centraliza e dá espaçamento */
+  margin: 0 auto 15px;
+  /* centraliza e dá espaçamento */
 }
 
 .linha-titulo2 {
   width: 456px;
-  
+
   background: #FFC958;
-  margin: 0 auto 15px; /* centraliza e dá espaçamento */
+  margin: 0 auto 15px;
+  /* centraliza e dá espaçamento */
   margin-bottom: 90px;
 }
 
@@ -308,11 +370,12 @@ h1 {
   margin-bottom: 10px;
   position: relative;
   display: inline-block;
-  font-family:"Inria Sans" ;
+  font-family: "Inria Sans";
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
-  line-height: 140%; /* 44.8px */
+  line-height: 140%;
+  /* 44.8px */
 }
 
 
@@ -336,6 +399,7 @@ h1 {
 .items-colecao:first-child {
   transform: rotate(-6deg);
 }
+
 .items-colecao:last-child {
   transform: rotate(6deg);
 }
@@ -344,18 +408,22 @@ h1 {
 /* Itens laterais */
 .items-colecao {
   width: 380px;
-  height: 500px;; /* menor altura */
+  height: 500px;
+  ;
+  /* menor altura */
   border-radius: 6px;
-  margin-top:80px;
+  margin-top: 80px;
 }
 
 /* Imagem central em destaque */
 .items-colecao.destaque {
   width: 350px;
-  height: 500px; /* maior altura */
-  z-index: 2; /* fica acima das outras */
+  height: 500px;
+  /* maior altura */
+  z-index: 2;
+  /* fica acima das outras */
   margin-top: -30px;
-  
+
 }
 
 
@@ -367,25 +435,29 @@ h1 {
   cursor: pointer;
   border-radius: 4px;
   color: #333;
-  margin-top: 20px; /* espaçamento positivo abaixo da imagem */
+  margin-top: 20px;
+  /* espaçamento positivo abaixo da imagem */
   display: block;
   margin-left: auto;
-  margin-right: auto; /* centraliza o botão */
+  margin-right: auto;
+  /* centraliza o botão */
   margin-top: 30px;
 }
 
-.linha-colecao{
+.linha-colecao {
   margin: 20px auto;
   width: 500px;
-  
+
 }
-.ver{
+
+.ver {
   text-align: center;
   font-family: "Judson";
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
-  line-height: 140%; /* 44.8px */
+  line-height: 140%;
+  /* 44.8px */
 }
 
 /* DEPOIMENTOS */
@@ -393,7 +465,7 @@ h1 {
   text-align: center;
   font-family: Arial, sans-serif;
   height: 40vh;
-  margin-top:180px;
+  margin-top: 180px;
 }
 
 #depoimentos h1 {
@@ -410,7 +482,8 @@ h1 {
   min-height: 160px;
   margin: 20px;
   padding: 20px;
-  border: 1px solid #462506; /* borda discreta marrom */
+  border: 1px solid #462506;
+  /* borda discreta marrom */
   display: inline-block;
   vertical-align: top;
   text-align: left;
@@ -421,7 +494,8 @@ h1 {
   font-size: 16px;
   color: #333;
   line-height: 1.6;
-  margin-top: 20px;;
+  margin-top: 20px;
+  ;
   width: 484px;
   font-family: "Abhaya Libre ExtraBold";
 }
@@ -436,7 +510,8 @@ h1 {
   width: 40px;
   height: 40px;
   margin-top: 20px;
-  border-radius: 50%; /* deixa redondo */
+  border-radius: 50%;
+  /* deixa redondo */
   object-fit: cover;
 }
 
@@ -447,47 +522,57 @@ h1 {
 }
 
 #depoimentos .container {
-  position: relative; /* referência pras setas */
+  position: relative;
+  /* referência pras setas */
 }
 
 .seta-esquerda2,
 .seta-direita2 {
   position: absolute;
-  top: 55%; /* centraliza verticalmente em relação às caixas */
-  
+  top: 55%;
+  /* centraliza verticalmente em relação às caixas */
+
   cursor: pointer;
 }
 
 .seta-esquerda2 {
-  left: 260px;  /* cola no lado esquerdo */
-  width: 15px; /* Largura fixa das setas */
+  left: 260px;
+  /* cola no lado esquerdo */
+  width: 15px;
+  /* Largura fixa das setas */
   height: 20px;
 }
 
 .seta-direita2 {
-  right: 260px; /* cola no lado direito */
-  width: 15px; /* Largura fixa das setas */
+  right: 260px;
+  /* cola no lado direito */
+  width: 15px;
+  /* Largura fixa das setas */
   height: 20px;
 }
 
 
 /* foooter */
-footer{
+footer {
   background-color: #5a0101;
   color: white;
-  padding: 40px 0; /* aumenta altura */
+  padding: 40px 0;
+  /* aumenta altura */
   display: flex;
-  justify-content: space-evenly;  
-  align-items: flex-start; /* alinhar tudo no topo */
-  flex-wrap: wrap; /* quebra linha caso precise */
-  margin-top: 20px; /* espaço entre o footer e o conteúdo */
+  justify-content: space-evenly;
+  align-items: flex-start;
+  /* alinhar tudo no topo */
+  flex-wrap: wrap;
+  /* quebra linha caso precise */
+  margin-top: 20px;
+  /* espaço entre o footer e o conteúdo */
 
 }
 
 footer ul {
   font-family: "Inter", sans-serif;
   list-style: none;
-  text-align:center; 
+  text-align: center;
 }
 
 footer li {
@@ -499,44 +584,45 @@ footer li {
 }
 
 
-.whatsapp, .telefone{
-    height: 20px;
+.whatsapp,
+.telefone {
+  height: 20px;
 }
 
 
-.instagram, .facebook{
+.instagram,
+.facebook {
   height: 40px;
   text-align: right;
 }
 
 
-.sob{
-    height: 100px;
-    margin-top: 90px;
-    margin: -10px;
+.sob {
+  height: 100px;
+  margin-top: 90px;
+  margin: -10px;
 }
 
-.linha{
-    width: 170px;
-    transform: rotate(-90.164deg);
-    color: #FFF;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 420px;
-    margin-top: 50px;
+.linha {
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: #FFF;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+  margin-top: 50px;
 }
 
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-top: 160px;
-    font-size: 15px;
-    margin-left: 60px;
+.direitos {
+  width: 100%;
+  text-align: left;
+  margin-top: 160px;
+  font-size: 15px;
+  margin-left: 60px;
 }
 
-.midia{
+.midia {
   float: right;
-   display: grid;
+  display: grid;
   gap: 15px;
 }
-
