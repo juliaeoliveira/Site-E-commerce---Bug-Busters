@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.expression import func
 from database import get_db
 from controller.usuario_autenticacao import verificar_token
 from models import Usuario_Model, Produto, Endereco, Pedido
@@ -29,8 +30,16 @@ def painel_usuario(request:Request, db: Session = Depends(get_db)):
         })
     
     primeiro_nome = usuario.nome_cliente.split(' ')[0]
+
+    produtos_carrossel = (db.query(Produto).filter(Produto.status == True).order_by(func.random()).limit(6).all())
+
+    imagens_carrossel = [request.url_for("static", path=f"/uploads/{p.imagem1_url}")
+        for p in produtos_carrossel
+        if p.imagem1_url
+    ]
+
     return templates.TemplateResponse("painel_usuario.html",
-                    {"request":request, "primeiro_nome": primeiro_nome})
+                    {"request":request, "primeiro_nome": primeiro_nome, "imagens_carrossel": imagens_carrossel})
 
 @caminho_prefixo_painelUsuario.get("/carrinho", response_class=HTMLResponse)
 def pagina_carrinho(request: Request, db: Session = Depends(get_db)):
