@@ -201,7 +201,7 @@ nav a {
   margin-right: 60px; /* espaçamento entre login e carrinho */
 }
 
-
+/*==================================MAIN=====================*/
 
 
 .paginas a:hover{
@@ -216,6 +216,8 @@ body {
 
 }
 
+
+
 /* Container principal */
 main {
   flex: 1;
@@ -227,7 +229,7 @@ main {
 /* Caminho inicial */
 
 
-main h1 { 
+main h1 a{ 
   padding: 50px;
   text-align: center;
   font-size: 20px;
@@ -236,6 +238,7 @@ main h1 {
   margin-bottom: 20px;
   margin-top: 80px;
 }
+
 
 /* Grid das fotos */
 .fotos {
