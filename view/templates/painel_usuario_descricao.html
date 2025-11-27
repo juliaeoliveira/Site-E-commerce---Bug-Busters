@@ -119,12 +119,14 @@
         
         <div class="variedades">
           {% for sugestao in sugestoes %}
-            <div class="imagem-container">
-                <a href="/painel_usuario/produtos/{{ sugestao.id }}">
-                    <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
-                    <p class="nome">{{ sugestao.nome_produto }}</p>
-                </a>
-            </div>
+            {% if sugestao.quantidade_estoque > 0 %}
+              <div class="imagem-container">
+                  <a href="/painel_usuario/produtos/{{ sugestao.id }}">
+                      <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
+                      <p class="nome">{{ sugestao.nome_produto }}</p>
+                  </a>
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
     </div>

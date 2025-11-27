@@ -54,14 +54,16 @@
                 {% if produtos %}
                     <div class="lista-vestidos">
                         {% for produto in produtos %}
-                            <div class="vestido">
-                                <a href="/produtos/{{ produto.id }}">
-                                    <img class="foto" src="{{ url_for('static', path='uploads/' + produto.imagem1_url) if produto.imagem1_url else '/static/img_home/vestido-1.png' }}" alt="{{ produto.nome_produto }}">
-                                    <h3>{{ produto.nome_produto }}</h3>
-                                </a>
-                                <p class="preco">R$ {{ produto.preco }}</p>
-                                <button class="btn-adicionar" data-id="{{ produto.id }}" data-nome="{{ produto.nome_produto }}" data-preco="{{ produto.preco }}" data-imagem="{{ produto.imagem1_url }}" onclick="adicionarAoCarrinho(this)">Adicionar ao Carrinho</button>
-                            </div>
+                            {% if produto.quantidade_estoque %}
+                                <div class="vestido">
+                                    <a href="/produtos/{{ produto.id }}">
+                                        <img class="foto" src="{{ url_for('static', path='uploads/' + produto.imagem1_url) if produto.imagem1_url else '/static/img_home/vestido-1.png' }}" alt="{{ produto.nome_produto }}">
+                                        <h3>{{ produto.nome_produto }}</h3>
+                                    </a>
+                                    <p class="preco">R$ {{ produto.preco }}</p>
+                                    <button class="btn-adicionar" data-id="{{ produto.id }}" data-nome="{{ produto.nome_produto }}" data-preco="{{ produto.preco }}" data-imagem="{{ produto.imagem1_url }}" onclick="adicionarAoCarrinho(this)">Adicionar ao Carrinho</button>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% else %}

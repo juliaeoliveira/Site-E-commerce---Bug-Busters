@@ -108,7 +108,8 @@ nav a {
   font-family: "Libre Caslon Text";
   color: rgb(255, 255, 255);
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
-  font-size: 15px
+  font-size: 15px;
+  text-decoration: none;
 }
 
 

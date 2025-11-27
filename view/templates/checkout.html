@@ -187,13 +187,15 @@
             <hr class="linha-titulo3">
             <div class="lista-vestidos">
                 {% for sugestao in sugestoes %}
-                <div class="vestido">
-                    <a href="/painel_usuario/produtos/{{ sugestao.id }}">
-                        <img src="{{url_for('static', path='uploads/' + sugestao.imagem1_url)}}"
-                            alt="{{ sugestao.nome_produto }}" class="fotovariedades">
-                        <p class="nome">{{ sugestao.nome_produto }}</p>
-                    </a>
-                </div>
+                    {% if sugestao.quantidade_estoque %}
+                        <div class="vestido">
+                            <a href="/painel_usuario/produtos/{{ sugestao.id }}">
+                                <img src="{{url_for('static', path='uploads/' + sugestao.imagem1_url)}}"
+                                    alt="{{ sugestao.nome_produto }}" class="fotovariedades">
+                                <p class="nome">{{ sugestao.nome_produto }}</p>
+                            </a>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <br>
