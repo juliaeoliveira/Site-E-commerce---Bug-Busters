@@ -21,23 +21,25 @@
 .menu {
   /*alterado*/
   height: 90px;
-  position: fixed;
+  position: fixed; /*original*/
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 100; /*original*/
   background-color: hsla(0, 0%, 100%, 0.75);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 25px; /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
 }
 
 /* Estilo dos links dentro do nav */
-nav a {
+.menu nav a {
   color: #523800;
-  font-size: 22px; /* Define o tamanho da fonte */
+  font-size: 20px; /* Define o tamanho da fonte */
   padding: 25px; /* Espaçamento interno */
   text-decoration: underline; /* Ativa o sublinhado */
   text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
@@ -52,7 +54,7 @@ nav a {
 
 .text-menu a {
   /*alterado*/
-  font-size: 22px;
+  font-size: 20px;
   text-decoration: underline;
   text-decoration-color: rgba(82, 56, 0, 0.192);
   color: #523800;
@@ -205,6 +207,11 @@ nav a {
   /*alterado*/
   margin: 0; /* Remove o margin-left: 270px que quebrava TUDO */
 }
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+} /*tirar se der problema*/
+
 
 /*=============================================*/
 
@@ -284,7 +291,7 @@ h1 {
   transition: transform 0.3s ease-in-out; /* Transição suave */
 }
 
-button {
+.voltar-btn {
   font-family: "Inter", sans-serif;
   height: 50px;
   width: 240px;
@@ -296,11 +303,11 @@ button {
   border-radius: 5px;
   font-size: 20px;
 }
-button:focus {
+.voltar-btn:focus {
   border-color: darkred;
   transform: scale(1.1);
 }
-button:hover {
+.voltar-btn:hover {
   border-color: darkred;
   transform: scale(1.05);
 }
@@ -321,29 +328,29 @@ button:hover {
   color: #444;
 }
 
-  .vestido {
-    display: flex;
-    flex-direction: column; /* para alinhar a imagem e o texto verticalmente */
-    align-items: center; /* centraliza horizontalmente */
-    height: auto; /* permite altura automática para crescer com o texto */
-    padding-bottom: 20px; /* espaço para o texto */
-    margin: 40px 120px; /* ajuste margem para evitar excesso */
-    background: none; /* remover fundo preto para destacar melhor as imagens */
-  }
-  
-  .vestido img {
-    position: static; /* remove position absolute para o fluxo normal */
-    width: 350px; /* fixa a largura */
-    height: 650px; /* fixa a altura */
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .vestido:hover img {
-    transform: scale(1.10);
-  }
-  
-  .nome {
+.vestido {
+  display: flex;
+  flex-direction: column; /* para alinhar a imagem e o texto verticalmente */
+  align-items: center; /* centraliza horizontalmente */
+  height: auto; /* permite altura automática para crescer com o texto */
+  padding-bottom: 20px; /* espaço para o texto */
+  margin: 40px 120px; /* ajuste margem para evitar excesso */
+  background: none; /* remover fundo preto para destacar melhor as imagens */
+}
+
+.vestido img {
+  position: static; /* remove position absolute para o fluxo normal */
+  width: 350px; /* fixa a largura */
+  height: 650px; /* fixa a altura */
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.vestido:hover img {
+  transform: scale(1.1);
+}
+
+.nome {
   color: #000;
   text-align: center;
   font-family: "Arial, Helvetica, sans-serif";
@@ -353,13 +360,12 @@ button:hover {
   line-height: normal;
   letter-spacing: 0.96px;
   margin-top: 40px;
-  }
-  
-  div.vestido:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-  }
+}
 
+div.vestido:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
 
@@ -405,7 +411,7 @@ button:hover {
   }
 
   /* botão hamburguer */
-  .hamburger {
+  .menu .hamburger {
     display: block;
     background: transparent;
     border: none;
@@ -414,6 +420,7 @@ button:hover {
     padding: 10px;
     color: #523800;
     z-index: 11;
+    /* margin: 30px; */
   }
 
   /* overlay */
@@ -447,7 +454,7 @@ button:hover {
   }
 
   .text-menu a {
-    font-size: 26px;
+    font-size: 20px;
     padding: 10px;
   }
 
@@ -575,7 +582,8 @@ footer li {
   margin-right: 6px;
   vertical-align: middle;
 }
-.instagram, .facebook {
+.instagram,
+.facebook {
   height: 40px;
   text-align: right;
 }
@@ -615,6 +623,10 @@ footer li {
 
 /* Celulares estreitos */
 @media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
   footer .coluna {
     min-width: 100%;
   }
