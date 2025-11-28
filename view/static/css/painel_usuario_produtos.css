@@ -520,7 +520,7 @@ div.vestido:hover {
 footer {
   background-color: #5a0101;
   color: white;
-  padding: 35px 20px;
+  padding: 30px 20px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -547,11 +547,12 @@ footer .coluna {
   max-width: 200px;
 }
 
-footer .coluna .titulo {
+footer div p {
   font-weight: bold;
   font-size: 15px;
   margin-top: 0px;
   margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
   color: #bdb0ae;
 }
 

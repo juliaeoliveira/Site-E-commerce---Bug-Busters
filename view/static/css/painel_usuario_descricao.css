@@ -250,9 +250,9 @@ html {
   background-color: #eae4d8;
 }
 
-main {
+/* main {
   margin-top: 50px;
-}
+} */
 
 body {
   display: flex;
@@ -267,6 +267,7 @@ body {
   overflow-x: hidden;
   /* Impede rolagem horizontal */
   background-color: #eae4d8;
+  color: #3a2d20;
 }
 
 /*==================================MAIN=====================*/
@@ -276,14 +277,6 @@ body {
   transform: scale(1.10);
 }
 
-/* Reset */
-body {
-  flex-direction: column;
-  background-color: #EBE4D7;
-  color: #3a2d20;
-
-}
-
 
 
 /* Container principal */
@@ -291,6 +284,7 @@ main {
   flex: 1;
   max-width: 1200px;
   margin: 30px auto;
+  margin-top: 50px;
   padding: 20px;
 }
 
@@ -402,7 +396,7 @@ main h1 a {
 }
 
 /* Mais variedades */
-h3 {
+.conteinervariedade h3 {
   font-size: 100px;
   text-align: center;
   color: #720911;
@@ -484,21 +478,21 @@ h3 {
 }
 
 /*==================FOOTER==================*/
-footer {
+/* footer {
   background-color: #5a0101;
   color: white;
   padding: 40px 0;
   /* aumenta altura */
-  display: flex;
+  /* display: flex;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: flex-start; */
   /* alinhar tudo no topo */
-  width: 100%;
-  flex-wrap: wrap;
+  /* width: 100%;
+  flex-wrap: wrap; */
   /* quebra linha caso precise */
-  margin-top: 100px;
+  /* margin-top: 100px; */
   /* espaço entre o footer e o conteúdo */
-}
+/* }
 
 footer ul {
   font-family: "Inter", sans-serif;
@@ -571,7 +565,8 @@ footer li {
 
 footer p {
   text-align: center;
-}
+} */ 
+/*======================VAREDADE==============*/
 
 .espacovariedades {
   text-align: center;
@@ -630,11 +625,11 @@ footer p {
   font-weight: 500;
 }
 
-.midia {
+/* .midia {
   float: right;
   display: grid;
   gap: 15px;
-}
+} */
 
 .outrosvestidos {
   margin-right: 900px;
@@ -748,7 +743,7 @@ footer p {
     gap: 60px !important; /* reduz o espaço entre os links */
   }
 
-  nav a {
+  .menu nav a {
     font-size: 20px;
     padding: 15px;
   }
@@ -784,5 +779,128 @@ footer p {
 
   #logout-btn {
     margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
   }
 }
