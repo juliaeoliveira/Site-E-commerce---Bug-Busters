@@ -80,6 +80,7 @@
   font-size: 16px; /* Tamanho da fonte */
   color: #7a4a1c; /* Cor marrom (estilo elegante) */
   margin-bottom: 80px; /* Espaço abaixo do título */
+  font-family: "Inter", sans-serif;
 }
 
 #login-dropdown ul {

@@ -1,41 +1,15 @@
 * {
   margin: 0;
   padding: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column; /* Organiza os itens na vertical (coluna) */
-  min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
-  margin: 0; /* Remove a margem padrão */
-  padding: 0; /* Remove o preenchimento padrão */
-  overflow-x: hidden; /* Impede rolagem horizontal */
-  background-color: #EAE4D8;
-}
-
-
-.lixeira {
-  height: 20px;
-  margin-left: 400px;
-  margin-top: -30px;
-  position: absolute;
-  
-}
-
-.lixeira:focus {
-  border-color: darkred;
-  transform: scale(1.10);
-}
-
-.lixeira:hover {
-  border-color: darkred;
-  transform: scale(1.10);
+  box-sizing: border-box;
 }
 
 /* MENU */
 #logo {
-  height: 80px; /* Define a altura do logo */
-  padding-left: 130px; /* Espaço à esquerda do logo */
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
 }
 
 .icons {
@@ -46,34 +20,273 @@ body {
 }
 
 .menu {
-  position: fixed; /* Fixa o menu na tela */
-  z-index: 1; /* Garante que o menu fique acima de outros elementos */
-  display: flex; /* Organiza os itens do menu em linha */
-  width: 100%; /* O menu ocupa toda a largura da tela */
-  align-items: center; /* Centraliza os itens na vertical */
-  justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
-  background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-  font-family: 'Open Sans', sans-serif; /* Fonte do menu */
-  color: #ffffff; /* Cor do texto do menu */
-}
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
 
-nav {
-    gap: 200px;
-    justify-content: center;
-    display: flex;
-    font-family: "Libre Caslon Text";
-    font-size: 22px;
-    color: #523800;
-}
-
-.menu nav {
-  justify-content: center;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
   font-family: "Libre Caslon Text";
-  font-size: 22px;
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
   color: #523800;
 }
 
+#login-dropdown {
+  /*alterado*/
+  position: absolute;
+  top: 90px;
+  /* aparece logo abaixo do header fixo */
+  right: 0;
+  /* alinhado ao canto direito, sempre certo */
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.89);
+  border-radius: 10px;
+  padding: 20px 0;
+  display: none;
+  z-index: 300;
+  /* MAIOR que o menu, ícones e o hambúrguer */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#login-dropdown h3 {
+  margin-top: 60px;
+  font-size: 16px;
+  /* Tamanho da fonte */
+  color: #7a4a1c;
+  /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px;
+  /* Espaço abaixo do título */
+  font-family: "Inter", sans-serif;
+}
+
+#login-dropdown ul {
+  list-style: none;
+  /* Remove marcadores (bolinhas) da lista */
+  margin: 0;
+  /* Remove espaçamento externo padrão */
+}
+
+#login-dropdown ul li a:hover {
+  text-decoration: underline;
+  color: #7a4a1c;
+  /* Cor marrom ao passar o mouse (hover) */
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text";
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* Ajuste do painel para telas pequenas (vertical) */
+#login-dropdown {
+  max-height: calc(100vh - 120px);
+  /* cabe sempre na tela */
+  overflow-y: auto;
+  /* ativa rolagem se necessário */
+  padding: 20px;
+}
+
+/* Reduz os espaçamentos internos no mobile */
+@media (max-height: 800px) {
+  #login-dropdown h3 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .opcoes {
+    margin: 12px 0;
+  }
+
+  #logout-btn {
+    margin: 25px;
+  }
+}
+
+.carrinho {
+  margin-right: 90px;
+}
+
+/* .login{
+ margin-left: 270px;
+} */
+/*alterado*/
+
+/* Animação de pulsação */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+/* Classe para o efeito visual no ícone */
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
+  /* anel visível mesmo quando não está no pico */
+}
+
+/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+/* Caixa de cada opção */
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  /* leve transparência */
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 20px 0px;
+  /* espaçamento entre as caixas */
+  text-align: center;
+}
+
+/* Texto das opções */
+.opcoes a {
+  display: block;
+  padding: 10px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover — destaca ao passar o mouse */
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+.login-dropdown-wrapper {
+  /*alterado*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  /* distância natural entre login e carrinho */
+}
+
+.login {
+  /*alterado*/
+  margin: 0;
+  /* Remove o margin-left: 270px que quebrava TUDO */
+}
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/*tirar se der problema*/
+
+
+/*=============================================*/
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #eae4d8;
+  color: #3a2d20;
+}
+
+/*=============================MAIN================================*/
+
+.lixeira {
+  height: 20px;
+  margin-left: 400px;
+  margin-top: -30px;
+  position: absolute;
+}
+
+.lixeira:focus {
+  border-color: darkred;
+  transform: scale(1.1);
+}
+
+.lixeira:hover {
+  border-color: darkred;
+  transform: scale(1.1);
+}
+
+/*=============================== MENU ============================*/
+
+
+
+
+/*==========================??????????============================*/
 .categorias {
   justify-content: center;
   display: flex;
@@ -82,38 +295,36 @@ nav {
   color: #523800;
   gap: 200px;
 }
-
+/*==============================================*/
 /* Estilo dos links dentro do nav */
-nav a {
+/* nav a {
   color: #523800;
   font-size: 20px; /* Define o tamanho da fonte */
-  padding: 25px; /* Espaçamento interno */
-  text-decoration: underline; /* Ativa o sublinhado */
-  text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
-}
+/* padding: 25px; /* Espaçamento interno */
+/* text-decoration: underline; /* Ativa o sublinhado */
+/* text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
+/* } */
 
+/*==================================================*/
 
 /* card carrinho */
 
 #carrinho {
   height: auto;
-  background-color: #EAE4D8;
-  
-
-  
+  background-color: #eae4d8;
 }
 
-.area-carrinho{
+.area-carrinho {
   display: flex;
-  justify-content: center;      /* centraliza horizontalmente */
-  align-items: flex-start;      /* alinha pelo topo */
-  gap: 60px;                    /* espaço entre os dois blocos */
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: flex-start; /* alinha pelo topo */
+  gap: 60px; /* espaço entre os dois blocos */
   width: 100%;
-  margin-top: 200px;    
+  margin-top: 200px;
 }
 /* div produto*/
 .produto-vestido h1 {
-  background-color: #FFF;
+  background-color: #fff;
   width: calc(96% + 40px); /* cobre todo o espaço horizontal + padding da section */
   margin: -20px -20px 20px -20px; /* remove o espaçamento interno da section */
   padding: 20px 0;
@@ -122,7 +333,7 @@ nav a {
   font-family: "Aboreto", system-ui;
   font-size: 24px;
   font-weight: bold;
-  color: #4E3902;
+  color: #4e3902;
 }
 
 .linha-selecao {
@@ -133,9 +344,8 @@ nav a {
   margin-top: 10px;
 }
 
-
 .produto-vestido {
-  background-color: #E3D2AC;
+  background-color: #e3d2ac;
   width: 710px;
   color: #000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -146,10 +356,7 @@ nav a {
   gap: 1rem;
   height: auto;
   margin-bottom: 30px;
-
 }
-
-
 
 .produto-item {
   display: flex;
@@ -163,7 +370,6 @@ nav a {
   align-self: center; /* garante alinhamento */
 }
 
-
 .imagem-carrinho img {
   width: 150px;
   border-radius: 4px;
@@ -171,7 +377,7 @@ nav a {
 
 .quantia {
   color: black;
-  background-color: #E3D2AC;
+  background-color: #e3d2ac;
   font-size: 15px;
   margin-top: 10px;
   width: 40px;
@@ -183,8 +389,6 @@ nav a {
   height: 250px;
   float: left;
 }
-
-
 
 /* Alinha a linha "Selecionar todos" */
 .linha-selecao {
@@ -201,7 +405,6 @@ nav a {
   position: relative;
   top: 2px;
 }
-
 
 /* Card do produto */
 .produto-item {
@@ -263,7 +466,6 @@ nav a {
   margin-bottom: 30px;
 }
 
-
 .pedido-total button {
   width: 200px;
   margin-top: 25px;
@@ -321,10 +523,8 @@ nav a {
 }
 
 .vestido:hover img {
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
-
-
 
 .lista-vestidos {
   display: flex;
@@ -333,12 +533,13 @@ nav a {
   flex-wrap: wrap;
 }
 
-button:focus {
+/* button:focus  */
+form button:focus{
   border-color: darkred;
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
-button:hover {
+form button:focus {
   border-color: darkred;
   transform: scale(1.05);
 }
@@ -373,10 +574,10 @@ button:hover {
 
 #voltarect {
   border-color: rgb(104, 0, 0);
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
- #botao-pagamento {
+#botao-pagamento {
   color: white;
   text-align: center;
   height: 50px;
@@ -385,101 +586,24 @@ button:hover {
   font-family: "Inter", sans-serif;
   font-size: 20px;
 }
+/*==============================FOOTER========================*/
 
-footer {
-  background-color: #5a0101;
-  color: white;
-  padding: 40px 0; /* aumenta altura */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start; /* alinhar tudo no topo */
-  width: 100%;
-  flex-wrap: wrap; /* quebra linha caso precise */
-  margin-top: 100px; /* espaço entre o footer e o conteúdo */
-}
-footer ul {
-  font-family: "Inter", sans-serif;
-  list-style: none;
-  text-align: center;
-  text-decoration: none;
-}
-
-footer li {
-  margin-top: 40px;
-  text-align: center;
-  margin: 10px 0;
-  font-size: 14px;
-  text-decoration: none;
-  list-style: none;
-}
-
+/*===================================*/
 h1 {
   font-size: 25px;
 }
+/*================FOOTER===================*/
 
-.linhafooter {
-  margin-top: 20px;
-  width: 170px;
-  transform: rotate(-90.164deg);
-  color: #FFF;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 420px;
-}
 
-.direitos {
-  width: 100%;
-  text-align: left;
-  margin-top: 50px;
-  font-size: 15px;
-  margin-left: 50px;
-}
-
-.whatsapp,
-.telefone {
-  height: 20px;
-}
-
-.instagram,
-.facebook {
-  height: 40px;
-  text-align: right;
-}
-
-.sob {
-  height: 100px;
-  margin-top: -100px;
-  margin: -10px;
-}
-
-.linha {
-  width: 170px;
-  transform: rotate(-90.164deg);
-  color: #FFF;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 420px;
-  margin-top: 50px;
-}
-
-html {
+/* html {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #FFF9ED;
-}
+  background-color: #fff9ed;
+} */
 
-footer p {
-  text-align: center;
-  text-decoration: none;
-}
 
-.midia {
-  float: right;
-  display: grid;
-  gap: 15px;
-}
-
+/*================================MAIN========================*/
 .outrosvestidos {
   margin-right: 900px;
 }
@@ -488,7 +612,7 @@ footer p {
   color: #523800;
   color: color(display-p3 0.3077 0.2228 0.0082);
   text-align: left;
-  -webkit-text-stroke-color: #7C5051;
+  -webkit-text-stroke-color: #7c5051;
   font-family: "Aboreto", system-ui;
   font-size: 24px;
   font-style: normal;
@@ -497,12 +621,10 @@ footer p {
 }
 
 .quantidade {
-  background-color: #E3D2AC;
+  background-color: #e3d2ac;
   color: #5a0101;
   height: 80px;
 }
-
-
 
 .pedido-total h1 {
   font-size: 20px;
@@ -542,14 +664,14 @@ h3 {
 
 .estoque {
   font-family: "Inter", sans-serif;
-  color: #4E3902;
+  color: #4e3902;
   font-size: 16px;
   margin-top: 10px;
 }
 
 .tamanho {
   font-family: "Inter", sans-serif;
-  color: #4E3902;
+  color: #4e3902;
   font-size: 16px;
   margin-top: 10px;
 }
@@ -582,11 +704,11 @@ h3 {
   top: 2px; /* ajuste fino — pode usar 1px, 2px, -1px, etc. */
 }
 
-
-#carrinho, .produto-item, .compras{
+#carrinho,
+.produto-item,
+.compras {
   height: auto;
   min-height: 200px;
-
 }
 
 #variedades {
@@ -601,31 +723,26 @@ h3 {
   margin-top: -2px;
 }
 
-
-
 .pedido-total h2 {
-    font-family: "Inter", sans-serif;
-    color: #4E3902;
-    /* Novas propriedades */
-    display: flex;
-    justify-content: space-between; /* ESSENCIAL: Empurra os elementos para os lados */
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
+  /* Novas propriedades */
+  display: flex;
+  justify-content: space-between; /* ESSENCIAL: Empurra os elementos para os lados */
 }
 
-
 .lista-vestidos a {
-    text-decoration: none; 
-    color: #000; 
-    display: block;
-    text-align: center;
+  text-decoration: none;
+  color: #000;
+  display: block;
+  text-align: center;
 }
 
 /* 2. Opcional: Estilo específico para o nome */
 .lista-vestidos .nome {
-    
-    font-family: "Libre Caslon Text";
-    font-size: 16px; 
-    margin-top: 10px; 
-   
+  font-family: "Libre Caslon Text";
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .nome {
@@ -634,123 +751,276 @@ h3 {
   font-size: 20px;
   margin-top: 40px;
   text-decoration: none;
-
 }
 
 /*TESTE DA ABERTURA DO LOGIN*/
 
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
 
-#login-dropdown {
-  height: 880px;
-  position: absolute;
-  top: 35px;
-  right: 0;
-  background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-  width: 300px;
-  font-family: 'Open Sans', sans-serif;
-  color: #523800;
+/* botão hamburguer */
+.hamburger {
   display: none;
-  margin-top: 45px;
-  text-align: center;
-}
-
-#login-dropdown h3 {
-  margin-top: 60px;
-  font-size: 16px; /* Tamanho da fonte */
-  color: #7a4a1c; /* Cor marrom (estilo elegante) */
-  margin-bottom: 80px; /* Espaço abaixo do título */
-}
-
-#login-dropdown ul {
-  list-style: none; /* Remove marcadores (bolinhas) da lista */
-  margin: 0; /* Remove espaçamento externo padrão */
-}
-
-#login-dropdown ul li a:hover {
-  text-decoration: underline;
-    color: #7a4a1c; /* Cor marrom ao passar o mouse (hover) */
-}
-
-#logout-btn {
-  margin-top: 200px;
-  background-color: #790000;
-  color: white;
-  padding: 8px 12px;
+  background: transparent;
   border: none;
-  border-radius: 4px;
-  width: 160px;
+  font-size: 35px;
   cursor: pointer;
-  height: 40px;
-  font-family: "Libre Caslon Text";
-  color: rgb(255, 255, 255);
-  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
-  font-size: 15px;
-}
-#logout-btn a {
-  color: #fff;
-  text-decoration: none;
-}
-#logout-btn:hover {
-  background-color: #5a0000;
-}
-
-.carrinho{
-  margin-right: 90px;
-}
-
-.login{
- margin-left: 270px;
-}
-
-/* Animação de pulsação */
-@keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
-  }
-}
-
-/* Classe para o efeito visual no ícone */
-.login-active {
-  border-radius: 50%;
-  animation: pulse-ring 1.5s infinite;
-  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3); /* anel visível mesmo quando não está no pico */
-}
-
-/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
-/* Caixa de cada opção */
-.opcoes {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.3); /* leve transparência */
-  backdrop-filter: blur(5px);
-  border: 2px solid #6E0606;
-  border-radius: 5px;
-  margin: 20px 0px; /* espaçamento entre as caixas */
-  text-align: center;
-}
-
-/* Texto das opções */
-.opcoes a {
-  display: block;
   padding: 10px;
-  color: #3d0b0b;
-  text-decoration: none;
-  font-weight: 500;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
   font-size: 14px;
-  transition: color 0.3s ease;
 }
 
-/* Efeito hover — destaca ao passar o mouse */
-.opcoes:hover {
-  background: rgba(255, 255, 255, 0.6);
-  transform: scale(1.02);
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
 }
 
-.opcoes a:hover {
-  color: #800000;
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
 }
