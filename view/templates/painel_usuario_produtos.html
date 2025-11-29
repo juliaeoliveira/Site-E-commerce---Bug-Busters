@@ -26,87 +26,10 @@
     <link rel="stylesheet" href="/static/css/painel_usuario_produtos.css" />
   </head>
 
-<<<<<<< HEAD
   <body>
     <!-- MENU FIXO RESPONSIVO -->
     <header class="menu">
       <!-- LOGO -->
-=======
-  <title>Sob Véu</title>
-  <link rel="stylesheet" href="/static/css/painel_usuario_produtos.css">
-</head>
-
-<body>
-
-  <!-- MENU FIXO RESPONSIVO -->
-  <header class="menu">
-    <!-- LOGO -->
-    <a href="/painel_usuario">
-      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
-    </a>
-
-    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
-    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-      ☰
-    </button>
-
-    <!-- NAV PRINCIPAL -->
-    <nav class="text-menu" id="nav-menu">
-      <a href="/painel_usuario/produtos">Vestidos</a>
-      <a href="/colecoes">Coleções</a>
-      <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
-    </nav>
-
-    <!-- ÍCONES (login + carrinho) -->
-    <div class="login-dropdown-wrapper">
-      <img class="login" src="/static/img_home/login.png" width="20px" title="login" alt="login" id="login-icon" />
-
-      <div id="login-dropdown" class="hidden" aria-hidden="true">
-        <h3><strong>Bem-vindo(a), {{primeiro_nome}}!</strong></h3>
-
-        <ul class="dropdown-list">
-          <li class="opcoes"><a href="/painel_usuario/meus_dados">Sua Conta</a></li>
-          <li class="opcoes"><a href="/painel_usuario/meus_pedidos">Seus Pedidos</a></li>
-          <li class="opcoes"><a href="/painel_usuario/carrinho">Seu Carrinho</a></li>
-          <li class="opcoes"><a href="/painel_usuario/comprar_novamente">Comprar novamente</a></li>
-        </ul>
-
-        <button id="logout-btn" type="button"><a href="/painel_usuario/lougout">Sair da conta</a></button>
-      </div>
-
-      <a href="/painel_usuario/carrinho">
-        <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho" />
-      </a>
-    </div>
-  </header>
-
-  <!-- Overlay para escurecer o fundo no mobile -->
-  <div class="overlay" id="overlay"></div>
-
-
-  <main>
-    <h1>VESTIDOS DE NOIVA</h1>
-    <section>
-      {% if produtos %}
-      {% for produto in produtos %}
-        {% if produto.quantidade_estoque > 0 %}
-        <div class="vestido">
-          <nav class="descricao">
-            <a href="/painel_usuario/produtos/{{produto.id}}">
-              <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}">
-            </a>
-          </nav>
-          <p class="nome">{{produto.nome_produto}}</p>
-        </div>
-        {% endif %}
-      {% endfor %}
-      {% else %}
-      <p>Nenhum produto encontrado!</p>
-      {% endif %}
-
-    </section>
-    <nav>
->>>>>>> 4df062d3f5560b5e1f524cdce9ab12cae030191c
       <a href="/painel_usuario">
         <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
       </a>
