@@ -24,7 +24,7 @@
     </nav>  
     <nav class="paginas">
       <a href="/produtos/">Vestidos</a>
-      <a href="#Colecoes">Coleções</a>
+      <a href="/colecoes">Coleções</a>
       <a href="/#Agendamentos">Agendamentos</a>
     </nav>
     <nav class="icons">
@@ -44,14 +44,16 @@
     <section>    
         {% if produtos %}
           {% for produto in produtos %}
-            <div class="vestido">   
-              <nav>
-                <a href="/produtos/{{produto.id}}">  
-                  <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}"> 
-                </a>
-              </nav>
-              <p class="nome">{{produto.nome_produto}}</p>
-            </div>
+            {% if produto.quantidade_estoque > 0%}
+              <div class="vestido">   
+                <nav>
+                  <a href="/produtos/{{produto.id}}">  
+                    <img src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}" alt="{{produto.nome_produto}}"> 
+                  </a>
+                </nav>
+                <p class="nome">{{produto.nome_produto}}</p>
+              </div>
+            {% endif %}
           {% endfor %}
         {% else %}
           <p>Nenhum produto encontrado!</p>

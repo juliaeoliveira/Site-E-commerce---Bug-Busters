@@ -269,24 +269,29 @@
         <tr>
             <th>Nome</th><th>Preço</th><th>Estoque</th><th>Imagem</th><th>Editar</th><th>Deletar</th>
         </tr>
-        {% for i in produtos %}
+
+        {% for produto in produtos %}
+            {% if produto.quantidade_estoque > 0 %}
             <tr>
-                <td>{{i.nome_produto}}</td>
-                <td>{{i.preco}}</td>
-                <td>{{i.quantidade_estoque}}</td>
+                <td>{{ produto.nome_produto }}</td>
+                <td>{{ produto.preco }}</td>
+                <td>{{ produto.quantidade_estoque }}</td>
+
                 <td>
-                    {% for img in [i.imagem1_url, i.imagem2_url, i.imagem3_url, i.imagem4_url] %}
+                    {% for img in [produto.imagem1_url, produto.imagem2_url, produto.imagem3_url, produto.imagem4_url] %}
                         {% if img %}
                             <img src="{{ url_for('static', path='uploads/' + img) }}" width="50">
                         {% endif %}
                     {% endfor %}
                 </td>
-                <td><a href="/usuario/admin/produto/editar/{{i.id}}" class="btn-editar-link">Editar</a></td>
 
-                <form action="/usuario/admin/produto/deletar/{{i.id}}" method="post">
-                    <td><button type="submit">Deletar</button></td>
-                </form>
+                <td>
+                    <a href="/usuario/admin/produto/editar/{{ produto.id }}" class="btn-editar-link">Editar</a>
+                </td>
+
+                <form action="/usuario/admin/produto/deletar/{{produto.id}}" method="post"> <td><button type="submit">Deletar</button></td> </form>
             </tr>
+            {% endif %}
         {% endfor %}
     </table>
 

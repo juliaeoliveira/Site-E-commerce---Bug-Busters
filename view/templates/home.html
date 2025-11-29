@@ -190,5 +190,65 @@
   <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
 
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    const resposta = await fetch("/"); 
+    const vestidos = await resposta.json();
+    
+    let index = 0; 
+
+    const itens = document.querySelectorAll(".items-produto");
+    const esquerda = document.querySelector(".seta-esquerda");
+    const direita = document.querySelector(".seta-direita");
+
+    function atualizarVestidos() {
+        const img1 = itens[0].querySelector("img");
+        const img2 = itens[1].querySelector("img");
+
+      
+        const v1 = vestidos[index];
+        const v2 = vestidos[index + 1];
+
+        
+        itens.forEach(item => item.classList.add("fade-out"));
+
+        setTimeout(() => {
+            img1.src = v1.url; 
+            img2.src = v2.url; 
+
+            // animação de entrada
+            itens.forEach(item => {
+                item.classList.remove("fade-out");
+                item.classList.add("fade-in");
+            });
+
+            // remove a classe depois da animação
+            setTimeout(() => {
+                itens.forEach(item => item.classList.remove("fade-in"));
+            }, 500);
+
+        }, 500); // tempo do fade-out
+    }
+
+    // seta direita → avança
+    direita.addEventListener("click", () => {
+        index += 2;
+        if (index >= vestidos.length) index = 0; // loop infinito
+        atualizarVestidos();
+    });
+
+    // seta esquerda → volta
+    esquerda.addEventListener("click", () => {
+        index -= 2;
+        if (index < 0) index = vestidos.length - 2; // final do loop
+        atualizarVestidos();
+    });
+
+    // inicia com os primeiros vestidos
+    atualizarVestidos();
+});
+</script>
+
 </body>
 </main>

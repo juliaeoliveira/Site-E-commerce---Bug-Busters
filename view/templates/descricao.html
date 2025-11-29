@@ -24,7 +24,7 @@
     </nav>  
     <nav class="paginas">
       <a href="/produtos/">Vestidos</a>
-      <a href="#Colecoes">Coleções</a>
+      <a href="/colecoes">Coleções</a>
       <a href="/#Agendamentos">Agendamentos</a>
     </nav>
     <nav class="icons">
@@ -86,12 +86,14 @@
         
         <div class="variedades">
           {% for sugestao in sugestoes %}
-            <div class="imagem-container">
-                <a href="/produtos/{{ sugestao.id }}">
-                    <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
-                    <p class="nome">{{ sugestao.nome_produto }}</p>
-                </a>
-            </div>
+            {% if sugestao.quantidade_estoque > 0%}
+              <div class="imagem-container">
+                  <a href="/produtos/{{ sugestao.id }}">
+                      <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
+                      <p class="nome">{{ sugestao.nome_produto }}</p>
+                  </a>
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
     </div>

@@ -13,7 +13,7 @@
     <a href="/painel_usuario"><img id="logo"src="/static/img_home/Sob.png" alt="Logo"></a>
         <nav>
             <a href="/painel_usuario/produtos">Vestidos</a>
-            <a href="/painel_usuario/meus-pedidos/{{pedido.id}}/#Coleções">Coleções</a>
+            <a href="/colecoes">Coleções</a>
             <a href="/painel_usuario/meus-pedidos/{{pedido.id}}/#Agendamentos">Agendamentos</a>
         </nav>
         <br> <br> <br>
@@ -59,8 +59,17 @@
     <div class="container">
         <h1>ID: {{ pedido.id }}</h1>
         <p><strong>Data:</strong> {{ pedido.data_pedido.strftime('%d/%m/%Y %H:%M') }}</p>
-        <p><strong>Status:</strong> {{ "Ativo" if pedido.status else "Concluído" }}</p>
-
+        <p><strong>Status:</strong>
+    {% if pedido.status == "pendente" %}
+        Ativo / Pendente
+    {% elif pedido.status == "pago" %}
+        Concluído / Pago
+    {% elif pedido.status == "cancelado" %}
+        Cancelado / Inativo
+    {% else %}
+        Desconhecido
+    {% endif %}
+</p>
         <table>
             <thead>
                 <tr>
@@ -87,8 +96,13 @@
         <p class="valor-total"><strong>Total:</strong> R$ {{ "%.2f"|format(pedido.valor_total) }}</p>
 
         <div class="voltar">
-            <a href="/painel_usuario/meus_pedidos" id="voltar">← Voltar aos pedidos</a>
-            <a id="abrir-modal-cancelar" class="btn-abrir-cancelar">Cancelar pedido →</a>
+            {% if pedido.status != "cancelado" %}
+                <a id="voltar" href="/painel_usuario/meus_pedidos">← Voltar aos pedidos</a>
+                <a id="abrir-modal-cancelar" class="btn-abrir-cancelar">Cancelar pedido →</a>
+            {% else %}
+                <!-- Se estiver cancelado, só mostra o botão voltar -->
+                <a id="voltar" href="/painel_usuario/meus_pedidos">← Voltar aos pedidos</a>
+            {% endif %}
         </div>
 
        <!-- Modal de cancelamento de pedidos -->

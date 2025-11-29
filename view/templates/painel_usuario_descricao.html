@@ -128,28 +128,28 @@
           <button class="carrinho" data-id="{{ produto.id }}"> Adicionar no carrinho 🛒 </button>
         </div>
       </div>
-
-      <nav>
-        <div class="outrosvestidos">
-          <a href="/painel_usuario/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
-        </div>
-      </nav>
-      <section class="espacovariedades">
-        <div class="conteinervariedade">
-          <h3>MAIS VARIEDADES</h3>
-          <p class="linhavariedade">________________________________________________________________</p>
-
-          <div class="variedades">
-            {% for sugestao in sugestoes %}
-            <div class="imagem-container">
-              <a href="/painel_usuario/produtos/{{ sugestao.id }}">
-                <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}"
-                  alt="{{ sugestao.nome_produto }}">
-                <p class="nome">{{ sugestao.nome_produto }}</p>
-              </a>
-            </div>
-            {% endfor %}
-          </div>
+        
+        <nav>
+            <div class="outrosvestidos">
+                <a href="/painel_usuario/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
+            </div> 
+        </nav>
+    <section class="espacovariedades">
+    <div class="conteinervariedade"> 
+        <h3>MAIS VARIEDADES</h3>
+        <p class="linhavariedade">________________________________________________________________</p>
+        
+        <div class="variedades">
+          {% for sugestao in sugestoes %}
+            {% if sugestao.quantidade_estoque > 0 %}
+              <div class="imagem-container">
+                  <a href="/painel_usuario/produtos/{{ sugestao.id }}">
+                      <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
+                      <p class="nome">{{ sugestao.nome_produto }}</p>
+                  </a>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
       </section>
 
