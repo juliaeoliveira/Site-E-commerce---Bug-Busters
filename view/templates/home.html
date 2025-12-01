@@ -44,9 +44,12 @@
 
 <section id="frames">
     <div class="video-inicial">
-      
+        <video class="video-bg" autoplay loop muted playsinline>
+            <source src="/static/video/video-fundo.mp4" type="video/mp4">
+        </video>
     </div>
 </section>
+
 
 <section id="Sobre-nos">
   <div class="sobre-container">
@@ -73,23 +76,27 @@
     <h1>
       TOQUE DE <span class="destaque">eternidade</span> NO SEU GRANDE DIA
     </h1>
+
     <div class="galeria-vestidos">
+
       <div class="seta seta-esquerda">
         <img src="/static/img_home/seta esquerda2.png" alt="Anterior">
       </div>
+
+      <!-- CONTÊINER FIXO DO PAR DE IMAGENS -->
       <div class="items-produto">
-        <img src="/static/img_home/vestido-1.png" alt="Vestido 1">
+        <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
       </div>
 
       <div class="items-produto">
-        <img src="/static/img_home/vestido 2.png" alt="Vestido 2">
+        <img id="vestido2" src="/static/img_home/vestido-2.png" alt="">
       </div>
 
       <div class="seta seta-direita">
         <img src="/static/img_home/seta direita2.png" alt="Próximo">
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
@@ -134,9 +141,6 @@
 <section id="depoimentos">
   <div class="container">
     <h1>DEPOIMENTOS</h1>
-    <div class="seta-esquerda2">
-        <img src="/static/img_home/seta esquerda2.png" alt="Anterior">
-      </div>
     <div class="box-depoimentos">
       <p>
         "Minha experiência na Sob Véu foi maravilhosa! Fui super bem atendida desde o primeiro momento e encontrei o vestido dos meus sonhos. Tudo com muito carinho e atenção aos detalhes. Recomendo de olhos fechados!"
@@ -156,10 +160,6 @@
         <span><b>Giulia R.</b></span>
       </div>
     </div>
-    <div class="seta-direita2">
-        <img src="/static/img_home/seta direita2.png" alt="Próximo">
-      </div>
-  </div>
 </section>
 
 <footer>
@@ -192,62 +192,47 @@
 </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", async () => {
-    const resposta = await fetch("/"); 
-    const vestidos = await resposta.json();
-    
-    let index = 0; 
+  const paresVestidos = [
+    ["/static/img_home/vestido-1.png", "/static/img_home/vestido 2.png"],
+    ["/static/img_home/vestido-3.png", "/static/img_home/vestido-4.png"],
+    ["/static/img_home/vestido-5.png", "/static/img_home/vestido-6.png"],
+    ["/static/img_home/vestido-7.png", "/static/img_home/vestido-8.png"]
+  ];
 
-    const itens = document.querySelectorAll(".items-produto");
-    const esquerda = document.querySelector(".seta-esquerda");
-    const direita = document.querySelector(".seta-direita");
+  let indice = 0; // Começa no primeiro par
 
-    function atualizarVestidos() {
-        const img1 = itens[0].querySelector("img");
-        const img2 = itens[1].querySelector("img");
+  const img1 = document.getElementById("vestido1");
+  const img2 = document.getElementById("vestido2");
 
-      
-        const v1 = vestidos[index];
-        const v2 = vestidos[index + 1];
+  const setaDir = document.querySelector(".seta-direita");
+  const setaEsq = document.querySelector(".seta-esquerda");
 
-        
-        itens.forEach(item => item.classList.add("fade-out"));
+  function atualizarImagens(direcao) {
+    // animação: sai para a esquerda ou direita
+    img1.classList.add(direcao);
+    img2.classList.add(direcao);
 
-        setTimeout(() => {
-            img1.src = v1.url; 
-            img2.src = v2.url; 
+    setTimeout(() => {
+      img1.src = paresVestidos[indice][0];
+      img2.src = paresVestidos[indice][1];
 
-            // animação de entrada
-            itens.forEach(item => {
-                item.classList.remove("fade-out");
-                item.classList.add("fade-in");
-            });
+      // reseta posição para animação de entrada
+      img1.classList.remove(direcao);
+      img2.classList.remove(direcao);
+    }, 300); // tempo da animação
+  }
 
-            // remove a classe depois da animação
-            setTimeout(() => {
-                itens.forEach(item => item.classList.remove("fade-in"));
-            }, 500);
+  setaDir.addEventListener("click", () => {
+    indice++;
+    if (indice >= paresVestidos.length) indice = 0;
+    atualizarImagens("sair-esquerda");
+  });
 
-        }, 500); // tempo do fade-out
-    }
-
-    // seta direita → avança
-    direita.addEventListener("click", () => {
-        index += 2;
-        if (index >= vestidos.length) index = 0; // loop infinito
-        atualizarVestidos();
-    });
-
-    // seta esquerda → volta
-    esquerda.addEventListener("click", () => {
-        index -= 2;
-        if (index < 0) index = vestidos.length - 2; // final do loop
-        atualizarVestidos();
-    });
-
-    // inicia com os primeiros vestidos
-    atualizarVestidos();
-});
+  setaEsq.addEventListener("click", () => {
+    indice--;
+    if (indice < 0) indice = paresVestidos.length - 1;
+    atualizarImagens("sair-direita");
+  });
 </script>
 
 </body>
