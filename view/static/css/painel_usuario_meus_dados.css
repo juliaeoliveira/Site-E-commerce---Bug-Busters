@@ -1,209 +1,117 @@
 * {
-    margin:0;
-    padding: 0;
-}
-
-body {
-    display: flex; 
-    flex-direction: column; /* Organiza os itens na vertical (coluna) */
-    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
-    margin: 0; /* Remove a margem padrão */
-    padding: 0; /* Remove o preenchimento padrão */
-    overflow-x: hidden; /* Impede rolagem horizontal */
-    background-color: #EAE4D8;
-    
-}
-html{
-   background-color: #EAE4D8;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* MENU */
 #logo {
-    height: 80px; /* Define a altura do logo */
-    padding-left: 130px; /* Espaço à esquerda do logo */
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
 }
 
 .icons {
-    gap: 5px;
-    justify-content: center;
-    display: flex;
-    padding-right: 150px;
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
 }
-
-
 
 .menu {
+  /*alterado*/
   height: 90px;
-    position: fixed; /* Fixa o menu na tela */
-    z-index: 1; /* Garante que o menu fique acima de outros elementos */
-    display: flex; /* Organiza os itens do menu em linha */
-    width: 100%; /* O menu ocupa toda a largura da tela */
-    align-items: center; /* Centraliza os itens na vertical */
-    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
-    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
-    color: #ffffff; /* Cor do texto do menu */
-}
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
 
-/* Estilo do menu de navegação */
-    .text-menu {
-    gap:200px;
-    justify-content: center;
-    display: flex;
-    font-family: "Libre Caslon Text";
-  
-    color: #523800;
-   
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
 }
 
 /* Estilo dos links dentro do nav */
-nav a {
-    color: #523800;
-    font-size: 25px; /* Define o tamanho da fonte */
-    padding: 25px; /* Espaçamento interno */
-    text-decoration: underline; /* Ativa o sublinhado */
-    text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
-
-}
-
-/* --- SEÇÃO DE CONTA E ENDEREÇO --- */
-.container {
-  display: flex;
-  gap: 250px;
-  padding-top: 180px; /* afasta do menu fixo */
-  padding-bottom: 100px;
-  font-family: 'Open Sans', sans-serif;
+.menu nav a {
   color: #523800;
-  margin-top: 40px;
-  margin-left: 60px;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
 }
 
-
-
-.secao {
+.text-menu {
+  /*alterado*/
   display: flex;
-  flex-direction: column;
-  margin-left: 20px;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
 }
 
-.outros{
-  margin-top: 100px;
-  position: absolute;
-  margin-left: 1160px;
-
-}
-
-.titulo {
-  font-family: "Libre Caslon Text", serif;
-  font-size: 22px;
-  text-align: left;
-  margin-bottom: 20px;
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
   color: #523800;
-  font-family: "Aboreto", system-ui;
-}
-
-.titulo.verm {
-  color: #800000; /* vermelho escuro igual à imagem */
-  font-size: 30px;
-  position: absolute;
-  margin-right: 800px;
-  margin-top: -60px;
-   font-family: "Aboreto", system-ui;
-}
-
-.info-bloco {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.info-bloco label {
-  font-size: 14px;
-  margin-top: 8px;
-}
-
-.info-box {
-  background-color: #DBCAA966;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 2px;
-  font-size: 14px;
-  color: #000000B2;
-  width: 550px;
-}
-
-.endereco-box{
-   background-color: #DBCAA966;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 2px;
-  font-size: 14px;
-  color: #000000B2;
-  width: 250px;
-}
-
-.endereco-box1{
-  background-color: #DBCAA966;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 2px;
-  font-size: 14px;
-  color: #000000B2;
-  width: 120px;
-}
-
-.botao-editar {
-  margin-top: 25px;
-  background-color: #4d3400;
-  color: white;
-  border: none;
-  padding: 8px 25px;
-  border-radius: 3px;
-  align-self: center;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bold;
-  text-decoration: none; 
-  display: inline-block;
-}
-
-.botao-editar:hover {
-  background-color: #5c4200;
 }
 
 #login-dropdown {
-  height: 880px;
+  /*alterado*/
   position: absolute;
-  top: 35px;
-  left: 130px;
-  background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-  width: 300px;
-  font-family: 'Open Sans', sans-serif;
-  color: #523800;
+  top: 90px;
+  /* aparece logo abaixo do header fixo */
+  right: 0;
+  /* alinhado ao canto direito, sempre certo */
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.89);
+  border-radius: 10px;
+  padding: 20px 0;
   display: none;
-  margin-top: 23px;
+  z-index: 300;
+  /* MAIOR que o menu, ícones e o hambúrguer */
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #login-dropdown h3 {
   margin-top: 60px;
-  font-size: 16px; /* Tamanho da fonte */
-  color: #7a4a1c; /* Cor marrom (estilo elegante) */
-  margin-bottom: 80px; /* Espaço abaixo do título */
+  font-size: 16px;
+  /* Tamanho da fonte */
+  color: #7a4a1c;
+  /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px;
+  /* Espaço abaixo do título */
+  font-family: "Inter", sans-serif;
 }
 
 #login-dropdown ul {
-  list-style: none; /* Remove marcadores (bolinhas) da lista */
-  margin: 0; /* Remove espaçamento externo padrão */
+  list-style: none;
+  /* Remove marcadores (bolinhas) da lista */
+  margin: 0;
+  /* Remove espaçamento externo padrão */
 }
 
 #login-dropdown ul li a:hover {
   text-decoration: underline;
-    color: #7a4a1c; /* Cor marrom ao passar o mouse (hover) */
+  color: #7a4a1c;
+  /* Cor marrom ao passar o mouse (hover) */
 }
 
 #logout-btn {
-  margin-top: 200px;
   background-color: #790000;
   color: white;
   padding: 8px 12px;
@@ -218,31 +126,54 @@ nav a {
   font-size: 15px;
 }
 
-#logout-btn a {
-  color: #fff;
-  text-decoration: none;
-}
-
 #logout-btn:hover {
   background-color: #5a0000;
 }
 
-.carrinho{
+/* Ajuste do painel para telas pequenas (vertical) */
+#login-dropdown {
+  max-height: calc(100vh - 120px);
+  /* cabe sempre na tela */
+  overflow-y: auto;
+  /* ativa rolagem se necessário */
+  padding: 20px;
+}
+
+/* Reduz os espaçamentos internos no mobile */
+@media (max-height: 800px) {
+  #login-dropdown h3 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .opcoes {
+    margin: 12px 0;
+  }
+
+  #logout-btn {
+    margin: 25px;
+  }
+}
+
+.carrinho {
   margin-right: 90px;
 }
 
-.login{
+/* .login{
  margin-left: 270px;
-}
+} */
+/*alterado*/
 
 /* Animação de pulsação */
 @keyframes pulse-ring {
   0% {
     box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
   }
@@ -252,18 +183,21 @@ nav a {
 .login-active {
   border-radius: 50%;
   animation: pulse-ring 1.5s infinite;
-  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3); /* anel visível mesmo quando não está no pico */
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
+  /* anel visível mesmo quando não está no pico */
 }
 
 /*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
 /* Caixa de cada opção */
 .opcoes {
   width: 100%;
-  background: rgba(255, 255, 255, 0.3); /* leve transparência */
+  background: rgba(255, 255, 255, 0.3);
+  /* leve transparência */
   backdrop-filter: blur(5px);
-  border: 2px solid #6E0606;
+  border: 2px solid #6e0606;
   border-radius: 5px;
-  margin: 20px 0px; /* espaçamento entre as caixas */
+  margin: 20px 0px;
+  /* espaçamento entre as caixas */
   text-align: center;
 }
 
@@ -288,145 +222,438 @@ nav a {
   color: #800000;
 }
 
-
-
-footer{
-    background-color: #5a0101;
-    color: white;
-    padding: 40px 0; /* aumenta altura */
-    display: flex;
-    justify-content: space-evenly;  
-    align-items: flex-start; /* alinhar tudo no topo */
-    width: 100%;
-    flex-wrap: wrap; /* quebra linha caso precise */
-    margin-top: 100px; /* espaço entre o footer e o conteúdo */
-}
-
-footer ul {
-  font-family: "Inter", sans-serif;
-    list-style: none;
-   text-align: center;
-}
-
-footer li {
-  margin-top: 40px;
-  text-align: center;
-    margin: 10px 0;
-    font-size: 14px;
-    font-family: "Inter", sans-serif;
-    margin: 10px 0;
-}
-
-h1{
-  font-size: 25px;
-}
-
-.linhafooter{
-  margin-top: 20px;
-    width: 170px;
-    transform: rotate(-90.164deg);
-    color: #FFF;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 420px;
-}
-
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-top: 50px; 
-    font-size: 15px;
-}
-
-.whatsapp, .telefone{
-    height: 20px;
-}
-
-
-.instagram, .facebook{
-  height: 40px;
-  text-align: right;
-}
-
-.sob{
-    height: 100px;
-    margin-top: -100px;
-    margin: -10px;
-}
-
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-left: 50px;
-    font-size: 15px;
-}
-
-.linha{
-    width: 170px;
-    transform: rotate(-90.164deg);
-    color: #FFF;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 420px;
-    margin-top: 50px;
-}
-
-html{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: #FFF9ED;
-}
-
-footer p{
-  text-align: center;
-}
-
-.midia{
-  float: right;
-   display: grid;
-  gap: 15px;
-}
-
-/* Correção para não empurrar o ícone do carrinho */
 .login-dropdown-wrapper {
+  /*alterado*/
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  margin-right: 60px; /* <-- afasta login e carrinho da borda direita */
+  gap: 25px;
+  /* distância natural entre login e carrinho */
 }
 
 .login {
-  margin-right: 60px; /* espaçamento entre login e carrinho */
+  /*alterado*/
+  margin: 0;
+  /* Remove o margin-left: 270px que quebrava TUDO */
 }
 
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
 
-main .botao{
-    font-family: "Inter", sans-serif;
-    height: 50px;
-    width: 240px;
-    color: darkred;
-    background-color: #EADCC1CC;
-    box-shadow: 4px 5px 3px  rgba(0, 0, 0, 0.25);
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
+/*tirar se der problema*/
+
+/*=============================================*/
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #eae4d8;
+  color: #3a2d20;
+}
+
+/* --- SEÇÃO DE CONTA E ENDEREÇO --- */
+.container {
+  display: flex;
+  gap: 250px;
+  padding-top: 180px; /* afasta do menu fixo */
+  padding-bottom: 100px;
+  font-family: "Open Sans", sans-serif;
+  color: #523800;
+  margin-top: 40px;
+  margin-left: 60px;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.outros {
+  margin-top: 100px;
+  position: absolute;
+  margin-left: 1160px;
+}
+
+main .titulo {
+  font-family: "Libre Caslon Text", serif;
+  font-size: 22px;
+  text-align: left;
+  margin-bottom: 20px;
+  color: #523800;
+  font-family: "Aboreto", system-ui;
+}
+
+.titulo.verm {
+  color: #800000; /* vermelho escuro igual à imagem */
+  font-size: 30px;
+  position: absolute;
+  margin-right: 800px;
+  margin-top: -60px;
+  font-family: "Aboreto", system-ui;
+}
+
+.info-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-bloco label {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.info-box {
+  background-color: #dbcaa966;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #000000b2;
+  width: 550px;
+}
+
+.endereco-box {
+  background-color: #dbcaa966;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #000000b2;
+  width: 250px;
+}
+
+.endereco-box1 {
+  background-color: #dbcaa966;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #000000b2;
+  width: 120px;
+}
+
+.botao-editar {
+  margin-top: 25px;
+  background-color: #4d3400;
+  color: white;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 3px;
+  align-self: center;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.botao-editar:hover {
+  background-color: #5c4200;
+}
+
+main .botao {
+  font-family: "Inter", sans-serif;
+  height: 50px;
+  width: 240px;
+  color: darkred;
+  background-color: #eadcc1cc;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
   margin-top: 80px;
 }
 
 .botao:focus {
-    border-color: darkred; 
-    transform: scale(1.10); 
+  border-color: darkred;
+  transform: scale(1.1);
 }
 .botao:hover {
-    border-color: darkred; 
-    transform: scale(1.05);
+  border-color: darkred;
+  transform: scale(1.05);
 }
 
-main{
+main {
   margin-left: 100px;
 }
 
-#logout-btn a {
-  color: #fff;
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
 }
