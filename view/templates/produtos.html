@@ -56,7 +56,7 @@
         {% if produtos %} {% for produto in produtos %}
         <div class="vestido">
           <nav class="descricao">
-            <a href="/painel_usuario/produtos/{{produto.id}}">
+            <a href="/produtos/{{produto.id}}">
               <img
                 src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}"
                 alt="{{produto.nome_produto}}"
