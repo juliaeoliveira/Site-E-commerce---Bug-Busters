@@ -271,6 +271,20 @@
         // Variável global para guardar o valor total da compra
         let totalAmount = 0;
 
+        // Helper: parse price string robustly to number (reais)
+        function parsePriceString(s) {
+            if (typeof s === 'number') return s;
+            if (!s) return 0;
+            let str = String(s).trim();
+            if (str.indexOf('.') !== -1 && str.indexOf(',') !== -1) {
+                str = str.replace(/\./g, '').replace(',', '.');
+            } else {
+                str = str.replace(',', '.');
+            }
+            const n = parseFloat(str);
+            return isNaN(n) ? 0 : n;
+        }
+
         // Função que é executada quando o site termina de carregar
         function ready() {
             loadCartFromLocalStorage(); // Carrega os produtos salvos no carrinho (localStorage)
@@ -387,9 +401,8 @@
 
             // Soma o preço de todos os produtos
             carrinho.forEach(produto => {
-                // Converte o preço de "R$xx,xx" para número
-                let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
-                total += preco * produto.quantidade;
+                const preco = parsePriceString(produto.preco);
+                total += preco * (Number(produto.quantidade) || 0);
             });
 
             // [LINHA 171] MUDANÇA AQUI: Adicionar style: 'currency' e currency: 'BRL'
@@ -487,13 +500,13 @@
             // Monta os dados a serem enviados ao backend
             const payload = {
                 metodo_pagamento: metodoPagamento,
-                itens: carrinho.map(item => ({
+                    itens: carrinho.map(item => ({
                     id_produto: item.id, // o produto deve ter um 'id' salvo no localStorage
                     nome: item.nome,
                     tamanho: item.tamanho,
                     quantidade: item.quantidade,
-                    preco_unitario: parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", ".")),
-                    subtotal: parseFloat(item.quantidade) * parseFloat(item.preco.replace("R$", "").replace(".", "").replace(",", "."))
+                    preco_unitario: parsePriceString(item.preco),
+                    subtotal: (Number(item.quantidade) || 0) * parsePriceString(item.preco)
                 }))
             };
 
