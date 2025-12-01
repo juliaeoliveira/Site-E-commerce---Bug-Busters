@@ -4,100 +4,99 @@
   box-sizing: border-box;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  background: linear-gradient(135deg, #eae4d8 0%, #f5f0e8 100%);
-  font-family: "Open Sans", sans-serif;
-}
-
 /* MENU */
 #logo {
   height: 80px;
-  padding-left: 130px;
-  transition: transform 0.3s ease;
-}
-
-#logo:hover {
-  transform: scale(1.05);
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
 }
 
 .icons {
-  gap: 15px;
+  gap: 5px;
   justify-content: center;
   display: flex;
   padding-right: 150px;
 }
 
-.icons a {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  display: inline-block;
-}
-
-.icons a:hover {
-  transform: translateY(-3px);
-  opacity: 0.8;
-}
-
 .menu {
+  /*alterado*/
+  height: 90px;
   position: fixed;
-  z-index: 1000;
-  display: flex;
+  /*original*/
+  top: 0;
+  left: 0;
   width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  font-family: "Open Sans", sans-serif;
-  color: #523800;
-  box-shadow: 0 2px 20px rgba(82, 56, 0, 0.08);
-  padding: 10px 0;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
 }
 
-.menu nav {
-  justify-content: center;
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
   display: flex;
-  font-family: "Libre Caslon Text", serif;
-  font-size: 22px;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
   color: #523800;
 }
 
-.categorias {
-  gap: 40px;
+
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.categorias a {
-  color: #523800;
-  text-decoration: none;
-  position: relative;
-  padding: 5px 0;
-  transition: color 0.3s ease;
+html {
+  background-color: #eae4d8;
 }
 
-.categorias a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #5a0101;
-  transition: width 0.3s ease;
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #eae4d8;
+  color: #3a2d20;
 }
 
-.categorias a:hover {
-  color: #5a0101;
-}
-
-.categorias a:hover::after {
-  width: 100%;
-}
-
-/* MENSAGEM SECTION */
+/*==================== MENSAGEM SECTION =================*/
 .mensagem {
   margin-top: 180px;
   padding: 60px 40px;
@@ -106,7 +105,7 @@ body {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 16px;
+  border-radius: 10px;
   box-shadow: 0 10px 40px rgba(82, 56, 0, 0.12);
   animation: fadeInUp 0.6s ease;
 }
@@ -124,10 +123,11 @@ body {
 
 .mensagem h2 {
   font-family: "Libre Caslon Text", serif;
-  font-size: 28px;
+  font-size: 25px;
+  font-weight: 500;
   color: #523800;
   margin-bottom: 30px;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .mensagem a {
@@ -136,7 +136,7 @@ body {
   background: linear-gradient(135deg, #5a0101 0%, #7a0101 100%);
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 5px;
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -161,8 +161,8 @@ body {
   padding: 16px 50px;
   background: white;
   color: #523800;
-  border: 2px solid #523800;
-  border-radius: 8px;
+  border: 1px solid #523800;
+  border-radius: 5px;
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -178,138 +178,10 @@ body {
   box-shadow: 0 6px 25px rgba(82, 56, 0, 0.2);
 }
 
-/* FOOTER */
-footer {
-  background: linear-gradient(135deg, #5a0101 0%, #4a0101 100%);
-  color: white;
-  padding: 60px 40px 30px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  width: 100%;
-  flex-wrap: wrap;
-  margin-top: auto;
-  box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.2);
-}
-
-footer ul {
-  font-family: "Inter", sans-serif;
-  list-style: none;
-  text-align: center;
-}
-
-footer ul p {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #fff9ed;
-  letter-spacing: 0.5px;
-}
-
-footer li {
-  margin: 15px 0;
-  text-align: center;
-  font-size: 14px;
-  opacity: 0.9;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-}
-
-footer li:hover {
-  opacity: 1;
-  transform: translateX(5px);
-}
-
-.linhafooter {
-  margin-top: 20px;
-  width: 170px;
-  transform: rotate(-90.164deg);
-  color: #fff;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 420px;
-}
-
-.direitos {
-  width: 100%;
-  text-align: left;
-  margin-top: 50px;
-  font-size: 13px;
-  margin-left: 50px;
-  opacity: 0.8;
-  font-family: "Inter", sans-serif;
-}
-
-.whatsapp,
-.telefone {
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 8px;
-  filter: brightness(0) invert(1);
-}
-
-.instagram,
-.facebook {
-  height: 40px;
-  text-align: right;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  cursor: pointer;
-  filter: brightness(0) invert(1);
-}
-
-.instagram:hover,
-.facebook:hover {
-  transform: scale(1.1) rotate(5deg);
-  opacity: 0.8;
-}
-
-.sob {
-  height: 100px;
-  margin-top: -20px;
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
-}
-
-.linha {
-  width: 170px;
-  transform: rotate(-90.164deg);
-  color: rgba(255, 255, 255, 0.3);
-  text-align: center;
-  font-size: 30px;
-  font-weight: 420px;
-  margin-top: 50px;
-}
-
-html {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff9ed;
-}
-
-footer p {
-  text-align: center;
-}
-
-.midia {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
+/*===================FOOTER============================ */
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  #logo {
-    padding-left: 20px;
-    height: 60px;
-  }
-
-  .icons {
-    padding-right: 20px;
-    gap: 10px;
-  }
-
   .categorias {
     gap: 20px;
     font-size: 18px;
@@ -331,12 +203,275 @@ footer p {
     font-size: 14px;
   }
 
-  footer {
-    padding: 40px 20px 20px;
+}
+
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
   }
 
-  .direitos {
-    margin-left: 20px;
-    font-size: 12px;
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
   }
 }
