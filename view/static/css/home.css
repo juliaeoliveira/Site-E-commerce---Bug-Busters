@@ -1,6 +1,83 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+html {
+  background-color: #eae4d8;
 }
 
 body {
@@ -15,79 +92,14 @@ body {
   /* Remove o preenchimento padrão */
   overflow-x: hidden;
   /* Impede rolagem horizontal */
-  background-color: #FBFCF7;
-
-}
-
-
-
-/* MENU */
-#logo {
-
-  height: 80px;
-  /* Define a altura do logo */
-  padding-left: 130px;
-  /* Espaço à esquerda do logo */
-}
-
-.icons {
-  gap: 5px;
-  justify-content: center;
-  display: flex;
-  padding-right: 150px;
-}
-
-
-
-.menu {
-  position: fixed;
-  /* Fixa o menu na tela */
-  z-index: 10;
-  /* Garante que o menu fique acima de outros elementos */
-  display: flex;
-  /* Organiza os itens do menu em linha */
-  width: 100%;
-  /* O menu ocupa toda a largura da tela */
-  align-items: center;
-  /* Centraliza os itens na vertical */
-  justify-content: space-between;
-  /* Distribui os itens do menu com espaços entre eles */
-  background-color: hsla(0, 0%, 100%, 0.692);
-  /* Cor de fundo com transparência */
-  font-family: 'Open Sans', sans-serif;
-  /* Fonte do menu */
-  color: #ffffff;
-  /* Cor do texto do menu */
-}
-
-/* Estilo do menu de navegação */
-nav {
-  gap: 200px;
-  justify-content: center;
-  display: flex;
-  font-family: "Libre Caslon Text";
-  font-size: 22px;
-  color: #523800;
-
-}
-
-/* Estilo dos links dentro do nav */
-nav a {
-  color: #523800;
-  font-size: 20px;
-  /* Define o tamanho da fonte */
-  padding: 25px;
-  /* Espaçamento interno */
-  text-decoration: underline;
-  /* Ativa o sublinhado */
-  text-decoration-color: rgba(82, 56, 0, 0.192);
-  /* Cor do sublinhado com transparência */
+  background-color: #eae4d8;
+  color: #3a2d20;
 }
 
 /* Estilo para os links do menu ao passar o mouse (hover) */
 
 
-
+/*==================================MAIN=====================*/
 
 
 /* PAGINA SOBRE NOS */
@@ -528,81 +540,11 @@ h1 {
   height: 20px;
 }
 
-
+/*=============================FOOTER=====================*/
 /* foooter */
-footer {
-  background-color: #5a0101;
-  color: white;
-  padding: 40px 0;
-  /* aumenta altura */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  /* alinhar tudo no topo */
-  flex-wrap: wrap;
-  /* quebra linha caso precise */
-  margin-top: 20px;
-  /* espaço entre o footer e o conteúdo */
 
-}
+/*================================================*/
 
-footer ul {
-  font-family: "Inter", sans-serif;
-  list-style: none;
-  text-align: center;
-}
-
-footer li {
-  margin-top: 40px;
-  text-align: center;
-  margin: 10px 0;
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
-}
-
-
-.whatsapp,
-.telefone {
-  height: 20px;
-}
-
-
-.instagram,
-.facebook {
-  height: 40px;
-  text-align: right;
-}
-
-
-.sob {
-  height: 100px;
-  margin-top: 90px;
-  margin: -10px;
-}
-
-.linha {
-  width: 170px;
-  transform: rotate(-90.164deg);
-  color: #FFF;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 420px;
-  margin-top: 50px;
-}
-
-.direitos {
-  width: 100%;
-  text-align: left;
-  margin-top: 160px;
-  font-size: 15px;
-  margin-left: 60px;
-}
-
-.midia {
-  float: right;
-  display: grid;
-  gap: 15px;
-}
 
 .items-produto img {
   transition: transform .3s ease, opacity .3s ease;
@@ -650,4 +592,274 @@ footer li {
     width: 100%;
     height: 100%;
     object-fit: cover; /* faz o vídeo se comportar igual a background-size: cover */
+}
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
 }
