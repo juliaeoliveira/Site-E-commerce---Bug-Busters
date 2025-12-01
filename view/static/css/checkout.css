@@ -3,6 +3,44 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* ========= RESET SELETIVO PARA NÃO QUEBRAR HEADER & FOOTER ========= */
+
+* {
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, li {
+    list-style: none;
+}
+
+button, input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+/* Proteção contra interferências do navegador */
+header, footer {
+    all: unset;
+    display: block;
+}
+
+header *, footer * {
+    all: revert;
+}
 
 /* MENU */
 #logo {
@@ -238,13 +276,12 @@
   /* Remove o margin-left: 270px que quebrava TUDO */
 }
 
-#hamburger {
+/* header #hamburger {
   appearance: none;
   -webkit-appearance: none;
-}
+} */
 
 /*tirar se der problema*/
-
 
 /*=============================================*/
 
@@ -279,23 +316,21 @@ body {
   margin-left: 400px;
   margin-top: -30px;
   position: absolute;
-  
 }
 
 .lixeira:focus {
   border-color: darkred;
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 .lixeira:hover {
   border-color: darkred;
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 /*=============================================================*/
 
 /* MENU */
-
 
 /*=============================================================*/
 .categorias {
@@ -309,33 +344,26 @@ body {
 
 /*=============================================================*/
 
-
-
-
 /* card carrinho */
 
 #carrinho {
   height: auto;
-  background-color: #EAE4D8;
-  
-
-  
+  background-color: #eae4d8;
 }
 
-.area-carrinho{
+.area-carrinho {
   display: flex;
   flex-direction: row; /* ← agora os elementos ficam lado a lado */
   justify-content: center;
   align-items: flex-start; /* alinha pelo topo */
   gap: 60px; /* espaço entre os blocos */
   width: 100%;
-  margin-top: 200px;    
+  margin-top: 200px;
 }
-
 
 /* div produto*/
 .produto-vestido h1 {
-  background-color: #FFF;
+  background-color: #fff;
   /* width: calc(96% + 40px); cobre todo o espaço horizontal + padding da section */
   margin: -20px -20px 20px -20px; /* remove o espaçamento interno da section */
   padding: 20px 0;
@@ -344,7 +372,7 @@ body {
   font-family: "Aboreto", system-ui;
   font-size: 24px;
   font-weight: bold;
-  color: #4E3902;
+  color: #4e3902;
 }
 
 .linha-selecao {
@@ -355,9 +383,8 @@ body {
   margin-top: 10px;
 }
 
-
 .produto-vestido {
-  background-color: #E3D2AC;
+  background-color: #e3d2ac;
   width: 710px;
   color: #000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -369,10 +396,7 @@ body {
   height: auto;
   margin-bottom: 30px;
   /* min-height: 700px; */
-
 }
-
-
 
 .produto-item {
   display: flex;
@@ -386,7 +410,6 @@ body {
   align-self: center; /* garante alinhamento */
 }
 
-
 .imagem-carrinho img {
   width: 150px;
   border-radius: 4px;
@@ -394,7 +417,7 @@ body {
 
 .quantia {
   color: black;
-  background-color: #E3D2AC;
+  background-color: #e3d2ac;
   font-size: 15px;
   margin-top: 10px;
   width: 40px;
@@ -406,8 +429,6 @@ body {
   height: 250px;
   float: left;
 }
-
-
 
 /* Alinha a linha "Selecionar todos" */
 .linha-selecao {
@@ -424,7 +445,6 @@ body {
   position: relative;
   top: 2px;
 }
-
 
 /* Card do produto */
 .produto-item {
@@ -483,13 +503,10 @@ body {
   background-color: white;
   width: 400px; /* Defina a largura desejada (ex: 300px) */
   flex-shrink: 0; /* IMPEDE que o item seja comprimido (encolha) */
-  flex-grow: 0;  
-  height:100px;
+  flex-grow: 0;
+  height: 100px;
   margin-bottom: 30px;
 }
-
-
-
 
 /* Sessão variedades */
 #variedades img {
@@ -499,14 +516,14 @@ body {
 
 #variedades {
   /* height: 1100px; */
-  background-color: #FFF9ED;
+  background-color: #fff9ed;
   text-align: center;
   /* width: 100%; */
 }
 
 .linha-titulo3 {
   width: 456px;
-  color: #4E3902;
+  color: #4e3902;
   margin: 0 auto 15px; /* centraliza e dá espaçamento */
 }
 
@@ -542,10 +559,8 @@ body {
 }
 
 .vestido:hover img {
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
-
-
 
 .lista-vestidos {
   display: flex;
@@ -555,7 +570,7 @@ body {
 }
 
 /* button:focus  */
-form button:focus{
+form button:focus {
   border-color: darkred;
   transform: scale(1.1);
 }
@@ -571,7 +586,7 @@ form button:focus {
   height: 60px;
   width: 320px;
   color: darkred;
-  background-color: #EADCC1CC;
+  background-color: #eadcc1cc;
   box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
@@ -589,16 +604,16 @@ form button:focus {
   margin-left: 650px;
   margin-bottom: 30px;
   font-family: "Libre Caslon Text";
-  color: #4E3902;
+  color: #4e3902;
   font-size: 18px;
 }
 
 #voltarect {
   border-color: rgb(104, 0, 0);
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
- #botao-pagamento {
+#botao-pagamento {
   color: white;
   text-align: center;
   background-color: #790000;
@@ -616,7 +631,6 @@ form button:focus {
 }
 /*========================FOOTER==============================*/
 
-
 /*=========================================================*/
 
 .outrosvestidos {
@@ -627,7 +641,7 @@ form button:focus {
   color: #523800;
   color: color(display-p3 0.3077 0.2228 0.0082);
   text-align: left;
-  -webkit-text-stroke-color: #7C5051;
+  -webkit-text-stroke-color: #7c5051;
   font-family: "Aboreto", system-ui;
   font-size: 24px;
   font-style: normal;
@@ -636,16 +650,14 @@ form button:focus {
 }
 
 .quantidade {
-  background-color: #E3D2AC;
+  background-color: #e3d2ac;
   color: #5a0101;
-  
 }
 
 .quantia {
   width: 60px;
-  border-color:#320101;
+  border-color: #320101;
 }
-
 
 .pedido-total h1 {
   font-size: 20px;
@@ -685,14 +697,14 @@ h3 {
 
 .estoque {
   font-family: "Inter", sans-serif;
-  color: #4E3902;
+  color: #4e3902;
   font-size: 16px;
   margin-top: 10px;
 }
 
 .tamanho {
   font-family: "Inter", sans-serif;
-  color: #4E3902;
+  color: #4e3902;
   font-size: 16px;
   margin-top: 10px;
 }
@@ -701,9 +713,7 @@ h3 {
   margin-top: 10px;
 }
 
-.pedido-total
-
-.produto-item .checkbox-item {
+.pedido-total .produto-item .checkbox-item {
   /* Coloca checkbox e imagem lado a lado */
   align-items: center; /* Centraliza verticalmente */
   gap: 10px;
@@ -727,11 +737,11 @@ h3 {
   top: 2px; /* ajuste fino — pode usar 1px, 2px, -1px, etc. */
 }
 
-
-#carrinho, .produto-item, .compras{
+#carrinho,
+.produto-item,
+.compras {
   height: auto;
   min-height: 200px;
-
 }
 
 #variedades {
@@ -746,31 +756,26 @@ h3 {
   margin-top: -2px;
 }
 
-
-
 .pedido-total h2 {
-    font-family: "Inter", sans-serif;
-    color: #4E3902;
-    /* Novas propriedades */
-    display: flex;
-    justify-content: space-between; /* ESSENCIAL: Empurra os elementos para os lados */
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
+  /* Novas propriedades */
+  display: flex;
+  justify-content: space-between; /* ESSENCIAL: Empurra os elementos para os lados */
 }
 
-
 .lista-vestidos a {
-    text-decoration: none; 
-    color: #000; 
-    display: block;
-    text-align: center;
+  text-decoration: none;
+  color: #000;
+  display: block;
+  text-align: center;
 }
 
 /* 2. Opcional: Estilo específico para o nome */
 .lista-vestidos .nome {
-    
-    font-family: "Libre Caslon Text";
-    font-size: 16px; 
-    margin-top: 10px; 
-   
+  font-family: "Libre Caslon Text";
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .nome {
@@ -779,7 +784,6 @@ h3 {
   font-size: 20px;
   margin-top: 40px;
   text-decoration: none;
-
 }
 
 /* .itens {
@@ -792,8 +796,6 @@ h3 {
   margin-top: 200px;
 } */
 
-
-
 .pedido-total
 
 
@@ -803,7 +805,6 @@ h3 {
   flex-direction: column; /* empilha os 3 cards */
   gap: 40px; /* espaçamento entre eles */
 }
-
 
 .area-carrinho {
   display: flex;
@@ -815,43 +816,43 @@ h3 {
 
 /* ===== CARD: ENDEREÇO DE ENVIO ===== */
 .form-endereco {
-    min-height: 510px;
-    gap: 20px; /* Espaço entre grupos de campos */
-    padding: 20px 40px;
-    font-family: "Inter", sans-serif;
-    color: #4E3902;
+  min-height: 510px;
+  gap: 20px; /* Espaço entre grupos de campos */
+  padding: 20px 40px;
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
 }
 
 /* Cada linha de campos (como Nome/Telefone ou CEP/Rua) */
 .linha-dupla {
-    justify-content: space-between;
-    gap: 70px;
+  justify-content: space-between;
+  gap: 70px;
 }
 
 .linha-dupla > div {
-    flex: 1;
+  flex: 1;
 }
 
 /* Rótulos dos inputs */
 .form-endereco label {
-    font-family: "Libre Caslon Text";
-    color: #4E3902;
-    margin-bottom: 5px;
-    font-size: 14px;
+  font-family: "Libre Caslon Text";
+  color: #4e3902;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
 /* Inputs (bloqueados visualmente, mas com aparência limpa) */
 .form-endereco input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: #fff;
-    font-family: "Inter", sans-serif;
-    font-size: 15px;
-    color: #4E3902;
-    gap: 60px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #4e3902;
+  gap: 60px;
 }
 
 /* Quando estiverem*
@@ -863,26 +864,33 @@ h3 {
 }
 
 /* Distribuição das larguras dos campos */
-#nome, #telefone, #cep, #rua, #numero, #complemento,
-#estado, #cidade, #bairro {
-    flex: 1;
+#nome,
+#telefone,
+#cep,
+#rua,
+#numero,
+#complemento,
+#estado,
+#cidade,
+#bairro {
+  flex: 1;
 }
 
 /* Botão — visual igual ao do Figma */
 .botao-enviar {
-    align-self: flex-end;
-    width: 200px;
-    background-color: #790000;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 25px;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    margin-left: 160px;
+  align-self: flex-end;
+  width: 200px;
+  background-color: #790000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 25px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  margin-left: 160px;
 }
 
 .linha-dupla2 {
@@ -890,19 +898,18 @@ h3 {
 }
 
 a.botao-enviar {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .botao-enviar:hover {
-    background-color: #5a0101;
-    transform: scale(1.05);
+  background-color: #5a0101;
+  transform: scale(1.05);
 }
-
 
 /* Ajustar os campos que estão lado a lado */
 .produto-vestido .linha-dupla2 {
   gap: 20px;
-} 
+}
 
 .produto-vestido .linha-dupla > div {
   flex: 1;
@@ -913,17 +920,16 @@ a.botao-enviar {
   margin-bottom: 15px;
 }
 
-.primeiro{
+.primeiro {
   width: 200px;
 }
 
-.segundo{
+.segundo {
   position: absolute;
   width: 100px;
   margin-top: -65px;
   margin-left: 430px;
   width: 200px;
-
 }
 
 /* metodo de pagamento */
@@ -935,7 +941,7 @@ a.botao-enviar {
   gap: 20px; /* espaçamento entre as opções */
   padding: 20px 40px;
   font-family: "Inter", sans-serif;
-  color: #4E3902;
+  color: #4e3902;
   font-size: 16px;
 }
 
@@ -981,14 +987,12 @@ a.botao-enviar {
   margin-bottom: 10px;
 }
 
-
 /* ajustes do enedereço de  */
 /* Garante altura maior e mantém alinhamento */
 .produto-vestido:nth-child(1) {
-    min-height: 550px;
-    padding-bottom: 40px;
+  min-height: 550px;
+  padding-bottom: 40px;
 }
-
 
 /* Aumentar largura dos inputs do endereço */
 .produto-vestido input {
@@ -999,7 +1003,6 @@ a.botao-enviar {
 
 /* Ajustar os campos que estão lado a lado */
 .produto-vestido .linha-dupla {
- 
   gap: 20px;
 }
 
@@ -1021,10 +1024,7 @@ a.botao-enviar {
 
 /*TESTE DA ABERTURA DO LOGIN*/
 
-
-
 /*===========================================================*/
-
 
 #itens-pedido {
   height: 300px;
@@ -1036,15 +1036,13 @@ a.botao-enviar {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 40px 200px 0px 120px; 
-  
-  
+  margin: 40px 200px 0px 120px;
 }
 
 /* Voltar */
 .botao-voltar {
-  background-color: #EADCC1CC;
-  color: #6E0606;
+  background-color: #eadcc1cc;
+  color: #6e0606;
   font-family: "Inter";
   font-size: 18px;
   border: none;
@@ -1064,8 +1062,8 @@ a.botao-enviar {
 .botao-confirmar-final {
   margin-right: 200px;
   box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
-  background-color:  #EADCC1CC;
-  color:  #6E0606;
+  background-color: #eadcc1cc;
+  color: #6e0606;
   font-family: "Inter", sans-serif;
   font-size: 18px;
   border: none;
@@ -1076,18 +1074,21 @@ a.botao-enviar {
   transition: all 0.3s ease;
 }
 
-h3
-.botao-confirmar-final:hover {
+h3 .botao-confirmar-final:hover {
   background-color: #5a0101;
   transform: scale(1.05);
 }
 
 #itens-pedido {
-  height: auto
+  height: auto;
 }
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
 
+header #hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
 /* botão hamburguer */
 .hamburger {
   display: none;
@@ -1273,7 +1274,6 @@ footer div p {
   font-family: "Inter", sans-serif;
   color: #bdb0ae;
 }
-
 
 /* LISTAS */
 footer ul {
