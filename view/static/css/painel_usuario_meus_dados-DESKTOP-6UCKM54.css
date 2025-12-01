@@ -272,260 +272,145 @@ body {
   color: #3a2d20;
 }
 
-/*=============================MAIN=======================*/
+/*=====================================================================*/
 
+
+/* --- SEÇÃO DE CONTA E ENDEREÇO --- */
 .container {
-  max-width: 900px;
-  margin: 150px auto 50px; /* Ajustado margin-top para compensar o menu fixo */
-  background: #fff;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(82, 56, 0, 0.15); /* Sombra mais suave com cor marrom */
-}
-
-h1 {
-  color: #523800; /* Mudado para marrom, combinando com o menu */
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: "Libre Caslon Text", serif;
-  font-size: 32px;
-}
-
-main p {
-  color: #523800; /* Cor do texto em marrom */
-  font-size: 16px;
-  margin: 10px 0;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Sombra suave na tabela */
-}
-
-th,
-td {
-  padding: 15px;
-  border-bottom: 1px solid #e8e0d5; /* Borda mais suave em bege */
-  text-align: left;
-}
-
-th {
-  background: linear-gradient(
-    135deg,
-    #790000 0%,
-    #5a0101 100%
-  ); /* Gradiente vermelho escuro combinando com o footer */
-  color: #fff;
-  font-family: "Libre Caslon Text", serif;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-}
-
-td {
-  color: #523800; /* Texto marrom nas células */
-  font-size: 15px;
-}
-
-tbody tr {
-  transition: background-color 0.3s ease; /* Transição suave */
-}
-
-tbody tr:hover {
-  background-color: #fbf8f3; /* Destaque suave ao passar o mouse */
-}
-
-.valor-total {
-  text-align: right;
-  font-size: 22px;
-  margin-top: 30px;
-  color: #790000; /* Vermelho escuro para destaque do total */
-  font-weight: bold;
-  padding: 20px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    #fff5f0
-  ); /* Gradiente sutil */
-  border-radius: 8px;
-}
-
-.voltar {
-  display: block;
-  margin-top: 30px;
-  text-align: center;
-}
-
-.voltar a {
-  color: #fff;
-  padding: 12px 30px;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  font-family: "Libre Caslon Text", serif;
-  font-size: 16px;
-  display: inline-block;
-  box-shadow: 0 2px 8px rgba(82, 56, 0, 0.3); /* Sombra marrom */
-}
-
-#voltar {
-  background: linear-gradient(
-    135deg,
-    #523800 0%,
-    #6d4a1a 100%
-  ); /* Gradiente marrom */
-}
-
-#abrir-modal-cancelar {
-  background: linear-gradient(
-    135deg,
-    #5c2323 0%,
-    #790000 100%
-  ); /* Gradiente vinho */
-}
-
-#voltar:hover {
-  background: linear-gradient(
-    135deg,
-    #6d4a1a 0%,
-    #523800 100%
-  ); /* Inverte gradiente no hover */
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(82, 56, 0, 0.4);
-}
-
-#abrir-modal-cancelar:hover {
-  background: linear-gradient(
-    135deg,
-    #790000 0%,
-    #5c2323 100%
-  ); /* Inverte gradiente no hover */
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(82, 56, 0, 0.4);
-}
-
-/*================================FOOTER================================*/
-
-
-
-/*====================================MAIN==================*/
-
-
-/* Estilos para o modal de cancelamento de pedidos */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  gap: 250px;
+  padding-top: 180px; /* afasta do menu fixo */
+  padding-bottom: 100px;
+  font-family: "Open Sans", sans-serif;
+  color: #523800;
+  margin-top: 40px;
+  margin-left: 60px;
 }
 
-.modal-overlay.hidden {
-  display: none;
+.secao {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }
 
-.modal-cancelar {
-  position: relative;
-  background-color: #fbfcf7;
-  width: 350px;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  text-align: center;
+.outros {
+  margin-top: 100px;
+  position: absolute;
+  margin-left: 1160px;
 }
 
-.modal-cancelar h2 {
+.secao .titulo {
   font-family: "Libre Caslon Text", serif;
-  color: #523800;
-  font-size: 24px;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-
-.modal-cancelar p {
-  color: #523800;
-  font-size: 14px;
+  font-size: 22px;
+  text-align: left;
   margin-bottom: 20px;
-  font-family: "Segoe UI", sans-serif;
+  color: #523800;
+  font-family: "Aboreto", system-ui;
 }
 
-.input-pedido {
-  width: 100%;
-  padding: 15px;
-  background-color: #e8dcc8;
+.titulo.verm {
+  color: #800000; /* vermelho escuro igual à imagem */
+  font-size: 30px;
+  position: absolute;
+  margin-right: 800px;
+  margin-top: -60px;
+  font-family: "Aboreto", system-ui;
+}
+
+.info-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-bloco label {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.info-box {
+  background-color: #dbcaa966;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #000000b2;
+  width: 550px;
+}
+
+.endereco-box {
+  background-color: #dbcaa966;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #000000b2;
+  width: 250px;
+}
+
+.endereco-box1 {
+  background-color: #dbcaa966;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #000000b2;
+  width: 120px;
+}
+
+.botao-editar {
+  margin-top: 25px;
+  background-color: #4d3400;
+  color: white;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 3px;
+  align-self: center;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.botao-editar:hover {
+  background-color: #5c4200;
+}
+
+/*=========================MENU=========================*/
+
+
+
+/*=================================FOOTER===================*/
+
+
+
+/*===================================MAIN================================*/
+main .botao {
+  font-family: "Inter", sans-serif;
+  height: 50px;
+  width: 240px;
+  color: darkred;
+  background-color: #eadcc1cc;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
-.input-pedido:focus {
-  outline: 2px solid #523800;
-}
-
-.btn-cancelar {
-  background-color: #790000;
-  color: white;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: "Libre Caslon Text", serif;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  box-shadow: 0 3px 10px rgba(121, 0, 0, 0.3);
-}
-
-.btn-cancelar:hover {
-  background-color: #5a0000;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(121, 0, 0, 0.4);
-}
-
-.fechar-modal {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: #790000;
-  color: white;
-  border: none;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
   font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  font-weight: bold;
-  line-height: 1;
+  margin-top: 80px;
 }
 
-.fechar-modal:hover {
-  background-color: #5a0000;
+.botao:focus {
+  border-color: darkred;
   transform: scale(1.1);
 }
-
-.btn-abrir-cancelar:hover {
-  background-color: #5a0000;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(121, 0, 0, 0.5);
+.botao:hover {
+  border-color: darkred;
+  transform: scale(1.05);
 }
 
+main {
+  margin-left: 100px;
+}
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
 

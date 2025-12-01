@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nossas Coleções</title>
-    <link rel="stylesheet" href="/static/css/colecao.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sob Véu</title>
+    <link
+      rel="stylesheet"
+      href="/static/css/painel_usuario_comprar_novamente.css"
+    />
   </head>
 
   <body>
@@ -74,32 +95,33 @@
     <!-- Overlay para escurecer o fundo no mobile -->
     <div class="overlay" id="overlay"></div>
 
-    <br />
+    <main>
+      <h1>COMPRE NOVAMENTE</h1>
+      <section>
+        {% if produtos %} {% for produto in produtos %} {% if
+        produto.quantidade_estoque > 0 %}
+        <div class="vestido">
+          <nav>
+            <a href="/painel_usuario/produtos/{{produto.id}}">
+              <img
+                src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}"
+                alt="{{produto.nome_produto}}"
+              />
+            </a>
+          </nav>
+          <p class="nome">{{produto.nome_produto}}</p>
+        </div>
+        {% endif %} {% endfor %} {% else %}
+        <p>Nenhum produto encontrado!</p>
+        {% endif %}
+      </section>
 
-    <h1 class="titulo">NOSSAS COLEÇÕES</h1>
-
-    <div class="grid">
-      <div class="card" data-colecao="Brisa do Altar">
-        <div class="img-area img1"></div>
-        <p class="nome">Brisa do Altar</p>
-      </div>
-
-      <div class="card" data-colecao="Sussurros">
-        <div class="img-area img2"></div>
-        <p class="nome">Sussurros</p>
-      </div>
-
-      <div class="card" data-colecao="Encanto">
-        <div class="img-area img3"></div>
-        <p class="nome">Encanto</p>
-      </div>
-
-      <div class="card" data-colecao="O Desabrochar">
-        <div class="img-area img4"></div>
-        <p class="nome">O Desabrochar</p>
-      </div>
-    </div>
-    <a href="/" class="voltar"> <span>⟵</span> Voltar à página inicial </a>
+      <nav>
+        <a href="/painel_usuario">
+          <button>← Voltar à página inicial</button>
+        </a>
+      </nav>
+    </main>
 
     <footer>
       <!-- LOGO -->
@@ -172,26 +194,6 @@
       <!-- DIREITOS -->
       <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
-
-    <!-- ======= MODAL AQUI ======= -->
-    <div id="modalColecao" class="modal hidden">
-      <div class="modal-content">
-        <span id="fecharModal" class="fechar">×</span>
-
-        <div class="modal-grid">
-          <img id="modalImg" src="" alt="" />
-
-          <div class="modal-texto">
-            <h2 id="modalNome"></h2>
-            <h3 id="modalEstacao"></h3>
-            <p id="modalDescricao"></p>
-
-            <button class="btn-ver">VER COLEÇÃO</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script>
       const loginIcon = document.getElementById("login-icon");
       const loginDropdown = document.getElementById("login-dropdown");
@@ -245,79 +247,6 @@
       // fecha no ESC
       window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeMenu();
-      });
-    </script>
-
-    <script>
-      // TEXTOS QUE APARECEM NO MODAL
-      const dados = {
-        "Brisa do Altar": {
-          estacao: "VERÃO",
-          descricao:
-            "No calor do Verão, o amor é celebrado sob o sol intenso e a leveza do vento. A Brisa do Altar representa a alegria vibrante, o frescor das manhãs ensolaradas e o romance que dança entre sorrisos e risos à beira-mar.",
-          imagem: "/img_colecao/64ca5a20d02ef9d6315d2100e5d749559a3a51eb.jpg",
-        },
-
-        Sussurros: {
-          estacao: "OUTONO",
-          descricao:
-            "As folhas caem lentamente e o outono fala em tons dourados. Sussurros é delicada, íntima e acolhedora, como segredos trocados ao entardecer, lembrando que cada detalhe do amor é suave, profundo e eterno.",
-          imagem: "/img_colecao/80929e088161e498119ac14931935ea1cc516484.jpg",
-        },
-
-        Encanto: {
-          estacao: "INVERNO",
-          descricao:
-            "No frio do Inverno, a elegância se revela no contraste entre a neve e o brilho da vida. Encanto é puro esplendor, trazendo vestidos que abraçam com sofisticação e romantismo, como um conto de inverno onde o amor aquece qualquer coração.",
-          imagem: "/img_colecao/e5d3a8694e8894edc8df7700402cde80950d1779.jpg",
-        },
-
-        "O Desabrochar": {
-          estacao: "PRIMAVERA",
-          descricao:
-            "Como a primeira flor que surge entre folhas verdes, O Desabrochar simboliza o início de uma nova vida. Cada vestido é como um botão que se abre, revelando delicadeza e frescor. É a coleção que celebra o despertar do amor e a beleza que cresce lentamente, transformando cada noiva em poesia viva.",
-          imagem: "/img_colecao/2664de833ebbdbe2764b3087d54ec71555bde2a9.jpg",
-        },
-      };
-
-      // ELEMENTOS DO MODAL
-      const modal = document.getElementById("modalColecao");
-      const modalImg = document.getElementById("modalImg");
-      const modalNome = document.getElementById("modalNome");
-      const modalEstacao = document.getElementById("modalEstacao");
-      const modalDescricao = document.getElementById("modalDescricao");
-      const fecharModal = document.getElementById("fecharModal");
-
-      // AÇÃO DE ABRIR O MODAL AO CLICAR EM QUALQUER CARD E REDIRECIONAR APÓS CLIQUE NO BOTÃO
-      document.querySelectorAll(".card").forEach((card) => {
-        card.addEventListener("click", () => {
-          const nome = card.querySelector(".nome").innerText;
-          const info = dados[nome];
-
-          // Preenche o modal
-          modalNome.textContent = nome;
-          modalEstacao.textContent = "Estação: " + info.estacao;
-          modalDescricao.textContent = info.descricao;
-          modalImg.src = info.imagem;
-
-          modal.classList.remove("hidden");
-
-          // Ao clicar no botão "VER COLEÇÃO", redireciona para página de produtos filtrados
-          const btnVer = modal.querySelector(".btn-ver");
-          btnVer.onclick = () => {
-            window.location.href = `/colecoes/${encodeURIComponent(nome)}`;
-          };
-        });
-      }); // FECHAR O MODAL
-      fecharModal.addEventListener("click", () => {
-        modal.classList.add("hidden");
-      });
-
-      // FECHAR CLICANDO FORA DO QUADRO
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          modal.classList.add("hidden");
-        }
       });
     </script>
   </body>

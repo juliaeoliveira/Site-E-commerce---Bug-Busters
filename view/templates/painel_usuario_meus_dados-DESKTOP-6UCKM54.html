@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nossas Coleções</title>
-    <link rel="stylesheet" href="/static/css/colecao.css" />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sob Véu - Tela do Usuário</title>
+    <link rel="stylesheet" href="/static/css/painel_usuario_meus_dados.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
 
-  <body>
     <!-- MENU FIXO RESPONSIVO -->
     <header class="menu">
       <!-- LOGO -->
@@ -73,35 +76,75 @@
 
     <!-- Overlay para escurecer o fundo no mobile -->
     <div class="overlay" id="overlay"></div>
+<main>
+      <div class="container">
+      <h2 class="titulo verm">SUA CONTA</h2> 
+    <div class="secao">
+      <div class="info-bloco">
+        <br> <br>
+        <label>Nome completo:</label>
+        <div class="info-box">{{ usuario.nome_cliente }}</div>
 
-    <br />
+        <label>E-mail:</label>
+        <div class="info-box">{{ usuario.email }}</div>
 
-    <h1 class="titulo">NOSSAS COLEÇÕES</h1>
+        <label>Data de Nascimento:</label>
+        <div class="info-box">{{ usuario.data_nascimento.strftime('%d/%m/%Y') }}</div>
 
-    <div class="grid">
-      <div class="card" data-colecao="Brisa do Altar">
-        <div class="img-area img1"></div>
-        <p class="nome">Brisa do Altar</p>
-      </div>
+        <label>Telefone:</label>
+        <div class="info-box">{{ usuario.telefone or "Não informado" }}</div>
 
-      <div class="card" data-colecao="Sussurros">
-        <div class="img-area img2"></div>
-        <p class="nome">Sussurros</p>
-      </div>
-
-      <div class="card" data-colecao="Encanto">
-        <div class="img-area img3"></div>
-        <p class="nome">Encanto</p>
-      </div>
-
-      <div class="card" data-colecao="O Desabrochar">
-        <div class="img-area img4"></div>
-        <p class="nome">O Desabrochar</p>
+        <a href="/painel_usuario/editar_usuario" class="botao-editar">Editar</a>
       </div>
     </div>
-    <a href="/" class="voltar"> <span>⟵</span> Voltar à página inicial </a>
 
-    <footer>
+    {% if endereco %}
+
+    <div class="secao">
+      <h3 class="titulo">ENDEREÇO</h3>
+      <div class="info-bloco">
+        <label>CEP:</label>
+        <div class="endereco-box">{{ endereco.cep }}</div>
+
+        <label>Rua:</label>
+        <div class="endereco-box">{{ endereco.rua }}</div>
+
+        <label>Bairro:</label>
+        <div class="endereco-box">{{ endereco.bairro }}</div>
+
+        <label>Cidade:</label>
+        <div class="endereco-box">{{ endereco.cidade }}</div>
+
+        <a href="/painel_usuario/editar_endereco" class="botao-editar">Editar</a>
+      </div>
+    </div>
+      <div class="outros">
+
+        <div class="info-endereco">
+          <label>Número:</label>
+          <div class="endereco-box1" class="tamanho">{{ endereco.numero }}</div>
+    <br> <br>
+          <label>Complemento:</label>
+          <div class="endereco-box1">{{ endereco.complemento or "—" }}</div>
+    <br> <br>
+          <label>Estado:</label>
+          <div class="endereco-box1">{{ endereco.estado }}</div>
+    {% else %}
+    <p>Você ainda não cadastrou um endereço.</p>
+    {% endif %}
+        
+        </div>
+      </div>
+    </div>
+    </div>
+
+  <nav>
+        <a href="/painel_usuario">
+          <button class="botao"> ← Voltar à página inicial</button>
+        </a>
+    </nav>
+</main>
+<footer>
       <!-- LOGO -->
       <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
 
@@ -172,26 +215,6 @@
       <!-- DIREITOS -->
       <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
-
-    <!-- ======= MODAL AQUI ======= -->
-    <div id="modalColecao" class="modal hidden">
-      <div class="modal-content">
-        <span id="fecharModal" class="fechar">×</span>
-
-        <div class="modal-grid">
-          <img id="modalImg" src="" alt="" />
-
-          <div class="modal-texto">
-            <h2 id="modalNome"></h2>
-            <h3 id="modalEstacao"></h3>
-            <p id="modalDescricao"></p>
-
-            <button class="btn-ver">VER COLEÇÃO</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script>
       const loginIcon = document.getElementById("login-icon");
       const loginDropdown = document.getElementById("login-dropdown");
@@ -247,78 +270,5 @@
         if (e.key === "Escape") closeMenu();
       });
     </script>
-
-    <script>
-      // TEXTOS QUE APARECEM NO MODAL
-      const dados = {
-        "Brisa do Altar": {
-          estacao: "VERÃO",
-          descricao:
-            "No calor do Verão, o amor é celebrado sob o sol intenso e a leveza do vento. A Brisa do Altar representa a alegria vibrante, o frescor das manhãs ensolaradas e o romance que dança entre sorrisos e risos à beira-mar.",
-          imagem: "/img_colecao/64ca5a20d02ef9d6315d2100e5d749559a3a51eb.jpg",
-        },
-
-        Sussurros: {
-          estacao: "OUTONO",
-          descricao:
-            "As folhas caem lentamente e o outono fala em tons dourados. Sussurros é delicada, íntima e acolhedora, como segredos trocados ao entardecer, lembrando que cada detalhe do amor é suave, profundo e eterno.",
-          imagem: "/img_colecao/80929e088161e498119ac14931935ea1cc516484.jpg",
-        },
-
-        Encanto: {
-          estacao: "INVERNO",
-          descricao:
-            "No frio do Inverno, a elegância se revela no contraste entre a neve e o brilho da vida. Encanto é puro esplendor, trazendo vestidos que abraçam com sofisticação e romantismo, como um conto de inverno onde o amor aquece qualquer coração.",
-          imagem: "/img_colecao/e5d3a8694e8894edc8df7700402cde80950d1779.jpg",
-        },
-
-        "O Desabrochar": {
-          estacao: "PRIMAVERA",
-          descricao:
-            "Como a primeira flor que surge entre folhas verdes, O Desabrochar simboliza o início de uma nova vida. Cada vestido é como um botão que se abre, revelando delicadeza e frescor. É a coleção que celebra o despertar do amor e a beleza que cresce lentamente, transformando cada noiva em poesia viva.",
-          imagem: "/img_colecao/2664de833ebbdbe2764b3087d54ec71555bde2a9.jpg",
-        },
-      };
-
-      // ELEMENTOS DO MODAL
-      const modal = document.getElementById("modalColecao");
-      const modalImg = document.getElementById("modalImg");
-      const modalNome = document.getElementById("modalNome");
-      const modalEstacao = document.getElementById("modalEstacao");
-      const modalDescricao = document.getElementById("modalDescricao");
-      const fecharModal = document.getElementById("fecharModal");
-
-      // AÇÃO DE ABRIR O MODAL AO CLICAR EM QUALQUER CARD E REDIRECIONAR APÓS CLIQUE NO BOTÃO
-      document.querySelectorAll(".card").forEach((card) => {
-        card.addEventListener("click", () => {
-          const nome = card.querySelector(".nome").innerText;
-          const info = dados[nome];
-
-          // Preenche o modal
-          modalNome.textContent = nome;
-          modalEstacao.textContent = "Estação: " + info.estacao;
-          modalDescricao.textContent = info.descricao;
-          modalImg.src = info.imagem;
-
-          modal.classList.remove("hidden");
-
-          // Ao clicar no botão "VER COLEÇÃO", redireciona para página de produtos filtrados
-          const btnVer = modal.querySelector(".btn-ver");
-          btnVer.onclick = () => {
-            window.location.href = `/colecoes/${encodeURIComponent(nome)}`;
-          };
-        });
-      }); // FECHAR O MODAL
-      fecharModal.addEventListener("click", () => {
-        modal.classList.add("hidden");
-      });
-
-      // FECHAR CLICANDO FORA DO QUADRO
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          modal.classList.add("hidden");
-        }
-      });
-    </script>
-  </body>
+</body>
 </html>

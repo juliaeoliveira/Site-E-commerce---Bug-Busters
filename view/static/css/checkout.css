@@ -3,44 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* ========= RESET SELETIVO PARA NÃO QUEBRAR HEADER & FOOTER ========= */
 
-* {
-    box-sizing: border-box;
-}
-
-body, h1, h2, h3, h4, h5, h6, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul, li {
-    list-style: none;
-}
-
-button, input, textarea, select {
-    font-family: inherit;
-    font-size: inherit;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-/* Proteção contra interferências do navegador */
-header, footer {
-    all: unset;
-    display: block;
-}
-
-header *, footer * {
-    all: revert;
-}
 
 /* MENU */
 #logo {
@@ -276,10 +239,10 @@ header *, footer * {
   /* Remove o margin-left: 270px que quebrava TUDO */
 }
 
-/* header #hamburger {
+header #hamburger {
   appearance: none;
   -webkit-appearance: none;
-} */
+}
 
 /*tirar se der problema*/
 
@@ -737,9 +700,8 @@ h3 {
   top: 2px; /* ajuste fino — pode usar 1px, 2px, -1px, etc. */
 }
 
-#carrinho,
-.produto-item,
-.compras {
+
+#carrinho, .produto-item, .compras{
   height: auto;
   min-height: 200px;
 }
@@ -795,8 +757,6 @@ h3 {
   width: 100%;
   margin-top: 200px;
 } */
-
-.pedido-total
 
 
 /* Coluna esquerda com os 3 cards empilhados */
@@ -897,7 +857,7 @@ h3 {
   margin-bottom: 30px;
 }
 
-a.botao-enviar {
+a .botao-enviar {
   text-decoration: none;
 }
 
@@ -1355,3 +1315,15 @@ footer li {
     flex-direction: row;
   }
 }
+
+/* Estilos para links
+footer a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #f8f8f8;
+  text-decoration: underline;
+} */
