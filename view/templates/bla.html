@@ -11,6 +11,19 @@
     // Variável global para guardar o valor total da compra
     let totalAmount = 0;
 
+    function parsePriceString(s) {
+        if (typeof s === 'number') return s;
+        if (!s) return 0;
+        let str = String(s).trim();
+        if (str.indexOf('.') !== -1 && str.indexOf(',') !== -1) {
+            str = str.replace(/\./g, '').replace(',', '.');
+        } else {
+            str = str.replace(',', '.');
+        }
+        const n = parseFloat(str);
+        return isNaN(n) ? 0 : n;
+    }
+
     // Função que é executada quando o site termina de carregar
     function ready() {
         loadCartFromLocalStorage(); // Carrega os produtos salvos no carrinho (localStorage)
@@ -137,9 +150,8 @@
 
     // Soma o preço de todos os produtos
     carrinho.forEach(produto => {
-    // Converte o preço de "R$xx,xx" para número
-    let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
-    total += preco * produto.quantidade;
+        const preco = parsePriceString(produto.preco);
+        total += preco * (Number(produto.quantidade) || 0);
     });
 
      // [LINHA 171] MUDANÇA AQUI: Adicionar style: 'currency' e currency: 'BRL'
@@ -218,13 +230,8 @@
             id_produto: Number(item.id),
             tamanho: item.tamanho,
             quantidade: Number(item.quantidade),
-            preco_unitario: parseFloat(
-              item.preco.replace("R$", "").replace(".", "").replace(",", ".")
-            ),
-            subtotal:
-              parseFloat(
-                item.preco.replace("R$", "").replace(".", "").replace(",", ".")
-              ) * Number(item.quantidade)
+                        preco_unitario: parsePriceString(item.preco),
+                        subtotal: parsePriceString(item.preco) * Number(item.quantidade)
           }))
         };
     

@@ -90,13 +90,16 @@
         <img src="/static/img_home/seta esquerda2.png" alt="Anterior">
       </div>
 
-      <!-- CONTÊINER FIXO DO PAR DE IMAGENS -->
       <div class="items-produto">
-        <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
+        <div class="wrap">
+          <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
+        </div>
       </div>
 
       <div class="items-produto">
-        <img id="vestido2" src="/static/img_home/vestido-2.png" alt="">
+        <div class="wrap">
+          <img id="vestido2" src="/static/img_home/vestido 2.png" alt="">
+        </div>
       </div>
 
       <div class="seta seta-direita">
@@ -127,20 +130,28 @@
     <hr class="linha-titulo">
     <h1>CONHEÇA NOSSAS COLEÇÕES</h1>
     <hr class="linha-titulo2">
+
     <div class="items-colecoes">
-      <div class="items-colecao">
-        <img src="/static/img_home/colecao2.png" alt="Coleção 1">
+      <div class="items-colecao direita">
+        <img src="/static/img_home/colecao22.png" alt="Coleção 1">
+        <button class="btn-overlay"><span>NOSSAS COLEÇÕES</span></button>
       </div>
-      <div class="items-colecao destaque">
-        <img src="/static/img_home/colecao1.png" alt="Coleção 2">
-        <button id="botao-vercolecao">
-        <span class="ver">Ver coleção</span>
+      <div class="items-colecao centro destaque">
+        <img src="/static/img_home/colecao11.png" alt="Coleção 2">
+        <button class="btn-overlay centro">
+          <span>Encanto</span>
         </button>
       </div>
-      <div class="items-colecao">
-        <img src="/static/img_home/colecao3.png" alt="Coleção 3">
+      <div class="items-colecao esquerda">
+        <img src="/static/img_home/colecao33.png" alt="Coleção 3">
+        <button class="btn-overlay"><span>NOSSAS COLEÇÕES</span></button>
       </div>
     </div>
+    <button class= "botao-vercolecao">
+      <a class="ver" href="#">VER COLEÇÃO</a>
+    </button>
+
+
     <hr class="linha-colecao">
   </div>
 </section>
@@ -280,7 +291,7 @@
     ["/static/img_home/vestido-7.png", "/static/img_home/vestido-8.png"]
   ];
 
-  let indice = 0; // Começa no primeiro par
+  let indice = 0;
 
   const img1 = document.getElementById("vestido1");
   const img2 = document.getElementById("vestido2");
@@ -289,7 +300,7 @@
   const setaEsq = document.querySelector(".seta-esquerda");
 
   function atualizarImagens(direcao) {
-    // animação: sai para a esquerda ou direita
+
     img1.classList.add(direcao);
     img2.classList.add(direcao);
 
@@ -297,24 +308,179 @@
       img1.src = paresVestidos[indice][0];
       img2.src = paresVestidos[indice][1];
 
-      // reseta posição para animação de entrada
+      // entrada
+      const entrar = direcao === "sair-esquerda" 
+        ? "entrar-direita" 
+        : "entrar-esquerda";
+
+      img1.classList.add(entrar);
+      img2.classList.add(entrar);
+
       img1.classList.remove(direcao);
       img2.classList.remove(direcao);
-    }, 300); // tempo da animação
+
+      setTimeout(() => {
+        img1.classList.remove("entrar-esquerda", "entrar-direita");
+        img2.classList.remove("entrar-esquerda", "entrar-direita");
+      }, 600);
+
+    }, 600);
   }
 
   setaDir.addEventListener("click", () => {
-    indice++;
-    if (indice >= paresVestidos.length) indice = 0;
+    indice = (indice + 1) % paresVestidos.length;
     atualizarImagens("sair-esquerda");
   });
 
   setaEsq.addEventListener("click", () => {
-    indice--;
-    if (indice < 0) indice = paresVestidos.length - 1;
+    indice = (indice - 1 + paresVestidos.length) % paresVestidos.length;
     atualizarImagens("sair-direita");
   });
+
+
+
+
+//  CARROSSEL COLEÇÕES
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+    const container = document.querySelector(".items-colecoes");
+    let cards = Array.from(container.querySelectorAll(".items-colecao"));
+
+    // duração da animação (deve combinar com seu CSS)
+    const DURATION = 850;
+    let animando = false;
+
+    // garante que cada card tenha btn span
+    const nomesColecao = [
+      "Coleção Encanto Invernal",
+      "Coleção Encanto",
+      "Coleção Encanto Real"
+    ];
+
+    function atualizarClassesVisuais() {
+      // recalcula cards pela ordem DOM
+      cards = Array.from(container.children);
+
+      cards.forEach((card, i) => {
+        card.classList.remove("esquerda", "centro", "direita",
+                            "vai-centro", "vai-direita", "vai-esquerda", "subindo");
+      });
+
+      // define posições base (assumimos sempre 3 cards)
+      if (cards[0]) cards[0].classList.add("esquerda");
+      if (cards[1]) cards[1].classList.add("centro");
+      if (cards[2]) cards[2].classList.add("direita");
+
+      // atualiza texto dos botões: só o centro mostra o nome
+      cards.forEach((card, i) => {
+        const span = card.querySelector(".btn-overlay span");
+        const btn = card.querySelector(".btn-overlay");
+        if (!span) return;
+        if (i === 1) {
+          span.textContent = nomesColecao[i] || span.textContent;
+          btn.classList.add("centro");
+        } else {
+          span.textContent = "NOSSAS COLEÇÕES";
+          btn.classList.remove("centro");
+        }
+      });
+    }
+
+    // anima clique: clickedCard é a <div.items-colecao> clicada
+    function handleClickOnCard(clickedCard) {
+      if (animando) return;
+      animando = true;
+
+      // recalc positions
+      cards = Array.from(container.children);
+      const esquerda = cards[0];
+      const centro   = cards[1];
+      const direita  = cards[2];
+
+      if (!esquerda || !centro || !direita) {
+        animando = false;
+        return;
+      }
+
+      // se clicou no centro, nada
+      if (clickedCard === centro) {
+        animando = false;
+        return;
+      }
+
+      // clique no direito -> direita vai centro; centro vai direita; esquerda permanece
+      if (clickedCard === direita) {
+        // classes de animação (definidas no seu CSS)
+        direita.classList.add("vai-centro");
+        centro.classList.add("vai-direita");
+
+        // garante que direita apareça por cima durante animação
+        direita.style.zIndex = 20;
+        centro.style.zIndex = 10;
+
+        setTimeout(() => {
+          // novo order: [esquerda, direita, centro]
+          container.appendChild(esquerda); // já está, mas assegura ordem
+          container.appendChild(direita);
+          container.appendChild(centro);
+
+          // limpa zIndex temporário
+          direita.style.zIndex = "";
+          centro.style.zIndex = "";
+
+          atualizarClassesVisuais();
+          animando = false;
+        }, DURATION);
+
+        return;
+      }
+
+      // clique no esquerdo -> esquerda vai centro; centro vai esquerda; direita permanece
+      if (clickedCard === esquerda) {
+        esquerda.classList.add("vai-centro");
+        centro.classList.add("vai-esquerda");
+
+        esquerda.style.zIndex = 20;
+        centro.style.zIndex = 10;
+
+        setTimeout(() => {
+          // novo order: [centro, esquerda, direita]
+          container.appendChild(centro);
+          container.appendChild(esquerda);
+          container.appendChild(direita);
+
+          esquerda.style.zIndex = "";
+          centro.style.zIndex = "";
+
+          atualizarClassesVisuais();
+          animando = false;
+        }, DURATION);
+
+        return;
+      }
+
+      // caso não seja nenhum (segurança)
+      animando = false;
+    }
+
+    // delegação: clicou em qualquer lugar do container
+    container.addEventListener("click", (ev) => {
+      const card = ev.target.closest(".items-colecao");
+      if (!card) return;
+      handleClickOnCard(card);
+    });
+
+    // inicializa
+    atualizarClassesVisuais();
+
+  });
+  
 </script>
+
+
+
+
 
 </body>
 </main>

@@ -184,30 +184,47 @@
             }
         });
 
+        // Função utilitária: formata número para moeda BRL
+        function formatCurrency(value) {
+            const n = Number(value) || 0;
+            return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
         // Função para adicionar produto ao carrinho
         function adicionarAoCarrinho(button) {
             const id = parseInt(button.dataset.id);
             const nome = button.dataset.nome;
-            const preco = button.dataset.preco;
+            const precoRaw = button.dataset.preco;
             const imagem = button.dataset.imagem;
-            
+
+            // Normaliza o preço para número (em Reais). Aceita formatos como "11.990,00" ou "11990.00"
+            let precoStr = String(precoRaw).trim();
+            // Se houver ponto e vírgula (ex: "1.234,56"), remove pontos e troca vírgula por ponto
+            if (precoStr.indexOf('.') !== -1 && precoStr.indexOf(',') !== -1) {
+                precoStr = precoStr.replace(/\./g, '').replace(',', '.');
+            } else {
+                precoStr = precoStr.replace(',', '.');
+            }
+            let precoNum = parseFloat(precoStr);
+            if (isNaN(precoNum)) precoNum = 0;
+
             const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-            
+
             const produtoExistente = carrinho.find(p => p.id === id);
-            
+
             if (produtoExistente) {
                 produtoExistente.quantidade += 1;
             } else {
                 carrinho.push({
                     id: id,
                     nome: nome,
-                    preco: preco,
+                    preco: precoNum,
                     imagem: imagem,
                     quantidade: 1,
                     tamanho: 'M'
                 });
             }
-            
+
             localStorage.setItem('carrinho', JSON.stringify(carrinho));
             alert('Produto adicionado ao carrinho!');
         }

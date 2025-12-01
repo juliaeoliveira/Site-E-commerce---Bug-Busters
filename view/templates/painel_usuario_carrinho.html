@@ -308,6 +308,35 @@
     // Variável global para guardar o valor total da compra
     let totalAmount = 0;
 
+    // Formata número para moeda BRL
+    function formatCurrency(value) {
+      const n = Number(value) || 0;
+      return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    // Faz parsing robusto de uma string/valor de preço para número (reais)
+    function parsePriceString(s) {
+      if (typeof s === 'number') return s;
+      if (!s) return 0;
+      let str = String(s).trim();
+      // remove tudo que não seja dígito, ponto ou vírgula
+      str = str.replace(/[^\d.,-]/g, '');
+      const hasDot = str.indexOf('.') !== -1;
+      const hasComma = str.indexOf(',') !== -1;
+      if (hasDot && hasComma) {
+        // Assume formato 1.234,56 -> remove pontos e transforma vírgula em ponto
+        str = str.replace(/\./g, '').replace(',', '.');
+      } else if (hasComma) {
+        // Assume formato 1234,56
+        str = str.replace(',', '.');
+      }
+      let n = parseFloat(str);
+      if (isNaN(n)) n = 0;
+      // Se vier em centavos (ex: 11990) e for claramente um inteiro grande, converte para reais
+      // Não converter automaticamente por 100; assumimos que o valor já está em reais
+      return n;
+    }
+
     // Função que é executada quando o site termina de carregar
     function ready() {
       loadCartFromLocalStorage(); // Carrega os produtos salvos no carrinho (localStorage)
@@ -390,7 +419,7 @@
             <!-- campo para alterar a quantidade -->
             <input type="number" class="quantia" min="1" max="10" value="${produto.quantidade}">
             <!-- mostra o preço -->
-            <p class="valor">${produto.preco}</p>
+            <p class="valor">${formatCurrency(produto.preco)}</p>
             </div>
         `;
         // adiciona a div do produto no container
@@ -432,14 +461,12 @@
       const totalElement = document.querySelector(".pedido-total h2 span:nth-child(2)");
       let total = 0;
 
-      // Soma o preço de todos os produtos
+      // Soma o preço de todos os produtos (preco pode ser número ou string)
       carrinho.forEach(produto => {
-        // Converte o preço de "R$xx,xx" para número
-        let preco = parseFloat(produto.preco.replace("R$", "").replace(".", "").replace(",", "."));
-        total += preco * produto.quantidade;
+        const precoNumber = parsePriceString(produto.preco);
+        total += precoNumber * (Number(produto.quantidade) || 0);
       });
 
-      // [LINHA 171] MUDANÇA AQUI: Adicionar style: 'currency' e currency: 'BRL'
       totalElement.textContent = total.toLocaleString("pt-BR", {
         style: 'currency',
         currency: 'BRL'
