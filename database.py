@@ -7,41 +7,29 @@ from urllib.parse import quote_plus
 import os
 from dotenv import load_dotenv
 
-#Carregar variáveis do .env
-# load_dotenv()
+# Carregar variáveis do .env
+load_dotenv()
 
-# USER = os.getenv("user")
-# PASSWORD = quote_plus(os.getenv("password"))
-# HOST = os.getenv("host")
-# PORT = os.getenv("port")
-# DBNAME = os.getenv("dbname")
+USER = os.getenv("user")
+PASSWORD = quote_plus(os.getenv("password"))
+HOST = os.getenv("host")
+PORT = os.getenv("port")
+DBNAME = os.getenv("dbname")
 
-# print("Tentando conectar em:")
-# print(f"HOST={HOST}, PORT={PORT}, USER={USER}, DBNAME={DBNAME}")
+print("Tentando conectar em:")
+print(f"HOST={HOST}, PORT={PORT}, USER={USER}, DBNAME={DBNAME}")
 
 # String de conexão para SQLAlchemy
-# DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
+DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
 
-DATABASE_URL = "sqlite:///loja.db"
+# DATABASE_URL = "sqlite:///loja.db"
 
 # Criar engine
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
-'''
-#conexão com o banco de dados sqlite
-DATABASE_URL="sqlite:///./produtos.db"
-#criar engine
-engine=create_engine(DATABASE_URL)
-#O engine é o objeto que mantém a conexão com o banco de dados.
-#Sessão
-SessionLocal=sessionmaker(bind=engine)
-#sessionmaker cria uma classe de sessão configurada para usar o engine.
-#base para models
-Base=declarative_base()
-'''
-#Base é a classe que será herdada pelos modelos
-#função para injetor sessão no fastapi
+
+
 def get_db():
     db=SessionLocal()
     try:

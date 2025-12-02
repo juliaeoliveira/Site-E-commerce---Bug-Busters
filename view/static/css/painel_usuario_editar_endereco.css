@@ -1,71 +1,216 @@
-/* Para não esconder o conteúdo atrás do menu */
-
-*{
-  padding: 0;
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #EAE4D8;
-    margin: 0;
-    padding: 0;
-}
-
-/* MENU */
-#logo {
-    height: 80px; /* Define a altura do logo */
-    padding-left: 130px; /* Espaço à esquerda do logo */
-}
-
-.icons {
-    gap: 5px;
-    justify-content: center;
-    display: flex;
-    padding-right: 150px;
-}
-
-
-
+/* ===================== MENU ===================== */
 .menu {
   height: 90px;
-    position: fixed; /* Fixa o menu na tela */
-    z-index: 1; /* Garante que o menu fique acima de outros elementos */
-    display: flex; /* Organiza os itens do menu em linha */
-    width: 100%; /* O menu ocupa toda a largura da tela */
-    align-items: center; /* Centraliza os itens na vertical */
-    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
-    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
-    color: #ffffff; /* Cor do texto do menu */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: hsla(0, 0%, 100%, 0.75);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo do menu de navegação */
-    .text-menu {
-    gap:200px;
-    justify-content: center;
-    display: flex;
-    font-family: "Libre Caslon Text";
-  
-    color: #523800;
-   
+#logo {
+  height: 80px;
+  width: auto;
 }
 
-/* Estilo dos links dentro do nav */
-nav a {
-    color: #523800;
-    font-size: 25px; /* Define o tamanho da fonte */
-    padding: 25px; /* Espaçamento interno */
-    text-decoration: underline; /* Ativa o sublinhado */
-    text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
-
+.text-menu {
+  display: flex;
+  gap: 60px;
+  font-family: "Libre Caslon Text", serif;
 }
 
+.text-menu a {
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+  transition: color 0.3s ease;
+}
+
+.text-menu a:hover {
+  color: #800000;
+}
+
+/* ÍCONES LOGIN/CARRINHO */
+.login-dropdown-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  z-index: 12;
+}
+
+.login,
+.login-dropdown-wrapper img {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.login:hover {
+  transform: scale(1.1);
+}
+
+/* DROPDOWN DO LOGIN */
+#login-dropdown {
+  position: absolute;
+  top: 90px;
+  right: 0;
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 30px 20px;
+  display: none;
+  z-index: 300;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+#login-dropdown h3 {
+  font-size: 16px;
+  color: #7a4a1c;
+  margin-bottom: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+#login-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a {
+  display: block;
+  padding: 12px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text", serif;
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* ANIMAÇÃO LOGIN */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+}
+
+/* MENU HAMBÚRGUER */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+  z-index: 11;
+}
+
+/* OVERLAY */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ===================== BODY E MAIN ===================== */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #eae4d8;
+  color: #3a2d20;
+  font-family: "Inter", sans-serif;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  padding: 120px 20px 60px;
+}
+
+/* ===================== CONTAINER DO FORMULÁRIO ===================== */
 .container {
   max-width: 650px;
   background: linear-gradient(135deg, #ffffff 0%, #f8f5f0 100%);
   padding: 40px 50px;
-  margin: 140px auto 50px auto;
+  margin: 0 auto 50px auto;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(82, 56, 0, 0.15);
   border: 1px solid rgba(82, 56, 0, 0.1);
@@ -144,247 +289,278 @@ input::placeholder {
   box-shadow: 0 2px 8px rgba(82, 56, 0, 0.3);
 }
 
-#login-dropdown {
-  height: 880px;
-  position: absolute;
-  top: 35px;
-  left: 130px;
-  background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
-  width: 300px;
-  font-family: 'Open Sans', sans-serif;
-  color: #523800;
-  display: none;
-  margin-top: 23px;
+/* NAVEGAÇÃO */
+.navigation {
   text-align: center;
+  margin-top: 30px;
 }
 
-#login-dropdown h3 {
-  margin-top: 60px;
-  font-size: 16px; /* Tamanho da fonte */
-  color: #7a4a1c; /* Cor marrom (estilo elegante) */
-  margin-bottom: 80px; /* Espaço abaixo do título */
-}
-
-#login-dropdown ul {
-  list-style: none; /* Remove marcadores (bolinhas) da lista */
-  margin: 0; /* Remove espaçamento externo padrão */
-}
-
-#login-dropdown ul li a:hover {
-  text-decoration: underline;
-    color: #7a4a1c; /* Cor marrom ao passar o mouse (hover) */
-}
-
-#logout-btn {
-  margin-top: 200px;
-  background-color: #790000;
-  color: white;
-  padding: 8px 12px;
+.botao {
+  font-family: "Inter", sans-serif;
+  height: 50px;
+  min-width: 200px;
+  padding: 0 20px;
+  color: darkred;
+  background-color: #eadcc1cc;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: none;
-  border-radius: 4px;
-  width: 160px;
-  cursor: pointer;
-  height: 40px;
-  font-family: "Libre Caslon Text";
-  color: rgb(255, 255, 255);
-  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
-  font-size: 15px;
-}
-
-#logout-btn:hover {
-  background-color: #5a0000;
-}
-
-.carrinho{
-  margin-right: 90px;
-}
-
-.login{
- margin-left: 270px;
-}
-
-/* Animação de pulsação */
-@keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
-  }
-}
-
-/* Classe para o efeito visual no ícone */
-.login-active {
-  border-radius: 50%;
-  animation: pulse-ring 1.5s infinite;
-  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3); /* anel visível mesmo quando não está no pico */
-}
-
-/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
-/* Caixa de cada opção */
-.opcoes {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.3); /* leve transparência */
-  backdrop-filter: blur(5px);
-  border: 2px solid #6E0606;
   border-radius: 5px;
-  margin: 20px 0px; /* espaçamento entre as caixas */
-  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Texto das opções */
-.opcoes a {
-  display: block;
-  padding: 10px;
-  color: #3d0b0b;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
-
-/* Efeito hover — destaca ao passar o mouse */
-.opcoes:hover {
-  background: rgba(255, 255, 255, 0.6);
-  transform: scale(1.02);
-}
-
-.opcoes a:hover {
-  color: #800000;
-}
-.midia{
-  float: right;
-   display: grid;
-  gap: 15px;
-}
-/* Correção para não empurrar o ícone do carrinho */
-.login-dropdown-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  margin-right: 60px; /* <-- afasta login e carrinho da borda direita */
-}
-
-.login {
-  margin-right: 60px; /* espaçamento entre login e carrinho */
-}
-
-
-main .botao{
-    font-family: "Inter", sans-serif;
-    height: 50px;
-    width: 240px;
-    color: darkred;
-    background-color: #EADCC1CC;
-    box-shadow: 4px 5px 3px  rgba(0, 0, 0, 0.25);
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-  margin-top: 80px;
-}
-
-.botao:focus {
-    border-color: darkred; 
-    transform: scale(1.10); 
-}
 .botao:hover {
-    border-color: darkred; 
-    transform: scale(1.05);
+  transform: scale(1.05);
+  box-shadow: 6px 7px 5px rgba(0, 0, 0, 0.3);
 }
 
+/* ===================== FOOTER ===================== */
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 40px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 30px;
+  font-family: "Inter", sans-serif;
+  margin-top: 50px;
+}
 
-footer{
-    background-color: #5a0101;
-    color: white;
-    padding: 40px 0; /* aumenta altura */
-    display: flex;
-    justify-content: space-evenly;  
-    align-items: flex-start; /* alinhar tudo no topo */
-    width: 100%;
-    flex-wrap: wrap; /* quebra linha caso precise */
-    margin-top: 100px; /* espaço entre o footer e o conteúdo */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px;
+}
+
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.titulo {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #bdb0ae;
 }
 
 footer ul {
-  font-family: "Inter", sans-serif;
-    list-style: none;
-   text-align: center;
+  list-style: none;
+  padding: 0;
 }
 
 footer li {
-  margin-top: 40px;
-  text-align: center;
-    margin: 10px 0;
-    font-size: 14px;
-    font-family: "Inter", sans-serif;
-    margin: 10px 0;
+  margin: 12px 0;
+  font-size: 14px;
 }
 
-h1{
-  font-size: 25px;
+.linha {
+  width: 1px;
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
 }
 
-.linhafooter{
-  margin-top: 20px;
-    width: 170px;
-    transform: rotate(-90.164deg);
-    color: #FFF;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 420px;
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-top: 50px; 
-    font-size: 15px;
-}
-
-.whatsapp, .telefone{
-    height: 20px;
-}
-
-
-.instagram, .facebook{
+.instagram,
+.facebook {
   height: 40px;
-  text-align: right;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.sob{
-    height: 100px;
-    margin-top: -100px;
-    margin: -10px;
+.instagram:hover,
+.facebook:hover {
+  transform: scale(1.1);
 }
 
-.direitos{
-    width: 100%;
-    text-align: left;
-    margin-left: 50px;
-    font-size: 15px;
-}
-
-.linha{
-    width: 170px;
-    transform: rotate(-90.164deg);
-    color: #FFF;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 420px;
-    margin-top: 50px;
-}
-
-html{
-  height: 100%;
+.midia {
   display: flex;
   flex-direction: column;
-  background-color: #FFF9ED;
+  gap: 15px;
+  align-items: center;
 }
 
-footer p{
+.direitos {
+  width: 100%;
   text-align: center;
+  font-size: 14px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* ===================== RESPONSIVIDADE ===================== */
+/* TABLETS E MÉDIAS */
+@media (max-width: 1024px) {
+  .text-menu {
+    gap: 40px;
+  }
+
+  .menu {
+    padding: 0 20px;
+  }
+
+  .container {
+    padding: 35px 40px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    height: 60px;
+  }
+
+  /* HAMBÚRGUER APARECE */
+  .hamburger {
+    display: block;
+  }
+
+  /* NAV VIRA SIDEBAR */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 25px;
+    transition: left 0.3s ease;
+    z-index: 10;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 15px;
+    border-bottom: 1px solid rgba(82, 56, 0, 0.1);
+  }
+
+  .login-dropdown-wrapper {
+    gap: 18px;
+  }
+
+  main {
+    padding: 100px 15px 40px;
+  }
+
+  .container {
+    padding: 30px 25px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  .botao {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 30px 15px;
+  }
+
+  .linha {
+    display: none;
+  }
+
+  footer .coluna {
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .midia {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* CELULARES PEQUENOS */
+@media (max-width: 480px) {
+  #logo {
+    height: 50px;
+  }
+
+  .menu {
+    height: 70px;
+  }
+
+  .text-menu {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+
+  #login-dropdown {
+    top: 70px;
+    width: 240px;
+    padding: 20px 15px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .container {
+    padding: 25px 20px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  input,
+  select {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .button1 {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .botao {
+    height: 45px;
+    font-size: 14px;
+  }
+}
+
+/* ANIMAÇÕES E TRANSIÇÕES */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
