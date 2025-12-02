@@ -91,13 +91,13 @@
       </div>
 
       <div class="items-produto">
-        <div class="wrap">
+        <div class="wrap1">
           <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
         </div>
       </div>
 
       <div class="items-produto">
-        <div class="wrap">
+        <div class="wrap2">
           <img id="vestido2" src="/static/img_home/vestido 2.png" alt="">
         </div>
       </div>
@@ -108,6 +108,7 @@
 
     </div>
   </div>
+ 
 </section>
 
 
@@ -132,24 +133,24 @@
     <hr class="linha-titulo2">
 
     <div class="items-colecoes">
-      <div class="items-colecao direita">
+      <a href="/colecoes/O%20Desabrochar" class="items-colecao direita">
         <img src="/static/img_home/colecao22.png" alt="Coleção 1">
-        <button class="btn-overlay"><span>O Desabrochar</span></button>
-      </div>
-      <div class="items-colecao centro destaque">
+        <button class="btn-overlay" type="button"><span>O Desabrochar</span></button>
+      </a>
+
+      <a href="/colecoes/Encanto" class="items-colecao centro destaque">
         <img src="/static/img_home/colecao11.png" alt="Coleção 2">
-        <button class="btn-overlay centro">
-          <span>Encanto</span>
-        </button>
-      </div>
-      <div class="items-colecao esquerda">
+        <button class="btn-overlay centro" type="button"><span>ENCANTO</span></button>
+      </a>
+
+      <a href="/colecoes/Sussuros" class="items-colecao esquerda">
         <img src="/static/img_home/colecao33.png" alt="Coleção 3">
-        <button class="btn-overlay"><span>Sussuros </span></button>
-      </div>
+        <button class="btn-overlay" type="button"><span>Sussurros</span></button>
+      </a>
     </div>
-    <button class= "botao-vercolecao">
-      <a class="ver" href="#">VER COLEÇÕES</a>
-    </button>
+    <nav>
+      <a class="botao-vercolecao" href="/colecoes">ver coleções</a>
+    </nav>
 
 
     <hr class="linha-colecao">
@@ -301,31 +302,30 @@
 
   function atualizarImagens(direcao) {
 
-    img1.classList.add(direcao);
-    img2.classList.add(direcao);
+  img1.classList.add(direcao);
+  img2.classList.add(direcao);
+
+  setTimeout(() => {
+    img1.src = paresVestidos[indice][0];
+    img2.src = paresVestidos[indice][1];
+
+    const entrar = direcao === "sair-esquerda" 
+      ? "entrar-direita" 
+      : "entrar-esquerda";
+
+    img1.classList.remove(direcao);
+    img2.classList.remove(direcao);
+
+    img1.classList.add(entrar, "active");
+    img2.classList.add(entrar, "active");
 
     setTimeout(() => {
-      img1.src = paresVestidos[indice][0];
-      img2.src = paresVestidos[indice][1];
+      img1.classList.remove(entrar, "active");
+      img2.classList.remove(entrar, "active");
+    }, 450);
 
-      // entrada
-      const entrar = direcao === "sair-esquerda" 
-        ? "entrar-direita" 
-        : "entrar-esquerda";
-
-      img1.classList.add(entrar);
-      img2.classList.add(entrar);
-
-      img1.classList.remove(direcao);
-      img2.classList.remove(direcao);
-
-      setTimeout(() => {
-        img1.classList.remove("entrar-esquerda", "entrar-direita");
-        img2.classList.remove("entrar-esquerda", "entrar-direita");
-      }, 600);
-
-    }, 600);
-  }
+  }, 450);
+}
 
   setaDir.addEventListener("click", () => {
     indice = (indice + 1) % paresVestidos.length;
