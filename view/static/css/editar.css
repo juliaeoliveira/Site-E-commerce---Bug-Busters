@@ -6,7 +6,8 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #fdf5f8 0%, #f8e8ed 100%);
+  /* Alterado de gradient rosa para o background bege do index.html */
+  background: #fbfcf7;
   min-height: 100vh;
   padding: 2rem;
   display: flex;
@@ -18,7 +19,8 @@ form {
   background: white;
   padding: 2.5rem;
   border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(212, 132, 156, 0.15);
+  /* Alterado shadow de rosa para tons neutros */
+  box-shadow: 0 10px 40px rgba(82, 56, 0, 0.1);
   max-width: 700px;
   width: 100%;
   animation: fadeIn 0.5s ease-in;
@@ -36,7 +38,8 @@ form {
 }
 
 h1 {
-  color: #d4849c;
+  /* Alterado de rosa (#d4849c) para marrom (#523800) */
+  color: #523800;
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
@@ -48,7 +51,8 @@ label {
   display: block;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
-  color: #4a4a4a;
+  /* Alterado de cinza para marrom escuro */
+  color: #523800;
   font-weight: 500;
   font-size: 0.95rem;
 }
@@ -59,7 +63,8 @@ textarea,
 select {
   width: 100%;
   padding: 0.875rem;
-  border: 2px solid #f0e0e6;
+  /* Alterado border de rosa (#f0e0e6) para bege (#e8dcc8) */
+  border: 2px solid #e8dcc8;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -72,9 +77,11 @@ input[type="number"]:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #d4849c;
+  /* Alterado de rosa para marrom */
+  border-color: #7a4a1c;
   background-color: white;
-  box-shadow: 0 0 0 3px rgba(212, 132, 156, 0.1);
+  /* Alterado shadow de rosa para marrom */
+  box-shadow: 0 0 0 3px rgba(122, 74, 28, 0.1);
 }
 
 textarea {
@@ -85,7 +92,8 @@ textarea {
 select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4849c' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  /* Alterado cor da seta de rosa para marrom */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23523800' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.875rem center;
   padding-right: 2.5rem;
@@ -95,9 +103,11 @@ select {
 .image-section {
   margin-top: 1.5rem;
   padding: 1.25rem;
-  background: #fdf5f8;
+  /* Alterado de rosa (#fdf5f8) para o background bege do index.html */
+  background: #dbcaa966;
   border-radius: 8px;
-  border: 1px solid #f0e0e6;
+  /* Alterado border de rosa para bege */
+  border: 1px solid #e8dcc8;
 }
 
 .image-section p {
@@ -108,7 +118,8 @@ select {
 
 .image-section p:first-child {
   font-weight: 600;
-  color: #4a4a4a;
+  /* Alterado de cinza para marrom */
+  color: #523800;
   margin-bottom: 0.75rem;
 }
 
@@ -116,7 +127,8 @@ select {
   display: block;
   margin: 0.75rem 0;
   border-radius: 8px;
-  border: 2px solid #f0e0e6;
+  /* Alterado border de rosa para bege */
+  border: 2px solid #e8dcc8;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-width: 100%;
   height: auto;
@@ -124,30 +136,36 @@ select {
 
 .image-section img:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(212, 132, 156, 0.2);
+  /* Alterado shadow de rosa para marrom */
+  box-shadow: 0 4px 12px rgba(122, 74, 28, 0.2);
 }
 
 input[type="file"] {
   width: 100%;
   padding: 0.75rem;
-  border: 2px dashed #d4849c;
+  /* Alterado border de rosa para marrom */
+  border: 2px dashed #7a4a1c;
   border-radius: 8px;
   font-size: 0.9rem;
   cursor: pointer;
-  background-color: #fdf5f8;
+  /* Alterado background de rosa para bege claro */
+  background-color: #fbfcf7;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
 }
 
 input[type="file"]:hover {
-  background-color: #fce9ef;
-  border-color: #c06d85;
+  /* Alterado hover de rosa para bege mais escuro */
+  background-color: #f5f0e8;
+  /* Alterado border hover de rosa para marrom escuro */
+  border-color: #523800;
 }
 
 input[type="file"]::file-selector-button {
   padding: 0.5rem 1rem;
   border: none;
-  background: linear-gradient(135deg, #d4849c 0%, #c06d85 100%);
+  /* Alterado gradient rosa para marrom sólido */
+  background: #7a4a1c;
   color: white;
   border-radius: 6px;
   cursor: pointer;
@@ -157,7 +175,8 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]::file-selector-button:hover {
-  background: linear-gradient(135deg, #c06d85 0%, #a85570 100%);
+  /* Alterado hover de rosa para marrom escuro */
+  background: #523800;
   transform: translateY(-1px);
 }
 
@@ -165,7 +184,8 @@ button[type="submit"] {
   width: 100%;
   padding: 1rem;
   margin-top: 2rem;
-  background: linear-gradient(135deg, #d4849c 0%, #c06d85 100%);
+  /* Alterado gradient rosa para marrom sólido */
+  background: #7a4a1c;
   color: white;
   border: none;
   border-radius: 8px;
@@ -173,13 +193,15 @@ button[type="submit"] {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(212, 132, 156, 0.3);
+  /* Alterado shadow de rosa para marrom */
+  box-shadow: 0 4px 12px rgba(122, 74, 28, 0.3);
 }
 
 button[type="submit"]:hover {
-  background: linear-gradient(135deg, #c06d85 0%, #a85570 100%);
+  /* Alterado hover de rosa para marrom escuro */
+  background: #523800;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(212, 132, 156, 0.4);
+  box-shadow: 0 6px 16px rgba(82, 56, 0, 0.4);
 }
 
 button[type="submit"]:active {
