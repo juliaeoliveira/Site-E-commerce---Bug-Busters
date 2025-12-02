@@ -94,20 +94,24 @@
   <div class="overlay" id="overlay"></div>
 
   <main>
-    <h1>
-      <a href="/painel_usuario">Início</a> > <a href="/painel_usuario/produtos"> Vestidos </a> > <a
-        href="/painel_usuario/produtos/{{produto.id}}"> Detalhes do Vestido </a>
-    </h1>
+    <center>
+      <h1>
+        <a href="/painel_usuario">Início</a> > <a href="/painel_usuario/produtos"> Vestidos </a> > <a
+          href="/painel_usuario/produtos/{{produto.id}}"> Detalhes do Vestido </a>
+      </h1>
+    </center>
 
-    <section>
-      <div class="fotos">
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem1_url)}}" alt="foto de frente"></div>
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem2_url)}}" alt="foto de costa"></div>
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}"></div>
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem4_url)}}" alt="foto do lado direito"></div>
-      </div>
+    <center>
+      <section>
+        <div class="fotos">
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem1_url)}}" alt="foto de frente"></div>
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem2_url)}}" alt="foto de costa"></div>
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}" alt="foto do lado esquerdo"></div>
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem4_url)}}" alt="foto do lado direito"></div>
+        </div>
+      </section>
+    </center>
 
-    </section>
     <section>
       <div class="descricao">
         <h2 class="nomevestido">{{produto.nome_produto}}</h2> <br> <br>
@@ -134,22 +138,24 @@
                 <a href="/painel_usuario/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
             </div> 
         </nav>
-    <section class="espacovariedades">
-    <div class="conteinervariedade"> 
-        <h3>MAIS VARIEDADES</h3>
-        <p class="linhavariedade">________________________________________________________________</p>
-        
-        <div class="variedades">
+      <section class="espacovariedades">
+        <div class="conteinervariedade">
+          <h3>MAIS VARIEDADES</h3>
+          <p class="linhavariedade">________________________________________________________________</p>
+
+          <div class="variedades">
           {% for sugestao in sugestoes %}
             {% if sugestao.quantidade_estoque > 0 %}
               <div class="imagem-container">
-                  <a href="/painel_usuario/produtos/{{ sugestao.id }}">
-                      <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}" alt="{{ sugestao.nome_produto }}">
-                      <p class="nome">{{ sugestao.nome_produto }}</p>
-                  </a>
+                <a href="/painel_usuario/produtos/{{ sugestao.id }}">
+                  <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}"
+                  alt="{{ sugestao.nome_produto }}">
+                  <p class="nome">{{ sugestao.nome_produto }}</p>
+                </a>
               </div>
             {% endif %}
           {% endfor %}
+          </div>
         </div>
       </section>
 

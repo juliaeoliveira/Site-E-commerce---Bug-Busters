@@ -95,8 +95,6 @@
   /* Cor marrom (estilo elegante) */
   margin-bottom: 80px;
   /* Espaço abaixo do título */
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
 }
 
 #login-dropdown ul {
@@ -479,7 +477,95 @@ main h1 a {
   transform: scale(1.05);
 }
 
+/*==================FOOTER==================*/
+/* footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 40px 0;
+  /* aumenta altura */
+  /* display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start; */
+  /* alinhar tudo no topo */
+  /* width: 100%;
+  flex-wrap: wrap; */
+  /* quebra linha caso precise */
+  /* margin-top: 100px; */
+  /* espaço entre o footer e o conteúdo */
+/* }
 
+footer ul {
+  font-family: "Inter", sans-serif;
+  list-style: none;
+  text-align: center;
+}
+
+footer li {
+  margin-top: 40px;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  margin: 10px 0;
+}
+
+.linhafooter {
+  margin-top: 20px;
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: #FFF;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+}
+
+.direitos {
+  width: 100%;
+  text-align: left;
+  margin-top: 50px;
+  font-size: 15px;
+}
+
+.whatsapp,
+.telefone {
+  height: 20px;
+}
+
+
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+.sob {
+  height: 100px;
+  margin-top: -100px;
+  margin: -10px;
+}
+
+.direitos {
+  width: 100%;
+  text-align: left;
+  margin-left: 50px;
+  font-size: 15px;
+}
+
+.linha {
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: #FFF;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+  margin-top: 50px;
+}
+
+
+
+footer p {
+  text-align: center;
+} */ 
 /*======================VAREDADE==============*/
 
 .espacovariedades {
@@ -816,5 +902,150 @@ footer li {
 
   .midia {
     flex-direction: row;
+  }
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE TOTAL PARA CELULAR - ATÉ 600px
+   ========================================================== */
+@media (max-width: 600px) {
+
+  /* ===== MAIN ===== */
+  main {
+    max-width: 100%;
+    padding: 10px;
+    margin-top: 120px; /* afastar do menu fixo */
+  }
+
+  main h1 {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+  }
+
+  main h1 a {
+    font-size: 14px;
+    padding: 0;
+  }
+
+  /* ===== FOTOS ===== */
+  .fotos {
+    width: 100%;
+    float: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 imagens por linha */
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .fotos img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ===== DESCRIÇÃO ===== */
+  .descricao {
+    float: none;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  .nomevestido {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .descricaovestido {
+    font-size: 16px;
+  }
+
+  .subtitulo {
+    font-size: 16px;
+  }
+
+  .descricao p {
+    font-size: 16px;
+  }
+
+  /* ===== BOTÕES ===== */
+  .botoes {
+    margin: 20px 0 30px 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .compra {
+    width: 100%;
+    margin-left: 0;
+    font-size: 16px;
+    height: 50px;
+  }
+
+  .carrinho {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    height: 55px;
+    font-size: 16px;
+  }
+
+  /* ===== CONTINUAR VENDO ===== */
+  .outrosvestidos {
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  .ver {
+    width: 56%;
+    max-width: 350px;
+    height: 50px;
+    font-size: 15px;
+    margin-right: 200px;
+  }
+
+  /* ===== VARIEDADES ===== */
+  .variedades {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .imagem-container {
+    padding: 5px;
+  }
+
+  .imagem-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .variedades .nome {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .conteinervariedade h3 {
+    font-size: 18px;
+  }
+
+  .linhavariedade {
+    display: none;
+  }
+
+  /* ===== CORRIGE FLOATS ===== */
+  .descricao, .fotos, .botoes {
+    float: none !important;
+  }
+
+  /* ===== EVITAR SCROLL HORIZONTAL ===== */
+  body, html {
+    overflow-x: hidden !important;
   }
 }
