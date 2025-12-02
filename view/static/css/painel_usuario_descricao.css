@@ -95,8 +95,6 @@
   /* Cor marrom (estilo elegante) */
   margin-bottom: 80px;
   /* Espaço abaixo do título */
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
 }
 
 #login-dropdown ul {
@@ -479,6 +477,7 @@ main h1 a {
   transform: scale(1.05);
 }
 
+/*==================FOOTER==================*/
 
 /*======================VAREDADE==============*/
 
@@ -816,5 +815,182 @@ footer li {
 
   .midia {
     flex-direction: row;
+  }
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE TOTAL PARA CELULAR - ATÉ 600px
+   ========================================================== */
+@media (max-width: 600px) {
+
+  /* ===== MAIN ===== */
+  main {
+    max-width: 100%;
+    padding: 10px;
+    margin-top: 120px; /* afastar do menu fixo */
+  }
+
+  main h1 {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+  }
+
+  main h1 a {
+    font-size: 14px;
+    padding: 0;
+  }
+
+  /* ===== FOTOS ===== */
+  .fotos {
+    width: 100%;
+    float: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 imagens por linha */
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .fotos img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ===== DESCRIÇÃO ===== */
+  .descricao {
+    float: none;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  .nomevestido {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .descricaovestido {
+    font-size: 16px;
+  }
+
+  .subtitulo {
+    font-size: 16px;
+  }
+
+  .descricao p {
+    font-size: 16px;
+  }
+
+  /* ===== BOTÕES ===== */
+  .botoes {
+    margin: 20px 0 30px 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .compra {
+    width: 100%;
+    margin-left: 0;
+    font-size: 16px;
+    height: 50px;
+  }
+
+  .carrinho {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    height: 55px;
+    font-size: 16px;
+  }
+
+  /* ===== CONTINUAR VENDO ===== */
+  .outrosvestidos {
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  .ver {
+    width: 56%;
+    max-width: 350px;
+    height: 50px;
+    font-size: 15px;
+    margin-right: 200px;
+  }
+
+  /* ===== VARIEDADES ===== */
+  .variedades {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .imagem-container {
+    padding: 5px;
+  }
+
+  .imagem-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .variedades .nome {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .conteinervariedade h3 {
+    font-size: 18px;
+  }
+
+  .linhavariedade {
+    display: none;
+  }
+
+  /* ===== CORRIGE FLOATS ===== */
+  .descricao, .fotos, .botoes {
+    float: none !important;
+  }
+
+  /* ===== EVITAR SCROLL HORIZONTAL ===== */
+  body, html {
+    overflow-x: hidden !important;
+  }
+}
+
+/*============================================================*/
+
+.alert-box {
+  /* O CSS que garante a responsividade */
+  position: fixed; /* Fixa na tela */
+  top: 20px;
+  right: 50px;
+  z-index: 1050; /* Garante que fique acima de outros elementos */
+  
+  /* Largura e Estilo */
+  width: 90%; /* Responsivo: 90% da tela */
+  max-width: 400px; /* Limita a largura em telas grandes */
+  font-family: "Inter", sans-serif;
+  /* Outros estilos visuais */
+  padding: 15px;
+  color: #523800;
+  background-color: #EAE4D8;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: 1px solid #5238007e;
+  border-radius: 4px;
+  display: none; /* Começa escondido */
+}
+
+/* Opcional: Estilo específico para telas muito pequenas */
+@media (max-width: 450px) {
+  .alert-box {
+    width: calc(100% - 40px); /* 100% menos o padding lateral */
+    right: 20px;
+    left: 20px;
   }
 }

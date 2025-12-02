@@ -1,7 +1,18 @@
+/* ZERA MARGENS E PADDING PADRÃO */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0; /* Remove a margem padrão */
+  padding: 0; /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
 }
 
 /* MENU */
@@ -70,143 +81,315 @@
 }
 
 
-
 #hamburger {
   appearance: none;
   -webkit-appearance: none;
 }
 
-html {
-  background-color: #eae4d8;
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
 }
 
-body {
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* LINKS DE NAVEGAÇÃO */
+.categorias a {
+  margin: 0 20px;
+  font-size: 20px;
+  color: #523800;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.2);
+}
+
+/* ÍCONES À DIREITA */
+.icons {
   display: flex;
-  flex-direction: column;
-  /* Organiza os itens na vertical (coluna) */
-  min-height: 100vh;
-  /* Garante que o corpo ocupe toda a altura da tela */
-  margin: 0;
-  /* Remove a margem padrão */
-  padding: 0;
-  /* Remove o preenchimento padrão */
-  overflow-x: hidden;
-  /* Impede rolagem horizontal */
-  background-color: #eae4d8;
-  color: #3a2d20;
+  gap: 15px;
 }
-
-
-/*================================================*/
 
 /* CONTAINER PRINCIPAL COM IMAGEM E FORMULÁRIO */
 .container {
-    display: flex;
-    margin-top: 80px; /* Espaço abaixo do menu fixo */
-    height: 100vh;
+  display: flex;
+  margin-top: 80px; /* Espaço abaixo do menu fixo */
+  height: 100vh;
 }
 
 /* IMAGEM À ESQUERDA */
 .imagem-esquerda {
-    width: 50%;
-    position: relative;
+  width: 50%;
+  position: relative;
 }
 
 .imagem-esquerda img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* BOTÃO VOLTAR */
 .voltar-btn {
-    position: absolute;
-    bottom: 90px;
-    left: 30px;
-    background-color: #d4c6ab;
-    color: #800000;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 14px;
-    font-family: "Open Sans", sans-serif;
-    border: 1px solid #800000;
-    margin-top: -s60px;
+  position: absolute;
+  bottom: 90px;
+  left: 30px;
+  background-color: #d4c6ab;
+  color: #800000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  border: 1px solid #800000;
+  margin-top: -s60px;
 }
 
 /* FORMULÁRIO À DIREITA */
 .formulario-login {
-    width: 50%;
-    background-color: #f8f3eb;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 60px;
+  width: 50%;
+  background-color: #f8f3eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
 }
 
 .formulario-login h2 {
-    font-size: 24px;
-    margin-bottom: 30px;
-    color: #523800;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #523800;
 }
 
 form {
-    width: 100%;
-    max-width: 350px;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* CAMPOS DE TEXTO */
 label {
-    color: #523800;
+  color: #523800;
 }
 
 input {
-    background-color: #eee0c2;
-    border: none;
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 4px;
+  background-color: #eee0c2;
+  border: none;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 4px;
 }
 
 /* BOTÃO ENTRAR */
 .entrar-btn {
-    background-color: #800000;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 40px;
-    width: 12dvh;
-    margin-left: 120px;
+  background-color: #800000;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 40px;
+  width: 12dvh;
+  margin-left: 120px;
 }
 
 .entrar-btn:hover {
-    background-color: #a00000;
+  background-color: #a00000;
 }
 
 /* TEXTO DE CRIAR CONTA */
 .criar-conta-texto {
-    margin-top: 20px;
-    color: #333;
+  margin-top: 20px;
+  color: #333;
 }
 
 /* BOTÃO CRIAR CONTA */
 .criar-conta-btn {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #d6c6a9;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
-    font-family: "Libre Caslon Text", serif;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #d6c6a9;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: "Libre Caslon Text", serif;
+}
+
+/* ==============================
+   NOTEBOOK / TELAS MÉDIAS
+   ============================== */
+@media (max-width: 1024px) {
+  .container {
+    height: auto;
+    margin-top: 100px;
+  }
+
+  .imagem-esquerda {
+    width: 45%;
+  }
+
+  .formulario-login {
+    width: 55%;
+    padding: 40px;
+  }
+
+  form {
+    max-width: 300px;
+  }
+
+  .entrar-btn {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .text-menu {
+    gap: 80px;
+  }
+
+  #logo {
+    height: 70px;
+  }
+}
+
+/* ==============================
+   CELULAR (ATÉ 600px)
+   ============================== */
+@media (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  /* ----- MENU ----- */
+  .menu {
+    height: 75px;
+    padding: 0 15px;
+  }
+
+  #logo {
+    height: 55px;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 32px;
+  }
+
+  .text-menu {
+    position: fixed;
+    top: 75px;
+    left: -100%;
+    width: 70%;
+    height: calc(100vh - 75px);
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.98);
+    gap: 25px;
+    padding-top: 40px;
+    transition: 0.3s ease;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+
+  /* ----- CONTEÚDO PRINCIPAL ----- */
+  .container {
+    flex-direction: column;
+    height: auto;
+    margin-top: 85px;
+  }
+
+  /* ----- IMAGEM ----- */
+  .imagem-esquerda {
+    width: 100%;
+    height: 280px;
+  }
+
+  .imagem-esquerda img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .voltar-btn {
+    bottom: 20px;
+    left: 15px;
+    font-size: 13px;
+    padding: 8px 15px;
+  }
+
+  /* ----- FORMULÁRIO ----- */
+  .formulario-login {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .formulario-login h2 {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .entrar-btn {
+    width: 100%;
+    margin-left: 0;
+    height: 48px;
+    display: none;
+  }
+
+  .criar-conta-btn {
+    width: 40%;
+    text-align: center;
+    padding: 12px 0;
+  }
+}
+
+/* Mostrar/Esvanecer botão no celular */
+@media (max-width: 600px) {
+  .voltar-btn {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .voltar-hidden {
+    opacity: 0;
+    pointer-events: none; /* não clica quando invisível */
+  }
 }
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */

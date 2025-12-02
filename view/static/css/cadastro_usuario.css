@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+
 }
 
 /* MENU */
@@ -89,164 +89,6 @@ body {
   background-image: url("/static/assets/img_cadastro/fundo-cadastro.png");
   background-repeat: no-repeat;
 }
-/*==========================MAIN=====================*/
-
-h1 {
-  color: #000;
-  font-family: "Aboreto", system-ui;
-  font-size: 20px;
-  font-weight: 0;
-  margin-left: 150px;
-}
-
-.cadastro {
-  margin-left: 1050px;
-  margin-top: 90px;
-}
-
-.informacoes {
-  float: left;
-  font-size: 20px;
-  margin-top: 10px;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 0;
-}
-
-label,
-input {
-  display: block; /*Ocupar toda largura*/
-  width: 500px; /*Largura*/
-  padding: 10px; /*Espaçamento interno*/
-  font-family: "Anton", serif;
-  border-radius: 8px; /*Arredonda as bordas*/
-  margin-bottom: 0px; /*Espaçamento inferior*/
-}
-
-input {
-  background-color: #dbcaa966;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-  margin-right: 0; /*remove margen da direita*/
-  margin-left: 15px; /*remove margem da esquerda*/
-  transform: scale(1.2); /*Aumentar escala*/
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none; /*Remover borda*/
-  border: solid 2px rgb(153, 153, 153); /*Cria uma cor na borda*/
-}
-
-label {
-  height: 20px;
-}
-
-#acao {
-  width: 130px;
-  margin-left: 210px;
-  background: #790000;
-  color: white;
-  margin-top: 20px;
-}
-
-.posicao {
-  margin-left: 40px;
-}
-
-.cadastrar {
-  text-align: center;
-  font-family: "Libre Caslon Text", serif;
-  font-size: 15px;
-  font-weight: 0;
-  height: 50px;
-  border-radius: 4px;
-  background: #790000;
-  margin-top: 40px;
-}
-
-.senhas {
-  display: flex;
-  gap: 20px; /* espaço entre os dois campos */
-  align-items: flex-end;
-  flex-wrap: wrap;
-}
-
-.senhas div {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.posicao {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.outrosvestidos {
-  position: absolute;
-  margin-left: 30px;
-  margin-top: 700px;
-}
-
-.ver {
-  color: #790000;
-  height: 35px;
-  width: 200px;
-  font-family: "Libre Caslon Text", serif;
-  color: darkred;
-  background: rgba(237, 219, 190, 0.8);
-  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
-  border: none;
-  border-radius: 3px;
-}
-
-main button:focus {
-  border-color: darkred;
-  transform: scale(1.1);
-}
-main button:hover {
-  border-color: darkred;
-  transform: scale(1.05);
-}
-
-.endereco {
-  display: grid;
-  grid-template-columns: repeat(2, 230px); /* duas colunas de 200px */
-  grid-gap: 10px 40px; /* espaçamento entre linhas e colunas */
-}
-
-.campo {
-  display: flex;
-  flex-direction: column;
-}
-
-#bairro,
-#complemento,
-#numero,
-#cep,
-#cidade,
-#estado {
-  width: 250px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #dbcaa966;
-  box-sizing: border-box;
-  padding: 8px;
-}
-#mensagem_erro,
-#mensagem_cep {
-  margin-top: 10px;
-  font-size: 15px;
-  margin-left: 40px;
-}
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
 
@@ -276,8 +118,6 @@ main button:hover {
   display: block;
   opacity: 1;
 }
-
-/* MENU DESKTOP PERMANECE COMO ESTÁ */
 
 /* ===================== RESPONSIVO ===================== */
 @media (max-width: 900px) {
@@ -394,3 +234,286 @@ main button:hover {
     margin: 30px; /* distância agradável do último item */
   }
 }
+
+/*======================================================================*/
+main h1 {
+  color: #000;
+  font-family: "Aboreto", system-ui;
+  font-size: 20px;
+  font-weight: 0;
+  margin-left: 150px;
+}
+
+.cadastro {
+  margin-left: 1050px;
+  margin-top: 90px;
+}
+
+.informacoes {
+  float: left;
+  font-size: 20px;
+  margin-top: 10px;
+  color: #000;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 0;
+}
+
+label,
+input {
+  display: block; /*Ocupar toda largura*/
+  width: 500px; /*Largura*/
+  padding: 10px; /*Espaçamento interno*/
+  font-family: "Anton", serif;
+  border-radius: 8px; /*Arredonda as bordas*/
+  margin-bottom: 0px; /*Espaçamento inferior*/
+}
+
+input {
+  background-color: #dbcaa966;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  margin-right: 0; /*remove margen da direita*/
+  margin-left: 15px; /*remove margem da esquerda*/
+  transform: scale(1.2); /*Aumentar escala*/
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none; /*Remover borda*/
+  border: solid 2px rgb(153, 153, 153); /*Cria uma cor na borda*/
+}
+
+label {
+  height: 20px;
+}
+
+#acao {
+  width: 130px;
+  margin-left: 210px;
+  background: #790000;
+  color: white;
+  margin-top: 20px;
+}
+
+.posicao {
+  margin-left: 40px;
+}
+
+.cadastrar {
+  text-align: center;
+  font-family: "Libre Caslon Text", serif;
+  font-size: 15px;
+  font-weight: 0;
+  height: 50px;
+  border-radius: 4px;
+  background: #790000;
+  margin-top: 40px;
+}
+
+.senhas {
+  display: flex;
+  gap: 20px; /* espaço entre os dois campos */
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.senhas div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.posicao {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.outrosvestidos {
+  position: absolute;
+  margin-left: 30px;
+  margin-top: 700px;
+}
+
+.ver {
+  color: #790000;
+  height: 35px;
+  width: 200px;
+  font-family: "Libre Caslon Text", serif;
+  color: darkred;
+  background: rgba(237, 219, 190, 0.8);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 3px;
+}
+
+button:focus {
+  border-color: darkred;
+  transform: scale(1.1);
+}
+button:hover {
+  border-color: darkred;
+  transform: scale(1.05);
+}
+
+.endereco {
+  display: grid;
+  grid-template-columns: repeat(2, 230px); /* duas colunas de 200px */
+  grid-gap: 10px 40px; /* espaçamento entre linhas e colunas */
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+#bairro,
+#complemento,
+#numero,
+#cep,
+#cidade,
+#estado {
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #dbcaa966;
+  box-sizing: border-box;
+  padding: 8px;
+}
+#mensagem_erro,
+#mensagem_cep {
+  margin-top: 10px;
+  font-size: 15px;
+  margin-left: 40px;
+}
+
+/* =====================================================
+   RESPONSIVIDADE COMPLETA — TELAS ATÉ 600px (CELULAR)
+   ===================================================== */
+@media (max-width: 600px) {
+  /* ----------- Layout Geral ----------- */
+  body {
+    background-image: none !important;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  main {
+    width: 100%;
+    padding: 20px 10px;
+    margin: 0 auto;
+    margin-top: 120px; /* espaço por causa do menu fixo */
+  }
+
+  /* ----------- Título ----------- */
+  .titulo_cadastro {
+    font-size: 18px !important;
+    text-align: center;
+    margin: 0 auto 25px auto;
+    margin-right: 70 !important;
+  }
+
+  /* ----------- Estrutura do formulário ----------- */
+  .cadastro {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .informacoes {
+    float: none;
+    width: 100%;
+    padding: 0 5px;
+    font-size: 14px;
+  }
+
+  label {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  input,
+  select {
+    width: 85% !important;
+    margin-left: 0 !important;
+    font-size: 15px;
+  }
+
+  /* ----------- Senhas (coluna única no celular) ----------- */
+  .senhas {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .senhas div {
+    width: 100%;
+  }
+
+  /* ------- Campos de endereço (duas colunas no celular) ------- */
+  .endereco {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
+    gap: 12px;
+    width: 100%;
+  }
+
+  .campo {
+    width: 100%;
+  }
+
+  #bairro,
+  #complemento,
+  #numero,
+  #cep,
+  #cidade,
+  #estado {
+    width: 85% !important; /* Cada input ocupa sua coluna inteira */
+  }
+
+  /* ----------- Botão Criar Conta ----------- */
+  .cadastrar {
+    width: 60%;
+    height: 40px;
+    font-size: 16px;
+    margin: 25px auto 10px auto;
+    display: block;
+  }
+
+  #acao {
+    width: 40% !important;
+    margin: 0 auto !important;
+  }
+
+  /* ----------- Botão "Voltar à Página Inicial" ----------- */
+  .outrosvestidos {
+    position: relative !important;
+    margin: 40px auto 0 auto !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ver {
+    width: 70%;
+    max-width: 280px;
+    height: 45px;
+    font-size: 14px;
+  }
+
+
+
+  /* ----------- Mensagens de erro ----------- */
+  #mensagem_erro,
+  #mensagem_cep {
+    margin-left: 0 !important;
+    font-size: 13px;
+  }
+}
+

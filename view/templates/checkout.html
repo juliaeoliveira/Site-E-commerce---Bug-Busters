@@ -316,16 +316,16 @@
         let totalAmount = 0;
 
         function parsePriceString(s) {
-            if (typeof s === 'number') return s;
-            if (!s) return 0;
-            let str = String(s).trim();
-            if (str.indexOf('.') !== -1 && str.indexOf(',') !== -1) {
-                str = str.replace(/\./g, '').replace(',', '.');
-            } else {
-                str = str.replace(',', '.');
-            }
-            const n = parseFloat(str);
-            return isNaN(n) ? 0 : n;
+          if (typeof s === "number") return s;
+          if (!s) return 0;
+          let str = String(s).trim();
+          if (str.indexOf(".") !== -1 && str.indexOf(",") !== -1) {
+            str = str.replace(/\./g, "").replace(",", ".");
+          } else {
+            str = str.replace(",", ".");
+          }
+          const n = parseFloat(str);
+          return isNaN(n) ? 0 : n;
         }
 
         function ready() {

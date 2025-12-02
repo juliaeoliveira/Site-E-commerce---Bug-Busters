@@ -459,4 +459,76 @@ def logout(request:Request):
     response.delete_cookie(key="token")
     return response
 
+@caminho_prefixo_painelUsuario.get("/colecoes", response_class=HTMLResponse)
+async def pagina_colecoes(request: Request, db: Session = Depends(get_db)):
+    """Exibe a página de coleções com produtos agrupados por categoria.
 
+    Cada categoria é tratada como uma coleção.
+    """
+    produtos = db.query(Produto).all()
+
+    # tenta obter primeiro nome do usuário (opcional)
+    primeiro_nome = None
+    try:
+        token = request.cookies.get("token")
+        payload = verificar_token(token)
+        if payload:
+            usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload.get("sub")).first()
+            if usuario:
+                primeiro_nome = usuario.nome_cliente.split(' ')[0]
+    except Exception:
+        primeiro_nome = None
+
+    # Agrupa produtos por categoria
+    colecoes = {}
+    for p in produtos:
+        chave = (p.categoria or "Sem Categoria").strip()
+        colecoes.setdefault(chave, []).append(p)
+
+    # Ordena as categorias alfabeticamente para exibição consistente
+    categorias_ordenadas = sorted(colecoes.items(), key=lambda x: x[0].lower())
+
+    return templates.TemplateResponse("painel_usuario_colecoes.html", {
+        "request": request,
+        "colecoes": categorias_ordenadas,
+        "primeiro_nome": primeiro_nome
+    })
+
+@caminho_prefixo_painelUsuario.get("/colecoes/{nome_colecao}", response_class=HTMLResponse)
+async def pagina_colecao_produtos(nome_colecao: str, request: Request, db: Session = Depends(get_db)):
+    """Exibe todos os produtos de uma coleção específica.
+    
+    Mapeia nome da coleção (Brisa do Altar, Sussurros, Encanto, O Desabrochar) 
+    para categorias no banco de dados.
+    """
+    # Mapear coleção para categoria (nome exibido → valor do banco)
+    mapeamento = {
+        "Brisa do Altar": "brisa_do_altar",
+        "Sussurros": "sussurros",
+        "Encanto": "encanto",
+        "O Desabrochar": "o_desabrochar",
+    }
+    
+    categoria_db = mapeamento.get(nome_colecao, nome_colecao)
+    
+    # Busca produtos dessa categoria
+    produtos = db.query(Produto).filter(Produto.categoria == categoria_db).all()
+    
+    # tenta obter primeiro nome do usuário (opcional)
+    primeiro_nome = None
+    try:
+        token = request.cookies.get("token")
+        payload = verificar_token(token)
+        if payload:
+            usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload.get("sub")).first()
+            if usuario:
+                primeiro_nome = usuario.nome_cliente.split(' ')[0]
+    except Exception:
+        primeiro_nome = None
+    
+    return templates.TemplateResponse("painel_usuario_colecao_produtos.html", {
+        "request": request,
+        "nome_colecao": nome_colecao,
+        "produtos": produtos,
+        "primeiro_nome": primeiro_nome
+    })
