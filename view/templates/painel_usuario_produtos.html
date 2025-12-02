@@ -1,250 +1,264 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-
-    <title>Sob Véu</title>
-    <link rel="stylesheet" href="/static/css/painel_usuario_produtos.css" />
-  </head>
-
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ nome_colecao }} - Sob Véu</title>
+    <link rel="stylesheet" href="/static/css/colecao.css">
+    <link rel="stylesheet" href="/static/css/colecao_produtos.css">
+</head>
+<body>
     <!-- MENU FIXO RESPONSIVO -->
     <header class="menu">
-      <!-- LOGO -->
-      <a href="/painel_usuario">
-        <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
-      </a>
+        <!-- LOGO -->
+        <a href="/"><img id="logo" src="/img_colecao/Sob1.png" alt="Logo" /></a>
 
-      <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
-      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-        ☰
-      </button>
+        <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+            ☰
+        </button>
 
-      <!-- NAV PRINCIPAL -->
-      <nav class="text-menu" id="nav-menu">
-        <a href="/painel_usuario/produtos">Vestidos</a>
-        <a href="/colecoes">Coleções</a>
-        <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
-      </nav>
+        <!-- NAV PRINCIPAL -->
+        <nav class="text-menu" id="nav-menu">
+            <a href="/produtos/">Vestidos</a>
+            <a href="/colecoes">Coleções</a>
+            <a href="#Agendamentos">Agendamentos</a>
+        </nav>
 
-      <!-- ÍCONES (login + carrinho) -->
-      <div class="login-dropdown-wrapper">
-        <img
-          class="login"
-          src="/static/img_home/login.png"
-          width="20px"
-          title="login"
-          alt="login"
-          id="login-icon"
-        />
+        <!-- ÍCONES (login + carrinho) -->
+        <div class="login-dropdown-wrapper">
+            <img
+                class="login"
+                src="/img_colecao/login.png"
+                width="20px"
+                title="login"
+                alt="login"
+                id="login-icon"
+            />
 
-        <div id="login-dropdown" class="hidden" aria-hidden="true">
-          <h3><strong>Bem-vinda, {{primeiro_nome}}!</strong></h3>
+            <div id="login-dropdown" class="hidden" aria-hidden="true">
+                <h3><strong>{{ primeiro_nome or 'Bem-vinda' }}</strong></h3>
 
-          <ul class="dropdown-list">
-            <li class="opcoes">
-              <a href="/painel_usuario/meus_dados">Sua Conta</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-            </li>
-          </ul>
-          <a href="/painel_usuario/lougout">
-            <button id="logout-btn" type="button">Sair da conta</button>
-          </a>
+                <ul class="dropdown-list">
+                    <li class="opcoes"><a href="/painel_usuario/meus_dados">Sua Conta</a></li>
+                    <li class="opcoes"><a href="/painel_usuario/meus_pedidos">Seus Pedidos</a></li>
+                    <li class="opcoes"><a href="/painel_usuario/carrinho">Seu Carrinho</a></li>
+                    <li class="opcoes"><a href="/painel_usuario/comprar_novamente">Comprar novamente</a></li>
+                </ul>
+
+                <button id="logout-btn" type="button"><a href="/painel_usuario/logout">Sair da conta</a></button>
+            </div>
+
+            <a href="/painel_usuario/carrinho">
+                <img
+                    src="/img_colecao/carrinho.png"
+                    width="20px"
+                    title="Carrinho"
+                    alt="Carrinho"
+                />
+            </a>
         </div>
-
-        <a href="/painel_usuario/carrinho">
-          <img
-            src="/static/img_home/carrinho.png"
-            width="20px"
-            title="Carrinho"
-            alt="Carrinho"
-          />
-        </a>
-      </div>
     </header>
 
     <!-- Overlay para escurecer o fundo no mobile -->
     <div class="overlay" id="overlay"></div>
 
     <main>
-      <h1>VESTIDOS DE NOIVA</h1>
-      <section>
-        {% if produtos %} {% for produto in produtos %}
-        <div class="vestido">
-          <nav class="descricao">
-            <a href="/painel_usuario/produtos/{{produto.id}}">
-              <img
-                src="{{url_for('static', path='uploads/' + produto.imagem1_url) }}"
-                alt="{{produto.nome_produto}}"
-              />
-            </a>
-          </nav>
-          <p class="nome">{{produto.nome_produto}}</p>
-        </div>
-        {% endfor %} {% else %}
-        <p>Nenhum produto encontrado!</p>
-        {% endif %}
-      </section>
-      <nav>
-        <a href="/painel_usuario">
-          <button class="voltar-btn">← Voltar à página inicial</button>
-        </a>
-      </nav>
+        <section id="colecao">
+            <h1 class="localizacao"><a href="/colecoes">Coleções</a> > {{ nome_colecao }}</h1>
+            <br><br>
+
+            <div class="area-colecao">
+                {% if produtos %}
+                    <div class="lista-vestidos">
+                        {% for produto in produtos %}
+                            {% if produto.quantidade_estoque %}
+                                <div class="vestido">
+                                    <a href="/produtos/{{ produto.id }}">
+                                        <img class="foto" src="{{ url_for('static', path='uploads/' + produto.imagem1_url) if produto.imagem1_url else '/static/img_home/vestido-1.png' }}" alt="{{ produto.nome_produto }}">
+                                        <h3>{{ produto.nome_produto }}</h3>
+                                    </a>
+                                    <p class="preco">R$ {{ produto.preco }}</p>
+                                    <button class="btn-adicionar" data-id="{{ produto.id }}" data-nome="{{ produto.nome_produto }}" data-preco="{{ produto.preco }}" data-imagem="{{ produto.imagem1_url }}" onclick="adicionarAoCarrinho(this)">Adicionar ao Carrinho</button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Nenhum vestido encontrado nesta coleção.</p>
+                {% endif %}
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="/colecoes" class="btn-voltar">← Voltar às Coleções</a>
+            </div>
+        </section>
     </main>
 
     <footer>
-      <!-- LOGO -->
-      <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
+        <!-- LOGO -->
+        <img class="sob" src="/img_colecao/Sob.png" alt="Logo" />
 
-      <!-- COLUNA 1 -->
-      <div class="coluna">
-        <p class="titulo">Contatos</p>
-        <ul>
-          <li>
+        <!-- COLUNA 1 -->
+        <div class="coluna">
+            <p class="titulo">Contatos</p>
+            <ul>
+                <li>
+                    <img
+                        class="telefone"
+                        src="/img_colecao/2gokRbP1IDl3BuRCfgic0r5CGMf-desktop-Photoroom.png"
+                        alt="Telefone"
+                    />
+                    (11) 4002-8922
+                </li>
+
+                <li>
+                    <img
+                        class="whatsapp"
+                        src="/img_colecao/speech-bubble--v2-Photoroom.png"
+                        alt="WhatsApp"
+                    />
+                    (11) 98291-1653
+                </li>
+
+                <li>sobveuoficial@gmail.com</li>
+            </ul>
+        </div>
+
+        <div class="linha"></div>
+
+        <!-- COLUNA 2 -->
+        <div class="coluna">
+            <p class="titulo">Sobre a loja</p>
+            <ul>
+                <li>Sobre nós</li>
+                <li>Trocas e Devoluções</li>
+                <li>Fretes e Entregas</li>
+            </ul>
+        </div>
+
+        <div class="linha"></div>
+
+        <!-- COLUNA 3 -->
+        <div class="coluna">
+            <p class="titulo">Informações</p>
+            <ul>
+                <li>Política de Privacidade</li>
+                <li>Termos de Uso</li>
+                <br/><br/>
+            </ul>
+        </div>
+
+        <!-- REDES SOCIAIS -->
+        <section class="midia">
             <img
-              class="telefone"
-              src="/static/img_home/telefone.png"
-              alt="Telefone"
+                class="instagram"
+                src="/img_colecao/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+                alt="Instagram"
             />
-            (11) 4002-8922
-          </li>
-
-          <li>
             <img
-              class="whatsapp"
-              src="/static/img_home/speech-bubble--v2-Photoroom.png"
-              alt="WhatsApp"
+                class="facebook"
+                src="/img_colecao/facebook-f-Photoroom.png"
+                alt="Facebook"
             />
-            (11) 98291-1653
-          </li>
+        </section>
 
-          <li>sobveuoficial@gmail.com</li>
-        </ul>
-      </div>
-
-      <div class="linha"></div>
-
-      <!-- COLUNA 2 -->
-      <div class="coluna">
-        <p class="titulo">Sobre a loja</p>
-        <ul>
-          <li>Sobre nós</li>
-          <li>Trocas e Devoluções</li>
-          <li>Fretes e Entregas</li>
-        </ul>
-      </div>
-
-      <div class="linha"></div>
-
-      <!-- COLUNA 3 -->
-      <div class="coluna">
-        <p class="titulo">Informações</p>
-        <ul>
-          <li>Política de Privacidade</li>
-          <li>Termos de Uso</li>
-          <br /><br />
-        </ul>
-      </div>
-
-      <!-- REDES SOCIAIS -->
-      <section class="midia">
-        <img
-          class="instagram"
-          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
-          alt="Instagram"
-        />
-        <img
-          class="facebook"
-          src="/static/img_home/facebook-f-Photoroom.png"
-          alt="Facebook"
-        />
-      </section>
-
-      <!-- DIREITOS -->
-      <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+        <!-- DIREITOS -->
+        <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-      const loginIcon = document.getElementById("login-icon");
-      const loginDropdown = document.getElementById("login-dropdown");
+        const loginIcon = document.getElementById('login-icon');
+        const loginDropdown = document.getElementById('login-dropdown');
 
-      loginIcon.addEventListener("click", () => {
-        const isVisible = loginDropdown.style.display === "block";
+        loginIcon.addEventListener('click', () => {
+            const isVisible = loginDropdown.style.display === 'block';
+            loginDropdown.style.display = isVisible ? 'none' : 'block';
+            loginIcon.classList.toggle('login-active', !isVisible);
+        });
 
-        loginDropdown.style.display = isVisible ? "none" : "block";
+        window.addEventListener('click', function (e) {
+            if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+                loginDropdown.style.display = 'none';
+                loginIcon.classList.remove('login-active');
+            }
+        });
 
-        // Ativa ou desativa a animação
-        loginIcon.classList.toggle("login-active", !isVisible);
-      });
-
-      window.addEventListener("click", function (e) {
-        if (
-          !loginIcon.contains(e.target) &&
-          !loginDropdown.contains(e.target)
-        ) {
-          loginDropdown.style.display = "none";
-          loginIcon.classList.remove("login-active");
+        // Função utilitária: formata número para moeda BRL
+        function formatCurrency(value) {
+            const n = Number(value) || 0;
+            return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
-      });
+
+        // Função para adicionar produto ao carrinho
+        function adicionarAoCarrinho(button) {
+            const id = parseInt(button.dataset.id);
+            const nome = button.dataset.nome;
+            const precoRaw = button.dataset.preco;
+            const imagem = button.dataset.imagem;
+
+            // Normaliza o preço para número (em Reais). Aceita formatos como "11.990,00" ou "11990.00"
+            let precoStr = String(precoRaw).trim();
+            // Se houver ponto e vírgula (ex: "1.234,56"), remove pontos e troca vírgula por ponto
+            if (precoStr.indexOf('.') !== -1 && precoStr.indexOf(',') !== -1) {
+                precoStr = precoStr.replace(/\./g, '').replace(',', '.');
+            } else {
+                precoStr = precoStr.replace(',', '.');
+            }
+            let precoNum = parseFloat(precoStr);
+            if (isNaN(precoNum)) precoNum = 0;
+
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+            const produtoExistente = carrinho.find(p => p.id === id);
+
+            if (produtoExistente) {
+                produtoExistente.quantidade += 1;
+            } else {
+                carrinho.push({
+                    id: id,
+                    nome: nome,
+                    preco: precoNum,
+                    imagem: imagem,
+                    quantidade: 1,
+                    tamanho: 'M'
+                });
+            }
+
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            alert('Produto adicionado ao carrinho!');
+        }
     </script>
+
     <script>
-      const nav = document.getElementById("nav-menu");
-      const btn = document.getElementById("hamburger");
-      const overlay = document.getElementById("overlay");
+        const nav = document.getElementById("nav-menu");
+        const btn = document.getElementById("hamburger");
+        const overlay = document.getElementById("overlay");
 
-      function openMenu() {
-        nav.classList.add("active");
-        overlay.classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeMenu() {
-        nav.classList.remove("active");
-        overlay.classList.remove("active");
-        document.body.style.overflow = "";
-      }
-
-      btn.addEventListener("click", () => {
-        if (nav.classList.contains("active")) {
-          closeMenu();
-        } else {
-          openMenu();
+        function openMenu() {
+            nav.classList.add("active");
+            overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
         }
-      });
 
-      overlay.addEventListener("click", closeMenu);
+        function closeMenu() {
+            nav.classList.remove("active");
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+        }
 
-      // fecha no ESC
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeMenu();
-      });
+        btn.addEventListener("click", () => {
+            if (nav.classList.contains("active")) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        overlay.addEventListener("click", closeMenu);
+
+        // fecha no ESC
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeMenu();
+        });
     </script>
-  </body>
-</html>
