@@ -34,15 +34,16 @@
     href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
     rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="/static/css/descricao.css">
+  <link rel="stylesheet" href="/static/css/painel_usuario_descricao.css">
 </head>
 
 <body>
 
-  <!-- MENU FIXO RESPONSIVO -->
+<body> 
+    <!-- MENU FIXO RESPONSIVO -->
   <header class="menu">
     <!-- LOGO -->
-    <a href="/painel_usuario">
+    <a href="/">
       <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
     </a>
 
@@ -53,9 +54,9 @@
 
     <!-- NAV PRINCIPAL -->
     <nav class="text-menu" id="nav-menu">
-      <a href="/painel_usuario/produtos">Vestidos</a>
+      <a href="/produtos">Vestidos</a>
       <a href="/colecoes">Coleções</a>
-      <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+      <a href="/#Agendamentos">Agendamentos</a>
     </nav>
 
     <nav class="icons">
@@ -72,20 +73,24 @@
   <div class="overlay" id="overlay"></div>
 
   <main>
-    <h1>
-      <a href="/painel_usuario">Início</a> > <a href="/painel_usuario/produtos"> Vestidos </a> > <a
-        href="/painel_usuario/produtos/{{produto.id}}"> Detalhes do Vestido </a>
-    </h1>
+    <center>
+      <h1>
+        <a href="/painel_usuario">Início</a> > <a href="/painel_usuario/produtos"> Vestidos </a> > <a
+          href="/painel_usuario/produtos/{{produto.id}}"> Detalhes do Vestido </a>
+      </h1>
+    </center>
 
-    <section>
-      <div class="fotos">
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem1_url)}}" alt="foto de frente"></div>
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem2_url)}}" alt="foto de costa"></div>
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}"></div>
-        <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem4_url)}}" alt="foto do lado direito"></div>
-      </div>
+    <center>
+      <section>
+        <div class="fotos">
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem1_url)}}" alt="foto de frente"></div>
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem2_url)}}" alt="foto de costa"></div>
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem3_url)}}" alt="foto do lado esquerdo"></div>
+          <div><img src="{{url_for('static', path= 'uploads/' + produto.imagem4_url)}}" alt="foto do lado direito"></div>
+        </div>
+      </section>
+    </center>
 
-    </section>
     <section>
       <div class="descricao">
         <h2 class="nomevestido">{{produto.nome_produto}}</h2> <br> <br>
@@ -106,27 +111,29 @@
           <button class="carrinho" data-id="{{ produto.id }}"> Adicionar no carrinho 🛒 </button>
         </div>
       </div>
-
-      <nav>
-        <div class="outrosvestidos">
-          <a href="/painel_usuario/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
-        </div>
-      </nav>
+        
+        <nav>
+            <div class="outrosvestidos">
+                <a href="/painel_usuario/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
+            </div> 
+        </nav>
       <section class="espacovariedades">
         <div class="conteinervariedade">
           <h3>MAIS VARIEDADES</h3>
           <p class="linhavariedade">________________________________________________________________</p>
 
           <div class="variedades">
-            {% for sugestao in sugestoes %}
-            <div class="imagem-container">
-              <a href="/painel_usuario/produtos/{{ sugestao.id }}">
-                <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}"
+          {% for sugestao in sugestoes %}
+            {% if sugestao.quantidade_estoque > 0 %}
+              <div class="imagem-container">
+                <a href="/produtos/{{ sugestao.id }}">
+                  <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}"
                   alt="{{ sugestao.nome_produto }}">
-                <p class="nome">{{ sugestao.nome_produto }}</p>
-              </a>
-            </div>
-            {% endfor %}
+                  <p class="nome">{{ sugestao.nome_produto }}</p>
+                </a>
+              </div>
+            {% endif %}
+          {% endfor %}
           </div>
         </div>
       </section>
@@ -203,61 +210,95 @@
       <!-- DIREITOS -->
       <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
-
+    <div id="custom-alert" class="alert-box">
+      <span id="alert-message"></span>
+      <button onclick="closeAlert()">&times;</button>
+    </div>
   <!-- <script src="carrinho.js"></script> -->
 
-  <script>
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", ready);
+<script>
+  // Funções de Inicialização
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ready);
+  } else {
+    ready();
+  }
+
+  function ready() {
+    const addButton = document.querySelector(".carrinho");
+    if (addButton) {
+      addButton.addEventListener("click", addProductToCart);
+    }
+  }
+
+  // FUNÇÕES DE ALERTA MOVIDAS PARA O ESCOPO GLOBAL
+  function showAlert(nome, tamanho) {
+    const alertBox = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('alert-message');
+
+    if (!alertBox || !alertMessage) return; // Segurança extra
+
+    // 1. Define a mensagem
+    alertMessage.textContent = `✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`;
+
+    // 2. Exibe o alerta
+    alertBox.style.display = 'flex'; // ou 'block'
+
+    // 3. Opcional: Esconde automaticamente após 3 segundos
+    setTimeout(closeAlert, 3000);
+  }
+
+  function closeAlert() {
+    const alertBox = document.getElementById('custom-alert');
+    if (alertBox) {
+      alertBox.style.display = 'none';
+    }
+  }
+
+  // Função Principal do Carrinho
+  function addProductToCart() {
+    // Pegando informações do produto
+    const nome = document.querySelector(".nomevestido")?.innerText.trim();
+    const precoMatch = document.querySelector(".compra b")?.innerText.match(/R\$[0-9.,]+/);
+    const preco = precoMatch ? precoMatch[0] : "R$0,00";
+    const imagem = document.querySelector(".fotos img")?.src;
+
+    const tamanhoSelect = document.querySelector(".tamanho");
+    const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
+
+    const idProduto = document.querySelector(".carrinho")?.dataset.id;
+    if (!nome || !idProduto) {
+      console.error("Dados do produto ausentes. Ação cancelada.");
+      return;
+    }
+
+    // Pega carrinho atual (ou cria vazio)
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    // Verifica se o mesmo produto com o mesmo tamanho já existe
+    const existente = carrinho.find(p => p.nome === nome && p.tamanho === tamanho);
+
+    if (existente) {
+      existente.quantidade++;
     } else {
-      ready();
+      carrinho.push({
+        id: Number(idProduto),
+        nome: nome,
+        preco: preco,
+        imagem: imagem,
+        tamanho: tamanho,
+        quantidade: 1
+      });
     }
 
-    function ready() {
-      // Botão "Adicionar no carrinho"
-      const addButton = document.querySelector(".carrinho");
-      if (addButton) {
-        addButton.addEventListener("click", addProductToCart);
-      }
-    }
+    // Salva no localStorage
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-    function addProductToCart() {
-      // Pegando informações do produto
-      const nome = document.querySelector(".nomevestido").innerText.trim();
-      const preco = document.querySelector(".compra b").innerText.match(/R\$[0-9.,]+/)[0];
-      const imagem = document.querySelector(".fotos img").src;
+    // 🎯 CHAMADA DA FUNÇÃO DE ALERTA NO FINAL DA AÇÃO
+    showAlert(nome, tamanho);
+  }
+</script>
 
-      // 🆕 Pegando o tamanho selecionado
-      const tamanhoSelect = document.querySelector(".tamanho");
-      const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
-
-      // 🆕 Pegando o ID do produto do botão
-      const idProduto = document.querySelector(".carrinho").dataset.id;
-
-      // Pega carrinho atual (ou cria vazio)
-      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-      // Verifica se o mesmo produto com o mesmo tamanho já existe
-      const existente = carrinho.find(p => p.nome === nome && p.tamanho === tamanho);
-
-      if (existente) {
-        existente.quantidade++;
-      } else {
-        carrinho.push({
-          id: Number(idProduto),
-          nome: nome,
-          preco: preco,
-          imagem: imagem,
-          tamanho: tamanho, // 🆕 adicionando tamanho
-          quantidade: 1
-        });
-      }
-
-      // Salva no localStorage
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
-      alert(`✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`);
-    }
-  </script>
   <script>
     const nav = document.getElementById("nav-menu");
     const btn = document.getElementById("hamburger");

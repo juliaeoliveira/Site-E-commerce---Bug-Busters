@@ -231,61 +231,94 @@
       <!-- DIREITOS -->
       <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
-
+    <div id="custom-alert" class="alert-box">
+      <span id="alert-message"></span>
+      <button onclick="closeAlert()">&times;</button>
+    </div>
   <!-- <script src="carrinho.js"></script> -->
 
-  <script>
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", ready);
+<script>
+  // Funções de Inicialização
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ready);
+  } else {
+    ready();
+  }
+
+  function ready() {
+    const addButton = document.querySelector(".carrinho");
+    if (addButton) {
+      addButton.addEventListener("click", addProductToCart);
+    }
+  }
+
+  // FUNÇÕES DE ALERTA MOVIDAS PARA O ESCOPO GLOBAL
+  function showAlert(nome, tamanho) {
+    const alertBox = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('alert-message');
+
+    if (!alertBox || !alertMessage) return; // Segurança extra
+
+    // 1. Define a mensagem
+    alertMessage.textContent = `✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`;
+
+    // 2. Exibe o alerta
+    alertBox.style.display = 'flex'; // ou 'block'
+
+    // 3. Opcional: Esconde automaticamente após 3 segundos
+    setTimeout(closeAlert, 3000);
+  }
+
+  function closeAlert() {
+    const alertBox = document.getElementById('custom-alert');
+    if (alertBox) {
+      alertBox.style.display = 'none';
+    }
+  }
+
+  // Função Principal do Carrinho
+  function addProductToCart() {
+    // Pegando informações do produto
+    const nome = document.querySelector(".nomevestido")?.innerText.trim();
+    const precoMatch = document.querySelector(".compra b")?.innerText.match(/R\$[0-9.,]+/);
+    const preco = precoMatch ? precoMatch[0] : "R$0,00";
+    const imagem = document.querySelector(".fotos img")?.src;
+
+    const tamanhoSelect = document.querySelector(".tamanho");
+    const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
+
+    const idProduto = document.querySelector(".carrinho")?.dataset.id;
+    if (!nome || !idProduto) {
+      console.error("Dados do produto ausentes. Ação cancelada.");
+      return;
+    }
+
+    // Pega carrinho atual (ou cria vazio)
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    // Verifica se o mesmo produto com o mesmo tamanho já existe
+    const existente = carrinho.find(p => p.nome === nome && p.tamanho === tamanho);
+
+    if (existente) {
+      existente.quantidade++;
     } else {
-      ready();
+      carrinho.push({
+        id: Number(idProduto),
+        nome: nome,
+        preco: preco,
+        imagem: imagem,
+        tamanho: tamanho,
+        quantidade: 1
+      });
     }
 
-    function ready() {
-      // Botão "Adicionar no carrinho"
-      const addButton = document.querySelector(".carrinho");
-      if (addButton) {
-        addButton.addEventListener("click", addProductToCart);
-      }
-    }
+    // Salva no localStorage
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-    function addProductToCart() {
-      // Pegando informações do produto
-      const nome = document.querySelector(".nomevestido").innerText.trim();
-      const preco = document.querySelector(".compra b").innerText.match(/R\$[0-9.,]+/)[0];
-      const imagem = document.querySelector(".fotos img").src;
-
-      // 🆕 Pegando o tamanho selecionado
-      const tamanhoSelect = document.querySelector(".tamanho");
-      const tamanho = tamanhoSelect ? tamanhoSelect.value : "Único";
-
-      // 🆕 Pegando o ID do produto do botão
-      const idProduto = document.querySelector(".carrinho").dataset.id;
-
-      // Pega carrinho atual (ou cria vazio)
-      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-      // Verifica se o mesmo produto com o mesmo tamanho já existe
-      const existente = carrinho.find(p => p.nome === nome && p.tamanho === tamanho);
-
-      if (existente) {
-        existente.quantidade++;
-      } else {
-        carrinho.push({
-          id: Number(idProduto),
-          nome: nome,
-          preco: preco,
-          imagem: imagem,
-          tamanho: tamanho, // 🆕 adicionando tamanho
-          quantidade: 1
-        });
-      }
-
-      // Salva no localStorage
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
-      alert(`✅ ${nome} (${tamanho}) foi adicionado ao carrinho!`);
-    }
-  </script>
+    // 🎯 CHAMADA DA FUNÇÃO DE ALERTA NO FINAL DA AÇÃO
+    showAlert(nome, tamanho);
+  }
+</script>
   <script>
     const loginIcon = document.getElementById("login-icon");
     const loginDropdown = document.getElementById("login-dropdown");

@@ -21,7 +21,7 @@
   <!-- MENU FIXO RESPONSIVO -->
   <header class="menu">
     <!-- LOGO -->
-    <a href="/painel_usuario">
+    <a href="/">
       <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
     </a>
 
@@ -32,9 +32,9 @@
 
     <!-- NAV PRINCIPAL -->
     <nav class="text-menu" id="nav-menu">
-      <a href="/painel_usuario/produtos">Vestidos</a>
+      <a href="/produtos">Vestidos</a>
       <a href="/colecoes">Coleções</a>
-      <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+      <a href="/#Agendamentos">Agendamentos</a>
     </nav>
 
     <nav class="icons">
@@ -75,7 +75,7 @@
         </a>
       </nav>
     </main>
-  
+
     <footer>
       <!-- LOGO -->
       <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
@@ -147,37 +147,38 @@
       <!-- DIREITOS -->
       <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
-      <script>
-    const nav = document.getElementById("nav-menu");
-    const btn = document.getElementById("hamburger");
-    const overlay = document.getElementById("overlay");
 
-    function openMenu() {
-      nav.classList.add("active");
-      overlay.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
+    <script>
+      const nav = document.getElementById("nav-menu");
+      const btn = document.getElementById("hamburger");
+      const overlay = document.getElementById("overlay");
 
-    function closeMenu() {
-      nav.classList.remove("active");
-      overlay.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-
-    btn.addEventListener("click", () => {
-      if (nav.classList.contains("active")) {
-        closeMenu();
-      } else {
-        openMenu();
+      function openMenu() {
+        nav.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
-    });
 
-    overlay.addEventListener("click", closeMenu);
+      function closeMenu() {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
 
-    // fecha no ESC
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-  </script>
+      btn.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      overlay.addEventListener("click", closeMenu);
+
+      // fecha no ESC
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    </script>
 </body>
 </html>

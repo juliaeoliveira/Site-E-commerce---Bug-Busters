@@ -1,14 +1,25 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html,
+body {
+    background-color: #EAE4D8;
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 /* MENU */
 #logo {
   height: 80px;
   padding-left: 0;
-  /*padding-left: 130px;  Espaço à esquerda do logo */ /*alterado*/
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
 }
 
 .icons {
@@ -21,17 +32,20 @@
 .menu {
   /*alterado*/
   height: 90px;
-  position: fixed; /*original*/
+  position: fixed;
+  /*original*/
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100; /*original*/
+  z-index: 100;
+  /*original*/
   background-color: hsla(0, 0%, 100%, 0.75);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 25px; /* controla o respiro nas laterais */
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
   /* position: fixed;
   z-index: 9999; */
 }
@@ -39,16 +53,21 @@
 /* Estilo dos links dentro do nav */
 .menu nav a {
   color: #523800;
-  font-size: 20px; /* Define o tamanho da fonte */
-  padding: 25px; /* Espaçamento interno */
-  text-decoration: underline; /* Ativa o sublinhado */
-  text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
 }
 
 .text-menu {
   /*alterado*/
   display: flex;
-  gap: 200px; /* mais elegante que gap 200px (quebrava tudo) */
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
   font-family: "Libre Caslon Text";
 }
 
@@ -63,35 +82,42 @@
 #login-dropdown {
   /*alterado*/
   position: absolute;
-  top: 90px; /* aparece logo abaixo do header fixo */
-  right: 0; /* alinhado ao canto direito, sempre certo */
+  top: 90px;
+  /* aparece logo abaixo do header fixo */
+  right: 0;
+  /* alinhado ao canto direito, sempre certo */
   width: 260px;
   background-color: hsla(0, 0%, 100%, 0.89);
   border-radius: 10px;
   padding: 20px 0;
   display: none;
-  z-index: 300; /* MAIOR que o menu, ícones e o hambúrguer */
+  z-index: 300;
+  /* MAIOR que o menu, ícones e o hambúrguer */
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #login-dropdown h3 {
   margin-top: 60px;
-  font-size: 16px; /* Tamanho da fonte */
-  color: #7a4a1c; /* Cor marrom (estilo elegante) */
-  margin-bottom: 80px; /* Espaço abaixo do título */
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
+  font-size: 16px;
+  /* Tamanho da fonte */
+  color: #7a4a1c;
+  /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px;
+  /* Espaço abaixo do título */
 }
 
 #login-dropdown ul {
-  list-style: none; /* Remove marcadores (bolinhas) da lista */
-  margin: 0; /* Remove espaçamento externo padrão */
+  list-style: none;
+  /* Remove marcadores (bolinhas) da lista */
+  margin: 0;
+  /* Remove espaçamento externo padrão */
 }
 
 #login-dropdown ul li a:hover {
   text-decoration: underline;
-  color: #7a4a1c; /* Cor marrom ao passar o mouse (hover) */
+  color: #7a4a1c;
+  /* Cor marrom ao passar o mouse (hover) */
 }
 
 #logout-btn {
@@ -115,8 +141,10 @@
 
 /* Ajuste do painel para telas pequenas (vertical) */
 #login-dropdown {
-  max-height: calc(100vh - 120px); /* cabe sempre na tela */
-  overflow-y: auto; /* ativa rolagem se necessário */
+  max-height: calc(100vh - 120px);
+  /* cabe sempre na tela */
+  overflow-y: auto;
+  /* ativa rolagem se necessário */
   padding: 20px;
 }
 
@@ -142,16 +170,19 @@
 
 /* .login{
  margin-left: 270px;
-} */ /*alterado*/
+} */
+/*alterado*/
 
 /* Animação de pulsação */
 @keyframes pulse-ring {
   0% {
     box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
   }
@@ -161,18 +192,21 @@
 .login-active {
   border-radius: 50%;
   animation: pulse-ring 1.5s infinite;
-  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3); /* anel visível mesmo quando não está no pico */
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
+  /* anel visível mesmo quando não está no pico */
 }
 
 /*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
 /* Caixa de cada opção */
 .opcoes {
   width: 100%;
-  background: rgba(255, 255, 255, 0.3); /* leve transparência */
+  background: rgba(255, 255, 255, 0.3);
+  /* leve transparência */
   backdrop-filter: blur(5px);
   border: 2px solid #6e0606;
   border-radius: 5px;
-  margin: 20px 0px; /* espaçamento entre as caixas */
+  margin: 20px 0px;
+  /* espaçamento entre as caixas */
   text-align: center;
 }
 
@@ -202,176 +236,167 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 25px; /* distância natural entre login e carrinho */
+  gap: 25px;
+  /* distância natural entre login e carrinho */
 }
 
 .login {
   /*alterado*/
-  margin: 0; /* Remove o margin-left: 270px que quebrava TUDO */
+  margin: 0;
+  /* Remove o margin-left: 270px que quebrava TUDO */
 }
+
 #hamburger {
   appearance: none;
   -webkit-appearance: none;
-} /*tirar se der problema*/
-
-
-/*=============================================*/
-
-html {
-  background-color: #eae4d8;
 }
+/* ============================= */
+/* ========= CONTEÚDO ========= */
+/* ============================= */
+
+
 
 main {
-  margin-top: 50px;
+    margin-top: 140px;
 }
 
-body {
-  display: flex;
-  flex-direction: column; /* Organiza os itens na vertical (coluna) */
-  min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
-  margin: 0; /* Remove a margem padrão */
-  padding: 0; /* Remove o preenchimento padrão */
-  overflow-x: hidden; /* Impede rolagem horizontal */
-  background-color: #eae4d8;
-  color: #ffffff;
+main h1 {
+    color: #790000;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.30);
+    font-family: "Aboreto", system-ui;
+    font-weight: 600;
+    letter-spacing: 2.4px;
+    font-size: 50px;
+    padding-left: 120px;
 }
 
-.paginas a:hover {
-  transform: scale(1.1);
-}
-
-main div {
-  padding: 30px;
-  text-align: center;
-}
-
-h1 {
-  margin-top: 50px;
-  color: #790000;
-  text-shadow: 2px 4px 4px color(display-p3 0 0 0 / 0.3);
-  -webkit-text-stroke-width: 0.5px;
-  font-family: "Aboreto", system-ui;
-  font-weight: 500;
-  letter-spacing: 2.4px;
-  margin-left: 120px;
-  padding-top: 100px;
-  font-size: 50px;
+/* GRADE DE VESTIDOS */
+main section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    margin-top: 40px;
 }
 
 .vestido {
-  position: relative; /* Permite usar posicionamento absoluto dentro do div */
-  background: black;
-  color: white;
-  margin: 120px;
-  padding: 40px;
-  height: 510px;
-  width: 300px;
-  float: left;
-  overflow: hidden; /* Garante que a imagem não saia do div */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.vestido:focus {
-  border: black;
-  transform: scale(10);
+.vestido img {
+    width: 330px;
+    height: 600px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
 }
+
+.vestido:hover img {
+    transform: scale(1.1);
+}
+
 .vestido:hover {
-  border-color: white;
-  transform: scale(10);
-}
-
-.vestido:hover img {
-  transform: scale(10); /* Aumenta a imagem */
-  transition: 2s ease;
-}
-
-.vestido img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.3s ease-in-out; /* Transição suave */
-}
-
-.voltar-btn {
-  font-family: "Inter", sans-serif;
-  height: 50px;
-  width: 240px;
-  margin: 120px;
-  color: darkred;
-  background-color: #eadcc1cc;
-  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-}
-.voltar-btn:focus {
-  border-color: darkred;
-  transform: scale(1.1);
-}
-.voltar-btn:hover {
-  border-color: darkred;
-  transform: scale(1.05);
-}
-
-.linha {
-  width: 170px;
-  transform: rotate(-90.164deg);
-  color: #fff;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 420px;
-  margin-top: 50px;
-}
-
-.vestido h3 {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #444;
-}
-
-.vestido {
-  display: flex;
-  flex-direction: column; /* para alinhar a imagem e o texto verticalmente */
-  align-items: center; /* centraliza horizontalmente */
-  height: auto; /* permite altura automática para crescer com o texto */
-  padding-bottom: 20px; /* espaço para o texto */
-  margin: 40px 120px; /* ajuste margem para evitar excesso */
-  background: none; /* remover fundo preto para destacar melhor as imagens */
-}
-
-.vestido img {
-  position: static; /* remove position absolute para o fluxo normal */
-  width: 350px; /* fixa a largura */
-  height: 650px; /* fixa a altura */
-  object-fit: cover;
-  transition: transform 0.3s ease-in-out;
-}
-
-.vestido:hover img {
-  transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .nome {
-  color: #000;
-  text-align: center;
-  font-family: "Arial, Helvetica, sans-serif";
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: 0.96px;
-  margin-top: 40px;
+    margin-top: 25px;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 500;
 }
 
-div.vestido:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
+/* Botão voltar */
+main button {
+    font-family: "Inter", sans-serif;
+    height: 50px;
+    width: 240px;
+    margin: 80px auto;
+    color: darkred;
+    background-color: #EADCC1CC;
+    box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+
+/* ========================= */
+/*   RESPONSIVIDADE DO MAIN  */
+/* ========================= */
+
+@media (max-width: 1200px) {
+  main h1 {
+    font-size: 40px;
+    padding-left: 40px;
+  }
+
+  main section {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .vestido img {
+    width: 260px;
+    height: 480px;
+  }
+
+  .nome {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  main h1 {
+    font-size: 32px;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  main section {
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+  }
+
+  .vestido {
+    margin: 20px 0;
+  }
+
+  .vestido img {
+    width: 80%;
+    max-width: 320px;
+    height: auto;
+  }
+
+  .nome {
+    font-size: 24px;
+  }
+
+  main button {
+    width: 200px;
+    height: 45px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vestido img {
+    width: 90%;
+  }
+
+  .nome {
+    font-size: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
 }
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
-
-/* botão hamburguer */
 .hamburger {
   display: none;
   background: transparent;
@@ -382,7 +407,6 @@ div.vestido:hover {
   color: #523800;
 }
 
-/* overlay (fundo escuro no mobile) */
 .overlay {
   display: none;
   position: fixed;
@@ -398,21 +422,18 @@ div.vestido:hover {
   opacity: 1;
 }
 
-/* MENU DESKTOP PERMANECE COMO ESTÁ */
-
-/* ===================== RESPONSIVO ===================== */
+/* ===================== RESPONSIVO MENU ===================== */
 @media (max-width: 900px) {
   .menu {
     justify-content: space-between;
     padding: 0 15px;
   }
-
+  
   #logo {
     padding-left: 0 !important;
     height: 70px;
   }
-
-  /* botão hamburguer */
+  
   .menu .hamburger {
     display: block;
     background: transparent;
@@ -422,20 +443,17 @@ div.vestido:hover {
     padding: 10px;
     color: #523800;
     z-index: 11;
-    /* margin: 30px; */
   }
-
-  /* overlay */
+  
   .overlay {
     display: none;
   }
-
+  
   .overlay.active {
     display: block;
     opacity: 1;
   }
-
-  /* NAV vira painel lateral */
+  
   .text-menu {
     position: fixed;
     top: 90px;
@@ -450,75 +468,71 @@ div.vestido:hover {
     transition: left 0.25s ease;
     z-index: 10;
   }
-
+  
   .text-menu.active {
     left: 0;
   }
-
+  
   .text-menu a {
     font-size: 20px;
     padding: 10px;
   }
-
-  /* ÍCONES fixos à direita SEM SUMIR */
+  
   .login-dropdown-wrapper {
     gap: 18px;
     margin-right: 0 !important;
     z-index: 12;
   }
-
+  
   #logout-btn {
-    margin: 25px; /* distância agradável do último item */
+    margin: 25px;
   }
 }
-/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+
 @media (max-width: 1116px) and (min-width: 901px) {
   .text-menu {
-    gap: 60px !important; /* reduz o espaço entre os links */
+    gap: 60px !important;
   }
-
-  nav a {
+  
+  .menu nav a {
     font-size: 20px;
     padding: 15px;
   }
-
+  
   .menu {
-    padding: 0 15px; /* ajusta respiro lateral */
+    padding: 0 15px;
   }
-
+  
   #logo {
-    height: 70px; /* logo menor */
+    height: 70px;
   }
-
+  
   .login-dropdown-wrapper {
     gap: 15px;
   }
 }
 
-/* Painel maior no desktop */
 @media (min-width: 901px) {
   #login-dropdown {
-    padding-top: 40px; /* antes era 20px */
-    padding-bottom: 50px; /* antes era 20px */
+    padding-top: 40px;
+    padding-bottom: 50px;
   }
-
+  
   #login-dropdown h3 {
-    margin-top: 20px; /* ajustado */
-    margin-bottom: 40px; /* reduzido para ficar proporcional */
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
-
+  
   .opcoes {
-    margin: 25px 0; /* mais espaçamento entre os itens */
+    margin: 25px 0;
   }
-
+  
   #logout-btn {
-    margin: 30px; /* distância agradável do último item */
+    margin: 30px;
   }
 }
 
-/*-------------------FOOTER----------------*/
 /* ------------------- FOOTER ------------------- */
-
 footer {
   background-color: #5a0101;
   color: white;
@@ -533,15 +547,13 @@ footer {
   font-family: "Inter", sans-serif;
 }
 
-/* LOGO */
 .sob {
   height: 100px;
   width: auto;
-  flex: 0 1 150px; /* permite dividir a linha */
-  margin-bottom: 0; /* evita empurrar para baixo */
+  flex: 0 1 150px;
+  margin-bottom: 0;
 }
 
-/* COLUNAS */
 footer .coluna {
   text-align: center;
   flex: 0 0 auto;
@@ -558,7 +570,6 @@ footer div p {
   color: #bdb0ae;
 }
 
-/* LISTAS */
 footer ul {
   list-style: none;
   padding: 0;
@@ -569,7 +580,6 @@ footer li {
   font-size: 14px;
 }
 
-/* LINHAS VERTICAIS */
 .linha {
   width: 1px;
   transform: rotate(0deg);
@@ -578,20 +588,19 @@ footer li {
   flex: 0 0 auto;
 }
 
-/* ÍCONES DE CONTATO */
 .telefone,
 .whatsapp {
   height: 18px;
   margin-right: 6px;
   vertical-align: middle;
 }
+
 .instagram,
 .facebook {
   height: 40px;
   text-align: right;
 }
 
-/* REDES SOCIAIS */
 .midia {
   display: flex;
   flex-direction: column;
@@ -599,7 +608,6 @@ footer li {
   align-items: center;
 }
 
-/* TEXTO FINAL */
 .direitos {
   width: 100%;
   text-align: left;
@@ -607,33 +615,26 @@ footer li {
   margin-top: 40px;
 }
 
-/* ------------------- RESPONSIVIDADE ------------------- */
-
-/* Tablet e telas intermediárias */
+/* ------------------- RESPONSIVIDADE FOOTER ------------------- */
 @media (max-width: 850px) {
   .linha {
     display: none;
   }
-
+  
   footer {
     justify-content: center;
   }
-
+  
   footer .coluna {
-    min-width: 45%;
+    min-width: 35%;
   }
 }
 
-/* Celulares estreitos */
 @media (max-width: 500px) {
-  /* .menu .hamburger {
-    margin: 25px;
-  } */
-
   footer .coluna {
     min-width: 100%;
   }
-
+  
   .midia {
     flex-direction: row;
   }
