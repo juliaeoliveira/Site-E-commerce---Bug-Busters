@@ -150,22 +150,7 @@ main .titulo {
 
 /* --------- BOTÃO VOLTAR --------- */
 
-.voltar {
-  height: 30px;
-  margin-top: 50px;
-  margin-right: 850px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: #e8dbb8;
-  padding: 8px 14px;
-  border-radius: 5px;
-  margin-bottom: 40px;
-  text-decoration: none;
-  font-size: 14px;
-  color: #7a2f1d;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
+
 
 /* --------- RESPONSIVIDADE --------- */
 
@@ -860,4 +845,21 @@ footer li {
   .midia {
     flex-direction: row;
   }
+}
+
+.voltar {
+  height: 30px;
+  margin-top: 30px;
+  margin-right: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #e8dbb8;
+  padding: 8px 14px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #7a2f1d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+
+
 * {
   margin: 0;
   padding: 0;
@@ -85,14 +86,8 @@ nav a {
   /* Cor do sublinhado com transparência */
 }
 
+
 /* Estilo para os links do menu ao passar o mouse (hover) */
-
-
-
-
-
-=======
->>>>>>> 4f8a187a2a08a09283eb3a91e5b9fd999f806562
 /* PAGINA SOBRE NOS */
 
 
@@ -242,10 +237,10 @@ h1 {
 
 /* Vestidos */
 
-/* Seção principal com ID "vestidos" */
-<<<<<<< HEAD
 
-=======
+
+
+/* Seção principal com ID "vestidos" */
 #vestidos {
   height: 57vh;
   /* Altura fixa da seção */
@@ -256,7 +251,6 @@ h1 {
   margin-top: 30px;
   margin-bottom: 100px;
 }
->>>>>>> 4f8a187a2a08a09283eb3a91e5b9fd999f806562
 
 /* Estilização do título (h1) dentro da seção "vestidos" */
 #vestidos h1 {
@@ -328,7 +322,7 @@ h1 {
 
 /* Sessão Coleções */
 #Coleções {
-  height: 200hv;
+  height: 200vh;
   text-align: center;
   margin-top: 100px;
 }
@@ -629,8 +623,6 @@ footer li {
 /* Permite posicionar o botão por cima */
 .items-colecao {
   position: relative;
-<<<<<<< HEAD
-=======
 }
 
 /* BOTÃO SOBRE A IMAGEM */
@@ -1342,14 +1334,13 @@ footer li {
   .midia {
     flex-direction: row;
   }
->>>>>>> 4f8a187a2a08a09283eb3a91e5b9fd999f806562
+
 }
 
 
 
 
-<<<<<<< HEAD
-=======
+
 /* ============================================
       RESPONSIVIDADE MOBILE — ATÉ 600px
 ============================================ */
@@ -1489,11 +1480,11 @@ footer li {
     padding-bottom: 15px;
   }
   
-  
 }
 
 
->>>>>>> 4f8a187a2a08a09283eb3a91e5b9fd999f806562
+
+
 
 
 
@@ -1534,7 +1525,7 @@ footer li {
 
 
 
-<<<<<<< HEAD
+
 
 
 /* ANIMAÇÃO + POSICIONAMENTO  */
@@ -1586,10 +1577,7 @@ footer li {
 /* hover central => sobe mais */
 .items-colecoes .items-colecao.centro:hover {
   transform: translateY(-75px);
-=======
-/* ============================
-    TABLET E NOTEBOOK PEQUENO
-============================ */
+}
 @media (max-width: 900px) and (min-width: 481px) {
 
   /* MENU */
@@ -1643,12 +1631,12 @@ footer li {
   footer {
     flex-wrap: wrap;
   }
->>>>>>> 4f8a187a2a08a09283eb3a91e5b9fd999f806562
+
 }
 
 
 
-<<<<<<< HEAD
+
 .items-colecao.centro{
   margin-top: -25px;
 
@@ -1704,7 +1692,7 @@ footer li {
   margin-top: 30px;
   margin-bottom: 100px;
 }
-=======
+
 /* --- COLEÇÕES MOBILE → 1 POR VEZ RETA --- */
 @media (max-width: 768px) {
   .items-colecoes {
@@ -1802,4 +1790,3 @@ footer li {
     width: 22px;
   }
 }
->>>>>>> 4f8a187a2a08a09283eb3a91e5b9fd999f806562
