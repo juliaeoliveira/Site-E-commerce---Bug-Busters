@@ -1,105 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  /* box-sizing: border-box; */
-}
+/* PAGINA SOBRE NOS */
 
-/* MENU */
-#logo {
-  height: 80px;
-  padding-left: 0;
-  /*padding-left: 130px;  Espaço à esquerda do logo */
-  /*alterado*/
-}
-
-.icons {
-  gap: 5px;
-  justify-content: center;
-  display: flex;
-  padding-right: 150px;
-}
-
-.menu {
-  /*alterado*/
-  height: 90px;
-  position: fixed;
-  /*original*/
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  /*original*/
-  background-color: hsla(0, 0%, 100%, 0.75);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 25px;
-  /* controla o respiro nas laterais */
-  /* position: fixed;
-  z-index: 9999; */
-}
-
-/* Estilo dos links dentro do nav */
-.menu nav a {
-  color: #523800;
-  font-size: 20px;
-  /* Define o tamanho da fonte */
-  padding: 25px;
-  /* Espaçamento interno */
-  text-decoration: underline;
-  /* Ativa o sublinhado */
-  text-decoration-color: rgba(82, 56, 0, 0.192);
-  /* Cor do sublinhado com transparência */
-}
-
-.text-menu {
-  /*alterado*/
-  display: flex;
-  gap: 200px;
-  /* mais elegante que gap 200px (quebrava tudo) */
-  font-family: "Libre Caslon Text";
-}
-
-.text-menu a {
-  /*alterado*/
-  font-size: 20px;
-  text-decoration: underline;
-  text-decoration-color: rgba(82, 56, 0, 0.192);
-  color: #523800;
-}
-
-
-
-#hamburger {
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-html {
-  background-color: #eae4d8;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  /* Organiza os itens na vertical (coluna) */
-  min-height: 100vh;
-  /* Garante que o corpo ocupe toda a altura da tela */
-  margin: 0;
-  /* Remove a margem padrão */
-  padding: 0;
-  /* Remove o preenchimento padrão */
-  overflow-x: hidden;
-  /* Impede rolagem horizontal */
-  background-color: #eae4d8;
-  color: #3a2d20;
-}
-/* Estilo para os links do menu ao passar o mouse (hover) */
-
-
-
-/*=========================================MAIN======================*/
 
 #Sobre-nos {
   background-color: #EDDBBE;
@@ -516,6 +416,80 @@ h1 {
 }
 
 
+/* foooter */
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 40px 0;
+  /* aumenta altura */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  /* alinhar tudo no topo */
+  flex-wrap: wrap;
+  /* quebra linha caso precise */
+  margin-top: 20px;
+  /* espaço entre o footer e o conteúdo */
+
+}
+
+footer ul {
+  font-family: "Inter", sans-serif;
+  list-style: none;
+  text-align: center;
+}
+
+footer li {
+  margin-top: 40px;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+}
+
+
+.whatsapp,
+.telefone {
+  height: 20px;
+}
+
+
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+
+.sob {
+  height: 100px;
+  margin-top: 90px;
+  margin: -10px;
+}
+
+.linha {
+  width: 170px;
+  transform: rotate(-90.164deg);
+  color: #FFF;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 420px;
+  margin-top: 50px;
+}
+
+.direitos {
+  width: 100%;
+  text-align: left;
+  margin-top: 160px;
+  font-size: 15px;
+  margin-left: 60px;
+}
+
+.midia {
+  float: right;
+  display: grid;
+  gap: 15px;
+}
 
 
 
@@ -761,8 +735,245 @@ h1 {
   color: #462506;
 }
 
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
 
-/* ------ CONFIG DO MENU RESPONSIVO ------ */
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+#login-dropdown {
+  /*alterado*/
+  position: absolute;
+  top: 90px;
+  /* aparece logo abaixo do header fixo */
+  right: 0;
+  /* alinhado ao canto direito, sempre certo */
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.89);
+  border-radius: 10px;
+  padding: 20px 0;
+  display: none;
+  z-index: 300;
+  /* MAIOR que o menu, ícones e o hambúrguer */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#login-dropdown h3 {
+  margin-top: 60px;
+  font-size: 16px;
+  /* Tamanho da fonte */
+  color: #7a4a1c;
+  /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px;
+  /* Espaço abaixo do título */
+}
+
+#login-dropdown ul {
+  list-style: none;
+  /* Remove marcadores (bolinhas) da lista */
+  margin: 0;
+  /* Remove espaçamento externo padrão */
+}
+
+#login-dropdown ul li a:hover {
+  text-decoration: underline;
+  color: #7a4a1c;
+  /* Cor marrom ao passar o mouse (hover) */
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text";
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* Ajuste do painel para telas pequenas (vertical) */
+#login-dropdown {
+  max-height: calc(100vh - 120px);
+  /* cabe sempre na tela */
+  overflow-y: auto;
+  /* ativa rolagem se necessário */
+  padding: 20px;
+}
+
+/* Reduz os espaçamentos internos no mobile */
+@media (max-height: 800px) {
+  #login-dropdown h3 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .opcoes {
+    margin: 12px 0;
+  }
+
+  #logout-btn {
+    margin: 25px;
+  }
+}
+
+.carrinho {
+  margin-right: 90px;
+}
+
+/* .login{
+ margin-left: 270px;
+} */
+/*alterado*/
+
+/* Animação de pulsação */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+/* Classe para o efeito visual no ícone */
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
+  /* anel visível mesmo quando não está no pico */
+}
+
+/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+/* Caixa de cada opção */
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  /* leve transparência */
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 20px 0px;
+  /* espaçamento entre as caixas */
+  text-align: center;
+}
+
+/* Texto das opções */
+.opcoes a {
+  display: block;
+  padding: 10px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover — destaca ao passar o mouse */
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+.login-dropdown-wrapper {
+  /*alterado*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  /* distância natural entre login e carrinho */
+}
+
+.login {
+  /*alterado*/
+  margin: 0;
+  /* Remove o margin-left: 270px que quebrava TUDO */
+}
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}               
+
+
+
 
 /* botão hamburguer */
 .hamburger {
@@ -1029,5 +1240,349 @@ footer li {
 
   .midia {
     flex-direction: row;
+  }
+}
+
+
+
+
+/* ============================================
+      RESPONSIVIDADE MOBILE — ATÉ 600px
+============================================ */
+@media (max-width: 600px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* ===== VÍDEO ===== */
+  .video-inicial {
+    height: 55vh;
+  }
+
+  .video-inicial video {
+    width: 100%;
+    height: 55vh;
+    object-fit: cover;
+  }
+
+  /* ===== SOBRE NÓS ===== */
+  #Sobre-nos {
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .sobre-container {
+    flex-direction: column;
+    gap: 35px;
+    text-align: center;
+  }
+
+  #box-noiva-img img {
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .Sobre-veu {
+    border-left: none;
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  .sob {
+    font-size: 48px;
+  }
+
+  .textoP {
+    width: 100%;
+  }
+
+  /* ===== VESTIDOS ===== */
+  #vestidos {
+    height: auto;
+    margin-top: 40px;
+  }
+
+  .vestidos-iniciais h1 {
+    font-size: 42px;
+  }
+
+  .galeria-vestidos {
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  .items-produto {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .items-produto img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .seta img {
+    width: 20px;
+  }
+
+  /* ===== COLEÇÕES ===== */
+  .colecoes-container {
+    height: auto;
+  }
+
+  .items-colecoes {
+    gap: 45px;
+  }
+
+  .items-colecao {
+    width: 30%;
+    height: 300px;
+  }
+
+  .btn-overlay {
+    width: 70%;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  /* ===== DEPOIMENTOS ===== */
+  #depoimentos {
+    height: auto;
+  }
+
+  .box-depoimentos {
+    width: 80%;
+    min-height: auto;
+  }
+
+  .box-depoimentos p {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    height: auto;
+    padding: 40px 0;
+  }
+
+  .linha {
+    display: none;
+  }
+
+  .nom {
+    margin: 0;
+  }
+
+  .direitos {
+    margin-left: 0;
+    padding-bottom: 15px;
+  }
+  
+  
+}
+
+
+
+
+
+/* ============================
+     NOTEBOOK / DESKTOP MÉDIO
+============================ */
+@media (max-width: 1280px) and (min-width: 901px) {
+
+  .text-menu {
+    gap: 70px;
+  }
+
+  #logo {
+    height: 75px;
+  }
+
+  /* SOBRE */
+  #box-noiva-img img {
+    width: 480px;
+  }
+
+  /* VESTIDOS */
+  .items-produto img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .vestidos-iniciais .galeria-vestidos {
+    gap: 60px;
+  }
+
+  /* COLEÇÕES */
+  .items-colecao {
+    width: 300px;
+    height: 420px;
+  }
+}
+
+
+
+/* ============================
+    TABLET E NOTEBOOK PEQUENO
+============================ */
+@media (max-width: 900px) and (min-width: 481px) {
+
+  /* MENU */
+  #logo {
+    height: 65px;
+  }
+
+  .menu {
+    height: 85px;
+  }
+
+  .text-menu {
+    gap: 40px;
+  }
+
+  /* SOBRE NÓS */
+  .sobre-container {
+    gap: 80px;
+  }
+
+  .sob {
+    font-size: 60px;
+  }
+
+  #box-noiva-img img {
+    width: 430px;
+    height: auto;
+  }
+
+  /* VESTIDOS */
+  .items-produto img {
+    width: 260px;
+    height: 260px;
+  }
+
+  .vestidos-iniciais .galeria-vestidos {
+    gap: 40px;
+  }
+
+  /* COLEÇÕES */
+  .items-colecoes {
+    gap: 35px;
+  }
+
+  .items-colecao {
+    width: 260px;
+    height: 380px;
+  }
+
+  /* FOOTER */
+  footer {
+    flex-wrap: wrap;
+  }
+}
+
+
+
+/* --- COLEÇÕES MOBILE → 1 POR VEZ RETA --- */
+@media (max-width: 768px) {
+  .items-colecoes {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+  }
+
+  .items-colecao {
+    min-width: 100%;
+    transform: none !important; /* remove inclinação */
+    opacity: 1 !important;
+  }
+
+  .items-colecao img {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .destaque {
+    transform: none !important;
+  }
+}
+
+
+
+/* --- VESTIDOS: MOBILE APENAS 1 IMAGEM --- */
+@media (max-width: 768px) {
+  .items-produto:nth-child(2) { /* some o segundo vestido */
+    display: none;
+  }
+
+  .galeria-vestidos {
+    justify-content: center;
+    position: relative;
+  }
+
+  .items-produto img {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .seta-esquerda, .seta-direita {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .seta-esquerda {
+    left: 10px;
+  }
+
+  .seta-direita {
+    right: 10px;
+  }
+}
+
+
+
+/* --- AGENDAMENTOS MOBILE --- */
+@media (max-width: 768px) {
+  #Agendamentos .agendamentos {
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  #Agendamentos h1 {
+    font-size: 1.8rem;
+  }
+
+  #Agendamentos p {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0 10px;
+  }
+
+  #botao-boasvindas {
+    width: 90%;
+    max-width: 320px;
+    height: 50px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #botao-boasvindas a.numero {
+    font-size: 1.1rem;
+  }
+
+  #botao-boasvindas img {
+    width: 22px;
   }
 }
