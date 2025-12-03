@@ -9,59 +9,36 @@
 </head>
 <body>
     <!-- MENU FIXO RESPONSIVO -->
-    <header class="menu">
-        <!-- LOGO -->
-        <a href="/"><img id="logo" src="/img_colecao/Sob1.png" alt="Logo" /></a>
+  <header class="menu">
+    <!-- LOGO -->
+    <a href="/">
+      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+    </a>
 
-        <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
-        <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-            ☰
-        </button>
+    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      ☰
+    </button>
 
-        <!-- NAV PRINCIPAL -->
-        <nav class="text-menu" id="nav-menu">
-            <a href="/produtos/">Vestidos</a>
-            <a href="/colecoes">Coleções</a>
-            <a href="/#Agendamentos">Agendamentos</a>
-        </nav>
+    <!-- NAV PRINCIPAL -->
+    <nav class="text-menu" id="nav-menu">
+      <a href="/produtos">Vestidos</a>
+      <a href="/colecoes">Coleções</a>
+      <a href="/#Agendamentos">Agendamentos</a>
+    </nav>
 
-        <!-- ÍCONES (login + carrinho) -->
-        <div class="login-dropdown-wrapper">
-            <img
-                class="login"
-                src="/img_colecao/login.png"
-                width="20px"
-                title="login"
-                alt="login"
-                id="login-icon"
-            />
+    <nav class="icons">
+      <a href="/usuario/login" >
+        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+      </a>
+      <a href="/painel_usuario/carrinho" >
+        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
+      </a>
+    </nav>
+  </header>
 
-            <div id="login-dropdown" class="hidden" aria-hidden="true">
-                <h3><strong>{{ primeiro_nome or 'Bem-vinda' }}</strong></h3>
-
-                <ul class="dropdown-list">
-                    <li class="opcoes"><a href="/painel_usuario/meus_dados">Sua Conta</a></li>
-                    <li class="opcoes"><a href="/painel_usuario/meus_pedidos">Seus Pedidos</a></li>
-                    <li class="opcoes"><a href="/painel_usuario/carrinho">Seu Carrinho</a></li>
-                    <li class="opcoes"><a href="/painel_usuario/comprar_novamente">Comprar novamente</a></li>
-                </ul>
-
-                <button id="logout-btn" type="button"><a href="/painel_usuario/logout">Sair da conta</a></button>
-            </div>
-
-            <a href="/painel_usuario/carrinho">
-                <img
-                    src="/img_colecao/carrinho.png"
-                    width="20px"
-                    title="Carrinho"
-                    alt="Carrinho"
-                />
-            </a>
-        </div>
-    </header>
-
-    <!-- Overlay para escurecer o fundo no mobile -->
-    <div class="overlay" id="overlay"></div>
+  <!-- Overlay para escurecer o fundo no mobile -->
+  <div class="overlay" id="overlay"></div>
 
     <main>
         <section id="colecao">

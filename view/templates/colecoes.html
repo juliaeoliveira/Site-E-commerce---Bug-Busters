@@ -9,73 +9,39 @@
 
   <body>
     <!-- MENU FIXO RESPONSIVO -->
-    <header class="menu">
-      <!-- LOGO -->
-      <a href="/painel_usuario">
-        <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+  <header class="menu">
+    <!-- LOGO -->
+    <a href="/">
+      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+    </a>
+
+    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      ☰
+    </button>
+
+    <!-- NAV PRINCIPAL -->
+    <nav class="text-menu" id="nav-menu">
+      <a href="/produtos">Vestidos</a>
+      <a href="/colecoes">Coleções</a>
+      <a href="/#Agendamentos">Agendamentos</a>
+    </nav>
+
+    <nav class="icons">
+      <a href="/usuario/login" >
+        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
       </a>
+      <a href="/painel_usuario/carrinho" >
+        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
+      </a>
+    </nav>
+  </header>
 
-      <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
-      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-        ☰
-      </button>
-
-      <!-- NAV PRINCIPAL -->
-      <nav class="text-menu" id="nav-menu">
-        <a href="/painel_usuario/produtos">Vestidos</a>
-        <a href="/colecoes">Coleções</a>
-        <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
-      </nav>
-
-      <!-- ÍCONES (login + carrinho) -->
-      <div class="login-dropdown-wrapper">
-        <img
-          class="login"
-          src="/static/img_home/login.png"
-          width="20px"
-          title="login"
-          alt="login"
-          id="login-icon"
-        />
-
-        <div id="login-dropdown" class="hidden" aria-hidden="true">
-          <h3><strong>Bem-vinda, {{primeiro_nome}}!</strong></h3>
-
-          <ul class="dropdown-list">
-            <li class="opcoes">
-              <a href="/painel_usuario/meus_dados">Sua Conta</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-            </li>
-          </ul>
-          <a href="/painel_usuario/lougout">
-            <button id="logout-btn" type="button">Sair da conta</button>
-          </a>
-        </div>
-
-        <a href="/painel_usuario/carrinho">
-          <img
-            src="/static/img_home/carrinho.png"
-            width="20px"
-            title="Carrinho"
-            alt="Carrinho"
-          />
-        </a>
-      </div>
-    </header>
-
-    <!-- Overlay para escurecer o fundo no mobile -->
-    <div class="overlay" id="overlay"></div>
+  <!-- Overlay para escurecer o fundo no mobile -->
+  <div class="overlay" id="overlay"></div>
 
     <br />
-
+<main>
     <h1 class="titulo">NOSSAS COLEÇÕES</h1>
 
     <div class="grid">
@@ -100,7 +66,7 @@
       </div>
     </div>
     <a href="/" class="voltar"> <span>⟵</span> Voltar à página inicial </a>
-
+</main>
     <footer>
       <!-- LOGO -->
       <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
@@ -192,61 +158,38 @@
       </div>
     </div>
 
-    <script>
-      const loginIcon = document.getElementById("login-icon");
-      const loginDropdown = document.getElementById("login-dropdown");
+  <script>
+    const nav = document.getElementById("nav-menu");
+    const btn = document.getElementById("hamburger");
+    const overlay = document.getElementById("overlay");
 
-      loginIcon.addEventListener("click", () => {
-        const isVisible = loginDropdown.style.display === "block";
+    function openMenu() {
+      nav.classList.add("active");
+      overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
 
-        loginDropdown.style.display = isVisible ? "none" : "block";
+    function closeMenu() {
+      nav.classList.remove("active");
+      overlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
 
-        // Ativa ou desativa a animação
-        loginIcon.classList.toggle("login-active", !isVisible);
-      });
-
-      window.addEventListener("click", function (e) {
-        if (
-          !loginIcon.contains(e.target) &&
-          !loginDropdown.contains(e.target)
-        ) {
-          loginDropdown.style.display = "none";
-          loginIcon.classList.remove("login-active");
-        }
-      });
-    </script>
-    <script>
-      const nav = document.getElementById("nav-menu");
-      const btn = document.getElementById("hamburger");
-      const overlay = document.getElementById("overlay");
-
-      function openMenu() {
-        nav.classList.add("active");
-        overlay.classList.add("active");
-        document.body.style.overflow = "hidden";
+    btn.addEventListener("click", () => {
+      if (nav.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
       }
+    });
 
-      function closeMenu() {
-        nav.classList.remove("active");
-        overlay.classList.remove("active");
-        document.body.style.overflow = "";
-      }
+    overlay.addEventListener("click", closeMenu);
 
-      btn.addEventListener("click", () => {
-        if (nav.classList.contains("active")) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-
-      overlay.addEventListener("click", closeMenu);
-
-      // fecha no ESC
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeMenu();
-      });
-    </script>
+    // fecha no ESC
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+  </script>
 
     <script>
       // TEXTOS QUE APARECEM NO MODAL
