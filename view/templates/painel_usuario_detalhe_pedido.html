@@ -127,24 +127,12 @@
           <div class="modal-cancelar">
             <button id="fechar-modal" class="fechar-modal">✕</button>
             <h2>Cancelar pedidos</h2>
-            <form
-              action="/painel_usuario/meus-pedidos/cancelar_pedido"
-              method="post"
-            >
-              <p>Digite o ID do pedido que deseja cancelar</p>
-              <input
-                type="text"
-                id="input-pedido-id"
-                class="input-pedido"
-                name="id_pedido"
-              />
-              <button
-                id="btn-cancelar-pedido"
-                class="btn-cancelar"
-                type="submit"
-              >
-                Cancelar pedido
-              </button>
+            <form action="/painel_usuario/meus-pedidos/cancelar_pedido" method="post">
+                <p>Tem certeza que deseja cancelar o pedido <strong>{{ pedido.id }}</strong>?</p>
+                <input type="hidden" name="id_pedido" value="{{ pedido.id }}" />
+                <button id="btn-cancelar-pedido" class="btn-cancelar" type="submit">
+                    Confirmar cancelamento
+                </button>
             </form>
           </div>
         </div>

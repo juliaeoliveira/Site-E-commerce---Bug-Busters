@@ -548,15 +548,15 @@
         const freteDataEl = document.getElementById("frete-data");
         const freteValueEl = document.getElementById("frete-value");
         const totalWithFreteEl = document.getElementById("total-with-frete");
-
+            
         let subtotal = 0;
-
-        // 1. CALCULA O SUBTOTAL
+            
+        // 1. CALCULA O SUBTOTAL (apenas produtos)
         carrinho.forEach((produto) => {
           const preco = parsePriceString(produto.preco);
           subtotal += preco * (Number(produto.quantidade) || 0);
         });
-
+      
         // 2. EXIBE O SUBTOTAL
         if (subtotalElement) {
           subtotalElement.textContent = subtotal.toLocaleString("pt-BR", {
@@ -564,32 +564,34 @@
             currency: "BRL",
           });
         }
-
-        // 3. PEGA E EXIBE O FRETE
-        // O valor do frete é pego do HTML via atributo data-valor (Flask/Jinja)
+      
+        // 3. PEGA O VALOR DO FRETE (do elemento data-valor)
         const freteValor = freteDataEl
-          ? parseFloat(freteDataEl.dataset.valor)
+          ? parseFloat(freteDataEl.dataset.valor) || 0
           : 0;
-
+      
+        // 4. EXIBE O FRETE
         if (freteValueEl) {
           freteValueEl.textContent = freteValor.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           });
         }
-
-        // 4. CALCULA E EXIBE O TOTAL GERAL
+      
+        // 5. CALCULA E EXIBE O TOTAL GERAL
         const totalGeral = subtotal + freteValor;
-
+      
         if (totalWithFreteEl) {
           totalWithFreteEl.textContent = totalGeral.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           });
         }
-
-        // Armazena o subtotal na variável global (útil para o payload da compra)
-        totalAmount = totalGeral; // ATENÇÃO: A rota /salvar espera o total GERAL (com frete) em 'valor_total'
+      
+        // Armazena os valores globais para uso no payload
+        window.carrinhoSubtotal = subtotal;
+        window.carrinhoFrete = freteValor;
+        window.carrinhoTotalGeral = totalGeral;
       }
 
       // ================================
@@ -597,79 +599,73 @@
       // ================================
       async function makePurchase(event) {
         event.preventDefault();
-
+            
         // Garante que o total está atualizado
         updateTotal();
-
+            
         const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
+            
         // Seleciona o valor do método de pagamento
         const metodoPagamento = document.querySelector(
           'input[name="metodo_pagamento"]:checked'
         )?.value;
-
+            
         if (!metodoPagamento) {
           alert("Selecione um método de pagamento!");
           return;
         }
-
+      
         if (carrinho.length === 0) {
           alert("Seu carrinho está vazio! Não é possível finalizar a compra.");
           return;
         }
-
-        // 1. Construir o payload conforme o Pydantic PedidoCreate
-        // A rota /salvar usa PedidoCreate, que espera 'valor_total' (o total geral, neste caso)
+      
+        // PEGAR VALOR DO FRETE
+        const freteDataEl = document.getElementById("frete-data");
+        const freteValor = freteDataEl
+          ? parseFloat(freteDataEl.dataset.valor)
+          : 0;
+      
+        // Construir o payload para a rota /pedido/checkout
         const payload = {
-          // valor_total deve ser o total geral (subtotal + frete) para a rota /salvar
-          valor_total: totalAmount,
-
-          // Aqui você decide se quer enviar o método de pagamento.
-          // A rota /salvar não usa 'metodo_pagamento' no PedidoCreate,
-          // mas a rota /checkout usa. Como estamos trocando para /salvar,
-          // vamos removê-lo do payload principal, mas você precisará salvar o pagamento
-          // em outra etapa ou ajustar o /salvar.
-          // VOU MANTÊ-LO COMENTADO, POIS SEU BACKEND PODE ESTAR ESPERANDO
-          // QUE ESSE CAMPO SEJA ENVIADO, MESMO QUE NÃO ESTEJA NO PEDIDOCREATE.
-          // metodo_pagamento: metodoPagamento,
-
-          itens_pedido: carrinho.map((item) => ({
-            // Mapeamento EXATO para o schema ItemPedido esperado pelo PedidoCreate
-            id_produto: item.id || 0, // Garante que seja um número ou 0
+          metodo_pagamento: metodoPagamento,
+          frete: freteValor, // Importante: enviar o valor do frete
+          itens: carrinho.map((item) => ({
+            id_produto: item.id || 0,
+            nome: item.nome, // Adicionando para referência (opcional)
             tamanho: item.tamanho,
             quantidade: Number(item.quantidade) || 0,
             preco_unitario: parsePriceString(item.preco),
-            subtotal:
-              (Number(item.quantidade) || 0) * parsePriceString(item.preco),
-          })),
+            subtotal: (Number(item.quantidade) || 0) * parsePriceString(item.preco)
+          }))
         };
-
-        // 2. Enviar a requisição para a rota MAIS ESTÁVEL
+      
+        console.log("DEBUG: Payload enviado:", payload);
+      
         try {
-          // ATENÇÃO: TROCANDO A ROTA DE /pedido/checkout PARA /pedido/salvar
-          const response = await fetch("/pedido/salvar", {
+          // AGORA usando a rota /pedido/checkout que cria o pagamento
+          const response = await fetch("/pedido/checkout", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(payload),
           });
-
+        
           const result = await response.json();
-
+        
           if (response.ok) {
-            alert("Pedido realizado com sucesso!");
+            alert("Pedido realizado com sucesso! ID: " + result.id_pedido);
             localStorage.removeItem("carrinho");
             window.location.href = `/painel_usuario/meus_pedidos`;
           } else {
-            // Captura a mensagem de erro detalhada da rota /salvar
-            alert(
-              "Erro ao salvar pedido: " + (result.detail || "Tente novamente.")
-            );
+            // Captura a mensagem de erro detalhada
+            alert("Erro ao salvar pedido: " + (result.detail || "Tente novamente."));
+            console.error("Erro na resposta:", result);
           }
         } catch (err) {
-          console.error("Erro:", err);
-          alert("Erro inesperado ao processar o pedido.");
+          console.error("Erro na requisição:", err);
+          alert("Erro inesperado ao processar o pedido. Verifique o console.");
         }
       }
     </script>
