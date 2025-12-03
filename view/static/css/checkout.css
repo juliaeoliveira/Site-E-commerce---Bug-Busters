@@ -948,3 +948,97 @@ footer li {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/*=======================================================*/
+
+/* 1. ESTILOS GERAIS PARA O CONTAINER DOS ITENS */
+.itens-container {
+    /* Força a estrutura de coluna para melhor organização */
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    padding: 10px 0;
+}
+
+/* 2. ESTILO PARA CADA ITEM INDIVIDUAL */
+.produto-item-checkout {
+    width: 100%;
+}
+
+/* 3. ALINHAMENTO FLEXÍVEL DOS DETALHES DO ITEM */
+.checkout-item-details {
+    display: flex;
+    align-items: flex-start; /* Alinha o conteúdo ao topo */
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+/* 4. ESTILO DA MINIATURA RESPONSIVA */
+.foto-checkout-miniatura {
+    /* MANTÉM UM TAMANHO FIXO PARA MINIATURA, mas evita que ela quebre o layout */
+    width: 80px;
+    height: 100px; 
+    object-fit: cover;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    /* Garante que não diminua (shrink) e que não cresça (grow) */
+    flex-shrink: 0; 
+    flex-grow: 0;
+}
+
+/* 5. ESTILO DO TEXTO */
+.texto-checkout {
+    /* Permite que o texto ocupe o espaço restante */
+    flex-grow: 1; 
+    font-size: 0.9em;
+}
+
+.texto-checkout h3 {
+    margin-top: 0;
+    font-size: 1em;
+}
+
+/* 6. VALOR SUBTOTAL DO ITEM */
+.subtotal-item {
+    font-weight: bold;
+    margin-left: auto; /* Empurra o valor para a direita */
+    font-size: 1em;
+    flex-shrink: 0; /* Impede que o preço encolha */
+}
+
+/* 7. LINHA SEPARADORA */
+.produto-item-checkout hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* ========================================================= */
+/* 8. MEDIA QUERY: RESPONSIVIDADE PARA TELAS MENORES (Celulares) */
+/* Aplica regras quando a tela tem no máximo 600px de largura */
+@media (max-width: 600px) {
+    
+    /* Diminui um pouco o tamanho da miniatura no mobile */
+    .foto-checkout-miniatura {
+        width: 60px;
+        height: 80px;
+    }
+
+    /* Reduz o espaçamento e o tamanho da fonte */
+    .checkout-item-details {
+        gap: 10px;
+    }
+
+    .texto-checkout {
+        font-size: 0.8em; /* Fonte menor para caber mais conteúdo */
+    }
+
+    .texto-checkout h3 {
+        font-size: 0.9em;
+    }
+
+    .subtotal-item {
+        font-size: 0.9em;
+    }
+}
