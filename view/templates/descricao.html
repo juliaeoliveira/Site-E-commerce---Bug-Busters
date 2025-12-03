@@ -75,8 +75,8 @@
   <main>
     <center>
       <h1>
-        <a href="/painel_usuario">Início</a> > <a href="/painel_usuario/produtos"> Vestidos </a> > <a
-          href="/painel_usuario/produtos/{{produto.id}}"> Detalhes do Vestido </a>
+        <a href="/">Início</a> > <a href="/produtos"> Vestidos </a> > <a
+          href="/produtos/{{produto.id}}"> Detalhes do Vestido </a>
       </h1>
     </center>
 
@@ -105,7 +105,9 @@
       </div>
       <div class="botoes">
         <div>
-          <button class="compra"> <b> Compra: R${{produto.preco}} </b></button>
+          <a href="/painel_usuario/carrinho">
+            <button class="compra"> <b> Comprar: R${{produto.preco}} </b></button>
+          </a>
         </div>
         <div>
           <button class="carrinho" data-id="{{ produto.id }}"> Adicionar no carrinho 🛒 </button>

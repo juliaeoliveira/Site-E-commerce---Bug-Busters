@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-
 }
 
 /* MENU */
@@ -45,7 +44,7 @@
   color: #523800;
   font-size: 20px;
   /* Define o tamanho da fonte */
-  padding: 25px;
+  padding: 20px;
   /* Espaçamento interno */
   text-decoration: underline;
   /* Ativa o sublinhado */
@@ -297,7 +296,7 @@ label {
   margin-left: 210px;
   background: #790000;
   color: white;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .posicao {
@@ -306,11 +305,11 @@ label {
 
 .cadastrar {
   text-align: center;
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Inter", sans-serif;
   font-size: 15px;
   font-weight: 0;
   height: 50px;
-  border-radius: 4px;
+  border-radius: 5px;
   background: #790000;
   margin-top: 40px;
 }
@@ -330,7 +329,7 @@ label {
 
 .posicao {
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 14px;
 }
@@ -342,15 +341,14 @@ label {
 }
 
 .ver {
-  color: #790000;
   height: 35px;
   width: 200px;
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Inter", sans-serif;
   color: darkred;
   background: rgba(237, 219, 190, 0.8);
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 button:focus {
@@ -380,12 +378,13 @@ button:hover {
 #cidade,
 #estado {
   width: 250px;
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid #ccc;
   background-color: #dbcaa966;
   box-sizing: border-box;
   padding: 8px;
 }
+
 #mensagem_erro,
 #mensagem_cep {
   margin-top: 10px;
@@ -422,14 +421,16 @@ button:hover {
   }
 
   /* ----------- Estrutura do formulário ----------- */
+  /* Reset margins and padding for mobile layout */
   .cadastro {
-    margin: 0;
+    margin: 0 !important;
     padding: 0;
     width: 100%;
+    margin-left: 0 !important;
   }
 
   .informacoes {
-    float: none;
+    float: none !important;
     width: 100%;
     padding: 0 5px;
     font-size: 14px;
@@ -438,12 +439,14 @@ button:hover {
   label {
     width: 100% !important;
     margin-left: 0 !important;
+    margin-bottom: 8px !important;
   }
 
   input,
   select {
     width: 85% !important;
     margin-left: 0 !important;
+    margin-bottom: 12px !important;
     font-size: 15px;
   }
 
@@ -476,26 +479,29 @@ button:hover {
   #cidade,
   #estado {
     width: 85% !important; /* Cada input ocupa sua coluna inteira */
+    margin-bottom: 12px !important;
   }
 
   /* ----------- Botão Criar Conta ----------- */
+  /* Improved spacing and sizing for button */
   .cadastrar {
     width: 60%;
     height: 40px;
     font-size: 16px;
-    margin: 25px auto 10px auto;
+    margin: 35px auto 20px auto !important;
     display: block;
   }
 
   #acao {
     width: 40% !important;
-    margin: 0 auto !important;
+    margin: 25px auto !important;
   }
 
   /* ----------- Botão "Voltar à Página Inicial" ----------- */
+  /* Increased top margin for better spacing from button */
   .outrosvestidos {
     position: relative !important;
-    margin: 40px auto 0 auto !important;
+    margin: 60px auto 0 auto !important;
     text-align: center;
     width: 100%;
   }
@@ -507,13 +513,11 @@ button:hover {
     font-size: 14px;
   }
 
-
-
   /* ----------- Mensagens de erro ----------- */
   #mensagem_erro,
   #mensagem_cep {
     margin-left: 0 !important;
     font-size: 13px;
+    margin-bottom: 10px !important;
   }
 }
-

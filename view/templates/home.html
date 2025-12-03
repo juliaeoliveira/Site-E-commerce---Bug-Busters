@@ -15,10 +15,10 @@
     <title>Sob Veu</title>
 </head>
 <body> 
-    <!-- MENU FIXO RESPONSIVO -->
+  <!-- MENU FIXO RESPONSIVO -->
   <header class="menu">
     <!-- LOGO -->
-    <a href="/">
+    <a href="/painel_usuario">
       <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
     </a>
 
@@ -133,17 +133,17 @@
     <hr class="linha-titulo2">
 
     <div class="items-colecoes">
-      <a href="/colecoes/O%20Desabrochar" class="items-colecao direita">
+      <a href="/colecoes/Encanto" class="items-colecao direita">
         <img src="/static/img_home/colecao22.png" alt="Coleção 1">
-        <button class="btn-overlay" type="button"><span>O Desabrochar</span></button>
+        <button class="btn-overlay" type="button"><span>Encanto</span></button>
       </a>
 
-      <a href="/colecoes/Encanto" class="items-colecao centro destaque">
+      <a href="/colecoes/O%20Desabrochar" class="items-colecao centro destaque">
         <img src="/static/img_home/colecao11.png" alt="Coleção 2">
-        <button class="btn-overlay centro" type="button"><span>ENCANTO</span></button>
+        <button class="btn-overlay centro" type="button"><span>O Desabrochar</span></button>
       </a>
 
-      <a href="/colecoes/Sussuros" class="items-colecao esquerda">
+      <a href="/colecoes/Sussurros" class="items-colecao esquerda">
         <img src="/static/img_home/colecao33.png" alt="Coleção 3">
         <button class="btn-overlay" type="button"><span>Sussurros</span></button>
       </a>
@@ -180,6 +180,7 @@
       </div>
     </div>
 </section>
+
     <footer>
       <!-- LOGO -->
       <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
@@ -284,6 +285,8 @@
     });
   </script>    
 <script>
+// transição dos vestidos
+  
   const paresVestidos = [
     ["/static/img_home/vestido-1.png", "/static/img_home/vestido 2.png"],
     ["/static/img_home/vestido-3.png", "/static/img_home/vestido-4.png"],
@@ -299,50 +302,80 @@
   const setaDir = document.querySelector(".seta-direita");
   const setaEsq = document.querySelector(".seta-esquerda");
 
-  function atualizarImagens(direcao) {
+  let emTransicao = false; // Trava para impedir cliques frenéticos
 
-  img1.classList.add(direcao);
-  img2.classList.add(direcao);
+  function atualizarImagens() {
+    if (emTransicao) return; 
+    emTransicao = true;
 
-  setTimeout(() => {
-    img1.src = paresVestidos[indice][0];
-    img2.src = paresVestidos[indice][1];
+    // 1. Inicia o efeito (Zoom + Blur + Fade Out)
+    img1.classList.add("trocando");
+    img2.classList.add("trocando");
 
-    const entrar = direcao === "sair-esquerda" 
-      ? "entrar-direita" 
-      : "entrar-esquerda";
-
-    img1.classList.remove(direcao);
-    img2.classList.remove(direcao);
-
-    img1.classList.add(entrar, "active");
-    img2.classList.add(entrar, "active");
-
+    // 2. Espera a imagem sumir e desfocar (600ms)
     setTimeout(() => {
-      img1.classList.remove(entrar, "active");
-      img2.classList.remove(entrar, "active");
-    }, 450);
+      
+      // Troca a foto "nos bastidores"
+      img1.src = paresVestidos[indice][0];
+      img2.src = paresVestidos[indice][1];
 
-  }, 450);
-}
+      // Pequena pausa técnica para o navegador processar a nova imagem
+      setTimeout(() => {
+        // 3. Traz a imagem de volta (Zoom volta, Foco volta)
+        img1.classList.remove("trocando");
+        img2.classList.remove("trocando");
+        
+        // Destrava o botão
+        setTimeout(() => {
+           emTransicao = false; 
+        }, 600); 
+
+      }, 50);
+      
+    }, 600); // Tempo igual ao do CSS (0.6s)
+  }
 
   setaDir.addEventListener("click", () => {
-    indice = (indice + 1) % paresVestidos.length;
-    atualizarImagens("sair-esquerda");
+    if(!emTransicao) {
+        indice = (indice + 1) % paresVestidos.length;
+        atualizarImagens();
+    }
   });
 
   setaEsq.addEventListener("click", () => {
-    indice = (indice - 1 + paresVestidos.length) % paresVestidos.length;
-    atualizarImagens("sair-direita");
+    if(!emTransicao) {
+        indice = (indice - 1 + paresVestidos.length) % paresVestidos.length;
+        atualizarImagens();
+    }
   });
 
-
-  // efeito nas coleções
-  
   
 </script>
 
 
+<script>
+const colecoes = document.querySelectorAll(".items-colecao");
+let colecaoIndex = 0;
+
+function mostrarColecao(i) {
+  colecoes.forEach((item, idx) => {
+    item.style.display = idx === i ? "block" : "none";
+  });
+}
+
+function iniciarCarrosselMobile() {
+  if (window.innerWidth > 768) return;
+
+  mostrarColecao(colecaoIndex);
+
+  setInterval(() => {
+    colecaoIndex = (colecaoIndex + 1) % colecoes.length;
+    mostrarColecao(colecaoIndex);
+  }, 5000);
+}
+
+iniciarCarrosselMobile();
+</script>
 
 
 

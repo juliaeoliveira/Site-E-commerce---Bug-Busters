@@ -38,10 +38,6 @@
     button { margin-top: 20px; padding: 12px; width: 100%; background: #7a4a1c; color: white;
         border: none; border-radius: 8px; font-size: 16px; cursor: pointer;
     }
-    button a {
-        color: white;
-        text-decoration: none;
-    }
     button:hover { background: #523800; }
 
     /* Estilização da seção de imagens */
@@ -192,6 +188,199 @@
     z-index: 999;
 }
 
+/* =========================== */
+/* RESPONSIVIDADE – TELAS GRANDES (≥1200px) */
+/* =========================== */
+@media (max-width: 1500px) {
+    .container {
+        gap: 120px;
+        margin-left: 20px;
+    }
+
+    .outros {
+        margin-left: 900px;
+    }
+}
+
+/* =========================== */
+/* RESPONSIVIDADE – NOTEBOOK MÉDIO (≤1100px) */
+/* =========================== */
+@media (max-width: 1100px) {
+    .container {
+        gap: 60px;
+        padding-top: 100px;
+        margin-left: 0;
+    }
+
+    .info-box { width: 420px; }
+    .endereco-box { width: 220px; }
+
+    .outros {
+        position: static;
+        margin: 40px 0 0 0;
+    }
+}
+
+/* =========================== */
+/* RESPONSIVIDADE – TABLET (≤900px) */
+/* =========================== */
+@media (max-width: 900px) {
+
+    /* Logo */
+    .logo {
+        height: 100px;
+    }
+    .logo.mover-logo {
+        transform: scale(0.35);
+    }
+
+    /* Menu */
+    #menu-inicial {
+        margin-top: 40px;
+    }
+    .menu-btn {
+        width: 240px;
+        font-size: 16px;
+    }
+
+    /* Container conta */
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        padding-top: 40px;
+        padding-bottom: 60px;
+        margin-left: 0;
+    }
+
+    .titulo.verm {
+        position: static;
+        margin: 0 auto 20px;
+        text-align: center;
+    }
+
+    .endereco-box,
+    .info-box {
+        width: 100%;
+    }
+
+    .outros {
+        position: static;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .endereco-box1 {
+        width: 100px;
+    }
+
+    /* Tabela vira scroll horizontal */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    td img {
+        width: 40px;
+    }
+}
+
+/* =========================== */
+/* RESPONSIVIDADE – CELULARES (≤600px) */
+/* =========================== */
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    /* Logo */
+    .logo {
+        height: 90px;
+    }
+    .logo.mover-logo {
+        top: 10px;
+        right: 10px;
+        transform: scale(0.30);
+    }
+
+    /* Botões */
+    .menu-btn {
+        width: 90%;
+        padding: 12px;
+        font-size: 15px;
+    }
+    #sair-btn {
+        width: 130px;
+    }
+    /* Formulários */
+    form {
+        width: 100%;
+        padding: 20px;
+    }
+
+    input, textarea, select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Seções "Conta" */
+    .container {
+        padding-top: 20px;
+    }
+
+    .info-box, 
+    .endereco-box, 
+    .endereco-box1 {
+        width: 90% !important;
+    }
+
+    .outros {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Tabela vira cards */
+    table {
+        display: block;
+        border: none;
+    }
+    tr {
+        display: block;
+        background: #fff;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    th { display: none; }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+    td:last-child {
+        border: none;
+    }
+    td img {
+        width: 60px;
+        height: auto;
+    }
+
+    /* Botões dentro da tabela */
+    .btn-editar-link,
+    td button {
+        text-align: center;
+        width: 45%;
+        font-size: 14px;
+    }
+}
+
+
 
 </style>
 </head>
@@ -206,7 +395,7 @@
     <button type="button" class="menu-btn" onclick="mostrar('secao-cadastrar')">Cadastrar Produto</button>
     <button type="button" class="menu-btn" onclick="mostrar('secao-gerenciar')">Gerenciar Produtos</button>
     <button type="button" class="menu-btn" onclick="mostrar('secao-conta')">Sua Conta</button>
-    <button type="button" class="menu-btn" style="background-color: #6E0606;"><a href="/painel_usuario/lougout" >Sair da conta</a></button>
+    <a href="/painel_usuario/lougout" ><button type="button" id="sair-btn" class="menu-btn" style="background-color: #6E0606;">Sair da conta</button></a>
 </div>
 
 <!-- CADASTRAR PRODUTO -->
@@ -269,29 +458,24 @@
         <tr>
             <th>Nome</th><th>Preço</th><th>Estoque</th><th>Imagem</th><th>Editar</th><th>Deletar</th>
         </tr>
-
-        {% for produto in produtos %}
-            {% if produto.quantidade_estoque > 0 %}
+        {% for i in produtos %}
             <tr>
-                <td>{{ produto.nome_produto }}</td>
-                <td>{{ produto.preco }}</td>
-                <td>{{ produto.quantidade_estoque }}</td>
-
+                <td>{{i.nome_produto}}</td>
+                <td>{{i.preco}}</td>
+                <td>{{i.quantidade_estoque}}</td>
                 <td>
-                    {% for img in [produto.imagem1_url, produto.imagem2_url, produto.imagem3_url, produto.imagem4_url] %}
+                    {% for img in [i.imagem1_url, i.imagem2_url, i.imagem3_url, i.imagem4_url] %}
                         {% if img %}
                             <img src="{{ url_for('static', path='uploads/' + img) }}" width="50">
                         {% endif %}
                     {% endfor %}
                 </td>
+                <td><a href="/usuario/admin/produto/editar/{{i.id}}" class="btn-editar-link">Editar</a></td>
 
-                <td>
-                    <a href="/usuario/admin/produto/editar/{{ produto.id }}" class="btn-editar-link">Editar</a>
-                </td>
-
-                <form action="/usuario/admin/produto/deletar/{{produto.id}}" method="post"> <td><button type="submit">Deletar</button></td> </form>
+                <form action="/usuario/admin/produto/deletar/{{i.id}}" method="post">
+                    <td><button type="submit">Deletar</button></td>
+                </form>
             </tr>
-            {% endif %}
         {% endfor %}
     </table>
 

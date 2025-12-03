@@ -1,5 +1,4 @@
 
-
 * {
   margin: 0;
   padding: 0;
@@ -28,7 +27,7 @@ body {
 
   height: 80px;
   /* Define a altura do logo */
-  padding-left: 130px;
+  padding-left: 0;
   /* Espaço à esquerda do logo */
 }
 
@@ -39,46 +38,53 @@ body {
   padding-right: 150px;
 }
 
-
-
 .menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+/* .menu {
   position: fixed;
   /* Fixa o menu na tela */
-  z-index: 10;
+  /* z-index: 10; */
   /* Garante que o menu fique acima de outros elementos */
-  display: flex;
+  /* display: flex; */
   /* Organiza os itens do menu em linha */
-  width: 100%;
+  /* width: 100%; */
   /* O menu ocupa toda a largura da tela */
-  align-items: center;
+  /* align-items: center; */
   /* Centraliza os itens na vertical */
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* Distribui os itens do menu com espaços entre eles */
-  background-color: hsla(0, 0%, 100%, 0.692);
+  /* background-color: hsla(0, 0%, 100%, 0.692); */
   /* Cor de fundo com transparência */
-  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
   /* Fonte do menu */
-  color: #ffffff;
+  /* color: #ffffff; */
   /* Cor do texto do menu */
-}
-
-/* Estilo do menu de navegação */
-nav {
-  gap: 200px;
-  justify-content: center;
-  display: flex;
-  font-family: "Libre Caslon Text";
-  font-size: 22px;
-  color: #523800;
-
-}
+/* } */
 
 /* Estilo dos links dentro do nav */
-nav a {
+.menu nav a {
   color: #523800;
   font-size: 20px;
   /* Define o tamanho da fonte */
-  padding: 25px;
+  padding: 20px;
   /* Espaçamento interno */
   text-decoration: underline;
   /* Ativa o sublinhado */
@@ -87,7 +93,36 @@ nav a {
 }
 
 
+
 /* Estilo para os links do menu ao passar o mouse (hover) */
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Estilo para os links do menu ao passar o mouse (hover) */
+
+
+
+
+
+
 /* PAGINA SOBRE NOS */
 
 
@@ -147,7 +182,7 @@ nav a {
 .texto1 {
   display: block;
   font-family: "Junge", serif;
-  font-size: 24px;
+  font-size: 22px;
   color: #523800;
   margin-bottom: 10px;
 }
@@ -155,7 +190,7 @@ nav a {
 /* Texto do parágrafo */
 .texto2 {
   font-family: Judson, serif;
-  font-size: 20px;
+  font-size: 18px;
   color: #523800;
   line-height: 1.6;
 
@@ -236,10 +271,6 @@ h1 {
 }
 
 /* Vestidos */
-
-
-
-
 /* Seção principal com ID "vestidos" */
 #vestidos {
   height: 57vh;
@@ -657,73 +688,6 @@ footer li {
   font-size: 32px;
   text-transform: none;
   letter-spacing: 1px;
-}
-
-
-
-/* transição vestidos */
-
-.items-produto {
-  width: 400px;
-  height: 400px;
-  overflow: hidden;
-  position: relative;
-}
-
-.items-produto .wrap {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: 
-    transform .6s ease,
-    opacity .6s ease;
-}
-
-.items-produto img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* mantém tudo bonito */
-}
-
-/* SAÍDA */
-.sair-esquerda {
-  transform: translateX(-260px);
-  opacity: 1;
-}
-
-.sair-direita {
-  transform: translateX(260px);
-  opacity: 1;
-}
-
-/* ENTRADA */
-.entrar-esquerda {
-  transform: translateX(-260px);
-  opacity: 1;
-}
-
-.entrar-direita {
-  transform: translateX(260px);
-  opacity: 1;
-}
-
-.entrar-esquerda,
-.entrar-direita {
-  animation: entrar .1s ease forwards;
-}
-
-@keyframes entrar {
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 
@@ -1334,9 +1298,7 @@ footer li {
   .midia {
     flex-direction: row;
   }
-
 }
-
 
 
 
@@ -1484,10 +1446,6 @@ footer li {
 
 
 
-
-
-
-
 /* ============================
      NOTEBOOK / DESKTOP MÉDIO
 ============================ */
@@ -1578,6 +1536,11 @@ footer li {
 .items-colecoes .items-colecao.centro:hover {
   transform: translateY(-75px);
 }
+
+/* ============================
+    TABLET E NOTEBOOK PEQUENO
+============================ */
+
 @media (max-width: 900px) and (min-width: 481px) {
 
   /* MENU */
@@ -1631,6 +1594,7 @@ footer li {
   footer {
     flex-wrap: wrap;
   }
+
 
 }
 
@@ -1693,6 +1657,9 @@ footer li {
   margin-bottom: 100px;
 }
 
+
+
+
 /* --- COLEÇÕES MOBILE → 1 POR VEZ RETA --- */
 @media (max-width: 768px) {
   .items-colecoes {
@@ -1704,6 +1671,7 @@ footer li {
   }
 
   .items-colecao {
+    height: auto;
     min-width: 100%;
     transform: none !important; /* remove inclinação */
     opacity: 1 !important;
@@ -1714,6 +1682,10 @@ footer li {
     border-radius: 0;
   }
 
+.botao-vercolecao{
+  margin-top: 50px;
+}
+
   .destaque {
     transform: none !important;
   }
@@ -1723,10 +1695,6 @@ footer li {
 
 /* --- VESTIDOS: MOBILE APENAS 1 IMAGEM --- */
 @media (max-width: 768px) {
-  .items-produto:nth-child(2) { /* some o segundo vestido */
-    display: none;
-  }
-
   .galeria-vestidos {
     justify-content: center;
     position: relative;
@@ -1790,3 +1758,61 @@ footer li {
     width: 22px;
   }
 }
+
+
+
+/* --- CONTAINER DO PRODUTO (A CAIXA) --- */
+.items-produto {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  background-color: #FBFCF7;
+  border-radius: 4px; /* Mantendo seu arredondado */
+  cursor: pointer;    /* Mãozinha para indicar que é clicável */
+
+  /* Transição suave para o movimento da caixa inteira */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* --- EFEITO HOVER (QUANDO PASSA O MOUSE) --- */
+.items-produto:hover {
+  /* Levanta 10 pixels */
+  transform: translateY(-10px);
+  
+  /* Sombra elegante marrom/dourada (baseada na sua paleta) */
+  box-shadow: 0 15px 30px rgba(82, 56, 0, 0.2); 
+}
+
+/* ------------------------------------------------ */
+
+/* --- AQUI MANTÉM A LÓGICA DA TRANSIÇÃO DE IMAGEM QUE FIZEMOS ANTES --- */
+
+.items-produto .wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.items-produto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  /* Mantém o tempo da transição de troca de imagem */
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
+
+/* Classe adicionada pelo JS para trocar a foto */
+.items-produto img.trocando {
+  opacity: 0;
+  transform: scale(1.1);
+  filter: blur(8px);
+}
+

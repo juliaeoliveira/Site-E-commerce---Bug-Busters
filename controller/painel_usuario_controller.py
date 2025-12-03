@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import func
 from database import get_db
 from controller.usuario_autenticacao import verificar_token
-from models import Usuario_Model, Produto, Endereco, Pedido
+from models import Usuario_Model, Produto, Endereco, Pedido ,Pagamento
 import random
 
 templates=Jinja2Templates(directory="view/templates")
@@ -396,6 +396,23 @@ def cancelar_pedido(request: Request, db: Session = Depends(get_db), id_pedido :
         })
     
     pagamento = pedido.pagamento
+
+    if not pagamento:
+        # Criar pagamento padrão se não existir
+        pagamento = Pagamento(
+            id_pedido=pedido.id,
+            id_usuario=pedido.id_usuario,
+            valor=pedido.valor_total,
+            metodo_pagamento="não registrado",
+            cnpj_loja="03.774.819/0005-28",
+            status=False
+        )
+        pedido.status = "cancelado"
+        db.add(pagamento)
+        db.commit()
+        db.refresh(pedido)
+        db.refresh(pagamento)
+        return RedirectResponse (url="/painel_usuario/meus_pedidos", status_code=303)
     
     pedido.status = "cancelado"
     pagamento.status = False
