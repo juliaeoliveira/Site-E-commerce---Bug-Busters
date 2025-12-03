@@ -52,3 +52,4 @@ def historico(request: Request):
 
 # python -m uvicorn main:app --reload
 
+
