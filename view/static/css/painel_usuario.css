@@ -257,11 +257,35 @@ body {
 #hamburger {
   appearance: none;
   -webkit-appearance: none;
+}               
+
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
 }
 
-/* Estilo para os links do menu ao passar o mouse (hover) */
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
 
-
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
 
 
 
@@ -937,6 +961,8 @@ footer li {
 
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
 .hamburger {
   display: none;
   background: transparent;
@@ -947,6 +973,7 @@ footer li {
   color: #523800;
 }
 
+/* overlay (fundo escuro no mobile) */
 .overlay {
   display: none;
   position: fixed;
@@ -962,18 +989,21 @@ footer li {
   opacity: 1;
 }
 
-/* ===================== RESPONSIVO MENU ===================== */
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
 @media (max-width: 900px) {
   .menu {
     justify-content: space-between;
     padding: 0 15px;
   }
-  
+
   #logo {
     padding-left: 0 !important;
     height: 70px;
   }
-  
+
+  /* botão hamburguer */
   .menu .hamburger {
     display: block;
     background: transparent;
@@ -983,17 +1013,20 @@ footer li {
     padding: 10px;
     color: #523800;
     z-index: 11;
+    /* margin: 30px; */
   }
-  
+
+  /* overlay */
   .overlay {
     display: none;
   }
-  
+
   .overlay.active {
     display: block;
     opacity: 1;
   }
-  
+
+  /* NAV vira painel lateral */
   .text-menu {
     position: fixed;
     top: 90px;
@@ -1008,71 +1041,74 @@ footer li {
     transition: left 0.25s ease;
     z-index: 10;
   }
-  
+
   .text-menu.active {
     left: 0;
   }
-  
+
   .text-menu a {
     font-size: 20px;
     padding: 10px;
   }
-  
+
+  /* ÍCONES fixos à direita SEM SUMIR */
   .login-dropdown-wrapper {
     gap: 18px;
     margin-right: 0 !important;
     z-index: 12;
   }
-  
+
   #logout-btn {
-    margin: 25px;
+    margin: 25px; /* distância agradável do último item */
   }
 }
-
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
 @media (max-width: 1116px) and (min-width: 901px) {
   .text-menu {
-    gap: 60px !important;
+    gap: 60px !important; /* reduz o espaço entre os links */
   }
-  
+
   .menu nav a {
     font-size: 20px;
     padding: 15px;
   }
-  
+
   .menu {
-    padding: 0 15px;
+    padding: 0 15px; /* ajusta respiro lateral */
   }
-  
+
   #logo {
-    height: 70px;
+    height: 70px; /* logo menor */
   }
-  
+
   .login-dropdown-wrapper {
     gap: 15px;
   }
 }
 
+/* Painel maior no desktop */
 @media (min-width: 901px) {
   #login-dropdown {
-    padding-top: 40px;
-    padding-bottom: 50px;
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
   }
-  
+
   #login-dropdown h3 {
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
   }
-  
+
   .opcoes {
-    margin: 25px 0;
+    margin: 25px 0; /* mais espaçamento entre os itens */
   }
-  
+
   #logout-btn {
-    margin: 30px;
+    margin: 30px; /* distância agradável do último item */
   }
 }
 
 /* ------------------- FOOTER ------------------- */
+
 footer {
   background-color: #5a0101;
   color: white;
@@ -1087,13 +1123,15 @@ footer {
   font-family: "Inter", sans-serif;
 }
 
+/* LOGO */
 .sob {
   height: 100px;
   width: auto;
-  flex: 0 1 150px;
-  margin-bottom: 0;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
 }
 
+/* COLUNAS */
 footer .coluna {
   text-align: center;
   flex: 0 0 auto;
@@ -1110,6 +1148,8 @@ footer div p {
   color: #bdb0ae;
 }
 
+
+/* LISTAS */
 footer ul {
   list-style: none;
   padding: 0;
@@ -1120,6 +1160,7 @@ footer li {
   font-size: 14px;
 }
 
+/* LINHAS VERTICAIS */
 .linha {
   width: 1px;
   transform: rotate(0deg);
@@ -1128,19 +1169,20 @@ footer li {
   flex: 0 0 auto;
 }
 
+/* ÍCONES DE CONTATO */
 .telefone,
 .whatsapp {
   height: 18px;
   margin-right: 6px;
   vertical-align: middle;
 }
-
 .instagram,
 .facebook {
   height: 40px;
   text-align: right;
 }
 
+/* REDES SOCIAIS */
 .midia {
   display: flex;
   flex-direction: column;
@@ -1148,6 +1190,7 @@ footer li {
   align-items: center;
 }
 
+/* TEXTO FINAL */
 .direitos {
   width: 100%;
   text-align: left;
@@ -1155,30 +1198,38 @@ footer li {
   margin-top: 40px;
 }
 
-/* ------------------- RESPONSIVIDADE FOOTER ------------------- */
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
 @media (max-width: 850px) {
   .linha {
     display: none;
   }
-  
+
   footer {
     justify-content: center;
   }
-  
+
   footer .coluna {
     min-width: 35%;
   }
 }
 
+/* Celulares estreitos */
 @media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
   footer .coluna {
     min-width: 100%;
   }
-  
+
   .midia {
     flex-direction: row;
   }
 }
+
 
 
 
@@ -1226,7 +1277,7 @@ footer li {
     max-width: 100%;
   }
 
-  .sob {
+  .sobre-container .sob {
     font-size: 48px;
   }
 
@@ -1298,9 +1349,9 @@ footer li {
     width: 100%;
     font-size: 14px;
   }
-
-  /* ===== FOOTER ===== */
-  footer {
+}
+  /* ========================== FOOTER========== ===== */
+  /* footer {
     flex-direction: column;
     gap: 20px;
     text-align: center;
@@ -1322,10 +1373,7 @@ footer li {
   }
   
   
-}
-
-
-
+} */
 
 
 /* ============================
@@ -1333,13 +1381,13 @@ footer li {
 ============================ */
 @media (max-width: 1280px) and (min-width: 901px) {
 
-  .text-menu {
+  /* .text-menu {
     gap: 70px;
   }
 
   #logo {
     height: 75px;
-  }
+  } */
 
   /* SOBRE */
   #box-noiva-img img {
@@ -1370,7 +1418,7 @@ footer li {
 ============================ */
 @media (max-width: 900px) and (min-width: 481px) {
 
-  /* MENU */
+  /* MENU
   #logo {
     height: 65px;
   }
@@ -1381,17 +1429,18 @@ footer li {
 
   .text-menu {
     gap: 40px;
-  }
+  } */
+  /*==============================*/
 
   /* SOBRE NÓS */
   .sobre-container {
     gap: 80px;
   }
-
-  .sob {
+/*==================FOOTER========================*/
+  /* .sob {
     font-size: 60px;
-  }
-
+  } */
+/*===================================================*/
   #box-noiva-img img {
     width: 430px;
     height: auto;
@@ -1416,12 +1465,15 @@ footer li {
     width: 260px;
     height: 380px;
   }
-
+}
+  /*=======================================*/
   /* FOOTER */
-  footer {
+  /* footer {
     flex-wrap: wrap;
   }
-}
+} */
+/*========================================*/
+
 
 /* --- COLEÇÕES MOBILE → 1 POR VEZ RETA --- */
 @media (max-width: 768px) {

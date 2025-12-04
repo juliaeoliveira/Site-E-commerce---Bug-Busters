@@ -15,71 +15,59 @@
     <title>Sob Veu</title>
 </head>
 <body> 
-    <!-- MENU FIXO RESPONSIVO -->
-    <header class="menu">
-      <!-- LOGO -->
-      <a href="/painel_usuario">
-        <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
-      </a>
+  <!-- MENU FIXO RESPONSIVO -->
+  <header class="menu">
+    <!-- LOGO -->
+    <a href="/painel_usuario">
+      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+    </a>
 
-      <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
-      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-        ☰
-      </button>
+    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      ☰
+    </button>
 
-      <!-- NAV PRINCIPAL -->
-      <nav class="text-menu" id="nav-menu">
-        <a href="/painel_usuario/produtos">Vestidos</a>
-        <a href="/painel_usuario/colecoes">Coleções</a>
-        <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
-      </nav>
+    <!-- NAV PRINCIPAL -->
+    <nav class="text-menu" id="nav-menu">
+      <a href="/painel_usuario/produtos">Vestidos</a>
+      <a href="/painel_usuario/colecoes">Coleções</a>
+      <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+    </nav>
 
-      <!-- ÍCONES (login + carrinho) -->
-      <div class="login-dropdown-wrapper">
-        <img
-          class="login"
-          src="/static/img_home/login.png"
-          width="20px"
-          title="login"
-          alt="login"
-          id="login-icon"
-        />
+    <!-- ÍCONES (login + carrinho) -->
+    <div class="login-dropdown-wrapper">
+      <img class="login" src="/static/img_home/login.png" width="20px" title="login" alt="login" id="login-icon" />
 
-        <div id="login-dropdown" class="hidden" aria-hidden="true">
-          <h3><strong>Bem-vinda, {{primeiro_nome}}!</strong></h3>
+      <div id="login-dropdown" class="hidden" aria-hidden="true">
+        <h3><strong>Bem-vinda, {{primeiro_nome}}!</strong></h3>
 
-          <ul class="dropdown-list">
-            <li class="opcoes">
-              <a href="/painel_usuario/meus_dados">Sua Conta</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-            </li>
-            <li class="opcoes">
-              <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-            </li>
-          </ul>
-          <a href="/painel_usuario/lougout">
-            <button id="logout-btn" type="button">Sair da conta</button>
-          </a>
-        </div>
-
-        <a href="/painel_usuario/carrinho">
-          <img
-            src="/static/img_home/carrinho.png"
-            width="20px"
-            title="Carrinho"
-            alt="Carrinho"
-          />
+        <ul class="dropdown-list">
+          <li class="opcoes">
+            <a href="/painel_usuario/meus_dados">Sua Conta</a>
+          </li>
+          <li class="opcoes">
+            <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+          </li>
+          <li class="opcoes">
+            <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+          </li>
+          <li class="opcoes">
+            <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+          </li>
+        </ul>
+        <a href="/painel_usuario/lougout">
+          <button id="logout-btn" type="button">Sair da conta</button>
         </a>
       </div>
-    </header>
 
-    <!-- Overlay para escurecer o fundo no mobile -->
-    <div class="overlay" id="overlay"></div>
+      <a href="/painel_usuario/carrinho">
+        <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho" />
+      </a>
+    </div>
+  </header>
+
+  <!-- Overlay para escurecer o fundo no mobile -->
+  <div class="overlay" id="overlay"></div>
 
     <main>
 
@@ -125,15 +113,19 @@
       </div>
 
       <div class="items-produto">
-        <div class="wrap1">
-          <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
-        </div>
+        <a href="/painel_usuario/produtos">
+          <div class="wrap1">
+            <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
+          </div>
+        </a>
       </div>
 
       <div class="items-produto">
-        <div class="wrap2">
-          <img id="vestido2" src="/static/img_home/vestido 2.png" alt="">
-        </div>
+        <a href="/painel_usuario/produtos">
+          <div class="wrap2">
+            <img id="vestido2" src="/static/img_home/vestido 2.png" alt="">
+          </div>
+        </a>
       </div>
 
       <div class="seta seta-direita">
@@ -214,7 +206,7 @@
       </div>
     </div>
 </section>
-
+    </main>
     <footer>
       <!-- LOGO -->
       <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
