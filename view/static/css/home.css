@@ -660,73 +660,6 @@ footer li {
 
 
 
-/* transição vestidos */
-
-.items-produto {
-  width: 400px;
-  height: 400px;
-  overflow: hidden;
-  position: relative;
-}
-
-.items-produto .wrap {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: 
-    transform .6s ease,
-    opacity .6s ease;
-}
-
-.items-produto img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* mantém tudo bonito */
-}
-
-/* SAÍDA */
-.sair-esquerda {
-  transform: translateX(-260px);
-  opacity: 1;
-}
-
-.sair-direita {
-  transform: translateX(260px);
-  opacity: 1;
-}
-
-/* ENTRADA */
-.entrar-esquerda {
-  transform: translateX(-260px);
-  opacity: 1;
-}
-
-.entrar-direita {
-  transform: translateX(260px);
-  opacity: 1;
-}
-
-.entrar-esquerda,
-.entrar-direita {
-  animation: entrar .1s ease forwards;
-}
-
-@keyframes entrar {
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-
-
 
 
 /* ANIMAÇÃO + POSICIONAMENTO  */
@@ -1579,42 +1512,71 @@ footer li {
   }
 }
 
-
 /* --- COLEÇÕES MOBILE → 1 POR VEZ RETA --- */
 @media (max-width: 768px) {
   .items-colecoes {
     display: flex;
     overflow: hidden;
-    width: 90%;
+    width: 100%;
     justify-content: center;
     position: relative;
   }
 
   .items-colecao {
-    min-width: 80%;
+    height: auto;
+    min-width: 100%;
     transform: none !important; /* remove inclinação */
     opacity: 1 !important;
   }
 
   .items-colecao img {
-    margin-top: 90px;
-    height: auto;
-    margin: 25px;
     width: 100%;
     border-radius: 0;
   }
 
+.botao-vercolecao{
+  margin-top: 50px;
+}
+
   .destaque {
-    
     transform: none !important;
   }
 }
 
 
-/* ===================== */
-/*  AGENDAMENTOS – MOBILE */
-/* ===================== */
-@media (max-width: 600px) {
+
+/* --- VESTIDOS: MOBILE APENAS 1 IMAGEM --- */
+@media (max-width: 768px) {
+  .galeria-vestidos {
+    justify-content: center;
+    position: relative;
+  }
+
+  .items-produto img {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .seta-esquerda, .seta-direita {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .seta-esquerda {
+    left: 10px;
+  }
+
+  .seta-direita {
+    right: 10px;
+  }
+}
+
+
+
+/* --- AGENDAMENTOS MOBILE --- */
+@media (max-width: 768px) {
   #Agendamentos .agendamentos {
     padding: 40px 20px;
     text-align: center;
@@ -1626,293 +1588,81 @@ footer li {
 
   #Agendamentos p {
     font-size: 1rem;
-    margin-bottom: 20px;
+    line-height: 1.4;
+    padding: 0 10px;
   }
 
   #botao-boasvindas {
-    width: 80%;
-    max-width: 280px;
-    height: 45px;
+    width: 90%;
+    max-width: 320px;
+    height: 50px;
+    margin: 15px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin: 0 auto;
+  }
+
+  #botao-boasvindas a.numero {
+    font-size: 1.1rem;
   }
 
   #botao-boasvindas img {
-    width: 20px;
-  }
-}
-
-@media (max-width: 700px) {
-  .galeria-vestidos {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .seta {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45px;
-    cursor: pointer;
-    z-index: 2;
-  }
-
-  .seta-esquerda { left: 10px; }
-  .seta-direita { right: 10px; }
-
-  #vestido1 {
-    display: block;
-    width: 80%;
-    margin: 0 auto;
-    object-fit: contain;
-    z-index: 1;
-  }
-
-  /* animações */
-  #vestido1.sair-esquerda { animation: sairEsq 0.45s forwards ease; }
-  #vestido1.sair-direita { animation: sairDir 0.45s forwards ease; }
-  #vestido1.entrar-esquerda { animation: entrarEsq 0.45s forwards ease; }
-  #vestido1.entrar-direita { animation: entrarDir 0.45s forwards ease; }
-
-  @keyframes sairEsq { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-80px); opacity: 0; } }
-  @keyframes sairDir { from { transform: translateX(0); opacity: 1; } to { transform: translateX(80px); opacity: 0; } }
-  @keyframes entrarEsq { from { transform: translateX(-80px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-  @keyframes entrarDir { from { transform: translateX(80px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
-  /* esconder outros itens-produto */
-  .items-produto:not(:first-child) {
-    display: none;
+    width: 22px;
   }
 }
 
 
-/* =============================== */
-/*  COLEÇÕES – MOBILE (CARROSSEL) */
-/* =============================== */
-@media (max-width: 700px) {
+/* --- CONTAINER DO PRODUTO (A CAIXA) --- */
+.items-produto {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  background-color: #FBFCF7;
+  border-radius: 4px; /* Mantendo seu arredondado */
+  cursor: pointer;    /* Mãozinha para indicar que é clicável */
 
-  .items-colecoes {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: 350px;
-  }
-
-  .items-colecao {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 80%;
-    transform: translateX(-50%);
-    display: none;
-    transition: transform 0.45s ease, opacity 0.45s ease;
-  }
-
-  .items-colecao img {
-    margin: -190px;
-    width: 100%;
-    height: 901;
-    object-fit: contain;
-  }
-
-  /* estado visível */
-  .items-colecao.ativo {
-    display: block;
-  }
-
-  /* animações */
-  .slide-in {
-    transform: translateX(100%);
-    opacity: 0;
-    animation: slideIn 0.45s forwards ease;
-  }
-
-  .slide-out {
-    
-    transform: translateX(0);
-    opacity: 1;
-    animation: slideOut 0.45s forwards ease;
-  }
-
-  @keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to   { transform: translateX(-50%); opacity: 1; }
-  }
-
-  @keyframes slideOut {
-    from { transform: translateX(-50%); opacity: 1; }
-    to   { transform: translateX(-150%); opacity: 0; }
-  }
+  /* Transição suave para o movimento da caixa inteira */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-
-
-
-/* -----------------------------------------------------
-   COLEÇÕES — MOBILE (somente abaixo de 700px)
-------------------------------------------------------*/
-@media (max-width: 700px) {
-
-  /* Contêiner principal das coleções */
-  .items-colecoes {
-    position: relative;
-    width: 100%;
-    padding: 20px 0;
-    overflow: hidden;
-    height: 460px; /* deixa espaço p/ imagem + botão, ajustável */
-  }
-
-  /* Cada item (cada coleção) */
-  .items-colecao {
-   
-    left: 8%;
-    top: 0;
-    width: 85%;                /* NÃO ocupa a tela toda (como você pediu) */
-    transform: translateX(-50%);
-    display: none;
-    opacity: 0;
-  }
-
-  /* A imagem aparece INTEIRA e centralizada */
-  .items-colecao img {
-    width: 100%;
-    height: auto;              /* impede corte na altura */
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* Item visível */
-  .items-colecao.ativo {
-    display: block;
-    opacity: 1;
-  }
-
-  /* -------------------------------
-     BOTÃO POR CIMA DA IMAGEM
-     Centralizado, transparente
-  --------------------------------*/
-  .items-colecao .btn-overlay {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.55);
-    padding: 10px 28px;
-    font-size: 1.1rem;
-    border-radius: 6px;
-    border: none;
-    text-align: center;
-  }
-
-  /* -------------------------------
-       ANIMAÇÃO DE TROCA (carrossel)
-       Sai pela esquerda
-       Entra pela direita
-  --------------------------------*/
-  .slide-in {
-    animation: slideIn 0.45s ease forwards;
-  }
-
-  .slide-out {
-    animation: slideOut 0.45s ease forwards;
-  }
-
-  @keyframes slideIn {
-    from { transform: translate(100%, -50%); opacity: 0; }
-    to   { transform: translate(-50%, -50%); opacity: 1; }
-  }
-
-  @keyframes slideOut {
-    from { transform: translate(-50%, -50%); opacity: 1; }
-    to   { transform: translate(-150%, -50%); opacity: 0; }
-  }
-
-  /* -------------------------------
-     Botão "ver coleções"
-     Sempre abaixo da imagem
-  --------------------------------*/
-  .botao-vercolecao {
-    margin-top: 60px;  /* Ajusta posição abaixo da imagem */
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
+/* --- EFEITO HOVER (QUANDO PASSA O MOUSE) --- */
+.items-produto:hover {
+  /* Levanta 10 pixels */
+  transform: translateY(-10px);
+  
+  /* Sombra elegante marrom/dourada (baseada na sua paleta) */
+  box-shadow: 0 15px 30px rgba(82, 56, 0, 0.2); 
 }
 
+/* ------------------------------------------------ */
 
+/* --- AQUI MANTÉM A LÓGICA DA TRANSIÇÃO DE IMAGEM QUE FIZEMOS ANTES --- */
 
-@media (max-width: 700px) {
-
-  /* Centraliza a galeria */
-  .galeria-vestidos {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Setas */
-  .seta {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45px;
-    cursor: pointer;
-    z-index: 2;
-  }
-
-  .seta-esquerda { left: 5%; }
-  .seta-direita { right: 5%; }
-
-  /* Apenas 1 vestido visível */
-  .items-produto:not(:first-child) {
-    display: none;
-  }
-
-  /* Imagem central */
-  #vestido1 {
-    width: 80%;
-    display: block;
-    margin: 0 auto;
-    object-fit: contain;
-    z-index: 1;
-  }
-
-  /* Animações */
-  #vestido1.sair-esquerda { animation: sairEsq 0.45s forwards ease; }
-  #vestido1.sair-direita { animation: sairDir 0.45s forwards ease; }
-  #vestido1.entrar-esquerda { animation: entrarEsq 0.45s forwards ease; }
-  #vestido1.entrar-direita { animation: entrarDir 0.45s forwards ease; }
-
-  @keyframes sairEsq { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-80px); opacity: 0; } }
-  @keyframes sairDir { from { transform: translateX(0); opacity: 1; } to { transform: translateX(80px); opacity: 0; } }
-  @keyframes entrarEsq { from { transform: translateX(-80px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-  @keyframes entrarDir { from { transform: translateX(80px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.items-produto .wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (max-width: 700px) {
-  /* Força a exibição do primeiro vestido */
-  .items-produto:first-child {
-    display: flex !important;
-    justify-content: center;
-    height: auto;
-  }
+.items-produto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  /* Mantém o tempo da transição de troca de imagem */
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
 
-  #vestido1 {
-    display: block !important;
-    width: 80%;
-    height: auto;
-    object-fit: contain;
-    margin: 0 auto;
-  }
-
-  .wrap1 {
-    height: auto;
-  }
+/* Classe adicionada pelo JS para trocar a foto */
+.items-produto img.trocando {
+  opacity: 0;
+  transform: scale(1.1);
+  filter: blur(8px);
 }
