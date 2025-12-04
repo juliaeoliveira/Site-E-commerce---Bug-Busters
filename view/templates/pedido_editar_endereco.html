@@ -56,10 +56,11 @@
 <main>
     <div class="container">
         <h2>Editar Endereço</h2>
-        <form id="formEditarEndereco" action="/painel_usuario/editar_endereco" method="post">
+        <form id="formEditarEndereco" action="/pedido/editar_endereco" method="post">
 
             <label for="cep">CEP:</label>
             <input type="text" id="cep" name="cep" value="{{ endereco.cep }}" required>
+            <div id="cepError" class="error-message" style="color: red; font-size: 12px; display: none;"></div>
 
             <label for="rua">Rua:</label>
             <input type="text" id="rua" name="rua" value="{{ endereco.rua }}" required>
@@ -179,9 +180,126 @@
 
     <script>
         const form = document.getElementById('formEditarEndereco');
+        const cepInput = document.getElementById('cep');
+        const cepError = document.getElementById('cepError');
+        const buscarCepBtn = document.getElementById('buscarCep');
+        
+        // Elementos do endereço
+        const ruaInput = document.getElementById('rua');
+        const bairroInput = document.getElementById('bairro');
+        const cidadeInput = document.getElementById('cidade');
+        const estadoSelect = document.getElementById('estado');
 
+        // Função para validar o CEP
+        function validarCEP(cep) {
+            const cepLimpo = cep.replace(/\D/g, '');
+            
+            if (cepLimpo.length !== 8) {
+                return false;
+            }
+            
+            const regexCEP = /^\d{5}-\d{3}$/;
+            return regexCEP.test(cep);
+        }
+
+        // Função para buscar CEP via API ViaCEP
+        function buscarCEP() {
+            const cep = cepInput.value.replace(/\D/g, '');
+            
+            if (cep.length !== 8) {
+                cepError.textContent = 'CEP inválido. Digite 8 números.';
+                cepError.style.display = 'block';
+                return;
+            }
+            
+            // Mostrar indicador de carregamento
+            buscarCepBtn.textContent = 'Buscando...';
+            buscarCepBtn.disabled = true;
+            
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    buscarCepBtn.textContent = 'Buscar CEP';
+                    buscarCepBtn.disabled = false;
+                    
+                    if (data.erro) {
+                        cepError.textContent = 'CEP não encontrado. Verifique e tente novamente.';
+                        cepError.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Preencher os campos com os dados do CEP
+                    ruaInput.value = data.logradouro || '';
+                    bairroInput.value = data.bairro || '';
+                    cidadeInput.value = data.localidade || '';
+                    
+                    // Selecionar o estado correspondente
+                    const estadoSigla = data.uf;
+                    if (estadoSigla) {
+                        estadoSelect.value = estadoSigla;
+                    }
+                    
+                    // Focar no campo número após preencher o endereço
+                    document.getElementById('numero').focus();
+                    
+                    // Esconder mensagem de erro se existir
+                    cepError.style.display = 'none';
+                    
+                    // Mostrar mensagem de sucesso
+                    alert('✅ Endereço encontrado e preenchido automaticamente!');
+                })
+                .catch(error => {
+                    buscarCepBtn.textContent = 'Buscar CEP';
+                    buscarCepBtn.disabled = false;
+                    cepError.textContent = 'Erro ao buscar CEP. Tente novamente.';
+                    cepError.style.display = 'block';
+                    console.error('Erro na busca do CEP:', error);
+                });
+        }
+
+        // Formatar o CEP enquanto o usuário digita
+        cepInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '-' + value.substring(5, 8);
+            }
+            
+            e.target.value = value;
+            
+            // Buscar automaticamente quando o CEP estiver completo
+            if (value.length === 9) { // 5 números + hífen + 3 números
+                buscarCEP();
+            }
+        });
+
+        // Botão para buscar CEP manualmente
+        buscarCepBtn.addEventListener('click', buscarCEP);
+
+        // Validar o CEP ao enviar o formulário
         form.addEventListener('submit', function (e) {
             e.preventDefault();
+
+            const cep = cepInput.value.trim();
+            
+            // Verifica se o CEP está vazio
+            if (!cep) {
+                cepError.textContent = 'CEP é obrigatório';
+                cepError.style.display = 'block';
+                cepInput.focus();
+                return;
+            }
+
+            // Valida o formato do CEP
+            if (!validarCEP(cep)) {
+                cepError.textContent = 'CEP inválido. Use o formato: XXXXX-XXX (ex: 08161-540)';
+                cepError.style.display = 'block';
+                cepInput.focus();
+                return;
+            }
+
+            // Se o CEP for válido, esconde a mensagem de erro
+            cepError.style.display = 'none';
 
             const formData = new FormData(form);
 
@@ -200,6 +318,21 @@
             .catch(() => {
                 alert('❌ Erro de conexão ao enviar os dados.');
             });
+        });
+
+        // Remover mensagem de erro quando o usuário começar a digitar
+        cepInput.addEventListener('input', function() {
+            if (cepError.style.display === 'block') {
+                cepError.style.display = 'none';
+            }
+        });
+
+        // Permitir buscar CEP pressionando Enter no campo CEP
+        cepInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                buscarCEP();
+            }
         });
 
         const loginIcon = document.getElementById("login-icon");
