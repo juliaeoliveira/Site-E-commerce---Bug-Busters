@@ -15,10 +15,10 @@
     <title>Sob Veu</title>
 </head>
 <body> 
-    <!-- MENU FIXO RESPONSIVO -->
+  <!-- MENU FIXO RESPONSIVO -->
   <header class="menu">
     <!-- LOGO -->
-    <a href="/">
+    <a href="/painel_usuario">
       <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
     </a>
 
@@ -148,11 +148,12 @@
         <button class="btn-overlay" type="button"><span>Sussurros</span></button>
       </a>
     </div>
+
     <nav>
       <a class="botao-vercolecao" href="/colecoes">ver coleções</a>
     </nav>
-
-
+    
+    
     <hr class="linha-colecao">
   </div>
 </section>
@@ -180,6 +181,7 @@
       </div>
     </div>
 </section>
+
     <footer>
       <!-- LOGO -->
       <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
@@ -282,7 +284,8 @@
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeMenu();
     });
-  </script>    
+  </script>  
+    
 <script>
   const paresVestidos = [
     ["/static/img_home/vestido-1.png", "/static/img_home/vestido 2.png"],
@@ -337,11 +340,200 @@
   });
 
 
-  // efeito nas coleções
+  const isMobile = window.innerWidth <= 700;
+
+if (isMobile) {
+  // Mobile: 1 imagem só
+  const vestido = document.getElementById("vestido1");
+  const setaDir = document.querySelector(".seta-direita");
+  const setaEsq = document.querySelector(".seta-esquerda");
+
+  const imagens = [
+    "/static/img_home/vestido-1.png",
+    "/static/img_home/vestido-2.png",
+    "/static/img_home/vestido-3.png",
+    "/static/img_home/vestido-4.png",
+    "/static/img_home/vestido-5.png",
+    "/static/img_home/vestido-6.png"
+  ];
+
+  let index = 0;
+
+  function trocar(direcao) {
+    vestido.classList.add(direcao === "esq" ? "sair-esquerda" : "sair-direita");
+
+    setTimeout(() => {
+      index = direcao === "esq"
+        ? (index - 1 + imagens.length) % imagens.length
+        : (index + 1) % imagens.length;
+
+      vestido.src = imagens[index];
+
+      vestido.classList.remove("sair-esquerda", "sair-direita");
+      vestido.classList.add(direcao === "esq" ? "entrar-direita" : "entrar-esquerda");
+
+      setTimeout(() => {
+        vestido.classList.remove("entrar-direita", "entrar-esquerda");
+      }, 450);
+    }, 450);
+  }
+
+  setaDir.addEventListener("click", () => trocar("dir"));
+  setaEsq.addEventListener("click", () => trocar("esq"));
+
+} else {
+  // Desktop: 2 imagens (seu JS original)
+  const paresVestidos = [
+    ["/static/img_home/vestido-1.png", "/static/img_home/vestido 2.png"],
+    ["/static/img_home/vestido-3.png", "/static/img_home/vestido-4.png"],
+    ["/static/img_home/vestido-5.png", "/static/img_home/vestido-6.png"],
+    ["/static/img_home/vestido-7.png", "/static/img_home/vestido-8.png"]
+  ];
+
+  let indice = 0;
+
+  const img1 = document.getElementById("vestido1");
+  const img2 = document.getElementById("vestido2");
+
+  const setaDir = document.querySelector(".seta-direita");
+  const setaEsq = document.querySelector(".seta-esquerda");
+
+  function atualizarImagens(direcao) {
+
+    img1.classList.add(direcao);
+    img2.classList.add(direcao);
+
+    setTimeout(() => {
+      img1.src = paresVestidos[indice][0];
+      img2.src = paresVestidos[indice][1];
+
+      const entrar = direcao === "sair-esquerda" 
+        ? "entrar-direita" 
+        : "entrar-esquerda";
+
+      img1.classList.remove(direcao);
+      img2.classList.remove(direcao);
+
+      img1.classList.add(entrar, "active");
+      img2.classList.add(entrar, "active");
+
+      setTimeout(() => {
+        img1.classList.remove(entrar, "active");
+        img2.classList.remove(entrar, "active");
+      }, 450);
+
+    }, 450);
+  }
+
+  setaDir.addEventListener("click", () => {
+    indice = (indice + 1) % paresVestidos.length;
+    atualizarImagens("sair-esquerda");
+  });
+
+  setaEsq.addEventListener("click", () => {
+    indice = (indice - 1 + paresVestidos.length) % paresVestidos.length;
+    atualizarImagens("sair-direita");
+  });
+}
+
   
   
 </script>
 
+
+<script>
+const colecoes = document.querySelectorAll(".items-colecao");
+let colecaoIndex = 0;
+
+function mostrarColecao(i) {
+  colecoes.forEach((item, idx) => {
+    item.style.display = idx === i ? "block" : "none";
+  });
+}
+
+function iniciarCarrosselMobile() {
+  if (window.innerWidth > 600) return;
+
+  mostrarColecao(colecaoIndex);
+
+  setInterval(() => {
+    colecaoIndex = (colecaoIndex + 1) % colecoes.length;
+    mostrarColecao(colecaoIndex);
+  }, 3000);
+}
+
+iniciarCarrosselMobile();
+</script>
+
+<script>if (window.innerWidth <= 700) {
+  const vestido = document.getElementById("vestido1");
+  const esquerda = document.querySelector(".seta-esquerda");
+  const direita = document.querySelector(".seta-direita");
+
+  const imagens = [
+    "/static/img_home/vestido-1.png",
+    "/static/img_home/vestido-2.png",
+    "/static/img_home/vestido-3.png",
+    "/static/img_home/vestido-4.png",
+    "/static/img_home/vestido-5.png",
+    "/static/img_home/vestido-6.png"
+  ];
+
+  let index = 0;
+
+  function trocar(direcao) {
+    vestido.classList.add(direcao === "esq" ? "sair-esquerda" : "sair-direita");
+
+    setTimeout(() => {
+      index = direcao === "esq"
+        ? (index - 1 + imagens.length) % imagens.length
+        : (index + 1) % imagens.length;
+
+      vestido.src = imagens[index];
+
+      vestido.classList.remove("sair-esquerda", "sair-direita");
+      vestido.classList.add(direcao === "esq" ? "entrar-direita" : "entrar-esquerda");
+
+      setTimeout(() => {
+        vestido.classList.remove("entrar-direita", "entrar-esquerda");
+      }, 450);
+    }, 450);
+  }
+
+  esquerda.addEventListener("click", () => trocar("esq"));
+  direita.addEventListener("click", () => trocar("dir"));
+}
+
+</script>
+
+<script>if (window.innerWidth < 700) {
+  const colecoes = document.querySelectorAll(".items-colecao");
+  let i = 0;
+
+  colecoes[0].classList.add("ativo");
+
+  setInterval(() => {
+    const atual = colecoes[i];
+
+    atual.classList.remove("ativo");
+    atual.classList.add("slide-out");
+
+    setTimeout(() => {
+      atual.classList.remove("slide-out");
+    }, 450);
+
+    i = (i + 1) % colecoes.length;
+
+    const proximo = colecoes[i];
+    proximo.classList.add("ativo", "slide-in");
+
+    setTimeout(() => {
+      proximo.classList.remove("slide-in");
+    }, 450);
+
+  }, 3000);
+}
+</script>
 
 
 
