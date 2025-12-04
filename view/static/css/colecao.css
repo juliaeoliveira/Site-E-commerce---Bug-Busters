@@ -1,128 +1,30 @@
+/* colecao_pagina.css - ESTILOS APENAS PARA A PÁGINA DE COLEÇÕES */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* MENU */
-#logo {
-  height: 80px;
-  padding-left: 0;
-  /*padding-left: 130px;  Espaço à esquerda do logo */
-  /*alterado*/
-}
-
-.icons {
-  gap: 5px;
-  justify-content: center;
-  display: flex;
-  padding-right: 150px;
-}
-
-.menu {
-  /*alterado*/
-  height: 90px;
-  position: fixed;
-  /*original*/
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  /*original*/
-  background-color: hsla(0, 0%, 100%, 0.75);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 25px;
-  /* controla o respiro nas laterais */
-  /* position: fixed;
-  z-index: 9999; */
-}
-
-/* Estilo dos links dentro do nav */
-.menu nav a {
-  color: #523800;
-  font-size: 20px;
-  /* Define o tamanho da fonte */
-  padding: 25px;
-  /* Espaçamento interno */
-  text-decoration: underline;
-  /* Ativa o sublinhado */
-  text-decoration-color: rgba(82, 56, 0, 0.192);
-  /* Cor do sublinhado com transparência */
-}
-
-.text-menu {
-  /*alterado*/
-  display: flex;
-  gap: 200px;
-  /* mais elegante que gap 200px (quebrava tudo) */
-  font-family: "Libre Caslon Text";
-}
-
-.text-menu a {
-  /*alterado*/
-  font-size: 20px;
-  text-decoration: underline;
-  text-decoration-color: rgba(82, 56, 0, 0.192);
-  color: #523800;
-}
-
-#hamburger {
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-html {
-  background-color: #eae4d8;
-}
-
 body {
-  display: flex;
-  flex-direction: column;
-  /* Organiza os itens na vertical (coluna) */
-  min-height: 100vh;
-  /* Garante que o corpo ocupe toda a altura da tela */
-  margin: 0;
-  /* Remove a margem padrão */
-  padding: 0;
-  /* Remove o preenchimento padrão */
-  overflow-x: hidden;
-  width: 100%;
-  /* Impede rolagem horizontal */
   background-color: #f4efe5;
   color: #5b2a19;
   font-family: "Georgia", serif;
   text-align: center;
+  overflow-x: hidden;
 }
 
-/* --------- CONFIGURAÇÃO GERAL --------- */
-
-/* body {
-  margin: 0;
-  padding: 0;
-  background: #f4efe5;
-  font-family: "Georgia", serif;
-  color: #5b2a19;
-  text-align: center;
-} */
-
 /* MAIN  */
-
-/* --------- TÍTULO --------- */
-
 main .titulo {
   width: 100%;
-  margin-top: 150px;
+  margin-top: 120px; /* Ajustado para o menu fixo */
   font-size: 28px;
   letter-spacing: 2px;
   color: #7a2f1d;
-  
+  padding: 20px 0;
 }
 
 /* --------- GRID --------- */
-
 .grid {
   width: 100%;
   max-width: 900px;
@@ -130,58 +32,83 @@ main .titulo {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
+  padding: 0 20px;
 }
 
 /* --------- CARDS --------- */
-
 .card {
   background: #e8dbb8;
   padding: 10px;
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .img-area {
   width: 100%;
   height: 650px;
   background-size: cover;
-
+  background-position: center;
   border-radius: 4px;
-  background-color: #d6c6a8; /* fundo temporário quando não há imagem */
+  object-fit: cover;
 }
 
 /* --------- BOTÃO VOLTAR --------- */
-
 .voltar {
-  height: 30px;
-  margin-top: 50px;
-  margin-right: 850px;
+  margin: 50px auto 40px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
   background: #e8dbb8;
   padding: 8px 14px;
   border-radius: 5px;
-  margin-bottom: 40px;
   text-decoration: none;
   font-size: 14px;
   color: #7a2f1d;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* --------- RESPONSIVIDADE --------- */
+/* --------- RESPONSIVIDADE GRID --------- */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    width: 90%;
+    max-width: 100%;
+  }
+
+  .img-area {
+    height: 450px;
+  }
+}
 
 @media (max-width: 600px) {
   .grid {
     grid-template-columns: 1fr;
-    max-width: 90%;
+    padding: 0 10px;
   }
 
   .img-area {
     height: 280px;
   }
+
+  main .titulo {
+    margin-top: 100px;
+    font-size: 24px;
+  }
 }
 
+@media (max-width: 480px) {
+  .img-area {
+    height: 250px;
+  }
+}
+
+/* IMAGENS ESPECÍFICAS */
 .img1 {
   background-image: url("/static/assets/img_colecao/64ca5a20d02ef9d6315d2100e5d749559a3a51eb.jpg");
 }
@@ -198,36 +125,38 @@ main .titulo {
 .nome {
   margin-top: 8px;
   font-size: 24px;
+  font-weight: bold;
 }
 
-/*-------------------FOOTER----------------*/
-
 /* ========== MODAL ========== */
-
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  padding: 20px;
+  z-index: 9999;
+  overflow-y: auto;
 }
 
 .modal.hidden {
-  display: none;
+  display: none !important;
 }
 
 .modal-content {
   background: #e8dbb8;
   padding: 25px;
   border-radius: 8px;
-  width: 80%;
+  width: 100%;
   max-width: 900px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-grid {
@@ -237,29 +166,47 @@ main .titulo {
 
 .modal-content img {
   width: 45%;
+  height: auto;
+  max-height: 650px;
   border-radius: 8px;
+  object-fit: cover;
+}
+
+.modal-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  flex: 1;
 }
 
 .modal-texto h2 {
   margin-bottom: 5px;
+  font-size: 26px;
 }
 
 .modal-texto h3 {
   margin: 10px 0;
+  font-size: 18px;
 }
 
 .modal-texto p {
-  margin-top: 100px;
+  margin-top: 20px;
+  line-height: 1.6;
 }
 
 .fechar {
-  float: right;
-  font-size: 26px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
   cursor: pointer;
+  color: #5a0101;
+  z-index: 10001;
 }
 
 .btn-ver {
-  margin-top: 120px;
+  margin-top: 20px;
   padding: 10px 20px;
   background: #5b2a19;
   color: #fff;
@@ -269,175 +216,7 @@ main .titulo {
   cursor: pointer;
 }
 
-/* === MODAL RESPONSIVO === */
-@media (max-width: 900px) {
-  .modal-content {
-    width: 95%;
-    padding: 15px;
-  }
-
-  .modal-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .modal-content img {
-    width: 100%;
-    height: 500px; /* reduz para telas menores */
-  }
-
-  .modal-texto h2 {
-    text-align: center;
-  }
-  .modal-texto h3 {
-    text-align: center;
-  }
-  .modal-texto p {
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .btn-ver {
-    margin-top: 20px;
-    width: 100%;
-  }
-}
-
-/* === IMAGENS IGUAIS NO MODAL E NOS CARDS === */
-.img-area,
-.modal-content img {
-  object-fit: cover; /* Mantém proporção e corta sem distorcer */
-  object-position: center;
-  height: 650px; /* Mesmo tamanho dos cards */
-  width: 100%;
-}
-
-/* === CARDS MAIS RESPONSIVOS === */
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    width: 90%;
-  }
-
-  .img-area {
-    height: 450px;
-  }
-}
-
-@media (max-width: 480px) {
-  .img-area {
-    height: 350px;
-  }
-}
-
-/* === CENTRALIZAÇÃO E ORGANIZAÇÃO DO TEXTO NO MODAL === */
-.modal-texto {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* centra verticalmente */
-  align-items: center; /* centra horizontalmente */
-  text-align: center; /* garante alinhamento do texto */
-  padding: 20px;
-}
-
-.modal-texto h2,
-.modal-texto h3 {
-  width: 100%;
-  text-align: center;
-}
-
-.modal-texto p {
-  margin-top: 20px !important; /* remove aquele grande espaço */
-  line-height: 1.6;
-  max-width: 90%; /* não deixa o texto muito largo */
-}
-
-.voltar {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 10px 18px;
-
-  color: #5a0101;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: 500;
-  white-space: nowrap; /* impede quebrar texto */
-}
-
-.voltar span {
-  font-size: 20px;
-}
-
-/* Responsivo — diminui a fonte, mas mantém dentro do botão */
-@media (max-width: 450px) {
-  .voltar {
-    font-size: 16px;
-    padding: 8px 14px;
-  }
-
-  .voltar span {
-    font-size: 18px;
-  }
-}
-
-/* ========================= */
-/*        MODAL BASE         */
-/* ========================= */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px; /* evita o modal colar nas bordas em telas pequenas */
-  z-index: 999;
-}
-
-.modal.hidden {
-  display: none;
-}
-
-.modal-content {
-  background: #e8dbb8;
-  width: 100%;
-  max-width: 900px;
-  border-radius: 10px;
-  padding: 25px;
-}
-
-.modal-grid {
-  display: flex;
-  gap: 25px;
-}
-
-/* Ajuste da imagem */
-.modal-content img {
-  width: 45%;
-  height: auto;
-  max-height: 650px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* Texto ao lado */
-.modal-texto {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-}
-
-.modal-texto p {
-  margin-top: 20px;
-}
-
-/* ========================= */
-/*   ⬇ RESPONSIVO – TABLET   */
-/* ========================= */
+/* RESPONSIVO MODAL */
 @media (max-width: 900px) {
   .modal-grid {
     flex-direction: column;
@@ -446,12 +225,12 @@ main .titulo {
 
   .modal-content {
     width: 95%;
-    padding: 15px;
+    padding: 20px;
   }
 
   .modal-content img {
     width: 100%;
-    max-height: 420px; /* reduz imagem */
+    max-height: 420px;
   }
 
   .modal-texto {
@@ -465,401 +244,40 @@ main .titulo {
   }
 }
 
-/* ========================= */
-/*  ⬇ RESPONSIVO – CELULARES */
-/* ========================= */
-@media (max-width: 500px) {
-  .modal-content img {
-    max-height: 320px; /* imagem mais compacta */
-    border-radius: 6px;
+@media (max-width: 600px) {
+  .modal {
+    padding: 15px;
   }
 
-  h2 {
-    font-size: 22px;
+  .modal-content {
+    width: 100%;
+    padding: 15px;
   }
-  h3 {
-    font-size: 18px;
+
+  .modal-content img {
+    max-height: 280px;
+  }
+
+  .modal-texto h2 {
+    font-size: 20px;
+  }
+
+  .modal-texto h3 {
+    font-size: 16px;
   }
 
   .modal-texto p {
-    font-size: 15px;
-  }
-
-  .btn-ver {
-    padding: 12px;
-    font-size: 16px;
-  }
-}
-
-/* Botão fechar ajustado */
-.fechar {
-  float: right;
-  font-size: 28px;
-  cursor: pointer;
-  color: #5a0101;
-}
-
-.modal {
-  z-index: 9999;
-}
-.modal-content {
-  position: relative;
-  z-index: 10000;
-}
-
-/* CORREÇÃO DO MODAL TRAVADO */
-.modal {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  z-index: 9999 !important;
-}
-
-.modal.hidden {
-  display: none !important;
-}
-
-.modal-content {
-  background: #e8dbb8;
-  padding: 20px;
-  width: 90%;
-  max-width: 850px;
-  border-radius: 12px;
-  position: relative;
-  z-index: 10000;
-}
-
-.modal-grid {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.modal-content img {
-  width: 100%;
-  max-height: 450px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* MOBILE */
-@media (max-width: 850px) {
-  .modal-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .modal-content img {
-    max-height: 320px;
-  }
-}
-
-/* Permite rolar dentro do modal em telas pequenas */
-.modal {
-  overflow-y: auto;
-}
-
-.modal-content {
-  max-height: 90vh; /* nunca maior que a tela */
-  overflow-y: auto; /* rolagem apenas dentro do conteúdo */
-}
-
-@media (max-width: 600px) {
-  .modal-content {
-    width: 95%;
-    padding: 15px;
-    max-height: 85vh;
-  }
-
-  .modal-content img {
-    max-height: 260px !important;
-  }
-
-  .modal-grid {
-    flex-direction: column;
-    align-items: center;
+    font-size: 14px;
   }
 
   .fechar {
-    position: absolute;
+    font-size: 26px;
     top: 10px;
-    right: 15px;
-    font-size: 30px;
-    z-index: 99999;
-  }
-}
-
-/* ------ CONFIG DO MENU RESPONSIVO ------ */
-
-/* botão hamburguer */
-.hamburger {
-  display: none;
-  background: transparent;
-  border: none;
-  font-size: 35px;
-  cursor: pointer;
-  padding: 10px;
-  color: #523800;
-}
-
-/* overlay (fundo escuro no mobile) */
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 9;
-  opacity: 0;
-  transition: 0.2s ease;
-}
-
-.overlay.active {
-  display: block;
-  opacity: 1;
-}
-
-/* MENU DESKTOP PERMANECE COMO ESTÁ */
-
-/* ===================== RESPONSIVO ===================== */
-@media (max-width: 900px) {
-  .menu {
-    justify-content: space-between;
-    padding: 0 15px;
+    right: 10px;
   }
 
-  #logo {
-    padding-left: 0 !important;
-    height: 70px;
-  }
-
-  /* botão hamburguer */
-  .menu .hamburger {
-    display: block;
-    background: transparent;
-    border: none;
-    font-size: 32px;
-    cursor: pointer;
+  .btn-ver {
     padding: 10px;
-    color: #523800;
-    z-index: 11;
-    /* margin: 30px; */
-  }
-
-  /* overlay */
-  .overlay {
-    display: none;
-  }
-
-  .overlay.active {
-    display: block;
-    opacity: 1;
-  }
-
-  /* NAV vira painel lateral */
-  .text-menu {
-    position: fixed;
-    top: 90px;
-    left: -100%;
-    width: 70%;
-    max-width: 300px;
-    height: calc(100vh - 90px);
-    background: hsla(0, 0%, 100%, 0.95);
-    flex-direction: column;
-    padding-top: 40px;
-    gap: 25px;
-    transition: left 0.25s ease;
-    z-index: 10;
-  }
-
-  .text-menu.active {
-    left: 0;
-  }
-
-  .text-menu a {
-    font-size: 20px;
-    padding: 10px;
-  }
-
-  /* ÍCONES fixos à direita SEM SUMIR */
-  .login-dropdown-wrapper {
-    gap: 18px;
-    margin-right: 0 !important;
-    z-index: 12;
-  }
-
-  #logout-btn {
-    margin: 25px; /* distância agradável do último item */
-  }
-}
-/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
-@media (max-width: 1116px) and (min-width: 901px) {
-  .text-menu {
-    gap: 60px !important; /* reduz o espaço entre os links */
-  }
-
-  .menu nav a {
-    font-size: 20px;
-    padding: 15px;
-  }
-
-  .menu {
-    padding: 0 15px; /* ajusta respiro lateral */
-  }
-
-  #logo {
-    height: 70px; /* logo menor */
-  }
-
-  .login-dropdown-wrapper {
-    gap: 15px;
-  }
-}
-
-/* Painel maior no desktop */
-@media (min-width: 901px) {
-  #login-dropdown {
-    padding-top: 40px; /* antes era 20px */
-    padding-bottom: 50px; /* antes era 20px */
-  }
-
-  #login-dropdown h3 {
-    margin-top: 20px; /* ajustado */
-    margin-bottom: 40px; /* reduzido para ficar proporcional */
-  }
-
-  .opcoes {
-    margin: 25px 0; /* mais espaçamento entre os itens */
-  }
-
-  #logout-btn {
-    margin: 30px; /* distância agradável do último item */
-  }
-}
-
-/* ------------------- FOOTER ------------------- */
-
-footer {
-  background-color: #5a0101;
-  color: white;
-  padding: 30px 20px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 30px;
-  margin-top: 100px;
-  font-family: "Inter", sans-serif;
-}
-
-/* LOGO */
-.sob {
-  height: 100px;
-  width: auto;
-  flex: 0 1 150px; /* permite dividir a linha */
-  margin-bottom: 0; /* evita empurrar para baixo */
-}
-
-/* COLUNAS */
-footer .coluna {
-  text-align: center;
-  flex: 0 0 auto;
-  min-width: 160px;
-  max-width: 200px;
-}
-
-footer div p {
-  font-weight: bold;
-  font-size: 15px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  font-family: "Inter", sans-serif;
-  color: #bdb0ae;
-}
-
-/* LISTAS */
-footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-footer li {
-  margin: 12px 0;
-  font-size: 14px;
-}
-
-/* LINHAS VERTICAIS */
-.linha {
-  width: 1px;
-  transform: rotate(0deg);
-  background-color: white;
-  height: 150px;
-  flex: 0 0 auto;
-}
-
-/* ÍCONES DE CONTATO */
-.telefone,
-.whatsapp {
-  height: 18px;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-.instagram,
-.facebook {
-  height: 40px;
-  text-align: right;
-}
-
-/* REDES SOCIAIS */
-.midia {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-}
-
-/* TEXTO FINAL */
-.direitos {
-  width: 100%;
-  text-align: left;
-  font-size: 15px;
-  margin-top: 40px;
-}
-
-/* ------------------- RESPONSIVIDADE ------------------- */
-
-/* Tablet e telas intermediárias */
-@media (max-width: 850px) {
-  .linha {
-    display: none;
-  }
-
-  footer {
-    justify-content: center;
-  }
-
-  footer .coluna {
-    min-width: 35%;
-  }
-}
-
-/* Celulares estreitos */
-@media (max-width: 500px) {
-  /* .menu .hamburger {
-    margin: 25px;
-  } */
-
-  footer .coluna {
-    min-width: 100%;
-  }
-
-  .midia {
-    flex-direction: row;
+    font-size: 14px;
   }
 }

@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -91,6 +92,9 @@ body {
   /* Cor do sublinhado com transparência */
 }
 
+
+
+/* Estilo para os links do menu ao passar o mouse (hover) */
 .text-menu {
   /*alterado*/
   display: flex;
@@ -113,6 +117,7 @@ body {
 }
 
 /* Estilo para os links do menu ao passar o mouse (hover) */
+
 
 
 
@@ -266,7 +271,6 @@ h1 {
 }
 
 /* Vestidos */
-
 /* Seção principal com ID "vestidos" */
 #vestidos {
   height: 57vh;
@@ -349,7 +353,7 @@ h1 {
 
 /* Sessão Coleções */
 #Coleções {
-  height: 200hv;
+  height: 200vh;
   text-align: center;
   margin-top: 100px;
 }
@@ -1438,10 +1442,7 @@ footer li {
     padding-bottom: 15px;
   }
   
-  
 }
-
-
 
 
 
@@ -1482,9 +1483,64 @@ footer li {
 
 
 
+
+
+
+/* ANIMAÇÃO + POSICIONAMENTO  */
+
+/* ---- comportamento básico ---- */
+.items-colecoes .items-colecao {
+  transition: transform .35s ease, opacity .28s ease;
+  opacity: 0.6;            /* padrão: laterais opacas */
+  cursor: pointer;
+}
+
+/* central fica 100% por padrão */
+.items-colecoes .items-colecao.centro {
+  opacity: 1;
+  z-index: 3;
+  transform: translateY(-40px); /* mantém central mais alto */
+}
+
+/* quando o usuário passa o mouse por QUALQUER CARD,
+   diminuímos a opacidade de TODOS (efeito "foco") */
+.items-colecoes:hover .items-colecao {
+  opacity: 0.35;
+}
+
+/* o card sob o mouse fica 100% */
+.items-colecoes .items-colecao:hover {
+  opacity: 1;
+  z-index: 5;
+}
+
+/* manter rotação das laterais e animar subida sem perder rotação */
+.items-colecoes .items-colecao.esquerda {
+  transform: rotate(6deg) translateY(0);
+  z-index: 1;
+}
+.items-colecoes .items-colecao.direita {
+  transform: rotate(-6deg) translateY(0);
+  z-index: 1;
+}
+
+/* hover das laterais preservando rotação */
+.items-colecoes .items-colecao.esquerda:hover {
+  transform: rotate(6deg) translateY(-32px);
+}
+.items-colecoes .items-colecao.direita:hover {
+  transform: rotate(-6deg) translateY(-32px);
+}
+
+/* hover central => sobe mais */
+.items-colecoes .items-colecao.centro:hover {
+  transform: translateY(-75px);
+}
+
 /* ============================
     TABLET E NOTEBOOK PEQUENO
 ============================ */
+
 @media (max-width: 900px) and (min-width: 481px) {
 
   /* MENU */
@@ -1538,7 +1594,71 @@ footer li {
   footer {
     flex-wrap: wrap;
   }
+
+
 }
+
+
+
+
+.items-colecao.centro{
+  margin-top: -25px;
+
+}
+
+.botao-vercolecao {
+  background: transparent;
+  border: 1px solid #4E3902;
+  padding: 5px 18px;
+  font-size: 23px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #333;
+  margin-top: -100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  margin-bottom: 70px;
+  list-style: none;
+  color: #462506;
+  width: 150px;
+  
+  /* ANIMAÇÃO */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.botao-vercolecao:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  border-color: #6a4a16;
+}
+
+.botao-vercolecao a {
+  text-align: center;
+  font-family: "Judson";
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  text-decoration: none;
+  list-style: none;
+  color: #462506;
+}
+
+#vestidos {
+  height: 57vh;
+  /* Altura fixa da seção */
+  padding: 60px 40px;
+  /* Espaçamento interno (60px em cima/baixo, 40px nos lados) */
+  text-align: center;
+  /* Centraliza o texto horizontalmente */
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+
+
 
 /* --- COLEÇÕES MOBILE → 1 POR VEZ RETA --- */
 @media (max-width: 768px) {
@@ -1640,6 +1760,7 @@ footer li {
 }
 
 
+
 /* --- CONTAINER DO PRODUTO (A CAIXA) --- */
 .items-produto {
   width: 400px;
@@ -1694,3 +1815,4 @@ footer li {
   transform: scale(1.1);
   filter: blur(8px);
 }
+
