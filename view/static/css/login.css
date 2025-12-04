@@ -56,7 +56,7 @@ body {
   color: #523800;
   font-size: 20px;
   /* Define o tamanho da fonte */
-  padding: 25px;
+  padding: 20px;
   /* Espaçamento interno */
   text-decoration: underline;
   /* Ativa o sublinhado */
@@ -85,8 +85,11 @@ body {
   appearance: none;
   -webkit-appearance: none;
 }
-
-/* botão hamburguer */
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+/* botão hamburguer
 .hamburger {
   display: none;
   background: transparent;
@@ -95,10 +98,10 @@ body {
   cursor: pointer;
   padding: 10px;
   color: #523800;
-}
+} */
 
 /* overlay (fundo escuro no mobile) */
-.overlay {
+/* .overlay {
   display: none;
   position: fixed;
   inset: 0;
@@ -111,7 +114,7 @@ body {
 .overlay.active {
   display: block;
   opacity: 1;
-}
+} */
 
 /* LINKS DE NAVEGAÇÃO */
 .categorias a {
@@ -153,13 +156,13 @@ body {
   bottom: 90px;
   left: 30px;
   background-color: #d4c6ab;
-  color: #800000;
+  color: darkred;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
-  border: 1px solid #800000;
+  font-family: "Inter", sans-serif;
+  border: 1px solid #700000;
   margin-top: -s60px;
 }
 
@@ -212,10 +215,11 @@ input {
   margin-top: 40px;
   width: 12dvh;
   margin-left: 120px;
+  font-family: "Inter", sans-serif;
 }
 
 .entrar-btn:hover {
-  background-color: #a00000;
+  background-color: #700000;
 }
 
 /* TEXTO DE CRIAR CONTA */
@@ -235,7 +239,8 @@ input {
   color: #333;
   font-weight: bold;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
 }
 
 /* ==============================
@@ -366,10 +371,11 @@ input {
   }
 
   .entrar-btn {
-    width: 100%;
-    margin-left: 0;
-    height: 48px;
-    display: none;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    height: 40px;
+    /* display: none; */
   }
 
   .criar-conta-btn {
@@ -420,8 +426,6 @@ input {
   display: block;
   opacity: 1;
 }
-
-/* MENU DESKTOP PERMANECE COMO ESTÁ */
 
 /* ===================== RESPONSIVO ===================== */
 @media (max-width: 900px) {

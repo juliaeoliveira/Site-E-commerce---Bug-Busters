@@ -89,6 +89,7 @@ body {
   padding: 0;
   /* Remove o preenchimento padrão */
   overflow-x: hidden;
+  width: 100%;
   /* Impede rolagem horizontal */
   background-color: #f4efe5;
   color: #5b2a19;
@@ -112,6 +113,7 @@ body {
 /* --------- TÍTULO --------- */
 
 main .titulo {
+  width: 100%;
   margin-top: 150px;
   font-size: 28px;
   letter-spacing: 2px;
