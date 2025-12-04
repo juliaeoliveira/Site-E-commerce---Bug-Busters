@@ -202,7 +202,7 @@ body {
 main {
   flex: 1;
   width: 100%;
-  padding: 120px 20px 60px;
+  
 }
 
 /* ===================== CARRINHO ===================== */
@@ -495,22 +495,40 @@ main {
   padding: 0 20px;
 }
 
-.botao-voltar,
+
 .botao-confirmar-final {
-  background-color: #eadcc1cc;
-  color: #6e0606;
-  font-family: "Inter", sans-serif;
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
-  height: 60px;
+  font-family: "Libre Caslon Text", serif;
+  height: 50px;
   width: 300px;
+  color: darkred;
+  background-color:rgba(237, 219, 190, 0.80);
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+}
+
+.botao-voltar {
+  font-family: "Libre Caslon Text", serif;
+  height: 50px;
+  width: 300px;
+  color: darkred;
+  background-color:rgba(237, 219, 190, 0.80);
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.botao-voltar:hover,
+.botao-voltar:hover{
+  transform: scale(1.05);
+}
+
 .botao-confirmar-final:hover {
   transform: scale(1.05);
 }
@@ -583,18 +601,18 @@ main {
 }
 
 .ver {
-  font-family: "Libre Caslon Text";
-  height: 60px;
-  width: 320px;
-  max-width: 90%;
+  font-family: "Libre Caslon Text", serif;
+  height: 50px;
+  width: 300px;
   color: darkred;
-  background-color: #eadcc1cc;
+  background-color:rgba(237, 219, 190, 0.80);
   box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
-  font-size: 19px;
+  font-size: 15px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  margin-right: 1000px;
 }
 
 .ver:hover {

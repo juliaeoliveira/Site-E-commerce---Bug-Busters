@@ -440,6 +440,7 @@ main {
   padding: 60px 20px;
   text-align: center;
   min-height: 400px;
+  height:100vh;
 }
 
 #variedades h1 {
@@ -501,17 +502,26 @@ main {
 
 .ver {
   font-family: "Libre Caslon Text", serif;
-  height: 60px;
-  min-width: 300px;
-  padding: 0 30px;
+  height: 50px;
+  width: 300px;
   color: darkred;
-  background-color: #eadcc1cc;
+  background-color:rgba(237, 219, 190, 0.80);
   box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-right: 900px;
+  /* qq
+  font-family: "Libre Caslon Text";
+  height: 50px;
+  width: 300px;
+  color: darkred;
+  background: rgba(237, 219, 190, 0.80);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px; */
 }
 
 .ver:hover {

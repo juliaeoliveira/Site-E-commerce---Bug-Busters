@@ -395,29 +395,7 @@ main h1 a {
 
 }
 
-/* Mais variedades */
-.conteinervariedade h3 {
-  font-size: 100px;
-  text-align: center;
-  color: #720911;
-  font-family: "Aboreto", system-ui;
-  font-size: 24px;
-  font-weight: 400;
-}
 
-.linhavariedade {
-  text-align: center;
-  color: #000000;
-
-}
-
-
-.variedades {
-  text-align: center;
-  margin-top: 20px;
-  padding: 30px;
-
-}
 
 .subtitulo {
   color: #790000;
@@ -477,63 +455,9 @@ main h1 a {
   transform: scale(1.05);
 }
 
-/*==================FOOTER==================*/
 
-/*======================VAREDADE==============*/
 
-.espacovariedades {
-  text-align: center;
-  /* Ensures everything is centered */
-}
 
-.conteinervariedade {
-  display: inline-block;
-  text-align: center;
-  padding: 20px;
-  margin-top: 70px;
-}
-
-.variedades {
-  display: flex;
-  justify-content: center;
-  /* Centers the images horizontally */
-  gap: 30px;
-  /* Space between images */
-  margin-top: 20px;
-
-}
-
-.imagem-container {
-  text-align: center;
-  /* Centers the image and text */
-  padding: 25px;
-}
-
-.imagem-container img {
-  max-width: 100%;
-  /* Ensures the images are responsive */
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-.imagem-container p {
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-  text-decoration: none;
-}
-
-/* .midia {
-  float: right;
-  display: grid;
-  gap: 15px;
-} */
-
-.outrosvestidos {
-  margin-right: 900px;
-}
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
 
@@ -983,24 +907,3 @@ footer li {
   }
 }
 
-
-
-
-.variedades .nome {
-  color: #000;
-  text-align: center;
-  font-family: "Arial, Helvetica, sans-serif";
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 40px;
-  line-height: normal;
-  letter-spacing: 0.96px;
-  margin-top: 40px;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-
-p {
-  text-decoration: none;
-}
