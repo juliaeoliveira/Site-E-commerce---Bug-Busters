@@ -260,7 +260,7 @@ body {
 }               
 
 
-/* botão hamburguer */
+/* botão hamburguer
 .hamburger {
   display: none;
   background: transparent;
@@ -272,7 +272,7 @@ body {
 }
 
 /* overlay (fundo escuro no mobile) */
-.overlay {
+/* .overlay {
   display: none;
   position: fixed;
   inset: 0;
@@ -285,7 +285,7 @@ body {
 .overlay.active {
   display: block;
   opacity: 1;
-}
+}  */
 
 
 
@@ -337,7 +337,7 @@ body {
 }
 
 /* “Sob Véu” */
-.sob {
+.titulo-completo .sob {
   display: block;
   font-family: "Libre Caslon Display", serif;
   font-size: 80px;
@@ -707,80 +707,6 @@ h1 {
 }
 
 
-/* foooter */
-footer {
-  background-color: #5a0101;
-  color: white;
-  padding: 40px 0;
-  /* aumenta altura */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  /* alinhar tudo no topo */
-  flex-wrap: wrap;
-  /* quebra linha caso precise */
-  margin-top: 20px;
-  /* espaço entre o footer e o conteúdo */
-
-}
-
-footer ul {
-  font-family: "Inter", sans-serif;
-  list-style: none;
-  text-align: center;
-}
-
-footer li {
-  margin-top: 40px;
-  text-align: center;
-  margin: 10px 0;
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
-}
-
-
-.whatsapp,
-.telefone {
-  height: 20px;
-}
-
-
-.instagram,
-.facebook {
-  height: 40px;
-  text-align: right;
-}
-
-
-.sob {
-  height: 100px;
-  margin-top: 90px;
-  margin: -10px;
-}
-
-.linha {
-  width: 170px;
-  transform: rotate(-90.164deg);
-  color: #FFF;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 420px;
-  margin-top: 50px;
-}
-
-.direitos {
-  width: 100%;
-  text-align: left;
-  margin-top: 160px;
-  font-size: 15px;
-  margin-left: 60px;
-}
-
-.midia {
-  float: right;
-  display: grid;
-  gap: 15px;
-}
 
 
 

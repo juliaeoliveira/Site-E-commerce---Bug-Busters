@@ -278,38 +278,61 @@
       <!-- DIREITOS -->
       <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
-  <script>
-    const nav = document.getElementById("nav-menu");
-    const btn = document.getElementById("hamburger");
-    const overlay = document.getElementById("overlay");
+    <script>
+      const loginIcon = document.getElementById("login-icon");
+      const loginDropdown = document.getElementById("login-dropdown");
 
-    function openMenu() {
-      nav.classList.add("active");
-      overlay.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
+      loginIcon.addEventListener("click", () => {
+        const isVisible = loginDropdown.style.display === "block";
 
-    function closeMenu() {
-      nav.classList.remove("active");
-      overlay.classList.remove("active");
-      document.body.style.overflow = "";
-    }
+        loginDropdown.style.display = isVisible ? "none" : "block";
 
-    btn.addEventListener("click", () => {
-      if (nav.classList.contains("active")) {
-        closeMenu();
-      } else {
-        openMenu();
+        // Ativa ou desativa a animação
+        loginIcon.classList.toggle("login-active", !isVisible);
+      });
+
+      window.addEventListener("click", function (e) {
+        if (
+          !loginIcon.contains(e.target) &&
+          !loginDropdown.contains(e.target)
+        ) {
+          loginDropdown.style.display = "none";
+          loginIcon.classList.remove("login-active");
+        }
+      });
+    </script>
+    <script>
+      const nav = document.getElementById("nav-menu");
+      const btn = document.getElementById("hamburger");
+      const overlay = document.getElementById("overlay");
+
+      function openMenu() {
+        nav.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
-    });
 
-    overlay.addEventListener("click", closeMenu);
+      function closeMenu() {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
 
-    // fecha no ESC
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-  </script>    
+      btn.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      overlay.addEventListener("click", closeMenu);
+
+      // fecha no ESC
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    </script>   
 <script>
 // transição dos vestidos
   

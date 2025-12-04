@@ -12,7 +12,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   background: linear-gradient(135deg, #eae4d8 0%, #f5f0e8 100%);
-  font-family: "Open Sans", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* MENU */
@@ -82,28 +82,13 @@ body {
 
 
 
-.carrinho {
-  margin-right: 90px;
-}
-
-/* .login{
- margin-left: 270px;
-} */
-/*alterado*/
-
-
-.login {
-  /*alterado*/
-  margin: 0;
-  /* Remove o margin-left: 270px que quebrava TUDO */
-}
-
 #hamburger {
   appearance: none;
   -webkit-appearance: none;
-}               
+}
 
 
+/* ---------------------------------------------------------- */
 
 .categorias {
   gap: 40px;
@@ -138,13 +123,21 @@ body {
 
 /* MENSAGEM SECTION */
 .mensagem {
-  margin-top: 180px;
+  /* 1. Posicionamento e Margem */
+  /* Usa calc() para garantir espaço decente abaixo do menu fixo (90px) + respiro */
+  margin-top: calc(90px + 60px);
+  margin-bottom: 50px; /* Garante que não fique grudado no botão ou footer */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* 2. Responsividade da Largura */
+  width: 90%; /* Ocupa 90% da viewport em qualquer tamanho */
+  max-width: 600px; /* Limita a largura máxima em telas maiores */
+
+  /* 3. Estilos Visuais */
   padding: 60px 40px;
   text-align: center;
   background: white;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(82, 56, 0, 0.12);
   animation: fadeInUp 0.6s ease;
@@ -163,10 +156,17 @@ body {
 
 .mensagem h2 {
   font-family: "Libre Caslon Text", serif;
-  font-size: 28px;
+  font-size: 1.75rem; /* ~28px */
   color: #523800;
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem; /* ~24px */
   line-height: 1.4;
+}
+
+/* Garante que o botão use 100% da largura em telas bem pequenas */
+@media (max-width: 500px) {
+  .mensagem a {
+    width: 100%;
+  }
 }
 
 .mensagem a {
@@ -216,6 +216,174 @@ body {
   transform: translateX(-5px);
   box-shadow: 0 6px 25px rgba(82, 56, 0, 0.2);
 }
+/*==============================================*/
+
+
+/* ==========================
+   RESPONSIVIDADE DO CORPO DA PÁGINA
+   ========================== */
+
+/* Tablets – ajusta proporções da mensagem */
+@media (max-width: 900px) {
+  .mensagem {
+    padding: 40px 25px;
+    margin-top: 150px;
+    max-width: 90%;
+  }
+
+  .mensagem h2 {
+    font-size: 24px;
+  }
+
+  .mensagem a {
+    font-size: 15px;
+    padding: 12px 30px;
+  }
+
+  .ver {
+    padding: 14px 40px;
+    font-size: 15px;
+  }
+
+  .outrosvestidos {
+    margin: 30px auto;
+  }
+}
+
+/* Celulares médios */
+@media (max-width: 600px) {
+  .mensagem {
+    padding: 30px 20px;
+    margin-top: 140px;
+  }
+
+  .mensagem h2 {
+    font-size: 20px;
+  }
+
+  .mensagem a {
+    font-size: 14px;
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  .ver {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+}
+
+/* Celulares pequenos */
+@media (max-width: 420px) {
+  .mensagem {
+    margin-top: 130px;
+    padding: 25px 18px;
+  }
+
+  .mensagem h2 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .ver {
+    width: 100%;
+    padding: 14px;
+  }
+}
+
+/* Ajuste extra: evitar que o footer grude no conteúdo */
+@media (max-width: 500px) {
+  footer {
+    padding-top: 40px;
+  }
+}
+
+/* ================================
+   RESPONSIVIDADE — SOMENTE O CORPO
+   ================================ */
+
+/* Ajuste geral para telas médias (tablets e notebooks menores) */
+@media (max-width: 900px) {
+  .mensagem {
+    padding: 40px 25px;
+    margin-top: 150px;
+    max-width: 90%;
+  }
+
+  .mensagem h2 {
+    font-size: 24px;
+  }
+
+  .mensagem a {
+    font-size: 15px;
+    padding: 12px 30px;
+  }
+
+  .outrosvestidos {
+    margin: 40px auto;
+  }
+
+  .ver {
+    padding: 14px 40px;
+    font-size: 15px;
+  }
+}
+
+/* CELULARES (principal) */
+@media (max-width: 600px) {
+  .mensagem {
+    padding: 30px 20px;
+    margin-top: 140px;
+    max-width: 92%;
+  }
+
+  .mensagem h2 {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+
+  .mensagem a {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 22px;
+  }
+
+  .outrosvestidos {
+    padding: 0 20px;
+    margin: 25px auto;
+  }
+
+  .ver {
+    width: 60%;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* CELULARES MENORES (galaxy A10, iPhone SE, Motorola E, etc.) */
+@media (max-width: 420px) {
+  .mensagem {
+    padding: 25px 16px;
+    margin-top: 130px;
+  }
+
+  .mensagem h2 {
+    font-size: 18px;
+  }
+
+  .mensagem a {
+    padding: 12px 18px;
+    font-size: 13px;
+  }
+
+  .ver {
+    padding: 12px 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
 
 /* botão hamburguer */
 .hamburger {
@@ -363,7 +531,6 @@ body {
 }
 
 /* ------------------- FOOTER ------------------- */
-
 footer {
   background-color: #5a0101;
   color: white;
@@ -378,15 +545,13 @@ footer {
   font-family: "Inter", sans-serif;
 }
 
-/* LOGO */
 .sob {
   height: 100px;
   width: auto;
-  flex: 0 1 150px; /* permite dividir a linha */
-  margin-bottom: 0; /* evita empurrar para baixo */
+  flex: 0 1 150px;
+  margin-bottom: 0;
 }
 
-/* COLUNAS */
 footer .coluna {
   text-align: center;
   flex: 0 0 auto;
@@ -403,8 +568,6 @@ footer div p {
   color: #bdb0ae;
 }
 
-
-/* LISTAS */
 footer ul {
   list-style: none;
   padding: 0;
@@ -415,7 +578,6 @@ footer li {
   font-size: 14px;
 }
 
-/* LINHAS VERTICAIS */
 .linha {
   width: 1px;
   transform: rotate(0deg);
@@ -424,20 +586,19 @@ footer li {
   flex: 0 0 auto;
 }
 
-/* ÍCONES DE CONTATO */
 .telefone,
 .whatsapp {
   height: 18px;
   margin-right: 6px;
   vertical-align: middle;
 }
+
 .instagram,
 .facebook {
   height: 40px;
   text-align: right;
 }
 
-/* REDES SOCIAIS */
 .midia {
   display: flex;
   flex-direction: column;
@@ -445,7 +606,6 @@ footer li {
   align-items: center;
 }
 
-/* TEXTO FINAL */
 .direitos {
   width: 100%;
   text-align: left;
@@ -453,202 +613,27 @@ footer li {
   margin-top: 40px;
 }
 
-/* ------------------- RESPONSIVIDADE ------------------- */
-
-/* Tablet e telas intermediárias */
+/* ------------------- RESPONSIVIDADE FOOTER ------------------- */
 @media (max-width: 850px) {
   .linha {
     display: none;
   }
-
+  
   footer {
     justify-content: center;
   }
-
+  
   footer .coluna {
     min-width: 35%;
   }
 }
 
-/* Celulares estreitos */
 @media (max-width: 500px) {
-  /* .menu .hamburger {
-    margin: 25px;
-  } */
-
   footer .coluna {
     min-width: 100%;
   }
-
+  
   .midia {
     flex-direction: row;
   }
 }
-
-
-
-/* ==========================
-   RESPONSIVIDADE DO CORPO DA PÁGINA
-   ========================== */
-
-/* Tablets – ajusta proporções da mensagem */
-@media (max-width: 900px) {
-  .mensagem {
-    padding: 40px 25px;
-    margin-top: 150px;
-    max-width: 90%;
-  }
-
-  .mensagem h2 {
-    font-size: 24px;
-  }
-
-  .mensagem a {
-    font-size: 15px;
-    padding: 12px 30px;
-  }
-
-  .ver {
-    padding: 14px 40px;
-    font-size: 15px;
-  }
-
-  .outrosvestidos {
-    margin: 30px auto;
-  }
-}
-
-/* Celulares médios */
-@media (max-width: 600px) {
-  .mensagem {
-    padding: 30px 20px;
-    margin-top: 140px;
-  }
-
-  .mensagem h2 {
-    font-size: 20px;
-  }
-
-  .mensagem a {
-    font-size: 14px;
-    width: 100%;
-    padding: 12px 20px;
-  }
-
-  .ver {
-    padding: 12px 25px;
-    font-size: 14px;
-  }
-}
-
-/* Celulares pequenos */
-@media (max-width: 420px) {
-  .mensagem {
-    margin-top: 130px;
-    padding: 25px 18px;
-  }
-
-  .mensagem h2 {
-    font-size: 18px;
-    line-height: 1.3;
-  }
-
-  .ver {
-    width: 100%;
-    padding: 14px;
-  }
-}
-
-/* Ajuste extra: evitar que o footer grude no conteúdo */
-@media (max-width: 500px) {
-  footer {
-    padding-top: 40px;
-  }
-}
-
-
-/* ================================
-   RESPONSIVIDADE — SOMENTE O CORPO
-   ================================ */
-
-/* Ajuste geral para telas médias (tablets e notebooks menores) */
-@media (max-width: 900px) {
-  .mensagem {
-    padding: 40px 25px;
-    margin-top: 150px;
-    max-width: 90%;
-  }
-
-  .mensagem h2 {
-    font-size: 24px;
-  }
-
-  .mensagem a {
-    font-size: 15px;
-    padding: 12px 30px;
-  }
-
-  .outrosvestidos {
-    margin: 40px auto;
-  }
-
-  .ver {
-    padding: 14px 40px;
-    font-size: 15px;
-  }
-}
-
-/* CELULARES (principal) */
-@media (max-width: 600px) {
-  .mensagem {
-    padding: 30px 20px;
-    margin-top: 140px;
-    max-width: 92%;
-  }
-
-  .mensagem h2 {
-    font-size: 20px;
-    line-height: 1.35;
-  }
-
-  .mensagem a {
-    width: 100%;
-    font-size: 14px;
-    padding: 12px 22px;
-  }
-
-  .outrosvestidos {
-    padding: 0 20px;
-    margin: 25px auto;
-  }
-
-  .ver {
-    width: 60%;
-    padding: 12px;
-    font-size: 14px;
-  }
-}
-
-/* CELULARES MENORES (galaxy A10, iPhone SE, Motorola E, etc.) */
-@media (max-width: 420px) {
-  .mensagem {
-    padding: 25px 16px;
-    margin-top: 130px;
-  }
-
-  .mensagem h2 {
-    font-size: 18px;
-  }
-
-  .mensagem a {
-    padding: 12px 18px;
-    font-size: 13px;
-  }
-
-  .ver {
-    padding: 12px 10px;
-    font-size: 14px;
-    width: 100%;
-  }
-}
-
