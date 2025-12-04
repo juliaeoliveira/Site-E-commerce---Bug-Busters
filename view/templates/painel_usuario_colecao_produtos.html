@@ -86,7 +86,7 @@
                         {% for produto in produtos %}
                             {% if produto.quantidade_estoque %}
                                 <div class="vestido">
-                                    <a href="/produtos/{{ produto.id }}">
+                                    <a href="/painel_usuario/produtos/{{ produto.id }}">
                                         <img class="foto" src="{{ url_for('static', path='uploads/' + produto.imagem1_url) if produto.imagem1_url else '/static/img_home/vestido-1.png' }}" alt="{{ produto.nome_produto }}">
                                         <h3>{{ produto.nome_produto }}</h3>
                                     </a>
