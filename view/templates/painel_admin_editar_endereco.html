@@ -184,7 +184,7 @@
     </footer>
 
     <!-- SCRIPTS -->
-    <script>
+        <script>
         // DROPDOWN LOGIN
         const loginIcon = document.getElementById("login-icon");
         const loginDropdown = document.getElementById("login-dropdown");
@@ -234,11 +234,134 @@
             if (e.key === "Escape") closeMenu();
         });
         
-        // FORMULÁRIO
+        // ---------- VIA CEP INTEGRATION ----------
+        
+        // FUNÇÃO PARA BUSCAR CEP NO VIACEP
+        async function buscarCEP(cep) {
+            // Limpa o CEP (remove tudo que não for número)
+            cep = cep.replace(/\D/g, '');
+            
+            // Verifica se tem 8 dígitos
+            if (cep.length !== 8) {
+                return null;
+            }
+            
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await response.json();
+                
+                // Se o CEP não existir, retorna erro
+                if (data.erro) {
+                    return { erro: true };
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('Erro ao buscar CEP:', error);
+                return null;
+            }
+        }
+
+        // PREENCHIMENTO AUTOMÁTICO DOS CAMPOS
+        function preencherEndereco(data) {
+            document.getElementById('rua').value = data.logradouro || '';
+            document.getElementById('bairro').value = data.bairro || '';
+            document.getElementById('cidade').value = data.localidade || '';
+            document.getElementById('estado').value = data.uf || '';
+            
+            // Foca no campo número (que não é preenchido pelo ViaCEP)
+            if (data.logradouro) {
+                document.getElementById('numero').focus();
+            }
+        }
+
+        // MÁSCARA E BUSCA AUTOMÁTICA DE CEP
+        const cepInput = document.getElementById('cep');
+        
+        // Aplica máscara enquanto digita
+        cepInput.addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            
+            if (valor.length > 5) {
+                valor = valor.substring(0, 5) + '-' + valor.substring(5, 8);
+            }
+            
+            e.target.value = valor;
+        });
+        
+        // Busca CEP quando o usuário sai do campo (evento blur)
+        cepInput.addEventListener('blur', async function(e) {
+            const cep = e.target.value;
+            
+            // Verifica se o CEP tem formato válido
+            const cepRegex = /^\d{5}-\d{3}$|^\d{8}$/;
+            if (!cepRegex.test(cep)) {
+                return;
+            }
+            
+            // Mostra mensagem de carregamento (opcional)
+            e.target.classList.add('loading');
+            
+            const data = await buscarCEP(cep);
+            
+            e.target.classList.remove('loading');
+            
+            if (data) {
+                if (data.erro) {
+                    alert('❌ CEP não encontrado. Por favor, verifique o número.');
+                    cepInput.focus();
+                    return;
+                }
+                
+                // Preenche os campos automaticamente
+                preencherEndereco(data);
+                
+                // Exibe mensagem de sucesso (opcional)
+                console.log('✅ Endereço preenchido automaticamente via ViaCEP');
+            } else {
+                alert('⚠️ Não foi possível consultar o CEP. Tente novamente.');
+            }
+        });
+
+        // VALIDAÇÃO FINAL NO ENVIO DO FORMULÁRIO
         const form = document.getElementById('formEditarEndereco');
-        form.addEventListener('submit', function (e) {
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
+            
+            const cep = cepInput.value;
+            const cepRegex = /^\d{5}-\d{3}$|^\d{8}$/;
+            
+            // Validação básica do formato
+            if (!cepRegex.test(cep)) {
+                alert('❌ CEP inválido! Use o formato 00000-000');
+                cepInput.focus();
+                return;
+            }
+            
+            // Validação com ViaCEP (opcional)
+            try {
+                const data = await buscarCEP(cep);
+                
+                if (!data || data.erro) {
+                    const confirmar = confirm('⚠️ CEP não encontrado no sistema dos Correios.\nDeseja continuar mesmo assim?');
+                    if (!confirmar) {
+                        cepInput.focus();
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.warn('Não foi possível validar o CEP, continuando...');
+            }
+            
+            // Se chegou aqui, pode enviar o formulário
             const formData = new FormData(form);
+            
+            // Mostrar loading no botão (opcional)
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Salvando...';
+            submitBtn.disabled = true;
+            
             fetch(form.action, {
                 method: 'POST',
                 body: formData
@@ -253,6 +376,10 @@
             })
             .catch(() => {
                 alert('❌ Erro de conexão ao enviar os dados.');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
             });
         });
     </script>
