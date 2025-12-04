@@ -26,7 +26,7 @@ body {
 
   height: 80px;
   /* Define a altura do logo */
-  padding-left: 0;
+  padding-left: 130px;
   /* Espaço à esquerda do logo */
 }
 
@@ -37,79 +37,51 @@ body {
   padding-right: 150px;
 }
 
-.menu {
-  /*alterado*/
-  height: 90px;
-  position: fixed;
-  /*original*/
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  /*original*/
-  background-color: hsla(0, 0%, 100%, 0.75);
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 25px;
-  /* controla o respiro nas laterais */
-  /* position: fixed;
-  z-index: 9999; */
-}
-/* .menu {
+
+.menu {
   position: fixed;
   /* Fixa o menu na tela */
-  /* z-index: 10; */
+  z-index: 10;
   /* Garante que o menu fique acima de outros elementos */
-  /* display: flex; */
+  display: flex;
   /* Organiza os itens do menu em linha */
-  /* width: 100%; */
+  width: 100%;
   /* O menu ocupa toda a largura da tela */
-  /* align-items: center; */
+  align-items: center;
   /* Centraliza os itens na vertical */
-  /* justify-content: space-between; */
+  justify-content: space-between;
   /* Distribui os itens do menu com espaços entre eles */
-  /* background-color: hsla(0, 0%, 100%, 0.692); */
+  background-color: hsla(0, 0%, 100%, 0.692);
   /* Cor de fundo com transparência */
-  /* font-family: 'Open Sans', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
   /* Fonte do menu */
-  /* color: #ffffff; */
+  color: #ffffff;
   /* Cor do texto do menu */
-/* } */
+}
+
+/* Estilo do menu de navegação */
+nav {
+  gap: 200px;
+  justify-content: center;
+  display: flex;
+  font-family: "Libre Caslon Text";
+  font-size: 22px;
+  color: #523800;
+
+}
 
 /* Estilo dos links dentro do nav */
-.menu nav a {
+nav a {
   color: #523800;
   font-size: 20px;
   /* Define o tamanho da fonte */
-  padding: 20px;
+  padding: 25px;
   /* Espaçamento interno */
   text-decoration: underline;
   /* Ativa o sublinhado */
   text-decoration-color: rgba(82, 56, 0, 0.192);
   /* Cor do sublinhado com transparência */
-}
-
-.text-menu {
-  /*alterado*/
-  display: flex;
-  gap: 200px;
-  /* mais elegante que gap 200px (quebrava tudo) */
-  font-family: "Libre Caslon Text";
-}
-
-.text-menu a {
-  /*alterado*/
-  font-size: 20px;
-  text-decoration: underline;
-  text-decoration-color: rgba(82, 56, 0, 0.192);
-  color: #523800;
-}
-
-#hamburger {
-  appearance: none;
-  -webkit-appearance: none;
 }
 
 /* Estilo para os links do menu ao passar o mouse (hover) */
@@ -177,7 +149,7 @@ body {
 .texto1 {
   display: block;
   font-family: "Junge", serif;
-  font-size: 22px;
+  font-size: 24px;
   color: #523800;
   margin-bottom: 10px;
 }
@@ -185,7 +157,7 @@ body {
 /* Texto do parágrafo */
 .texto2 {
   font-family: Judson, serif;
-  font-size: 18px;
+  font-size: 20px;
   color: #523800;
   line-height: 1.6;
 
@@ -266,6 +238,7 @@ h1 {
 }
 
 /* Vestidos */
+
 /* Seção principal com ID "vestidos" */
 #vestidos {
   height: 57vh;
@@ -348,7 +321,7 @@ h1 {
 
 /* Sessão Coleções */
 #Coleções {
-  height: 100vh;
+  height: 200hv;
   text-align: center;
   margin-top: 100px;
 }
