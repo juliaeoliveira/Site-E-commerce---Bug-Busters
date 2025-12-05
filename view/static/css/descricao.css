@@ -1,0 +1,980 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+#login-dropdown {
+  /*alterado*/
+  position: absolute;
+  top: 90px;
+  /* aparece logo abaixo do header fixo */
+  right: 0;
+  /* alinhado ao canto direito, sempre certo */
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.89);
+  border-radius: 10px;
+  padding: 20px 0;
+  display: none;
+  z-index: 300;
+  /* MAIOR que o menu, ícones e o hambúrguer */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#login-dropdown h3 {
+  margin-top: 60px;
+  font-size: 16px;
+  /* Tamanho da fonte */
+  color: #7a4a1c;
+  /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px;
+  /* Espaço abaixo do título */
+}
+
+#login-dropdown ul {
+  list-style: none;
+  /* Remove marcadores (bolinhas) da lista */
+  margin: 0;
+  /* Remove espaçamento externo padrão */
+}
+
+#login-dropdown ul li a:hover {
+  text-decoration: underline;
+  color: #7a4a1c;
+  /* Cor marrom ao passar o mouse (hover) */
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text";
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* Ajuste do painel para telas pequenas (vertical) */
+#login-dropdown {
+  max-height: calc(100vh - 120px);
+  /* cabe sempre na tela */
+  overflow-y: auto;
+  /* ativa rolagem se necessário */
+  padding: 20px;
+}
+
+/* Reduz os espaçamentos internos no mobile */
+@media (max-height: 800px) {
+  #login-dropdown h3 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .opcoes {
+    margin: 12px 0;
+  }
+
+  #logout-btn {
+    margin: 25px;
+  }
+}
+
+.carrinho {
+  margin-right: 90px;
+}
+
+/* .login{
+ margin-left: 270px;
+} */
+/*alterado*/
+
+/* Animação de pulsação */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+/* Classe para o efeito visual no ícone */
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
+  /* anel visível mesmo quando não está no pico */
+}
+
+/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+/* Caixa de cada opção */
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  /* leve transparência */
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 20px 0px;
+  /* espaçamento entre as caixas */
+  text-align: center;
+}
+
+/* Texto das opções */
+.opcoes a {
+  display: block;
+  padding: 10px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover — destaca ao passar o mouse */
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+.login-dropdown-wrapper {
+  /*alterado*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  /* distância natural entre login e carrinho */
+}
+
+.login {
+  /*alterado*/
+  margin: 0;
+  /* Remove o margin-left: 270px que quebrava TUDO */
+}
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/*tirar se der problema*/
+
+
+/*=============================================*/
+
+html {
+  background-color: #eae4d8;
+}
+
+/* main {
+  margin-top: 50px;
+} */
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #eae4d8;
+  color: #3a2d20;
+}
+
+/*==================================MAIN=====================*/
+
+
+.paginas a:hover {
+  transform: scale(1.10);
+}
+
+
+
+/* Container principal */
+main {
+  flex: 1;
+  max-width: 1200px;
+  margin-top: 120px;
+
+}
+
+/* Caminho inicial */
+
+
+main h1 a {
+  padding: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: normal;
+  color: #5a4635;
+  margin-bottom: 20px;
+  margin-top: 80px;
+}
+
+
+/* Grid das fotos */
+.fotos {
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  gap: 15px;
+  width: 45%;
+  float: left;
+}
+
+.fotos img {
+  width: 100%;
+  padding: -10;
+}
+
+/* Área de descrição */
+.descricao {
+  float: right;
+  width: 40%;
+  background-color: #DBCAA94D;
+  padding: 20px;
+  border-radius: 5px;
+  height: 600px;
+  margin-top: -17px;
+}
+
+.descricao li {
+  border-color: black;
+
+}
+
+.descricao .nome {
+  font-size: 22px;
+  color: #7b2d2d;
+  margin-bottom: 15px;
+}
+
+.descricao p {
+  font-size: 20px;
+  text-align: justify;
+}
+
+/* Botões */
+
+.compra,
+.carrinho
+{
+  margin: 40px 0;
+  padding: 10px 15px;
+  border: 1px solid #4E390299;
+  background: #ede2d2;
+  font-size: 15px;
+  border-radius: 4px;
+
+}
+
+.botoes {
+  flex-direction: column;
+  margin-left: 800px;
+  margin-top: 40px;
+}
+
+.compra {
+  color: black;
+  margin-left: -10px;
+  width: 300px;
+  height: 50px;
+  flex-shrink: 0;
+  background: none;
+}
+
+.carrinho {
+  margin-left: 17px;
+  width: 240px;
+  height: 60px;
+  flex-shrink: 0;
+  margin-top: -20px;
+  background: #d5c3a5;
+}
+
+
+.ver {
+  font-family: "Libre Caslon Text";
+  height: 50px;
+  width: 300px;
+  color: darkred;
+  background: rgba(237, 219, 190, 0.80);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  margin-top: 100px;
+  margin-right: 1000px;
+  margin-top: -40px;
+  margin-bottom: 40px;
+}
+
+
+
+.subtitulo {
+  color: #790000;
+  font-size: 22px;
+  font-family: "Libre Caslon Text";
+}
+
+.descricaovestido {
+  font-size: 18px;
+  font-family: "Libre Caslon Text";
+  font-weight: 200;
+}
+
+.descricao .nome {
+  font-size: 28px;
+}
+
+.linhadescricao {
+  font-size: 18px;
+
+}
+
+.nomevestido {
+  letter-spacing: 2.5px;
+  font-family: "Aboreto", system-ui;
+  color: #790000;
+  text-shadow: 2px 4px 4px color(display-p3 0 0 0 / 0.30);
+  -webkit-text-stroke-width: 0.5px;
+  margin-top: -5px;
+}
+
+/* .compra:focus {
+  border-color: darkred;
+  transform: scale(1.10);
+}
+
+.compra:hover {
+  border-color: darkred;
+  transform: scale(1.05);
+}
+.carrinho:focus {
+  border-color: darkred;
+  transform: scale(1.10);
+} */
+
+.carrinho:hover {
+  border-color: darkred;
+  transform: scale(1.05);
+}
+.ver:focus {
+  border-color: darkred;
+  transform: scale(1.10);
+}
+
+.ver:hover {
+  border-color: darkred;
+  transform: scale(1.05);
+}
+
+
+
+
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE TOTAL PARA CELULAR - ATÉ 600px
+   ========================================================== */
+@media (max-width: 600px) {
+
+  /* ===== MAIN ===== */
+  main {
+    max-width: 100%;
+    padding: 10px;
+    margin-top: 120px; /* afastar do menu fixo */
+  }
+
+  main h1 {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+  }
+
+  main h1 a {
+    font-size: 14px;
+    padding: 0;
+  }
+
+  /* ===== FOTOS ===== */
+  .fotos {
+    width: 100%;
+    float: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 imagens por linha */
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .fotos img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ===== DESCRIÇÃO ===== */
+  .descricao {
+    float: none;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  .nomevestido {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .descricaovestido {
+    font-size: 16px;
+  }
+
+  .subtitulo {
+    font-size: 16px;
+  }
+
+  .descricao p {
+    font-size: 16px;
+  }
+
+  /* ===== BOTÕES ===== */
+  .botoes {
+    margin: 20px 0 30px 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .compra {
+    width: 100%;
+    margin-left: 0;
+    font-size: 16px;
+    height: 50px;
+  }
+
+  .carrinho {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    height: 55px;
+    font-size: 16px;
+  }
+
+  /* ===== CONTINUAR VENDO ===== */
+  .outrosvestidos {
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  .ver {
+    width: 56%;
+    max-width: 350px;
+    height: 50px;
+    font-size: 15px;
+    margin-right: 200px;
+  }
+
+  /* ===== VARIEDADES ===== */
+  .variedades {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .imagem-container {
+    padding: 5px;
+  }
+
+  .imagem-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .variedades .nome {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .conteinervariedade h3 {
+    font-size: 18px;
+  }
+
+  .linhavariedade {
+    display: none;
+  }
+
+  /* ===== CORRIGE FLOATS ===== */
+  .descricao, .fotos, .botoes {
+    float: none !important;
+  }
+
+  /* ===== EVITAR SCROLL HORIZONTAL ===== */
+  body, html {
+    overflow-x: hidden !important;
+  }
+}
+
+/*============================================================*/
+
+.alert-box {
+  /* O CSS que garante a responsividade */
+  position: fixed; /* Fixa na tela */
+  top: 20px;
+  right: 50px;
+  z-index: 1050; /* Garante que fique acima de outros elementos */
+  
+  /* Largura e Estilo */
+  width: 90%; /* Responsivo: 90% da tela */
+  max-width: 400px; /* Limita a largura em telas grandes */
+  font-family: "Inter", sans-serif;
+  /* Outros estilos visuais */
+  padding: 15px;
+  color: #523800;
+  background-color: #EAE4D8;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: 1px solid #5238007e;
+  border-radius: 4px;
+  display: none; /* Começa escondido */
+}
+
+/* Opcional: Estilo específico para telas muito pequenas */
+@media (max-width: 450px) {
+  .alert-box {
+    width: calc(100% - 40px); /* 100% menos o padding lateral */
+    right: 20px;
+    left: 20px;
+  }
+}
+
+
+/* ===================== VARIEDADES ===================== */
+#variedades {
+  background-color: #fff9ed;
+  padding: 60px 20px;
+  text-align: center;
+  min-height: 400px;
+  height:100vh;
+}
+
+#variedades h1 {
+  color: #681616;
+  font-family: "Aboreto", system-ui;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.linha-titulo3 {
+  width: 456px;
+  max-width: 90%;
+  border: none;
+  border-top: 2px solid #4e3902;
+  margin: 0 auto 40px;
+}
+
+.lista-vestidos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.vestido {
+  width: 280px;
+  text-align: center;
+}
+
+.vestido a {
+  text-decoration: none;
+  color: #000;
+}
+
+.fotovariedades {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.vestido:hover .fotovariedades {
+  transform: scale(1.05);
+}
+
+.nome {
+  font-family: "Libre Caslon Text", serif;
+  font-size: 18px;
+  color: #523800;
+  margin-top: 15px;
+}
+
+.outrosvestidos {
+  text-align: center;
+  margin-top: 40px;
+}
+
+

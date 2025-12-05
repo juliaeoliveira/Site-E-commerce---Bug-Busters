@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aboreto&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Pagamento - Sob Véu</title>
+    <link rel="stylesheet" href="/static/css/checkout.css" />
+  </head>
+  <body>
+    <!-- MENU FIXO RESPONSIVO -->
+    <header class="menu">
+      <!-- LOGO -->
+      <a href="/painel_usuario">
+        <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+      </a>
+
+      <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        ☰
+      </button>
+
+      <!-- NAV PRINCIPAL -->
+      <nav class="text-menu" id="nav-menu">
+        <a href="/painel_usuario/produtos">Vestidos</a>
+        <a href="/painel_usuario/colecoes">Coleções</a>
+        <a href="/painel_usuario/#Agendamentos">Agendamentos</a>
+      </nav>
+
+      <!-- ÍCONES (login + carrinho) -->
+      <div class="login-dropdown-wrapper">
+        <img
+          class="login"
+          src="/static/img_home/login.png"
+          width="20px"
+          title="login"
+          alt="login"
+          id="login-icon"
+        />
+        <div id="login-dropdown" class="hidden" aria-hidden="true">
+          <h3><strong>Bem-vinda, {{primeiro_nome}}!</strong></h3>
+          <ul class="dropdown-list">
+            <li class="opcoes">
+              <a href="/painel_usuario/meus_dados">Sua Conta</a>
+            </li>
+            <li class="opcoes">
+              <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+            </li>
+            <li class="opcoes">
+              <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+            </li>
+            <li class="opcoes">
+              <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+            </li>
+          </ul>
+          <a href="/painel_usuario/lougout">
+            <button id="logout-btn" type="button">Sair da conta</button>
+          </a>
+        </div>
+        <a href="/painel_usuario/carrinho">
+          <img
+            src="/static/img_home/carrinho.png"
+            width="20px"
+            title="Carrinho"
+            alt="Carrinho"
+          />
+        </a>
+      </div>
+    </header>
+
+    <!-- Overlay para escurecer o fundo no mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+      <form action="">
+        <section id="carrinho">
+          <h1 class="localizacao">Carrinho > Pagamento</h1>
+          <br /><br />
+          <div class="area-carrinho">
+            <div class="coluna-esquerda">
+              <section class="produto-vestido">
+                <h1>ENDEREÇO DE ENVIO</h1>
+                <div class="form-endereco">
+                  <div class="linha-dupla">
+                    <div>
+                      <label for="nome">Nome Completo:</label>
+                      <input
+                        id="nome"
+                        type="text"
+                        value="{{ usuario.nome_cliente }}"
+                        disabled
+                      />
+                    </div>
+                    <div>
+                      <label for="telefone">Número de Telefone: </label>
+                      <input
+                        id="telefone"
+                        type="text"
+                        value="{{ usuario.telefone }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="linha-dupla">
+                    <div>
+                      <label for="cep">CEP: </label>
+                      <input
+                        id="cep"
+                        type="text"
+                        value="{{ endereco.cep }}"
+                        disabled
+                      />
+                    </div>
+                    <div>
+                      <label for="rua">Rua: </label>
+                      <input
+                        id="rua"
+                        type="text"
+                        value="{{ endereco.rua }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="linha-dupla">
+                    <div>
+                      <label for="numero">N°: </label>
+                      <input
+                        id="numero"
+                        type="text"
+                        value="{{ endereco.numero }}"
+                        disabled
+                      />
+                    </div>
+                    <div>
+                      <label for="complemento">Complemento:</label>
+                      <input
+                        id="complemento"
+                        type="text"
+                        value="{{ endereco.complemento if endereco.complemento else '' }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="linha-dupla">
+                    <div class="primeiro">
+                      <label for="estado">Estado:</label>
+                      <input
+                        id="estado"
+                        type="text"
+                        value="{{ endereco.estado }}"
+                        disabled
+                      />
+                    </div>
+                    <div class="segundo">
+                      <label for="cidade">Cidade:</label>
+                      <input
+                        id="cidade"
+                        type="text"
+                        value="{{ endereco.cidade }}"
+                        disabled
+                      />
+                    </div>
+                    <div class="linha-dupla2">
+                      <div>
+                        <label for="bairro">Bairro:</label>
+                        <input
+                          id="bairro"
+                          type="text"
+                          value="{{ endereco.bairro }}"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <a
+                    href="/pedido/editar_endereco"
+                    type="button"
+                    class="botao-enviar"
+                    >Alterar informações de cadastro</a
+                  >
+                </div>
+              </section>
+
+              <section class="produto-vestido">
+                <h1>MÉTODOS DE PAGAMENTO</h1>
+                <div class="form-pagamento">
+                  <div class="opcao-pagamento">
+                    <label for="pix">Pix</label>
+                    <input
+                      type="radio"
+                      id="pix"
+                      name="metodo_pagamento"
+                      value="pix"
+                      required
+                    />
+                  </div>
+                  <div class="opcao-pagamento">
+                    <label for="credito">Cartão de Crédito:<br />(12x)</label>
+                    <input
+                      type="radio"
+                      id="credito"
+                      name="metodo_pagamento"
+                      value="credito"
+                    />
+                  </div>
+                  <div class="opcao-pagamento">
+                    <label for="debito">Cartão de Débito:</label>
+                    <input
+                      type="radio"
+                      id="debito"
+                      name="metodo_pagamento"
+                      value="debito"
+                    />
+                  </div>
+                </div>
+              </section>
+
+              <section class="produto-vestido" id="itens-pedido">
+                <h1>ITENS</h1>
+                <div class="itens-container"></div>
+              </section>
+            </div>
+
+            <section class="pedido-total">
+              <div>
+                <h3>Seu pedido</h3>
+                <br />
+                <h2>
+                  <span>Sub total:</span>
+                  <span id="subtotal-value">R$ 0,00</span>
+                </h2>
+                <h2>
+                  <span>Frete:</span>
+                  <span id="frete-value"
+                    >R$ {{ '%.2f'|format(frete.valor_frete) if frete else '0.00'
+                    }}</span
+                  >
+                </h2>
+                <div
+                  id="frete-data"
+                  data-valor="{{ frete.valor_frete if frete else 0 }}"
+                  style="display: none"
+                ></div>
+                <h2>
+                  <span>Total:</span> <span id="total-with-frete">R$ 0,00</span>
+                </h2>
+              </div>
+              <div id="checkout-form">
+                <button id="botao-pagamento" type="submit">
+                  Fechar pedido
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <div class="botoes-finais">
+            <button class="botao-voltar">← Voltar para o carrinho</button>
+            <button class="botao-confirmar-final">Confirmar pagamento →</button>
+          </div>
+          <div style="height: 30px"></div>
+        </section>
+      </form>
+
+      <!-- MAIS VARIEDADES -->
+      <section id="variedades">
+        <h1>Mais variedades</h1>
+        <hr class="linha-titulo3" />
+        <div class="lista-vestidos">
+          {% for sugestao in sugestoes %} {% if sugestao.quantidade_estoque %}
+          <div class="vestido">
+            <a href="/painel_usuario/produtos/{{ sugestao.id }}">
+              <img
+                src="{{url_for('static', path='uploads/' + sugestao.imagem1_url)}}"
+                alt="{{ sugestao.nome_produto }}"
+                class="fotovariedades"
+              />
+              <p class="nome">{{ sugestao.nome_produto }}</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+        <br />
+        <nav>
+          <div class="outrosvestidos">
+            <a href="/painel_usuario/produtos"
+              ><button class="ver">← Continuar vendo outros vestidos</button></a
+            >
+          </div>
+        </nav>
+      </section>
+    </main>
+
+    <!-- FOOTER PADRONIZADO -->
+    <footer>
+      <!-- LOGO -->
+      <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
+
+      <!-- COLUNA 1 -->
+      <div class="coluna">
+        <p class="titulo">Contatos</p>
+        <ul>
+          <li>
+            <img
+              class="telefone"
+              src="/static/img_home/telefone.png"
+              alt="Telefone"
+            />
+            (11) 4002-8922
+          </li>
+          <li>
+            <img
+              class="whatsapp"
+              src="/static/img_home/speech-bubble--v2-Photoroom.png"
+              alt="WhatsApp"
+            />
+            (11) 98291-1653
+          </li>
+          <li>sobveuoficial@gmail.com</li>
+        </ul>
+      </div>
+
+      <div class="linha"></div>
+
+      <!-- COLUNA 2 -->
+      <div class="coluna">
+        <p class="titulo">Sobre a loja</p>
+        <ul>
+          <li>Sobre nós</li>
+          <li>Trocas e Devoluções</li>
+          <li>Fretes e Entregas</li>
+        </ul>
+      </div>
+
+      <div class="linha"></div>
+
+      <!-- COLUNA 3 -->
+      <div class="coluna">
+        <p class="titulo">Informações</p>
+        <ul>
+          <li>Política de Privacidade</li>
+          <li>Termos de Uso</li>
+          <br /><br />
+        </ul>
+      </div>
+
+      <!-- REDES SOCIAIS -->
+      <section class="midia">
+        <img
+          class="instagram"
+          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+          alt="Instagram"
+        />
+        <img
+          class="facebook"
+          src="/static/img_home/facebook-f-Photoroom.png"
+          alt="Facebook"
+        />
+      </section>
+
+      <!-- DIREITOS -->
+      <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT: LOGIN DROPDOWN -->
+    <script>
+      const loginIcon = document.getElementById("login-icon");
+      const loginDropdown = document.getElementById("login-dropdown");
+
+      loginIcon.addEventListener("click", () => {
+        const isVisible = loginDropdown.style.display === "block";
+        loginDropdown.style.display = isVisible ? "none" : "block";
+        loginIcon.classList.toggle("login-active", !isVisible);
+      });
+
+      window.addEventListener("click", function (e) {
+        if (
+          !loginIcon.contains(e.target) &&
+          !loginDropdown.contains(e.target)
+        ) {
+          loginDropdown.style.display = "none";
+          loginIcon.classList.remove("login-active");
+        }
+      });
+    </script>
+
+    <!-- SCRIPT: MENU HAMBÚRGUER -->
+    <script>
+      const nav = document.getElementById("nav-menu");
+      const btn = document.getElementById("hamburger");
+      const overlay = document.getElementById("overlay");
+
+      function openMenu() {
+        nav.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      btn.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      overlay.addEventListener("click", closeMenu);
+
+      // fecha no ESC
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    </script>
+
+    <!-- SCRIPT: CARRINHO -->
+
+    <script>
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", ready);
+      } else {
+        ready();
+      }
+
+      // Variável global para guardar o valor total SEM frete.
+      let totalAmount = 0;
+
+      // Função auxiliar para converter strings de preço (R$ 1.000,00) em número (1000.00)
+      function parsePriceString(s) {
+        if (typeof s === "number") return s;
+        if (!s) return 0;
+        let str = String(s).trim().replace("R$", ""); // Remove o R$
+
+        // Se tiver ponto e vírgula, assume formato brasileiro (1.000,00)
+        if (str.includes(".") && str.includes(",")) {
+          str = str.replace(/\./g, "").replace(",", "."); // 1.000,00 -> 1000.00
+        } else {
+          str = str.replace(",", "."); // 1000,00 -> 1000.00 (Caso não tenha ponto)
+        }
+        const n = parseFloat(str);
+        return isNaN(n) ? 0 : n;
+      }
+
+      function ready() {
+        loadCartFromLocalStorage();
+
+        const purchaseButton = document.getElementById("botao-pagamento");
+        if (purchaseButton) {
+          purchaseButton.addEventListener("click", makePurchase);
+        }
+
+        const confirmButton = document.querySelector(".botao-confirmar-final");
+        if (confirmButton) {
+          confirmButton.addEventListener("click", makePurchase);
+        }
+
+        const backButton = document.querySelector(".botao-voltar");
+        if (backButton) {
+          backButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.location.href = "/painel_usuario/carrinho";
+          });
+        }
+      }
+
+      // ... (loadCartFromLocalStorage e updateTotal permanecem inalteradas, exceto se você reverter a exibição como no último passo)
+
+      function loadCartFromLocalStorage() {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        // Seletor corrigido no HTML para #subtotal-value
+        const subtotalElement = document.getElementById("subtotal-value");
+        const container = document.querySelector(
+          "#itens-pedido .itens-container"
+        );
+
+        // Limpa o container antes de adicionar os itens
+        container.innerHTML = "";
+
+        if (carrinho.length === 0) {
+          container.innerHTML +=
+            "<p>Seu carrinho está vazio. Volte para a loja para adicionar itens.</p>";
+
+          // Garante que todos os valores sejam zero e formatados
+          const zeroValue = (0).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          });
+          if (subtotalElement) subtotalElement.textContent = zeroValue;
+          if (document.getElementById("frete-value"))
+            document.getElementById("frete-value").textContent = zeroValue;
+          if (document.getElementById("total-with-frete"))
+            document.getElementById("total-with-frete").textContent = zeroValue;
+          return;
+        }
+
+        // Adiciona os itens do carrinho para visualização (sem campos de edição)
+        carrinho.forEach((produto) => {
+          const precoUnitario = parsePriceString(produto.preco);
+          const subtotalItem = precoUnitario * produto.quantidade;
+
+          const div = document.createElement("div");
+          div.classList.add("produto-item-checkout"); // Classe para o container do item
+
+          // Mapeia os dados do produto para o layout de checkout (Versão limpa)
+          div.innerHTML = `
+                <div class="checkout-item-details">
+                    <img class="foto-checkout-miniatura" src="${
+                      produto.imagem
+                    }" alt="${produto.nome}">
+                    <div class="texto-checkout">
+                        <h3>${produto.nome}</h3>
+                        <p>Tamanho: ${produto.tamanho}</p>
+                        <p>Quantidade: ${produto.quantidade}</p>
+                        <p>Preço Unitário: ${precoUnitario.toLocaleString(
+                          "pt-BR",
+                          { style: "currency", currency: "BRL" }
+                        )}</p>
+                    </div>
+                    <p class="subtotal-item">${subtotalItem.toLocaleString(
+                      "pt-BR",
+                      { style: "currency", currency: "BRL" }
+                    )}</p>
+                </div>
+                <hr>
+            `;
+          container.appendChild(div);
+        });
+
+        updateTotal();
+      }
+
+      function updateTotal() {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const subtotalElement = document.getElementById("subtotal-value");
+        const freteDataEl = document.getElementById("frete-data");
+        const freteValueEl = document.getElementById("frete-value");
+        const totalWithFreteEl = document.getElementById("total-with-frete");
+            
+        let subtotal = 0;
+            
+        // 1. CALCULA O SUBTOTAL (apenas produtos)
+        carrinho.forEach((produto) => {
+          const preco = parsePriceString(produto.preco);
+          subtotal += preco * (Number(produto.quantidade) || 0);
+        });
+      
+        // 2. EXIBE O SUBTOTAL
+        if (subtotalElement) {
+          subtotalElement.textContent = subtotal.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          });
+        }
+      
+        // 3. PEGA O VALOR DO FRETE (do elemento data-valor)
+        const freteValor = freteDataEl
+          ? parseFloat(freteDataEl.dataset.valor) || 0
+          : 0;
+      
+        // 4. EXIBE O FRETE
+        if (freteValueEl) {
+          freteValueEl.textContent = freteValor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          });
+        }
+      
+        // 5. CALCULA E EXIBE O TOTAL GERAL
+        const totalGeral = subtotal + freteValor;
+      
+        if (totalWithFreteEl) {
+          totalWithFreteEl.textContent = totalGeral.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          });
+        }
+      
+        // Armazena os valores globais para uso no payload
+        window.carrinhoSubtotal = subtotal;
+        window.carrinhoFrete = freteValor;
+        window.carrinhoTotalGeral = totalGeral;
+      }
+
+      // ================================
+      // FUNÇÃO FINALIZAR COMPRA (CORRIGIDA)
+      // ================================
+      async function makePurchase(event) {
+        event.preventDefault();
+            
+        // Garante que o total está atualizado
+        updateTotal();
+            
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            
+        // Seleciona o valor do método de pagamento
+        const metodoPagamento = document.querySelector(
+          'input[name="metodo_pagamento"]:checked'
+        )?.value;
+            
+        if (!metodoPagamento) {
+          alert("Selecione um método de pagamento!");
+          return;
+        }
+      
+        if (carrinho.length === 0) {
+          alert("Seu carrinho está vazio! Não é possível finalizar a compra.");
+          return;
+        }
+      
+        // PEGAR VALOR DO FRETE
+        const freteDataEl = document.getElementById("frete-data");
+        const freteValor = freteDataEl
+          ? parseFloat(freteDataEl.dataset.valor)
+          : 0;
+      
+        // Construir o payload para a rota /pedido/checkout
+        const payload = {
+          metodo_pagamento: metodoPagamento,
+          frete: freteValor, // Importante: enviar o valor do frete
+          itens: carrinho.map((item) => ({
+            id_produto: item.id || 0,
+            nome: item.nome, // Adicionando para referência (opcional)
+            tamanho: item.tamanho,
+            quantidade: Number(item.quantidade) || 0,
+            preco_unitario: parsePriceString(item.preco),
+            subtotal: (Number(item.quantidade) || 0) * parsePriceString(item.preco)
+          }))
+        };
+      
+        console.log("DEBUG: Payload enviado:", payload);
+      
+        try {
+          // AGORA usando a rota /pedido/checkout que cria o pagamento
+          const response = await fetch("/pedido/checkout", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+        
+          const result = await response.json();
+        
+          if (response.ok) {
+            alert("Pedido realizado com sucesso! ID: " + result.id_pedido);
+            localStorage.removeItem("carrinho");
+            window.location.href = `/painel_usuario/meus_pedidos`;
+          } else {
+            // Captura a mensagem de erro detalhada
+            alert("Erro ao salvar pedido: " + (result.detail || "Tente novamente."));
+            console.error("Erro na resposta:", result);
+          }
+        } catch (err) {
+          console.error("Erro na requisição:", err);
+          alert("Erro inesperado ao processar o pedido. Verifique o console.");
+        }
+      }
+    </script>
+  </body>
+</html>

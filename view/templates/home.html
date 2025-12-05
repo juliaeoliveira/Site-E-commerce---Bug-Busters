@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Jim+Nightshade&family=Judson:ital,wght@0,400;0,700;1,400&family=Junge&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Dancing+Script:wght@400..700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Judson:ital,wght@0,400;0,700;1,400&family=Junge&family=Lavishly+Yours&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rouge+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <title>Sob Veu</title>
+</head>
+<body> 
+  <!-- MENU FIXO RESPONSIVO -->
+  <header class="menu">
+    <!-- LOGO -->
+    <a href="/">
+      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
+    </a>
+
+    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      ☰
+    </button>
+
+    <!-- NAV PRINCIPAL -->
+    <nav class="text-menu" id="nav-menu">
+      <a href="/produtos">Vestidos</a>
+      <a href="/colecoes">Coleções</a>
+      <a href="/#Agendamentos">Agendamentos</a>
+    </nav>
+
+    <nav class="icons">
+      <a href="/usuario/login" >
+        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+      </a>
+      <a href="/painel_usuario/carrinho" >
+        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Overlay para escurecer o fundo no mobile -->
+  <div class="overlay" id="overlay"></div>
+
+    <main>
+
+<section id="frames">
+    <div class="video-inicial">
+        <video class="video-bg" autoplay loop muted playsinline>
+            <source src="/static/video/video-fundo.mp4" type="video/mp4">
+        </video>
+    </div>
+</section>
+
+
+<section id="Sobre-nos">
+  <div class="sobre-container">
+    <div class="Sobre-veu">
+      <div class="titulo-completo">
+        <span class="sob">Sob Véu</span>
+        <span class="texto1">é o espaço onde os sonhos das noivas ganham forma</span>
+      </div>
+      <p class="texto2">
+        Aqui cada prova é vivida como um instante íntimo e inesquecível,<br>
+        no qual a noiva se descobre diante do espelho: única, radiante e 
+        pronta para dar mais um belo passo em sua história de amor.
+      </p>
+    </div>
+<div id="box-noiva-img">
+      <img src="/static/img_home/noiva-inicial.png" alt="noiva">
+</div>
+
+  </div>
+</section>
+
+<section id="vestidos">
+  <div class="vestidos-iniciais">
+    <h1>
+      TOQUE DE <span class="destaque">eternidade</span> NO SEU GRANDE DIA
+    </h1>
+
+    <div class="galeria-vestidos">
+
+      <div class="seta seta-esquerda">
+        <img src="/static/img_home/seta esquerda2.png" alt="Anterior">
+      </div>
+
+      <div class="items-produto">
+        <div class="wrap1">
+          <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
+        </div>
+      </div>
+
+      <div class="items-produto">
+        <div class="wrap2">
+          <img id="vestido2" src="/static/img_home/vestido 2.png" alt="">
+        </div>
+      </div>
+
+      <div class="seta seta-direita">
+        <img src="/static/img_home/seta direita2.png" alt="Próximo">
+      </div>
+
+    </div>
+  </div>
+ 
+</section>
+
+
+<section id="Agendamentos">
+  <div class="agendamentos">
+    <h1>AGENDAMENTOS</h1>
+    <div class="linha-abaixo"></div>
+    <p>
+      Seu grande dia merece um vestido a altura! Clique no botão abaixo e marque uma consultoria online.
+    </p>
+    <button id="botao-boasvindas">
+      <a href="https://web.whatsapp.com/" class="numero" target="_blank" >(11) 4002-8922</a>
+      <img src="/static/img_home/telefone.png" alt="Telefone">
+    </button>
+  </div>
+</section>
+
+<section id="Coleções">
+  <div class="colecoes">
+    <hr class="linha-titulo">
+    <h1>CONHEÇA NOSSAS COLEÇÕES</h1>
+    <hr class="linha-titulo2">
+
+    <div class="items-colecoes">
+      <a href="/colecoes/Encanto" class="items-colecao direita">
+        <img src="/static/img_home/colecao22.png" alt="Coleção 1">
+        <button class="btn-overlay" type="button"><span>Encanto</span></button>
+      </a>
+
+      <a href="/colecoes/O%20Desabrochar" class="items-colecao centro destaque">
+        <img src="/static/img_home/colecao11.png" alt="Coleção 2">
+        <button class="btn-overlay centro" type="button"><span>O Desabrochar</span></button>
+      </a>
+
+      <a href="/colecoes/Sussurros" class="items-colecao esquerda">
+        <img src="/static/img_home/colecao33.png" alt="Coleção 3">
+        <button class="btn-overlay" type="button"><span>Sussurros</span></button>
+      </a>
+    </div>
+    <nav>
+      <a class="botao-vercolecao" href="/colecoes">ver coleções</a>
+    </nav>
+
+
+    <hr class="linha-colecao">
+  </div>
+</section>
+
+<section id="depoimentos">
+  <div class="container">
+    <h1>DEPOIMENTOS</h1>
+    <div class="box-depoimentos">
+      <p>
+        "Minha experiência na Sob Véu foi maravilhosa! Fui super bem atendida desde o primeiro momento e encontrei o vestido dos meus sonhos. Tudo com muito carinho e atenção aos detalhes. Recomendo de olhos fechados!"
+      </p>
+      <div class="autor">
+        <img src="/static/img_home/depoimento2.png" alt="Juliana e seu cachorro">
+        <span><b>Renata B.</b></span>
+      </div>
+    </div>
+
+    <div class="box-depoimentos">
+      <p>
+        "Minha experiência na Sob Véu foi maravilhosa! Fui super bem atendida desde o primeiro momento e encontrei o vestido dos meus sonhos. Tudo com muito carinho e atenção aos detalhes. Recomendo de olhos fechados!"
+      </p>
+      <div class="autor">
+        <img src="/static/img_home/depoimento1.png" alt="Guilherme e seu cachorro">
+        <span><b>Giulia R.</b></span>
+      </div>
+    </div>
+</section>
+
+    <footer>
+      <!-- LOGO -->
+      <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
+
+      <!-- COLUNA 1 -->
+      <div class="coluna">
+        <p class="titulo">Contatos</p>
+        <ul>
+          <li>
+            <img
+              class="telefone"
+              src="/static/img_home/telefone.png"
+              alt="Telefone"
+            />
+            (11) 4002-8922
+          </li>
+
+          <li>
+            <img
+              class="whatsapp"
+              src="/static/img_home/speech-bubble--v2-Photoroom.png"
+              alt="WhatsApp"
+            />
+            (11) 98291-1653
+          </li>
+
+          <li>sobveuoficial@gmail.com</li>
+        </ul>
+      </div>
+
+      <div class="linha"></div>
+
+      <!-- COLUNA 2 -->
+      <div class="coluna">
+        <p class="titulo">Sobre a loja</p>
+        <ul>
+          <li>Sobre nós</li>
+          <li>Trocas e Devoluções</li>
+          <li>Fretes e Entregas</li>
+        </ul>
+      </div>
+
+      <div class="linha"></div>
+
+      <!-- COLUNA 3 -->
+      <div class="coluna">
+        <p class="titulo">Informações</p>
+        <ul>
+          <li>Política de Privacidade</li>
+          <li>Termos de Uso</li>
+          <br /><br />
+        </ul>
+      </div>
+
+      <!-- REDES SOCIAIS -->
+      <section class="midia">
+        <img
+          class="instagram"
+          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+          alt="Instagram"
+        />
+        <img
+          class="facebook"
+          src="/static/img_home/facebook-f-Photoroom.png"
+          alt="Facebook"
+        />
+      </section>
+
+      <!-- DIREITOS -->
+      <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+    </footer>
+  <script>
+    const nav = document.getElementById("nav-menu");
+    const btn = document.getElementById("hamburger");
+    const overlay = document.getElementById("overlay");
+
+    function openMenu() {
+      nav.classList.add("active");
+      overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu() {
+      nav.classList.remove("active");
+      overlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    btn.addEventListener("click", () => {
+      if (nav.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    overlay.addEventListener("click", closeMenu);
+
+    // fecha no ESC
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+  </script>    
+<script>
+// transição dos vestidos
+  
+  const paresVestidos = [
+    ["/static/img_home/vestido-1.png", "/static/img_home/vestido 2.png"],
+    ["/static/img_home/vestido-3.png", "/static/img_home/vestido-4.png"],
+    ["/static/img_home/vestido-5.png", "/static/img_home/vestido-6.png"],
+    ["/static/img_home/vestido-7.png", "/static/img_home/vestido-8.png"]
+  ];
+
+  let indice = 0;
+
+  const img1 = document.getElementById("vestido1");
+  const img2 = document.getElementById("vestido2");
+
+  const setaDir = document.querySelector(".seta-direita");
+  const setaEsq = document.querySelector(".seta-esquerda");
+
+  let emTransicao = false; // Trava para impedir cliques frenéticos
+
+  function atualizarImagens() {
+    if (emTransicao) return; 
+    emTransicao = true;
+
+    // 1. Inicia o efeito (Zoom + Blur + Fade Out)
+    img1.classList.add("trocando");
+    img2.classList.add("trocando");
+
+    // 2. Espera a imagem sumir e desfocar (600ms)
+    setTimeout(() => {
+      
+      // Troca a foto "nos bastidores"
+      img1.src = paresVestidos[indice][0];
+      img2.src = paresVestidos[indice][1];
+
+      // Pequena pausa técnica para o navegador processar a nova imagem
+      setTimeout(() => {
+        // 3. Traz a imagem de volta (Zoom volta, Foco volta)
+        img1.classList.remove("trocando");
+        img2.classList.remove("trocando");
+        
+        // Destrava o botão
+        setTimeout(() => {
+           emTransicao = false; 
+        }, 600); 
+
+      }, 50);
+      
+    }, 600); // Tempo igual ao do CSS (0.6s)
+  }
+
+  setaDir.addEventListener("click", () => {
+    if(!emTransicao) {
+        indice = (indice + 1) % paresVestidos.length;
+        atualizarImagens();
+    }
+  });
+
+  setaEsq.addEventListener("click", () => {
+    if(!emTransicao) {
+        indice = (indice - 1 + paresVestidos.length) % paresVestidos.length;
+        atualizarImagens();
+    }
+  });
+
+  
+</script>
+
+
+<script>
+const colecoes = document.querySelectorAll(".items-colecao");
+let colecaoIndex = 0;
+
+function mostrarColecao(i) {
+  colecoes.forEach((item, idx) => {
+    item.style.display = idx === i ? "block" : "none";
+  });
+}
+
+function iniciarCarrosselMobile() {
+  if (window.innerWidth > 768) return;
+
+  mostrarColecao(colecaoIndex);
+
+  setInterval(() => {
+    colecaoIndex = (colecaoIndex + 1) % colecoes.length;
+    mostrarColecao(colecaoIndex);
+  }, 5000);
+}
+
+iniciarCarrosselMobile();
+</script>
+
+
+
+</body>
+</main>

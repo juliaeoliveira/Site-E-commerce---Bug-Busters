@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - Sob Véu</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/carrinho.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/descricao.css"> 
+    <script src="{{ url_for('static', path='js/carrinho.js') }}"></script>
+</head>
+
+<body>
+    <div class="menu">
+        <a href="/home/"> <img id="logo" src="/static/img_home/Sob.png" alt="Logo"></a>
+        <nav class="categorias">
+            <a href="/">Vestidos</a>
+            <a href="#Colecoes">Coleções</a>
+            <a href="#Agendamentos">Agendamentos</a>
+        </nav>
+        <nav class="icons">
+            <a href="https://instagram.com" target="_blank">
+                <img src="/static/img_home/login.png" width="20px" title="login" alt="login">
+            </a>
+            <a href="/carrinho/" target="_blank">
+                <img src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho">
+            </a>
+        </nav>
+    </div>
+
+    <main>
+        <h1 class="localizacao"> Carrinho > Pagamento</h1>
+        <br><br><br><br>
+        <section id="carrinho">
+            <section class="compras">
+                <div class="breadcrumb">
+                    <section class="produto-vestido">
+                        <h1>Carrinho de compras</h1>
+                        <!-- Linha de selecionar todos -->
+                        <div class="linha-selecao">
+                            <input id="selecionar-todos" type="checkbox" class="checkbox-geral" />
+                            <label for="selecionar-todos">Selecionar todos </label>
+                        </div>
+
+                        <!-- Área onde os itens do carrinho vão aparecer -->
+                        <div id="itens-carrinho" class="produto-item">
+
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- Pedido Total -->
+            <section class="pedido-total">
+                <div>
+                    <h3>Seu pedido</h3>
+                    <br>
+                    <h2>Sub total: <span id="sub-total">R$ 0.00</span></h2>
+                    <button id="botao-pagamento">Fechar pedido</button>
+                </div>
+            </section>
+        </section>
+
+        <section id="variedades">
+            <h1>Mais Variedades</h1>
+            <hr class="linha-titulo3">
+
+            <div class="lista-vestidos">
+                <div class="vestido">
+                    <img class="fotovariedades" src="/static/imagemcarrinho/Image (7).png" alt="Vestido Jasmim">
+                    <p class="nome">Jasmim</p>
+                </div>
+                <div class="vestido">
+                    <img class="fotovariedades" src="/static/imagemcarrinho/Image (4).png" alt="Vestido Âmbar">
+                    <p class="nome">Âmbar</p>
+                </div>
+                <div class="vestido">
+                    <img class="fotovariedades" src="/static/imagemcarrinho/Image (2).png" alt="Vestido Camélia">
+                    <p class="nome">Camélia</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img class="sob" src="/static/imagem/Sob.png" alt="Logo Sob Véu">
+        <ul>
+            <p>Contatos</p>
+            <li>(11) 4002-8922</li>
+            <li>(11) 98291-1653</li>
+            <li>sobveuoficial@gmail.com</li>
+        </ul>
+        <p class="linha">___________</p>
+        <ul>
+            <p>Sobre a loja: </p>
+            <li>Sobre nós</li>
+            <li>Trocas e Devoluções</li>
+            <li>Fretes e Entregas</li>
+        </ul>
+        <p class="linha">___________</p>
+        <ul>
+            <li>Política de Privacidade</li>
+            <li>Termos de Uso</li>
+        </ul>
+        <section class="midia">
+            <img class="instagram"
+                src="/static/imagem/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="">
+            <img class="facebook" src="/static/imagem/facebook-f-Photoroom.png" alt="">
+        </section>
+        <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        // Verifica se o documento ainda está sendo carregado
+        if (document.readyState === "loading") {
+            // Se sim, adiciona um evento para rodar a função "ready" quando o DOM estiver pronto
+            document.addEventListener("DOMContentLoaded", ready);
+        } else {
+            // Caso o documento já tenha sido carregado, executa a função imediatamente
+            ready();
+        }
+
+        // Variável global para guardar o valor total da compra
+        let totalAmount = 0;
+
+        function parsePriceString(s) {
+            if (typeof s === 'number') return s;
+            if (!s) return 0;
+            let str = String(s).trim();
+            if (str.indexOf('.') !== -1 && str.indexOf(',') !== -1) {
+                str = str.replace(/\./g, '').replace(',', '.');
+            } else {
+                str = str.replace(',', '.');
+            }
+            const n = parseFloat(str);
+            return isNaN(n) ? 0 : n;
+        }
+
+        // Função que é executada quando o site termina de carregar
+        function ready() {
+            loadCartFromLocalStorage(); // Carrega os produtos salvos no carrinho (localStorage)
+
+            // Pega o botão de pagamento pelo ID
+            const purchaseButton = document.getElementById("botao-pagamento");
+
+            // Se o botão existir na página, adiciona o evento de clique
+            if (purchaseButton) {
+                purchaseButton.addEventListener("click", makePurchase);
+            }
+        }
+
+        // ================================
+        // CARREGA CARRINHO DO LOCALSTORAGE
+        // ================================
+        function loadCartFromLocalStorage() {
+            // Pega o carrinho do localStorage (ou cria um array vazio se não existir)
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+            // Seleciona o container onde os produtos serão exibidos
+            const container = document.querySelector(".produto-vestido");
+
+            // Seleciona o elemento onde aparece o total (obs: "spam" deveria ser "span")
+            const totalElement = document.querySelector(".pedido-total h2 spam");
+
+            // Começa colocando o título "Carrinho de compras" no container
+            container.innerHTML = "<h1>Carrinho de compras</h1>";
+
+            // Se o carrinho estiver vazio, mostra a mensagem e zera o total
+            if (carrinho.length === 0) {
+                container.innerHTML += "<p>Seu carrinho está vazio!</p>";
+                totalElement.textContent = "0,00";
+                return; // Sai da função
+            }
+
+            // Para cada produto no carrinho...
+            carrinho.forEach((produto, index) => {
+                // Cria uma nova div para representar o produto
+                const div = document.createElement("div");
+                div.classList.add("produto-item"); // adiciona a classe CSS
+
+                // Adiciona dentro da div as informações do produto
+                div.innerHTML = `
+    <input class="checkbox-item" type="checkbox"> <!-- checkbox (sem função no momento) -->
+    <img class="foto" src="${produto.imagem}" alt="${produto.nome}"> <!-- imagem do produto -->
+    <div class="texto">
+      <h3>${produto.nome}</h3> <!-- nome do produto -->
+      <img class="lixeira" src="imagemcarrinho/5366933-removebg-preview.png" alt="lixeira" data-index="${index}"> <!-- botão para excluir o produto -->
+      <br>
+      <label class="tamanho-label">Tamanho:</label>
+      <!-- seletor de tamanhos -->
+      <select class="tamanho">
+        <option value="PP" ${produto.tamanho === "PP" ? "selected" : ""}>PP</option>
+        <option value="P" ${produto.tamanho === "P" ? "selected" : ""}>P</option>
+        <option value="M" ${produto.tamanho === "M" ? "selected" : ""}>M</option>
+        <option value="G" ${produto.tamanho === "G" ? "selected" : ""}>G</option>
+        <option value="GG" ${produto.tamanho === "GG" ? "selected" : ""}>GG</option>
+      </select>
+      <br>
+      <label class="quantidade">Quantidade:</label>
+      <!-- campo para alterar a quantidade -->
+      <input type="number" class="quantia" min="1" max="10" value="${produto.quantidade}">
+      <!-- mostra o preço -->
+      <p class="valor">${produto.preco}</p>
+    </div>
+  `;
+                // adiciona a div do produto no container
+                container.appendChild(div);
+            });
+
+            // Atualiza o valor total dos produtos
+            updateTotal();
+
+            // Adiciona eventos para quando a quantidade for alterada
+            document.querySelectorAll(".quantia").forEach(input => {
+                input.addEventListener("change", updateQuantity);
+            });
+
+            // Adiciona eventos para quando clicar na lixeira (remover produto)
+            document.querySelectorAll(".lixeira").forEach(btn => {
+                btn.addEventListener("click", removeProduct);
+            });
+
+            // Adiciona eventos para quando mudar o tamanho
+            document.querySelectorAll(".tamanho").forEach(select => {
+                select.addEventListener("change", event => {
+                    // Pega o índice do produto que teve o tamanho alterado
+                    const index = Array.from(document.querySelectorAll(".tamanho")).indexOf(event.target);
+
+                    // Atualiza o tamanho no localStorage
+                    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+                    carrinho[index].tamanho = event.target.value;
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+                });
+            });
+        }
+
+        // ================================
+        // ATUALIZA TOTAL DO CARRINHO
+        // ================================
+        function updateTotal() {
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            const totalElement = document.querySelector(".pedido-total h2 spam");
+            let total = 0;
+
+            // Soma o preço de todos os produtos
+            carrinho.forEach(produto => {
+                const preco = parsePriceString(produto.preco);
+                total += preco * (Number(produto.quantidade) || 0);
+            });
+
+            // Mostra o total formatado (ex: 120,50)
+            totalElement.textContent = total.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+
+            // Guarda o total na variável global
+            totalAmount = total;
+        }
+
+        // ================================
+        // ATUALIZA QUANTIDADE DE UM PRODUTO
+        // ================================
+        function updateQuantity(event) {
+            // Pega o índice do produto alterado
+            const index = Array.from(document.querySelectorAll(".quantia")).indexOf(event.target);
+
+            // Pega o carrinho atual
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+            // Atualiza a quantidade com o novo valor
+            carrinho[index].quantidade = parseInt(event.target.value) || 1;
+
+            // Salva de volta no localStorage
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+            // Recalcula o total
+            updateTotal();
+        }
+
+        // ================================
+        // REMOVE UM PRODUTO DO CARRINHO
+        // ================================
+        function removeProduct(event) {
+            const index = event.target.dataset.index; // índice do produto clicado
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            carrinho.splice(index, 1); // remove o produto do array
+            localStorage.setItem("carrinho", JSON.stringify(carrinho)); // atualiza o localStorage
+            loadCartFromLocalStorage(); // recarrega o carrinho na tela
+        }
+
+        // ================================
+        // FINALIZA A COMPRA
+        // ================================
+        function makePurchase() {
+            // Se o total for 0, o carrinho está vazio
+            if (totalAmount <= 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            // Mostra uma mensagem de agradecimento com o valor da compra
+            alert(`✅ Obrigado pela sua compra! Valor do pedido: R$${totalAmount.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`);
+
+            // Limpa o carrinho do localStorage
+            localStorage.removeItem("carrinho");
+
+            // Atualiza a tela (mostra que o carrinho está vazio)
+            loadCartFromLocalStorage();
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,639 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #eae4d8 0%, #f5f0e8 100%);
+  font-family: "Inter", sans-serif;
+}
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+
+/* ---------------------------------------------------------- */
+
+.categorias {
+  gap: 40px;
+}
+
+.categorias a {
+  color: #523800;
+  text-decoration: none;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.categorias a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #5a0101;
+  transition: width 0.3s ease;
+}
+
+.categorias a:hover {
+  color: #5a0101;
+}
+
+.categorias a:hover::after {
+  width: 100%;
+}
+
+/* MENSAGEM SECTION */
+.mensagem {
+  /* 1. Posicionamento e Margem */
+  /* Usa calc() para garantir espaço decente abaixo do menu fixo (90px) + respiro */
+  margin-top: calc(90px + 60px);
+  margin-bottom: 50px; /* Garante que não fique grudado no botão ou footer */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* 2. Responsividade da Largura */
+  width: 90%; /* Ocupa 90% da viewport em qualquer tamanho */
+  max-width: 600px; /* Limita a largura máxima em telas maiores */
+
+  /* 3. Estilos Visuais */
+  padding: 60px 40px;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(82, 56, 0, 0.12);
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mensagem h2 {
+  font-family: "Libre Caslon Text", serif;
+  font-size: 1.75rem; /* ~28px */
+  color: #523800;
+  margin-bottom: 1.5rem; /* ~24px */
+  line-height: 1.4;
+}
+
+/* Garante que o botão use 100% da largura em telas bem pequenas */
+@media (max-width: 500px) {
+  .mensagem a {
+    width: 100%;
+  }
+}
+
+.mensagem a {
+  display: inline-block;
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #5a0101 0%, #7a0101 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(90, 1, 1, 0.3);
+}
+
+.mensagem a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(90, 1, 1, 0.4);
+  background: linear-gradient(135deg, #7a0101 0%, #5a0101 100%);
+}
+
+/* BOTÃO CONTINUAR VENDO */
+.outrosvestidos {
+  text-align: center;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.ver {
+  padding: 16px 50px;
+  background: white;
+  color: #523800;
+  border: 2px solid #523800;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(82, 56, 0, 0.1);
+}
+
+.ver:hover {
+  background: #523800;
+  color: white;
+  transform: translateX(-5px);
+  box-shadow: 0 6px 25px rgba(82, 56, 0, 0.2);
+}
+/*==============================================*/
+
+
+/* ==========================
+   RESPONSIVIDADE DO CORPO DA PÁGINA
+   ========================== */
+
+/* Tablets – ajusta proporções da mensagem */
+@media (max-width: 900px) {
+  .mensagem {
+    padding: 40px 25px;
+    margin-top: 150px;
+    max-width: 90%;
+  }
+
+  .mensagem h2 {
+    font-size: 24px;
+  }
+
+  .mensagem a {
+    font-size: 15px;
+    padding: 12px 30px;
+  }
+
+  .ver {
+    padding: 14px 40px;
+    font-size: 15px;
+  }
+
+  .outrosvestidos {
+    margin: 30px auto;
+  }
+}
+
+/* Celulares médios */
+@media (max-width: 600px) {
+  .mensagem {
+    padding: 30px 20px;
+    margin-top: 140px;
+  }
+
+  .mensagem h2 {
+    font-size: 20px;
+  }
+
+  .mensagem a {
+    font-size: 14px;
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  .ver {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+}
+
+/* Celulares pequenos */
+@media (max-width: 420px) {
+  .mensagem {
+    margin-top: 130px;
+    padding: 25px 18px;
+  }
+
+  .mensagem h2 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .ver {
+    width: 100%;
+    padding: 14px;
+  }
+}
+
+/* Ajuste extra: evitar que o footer grude no conteúdo */
+@media (max-width: 500px) {
+  footer {
+    padding-top: 40px;
+  }
+}
+
+/* ================================
+   RESPONSIVIDADE — SOMENTE O CORPO
+   ================================ */
+
+/* Ajuste geral para telas médias (tablets e notebooks menores) */
+@media (max-width: 900px) {
+  .mensagem {
+    padding: 40px 25px;
+    margin-top: 150px;
+    max-width: 90%;
+  }
+
+  .mensagem h2 {
+    font-size: 24px;
+  }
+
+  .mensagem a {
+    font-size: 15px;
+    padding: 12px 30px;
+  }
+
+  .outrosvestidos {
+    margin: 40px auto;
+  }
+
+  .ver {
+    padding: 14px 40px;
+    font-size: 15px;
+  }
+}
+
+/* CELULARES (principal) */
+@media (max-width: 600px) {
+  .mensagem {
+    padding: 30px 20px;
+    margin-top: 140px;
+    max-width: 92%;
+  }
+
+  .mensagem h2 {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+
+  .mensagem a {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 22px;
+  }
+
+  .outrosvestidos {
+    padding: 0 20px;
+    margin: 25px auto;
+  }
+
+  .ver {
+    width: 60%;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* CELULARES MENORES (galaxy A10, iPhone SE, Motorola E, etc.) */
+@media (max-width: 420px) {
+  .mensagem {
+    padding: 25px 16px;
+    margin-top: 130px;
+  }
+
+  .mensagem h2 {
+    font-size: 18px;
+  }
+
+  .mensagem a {
+    padding: 12px 18px;
+    font-size: 13px;
+  }
+
+  .ver {
+    padding: 12px 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px;
+  margin-bottom: 0;
+}
+
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE FOOTER ------------------- */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+  
+  footer {
+    justify-content: center;
+  }
+  
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+@media (max-width: 500px) {
+  footer .coluna {
+    min-width: 100%;
+  }
+  
+  .midia {
+    flex-direction: row;
+  }
+}

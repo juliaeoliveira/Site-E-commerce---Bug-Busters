@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu">
+        <img id="logo"src="img/Sob.png" alt="Logo">
+            <nav>
+                <a href="/Site-E-commerce---Bug-Busters/tudo/produtos/produtos.html">Vestidos</a>
+                <a href="#Colecoes">Coleções</a>
+                <a href="#Agendamentos">Agendamentos</a>
+            </nav>
+            <nav class="icons">
+                <a href="/Site-E-commerce---Bug-Busters/tudo/cadastro-login/login.html" target="_blanck">
+                        <img src="img/login.png"
+                        width="20px"
+                        title="login"
+                        alt="login"
+                    />
+                    </a>
+                <a href="/Site-E-commerce---Bug-Busters/tudo/carrinho/carrinho.html" target="_blanck">
+                    <img src="img/carrinho.png"
+                    width="20px"
+                    title="Carrinho"
+                    alt="Carrinho"
+                />
+                </a>
+            </nav>
+        
+        </div>
+
+    <main>
+        <form action="">
+            <section class="cadastro">
+                <h1 class="titulo_cadastro">CADASTRO DE USUÁRIO</h1>
+                <div class="informacoes">
+                    <label for="Nome">Nome completo:*</label>
+                    <input class="posicao" type="text" id="Nome" required placeholder="Henrique Nascimento de Sales" />
+         
+
+                    <!-- Agrupamento lado a lado -->
+                    <div class="senhas">
+                        <div>
+                            <label for="senha">Senha:*</label>
+                            <input class="posicao" type="password" id="senha" required placeholder="*******" />
+
+                            <label for="confirmacao_senha">Confirmação de senha:*</label>
+                            <input class="posicao" type="password" id="confirmacao_senha" required placeholder="*******" />
+                        </div>
+                    </div>
+
+               
+                    <label for="email">E-mail:</label>
+                    <input class="posicao" type="email" id="email" required placeholder="exemplo@exemplo.com" />
+              
+
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input class="posicao" type="date" id="data_nascimento" required />
+          
+
+                    <label for="Telefone">Telefone:</label>
+                    <input class="posicao" type="tel" id="Telefone" required placeholder="(11) 4002-8922" />
+       
+
+                    <label for="endereco">Endereço:</label>
+                    <input class="posicao" type="text" id="endereco" required placeholder="Rua: Loucos, Bairro: Perdidos" />
+         
+                    <label for="cep">CEP:</label>
+                    <input class="posicao" type="number" id="cep" required placeholder="18180-970" />
+
+
+                    <button class="cadastrar" type="submit" id="acao">Criar conta</button>
+                </div>
+            </section>
+        </form>
+        <div class="outrosvestidos">
+           <a href="/Site-E-commerce---Bug-Busters/tudo/produtos/produtos.html"><button class="ver"> ← Voltar á páginos inicial</button></a>
+       </div> 
+    </main>
+</body>
+</html>
