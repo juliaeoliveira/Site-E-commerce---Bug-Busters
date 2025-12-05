@@ -879,365 +879,6 @@ footer li {
   }
 }
 
-
-/* Telas médias (tablets) - 601px a 900px */
-@media (max-width: 900px) {
-  /* MAIN ajustes */
-  main {
-    margin-top: 100px;
-    padding: 0 20px;
-  }
-  
-  /* Layout principal - muda para coluna */
-  .fotos {
-    width: 100%;
-    float: none;
-    margin: 0 auto 30px;
-    max-width: 500px;
-  }
-  
-  .descricao {
-    width: 100%;
-    float: none;
-    height: auto;
-    min-height: 400px;
-    margin-top: 0;
-  }
-  
-  /* Botoes ajustados */
-  .botoes {
-    margin: 30px auto;
-    width: 100%;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .compra, .carrinho {
-    margin-left: 0;
-    width: 100%;
-    max-width: 350px;
-  }
-  
-  .compra {
-    margin-bottom: 15px;
-  }
-  
-  .carrinho {
-    margin-left: 0;
-  }
-  
-  /* Continuar vendo */
-  .outrosvestidos {
-    text-align: center;
-    margin: 40px 0;
-  }
-  
-  .ver {
-    margin: 0 auto;
-    width: 90%;
-    max-width: 350px;
-    display: block;
-  }
-  
-  /* Variedades ajustadas */
-  .lista-vestidos {
-    gap: 20px;
-  }
-  
-  .vestido {
-    width: 45%;
-    min-width: 200px;
-  }
-  
-  .fotovariedades {
-    height: 300px;
-  }
-}
-
-/* Telas pequenas (celulares grandes) - 426px a 600px */
-@media (max-width: 600px) {
-  /* Menu fixo menor */
-  .menu {
-    height: 80px;
-  }
-  
-  #logo {
-    height: 60px;
-  }
-  
-  .text-menu.active {
-    top: 80px;
-    height: calc(100vh - 80px);
-  }
-  
-  main {
-    margin-top: 90px;
-  }
-  
-  /* Caminho de migalhas */
-  main h1 a {
-    font-size: 14px;
-    padding: 0;
-    margin: 20px 0;
-  }
-  
-  /* Grid de fotos - 2 colunas */
-  .fotos {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  
-  /* Descrição mais compacta */
-  .descricao {
-    padding: 15px;
-    min-height: 350px;
-  }
-  
-  .nomevestido {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .descricaovestido {
-    font-size: 16px;
-  }
-  
-  .subtitulo {
-    font-size: 14px;
-  }
-  
-  .descricao p {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-  /* Botões mais compactos */
-  .compra, .carrinho {
-    height: 45px;
-    font-size: 14px;
-  }
-  
-  /* Variedades - 2 colunas */
-  .lista-vestidos {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-  
-  .vestido {
-    width: 100%;
-  }
-  
-  .fotovariedades {
-    height: 250px;
-  }
-  
-  .nome {
-    font-size: 14px;
-  }
-  
-  /* Alert box */
-  .alert-box {
-    right: 20px;
-    left: 20px;
-    width: calc(100% - 40px);
-  }
-}
-
-/* Telas muito pequenas (celulares pequenos) - até 425px */
-@media (max-width: 425px) {
-  /* Menu ajustado */
-  .menu {
-    padding: 0 10px;
-  }
-  
-  .hamburger {
-    font-size: 28px;
-  }
-  
-  .login-dropdown-wrapper {
-    gap: 15px;
-  }
-  
-  /* Fotos - 2 colunas com menos gap */
-  .fotos {
-    gap: 8px;
-  }
-  
-  /* Descrição */
-  .descricao {
-    padding: 12px;
-    min-height: 320px;
-  }
-  
-  .nomevestido {
-    font-size: 18px;
-    letter-spacing: 1.5px;
-  }
-  
-  /* Botões full width */
-  .compra, .carrinho {
-    width: 100%;
-  }
-  
-  /* Variedades - ainda 2 colunas mas menor */
-  .lista-vestidos {
-    gap: 10px;
-  }
-  
-  .fotovariedades {
-    height: 200px;
-  }
-  
-  #variedades h1 {
-    font-size: 22px;
-  }
-  
-  .linha-titulo3 {
-    width: 80%;
-  }
-  
-  /* Footer ajustado */
-  footer {
-    padding: 20px 15px;
-    gap: 20px;
-  }
-  
-  .sob {
-    height: 80px;
-  }
-  
-  .linha {
-    display: none;
-  }
-  
-  footer .coluna {
-    min-width: 45%;
-  }
-}
-
-/* Ajustes para landscape (telas largas mas curtas) */
-@media (max-height: 600px) and (orientation: landscape) {
-  .menu {
-    height: 70px;
-  }
-  
-  #logo {
-    height: 50px;
-  }
-  
-  .text-menu.active {
-    top: 70px;
-    height: calc(100vh - 70px);
-  }
-  
-  main {
-    margin-top: 80px;
-  }
-  
-  .descricao {
-    min-height: 300px;
-    padding: 10px;
-  }
-  
-  .fotos {
-    max-width: 400px;
-  }
-  
-  .botoes {
-    max-width: 400px;
-  }
-}
-
-/* Ajustes para tablets grandes e laptops pequenos */
-@media (min-width: 901px) and (max-width: 1100px) {
-  .fotos {
-    width: 50%;
-  }
-  
-  .descricao {
-    width: 45%;
-  }
-  
-  .botoes {
-    margin-left: 650px;
-  }
-  
-  .ver {
-    margin-right: 800px;
-  }
-  
-  .text-menu {
-    gap: 120px;
-  }
-}
-
-/* Garantir que imagens são responsivas */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Remover qualquer float problemático em telas pequenas */
-@media (max-width: 900px) {
-  .fotos, .descricao, .botoes {
-    float: none !important;
-  }
-  
-  /* Centralizar tudo */
-  section, .outrosvestidos, #variedades {
-    text-align: center;
-  }
-}
-
-/* Ajuste do dropdown de login para telas médias */
-@media (max-width: 900px) {
-  .login-dropdown-wrapper {
-    position: static;
-  }
-  
-  #login-dropdown {
-    right: 10px;
-    width: 250px;
-  }
-}
-
-/* Melhorar espaçamento geral em mobile */
-@media (max-width: 600px) {
-  body {
-    font-size: 14px;
-  }
-  
-  h1, h2, h3 {
-    line-height: 1.3;
-  }
-  
-  p {
-    line-height: 1.5;
-  }
-  
-  /* Aumentar área de toque para botões */
-  button, .opcoes a {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* Ajuste fino para evitar rolagem horizontal */
-@media (max-width: 600px) {
-  body, html, main {
-    overflow-x: hidden !important;
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-}
 /*============================================================*/
 
 .alert-box {
@@ -1272,25 +913,25 @@ img {
 
 /* ===================== VARIEDADES ===================== */
 #variedades {
+  min-height: 100vh;
+  height: auto;
   background-color: #fff9ed;
-  padding: 60px 20px;
   text-align: center;
-  min-height: 400px;
-  height:100vh;
+  padding: 60px 20px;
 }
 
 #variedades h1 {
   color: #681616;
-  font-family: "Aboreto", system-ui;
-  font-size: 28px;
+  font-family: "Aboreto";
+  font-size: 24px;
+  font-weight: 400;
   margin-bottom: 20px;
 }
 
 .linha-titulo3 {
   width: 456px;
   max-width: 90%;
-  border: none;
-  border-top: 2px solid #4e3902;
+  color: #4e3902;
   margin: 0 auto 40px;
 }
 
@@ -1303,36 +944,55 @@ img {
 }
 
 .vestido {
-  width: 280px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding-bottom: 20px;
+  margin: 20px;
 }
 
-.vestido a {
+.vestido img {
+  width: 352px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.vestido:hover img {
+  transform: scale(1.05);
+}
+
+.lista-vestidos a {
   text-decoration: none;
   color: #000;
 }
 
-.fotovariedades {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+.nome {
+  color: #000;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 15px;
+  font-family: "Libre Caslon Text";
 }
 
-.vestido:hover .fotovariedades {
+.ver {
+  font-family: "Libre Caslon Text", serif;
+  height: 50px;
+  width: 300px;
+  color: darkred;
+  background-color:rgba(237, 219, 190, 0.80);
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1000px;
+}
+
+.ver:hover {
   transform: scale(1.05);
 }
-
-.nome {
-  font-family: "Libre Caslon Text", serif;
-  font-size: 18px;
-  color: #523800;
-  margin-top: 15px;
-}
-
-.outrosvestidos {
-  text-align: center;
-  margin-top: 40px;
-}
-

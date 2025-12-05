@@ -7,59 +7,66 @@
     <link rel="stylesheet" href="/static/css/painel_usuario_editar_endereco.css"/>
 </head>
 <body>
-      <div class="menu">
-      <a href="/painel_usuario"><img id="logo" src="/static/assets/img_tela.usuario/Sob1.png" alt="Logo"></a>
-          <nav class="text-menu">
-              <a href="/painel_usuario/produtos">Vestidos</a>
-              <a href="/painel_usuario/colecoes">Coleções</a>
-              <a href="/painel_usuario/meus_dados/editar_endereco/#">Agendamentos</a>
-          </nav>
+    <div class="menu">
+        <a href="/painel_usuario"><img id="logo" src="/static/assets/img_tela.usuario/Sob1.png" alt="Logo"></a>
         
-            <div class="login-dropdown-wrapper">
-              <img class="login"
+        <!-- Botão hamburger para mobile -->
+        <button class="hamburger" id="hamburger-btn">☰</button>
+        
+        <nav class="text-menu" id="text-menu">
+            <a href="/painel_usuario/produtos">Vestidos</a>
+            <a href="/painel_usuario/colecoes">Coleções</a>
+            <a href="/painel_usuario/meus_dados/editar_endereco/#">Agendamentos</a>
+        </nav>
+        
+        <div class="login-dropdown-wrapper">
+            <img class="login"
                 src="/static/assets/img_tela.usuario/login.png"
                 width="20px"
                 title="login"
                 alt="login"
                 id="login-icon"
-              />
+            />
 
-              <div id="login-dropdown" class="hidden">
+            <div id="login-dropdown" class="hidden">
                 <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
                 <ul>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
-                  </div>
-                  <div class="opcoes">
-                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
-                  </div>
-                  </ul>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/meus_dados">Sua Conta</a>
+                    </div>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+                    </div>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+                    </div>
+                    <div class="opcoes">
+                        <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+                    </div>
+                </ul>
                 <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
-              </div>
-                
-                  <a href="/painel_usuario/carrinho">
-                      <img src="/static/assets/img_tela.usuario/carrinho.png"
-                      width="20px"
-                      title="Carrinho"
-                      alt="Carrinho"
-                  />
-                  </a>
-                </nav>
-              </div>
-          </div>
+            </div>
+            
+            <a href="/painel_usuario/carrinho">
+                <img src="/static/assets/img_tela.usuario/carrinho.png"
+                    width="20px"
+                    title="Carrinho"
+                    alt="Carrinho"
+                />
+            </a>
+        </div>
+    </div>
+
+    <!-- Overlay para mobile -->
+    <div class="overlay" id="overlay"></div>
+
 <main>
     <div class="container">
         <h2>Editar Endereço</h2>
         <form id="formEditarEndereco" action="/pedido/editar_endereco" method="post">
 
             <label for="cep">CEP:</label>
-            <input type="text" id="cep" name="cep" value="{{ endereco.cep }}" required>
+            <input type="text" id="cep" name="cep" value="{{ endereco.cep }}" pattern="\d{5}-\d{3}" title="Digite o CEP no formato: XXXXX-XXX" required>
             <div id="cepError" class="error-message" style="color: red; font-size: 12px; display: none;"></div>
 
             <label for="rua">Rua:</label>
@@ -112,77 +119,103 @@
             <button class="button1" type="submit">Salvar Endereço</button>
         </form>
     </div>
+</main>
 
     <footer>
-      <img class="sob" src="/static/img_home/Sob copy.png" alt="" />
-
-      <div class="footer-section">
-        <h4>Contatos</h4>
-        <ul>
-          <li>
-            <img
-              class="telefone"
-              src="/static/img_home/telefone.png"
-              alt="Telefone"
-            />
-            (11) 4002-8922
-          </li>
-          <li>
-            <img
-              class="whatsapp"
-              src="/static/img_home/speech-bubble--v2-Photoroom.png"
-              alt="WhatsApp"
-            />
-            (11) 98291-1653
-          </li>
-          <li>sobveuoficial@gmail.com</li>
-        </ul>
-      </div>
-
-      <p class="linha">___________</p>
-
-      <div class="footer-section">
-        <h4>Sobre a loja:</h4>
-        <ul>
-          <li>Sobre nós</li>
-          <li>Trocas e Devoluções</li>
-          <li>Fretes e Entregas</li>
-        </ul>
-      </div>
-
-      <p class="linha">___________</p>
-
-      <div class="footer-section">
-        <ul>
-          <li>Política de Privacidade</li>
-          <li>Termos de Uso</li>
-        </ul>
-      </div>
-
-      <section class="midia">
-        <img
-          class="instagram"
-          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
-          alt="Instagram"
-        />
-        <img
-          class="facebook"
-          src="/static/img_home/facebook-f-Photoroom.png"
-          alt="Facebook"
-        />
-      </section>
-
-      <p class="direitos">
-        &copy; 2025 Sob Véu. Todos os direitos reservados.
-      </p>
+        <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo Sob Véu" />
+        
+        <div class="coluna">
+            <h4 class="titulo">Contatos</h4>
+            <ul>
+                <li>
+                    <img class="telefone" src="/static/img_home/telefone.png" alt="Telefone" />
+                    (11) 4002-8922
+                </li>
+                <li>
+                    <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt="WhatsApp" />
+                    (11) 98291-1653
+                </li>
+                <li>sobveuoficial@gmail.com</li>
+            </ul>
+        </div>
+        
+        <div class="linha"></div>
+        
+        <div class="coluna">
+            <h4 class="titulo">Sobre a loja:</h4>
+            <ul>
+                <li>Sobre nós</li>
+                <li>Trocas e Devoluções</li>
+                <li>Fretes e Entregas</li>
+            </ul>
+        </div>
+        
+        <div class="linha"></div>
+        
+        <div class="coluna">
+            <h4 class="titulo">Informações</h4>
+            <ul>
+                <li>Política de Privacidade</li>
+                <li>Termos de Uso</li>
+            </ul>
+        </div>
+        
+        <div class="midia">
+            <img class="instagram" src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png" alt="Instagram" />
+            <img class="facebook" src="/static/img_home/facebook-f-Photoroom.png" alt="Facebook" />
+        </div>
+        
+        <p class="direitos">
+            &copy; 2025 Sob Véu. Todos os direitos reservados.
+        </p>
     </footer>
 
-
     <script>
+        // Menu hamburger para mobile
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const textMenu = document.getElementById('text-menu');
+        const overlay = document.getElementById('overlay');
+        
+        hamburgerBtn.addEventListener('click', () => {
+            textMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            textMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        const menuLinks = textMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                textMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+
+        // Login dropdown
+        const loginIcon = document.getElementById("login-icon");
+        const loginDropdown = document.getElementById("login-dropdown");
+
+        loginIcon.addEventListener("click", () => {
+            const isVisible = loginDropdown.style.display === "block";
+            loginDropdown.style.display = isVisible ? "none" : "block";
+            loginIcon.classList.toggle("login-active", !isVisible);
+        });
+
+        window.addEventListener("click", function (e) {
+            if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+                loginDropdown.style.display = "none";
+                loginIcon.classList.remove("login-active");
+            }
+        });
+
+        // Form validation and CEP handling
         const form = document.getElementById('formEditarEndereco');
         const cepInput = document.getElementById('cep');
         const cepError = document.getElementById('cepError');
-        const buscarCepBtn = document.getElementById('buscarCep');
         
         // Elementos do endereço
         const ruaInput = document.getElementById('rua');
@@ -212,16 +245,9 @@
                 return;
             }
             
-            // Mostrar indicador de carregamento
-            buscarCepBtn.textContent = 'Buscando...';
-            buscarCepBtn.disabled = true;
-            
             fetch(`https://viacep.com.br/ws/${cep}/json/`)
                 .then(response => response.json())
                 .then(data => {
-                    buscarCepBtn.textContent = 'Buscar CEP';
-                    buscarCepBtn.disabled = false;
-                    
                     if (data.erro) {
                         cepError.textContent = 'CEP não encontrado. Verifique e tente novamente.';
                         cepError.style.display = 'block';
@@ -249,8 +275,6 @@
                     alert('✅ Endereço encontrado e preenchido automaticamente!');
                 })
                 .catch(error => {
-                    buscarCepBtn.textContent = 'Buscar CEP';
-                    buscarCepBtn.disabled = false;
                     cepError.textContent = 'Erro ao buscar CEP. Tente novamente.';
                     cepError.style.display = 'block';
                     console.error('Erro na busca do CEP:', error);
@@ -272,9 +296,6 @@
                 buscarCEP();
             }
         });
-
-        // Botão para buscar CEP manualmente
-        buscarCepBtn.addEventListener('click', buscarCEP);
 
         // Validar o CEP ao enviar o formulário
         form.addEventListener('submit', function (e) {
@@ -326,30 +347,6 @@
                 cepError.style.display = 'none';
             }
         });
-
-        // Permitir buscar CEP pressionando Enter no campo CEP
-        cepInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                buscarCEP();
-            }
-        });
-
-        const loginIcon = document.getElementById("login-icon");
-      const loginDropdown = document.getElementById("login-dropdown");
-
-      loginIcon.addEventListener("click", () => {
-        const isVisible = loginDropdown.style.display === "block";
-        loginDropdown.style.display = isVisible ? "none" : "block";
-        loginIcon.classList.toggle("login-active", !isVisible);
-      });
-
-      window.addEventListener("click", function (e) {
-        if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
-          loginDropdown.style.display = "none";
-          loginIcon.classList.remove("login-active");
-        }
-      });
     </script>
 </body>
 </html>
