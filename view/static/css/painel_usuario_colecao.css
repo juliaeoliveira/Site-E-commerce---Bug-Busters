@@ -1,0 +1,979 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */ /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px; /* controla o respiro nas laterais */
+}
+
+/* Estilo dos links dentro do nav */
+nav a {
+  color: #523800;
+  font-size: 22px; /* Define o tamanho da fonte */
+  padding: 25px; /* Espaçamento interno */
+  text-decoration: underline; /* Ativa o sublinhado */
+  text-decoration-color: rgba(
+    82,
+    56,
+    0,
+    0.192
+  ); /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px; /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 22px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+#login-dropdown {
+  /*alterado*/
+  position: absolute;
+  top: 90px; /* aparece logo abaixo do header fixo */
+  right: 0; /* alinhado ao canto direito, sempre certo */
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.75);
+  border-radius: 10px;
+  padding: 20px 0;
+  display: none;
+  z-index: 300; /* MAIOR que o menu, ícones e o hambúrguer */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#login-dropdown h3 {
+  margin-top: 60px;
+  font-size: 16px; /* Tamanho da fonte */
+  color: #7a4a1c; /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px; /* Espaço abaixo do título */
+}
+
+#login-dropdown ul {
+  list-style: none; /* Remove marcadores (bolinhas) da lista */
+  margin: 0; /* Remove espaçamento externo padrão */
+}
+
+#login-dropdown ul li a:hover {
+  text-decoration: underline;
+  color: #7a4a1c; /* Cor marrom ao passar o mouse (hover) */
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text";
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* Ajuste do painel para telas pequenas (vertical) */
+#login-dropdown {
+  max-height: calc(100vh - 120px); /* cabe sempre na tela */
+  overflow-y: auto; /* ativa rolagem se necessário */
+  padding: 20px;
+}
+
+/* Reduz os espaçamentos internos no mobile */
+@media (max-height: 800px) {
+  #login-dropdown h3 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .opcoes {
+    margin: 12px 0;
+  }
+
+  #logout-btn {
+    margin-top: 25px;
+  }
+}
+
+.carrinho {
+  margin-right: 90px;
+}
+
+/* .login{
+ margin-left: 270px;
+} */ /*alterado*/
+
+/* Animação de pulsação */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+/* Classe para o efeito visual no ícone */
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3); /* anel visível mesmo quando não está no pico */
+}
+
+/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+/* Caixa de cada opção */
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3); /* leve transparência */
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 20px 0px; /* espaçamento entre as caixas */
+  text-align: center;
+}
+
+/* Texto das opções */
+.opcoes a {
+  display: block;
+  padding: 10px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover — destaca ao passar o mouse */
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+.login-dropdown-wrapper {
+  /*alterado*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px; /* distância natural entre login e carrinho */
+}
+
+.login {
+  /*alterado*/
+  margin: 0; /* Remove o margin-left: 270px que quebrava TUDO */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* --------- CONFIGURAÇÃO GERAL --------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4efe5;
+  font-family: "Georgia", serif;
+  color: #5b2a19;
+  text-align: center;
+}
+
+/* MAIN  */
+
+/* --------- TÍTULO --------- */
+
+.titulo {
+  margin-top: 150px;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #7a2f1d;
+}
+
+/* --------- GRID --------- */
+
+.grid {
+  width: 100%;
+  max-width: 900px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* --------- CARDS --------- */
+
+.card {
+  background: #e8dbb8;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.img-area {
+  width: 100%;
+  height: 650px;
+  background-size: cover;
+
+  border-radius: 4px;
+  background-color: #d6c6a8; /* fundo temporário quando não há imagem */
+}
+
+/* --------- BOTÃO VOLTAR --------- */
+
+.voltar {
+  height: 30px;
+  margin-top: 50px;
+  margin-right: 850px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #e8dbb8;
+  padding: 8px 14px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #7a2f1d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* --------- RESPONSIVIDADE --------- */
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 90%;
+  }
+
+  .img-area {
+    height: 280px;
+  }
+}
+
+.img1 {
+  background-image: url("/static/assets/img_colecao/64ca5a20d02ef9d6315d2100e5d749559a3a51eb.jpg");
+}
+.img2 {
+  background-image: url("/static/assets/img_colecao/80929e088161e498119ac14931935ea1cc516484.jpg");
+}
+.img3 {
+  background-image: url("/static/assets/img_colecao/e5d3a8694e8894edc8df7700402cde80950d1779.jpg");
+}
+.img4 {
+  background-image: url("/static/assets/img_colecao/2664de833ebbdbe2764b3087d54ec71555bde2a9.jpg");
+}
+
+.nome {
+  margin-top: 8px;
+  font-size: 24px;
+}
+
+/*-------------------FOOTER----------------*/
+
+.whatsapp,
+.telefone {
+  height: 20px;
+}
+
+/* ========== MODAL ========== */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #e8dbb8;
+  padding: 25px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 900px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.modal-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.modal-content img {
+  width: 45%;
+  border-radius: 8px;
+}
+
+.modal-texto h2 {
+  margin-bottom: 5px;
+}
+
+.modal-texto h3 {
+  margin: 10px 0;
+}
+
+.modal-texto p {
+  margin-top: 100px;
+}
+
+.fechar {
+  float: right;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.btn-ver {
+  margin-top: 120px;
+  padding: 10px 20px;
+  background: #5b2a19;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* === MODAL RESPONSIVO === */
+@media (max-width: 900px) {
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: 500px; /* reduz para telas menores */
+  }
+
+  .modal-texto h2 {
+    text-align: center;
+  }
+  .modal-texto h3 {
+    text-align: center;
+  }
+  .modal-texto p {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .btn-ver {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+/* === IMAGENS IGUAIS NO MODAL E NOS CARDS === */
+.img-area,
+.modal-content img {
+  object-fit: cover; /* Mantém proporção e corta sem distorcer */
+  object-position: center;
+  height: 650px; /* Mesmo tamanho dos cards */
+  width: 100%;
+}
+
+/* === CARDS MAIS RESPONSIVOS === */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    width: 90%;
+  }
+
+  .img-area {
+    height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .img-area {
+    height: 350px;
+  }
+}
+
+/* === CENTRALIZAÇÃO E ORGANIZAÇÃO DO TEXTO NO MODAL === */
+.modal-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra verticalmente */
+  align-items: center; /* centra horizontalmente */
+  text-align: center; /* garante alinhamento do texto */
+  padding: 20px;
+}
+
+.modal-texto h2,
+.modal-texto h3 {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-texto p {
+  margin-top: 20px !important; /* remove aquele grande espaço */
+  line-height: 1.6;
+  max-width: 90%; /* não deixa o texto muito largo */
+}
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin-top: 30px; /* distância agradável do último item */
+  }
+}
+
+/*-------------------FOOTER----------------*/
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 35px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer .coluna .titulo {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 45%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
+}
+
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+
+  color: #5a0101;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap; /* impede quebrar texto */
+}
+
+.voltar span {
+  font-size: 20px;
+}
+
+/* Responsivo — diminui a fonte, mas mantém dentro do botão */
+@media (max-width: 450px) {
+  .voltar {
+    font-size: 16px;
+    padding: 8px 14px;
+  }
+
+  .voltar span {
+    font-size: 18px;
+  }
+}
+
+/* ========================= */
+/*        MODAL BASE         */
+/* ========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* evita o modal colar nas bordas em telas pequenas */
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #e8dbb8;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.modal-grid {
+  display: flex;
+  gap: 25px;
+}
+
+/* Ajuste da imagem */
+.modal-content img {
+  width: 45%;
+  height: auto;
+  max-height: 650px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Texto ao lado */
+.modal-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.modal-texto p {
+  margin-top: 20px;
+}
+
+/* ========================= */
+/*   ⬇ RESPONSIVO – TABLET   */
+/* ========================= */
+@media (max-width: 900px) {
+  .modal-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal-content img {
+    width: 100%;
+    max-height: 420px; /* reduz imagem */
+  }
+
+  .modal-texto {
+    text-align: center;
+    width: 100%;
+  }
+
+  .btn-ver {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+/* ========================= */
+/*  ⬇ RESPONSIVO – CELULARES */
+/* ========================= */
+@media (max-width: 500px) {
+  .modal-content img {
+    max-height: 320px; /* imagem mais compacta */
+    border-radius: 6px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+
+  .modal-texto p {
+    font-size: 15px;
+  }
+
+  .btn-ver {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+/* Botão fechar ajustado */
+.fechar {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+  color: #5a0101;
+}
+
+.modal {
+  z-index: 9999;
+}
+.modal-content {
+  position: relative;
+  z-index: 10000;
+}
+
+/* CORREÇÃO DO MODAL TRAVADO */
+.modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 9999 !important;
+}
+
+.modal.hidden {
+  display: none !important;
+}
+
+.modal-content {
+  background: #e8dbb8;
+  padding: 20px;
+  width: 90%;
+  max-width: 850px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 10000;
+}
+
+.modal-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* MOBILE */
+@media (max-width: 850px) {
+  .modal-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-content img {
+    max-height: 320px;
+  }
+}
+
+/* Permite rolar dentro do modal em telas pequenas */
+.modal {
+  overflow-y: auto;
+}
+
+.modal-content {
+  max-height: 90vh; /* nunca maior que a tela */
+  overflow-y: auto; /* rolagem apenas dentro do conteúdo */
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+    max-height: 85vh;
+  }
+
+  .modal-content img {
+    max-height: 260px !important;
+  }
+
+  .modal-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    z-index: 99999;
+  }
+}

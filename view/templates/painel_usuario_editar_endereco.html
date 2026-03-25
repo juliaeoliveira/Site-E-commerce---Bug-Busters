@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sob Véu - Editar Endereço</title>
+    <link rel="stylesheet" href="/static/css/painel_usuario_editar_endereco.css"/>
+</head>
+<body>
+      <div class="menu">
+      <a href="/painel_usuario"><img id="logo" src="/static/assets/img_tela.usuario/Sob1.png" alt="Logo"></a>
+          <nav class="text-menu">
+              <a href="/painel_usuario/produtos">Vestidos</a>
+              <a href="/painel_usuario/colecoes">Coleções</a>
+              <a href="/painel_usuario/meus_dados/editar_endereco/#">Agendamentos</a>
+          </nav>
+        
+            <div class="login-dropdown-wrapper">
+              <img class="login"
+                src="/static/assets/img_tela.usuario/login.png"
+                width="20px"
+                title="login"
+                alt="login"
+                id="login-icon"
+              />
+
+              <div id="login-dropdown" class="hidden">
+                <h3><strong>Bem-vindo(a), {{ primeiro_nome }}!</strong></h3>
+                <ul>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_dados">Sua Conta</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/meus_pedidos">Seus Pedidos</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/carrinho">Seu Carrinho</a>
+                  </div>
+                  <div class="opcoes">
+                    <a href="/painel_usuario/comprar_novamente">Comprar novamente</a>
+                  </div>
+                  </ul>
+                <button id="logout-btn"><a href="/painel_usuario/lougout">Sair da conta</a></button>
+              </div>
+                
+                  <a href="/painel_usuario/carrinho">
+                      <img src="/static/assets/img_tela.usuario/carrinho.png"
+                      width="20px"
+                      title="Carrinho"
+                      alt="Carrinho"
+                  />
+                  </a>
+                </nav>
+              </div>
+          </div>
+<main>
+    <div class="container">
+        <h2>Editar Endereço</h2>
+        <form id="formEditarEndereco" action="/painel_usuario/editar_endereco" method="post">
+
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" value="{{ endereco.cep }}"  pattern="\d{5}-\d{3}" title="Digite o CEP no formato: XXXXX-XXX" required>
+
+            <label for="rua">Rua:</label>
+            <input type="text" id="rua" name="rua" value="{{ endereco.rua }}" required>
+
+            <label for="numero">Número:</label>
+            <input type="text" id="numero" name="numero" value="{{ endereco.numero }}" required>
+
+            <label for="complemento">Complemento:</label>
+            <input type="text" id="complemento" name="complemento" value="{{ endereco.complemento if endereco.complemento else '' }}">
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" value="{{ endereco.bairro }}" required>
+
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" name="cidade" value="{{ endereco.cidade }}" required>
+
+            <label for="estado">Estado:</label>
+            <select class="posicao" id="estado" name="estado" value="{{ endereco.estado }}" required>
+                <option value="" disabled>Selecione um estado</option>
+                <option value="AC" {% if endereco.estado == "AC" %}selected{% endif %}>Acre</option>
+                <option value="AL" {% if endereco.estado == "AL" %}selected{% endif %}>Alagoas</option>
+                <option value="AP" {% if endereco.estado == "AP" %}selected{% endif %}>Amapá</option>
+                <option value="AM" {% if endereco.estado == "AM" %}selected{% endif %}>Amazonas</option>
+                <option value="BA" {% if endereco.estado == "BA" %}selected{% endif %}>Bahia</option>
+                <option value="CE" {% if endereco.estado == "CE" %}selected{% endif %}>Ceará</option>
+                <option value="DF" {% if endereco.estado == "DF" %}selected{% endif %}>Distrito Federal</option>
+                <option value="ES" {% if endereco.estado == "ES" %}selected{% endif %}>Espírito Santo</option>
+                <option value="GO" {% if endereco.estado == "GO" %}selected{% endif %}>Goiás</option>
+                <option value="MA" {% if endereco.estado == "MA" %}selected{% endif %}>Maranhão</option>
+                <option value="MT" {% if endereco.estado == "MT" %}selected{% endif %}>Mato Grosso</option>
+                <option value="MS" {% if endereco.estado == "MS" %}selected{% endif %}>Mato Grosso do Sul</option>
+                <option value="MG" {% if endereco.estado == "MG" %}selected{% endif %}>Minas Gerais</option>
+                <option value="PA" {% if endereco.estado == "PA" %}selected{% endif %}>Pará</option>
+                <option value="PB" {% if endereco.estado == "PB" %}selected{% endif %}>Paraíba</option>
+                <option value="PR" {% if endereco.estado == "PR" %}selected{% endif %}>Paraná</option>
+                <option value="PE" {% if endereco.estado == "PE" %}selected{% endif %}>Pernambuco</option>
+                <option value="PI" {% if endereco.estado == "PI" %}selected{% endif %}>Piauí</option>
+                <option value="RJ" {% if endereco.estado == "RJ" %}selected{% endif %}>Rio de Janeiro</option>
+                <option value="RN" {% if endereco.estado == "RN" %}selected{% endif %}>Rio Grande do Norte</option>
+                <option value="RS" {% if endereco.estado == "RS" %}selected{% endif %}>Rio Grande do Sul</option>
+                <option value="RO" {% if endereco.estado == "RO" %}selected{% endif %}>Rondônia</option>
+                <option value="RR" {% if endereco.estado == "RR" %}selected{% endif %}>Roraima</option>
+                <option value="SC" {% if endereco.estado == "SC" %}selected{% endif %}>Santa Catarina</option>
+                <option value="SP" {% if endereco.estado == "SP" %}selected{% endif %}>São Paulo</option>
+                <option value="SE" {% if endereco.estado == "SE" %}selected{% endif %}>Sergipe</option>
+                <option value="TO" {% if endereco.estado == "TO" %}selected{% endif %}>Tocantins</option>
+            </select>
+
+            <button class="button1" type="submit">Salvar Endereço</button>
+        </form>
+    </div>
+
+    <footer>
+      <img class="sob" src="/static/img_home/Sob copy.png" alt="" />
+
+      <div class="footer-section">
+        <h4>Contatos</h4>
+        <ul>
+          <li>
+            <img
+              class="telefone"
+              src="/static/img_home/telefone.png"
+              alt="Telefone"
+            />
+            (11) 4002-8922
+          </li>
+          <li>
+            <img
+              class="whatsapp"
+              src="/static/img_home/speech-bubble--v2-Photoroom.png"
+              alt="WhatsApp"
+            />
+            (11) 98291-1653
+          </li>
+          <li>sobveuoficial@gmail.com</li>
+        </ul>
+      </div>
+
+      <p class="linha">___________</p>
+
+      <div class="footer-section">
+        <h4>Sobre a loja:</h4>
+        <ul>
+          <li>Sobre nós</li>
+          <li>Trocas e Devoluções</li>
+          <li>Fretes e Entregas</li>
+        </ul>
+      </div>
+
+      <p class="linha">___________</p>
+
+      <div class="footer-section">
+        <ul>
+          <li>Política de Privacidade</li>
+          <li>Termos de Uso</li>
+        </ul>
+      </div>
+
+      <section class="midia">
+        <img
+          class="instagram"
+          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+          alt="Instagram"
+        />
+        <img
+          class="facebook"
+          src="/static/img_home/facebook-f-Photoroom.png"
+          alt="Facebook"
+        />
+      </section>
+
+      <p class="direitos">
+        &copy; 2025 Sob Véu. Todos os direitos reservados.
+      </p>
+    </footer>
+
+
+    <script>
+        const form = document.getElementById('formEditarEndereco');
+    const cepInput = document.getElementById('cep');
+
+    // Função para validar o formato do CEP
+    function validarCEP(cep) {
+        // Regex para formato XXXXX-XXX
+        const cepRegex = /^\d{5}-\d{3}$/;
+        return cepRegex.test(cep);
+    }
+
+    // Função para formatar o CEP (opcional, mas útil)
+    function formatarCEP(cep) {
+        // Remove tudo que não é número
+        const numeros = cep.replace(/\D/g, '');
+        
+        // Formata como XXXXX-XXX se tiver 8 dígitos
+        if (numeros.length === 8) {
+            return numeros.substring(0, 5) + '-' + numeros.substring(5);
+        }
+        return cep;
+    }
+
+    // Auto-formatação enquanto o usuário digita
+    cepInput.addEventListener('input', function(e) {
+        let valor = e.target.value.replace(/\D/g, '');
+        
+        if (valor.length > 5) {
+            valor = valor.substring(0, 5) + '-' + valor.substring(5, 8);
+        }
+        
+        e.target.value = valor;
+    });
+
+    // Validação antes do envio
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const cep = cepInput.value.trim();
+        
+        // Valida o formato do CEP
+        if (!validarCEP(cep)) {
+            alert('❌ Formato de CEP inválido! Use o formato: XXXXX-XXX');
+            cepInput.focus();
+            return;
+        }
+
+        // Validação adicional com ViaCEP (opcional, mas recomendado)
+        validarCEPViaCEP(cep).then(cepValido => {
+            if (!cepValido) {
+                alert('❌ CEP não encontrado! Por favor, verifique o CEP digitado.');
+                cepInput.focus();
+                return;
+            }
+            
+            // Se o CEP for válido, prossegue com o envio
+            enviarFormulario();
+        }).catch(() => {
+            // Se a API falhar, ainda permite o envio mas avisa o usuário
+            if (confirm('⚠️ Não foi possível validar o CEP online. Deseja continuar mesmo assim?')) {
+                enviarFormulario();
+            }
+        });
+    });
+
+    // Função para validar CEP na API ViaCEP
+    function validarCEPViaCEP(cep) {
+        return new Promise((resolve, reject) => {
+            const cepNumeros = cep.replace('-', '');
+            
+            fetch(`https://viacep.com.br/ws/${cepNumeros}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    // Se não tiver erro e o CEP existir
+                    if (!data.erro) {
+                        // Preenche automaticamente os campos se o CEP for válido
+                        if (data.logradouro) document.getElementById('rua').value = data.logradouro;
+                        if (data.bairro) document.getElementById('bairro').value = data.bairro;
+                        if (data.localidade) document.getElementById('cidade').value = data.localidade;
+                        if (data.uf) document.getElementById('estado').value = data.uf;
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                })
+                .catch(() => {
+                    reject('Erro na consulta do CEP');
+                });
+        });
+    }
+
+    // Função separada para enviar o formulário
+    function enviarFormulario() {
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.redirected) {
+                alert('✅ Endereço atualizado com sucesso!');
+                window.location.href = "/painel_usuario/meus_dados";
+            } else {
+                alert('❌ Ocorreu um erro ao atualizar o endereço.');
+            }
+        })
+        .catch(() => {
+            alert('❌ Erro de conexão ao enviar os dados.');
+        });
+    }
+
+        const loginIcon = document.getElementById("login-icon");
+      const loginDropdown = document.getElementById("login-dropdown");
+
+      loginIcon.addEventListener("click", () => {
+        const isVisible = loginDropdown.style.display === "block";
+        loginDropdown.style.display = isVisible ? "none" : "block";
+        loginIcon.classList.toggle("login-active", !isVisible);
+      });
+
+      window.addEventListener("click", function (e) {
+        if (!loginIcon.contains(e.target) && !loginDropdown.contains(e.target)) {
+          loginDropdown.style.display = "none";
+          loginIcon.classList.remove("login-active");
+        }
+      });
+    </script>
+</body>
+</html>

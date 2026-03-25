@@ -1,0 +1,523 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 20px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+html {
+  background-color: #eae4d8;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0; /* Remove a margem padrão */
+  padding: 0; /* Remove o preenchimento padrão */
+  overflow-x: hidden; /* Impede rolagem horizontal */
+  background-color: #eae4d8;
+  background-image: url("/static/assets/img_cadastro/fundo-cadastro.png");
+  background-repeat: no-repeat;
+}
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/*======================================================================*/
+main h1 {
+  color: #000;
+  font-family: "Aboreto", system-ui;
+  font-size: 20px;
+  font-weight: 0;
+  margin-left: 150px;
+}
+
+.cadastro {
+  margin-left: 1050px;
+  margin-top: 90px;
+}
+
+.informacoes {
+  float: left;
+  font-size: 20px;
+  margin-top: 10px;
+  color: #000;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 0;
+}
+
+label,
+input {
+  display: block; /*Ocupar toda largura*/
+  width: 500px; /*Largura*/
+  padding: 10px; /*Espaçamento interno*/
+  font-family: "Anton", serif;
+  border-radius: 8px; /*Arredonda as bordas*/
+  margin-bottom: 0px; /*Espaçamento inferior*/
+}
+
+input {
+  background-color: #dbcaa966;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  margin-right: 0; /*remove margen da direita*/
+  margin-left: 15px; /*remove margem da esquerda*/
+  transform: scale(1.2); /*Aumentar escala*/
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none; /*Remover borda*/
+  border: solid 2px rgb(153, 153, 153); /*Cria uma cor na borda*/
+}
+
+label {
+  height: 20px;
+}
+
+#acao {
+  width: 130px;
+  margin-left: 210px;
+  background: #790000;
+  color: white;
+  /* margin-top: 20px; */
+}
+
+.posicao {
+  margin-left: 40px;
+}
+
+.cadastrar {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 0;
+  height: 50px;
+  border-radius: 5px;
+  background: #790000;
+  margin-top: 40px;
+}
+
+.senhas {
+  display: flex;
+  gap: 20px; /* espaço entre os dois campos */
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.senhas div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.posicao {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.outrosvestidos {
+  position: absolute;
+  margin-left: 30px;
+  margin-top: 700px;
+}
+
+.ver {
+  height: 35px;
+  width: 200px;
+  font-family: "Inter", sans-serif;
+  color: darkred;
+  background: rgba(237, 219, 190, 0.8);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+}
+
+button:focus {
+  border-color: darkred;
+  transform: scale(1.1);
+}
+button:hover {
+  border-color: darkred;
+  transform: scale(1.05);
+}
+
+.endereco {
+  display: grid;
+  grid-template-columns: repeat(2, 230px); /* duas colunas de 200px */
+  grid-gap: 10px 40px; /* espaçamento entre linhas e colunas */
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+#bairro,
+#complemento,
+#numero,
+#cep,
+#cidade,
+#estado {
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #dbcaa966;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+#mensagem_erro,
+#mensagem_cep {
+  margin-top: 10px;
+  font-size: 15px;
+  margin-left: 40px;
+}
+
+/* =====================================================
+   RESPONSIVIDADE COMPLETA — TELAS ATÉ 600px (CELULAR)
+   ===================================================== */
+@media (max-width: 600px) {
+  /* ----------- Layout Geral ----------- */
+  body {
+    background-image: none !important;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  main {
+    width: 100%;
+    padding: 20px 10px;
+    margin: 0 auto;
+    margin-top: 120px; /* espaço por causa do menu fixo */
+  }
+
+  /* ----------- Título ----------- */
+  .titulo_cadastro {
+    font-size: 18px !important;
+    text-align: center;
+    margin: 0 auto 25px auto;
+    margin-right: 70 !important;
+  }
+
+  /* ----------- Estrutura do formulário ----------- */
+  /* Reset margins and padding for mobile layout */
+  .cadastro {
+    margin: 0 !important;
+    padding: 0;
+    width: 100%;
+    margin-left: 0 !important;
+  }
+
+  .informacoes {
+    float: none !important;
+    width: 100%;
+    padding: 0 5px;
+    font-size: 14px;
+  }
+
+  label {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-bottom: 8px !important;
+  }
+
+  input,
+  select {
+    width: 85% !important;
+    margin-left: 0 !important;
+    margin-bottom: 12px !important;
+    font-size: 15px;
+  }
+
+  /* ----------- Senhas (coluna única no celular) ----------- */
+  .senhas {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .senhas div {
+    width: 100%;
+  }
+
+  /* ------- Campos de endereço (duas colunas no celular) ------- */
+  .endereco {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
+    gap: 12px;
+    width: 100%;
+  }
+
+  .campo {
+    width: 100%;
+  }
+
+  #bairro,
+  #complemento,
+  #numero,
+  #cep,
+  #cidade,
+  #estado {
+    width: 85% !important; /* Cada input ocupa sua coluna inteira */
+    margin-bottom: 12px !important;
+  }
+
+  /* ----------- Botão Criar Conta ----------- */
+  /* Improved spacing and sizing for button */
+  .cadastrar {
+    width: 60%;
+    height: 40px;
+    font-size: 16px;
+    margin: 35px auto 20px auto !important;
+    display: block;
+  }
+
+  #acao {
+    width: 40% !important;
+    margin: 25px auto !important;
+  }
+
+  /* ----------- Botão "Voltar à Página Inicial" ----------- */
+  /* Increased top margin for better spacing from button */
+  .outrosvestidos {
+    position: relative !important;
+    margin: 60px auto 0 auto !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ver {
+    width: 70%;
+    max-width: 280px;
+    height: 45px;
+    font-size: 14px;
+  }
+
+  /* ----------- Mensagens de erro ----------- */
+  #mensagem_erro,
+  #mensagem_cep {
+    margin-left: 0 !important;
+    font-size: 13px;
+    margin-bottom: 10px !important;
+  }
+}

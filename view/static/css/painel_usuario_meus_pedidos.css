@@ -1,0 +1,684 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+#login-dropdown {
+  /*alterado*/
+  position: absolute;
+  top: 90px;
+  /* aparece logo abaixo do header fixo */
+  right: 0;
+  /* alinhado ao canto direito, sempre certo */
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.89);
+  border-radius: 10px;
+  padding: 20px 0;
+  display: none;
+  z-index: 300;
+  /* MAIOR que o menu, ícones e o hambúrguer */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#login-dropdown h3 {
+  margin-top: 60px;
+  font-size: 16px;
+  /* Tamanho da fonte */
+  color: #7a4a1c;
+  /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px;
+  /* Espaço abaixo do título */
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+#login-dropdown ul {
+  list-style: none;
+  /* Remove marcadores (bolinhas) da lista */
+  margin: 0;
+  /* Remove espaçamento externo padrão */
+}
+
+#login-dropdown ul li a:hover {
+  text-decoration: underline;
+  color: #7a4a1c;
+  /* Cor marrom ao passar o mouse (hover) */
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text";
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* Ajuste do painel para telas pequenas (vertical) */
+#login-dropdown {
+  max-height: calc(100vh - 120px);
+  /* cabe sempre na tela */
+  overflow-y: auto;
+  /* ativa rolagem se necessário */
+  padding: 20px;
+}
+
+/* Reduz os espaçamentos internos no mobile */
+@media (max-height: 800px) {
+  #login-dropdown h3 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .opcoes {
+    margin: 12px 0;
+  }
+
+  #logout-btn {
+    margin: 25px;
+  }
+}
+
+.carrinho {
+  margin-right: 90px;
+}
+
+/* .login{
+ margin-left: 270px;
+} */
+/*alterado*/
+
+/* Animação de pulsação */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+/* Classe para o efeito visual no ícone */
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
+  /* anel visível mesmo quando não está no pico */
+}
+
+/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+/* Caixa de cada opção */
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  /* leve transparência */
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 20px 0px;
+  /* espaçamento entre as caixas */
+  text-align: center;
+}
+
+/* Texto das opções */
+.opcoes a {
+  display: block;
+  padding: 10px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover — destaca ao passar o mouse */
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+.login-dropdown-wrapper {
+  /*alterado*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  /* distância natural entre login e carrinho */
+}
+
+.login {
+  /*alterado*/
+  margin: 0;
+  /* Remove o margin-left: 270px que quebrava TUDO */
+}
+
+header #hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/*tirar se der problema*/
+
+/*=============================================*/
+
+html {
+  background-color: #eae4d8;
+}
+
+/* main {
+  margin-top: 50px;
+} */
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #eae4d8;
+  color: #3a2d20;
+}
+
+/*===============================================================*/
+
+/* ESTILIZAÇÃO DO MAIN - CORPO DA PÁGINA */
+main {
+  margin-top: 120px; /* Espaço para o menu fixo */
+  margin-bottom: 60px;
+  padding: 0 20px;
+  min-height: calc(100vh - 300px); /* Garante altura mínima */
+}
+
+.container {
+  max-width: 1000px; /* Aumentado para melhor aproveitamento */
+  margin: 0 auto;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #faf8f5 100%
+  ); /* Gradiente sutil */
+  padding: 50px 40px;
+  border-radius: 16px; /* Bordas mais arredondadas */
+  box-shadow: 0 8px 24px rgba(82, 56, 0, 0.12); /* Sombra mais suave e elegante */
+}
+
+h1 {
+  text-align: center;
+  color: #523800; /* Cor consistente com o tema */
+  margin-bottom: 40px;
+  font-family: "Libre Caslon Text", serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.pedido-card {
+  background: #ffffff; /* Fundo branco limpo */
+  border: 2px solid #e8dcc8; /* Borda suave bege */
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  border-radius: 12px; /* Bordas arredondadas */
+  transition: all 0.3s ease; /* Transição mais suave */
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(82, 56, 0, 0.08); /* Sombra sutil */
+}
+
+.pedido-card:hover {
+  background: #fef9f3; /* Bege muito claro no hover */
+  border-color: #7a4a1c; /* Borda marrom no hover */
+  transform: translateY(-3px); /* Efeito de elevação */
+  box-shadow: 0 6px 20px rgba(82, 56, 0, 0.15); /* Sombra mais pronunciada */
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0e8dc; /* Linha divisória sutil */
+  margin-bottom: 16px;
+}
+
+.pedido-header h2 {
+  font-size: 20px;
+  color: #7a4a1c; /* Marrom elegante */
+  font-family: "Libre Caslon Text", serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+.pedido-header span {
+  font-size: 14px;
+  color: #8b7355; /* Marrom claro para data */
+  font-family: "Inter", sans-serif;
+  background: #f5efe5; /* Fundo para destacar a data */
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.pedido-info {
+  margin-top: 0;
+  font-size: 16px;
+  color: #523800;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  gap: 32px; /* Espaçamento entre informações */
+}
+
+.pedido-info p {
+  margin: 8px 0;
+}
+
+.pedido-info strong {
+  color: #3d2a0f; /* Marrom escuro para labels */
+  font-weight: 600;
+}
+
+.sem-pedidos {
+  text-align: center;
+  color: #8b7355;
+  font-size: 18px;
+  font-family: "Inter", sans-serif;
+  padding: 60px 20px;
+  background: #faf8f5; /* Fundo sutil */
+  border-radius: 12px;
+  border: 2px dashed #e8dcc8; /* Borda tracejada */
+}
+
+/*=========================MENU====================*/
+
+
+
+/*=========================FOOTER=========================*/
+
+
+/*==============================MAIN===========================*/
+
+main .botao {
+  font-family: "Inter", sans-serif;
+  height: 50px;
+  width: 240px;
+  color: darkred;
+  background-color: #eadcc1cc;
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-top: 80px;
+}
+/* 
+.botao:focus {
+  border-color: darkred;
+  transform: scale(1.1);
+}
+.botao:hover {
+  border-color: darkred;
+  transform: scale(1.05);
+} */
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+header #hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
+}
+
