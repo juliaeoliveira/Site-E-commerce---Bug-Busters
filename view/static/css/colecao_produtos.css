@@ -1,0 +1,702 @@
+/* =============== ESTILIZAÇÃO GERAL =============== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+html {
+  background-color: #eae4d8;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #f4efe5;
+  color: #5b2a19;
+}
+
+/* body {
+    font-family: "Georgia", serif;
+    background-color: #f4efe5;
+    color: #5b2a19;
+} */
+
+/* =============== MAIN CONTENT =============== */
+main {
+    margin-top: 130px;
+    padding: 40px 20px;
+    background-color: #f4efe5;
+    flex: 1;
+}
+
+#colecao {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =============== BREADCRUMB / LOCALIZAÇÃO =============== */
+.localizacao {
+    font-size: 18px;
+    color: #7a2f1d;
+    margin-bottom: 30px;
+    font-family: "Georgia", serif;
+    letter-spacing: 1px;
+}
+
+.localizacao a {
+    color: #7a2f1d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.localizacao a:hover {
+    color: #5b2a19;
+    text-decoration: underline;
+}
+
+/* =============== ÁREA DE COLEÇÃO =============== */
+.area-colecao {
+    margin: 50px 0;
+}
+
+/* =============== GRID DE PRODUTOS =============== */
+.lista-vestidos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin: 40px 0;
+}
+
+/* =============== CARD DO PRODUTO =============== */
+.vestido {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.vestido:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.vestido a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* =============== IMAGEM DO PRODUTO =============== */
+.vestido .foto {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.vestido:hover .foto {
+    transform: scale(1.08);
+}
+
+/* =============== INFORMAÇÕES DO PRODUTO =============== */
+.vestido h3 {
+    font-size: 18px;
+    color: #7a2f1d;
+    margin: 15px 15px 8px 15px;
+    font-family: "Georgia", serif;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.vestido .preco {
+    font-size: 20px;
+    color: #5b2a19;
+    font-weight: 700;
+    margin: 5px 15px 15px 15px;
+    font-family: "Georgia", serif;
+}
+
+/* =============== BOTÃO ADICIONAR AO CARRINHO =============== */
+.btn-adicionar {
+    background: linear-gradient(135deg, #7a2f1d 0%, #5b2a19 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px 15px 15px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Georgia", serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto;
+}
+
+.btn-adicionar:hover {
+    background: linear-gradient(135deg, #5b2a19 0%, #3d1410 100%);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(122, 47, 29, 0.3);
+}
+
+.btn-adicionar:active {
+    transform: scale(0.98);
+}
+
+/* =============== MENSAGEM DE NENHUM PRODUTO =============== */
+#colecao > p {
+    text-align: center;
+    font-size: 18px;
+    color: #7a2f1d;
+    margin: 60px 0;
+    font-family: "Georgia", serif;
+}
+
+/* =============== BOTÃO VOLTAR =============== */
+.btn-voltar {
+    display: inline-block;
+    background: #e8dbb8;
+    color: #7a2f1d;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    font-family: "Georgia", serif;
+}
+
+.btn-voltar:hover {
+    background: #d4c49a;
+    transform: translateX(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* =============== RESPONSIVIDADE =============== */
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+    main {
+        margin-top: 120px;
+        padding: 30px 15px;
+    }
+
+    .lista-vestidos {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 30px;
+    }
+
+    .vestido .foto {
+        height: 300px;
+    }
+
+    .vestido h3 {
+        font-size: 16px;
+        margin: 12px 12px 6px 12px;
+    }
+
+    .vestido .preco {
+        font-size: 18px;
+        margin: 4px 12px 12px 12px;
+    }
+
+    .btn-adicionar {
+        padding: 10px 16px;
+        font-size: 13px;
+        margin: 8px 12px 12px 12px;
+    }
+}
+
+/* Tablets pequenos (600px - 768px) */
+@media (max-width: 768px) {
+    main {
+        margin-top: 110px;
+        padding: 25px 15px;
+    }
+
+    .localizacao {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .lista-vestidos {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+
+    .vestido {
+        border-radius: 6px;
+    }
+
+    .vestido .foto {
+        height: 260px;
+    }
+
+    .vestido h3 {
+        font-size: 15px;
+        margin: 10px 10px 5px 10px;
+    }
+
+    .vestido .preco {
+        font-size: 17px;
+        margin: 3px 10px 10px 10px;
+    }
+
+    .btn-adicionar {
+        padding: 10px 14px;
+        font-size: 12px;
+        margin: 8px 10px 10px 10px;
+    }
+}
+
+/* Celulares (480px - 600px) */
+@media (max-width: 600px) {
+    main {
+        margin-top: 100px;
+        padding: 20px 12px;
+    }
+
+    .localizacao {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .lista-vestidos {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 25px 0;
+    }
+
+    .vestido {
+        border-radius: 5px;
+    }
+
+    .vestido .foto {
+        height: 220px;
+    }
+
+    .vestido h3 {
+        font-size: 14px;
+        margin: 8px 8px 4px 8px;
+    }
+
+    .vestido .preco {
+        font-size: 15px;
+        margin: 2px 8px 8px 8px;
+    }
+
+    .btn-adicionar {
+        padding: 8px 12px;
+        font-size: 11px;
+        margin: 6px 8px 8px 8px;
+    }
+
+    .btn-voltar {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+    main {
+        margin-top: 90px;
+        padding: 15px 10px;
+    }
+
+    .localizacao {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .lista-vestidos {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .vestido .foto {
+        height: 280px;
+    }
+
+    .vestido h3 {
+        font-size: 15px;
+        margin: 10px 10px 5px 10px;
+    }
+
+    .vestido .preco {
+        font-size: 16px;
+        margin: 3px 10px 10px 10px;
+    }
+
+    .btn-adicionar {
+        padding: 10px 12px;
+        font-size: 13px;
+        margin: 8px 10px 10px 10px;
+        width: calc(100% - 20px);
+    }
+}
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
+}

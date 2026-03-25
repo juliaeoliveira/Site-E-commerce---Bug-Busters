@@ -1,0 +1,1559 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #FBFCF7;
+
+}
+
+
+
+/* MENU */
+#logo {
+  height: 80px;
+  padding-left: 0;
+  /*padding-left: 130px;  Espaço à esquerda do logo */
+  /*alterado*/
+}
+
+.icons {
+  gap: 5px;
+  justify-content: center;
+  display: flex;
+  padding-right: 150px;
+}
+
+.menu {
+  /*alterado*/
+  height: 90px;
+  position: fixed;
+  /*original*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  /*original*/
+  background-color: hsla(0, 0%, 100%, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  /* controla o respiro nas laterais */
+  /* position: fixed;
+  z-index: 9999; */
+}
+
+/* Estilo dos links dentro do nav */
+.menu nav a {
+  color: #523800;
+  font-size: 20px;
+  /* Define o tamanho da fonte */
+  padding: 25px;
+  /* Espaçamento interno */
+  text-decoration: underline;
+  /* Ativa o sublinhado */
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  /* Cor do sublinhado com transparência */
+}
+
+.text-menu {
+  /*alterado*/
+  display: flex;
+  gap: 200px;
+  /* mais elegante que gap 200px (quebrava tudo) */
+  font-family: "Libre Caslon Text";
+}
+
+.text-menu a {
+  /*alterado*/
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+}
+
+#login-dropdown {
+  /*alterado*/
+  position: absolute;
+  top: 90px;
+  /* aparece logo abaixo do header fixo */
+  right: 0;
+  /* alinhado ao canto direito, sempre certo */
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.89);
+  border-radius: 10px;
+  padding: 20px 0;
+  display: none;
+  z-index: 300;
+  /* MAIOR que o menu, ícones e o hambúrguer */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#login-dropdown h3 {
+  margin-top: 60px;
+  font-size: 16px;
+  /* Tamanho da fonte */
+  color: #7a4a1c;
+  /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px;
+  /* Espaço abaixo do título */
+}
+
+#login-dropdown ul {
+  list-style: none;
+  /* Remove marcadores (bolinhas) da lista */
+  margin: 0;
+  /* Remove espaçamento externo padrão */
+}
+
+#login-dropdown ul li a:hover {
+  text-decoration: underline;
+  color: #7a4a1c;
+  /* Cor marrom ao passar o mouse (hover) */
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text";
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* Ajuste do painel para telas pequenas (vertical) */
+#login-dropdown {
+  max-height: calc(100vh - 120px);
+  /* cabe sempre na tela */
+  overflow-y: auto;
+  /* ativa rolagem se necessário */
+  padding: 20px;
+}
+
+/* Reduz os espaçamentos internos no mobile */
+@media (max-height: 800px) {
+  #login-dropdown h3 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .opcoes {
+    margin: 12px 0;
+  }
+
+  #logout-btn {
+    margin: 25px;
+  }
+}
+
+.carrinho {
+  margin-right: 90px;
+}
+
+/* .login{
+ margin-left: 270px;
+} */
+/*alterado*/
+
+/* Animação de pulsação */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+/* Classe para o efeito visual no ícone */
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
+  /* anel visível mesmo quando não está no pico */
+}
+
+/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+/* Caixa de cada opção */
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  /* leve transparência */
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 20px 0px;
+  /* espaçamento entre as caixas */
+  text-align: center;
+}
+
+/* Texto das opções */
+.opcoes a {
+  display: block;
+  padding: 10px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover — destaca ao passar o mouse */
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+.login-dropdown-wrapper {
+  /*alterado*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  /* distância natural entre login e carrinho */
+}
+
+.login {
+  /*alterado*/
+  margin: 0;
+  /* Remove o margin-left: 270px que quebrava TUDO */
+}
+
+#hamburger {
+  appearance: none;
+  -webkit-appearance: none;
+}               
+
+
+/* botão hamburguer
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+/* .overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}  */
+
+
+
+/* PAGINA SOBRE NOS */
+
+
+#Sobre-nos {
+  background-color: #EDDBBE;
+  display: flex;
+  justify-content: center;
+
+  min-height: 738px;
+  /* deixa adaptar ao conteúdo */
+  height: 10vh;
+}
+
+/* Container texto + imagem */
+.sobre-container {
+  display: flex;
+  justify-content: center;
+  /* centraliza os dois blocos */
+  align-items: center;
+  gap: 200px;
+  /* deixa mais próximo */
+
+}
+
+/* Bloco de texto à esquerda */
+.Sobre-veu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  max-width: 500px;
+  /* deixa mais estreito */
+  border-left: 2px solid #d4b887;
+  /* linha vertical ao lado */
+  padding-left: 25px;
+  /* espaço entre a linha e o texto */
+}
+
+/* Título */
+.titulo-completo {
+  display: block;
+  /* força ficar em coluna */
+  font-size: 25px;
+  font-family: Junge, serif;
+  color: #523800;
+}
+
+/* “Sob Véu” */
+.titulo-completo .sob {
+  display: block;
+  font-family: "Libre Caslon Display", serif;
+  font-size: 80px;
+  color: #523800;
+  margin-bottom: 10px;
+}
+
+.texto1 {
+  display: block;
+  font-family: "Junge", serif;
+  font-size: 22px;
+  color: #523800;
+  margin-bottom: 10px;
+}
+
+/* Texto do parágrafo */
+.texto2 {
+  font-family: Judson, serif;
+  font-size: 18px;
+  color: #523800;
+  line-height: 1.6;
+
+}
+
+/* Imagem da noiva */
+#box-noiva-img img {
+  width: 570px;
+  /* ajustado para não ficar muito grande */
+  height: 650px;
+  display: block;
+}
+
+
+/* AGENDAMENTOS */
+
+#Agendamentos {
+  clear: both;
+  background-color: #DFCAA4;
+  width: 100%;
+  height: 282px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+
+}
+
+.agendamentos {
+  text-align: center;
+}
+
+.agendamentos p {
+  color: #790000;
+  margin-top: 20px;
+  font-size: 24px;
+  font-family: "Afacad";
+
+}
+
+h1 {
+  text-align: center;
+  color: #790000;
+  font-size: 48px;
+  letter-spacing: 2px;
+  font-family: "Aboreto";
+  font-weight: 400;
+  margin-top: -10px;
+}
+
+.linha-abaixo {
+  width: 300px;
+  /* largura da linha */
+  font-weight: 400px;
+  border-bottom: 1px solid #790000;
+  margin: 0 auto 20px auto;
+  /* centraliza e espaça abaixo */
+  margin-top: 10px;
+}
+
+.numero {
+  font-family: "Afacad";
+  font-weight: 400;
+  font-size: 24px;
+  text-decoration: none;
+  color: white; 
+}
+
+
+#botao-boasvindas img {
+  width: 20px;
+  height: 20px;
+}
+
+#botao-boasvindas:hover {
+  background-color: #5a0000;
+}
+
+/* Vestidos */
+
+/* Seção principal com ID "vestidos" */
+#vestidos {
+  height: 57vh;
+  /* Altura fixa da seção */
+  padding: 60px 40px;
+  /* Espaçamento interno (60px em cima/baixo, 40px nos lados) */
+  text-align: center;
+  /* Centraliza o texto horizontalmente */
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+/* Estilização do título (h1) dentro da seção "vestidos" */
+#vestidos h1 {
+  font-family: "Aboreto", serif;
+  /* Fonte do título */
+  font-size: 28px;
+  /* Tamanho da fonte */
+  color: #523800;
+  /* Cor do texto */
+  margin-bottom: 40px;
+  /* Espaço abaixo do título */
+  letter-spacing: 1px;
+  /* Espaçamento entre as letras */
+}
+
+/* Destaque para uma parte do título com a classe "destaque" */
+#vestidos h1 .destaque {
+  font-family: "Dancing Script", cursive;
+  /* Fonte diferenciada */
+  font-style: italic;
+  /* Estilo itálico */
+  font-weight: bold;
+  /* Negrito */
+  color: #7a4a00;
+  /* Cor diferenciada para destaque */
+  font-size: 40px;
+}
+
+/* Container principal das imagens + setas (navegação) */
+.vestidos-iniciais .galeria-vestidos {
+  display: flex;
+  /* Layout flexível em linha */
+  justify-content: center;
+  /* Centraliza os elementos horizontalmente */
+  align-items: center;
+  /* Centraliza os elementos verticalmente */
+  gap: 100px;
+  /* Espaçamento entre os itens (imagens e setas) */
+
+
+}
+
+/* Estilização das imagens dos vestidos */
+.vestidos-iniciais .items-produto img {
+  width: 400px;
+  /* Largura fixa das imagens */
+  height: 400px;
+  ;
+  /* Altura proporcional à largura */
+  border-radius: 4px;
+  /* Bordas levemente arredondadas */
+  display: block;
+  /* Garante que a imagem ocupe toda a linha disponível */
+}
+
+/* Estilização das setas de navegação */
+.seta img {
+  width: 15px;
+  /* Largura fixa das setas */
+  height: 20px;
+  /* Altura proporcional */
+  cursor: pointer;
+  /* Cursor muda para mãozinha ao passar o mouse */
+
+}
+
+
+/* COLECÇOES */
+
+/* Sessão Coleções */
+#Coleções {
+  height: 200hv;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.linha-titulo {
+  width: 456px;
+  background: #FFC958;
+  margin: 0 auto 15px;
+  /* centraliza e dá espaçamento */
+}
+
+.linha-titulo2 {
+  width: 456px;
+
+  background: #FFC958;
+  margin: 0 auto 15px;
+  /* centraliza e dá espaçamento */
+  margin-bottom: 130px;
+}
+
+
+#Coleções h1 {
+  color: #4a3c26;
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+  font-family: "Inria Sans";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  /* 44.8px */
+}
+
+
+/* Container dos itens */
+.items-colecoes {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+
+
+.items-colecao img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Inclinação das laterais */
+/* .items-colecao:first-child {
+  transform: rotate(-6deg);
+}
+
+.items-colecao:last-child {
+  transform: rotate(6deg);
+} */
+
+
+/* Itens laterais */
+.items-colecao {
+  width: 380px;
+  height: 500px;
+  ;
+  /* menor altura */
+  border-radius: 6px;
+  margin-top: 80px;
+}
+
+/* Imagem central em destaque */
+/* .items-colecao.destaque { */
+  /* width: 350px;
+  height: 500px; */
+  /* maior altura */
+  /* z-index: 2;
+  /* fica acima das outras */
+  /* margin-top: -30px; */ 
+
+/* } */
+
+
+
+
+.linha-colecao {
+  margin: 20px auto;
+  width: 500px;
+
+}
+
+
+
+/* DEPOIMENTOS */
+#depoimentos {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  height: 40vh;
+  margin-top: 180px;
+}
+
+#depoimentos h1 {
+  font-size: 30px;
+  color: #222;
+  font-weight: 400;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  margin-top: -90px;
+}
+
+.box-depoimentos {
+  width: 525px;
+  min-height: 160px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #462506;
+  /* borda discreta marrom */
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  background-color: #FBFCF7;
+}
+
+.box-depoimentos p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  margin-top: 20px;
+  ;
+  width: 484px;
+  font-family: "Abhaya Libre ExtraBold";
+}
+
+.autor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.autor img {
+  width: 40px;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 50%;
+  /* deixa redondo */
+  object-fit: cover;
+}
+
+.autor span {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #000;
+}
+
+#depoimentos .container {
+  position: relative;
+  /* referência pras setas */
+}
+
+.seta-esquerda2,
+.seta-direita2 {
+  position: absolute;
+  top: 55%;
+  /* centraliza verticalmente em relação às caixas */
+
+  cursor: pointer;
+}
+
+.seta-esquerda2 {
+  left: 260px;
+  /* cola no lado esquerdo */
+  width: 15px;
+  /* Largura fixa das setas */
+  height: 20px;
+}
+
+.seta-direita2 {
+  right: 260px;
+  /* cola no lado direito */
+  width: 15px;
+  /* Largura fixa das setas */
+  height: 20px;
+}
+
+
+
+
+
+#botao-boasvindas {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  /* espaço entre número e ícone */
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: #790000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.video-inicial {
+    width: 100%;
+    height: 95vh; /* altura do banner */
+    position: relative;
+    overflow: hidden;
+}
+
+.video-inicial .video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* faz o vídeo se comportar igual a background-size: cover */
+}
+
+/* Permite posicionar o botão por cima */
+.items-colecao {
+  position: relative;
+}
+
+/* BOTÃO SOBRE A IMAGEM */
+.btn-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza perfeitamente */
+  background: rgba(255, 255, 255, 0.28);  /* igual ao efeito da foto */
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  text-align: center;
+  padding: 8px 3px;
+  width: 230px;
+}
+
+/* TEXTO DO BOTÃO */
+.btn-overlay span {
+  display: block;
+  font-weight: 400;
+}
+
+/* BOTÃO CENTRAL — CHAMA SERENA — fonte serif elegante */
+.btn-overlay.centro span {
+  font-family: "Georgia", serif;
+  font-size: 32px;
+  text-transform: none;
+  letter-spacing: 1px;
+}
+
+
+
+
+
+/* ANIMAÇÃO + POSICIONAMENTO  */
+
+/* ---- comportamento básico ---- */
+.items-colecoes .items-colecao {
+  transition: transform .35s ease, opacity .28s ease;
+  opacity: 0.6;            /* padrão: laterais opacas */
+  cursor: pointer;
+}
+
+/* central fica 100% por padrão */
+.items-colecoes .items-colecao.centro {
+  opacity: 1;
+  z-index: 3;
+  transform: translateY(-40px); /* mantém central mais alto */
+}
+
+/* quando o usuário passa o mouse por QUALQUER CARD,
+   diminuímos a opacidade de TODOS (efeito "foco") */
+.items-colecoes:hover .items-colecao {
+  opacity: 0.35;
+}
+
+/* o card sob o mouse fica 100% */
+.items-colecoes .items-colecao:hover {
+  opacity: 1;
+  z-index: 5;
+}
+
+/* manter rotação das laterais e animar subida sem perder rotação */
+.items-colecoes .items-colecao.esquerda {
+  transform: rotate(6deg) translateY(0);
+  z-index: 1;
+}
+.items-colecoes .items-colecao.direita {
+  transform: rotate(-6deg) translateY(0);
+  z-index: 1;
+}
+
+/* hover das laterais preservando rotação */
+.items-colecoes .items-colecao.esquerda:hover {
+  transform: rotate(6deg) translateY(-32px);
+}
+.items-colecoes .items-colecao.direita:hover {
+  transform: rotate(-6deg) translateY(-32px);
+}
+
+/* hover central => sobe mais */
+.items-colecoes .items-colecao.centro:hover {
+  transform: translateY(-75px);
+}
+
+
+
+.items-colecao.centro{
+  margin-top: -25px;
+
+}
+
+.botao-vercolecao {
+  background: transparent;
+  border: 1px solid #4E3902;
+  padding: 5px 18px;
+  font-size: 23px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #333;
+  margin-top: -100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  margin-bottom: 70px;
+  list-style: none;
+  color: #462506;
+  width: 150px;
+  
+  /* ANIMAÇÃO */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.botao-vercolecao:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  border-color: #6a4a16;
+}
+
+.botao-vercolecao a {
+  text-align: center;
+  font-family: "Judson";
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  text-decoration: none;
+  list-style: none;
+  color: #462506;
+}
+
+
+/* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+}
+
+/* overlay (fundo escuro no mobile) */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    padding-left: 0 !important;
+    height: 70px;
+  }
+
+  /* botão hamburguer */
+  .menu .hamburger {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 10px;
+    color: #523800;
+    z-index: 11;
+    /* margin: 30px; */
+  }
+
+  /* overlay */
+  .overlay {
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* NAV vira painel lateral */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.95);
+    flex-direction: column;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.25s ease;
+    z-index: 10;
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* ÍCONES fixos à direita SEM SUMIR */
+  .login-dropdown-wrapper {
+    gap: 18px;
+    margin-right: 0 !important;
+    z-index: 12;
+  }
+
+  #logout-btn {
+    margin: 25px; /* distância agradável do último item */
+  }
+}
+/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 60px !important; /* reduz o espaço entre os links */
+  }
+
+  .menu nav a {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .menu {
+    padding: 0 15px; /* ajusta respiro lateral */
+  }
+
+  #logo {
+    height: 70px; /* logo menor */
+  }
+
+  .login-dropdown-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Painel maior no desktop */
+@media (min-width: 901px) {
+  #login-dropdown {
+    padding-top: 40px; /* antes era 20px */
+    padding-bottom: 50px; /* antes era 20px */
+  }
+
+  #login-dropdown h3 {
+    margin-top: 20px; /* ajustado */
+    margin-bottom: 40px; /* reduzido para ficar proporcional */
+  }
+
+  .opcoes {
+    margin: 25px 0; /* mais espaçamento entre os itens */
+  }
+
+  #logout-btn {
+    margin: 30px; /* distância agradável do último item */
+  }
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
+}
+
+
+
+
+/* ============================================
+      RESPONSIVIDADE MOBILE — ATÉ 600px
+============================================ */
+@media (max-width: 600px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* ===== VÍDEO ===== */
+  .video-inicial {
+    height: 55vh;
+  }
+
+  .video-inicial video {
+    width: 100%;
+    height: 55vh;
+    object-fit: cover;
+  }
+
+  /* ===== SOBRE NÓS ===== */
+  #Sobre-nos {
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .sobre-container {
+    flex-direction: column;
+    gap: 35px;
+    text-align: center;
+  }
+
+  #box-noiva-img img {
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .Sobre-veu {
+    border-left: none;
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  .sobre-container .sob {
+    font-size: 48px;
+  }
+
+  .textoP {
+    width: 100%;
+  }
+
+  /* ===== VESTIDOS ===== */
+  #vestidos {
+    height: auto;
+    margin-top: 40px;
+  }
+
+  .vestidos-iniciais h1 {
+    font-size: 42px;
+  }
+
+  .galeria-vestidos {
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  .items-produto {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .items-produto img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .seta img {
+    width: 20px;
+  }
+
+  /* ===== COLEÇÕES ===== */
+  .colecoes-container {
+    height: auto;
+  }
+
+  .items-colecoes {
+    gap: 45px;
+  }
+
+  .items-colecao {
+    width: 30%;
+    height: 300px;
+  }
+
+  .btn-overlay {
+    width: 70%;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  /* ===== DEPOIMENTOS ===== */
+  #depoimentos {
+    height: auto;
+  }
+
+  .box-depoimentos {
+    width: 80%;
+    min-height: auto;
+  }
+
+  .box-depoimentos p {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+  /* ========================== FOOTER========== ===== */
+  /* footer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    height: auto;
+    padding: 40px 0;
+  }
+
+  .linha {
+    display: none;
+  }
+
+  .nom {
+    margin: 0;
+  }
+
+  .direitos {
+    margin-left: 0;
+    padding-bottom: 15px;
+  }
+  
+  
+} */
+
+
+/* ============================
+     NOTEBOOK / DESKTOP MÉDIO
+============================ */
+@media (max-width: 1280px) and (min-width: 901px) {
+
+  /* .text-menu {
+    gap: 70px;
+  }
+
+  #logo {
+    height: 75px;
+  } */
+
+  /* SOBRE */
+  #box-noiva-img img {
+    width: 480px;
+  }
+
+  /* VESTIDOS */
+  .items-produto img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .vestidos-iniciais .galeria-vestidos {
+    gap: 60px;
+  }
+
+  /* COLEÇÕES */
+  .items-colecao {
+    width: 300px;
+    height: 420px;
+  }
+}
+
+
+
+/* ============================
+    TABLET E NOTEBOOK PEQUENO
+============================ */
+@media (max-width: 900px) and (min-width: 481px) {
+
+  /* MENU
+  #logo {
+    height: 65px;
+  }
+
+  .menu {
+    height: 85px;
+  }
+
+  .text-menu {
+    gap: 40px;
+  } */
+  /*==============================*/
+
+  /* SOBRE NÓS */
+  .sobre-container {
+    gap: 80px;
+  }
+/*==================FOOTER========================*/
+  /* .sob {
+    font-size: 60px;
+  } */
+/*===================================================*/
+  #box-noiva-img img {
+    width: 430px;
+    height: auto;
+  }
+
+  /* VESTIDOS */
+  .items-produto img {
+    width: 260px;
+    height: 260px;
+  }
+
+  .vestidos-iniciais .galeria-vestidos {
+    gap: 40px;
+  }
+
+  /* COLEÇÕES */
+  .items-colecoes {
+    gap: 35px;
+  }
+
+  .items-colecao {
+    width: 260px;
+    height: 380px;
+  }
+}
+  /*=======================================*/
+  /* FOOTER */
+  /* footer {
+    flex-wrap: wrap;
+  }
+} */
+/*========================================*/
+
+
+/* --- COLEÇÕES MOBILE → 1 POR VEZ RETA --- */
+@media (max-width: 768px) {
+  .items-colecoes {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+  }
+
+  .items-colecao {
+    height: auto;
+    min-width: 100%;
+    transform: none !important; /* remove inclinação */
+    opacity: 1 !important;
+  }
+
+  .items-colecao img {
+    width: 100%;
+    border-radius: 0;
+  }
+
+.botao-vercolecao{
+  margin-top: 50px;
+}
+
+  .destaque {
+    transform: none !important;
+  }
+}
+
+
+
+/* --- VESTIDOS: MOBILE APENAS 1 IMAGEM --- */
+@media (max-width: 768px) {
+  .galeria-vestidos {
+    justify-content: center;
+    position: relative;
+  }
+
+  .items-produto img {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .seta-esquerda, .seta-direita {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .seta-esquerda {
+    left: 10px;
+  }
+
+  .seta-direita {
+    right: 10px;
+  }
+}
+
+
+
+/* --- AGENDAMENTOS MOBILE --- */
+@media (max-width: 768px) {
+  #Agendamentos .agendamentos {
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  #Agendamentos h1 {
+    font-size: 1.8rem;
+  }
+
+  #Agendamentos p {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0 10px;
+  }
+
+  #botao-boasvindas {
+    width: 90%;
+    max-width: 320px;
+    height: 50px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #botao-boasvindas a.numero {
+    font-size: 1.1rem;
+  }
+
+  #botao-boasvindas img {
+    width: 22px;
+  }
+}
+
+
+/* --- CONTAINER DO PRODUTO (A CAIXA) --- */
+.items-produto {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  background-color: #FBFCF7;
+  border-radius: 4px; /* Mantendo seu arredondado */
+  cursor: pointer;    /* Mãozinha para indicar que é clicável */
+
+  /* Transição suave para o movimento da caixa inteira */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* --- EFEITO HOVER (QUANDO PASSA O MOUSE) --- */
+.items-produto:hover {
+  /* Levanta 10 pixels */
+  transform: translateY(-10px);
+  
+  /* Sombra elegante marrom/dourada (baseada na sua paleta) */
+  box-shadow: 0 15px 30px rgba(82, 56, 0, 0.2); 
+}
+
+/* ------------------------------------------------ */
+
+/* --- AQUI MANTÉM A LÓGICA DA TRANSIÇÃO DE IMAGEM QUE FIZEMOS ANTES --- */
+
+.items-produto .wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.items-produto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  /* Mantém o tempo da transição de troca de imagem */
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
+
+/* Classe adicionada pelo JS para trocar a foto */
+.items-produto img.trocando {
+  opacity: 0;
+  transform: scale(1.1);
+  filter: blur(8px);
+}
+
+

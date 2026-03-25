@@ -1,0 +1,1062 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===================== MENU ===================== */
+.menu {
+  height: 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: hsla(0, 0%, 100%, 0.75);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#logo {
+  height: 80px;
+  width: auto;
+}
+
+.text-menu {
+  display: flex;
+  gap: 60px;
+  font-family: "Libre Caslon Text", serif;
+}
+
+.text-menu a {
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 56, 0, 0.192);
+  color: #523800;
+  transition: color 0.3s ease;
+}
+
+.text-menu a:hover {
+  color: #800000;
+}
+
+/* ÍCONES LOGIN/CARRINHO */
+.login-dropdown-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  z-index: 12;
+}
+
+.login,
+.login-dropdown-wrapper img {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.login:hover {
+  transform: scale(1.1);
+}
+
+/* DROPDOWN DO LOGIN */
+#login-dropdown {
+  position: absolute;
+  top: 90px;
+  right: 0;
+  width: 260px;
+  background-color: hsla(0, 0%, 100%, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 30px 20px;
+  display: none;
+  z-index: 300;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+#login-dropdown h3 {
+  font-size: 16px;
+  color: #7a4a1c;
+  margin-bottom: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+#login-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  border: 2px solid #6e0606;
+  border-radius: 5px;
+  margin: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a {
+  display: block;
+  padding: 12px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
+
+#logout-btn {
+  background-color: #790000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text", serif;
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+/* ANIMAÇÃO LOGIN */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+}
+
+/* MENU HAMBÚRGUER */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  cursor: pointer;
+  padding: 10px;
+  color: #523800;
+  z-index: 11;
+}
+
+/* OVERLAY */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ===================== BODY E MAIN ===================== */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #eae4d8;
+  color: #3a2d20;
+  font-family: "Inter", sans-serif;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  
+}
+
+/* ===================== CARRINHO ===================== */
+#carrinho {
+  height: auto;
+  background-color: #eae4d8;
+}
+
+.localizacao {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 30px;
+  font-family: "Libre Caslon Text";
+  color: #4e3902;
+  font-size: 18px;
+}
+
+.area-carrinho {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  width: 100%;
+  margin-top: 50px;
+}
+
+/* Coluna esquerda com os 3 cards empilhados */
+.coluna-esquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* CARDS */
+.produto-vestido {
+  background-color: #e3d2ac;
+  width: 710px;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: auto;
+}
+
+.produto-vestido h1 {
+  background-color: #fff;
+  margin: -20px -20px 20px -20px;
+  padding: 20px 0;
+  padding-left: 30px;
+  border-radius: 8px 8px 0 0;
+  font-family: "Aboreto", system-ui;
+  font-size: 24px;
+  font-weight: bold;
+  color: #4e3902;
+}
+
+/* ENDEREÇO DE ENVIO */
+.form-endereco {
+  min-height: 510px;
+  gap: 20px;
+  padding: 20px 40px;
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
+}
+
+.linha-dupla {
+  display: flex;
+  justify-content: space-between;
+  gap: 70px;
+  margin-bottom: 15px;
+}
+
+.linha-dupla > div {
+  flex: 1;
+}
+
+.linha-dupla2 {
+  margin-bottom: 30px;
+}
+
+.form-endereco label {
+  font-family: "Libre Caslon Text";
+  color: #4e3902;
+  margin-bottom: 5px;
+  font-size: 14px;
+  display: block;
+}
+
+.form-endereco input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #4e3902;
+}
+
+.primeiro {
+  width: 200px;
+}
+
+.segundo {
+  width: 200px;
+}
+
+.botao-enviar {
+  display: inline-block;
+  margin-top: 20px;
+  width: 200px;
+  background-color: #790000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 25px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  text-align: center;
+}
+
+.botao-enviar:hover {
+  background-color: #5a0101;
+  transform: scale(1.05);
+}
+
+/* MÉTODOS DE PAGAMENTO */
+.form-pagamento {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 40px;
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
+  font-size: 16px;
+}
+
+.opcao-pagamento {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.opcao-pagamento input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #c3a97c;
+  cursor: pointer;
+}
+
+/* ITENS DO PEDIDO */
+#itens-pedido {
+  height: auto;
+}
+
+.itens-container {
+  padding: 20px;
+}
+
+.produto-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.produto-item .foto {
+  height: 200px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.produto-item .texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Inter", sans-serif;
+}
+
+.produto-item h3 {
+  color: #523800;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.tamanho-label,
+.quantidade {
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
+  font-size: 16px;
+}
+
+.tamanho {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-family: "Inter", sans-serif;
+}
+
+.quantia {
+  color: black;
+  background-color: #e3d2ac;
+  font-size: 15px;
+  width: 60px;
+  height: 25px;
+  text-align: center;
+  border: 1px solid #320101;
+  border-radius: 4px;
+}
+
+.valor {
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* PEDIDO TOTAL */
+.pedido-total {
+  color: #000;
+  min-height: 200px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  background-color: white;
+  width: 400px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: auto;
+}
+
+.pedido-total h3 {
+  color: #523800;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.pedido-total h2 {
+  font-family: "Inter", sans-serif;
+  color: #4e3902;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+#botao-pagamento {
+  color: white;
+  text-align: center;
+  background-color: #790000;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  padding: 12px 25px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#botao-pagamento:hover {
+  background-color: #5a0000;
+  transform: scale(1.02);
+}
+
+/* BOTÕES FINAIS */
+.botoes-finais {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+
+.botao-confirmar-final {
+  font-family: "Libre Caslon Text", serif;
+  height: 50px;
+  width: 300px;
+  color: darkred;
+  background-color:rgba(237, 219, 190, 0.80);
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+}
+
+.botao-voltar {
+  font-family: "Libre Caslon Text", serif;
+  height: 50px;
+  width: 300px;
+  color: darkred;
+  background-color:rgba(237, 219, 190, 0.80);
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.botao-voltar:hover{
+  transform: scale(1.05);
+}
+
+.botao-confirmar-final:hover {
+  transform: scale(1.05);
+}
+
+/* ===================== VARIEDADES ===================== */
+#variedades {
+  min-height: 100vh;
+  height: auto;
+  background-color: #fff9ed;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+#variedades h1 {
+  color: #681616;
+  font-family: "Aboreto";
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.linha-titulo3 {
+  width: 456px;
+  max-width: 90%;
+  color: #4e3902;
+  margin: 0 auto 40px;
+}
+
+.lista-vestidos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.vestido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding-bottom: 20px;
+  margin: 20px;
+}
+
+.vestido img {
+  width: 352px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.vestido:hover img {
+  transform: scale(1.05);
+}
+
+.lista-vestidos a {
+  text-decoration: none;
+  color: #000;
+}
+
+.nome {
+  color: #000;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 15px;
+  font-family: "Libre Caslon Text";
+}
+
+.ver {
+  font-family: "Libre Caslon Text", serif;
+  height: 50px;
+  width: 300px;
+  color: darkred;
+  background-color:rgba(237, 219, 190, 0.80);
+  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1000px;
+}
+
+.ver:hover {
+  transform: scale(1.05);
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 40px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px;
+}
+
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer .coluna .titulo {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #bdb0ae;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.linha {
+  width: 1px;
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.instagram,
+.facebook {
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.instagram:hover,
+.facebook:hover {
+  transform: scale(1.1);
+}
+
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.direitos {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ===================== RESPONSIVIDADE ===================== */
+
+/* TABLETS E MÉDIAS */
+@media (max-width: 1116px) and (min-width: 901px) {
+  .text-menu {
+    gap: 40px;
+  }
+
+  .menu nav a {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .area-carrinho {
+    gap: 40px;
+  }
+
+  .produto-vestido {
+    width: 600px;
+  }
+
+  .pedido-total {
+    width: 350px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .menu {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  #logo {
+    height: 60px;
+  }
+
+  /* HAMBÚRGUER APARECE */
+  .hamburger {
+    display: block;
+  }
+
+  /* NAV VIRA SIDEBAR */
+  .text-menu {
+    position: fixed;
+    top: 90px;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 90px);
+    background: hsla(0, 0%, 100%, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 25px;
+    transition: left 0.3s ease;
+    z-index: 10;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .text-menu.active {
+    left: 0;
+  }
+
+  .text-menu a {
+    font-size: 20px;
+    padding: 15px;
+    border-bottom: 1px solid rgba(82, 56, 0, 0.1);
+  }
+
+  .login-dropdown-wrapper {
+    gap: 18px;
+  }
+
+  main {
+    padding: 100px 15px 40px;
+  }
+
+  .localizacao {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  /* ÁREA DO CARRINHO VIRA COLUNA */
+  .area-carrinho {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .coluna-esquerda {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .produto-vestido {
+    width: 100%;
+  }
+
+  .pedido-total {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  /* FORMULÁRIO DE ENDEREÇO */
+  .linha-dupla {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .primeiro,
+  .segundo {
+    width: 100%;
+    position: static;
+    margin: 0;
+  }
+
+  .botao-enviar {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  /* BOTÕES FINAIS */
+  .botoes-finais {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .botao-voltar,
+  .botao-confirmar-final {
+    width: 100%;
+    max-width: 400px;
+    margin: 0;
+  }
+
+  /* VARIEDADES */
+  .lista-vestidos {
+    gap: 20px;
+  }
+
+  .vestido img {
+    width: 280px;
+  }
+
+  .ver {
+    width: 90%;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 30px 15px;
+  }
+
+  .linha {
+    display: none;
+  }
+
+  footer .coluna {
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .midia {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* CELULARES PEQUENOS */
+@media (max-width: 480px) {
+  #logo {
+    height: 50px;
+  }
+
+  .menu {
+    height: 70px;
+  }
+
+  .text-menu {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+
+  #login-dropdown {
+    top: 70px;
+    width: 240px;
+    padding: 20px 15px;
+  }
+
+  .localizacao {
+    font-size: 14px;
+  }
+
+  .produto-vestido h1 {
+    font-size: 20px;
+    padding-left: 15px;
+  }
+
+  .form-endereco,
+  .form-pagamento {
+    padding: 15px 20px;
+  }
+
+  .form-endereco label,
+  .opcao-pagamento {
+    font-size: 13px;
+  }
+
+  .produto-item .foto {
+    height: 150px;
+  }
+
+  .produto-item h3 {
+    font-size: 16px;
+  }
+
+  .pedido-total h3 {
+    font-size: 20px;
+  }
+
+  .pedido-total h2 {
+    font-size: 16px;
+  }
+
+  #botao-pagamento {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .botao-voltar,
+  .botao-confirmar-final {
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .vestido img {
+    width: 240px;
+  }
+
+  .nome {
+    font-size: 16px;
+  }
+
+  .ver {
+    font-size: 16px;
+    height: 50px;
+  }
+}
+
+/* ANIMAÇÕES E TRANSIÇÕES */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/*=======================================================*/
+
+/* 1. ESTILOS GERAIS PARA O CONTAINER DOS ITENS */
+.itens-container {
+    /* Força a estrutura de coluna para melhor organização */
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    padding: 10px 0;
+}
+
+/* 2. ESTILO PARA CADA ITEM INDIVIDUAL */
+.produto-item-checkout {
+    width: 100%;
+}
+
+/* 3. ALINHAMENTO FLEXÍVEL DOS DETALHES DO ITEM */
+.checkout-item-details {
+    display: flex;
+    align-items: flex-start; /* Alinha o conteúdo ao topo */
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+/* 4. ESTILO DA MINIATURA RESPONSIVA */
+.foto-checkout-miniatura {
+    /* MANTÉM UM TAMANHO FIXO PARA MINIATURA, mas evita que ela quebre o layout */
+    width: 80px;
+    height: 100px; 
+    object-fit: cover;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    /* Garante que não diminua (shrink) e que não cresça (grow) */
+    flex-shrink: 0; 
+    flex-grow: 0;
+}
+
+/* 5. ESTILO DO TEXTO */
+.texto-checkout {
+    /* Permite que o texto ocupe o espaço restante */
+    flex-grow: 1; 
+    font-size: 0.9em;
+}
+
+.texto-checkout h3 {
+    margin-top: 0;
+    font-size: 1em;
+}
+
+/* 6. VALOR SUBTOTAL DO ITEM */
+.subtotal-item {
+    font-weight: bold;
+    margin-left: auto; /* Empurra o valor para a direita */
+    font-size: 1em;
+    flex-shrink: 0; /* Impede que o preço encolha */
+}
+
+/* 7. LINHA SEPARADORA */
+.produto-item-checkout hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* ========================================================= */
+/* 8. MEDIA QUERY: RESPONSIVIDADE PARA TELAS MENORES (Celulares) */
+/* Aplica regras quando a tela tem no máximo 600px de largura */
+@media (max-width: 600px) {
+    
+    /* Diminui um pouco o tamanho da miniatura no mobile */
+    .foto-checkout-miniatura {
+        width: 60px;
+        height: 80px;
+    }
+
+    /* Reduz o espaçamento e o tamanho da fonte */
+    .checkout-item-details {
+        gap: 10px;
+    }
+
+    .texto-checkout {
+        font-size: 0.8em; /* Fonte menor para caber mais conteúdo */
+    }
+
+    .texto-checkout h3 {
+        font-size: 0.9em;
+    }
+
+    .subtotal-item {
+        font-size: 0.9em;
+    }
+}

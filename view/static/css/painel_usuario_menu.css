@@ -1,0 +1,180 @@
+* {
+    margin:0;
+    padding: 0;
+}
+
+body {
+    display: flex; 
+    flex-direction: column; /* Organiza os itens na vertical (coluna) */
+    min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o preenchimento padrão */
+    overflow-x: hidden; /* Impede rolagem horizontal */
+    background-color: #FBFCF7;
+    
+}
+
+/* MENU */
+#logo {
+    
+    height: 80px; /* Define a altura do logo */
+    padding-left: 130px; /* Espaço à esquerda do logo */
+}
+
+.icons {
+    gap: 5px;
+    justify-content: center;
+    display: flex;
+    padding-right: 150px;
+}
+
+
+
+.menu {
+    position: fixed; /* Fixa o menu na tela */
+    z-index: 1; /* Garante que o menu fique acima de outros elementos */
+    display: flex; /* Organiza os itens do menu em linha */
+    width: 100%; /* O menu ocupa toda a largura da tela */
+    align-items: center; /* Centraliza os itens na vertical */
+    justify-content: space-between; /* Distribui os itens do menu com espaços entre eles */
+    background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
+    font-family: 'Open Sans', sans-serif; /* Fonte do menu */
+    color: #ffffff; /* Cor do texto do menu */
+}
+
+/* Estilo do menu de navegação */
+nav {
+    gap:200px;
+    justify-content: center;
+    display: flex;
+    font-family: "Libre Caslon Text";
+    font-size: 22px;
+    color: #523800;
+   
+}
+
+/* Estilo dos links dentro do nav */
+nav a {
+    color: #523800;
+    font-size: 20px; /* Define o tamanho da fonte */
+    padding: 25px; /* Espaçamento interno */
+    text-decoration: underline; /* Ativa o sublinhado */
+    text-decoration-color: rgba(82, 56, 0, 0.192); /* Cor do sublinhado com transparência */
+}
+
+/* Estilo para os links do menu ao passar o mouse (hover) */
+
+/*TESTE DA ABERTURA DO LOGIN*/
+
+
+#login-dropdown {
+  height: 880px;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background-color: hsla(0, 0%, 100%, 0.692); /* Cor de fundo com transparência */
+  width: 300px;
+  font-family: 'Open Sans', sans-serif;
+  color: #523800;
+  display: none;
+  margin-top: 45px;
+  text-align: center;
+}
+
+#login-dropdown h3 {
+  margin-top: 60px;
+  font-size: 16px; /* Tamanho da fonte */
+  color: #7a4a1c; /* Cor marrom (estilo elegante) */
+  margin-bottom: 80px; /* Espaço abaixo do título */
+}
+
+#login-dropdown ul {
+  list-style: none; /* Remove marcadores (bolinhas) da lista */
+  margin: 0; /* Remove espaçamento externo padrão */
+}
+
+#login-dropdown ul li a:hover {
+  text-decoration: underline;
+    color: #7a4a1c; /* Cor marrom ao passar o mouse (hover) */
+}
+
+#logout-btn {
+  margin-top: 200px;
+  background-color: #790000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  cursor: pointer;
+  height: 40px;
+  font-family: "Libre Caslon Text";
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+}
+
+#logout-btn:hover {
+  background-color: #5a0000;
+}
+
+.carrinho{
+  margin-right: 90px;
+}
+
+.login{
+ margin-left: 270px;
+}
+
+/* Animação de pulsação */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
+  }
+}
+
+/* Classe para o efeito visual no ícone */
+.login-active {
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3); /* anel visível mesmo quando não está no pico */
+}
+
+/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
+/* Caixa de cada opção */
+.opcoes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3); /* leve transparência */
+  backdrop-filter: blur(5px);
+  border: 2px solid #6E0606;
+  border-radius: 5px;
+  margin: 20px 0px; /* espaçamento entre as caixas */
+  text-align: center;
+}
+
+/* Texto das opções */
+.opcoes a {
+  display: block;
+  padding: 10px;
+  color: #3d0b0b;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover — destaca ao passar o mouse */
+.opcoes:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.02);
+}
+
+.opcoes a:hover {
+  color: #800000;
+}
