@@ -2,6 +2,7 @@ import { useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, TextInput, TouchableOpacity, Alert,  Linking, ScrollView } from 'react-native';
 import { styles } from "./style";
+import { getProducts } from "../../services/api";
 
 
 export default function Home() {
