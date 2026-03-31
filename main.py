@@ -9,8 +9,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from controller import pedido_controller
 
+from fastapi.staticfiles import StaticFiles
+
+
+
 app = FastAPI(title="Loja de Vestidos")
 templates = Jinja2Templates(directory="view/templates")
+
+
+
+app.mount("/static", StaticFiles(directory="view/static"), name="static")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Exception handler para erros de validação
 @app.exception_handler(RequestValidationError)
@@ -39,6 +53,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 app.mount("/static", StaticFiles(directory="view/static"), name="static")
 # Monta os arquivos de imagens da pasta 'coleção/img_colecao' em '/img_colecao'
 app.mount("/img_colecao", StaticFiles(directory="coleção/img_colecao"), name="img_colecao")
+
 
 app.include_router(router)
 app.include_router(pedido_controller.router)

@@ -1,4 +1,4 @@
-const BASE_URL = "https://10.0.2.2:3000"
+const BASE_URL = "http://10.0.2.2:8000"
 
 export async function getProducts() {
     const response = await fetch(`${BASE_URL}/products`)

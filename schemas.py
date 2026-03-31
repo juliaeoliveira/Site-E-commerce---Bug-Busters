@@ -4,6 +4,21 @@ from typing import Optional, List
 from datetime import datetime,timezone
 
 
+
+
+class Products(BaseModel):
+    id: int
+    nome_produto: str
+    preco: float
+    descricao: str
+    cor: str
+    categoria: str
+    imagem1_url: str
+    imagem2_url: str
+    imagem3_url: str
+    imagem4_url: str
+
+
 class Usuario(BaseModel):
     #informações pessoais e contato
     nome_cliente : str

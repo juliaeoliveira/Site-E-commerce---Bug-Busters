@@ -53,8 +53,21 @@ async def listar_todos (request:Request,
     return templates.TemplateResponse(
         "produtos.html",
         {"request": request, "produtos": produtos}
-    )        
+    ) 
 
+# Rota da Api para o Mobile
+from schemas import Products
+
+@router.get("/products", response_model=list[Products])
+def list_products(db: Session = Depends(get_db)):
+    products = db.query(Produto).all()
+
+#validação para as imagens passarem pela api
+    for product in products:
+        if product.imagem1_url:
+            product.imagem1_url = f"http://10.0.2.2:8000/static/uploads/{product.imagem1_url}"
+
+    return products
 
 #rota detalhe do produto
 @router.get("/produtos/{id_produto}",
