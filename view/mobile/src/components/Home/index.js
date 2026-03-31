@@ -81,7 +81,7 @@ export default function Home() {
           <Text style={styles.titulo}>AGENDAMENTOS</Text>
 
           <Text style={styles.subtitulo}>
-            Seu grande dia merece um vestido à altura! Fale com nossas atendentes e agende um horário conosco
+            Seu grande dia merece um vestido à altura! Clique no botão abaixo e marque uma consultoria online.
           </Text>
 
           <TouchableOpacity
@@ -107,6 +107,7 @@ export default function Home() {
       ListHeaderComponent={ListHeader}
       contentContainerStyle={{ paddingBottom: 20 }}
       showsVerticalScrollIndicator={false}
+      style= {styles.vestidos}
     />
   );
 }

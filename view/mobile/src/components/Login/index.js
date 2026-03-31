@@ -34,7 +34,7 @@ export default function Login() {
       <View style={styles.logo}>
         <Image
           source={require("../../assets/images/Sob.png")}
-          style={{ width: 120, height: 120 }}
+          style={{ width: 150, height: 150 }}
           resizeMode="contain"
         />
       </View>
@@ -45,7 +45,7 @@ export default function Login() {
         <Text style={styles.label}>Email</Text>
         <TextInput
           placeholder="Digite seu email"
-          placeholderTextColor="#94A3B8"
+          placeholderTextColor="#523800"
           style={styles.input}
           value={email}
           onChangeText={setEmail}
@@ -56,7 +56,7 @@ export default function Login() {
         <Text style={styles.label}>Senha</Text>
         <TextInput
           placeholder="Digite sua senha"
-          placeholderTextColor="#94A3B8"
+          placeholderTextColor="#523800"
           secureTextEntry
           style={styles.input}
           value={senha}
@@ -64,7 +64,7 @@ export default function Login() {
         />
 
         <TouchableOpacity
-          style={[styles.button, isDisabled && { opacity: 0.5 }]}
+          style={[styles.button, isDisabled]}
           onPress={handleLogin}
           disabled={isDisabled}
         >

@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   // BARRA DE PESQUISA
   container: {
-     flex: 1, // ocupa toda a tela disponível
+    flex: 1, // ocupa toda a tela disponível
     backgroundColor: '#eae4d8', // cor de fundo da tela (cinza claro)
   },
 
@@ -17,18 +17,19 @@ export const styles = StyleSheet.create({
 
   searchInput: {
     backgroundColor: '#eee', // fundo cinza claro do input
+
     padding: 10, // espaço interno (deixa o input maior)
     borderRadius: 8, // bordas arredondadas
   },
   // BANNER
   image: {
-  width: '100%',
-  height: 200,
+    width: '100%',
+    height: 200,
   },
   // CATEGORIAS BOLINHAS
   categorias: {
-  flexDirection: 'row', // deixa lado a lado
-  justifyContent: 'space-around', // distribui bem na tela
+    flexDirection: 'row', // deixa lado a lado
+    justifyContent: 'space-around', // distribui bem na tela
     marginTop: 20,
   },
   circulo: {
@@ -43,21 +44,21 @@ export const styles = StyleSheet.create({
   },
   // BANNER AGENDAMENTOS
   agendamento: {
-  backgroundColor: '#c2a46d', // cor parecida com a da imagem
-  padding: 20,
-  alignItems: 'center',
-  marginTop: 30,
+    backgroundColor: '#DFCAA4', // cor parecida com a da imagem
+    padding: 20,
+    alignItems: 'center',
+    marginTop: 30,
   },
 
   titulo: {
-    color: '#fff',
-    fontSize: 18,
+    color: '#790000',
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
   },
 
   subtitulo: {
-    color: '#fff',
+    color: '#790000',
     fontSize: 12,
     textAlign: 'center',
     marginBottom: 15,
@@ -65,7 +66,8 @@ export const styles = StyleSheet.create({
 
   botao: {
     borderWidth: 1,
-    borderColor: '#fff',
+    backgroundColor: "#790000",
+    borderColor: '#790000',
     paddingVertical: 6,
     paddingHorizontal: 15,
     borderRadius: 4,
@@ -76,16 +78,17 @@ export const styles = StyleSheet.create({
     fontSize: 12,
   },
 
- // PRODUTOS
+  // PRODUTOS
   produtos: {
     marginTop: 20,
     paddingLeft: 16,
   },
 
   tituloProdutos: {
+    marginTop: 16,
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 16,
     textAlign: 'center',
     marginRight: 10,
 
@@ -94,15 +97,15 @@ export const styles = StyleSheet.create({
   card: {
     width: 170,
     marginBottom: 20,
-    marginRight: 5,
+    marginLeft: "6%",
   },
 
   cardImage: {
     width: 170,
     height: 200,
     borderRadius: 3,
- 
-    
+
+
   },
 
   cardNome: {
@@ -118,12 +121,13 @@ export const styles = StyleSheet.create({
     marginHorizontal: 12,
   },
   linhaCards: {
-    flexDirection: 'row', 
-    justifyContent: 'center', 
+    flexDirection: 'row',
+    justifyContent: 'center',
     gap: 20,
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   
 
-  },
+
+},
 );
