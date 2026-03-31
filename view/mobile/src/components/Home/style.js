@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
 
   searchInput: {
     backgroundColor: '#eee', // fundo cinza claro do input
-
+    borderWidth: 1,
+    borderColor: "#523800",
     padding: 10, // espaço interno (deixa o input maior)
     borderRadius: 8, // bordas arredondadas
   },
@@ -30,7 +31,7 @@ export const styles = StyleSheet.create({
   categorias: {
     flexDirection: 'row', // deixa lado a lado
     justifyContent: 'space-around', // distribui bem na tela
-    marginTop: 20,
+    marginTop: 25,
   },
   circulo: {
     width: 60,
@@ -47,7 +48,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#DFCAA4', // cor parecida com a da imagem
     padding: 20,
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 25,
   },
 
   titulo: {

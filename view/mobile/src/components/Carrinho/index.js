@@ -12,7 +12,6 @@ export default function Carrinho() {
       <View >
         <Text style={styles.title}>Carrinho</Text>
       </View>
-      <Text style={styles.addEnunciado}>Vestidos</Text>
 
 
       <StatusBar style="auto" />

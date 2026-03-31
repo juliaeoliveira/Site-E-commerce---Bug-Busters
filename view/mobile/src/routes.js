@@ -26,7 +26,7 @@ export function Routes() {
           tabBarIcon: ({ focused, size, color }) => {
             if (focused) {
               return (
-                <MaterialIcons name="home-filled" size={size} color={color} />
+                <MaterialIcons name="home-filled" size={size} color={"#000"} />
               );
             }
             return (
@@ -44,7 +44,7 @@ export function Routes() {
           headerShown: false,
           tabBarIcon: ({ focused, size, color }) => {
             if (focused) {
-              return <Ionicons name="list" size={size} color={color} />;
+              return <Ionicons name="list" size={size} color={"#000"} />;
             }
             return <Ionicons name="list-outline" size={size} color={color} />;
           },
@@ -59,7 +59,7 @@ export function Routes() {
           tabBarIcon: ({ focused, size, color }) => {
             if (focused) {
               return (
-                <FontAwesome name="shopping-cart" size={size} color={color} />
+                <FontAwesome name="shopping-cart" size={size} color={"#000"} />
               );
             }
             return (
@@ -76,9 +76,9 @@ export function Routes() {
           headerShown: false,
           tabBarIcon: ({ focused, size, color }) => {
             if (focused) {
-              return <FontAwesome name="user" size={size} color={color} />;
+              return <FontAwesome name="user" size={size} color={"#000"} />;
             }
-            return <FontAwesome name="user" size={32} color={"#000"} />;
+            return <FontAwesome name="user" size={size} color={color} />;
           },
         }}
       />

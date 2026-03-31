@@ -93,7 +93,7 @@ export default function Home() {
         </View>
 
         {/* TÍTULO */}
-        <Text style={styles.tituloProdutos}>Produtos</Text>
+        <Text style={styles.tituloProdutos}>Vestidos</Text>
       </>
     );
   }
