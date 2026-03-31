@@ -31,7 +31,7 @@ export default function Home() {
           source={{ uri: item.imagem1_url }}
           style={styles.cardImage}
         />
-        <Text style={styles.cardNome}>{item.nome}</Text>
+        <Text style={styles.cardNome}>{item.nome_produto}</Text>
         <Text style={styles.cardPreco}>
           R$ {Number(item.preco).toFixed(2)}
         </Text>
