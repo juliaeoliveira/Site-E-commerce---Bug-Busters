@@ -54,4 +54,16 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  texto: {
+  textAlign: 'center',
+  marginTop: 15,
+  fontSize: 14,
+  color: '#333',
+  },
+
+  cadastro: {
+    color: '#c2a46d', // mesma cor do seu tema
+    textDecorationLine: 'underline',
+    fontWeight: 'bold',
+  },
 });

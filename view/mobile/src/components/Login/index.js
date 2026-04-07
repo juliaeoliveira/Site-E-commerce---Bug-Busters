@@ -70,6 +70,14 @@ export default function Login() {
         >
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
+
+        <Text style={styles.texto}>
+        Não possui uma conta?{' '}
+        
+        <Text style={styles.cadastro} onPress={() => console.log('ir para cadastro')}>
+          Cadastre-se
+        </Text>
+      </Text>
       </View>
     </View>
   );
