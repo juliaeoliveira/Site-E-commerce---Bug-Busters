@@ -21,14 +21,16 @@ export const styles = StyleSheet.create({
 
     
     titulo: {
-        fontSize: 15,
+        color: '#790000',
+        fontSize: 26,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 15,
+        marginTop: 70,
         marginBottom: 20,
     },
 
     grid: {
+        marginTop: 40,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
@@ -36,20 +38,20 @@ export const styles = StyleSheet.create({
     },
 
     card: {
-        width: '48%', 
+        width: '49%', 
         backgroundColor: '#fff',
         borderRadius: 12,
-        marginBottom: 15,
+        marginBottom: 20,
         padding: 10,
         alignItems: 'center',
-        elevation: 3,
+        elevation: 5,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         shadowRadius: 4,
     },
     cardImage: {
         width: '100%',
-        height: 200,
+        height: 350,
         borderRadius: 10,
         marginBottom: 10,
     },
@@ -58,9 +60,5 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    cardPreco: {
-        fontSize: 13,
-        color: '#555',
-        marginTop: 5,
-    }
+
 });
