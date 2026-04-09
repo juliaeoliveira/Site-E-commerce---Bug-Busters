@@ -1,44 +1,65 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
-  body: {
+  container: {
+    flex: 1,
     backgroundColor: "#eae4d8",
-    width: "100%",
-    height: "100%",
   },
-  title: {
-    marginTop:"15%",
-    marginLeft: 15,
-    fontSize: 28,
+
+  // IMAGEM TOPO
+  topo: {
+    width: 450,
+    height: 370,
+    justifyContent: "flex-end",
+    padding: 20,
+  },
+
+  titulo: {
+    color: "#fff",
+    fontSize: 22,
     fontWeight: "bold",
   },
-  addContent: {
-    width: "80%",
-    marginTop: "5%",
-    marginLeft: "6%",
-    flexDirection:"row"
-    
-  },
-  addImage: {
-    width: 30,
-    height:30,
-    //objectFit: "cover"
-  },
-  addInput: {
-    width: "90%",
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginLeft: "5%",
-    paddingHorizontal: 10,
-    borderRadius:5
-  },
-    addEnunciado: {
-    width: "80%",
-    marginTop: "15%",
-    marginLeft: "15%",
-    textAlign: "left",
 
+  // FORMULÁRIO (CARD)
+  formContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+
+    marginTop: -20,
+    padding: 20,
+  },
+
+  label: {
+    fontSize: 13,
+    marginBottom: 5,
+    marginTop: 10,
+  },
+
+  input: {
+    backgroundColor: "#eee",
+    height: 40,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+  },
+
+  botao: {
+    backgroundColor: "#8B0000",
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 20,
+  },
+
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+
+  login: {
+    textAlign: "center",
+    marginTop: 15,
+    textDecorationLine: "underline",
   },
 });

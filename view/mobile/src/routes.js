@@ -11,6 +11,7 @@ import Home from "./components/Home";
 import Tasks from "./components/Tasks";
 import Carrinho from "./components/Carrinho";
 import Login from "./components/Login";
+import Cadastro from "./components/Cadastro";
 
 const Tabs = createBottomTabNavigator();
 
@@ -80,6 +81,14 @@ export function Routes() {
             }
             return <FontAwesome name="user" size={size} color={color} />;
           },
+        }}
+      />
+      <Tabs.Screen
+        name="cadastro"
+        component={Cadastro}
+        options={{
+          tabBarItemStyle: { display: 'none' }, // 👈 ESCONDE DE VERDADE
+          headerShown: false,
         }}
       />
     </Tabs.Navigator>

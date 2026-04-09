@@ -77,7 +77,7 @@ export default function Login({ navigation }) {
 
           <Text
             style={styles.cadastro}
-            onPress={() => navigation.navigate('Cadastro')}
+            onPress={() => navigation.navigate('cadastro')}
           >
             Cadastre-se
           </Text>
