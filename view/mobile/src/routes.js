@@ -12,6 +12,7 @@ import Tasks from "./components/Tasks";
 import Carrinho from "./components/Carrinho";
 import Login from "./components/Login";
 
+
 const Tabs = createBottomTabNavigator();
 
 export function Routes() {
@@ -82,6 +83,8 @@ export function Routes() {
           },
         }}
       />
+
+      
     </Tabs.Navigator>
   );
 }
