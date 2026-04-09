@@ -13,6 +13,7 @@ import Carrinho from "./components/Carrinho";
 import Login from "./components/Login";
 import Cadastro from "./components/Cadastro";
 
+
 const Tabs = createBottomTabNavigator();
 
 export function Routes() {
