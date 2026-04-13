@@ -17,9 +17,13 @@ export const styles = StyleSheet.create({
   },
 
   username: {
-    color: '#790000',
+    color: '#000000',
     fontSize: 22,
     fontWeight: "900",
+  },
+
+  foto: {
+    marginTop: -26,
   },
 
   card: {
@@ -27,12 +31,28 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 15,
     padding: 20,
-    borderRadius: 8,
+    borderRadius: 10,
+  },
+
+  cards:{
+    width:'100%',
+    backgroundColor: '#790000',
+    marginHorizontal: 0,
+    marginBottom: 0,
+    padding: 25,
+    borderRadius: 0,
   },
 
   sectionTitle: {
     color: 'black',
     fontSize: 17,
+    fontWeight: 800,
+    marginBottom: 40,
+  },
+
+  sectionTitles: {
+    color: 'white',
+     fontSize: 17,
     fontWeight: 800,
     marginBottom: 40,
   },
@@ -48,6 +68,7 @@ export const styles = StyleSheet.create({
   },
 
   supportItem: {
+    
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 8,
@@ -55,6 +76,7 @@ export const styles = StyleSheet.create({
   },
 
   supportText: {
+    color: "white",
     fontSize: 14,
   },
 
@@ -65,7 +87,34 @@ export const styles = StyleSheet.create({
   },
 
   link: {
+    color: "white",
     fontSize: 13,
     marginBottom: 4,
   },
+
+  botaoPerfil: {
+  marginTop: 5,
+  backgroundColor: '#000000', // azul estilo iOS
+  paddingVertical: 4,
+  paddingHorizontal: 10,
+  borderRadius: 8,
+  alignSelf: 'flex-start'
+},
+
+
+botaoSair: {
+  marginTop: 10,
+  backgroundColor: '#790000', // vermelho estilo iOS
+  paddingVertical: 5,
+  paddingHorizontal: 12,
+  borderRadius: 8,
+  alignSelf: 'flex-start'
+},
+
+textoBotaoSair: {
+  color: '#fff',
+  fontSize: 13,
+  fontWeight: '600'
+},
+
 });

@@ -7,11 +7,18 @@ export default function Carrinho( {navegation}) {
   return (
     <View style={styles.body}>
 
-      {/* Header */}
-      <View style={styles.header}>
-        <Ionicons name="person-circle-outline" size={40} />
-        <Text style={styles.username}>Pedro H Nascimento</Text>
-      </View>
+   <View style={styles.header}>
+  <Ionicons name="person-circle-outline" style={styles.foto} size={40} />
+
+  <View>
+    <Text style={styles.username}>Pedro H Nascimento</Text>
+
+    <TouchableOpacity style={styles.botaoSair}>
+      <Text style={styles.textoBotaoSair}>Sair</Text>
+    </TouchableOpacity>
+  </View>
+</View>
+
 
       {/* Sua Conta */}
       <View style={styles.card}>
@@ -25,7 +32,7 @@ export default function Carrinho( {navegation}) {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.item}>
-            <Ionicons name="location-outline" size={28} />
+            <Ionicons name="location-outline" size={28}  />
             <Text>Endereços cadastrados</Text>
           </TouchableOpacity>
         </View>
@@ -49,16 +56,16 @@ export default function Carrinho( {navegation}) {
       </View>
 
       {/* Suporte */}
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>Suporte</Text>
+      <View style={styles.cards}>
+        <Text style={styles.sectionTitles}>Suporte</Text>
 
         <View style={styles.supportItem}>
-          <Ionicons name="logo-whatsapp" size={20} />
+          <Ionicons name="logo-whatsapp" size={20} color="white"/>
           <Text style={styles.supportText}>(11) 98291-1653</Text>
         </View>
 
         <View style={styles.supportItem}>
-          <Ionicons name="mail-outline" size={20} />
+          <Ionicons name="mail-outline" size={20} color="white" />
           <Text style={styles.supportText}>sobveuoficial@gmail.com</Text>
         </View>
 
