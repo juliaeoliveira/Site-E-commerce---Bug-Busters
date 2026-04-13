@@ -8,8 +8,9 @@ import {
   Image,
 } from "react-native";
 import { styles } from "./style";
+import { useNavigation } from '@react-navigation/native';
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -70,6 +71,17 @@ export default function Login() {
         >
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
+
+        <Text style={styles.texto}>
+          Não possui uma conta?{' '}
+
+          <Text
+            style={styles.cadastro}
+            onPress={() => navigation.navigate('cadastro')}
+          >
+            Cadastre-se
+          </Text>
+        </Text>
       </View>
     </View>
   );
