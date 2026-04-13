@@ -10,7 +10,7 @@ export default function Cadastro({ navigation }) {
         source={require("../../assets/images/casamento.jpg")}
         style={styles.topo}
       >
-        <Text style={styles.titulo}>Cadastro</Text>
+        <Text style={styles.titulo}>Realize seu cadastro</Text>
       </ImageBackground>
 
       {/* FORMULÁRIO */}
@@ -19,10 +19,19 @@ export default function Cadastro({ navigation }) {
         <Text style={styles.label}>Nome Completo</Text>
         <TextInput style={styles.input} />
 
+        <Text style={styles.label}>Data de Nascimento</Text>
+        <TextInput style={styles.input} placeholder="DD/MM/AAAA" />
+
+        <Text style={styles.label}>Telefone</Text>
+        <TextInput style={styles.input} placeholder="(11) 99999-9999" />
+
         <Text style={styles.label}>E-mail</Text>
         <TextInput style={styles.input} />
 
         <Text style={styles.label}>Senha</Text>
+        <TextInput style={styles.input} secureTextEntry />
+
+        <Text style={styles.label}>Confirmar senha</Text>
         <TextInput style={styles.input} secureTextEntry />
 
         <TouchableOpacity style={styles.botao}>
@@ -33,7 +42,7 @@ export default function Cadastro({ navigation }) {
           style={styles.login}
           onPress={() => navigation.navigate('login')}
         >
-          Já tem conta? Entrar
+          Já possui login? Login.
         </Text>
 
       </View>

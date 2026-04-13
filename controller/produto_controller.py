@@ -55,6 +55,24 @@ async def listar_todos (request:Request,
         {"request": request, "produtos": produtos}
     ) 
 
+from fastapi import Request
+
+@router.get("/products", response_model=list[Products])
+def list_products(request: Request, db: Session = Depends(get_db)):
+    products = db.query(Produto).all()
+
+    for product in products:
+        if product.imagem1_url and not product.imagem1_url.startswith("http"):
+            # Opção A: Dinâmico (detecta o IP de quem chama)
+            # base_url = str(request.base_url)
+            
+            # Opção B: Manual para o Emulador Android
+            base_url = "http://10.0.2.2:8000/"
+            
+            product.imagem1_url = f"{base_url}static/uploads/{product.imagem1_url}"
+
+    return products
+
 # Rota da Api para o Mobile
 from schemas import Products
 
