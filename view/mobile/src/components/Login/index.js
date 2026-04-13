@@ -5,10 +5,9 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  Image,
+  ImageBackground,
 } from "react-native";
 import { styles } from "./style";
-import { useNavigation } from '@react-navigation/native';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -32,16 +31,18 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logo}>
-        <Image
-          source={require("../../assets/images/Sob.png")}
-          style={{ width: 150, height: 150 }}
-          resizeMode="contain"
-        />
-      </View>
 
+      {/* IMAGEM DE CIMA */}
+      <ImageBackground
+        source={require("../../assets/images/noiva.jpg")}
+        style={styles.topo}
+      >
+      </ImageBackground>
+
+      {/* CARD */}
       <View style={styles.content}>
-        <Text style={styles.title}>Login</Text>
+
+        <Text style={styles.title}>Bem-vinda de volta</Text>
 
         <Text style={styles.label}>Email</Text>
         <TextInput
@@ -50,8 +51,6 @@ export default function Login({ navigation }) {
           style={styles.input}
           value={email}
           onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
         />
 
         <Text style={styles.label}>Senha</Text>
@@ -65,7 +64,7 @@ export default function Login({ navigation }) {
         />
 
         <TouchableOpacity
-          style={[styles.button, isDisabled]}
+          style={[styles.button, isDisabled && styles.buttonDisabled]}
           onPress={handleLogin}
           disabled={isDisabled}
         >
@@ -73,15 +72,15 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
 
         <Text style={styles.texto}>
-          Não possui uma conta?{' '}
-
+          Não possui uma conta?{" "}
           <Text
             style={styles.cadastro}
-            onPress={() => navigation.navigate('cadastro')}
+            onPress={() => navigation.navigate("cadastro")}
           >
             Cadastre-se
           </Text>
         </Text>
+
       </View>
     </View>
   );
