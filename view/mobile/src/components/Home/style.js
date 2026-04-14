@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   // BARRA DE PESQUISA
   container: {
     flex: 1, // ocupa toda a tela disponível
-    backgroundColor: '#eae4d8', // cor de fundo da tela (cinza claro)
+    
   },
 
   header: {
