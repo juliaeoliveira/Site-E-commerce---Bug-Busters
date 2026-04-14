@@ -1,21 +1,22 @@
-from fastapi import APIRouter,Request,Form,UploadFile,File,Depends
+from fastapi import APIRouter,Request,Form,UploadFile,File,Depends,Query
 # APIRouter=rota api para o front-end,
 # Request=Requesição HTTP,
 # Form=Formulário para criar e editar,
 # UploadFile=Upload da foto,
 # File=Função para gravar o caminho da imagem,
 # Depends=dependência do banco de dados sqlite para o fastapi
+# Query=parâmetros de query na URL
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Produto
 from .usuario_autenticacao import verificar_token
-from models import Usuario_Model
+from models import Usuario_Model, Produto as ProdutoDB
 from fastapi.responses import HTMLResponse,RedirectResponse
 # HTMLResponse=resposta do html GET,POST,PUT,DELETE,
 # RedirectResponse=redirecionar a página ao receber o método'GET'
 from fastapi.templating import Jinja2Templates
-from typing import Optional
+from typing import Optional, List
 
 #from models_teste import SessionLocal
 #Jinja2Templates=responsável por renderizar o front-end,
@@ -59,32 +60,76 @@ from fastapi import Request
 # Rota da Api para o Mobile
 from schemas import Products
 
+
 @router.get("/products", response_model=list[Products])
-def list_products(request: Request, db: Session = Depends(get_db)):
-    products = db.query(Produto).all()
+def list_products(
+    request: Request,
+    skip: int = 0,
+    limit: int = 10,
+    db: Session = Depends(get_db)
+):
+    products = db.query(Produto).offset(skip).limit(limit).all()
+
+    # Construir base_url corretamente: inclui protocolo, host e porta
+    scheme = request.url.scheme  # http ou https
+    server = request.headers.get('host', request.url.netloc)  # host:port
+    base_url = f"{scheme}://{server}"
 
     for product in products:
         if product.imagem1_url and not product.imagem1_url.startswith("http"):
-            # Opção A: Dinâmico (detecta o IP de quem chama)
-            # base_url = str(request.base_url)
-            
-            # Opção B: Manual para o Emulador Android
-            base_url = "http://10.0.2.2:8000/"
-            
-            product.imagem1_url = f"{base_url}static/uploads/{product.imagem1_url}"
+            product.imagem1_url = f"{base_url}/static/uploads/{product.imagem1_url}"
+        if product.imagem2_url and not product.imagem2_url.startswith("http"):
+            product.imagem2_url = f"{base_url}/static/uploads/{product.imagem2_url}"
+        if product.imagem3_url and not product.imagem3_url.startswith("http"):
+            product.imagem3_url = f"{base_url}/static/uploads/{product.imagem3_url}"
+        if product.imagem4_url and not product.imagem4_url.startswith("http"):
+            product.imagem4_url = f"{base_url}/static/uploads/{product.imagem4_url}"
 
     return products
 
-@router.get("/products", response_model=list[Products])
-def list_products(db: Session = Depends(get_db)):
-    products = db.query(Produto).all()
+# Rota de busca
+@router.get("/produtos/search", response_model=List[Products], summary="Buscar produtos (JSON)")
+async def search_produtos_json(
+    request: Request,
+    q: Optional[str] = Query(None, description="Termo de busca (nome, descrição)"),
+    category: Optional[str] = Query(None, description="Filtra por categoria"),
+    min_price: Optional[float] = Query(None, gt=0, description="Preço mínimo"),
+    max_price: Optional[float] = Query(None, gt=0, description="Preço máximo"),
+    color: Optional[str] = Query(None, description="Filtra por cor"),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(10, ge=1, le=100),
+    db: Session = Depends(get_db)
+):
+    query = db.query(ProdutoDB).filter(ProdutoDB.status == True)
+    if q:
+        query = query.filter(ProdutoDB.nome_produto.ilike(f"%{q}%") | ProdutoDB.descricao.ilike(f"%{q}%"))
+    if category:
+        query = query.filter(ProdutoDB.categoria.ilike(f"%{category}%"))
+    if min_price:
+        query = query.filter(ProdutoDB.preco >= min_price)
+    if max_price:
+        query = query.filter(ProdutoDB.preco <= max_price)
+    if color:
+        query = query.filter(ProdutoDB.cor.ilike(f"%{color}%"))
 
-#validação para as imagens passarem pela api
-    for product in products:
-        if product.imagem1_url:
-            product.imagem1_url = f"http://10.0.2.2:8000/static/uploads/{product.imagem1_url}"
+    produtos = query.offset(skip).limit(limit).all()
+    
+    # Construir base_url corretamente: inclui protocolo, host e porta
+    scheme = request.url.scheme  # http ou https
+    server = request.headers.get('host', request.url.netloc)  # host:port
+    base_url = f"{scheme}://{server}"
 
-    return products
+    for product in produtos:
+        if product.imagem1_url and not product.imagem1_url.startswith("http"):
+            product.imagem1_url = f"{base_url}/static/uploads/{product.imagem1_url}"
+        if product.imagem2_url and not product.imagem2_url.startswith("http"):
+            product.imagem2_url = f"{base_url}/static/uploads/{product.imagem2_url}"
+        if product.imagem3_url and not product.imagem3_url.startswith("http"):
+            product.imagem3_url = f"{base_url}/static/uploads/{product.imagem3_url}"
+        if product.imagem4_url and not product.imagem4_url.startswith("http"):
+            product.imagem4_url = f"{base_url}/static/uploads/{product.imagem4_url}"
+
+    return produtos
 
 #rota detalhe do produto
 @router.get("/produtos/{id_produto}",

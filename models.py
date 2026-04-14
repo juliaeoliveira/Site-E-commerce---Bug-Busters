@@ -154,7 +154,6 @@ db = SessionLocal()
 
 
 
-
 # class Usuario_Model(Base): -------------------------- Teste da autenticação
 #     __tablename__="usuarios"
 #     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)

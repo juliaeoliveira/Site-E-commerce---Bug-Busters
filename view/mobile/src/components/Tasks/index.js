@@ -100,7 +100,7 @@ export default function Tasks() {
             <View style={styles.modalText}>
               <Text style={styles.tituloModal}>{selecionado.nome}</Text>
 
-         
+              {/* 🔥 AGORA DINÂMICO */}
               <Text style={styles.estacao}>
                 Estação: {selecionado.estacao}
               </Text>

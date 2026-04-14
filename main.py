@@ -19,6 +19,8 @@ templates = Jinja2Templates(directory="view/templates")
 
 
 app.mount("/static", StaticFiles(directory="view/static"), name="static")
+# Mount explícito para uploads também (por segurança e certeza)
+app.mount("/uploads", StaticFiles(directory="view/static/uploads"), name="uploads")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -50,7 +52,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 # )                                                            #-    
 # #--------------------------------------------------------------
 
-app.mount("/static", StaticFiles(directory="view/static"), name="static")
+
 # Monta os arquivos de imagens da pasta 'coleção/img_colecao' em '/img_colecao'
 app.mount("/img_colecao", StaticFiles(directory="coleção/img_colecao"), name="img_colecao")
 
@@ -64,6 +66,33 @@ app.include_router(caminho_prefixo_painelUsuario)
 @app.get("/historico")
 def historico(request: Request):
     return templates.TemplateResponse("historico.html", {"request":request})
+
+@app.get("/debug/images")
+def debug_images(request: Request):
+    """Endpoint para debug - mostra URLs das imagens servidas"""
+    import os
+    upload_dir = "view/static/uploads"
+    scheme = request.url.scheme
+    server = request.headers.get('host', request.url.netloc)
+    base_url = f"{scheme}://{server}"
+    
+    images = []
+    if os.path.exists(upload_dir):
+        for file in os.listdir(upload_dir)[:10]:  # Primeiras 10 imagens
+            if file.endswith(('.jpg', '.jpeg', '.png', '.gif')):
+                images.append({
+                    "filename": file,
+                    "url": f"{base_url}/static/uploads/{file}"
+                })
+    
+    return {
+        "base_url": base_url,
+        "host_header": request.headers.get('host'),
+        "scheme": scheme,
+        "upload_dir": upload_dir,
+        "uploaded_images": images,
+        "message": "Acesse as URLs acima para verificar se as imagens carregam"
+    }
 
 # python -m uvicorn main:app --reload
 

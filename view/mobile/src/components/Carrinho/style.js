@@ -3,41 +3,69 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   body: {
     backgroundColor: "#eae4d8",
-    width: "100%",
-    height: "100%",
-    },
-  title: {
-    marginTop:"15%",
-        marginLeft: 15,
-    fontSize: 28,
-    fontWeight: "bold",
+    flex: 1,
+    paddingTop: "15%",
   },
-  addContent: {
-    width: "80%",
-    marginTop: "5%",
-    marginLeft: "6%",
-    flexDirection:"row"
-    
-  },
-  addImage: {
-    width: 30,
-    height:30,
-    //objectFit: "cover"
-  },
-  addInput: {
-    width: "90%",
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginLeft: "5%",
-    paddingHorizontal: 10,
-    borderRadius:5
-  },
-    addEnunciado: {
-    width: "80%",
-    marginTop: "15%",
-    marginLeft: "15%",
-    textAlign: "left",
 
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 15,
+    marginBottom: 50,
+    marginTop: 40,
+    gap: 10,
+  },
+
+  username: {
+    color: '#790000',
+    fontSize: 22,
+    fontWeight: "900",
+  },
+
+  card: {
+    backgroundColor: "#d9d3c7",
+    marginHorizontal: 10,
+    marginBottom: 15,
+    padding: 20,
+    borderRadius: 8,
+  },
+
+  sectionTitle: {
+    color: 'black',
+    fontSize: 17,
+    fontWeight: 800,
+    marginBottom: 40,
+  },
+
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+
+  item: {
+    alignItems: "center",
+    gap: 5,
+  },
+
+  supportItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+    gap: 8,
+  },
+
+  supportText: {
+    fontSize: 14,
+  },
+
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#999",
+    marginVertical: 10,
+  },
+
+  link: {
+    fontSize: 13,
+    marginBottom: 4,
   },
 });

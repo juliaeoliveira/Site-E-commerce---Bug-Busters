@@ -247,9 +247,9 @@ def criar_produto(request:Request,nome_produto:str=Form(...),
     with open(caminho_arquivo3, "wb") as arquivo:
         shutil.copyfileobj(imagem3_url.file,arquivo)
 
-    caminho_arquivo4 = f'{UPLOAD_DIR}/{imagem3_url.filename}'
+    caminho_arquivo4 = f'{UPLOAD_DIR}/{imagem4_url.filename}'
     with open(caminho_arquivo4, "wb") as arquivo:
-        shutil.copyfileobj(imagem3_url.file,arquivo)
+        shutil.copyfileobj(imagem4_url.file,arquivo)
 
     novo_produto=Produto(
         nome_produto=nome_produto,

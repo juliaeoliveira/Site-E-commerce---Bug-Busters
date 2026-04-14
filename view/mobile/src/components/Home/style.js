@@ -86,7 +86,6 @@ export const styles = StyleSheet.create({
   },
 
   tituloProdutos: {
-    fontFamily: 'Aboreto_400Regular',
     marginTop: 16,
     fontSize: 16,
     fontWeight: 'bold',

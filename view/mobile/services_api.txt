@@ -1,0 +1,227 @@
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Para armazenar o token
+
+const API_BASE_URL = 'http://localhost:8000/api/v1'; // Ajuste para o IP/domínio do seu backend
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Interceptor para adicionar o token JWT a todas as requisições
+api.interceptors.request.use(
+  async (config) => {
+    const token = await AsyncStorage.getItem('userToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Interceptor para tratamento de erros genéricos (opcional, pode ser feito no componente)
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    // Exemplo: Se 401 Unauthorized, tentar fazer refresh ou deslogar
+    if (error.response && error.response.status === 401) {
+      console.log('Token expirado ou inválido. Redirecionando para login.');
+      // Aqui você poderia tentar um refresh token se tivesse um,
+      // ou limpar o token e redirecionar para a tela de login.
+      await AsyncStorage.removeItem('userToken');
+      // Redirecionar para tela de login (depende da sua navegação, ex: navigate('Login'))
+    }
+    return Promise.reject(error);
+  }
+);
+
+export const authService = {
+  login: async (email, password) => {
+    // Usamos 'multipart/form-data' ou 'application/x-www-form-urlencoded' para OAuth2PasswordRequestForm no FastAPI
+    const formData = new URLSearchParams();
+    formData.append('username', email);
+    formData.append('password', password);
+
+    const response = await api.post('/auth/token', formData.toString(), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    const { access_token } = response.data;
+    await AsyncStorage.setItem('userToken', access_token);
+    return response.data;
+  },
+  logout: async () => {
+    await AsyncStorage.removeItem('userToken');
+    // Você pode chamar um endpoint de logout no backend se precisar invalidar sessões lá.
+  },
+  register: async (userData) => {
+    const response = await api.post('/usuario/registrar', userData); // Modificar para POST /api/v1/auth/register se for JSON
+    return response.data;
+  },
+};
+
+export const productService = {
+  getProducts: async (skip = 0, limit = 10) => {
+    const response = await api.get(`/produtos/?skip=${skip}&limit=${limit}`);
+    return response.data;
+  },
+  getProductDetail: async (id) => {
+    const response = await api.get(`/produtos/${id}`);
+    return response.data;
+  },
+  searchProducts: async (query, category, minPrice, maxPrice, color, skip = 0, limit = 10) => {
+    const params = new URLSearchParams();
+    if (query) params.append('q', query);
+    if (category) params.append('category', category);
+    if (minPrice) params.append('min_price', minPrice);
+    if (maxPrice) params.append('max_price', maxPrice);
+    if (color) params.append('color', color);
+    params.append('skip', skip);
+    params.append('limit', limit);
+
+    const response = await api.get(`/produtos/search?${params.toString()}`);
+    return response.data;
+  },
+  // Outras funções CRUD para admin (criar, atualizar, deletar produto)
+  createProduct: async (productData, images) => {
+    const formData = new FormData();
+    for (const key in productData) {
+      formData.append(key, productData[key]);
+    }
+    // Supondo que images é um array de objetos { uri, name, type }
+    images.forEach((image, index) => {
+      formData.append(`imagem${index + 1}_url`, {
+        uri: image.uri,
+        name: image.name || `image${index + 1}.jpg`,
+        type: image.type || 'image/jpeg',
+      });
+    });
+
+    const response = await api.post('/usuario/admin/produto', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+  updateProduct: async (id, productData, images) => {
+    const formData = new FormData();
+    for (const key in productData) {
+      formData.append(key, productData[key]);
+    }
+    images.forEach((image, index) => {
+        formData.append(`imagem${index + 1}_url`, {
+            uri: image.uri,
+            name: image.name || `image${index + 1}.jpg`,
+            type: image.type || 'image/jpeg',
+        });
+    });
+
+    const response = await api.post(`/usuario/admin/produto/atualizar/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  }
+};
+
+export const userService = {
+  getUserProfile: async () => {
+    const response = await api.get('/painel_usuario/meus_dados'); // Assumindo que esta rota agora retorna JSON
+    return response.data;
+  },
+  updateUserProfile: async (userData) => {
+    const response = await api.post('/painel_usuario/editar_usuario', userData); // Modificar para JSON
+    return response.data;
+  },
+  updateUserAddress: async (addressData) => {
+    const response = await api.post('/painel_usuario/editar_endereco', addressData); // Modificar para JSON
+    return response.data;
+  }
+};
+
+export const orderService = {
+  createOrder: async (orderData) => {
+    const response = await api.post('/pedido/salvar', orderData);
+    return response.data;
+  },
+  getOrders: async () => {
+    const response = await api.get('/pedido/meus'); // Assumindo que esta rota agora retorna JSON
+    return response.data;
+  },
+  getOrderDetail: async (id) => {
+    const response = await api.get(`/pedido/${id}`); // Assumindo que esta rota agora retorna JSON
+    return response.data;
+  },
+  cancelOrder: async (orderId) => {
+    const formData = new URLSearchParams();
+    formData.append('id_pedido', orderId);
+    const response = await api.post('/painel_usuario/meus-pedidos/cancelar_pedido', formData.toString(), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    return response.data;
+  },
+};
+
+// Exemplo de uso em um componente React Native
+/*
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, Alert, ActivityIndicator } from 'react-native';
+import { authService, productService } from '../services/api';
+
+function HomeScreen() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await productService.getProducts();
+        setProducts(data);
+      } catch (err) {
+        setError('Erro ao carregar produtos.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      await authService.login('seu@email.com', 'suasenha');
+      Alert.alert('Sucesso', 'Login realizado!');
+    } catch (err) {
+      const errorMessage = err.response?.data?.detail || 'Erro ao fazer login.';
+      Alert.alert('Erro', errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <ActivityIndicator size="large" color="#0000ff" />;
+  if (error) return <Text>{error}</Text>;
+
+  return (
+    <View>
+      <Text>Bem-vindo à Loja!</Text>
+      <Button title="Fazer Login" onPress={handleLogin} />
+      {products.map(product => (
+        <Text key={product.id}>{product.nome_produto} - R${product.preco}</Text>
+      ))}
+    </View>
+  );
+}
+*/

@@ -12,32 +12,11 @@ import Tasks from "./components/Tasks";
 import Carrinho from "./components/Carrinho";
 import Login from "./components/Login";
 import Cadastro from "./components/Cadastro";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import { useState } from "react";
-import Perfil from "./components/Perfil";
+
 
 const Tabs = createBottomTabNavigator();
 
 export function Routes() {
-
-  const [isLogado, setIsLogado] = useState(null);
-
-  useFocusEffect(
-  React.useCallback(() => {
-    async function verificarLogin() {
-      const token = await AsyncStorage.getItem("token");
-      console.log("Token encontrado:", token);
-      setIsLogado(!!token);
-    }
-
-    verificarLogin();
-  }, [])
-);
-
-  if (isLogado === null) return null;
-
   return (
     <Tabs.Navigator>
       <Tabs.Screen
@@ -93,7 +72,7 @@ export function Routes() {
       />
       <Tabs.Screen
         name="login"
-        component={isLogado ? Perfil : Login}
+        component={Login}
         options={{
           tabBarShowLabel: false,
           headerShown: false,

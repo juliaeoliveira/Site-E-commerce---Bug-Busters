@@ -3,31 +3,20 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f3eb",
-  },
-
-  // IMAGEM TOPO
-  topo: {
-    height: 550,
-    justifyContent: "flex-end",
+    backgroundColor: "#f8f3eb", // fundo escuro moderno
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
 
-  tituloTopo: {
-    color: "#fff",
-    fontSize: 22,
-    fontWeight: "bold",
+  logo: {
+    
+    width: 150,
+    height: 150,
   },
 
-  // CARD
   content: {
-    flex: 1,
-    width: "100%",
-    backgroundColor: "#ffffff",
-    marginTop: -150, // sobe o card
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    padding: 20,
+    width: "80%",
   },
 
   title: {
@@ -47,8 +36,8 @@ export const styles = StyleSheet.create({
   input: {
     backgroundColor: "#eee0c2",
     color: "#523800",
-    padding: 10,
-    borderRadius: 8,
+    padding: 8,
+    borderRadius: 4,
     marginBottom: 10,
   },
 
@@ -60,26 +49,21 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  buttonDisabled: {
-    opacity: 0.5,
-  },
-
   buttonText: {
     color: "#FFF",
     fontWeight: "bold",
     fontSize: 16,
   },
-
   texto: {
-    textAlign: "center",
-    marginTop: 15,
-    fontSize: 14,
-    color: "#333",
+  textAlign: 'center',
+  marginTop: 15,
+  fontSize: 14,
+  color: '#333',
   },
 
   cadastro: {
-    color: "#c2a46d",
-    textDecorationLine: "underline",
-    fontWeight: "bold",
+    color: '#c2a46d', // mesma cor do seu tema
+    textDecorationLine: 'underline',
+    fontWeight: 'bold',
   },
 });
