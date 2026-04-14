@@ -1,43 +1,105 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+
   body: {
+    flex: 1,
     backgroundColor: "#eae4d8",
-    width: "100%",
-    height: "100%",
-    },
+    paddingTop: 40,
+  },
+
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 15,
+    gap: 10,
+    marginTop: 25,
+  },
+
   title: {
-    marginTop:"15%",
-        marginLeft: 15,
-    fontSize: 28,
+    fontSize: 25,
     fontWeight: "bold",
   },
-  addContent: {
-    width: "80%",
-    marginTop: "5%",
-    marginLeft: "6%",
-    flexDirection:"row"
-    
-  },
-  addImage: {
-    width: 30,
-    height:30,
-    //objectFit: "cover"
-  },
-  addInput: {
-    width: "90%",
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginLeft: "5%",
-    paddingHorizontal: 10,
-    borderRadius:5
-  },
-    addEnunciado: {
-    width: "80%",
-    marginTop: "15%",
-    marginLeft: "15%",
-    textAlign: "left",
 
+  card: {
+    backgroundColor: "#fff",
+    margin: 15,
+    borderRadius: 12,
+    padding: 10,
   },
+
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+  },
+
+  info: {
+    flex: 1,
+    marginLeft: 10,
+  },
+
+  nome: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  preco: {
+    color: "green",
+    marginTop: 2,
+  },
+
+  controls: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+  },
+
+  btn: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+  },
+
+  qtd: {
+    marginHorizontal: 10,
+  },
+
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    backgroundColor: "#fff",
+    padding: 15,
+    borderTopWidth: 1,
+    borderColor: "#ddd",
+  },
+
+  total: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
+  checkout: {
+    backgroundColor: "#790000",
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 10,
+    alignItems: "center",
+  },
+
+  checkoutText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+
 });

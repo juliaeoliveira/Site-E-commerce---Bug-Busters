@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 
   // IMAGEM TOPO
   topo: {
-    height: 550,
+    height: 460,
     justifyContent: "flex-end",
     padding: 20,
   },
@@ -23,8 +23,8 @@ export const styles = StyleSheet.create({
   content: {
     flex: 1,
     width: "100%",
-    backgroundColor: "#ffffff",
-    marginTop: -150, // sobe o card
+    backgroundColor: "#f8f3eb",
+    marginTop: -40, // sobe o card
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     padding: 20,
