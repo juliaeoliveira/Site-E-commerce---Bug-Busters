@@ -67,11 +67,59 @@ class ServicosUsuario:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail='O usuário já existe'
             )
-        
-#função de gerar o hash da senha
-def gerar_hash_senha(senha:str):
-    return crypt_context.hash(senha)
+            
+    def registrar_usuario_mobile(self, usuario: Usuario):
+        usuario_model = Usuario_Model(
+            nome_cliente=usuario.nome_cliente,
+            data_nascimento=usuario.data_nascimento,
+            # data_cadastro=usuario.data_cadastro, # o banco de dados já tem um valor padrão para data_cadastro, então não é necessário passar esse valor aqui
+            email=usuario.email,
+            telefone=usuario.telefone,
+            senha=crypt_context.hash(usuario.senha),
+            tipo=usuario.tipo
+        )
 
+        try:
+            self.db_session.add(usuario_model)
+            self.db_session.commit()
+            self.db_session.refresh(usuario_model)
+
+            return usuario_model  # importante retornar para usar o ID depois
+
+        except IntegrityError:
+            self.db_session.rollback()
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail='O usuário já existe' #(o banco de dados recusou a operação por violar alguma regra de integridade)
+            )
+
+    def registrar_endereco_mobile(self, endereco: Endereco):
+        endereco_model = Endereco_Model(
+            rua=endereco.rua,
+            numero=endereco.numero,
+            complemento=endereco.complemento,
+            bairro=endereco.bairro,
+            cidade=endereco.cidade,
+            estado=endereco.estado,
+            cep=endereco.cep,
+            usuario_id=endereco.usuario_id,
+            loja_id=endereco.loja_id
+        )
+
+        try:
+            self.db_session.add(endereco_model)
+            self.db_session.commit()
+            self.db_session.refresh(endereco_model)
+
+            return endereco_model
+
+        except IntegrityError:
+            self.db_session.rollback()
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail='Erro ao cadastrar endereço'
+            )
+        
 #função de gerar o hash da senha
 def gerar_hash_senha(senha:str):
     return crypt_context.hash(senha)
@@ -123,3 +171,36 @@ def obter_usuario_logado(request: Request, db: Session = Depends(get_db)):
     if not usuario:
         raise HTTPException(status_code=401, detail="Usuário não encontrado.")
     return usuario
+
+
+def obter_usuario_logado_mobile(
+    token: str = Depends(oauth2_scheme),
+    db: Session = Depends(get_db)
+):
+    try:
+        payload = jwt.decode(token, CHAVE_SECRETA, algorithms=[ALGORITMO])
+        email = payload.get("sub")
+
+        if not email:
+            raise HTTPException(status_code=401, detail="Token inválido")
+
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado")
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+
+    if not usuario:
+        raise HTTPException(status_code=401, detail="Usuário não encontrado")
+
+    return usuario
+
+'''Antes na web: payload = verificar_token(token) --> agora no mobile:  
+exemplo:
+@router.get("/perfil")
+def perfil(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile)):
+    return {
+        "nome": usuario.nome_cliente,
+        "email": usuario.email,
+        "telefone": usuario.telefone,
+        "tipo": usuario.tipo
+    }'''

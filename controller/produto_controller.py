@@ -56,6 +56,8 @@ async def listar_todos (request:Request,
     ) 
 
 from fastapi import Request
+# Rota da Api para o Mobile
+from schemas import Products
 
 @router.get("/products", response_model=list[Products])
 def list_products(request: Request, db: Session = Depends(get_db)):
@@ -72,9 +74,6 @@ def list_products(request: Request, db: Session = Depends(get_db)):
             product.imagem1_url = f"{base_url}static/uploads/{product.imagem1_url}"
 
     return products
-
-# Rota da Api para o Mobile
-from schemas import Products
 
 @router.get("/products", response_model=list[Products])
 def list_products(db: Session = Depends(get_db)):

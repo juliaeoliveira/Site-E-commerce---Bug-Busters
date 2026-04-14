@@ -1,11 +1,11 @@
-from fastapi import APIRouter, Depends, UploadFile, Request, Form, File
+from fastapi import APIRouter, Depends, UploadFile, Request, Form, File, HTTPException
 from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from database import get_db
-from controller.usuario_autenticacao import ServicosUsuario, verificar_hash_senha, criar_token, verificar_token
+from controller.usuario_autenticacao import ServicosUsuario, verificar_hash_senha, criar_token, verificar_token, obter_usuario_logado_mobile
 from models import Usuario_Model, Produto, Endereco as Endereco_Model
-from schemas import Usuario , Endereco
+from schemas import Usuario , Endereco , LoginRequest
 import shutil
 
 from datetime import datetime
@@ -97,6 +97,29 @@ def cadastrar_usuario( request:Request,
     su.registrar_usuario(usuario=novo_usuario,endereco=endereco)
     return RedirectResponse(url="/usuario/login",status_code=303)
 
+@caminho_prefixo_usuario.post("/create_user", response_model=Usuario)
+def cadastrar_usuario_no_mobile(usuario: Usuario, db: Session = Depends(get_db)):
+
+    usuario.email = usuario.email.strip().lower()
+
+    if usuario.senha != usuario.confirmar_senha:
+        raise HTTPException(status_code=400, detail="As senhas não coincidem")
+
+    if usuario.email.endswith("@admsobveu.com"):
+        usuario.tipo = "adm"
+    else:
+        usuario.tipo = "cliente"
+
+    usuario_existente = db.query(Usuario_Model).filter(Usuario_Model.email == usuario.email).first()
+
+    if usuario_existente:
+        raise HTTPException(status_code=400, detail="Email já em uso")
+
+    su = ServicosUsuario(db_session=db)
+    su.registrar_usuario_mobile(usuario=usuario)
+
+    return usuario
+
 #rota login usuário
 @caminho_prefixo_usuario.get("/login",response_class=HTMLResponse)
 def home(request:Request):
@@ -139,6 +162,35 @@ def login(request:Request, email:str=Form(...),
     response=RedirectResponse(url=destino,status_code=303)
     response.set_cookie(key="token",value=token,httponly=True,samesite="Lax", secure=False, max_age=60 * 60, path="/")
     return response
+
+@caminho_prefixo_usuario.post("/login_mobile")
+def login_mobile(dados: LoginRequest, db: Session = Depends(get_db)):
+
+    email = dados.email.strip().lower()
+
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == email).first()
+
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+    if not verificar_hash_senha(dados.senha, usuario.senha):
+        raise HTTPException(status_code=401, detail="Senha incorreta")
+
+    token = criar_token({
+        "sub": usuario.email,
+        "adm": usuario.tipo == "adm"
+    })
+
+    return {
+        "access_token": token,
+        "tipo": usuario.tipo
+    }
+
+@caminho_prefixo_usuario.get("/perfil")
+def perfil(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile)):
+    return {
+        "nome": usuario.nome_cliente
+    }
 
 ##ota de adm crud produtos
 @caminho_prefixo_usuario.get("/admin", response_class=HTMLResponse)

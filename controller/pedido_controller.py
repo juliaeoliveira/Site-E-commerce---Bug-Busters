@@ -381,16 +381,27 @@ def editar_endereco(request:Request,
             "link_login": "/usuario/login"
         })
     
-    endereco = usuario.endereco
-    
-    #atualizar os campos
-    endereco.cep = cep
-    endereco.rua = rua
-    endereco.numero = numero
-    endereco.complemento = complemento
-    endereco.bairro = bairro
-    endereco.cidade = cidade
-    endereco.estado = estado
+    if not usuario.endereco:
+        endereco = Endereco(
+            cep=cep,
+            rua=rua,
+            numero=numero,
+            complemento=complemento,
+            bairro=bairro,
+            cidade=cidade,
+            estado=estado,
+            usuario_id=usuario.id
+        )
+        db.add(endereco)
+    else:
+        endereco = usuario.endereco
+        endereco.cep = cep
+        endereco.rua = rua
+        endereco.numero = numero
+        endereco.complemento = complemento
+        endereco.bairro = bairro
+        endereco.cidade = cidade
+        endereco.estado = estado
 
     db.commit()
     db.refresh(endereco)

@@ -18,6 +18,10 @@ class Products(BaseModel):
     imagem3_url: str
     imagem4_url: str
 
+class LoginRequest(BaseModel):
+    email: str
+    senha: str
+
 
 class Usuario(BaseModel):
     #informações pessoais e contato
