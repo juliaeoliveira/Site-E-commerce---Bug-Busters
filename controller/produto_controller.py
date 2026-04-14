@@ -1,22 +1,23 @@
-from fastapi import APIRouter,Request,Form,UploadFile,File,Depends,Query
+from fastapi import APIRouter,Request,Form,UploadFile,File,Depends
 # APIRouter=rota api para o front-end,
 # Request=Requesição HTTP,
 # Form=Formulário para criar e editar,
 # UploadFile=Upload da foto,
 # File=Função para gravar o caminho da imagem,
 # Depends=dependência do banco de dados sqlite para o fastapi
-# Query=parâmetros de query na URL
 from pydantic import BaseModel
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Produto
 from .usuario_autenticacao import verificar_token
-from models import Usuario_Model, Produto as ProdutoDB
+from models import Usuario_Model
+from schemas import Products
 from fastapi.responses import HTMLResponse,RedirectResponse
 # HTMLResponse=resposta do html GET,POST,PUT,DELETE,
 # RedirectResponse=redirecionar a página ao receber o método'GET'
 from fastapi.templating import Jinja2Templates
-from typing import Optional, List
+from typing import Optional
 
 #from models_teste import SessionLocal
 #Jinja2Templates=responsável por renderizar o front-end,
@@ -56,80 +57,50 @@ async def listar_todos (request:Request,
         {"request": request, "produtos": produtos}
     ) 
 
-from fastapi import Request
 # Rota da Api para o Mobile
-from schemas import Products
 
+def _normalize_image_url(image_url: str | None, base_url: str) -> str:
+    if not image_url:
+        return ""
+    image_url = image_url.strip()
+    if image_url.startswith("http://") or image_url.startswith("https://"):
+        return image_url
+    return f"{base_url}static/uploads/{image_url}"
+
+
+def _build_product_response(product: Produto, base_url: str) -> dict:
+    return {
+        "id": product.id,
+        "nome_produto": product.nome_produto,
+        "preco": float(product.preco),
+        "descricao": product.descricao,
+        "cor": product.cor,
+        "categoria": product.categoria,
+        "imagem1_url": _normalize_image_url(product.imagem1_url, base_url),
+        "imagem2_url": _normalize_image_url(product.imagem2_url, base_url),
+        "imagem3_url": _normalize_image_url(product.imagem3_url, base_url),
+        "imagem4_url": _normalize_image_url(product.imagem4_url, base_url),
+        "status": bool(product.status),
+    }
 
 @router.get("/products", response_model=list[Products])
-def list_products(
-    request: Request,
-    skip: int = 0,
-    limit: int = 10,
-    db: Session = Depends(get_db)
-):
+def list_products(request: Request, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     products = db.query(Produto).offset(skip).limit(limit).all()
+    base_url = str(request.base_url)
+    return [_build_product_response(product, base_url) for product in products]
 
-    # Construir base_url corretamente: inclui protocolo, host e porta
-    scheme = request.url.scheme  # http ou https
-    server = request.headers.get('host', request.url.netloc)  # host:port
-    base_url = f"{scheme}://{server}"
 
-    for product in products:
-        if product.imagem1_url and not product.imagem1_url.startswith("http"):
-            product.imagem1_url = f"{base_url}/static/uploads/{product.imagem1_url}"
-        if product.imagem2_url and not product.imagem2_url.startswith("http"):
-            product.imagem2_url = f"{base_url}/static/uploads/{product.imagem2_url}"
-        if product.imagem3_url and not product.imagem3_url.startswith("http"):
-            product.imagem3_url = f"{base_url}/static/uploads/{product.imagem3_url}"
-        if product.imagem4_url and not product.imagem4_url.startswith("http"):
-            product.imagem4_url = f"{base_url}/static/uploads/{product.imagem4_url}"
-
-    return products
-
-# Rota de busca
-@router.get("/produtos/search", response_model=List[Products], summary="Buscar produtos (JSON)")
-async def search_produtos_json(
-    request: Request,
-    q: Optional[str] = Query(None, description="Termo de busca (nome, descrição)"),
-    category: Optional[str] = Query(None, description="Filtra por categoria"),
-    min_price: Optional[float] = Query(None, gt=0, description="Preço mínimo"),
-    max_price: Optional[float] = Query(None, gt=0, description="Preço máximo"),
-    color: Optional[str] = Query(None, description="Filtra por cor"),
-    skip: int = Query(0, ge=0),
-    limit: int = Query(10, ge=1, le=100),
-    db: Session = Depends(get_db)
-):
-    query = db.query(ProdutoDB).filter(ProdutoDB.status == True)
+@router.get("/products/search", response_model=list[Products])
+def search_products(request: Request, q: Optional[str] = None, db: Session = Depends(get_db)):
+    query = db.query(Produto)
     if q:
-        query = query.filter(ProdutoDB.nome_produto.ilike(f"%{q}%") | ProdutoDB.descricao.ilike(f"%{q}%"))
-    if category:
-        query = query.filter(ProdutoDB.categoria.ilike(f"%{category}%"))
-    if min_price:
-        query = query.filter(ProdutoDB.preco >= min_price)
-    if max_price:
-        query = query.filter(ProdutoDB.preco <= max_price)
-    if color:
-        query = query.filter(ProdutoDB.cor.ilike(f"%{color}%"))
-
-    produtos = query.offset(skip).limit(limit).all()
-    
-    # Construir base_url corretamente: inclui protocolo, host e porta
-    scheme = request.url.scheme  # http ou https
-    server = request.headers.get('host', request.url.netloc)  # host:port
-    base_url = f"{scheme}://{server}"
-
-    for product in produtos:
-        if product.imagem1_url and not product.imagem1_url.startswith("http"):
-            product.imagem1_url = f"{base_url}/static/uploads/{product.imagem1_url}"
-        if product.imagem2_url and not product.imagem2_url.startswith("http"):
-            product.imagem2_url = f"{base_url}/static/uploads/{product.imagem2_url}"
-        if product.imagem3_url and not product.imagem3_url.startswith("http"):
-            product.imagem3_url = f"{base_url}/static/uploads/{product.imagem3_url}"
-        if product.imagem4_url and not product.imagem4_url.startswith("http"):
-            product.imagem4_url = f"{base_url}/static/uploads/{product.imagem4_url}"
-
-    return produtos
+        search_term = f"%{q}%"
+        query = query.filter(
+            or_(Produto.nome_produto.ilike(search_term), Produto.descricao.ilike(search_term))
+        )
+    products = query.all()
+    base_url = str(request.base_url)
+    return [_build_product_response(product, base_url) for product in products]
 
 #rota detalhe do produto
 @router.get("/produtos/{id_produto}",

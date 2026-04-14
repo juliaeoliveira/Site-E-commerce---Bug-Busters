@@ -1,33 +1,77 @@
-import axios from "axios";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const BASE_URL = "http://10.0.2.2:8000"
 
-// Ajuste para o IP/domínio do backend
-const API_BASE_URL = "http://10.0.2.2:8000"; 
+export async function getProducts() {
+    const response = await fetch(`${BASE_URL}/products`)
+    const data = await response.json();
+    return data;
+}
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  }, 
-});
+export async function searchProducts(query) {
+    const url = query
+        ? `${BASE_URL}/products/search?q=${encodeURIComponent(query)}`
+        : `${BASE_URL}/products`
 
-export const productService = {
-  getProducts: async (skip = 0, limit = 10) => {
-    const response = await api.get(`/products/?skip=${skip}&limit=${limit}`);
-    return response.data;
-  },
-  searchProducts: async (query, category, minPrice, maxPrice, color, skip = 0, limit = 10) => {
-    const params = new URLSearchParams();
-    if (query) params.append('query', query);
-    if (category) params.append('category', category);
-    if (minPrice !== null && minPrice !== undefined) params.append('min_price', minPrice);
-    if (maxPrice !== null && maxPrice !== undefined) params.append('max_price', maxPrice);
-    if (color) params.append('color', color);
-    params.append('skip', skip);
-    params.append('limit', limit);
+    const response = await fetch(url)
+    const data = await response.json();
+    return data;
+}
 
-    const response = await api.get(`/products/search?${params.toString()}`);
-    return response.data;
-  },
+export async function CreateUser(userData) {
+    const response = await fetch(`${BASE_URL}/usuario/create_user`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail);
+    }
+
+    return await response.json();
+}
+
+export async function Login(email, senha) {
+    const response = await fetch(`${BASE_URL}/usuario/login_mobile`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email,
+            senha
+        })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.detail);
+    }
+
+    return data;
+}
+
+export async function getPerfil() {
+    const token = await AsyncStorage.getItem("token");
+
+    const response = await fetch(`${BASE_URL}/usuario/perfil`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.detail);
+    }
+
+    return data;
 }

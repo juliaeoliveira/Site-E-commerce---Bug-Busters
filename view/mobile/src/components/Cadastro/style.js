@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#eae4d8",
+    backgroundColor: "#ffffff",
   },
 
   // IMAGEM TOPO
   topo: {
     width: 450,
-    height: 370,
+    height: 270,
     justifyContent: "flex-end",
     padding: 20,
   },
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   // FORMULÁRIO (CARD)
   formContainer: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
 

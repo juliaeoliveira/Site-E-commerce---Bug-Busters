@@ -6,25 +6,17 @@ from datetime import datetime,timezone
 
 
 
-# --- Produtos ---
 class Products(BaseModel):
     id: int
     nome_produto: str
     preco: float
+    descricao: str
     cor: str
     categoria: str
-    imagem_principal_url: str # Usar apenas uma imagem principal para listagens
-    status: bool
-
-class ProdutoDetalheDTO(Products):
-    descricao: str
-    quantidade_estoque: int
-    imagem1_url: Optional[str] = None
-    imagem2_url: Optional[str] = None
-    imagem3_url: Optional[str] = None
-    imagem4_url: Optional[str] = None
-    loja_id: Optional[str] = None # Dependendo se é relevante para o cliente mobile
-
+    imagem1_url: str
+    imagem2_url: str
+    imagem3_url: str
+    imagem4_url: str
 
 class LoginRequest(BaseModel):
     email: str
