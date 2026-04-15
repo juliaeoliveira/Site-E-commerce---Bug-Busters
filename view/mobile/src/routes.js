@@ -22,22 +22,6 @@ const Tabs = createBottomTabNavigator();
 
 export function Routes() {
 
-  const [isLogado, setIsLogado] = useState(null);
-
-  useFocusEffect(
-  React.useCallback(() => {
-    async function verificarLogin() {
-      const token = await AsyncStorage.getItem("token");
-      console.log("Token encontrado:", token);
-      setIsLogado(!!token);
-    }
-
-    verificarLogin();
-  }, [])
-);
-
-  if (isLogado === null) return null;
-
   return (
     <Tabs.Navigator>
       <Tabs.Screen
@@ -93,23 +77,41 @@ export function Routes() {
       />
       <Tabs.Screen
         name="login"
-        component={isLogado ? Perfil : Login}
+        component={Login} // pode deixar Login mesmo
         options={{
           tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({ focused, size, color }) => {
-            if (focused) {
-              return <FontAwesome name="user" size={size} color={"#000"} />;
-            }
-            return <FontAwesome name="user" size={size} color={color} />;
+            return <FontAwesome name="user" size={size} color={focused ? "#000" : color} />;
           },
         }}
+        listeners={({ navigation }) => ({
+          tabPress: async (e) => {
+            e.preventDefault(); // 👈 impede navegação padrão
+          
+            const token = await AsyncStorage.getItem("token");
+          
+            if (token) {
+              navigation.navigate("perfil"); // 👈 vai pro perfil
+            } else {
+              navigation.navigate("login"); // 👈 vai pro login
+            }
+          },
+        })}
       />
       <Tabs.Screen
         name="cadastro"
         component={Cadastro}
         options={{
           tabBarItemStyle: { display: 'none' }, // 👈 ESCONDE DE VERDADE
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="perfil"
+        component={Perfil}
+        options={{
+          tabBarItemStyle: { display: "none" },
           headerShown: false,
         }}
       />

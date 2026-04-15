@@ -8,12 +8,33 @@ import {
   ImageBackground,
 } from "react-native";
 import { styles } from "./style";
+import { Login as LoginApi } from "../../services/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  function handleLogin() {
+  useFocusEffect(
+    useCallback(() => {
+      async function verificarToken() {
+        const token = await AsyncStorage.getItem("token");
+
+        if (token) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "perfil" }],
+          });
+        }
+      }
+
+      verificarToken();
+    }, [])
+  );
+
+  async function handleLogin() {
     if (!email || !senha) {
       Alert.alert("Erro", "Preencha todos os campos!");
       return;
@@ -24,8 +45,25 @@ export default function Login({ navigation }) {
       return;
     }
 
-    Alert.alert("Sucesso", "Login realizado!");
-  }
+    try {
+      const data = await LoginApi(email, senha);
+      
+      // salvar token
+      await AsyncStorage.setItem("token", data.access_token);
+      console.log("Token salvo:", data.access_token);
+
+      Alert.alert("Sucesso", "Login realizado!");
+
+      // força atualização
+     navigation.reset({
+      index: 0,
+      routes: [{ name: "perfil" }],
+    });
+    } catch (error) {
+          Alert.alert("Erro", error.message);
+          console.log(error);
+        }
+      }
 
   const isDisabled = !email || !senha;
 
