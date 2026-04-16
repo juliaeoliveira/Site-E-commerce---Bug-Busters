@@ -4,7 +4,7 @@ import { Text, View, Image, TextInput, TouchableOpacity, Linking, FlatList } fro
 import { styles } from "./style";
 import { getProducts, searchProducts } from "../../services/api";
 
-export default function Home() {
+export default function Home({ navigation }) {
 
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -28,7 +28,7 @@ export default function Home() {
     return (
       <TouchableOpacity
         style={styles.card}
-        onPress={() => console.log(item.nome)}
+        onPress={() => navigation.navigate("detalhes", { product: item })}
       >
         <Image
           source={{ uri: item.imagem1_url }}
