@@ -7,7 +7,7 @@ import {
 } from "@expo/vector-icons";
 // import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 // import AntDesign from '@expo/vector-icons/AntDesign';
-import Home from "./components/Home";
+import HomeStack from "./home.routes";
 import Tasks from "./components/Tasks";
 import Carrinho from "./components/Carrinho";
 import Login from "./components/Login";
@@ -26,7 +26,7 @@ export function Routes() {
     <Tabs.Navigator>
       <Tabs.Screen
         name="home"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
