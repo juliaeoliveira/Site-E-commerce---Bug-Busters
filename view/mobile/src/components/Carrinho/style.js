@@ -1,105 +1,73 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-
-  body: {
+  container: {
     flex: 1,
     backgroundColor: "#eae4d8",
-    paddingTop: 40,
   },
 
   header: {
+    marginTop: 60,
+    height: 80,
+    paddingHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",
-    padding: 15,
-    gap: 10,
-    marginTop: 25,
+    justifyContent: "space-between",
   },
 
   title: {
-    fontSize: 25,
+    fontSize: 22,
     fontWeight: "bold",
   },
 
-  card: {
-    backgroundColor: "#fff",
-    margin: 15,
-    borderRadius: 12,
+
+  circlesContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 15,
+  },
+
+  circle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "transparent",
+  },
+
+  circleActive: {
+    borderColor: '#790000',
+    height: 65,
+    width: 60,
+  },
+
+  circleImage: {
+    width: "100%",
+    height: "100%",
+  },
+
+
+  dressContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     padding: 10,
   },
 
-  item: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 15,
-  },
-
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: 8,
-  },
-
-  info: {
-    flex: 1,
-    marginLeft: 10,
-  },
-
-  nome: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-
-  preco: {
-    color: "green",
-    marginTop: 2,
-  },
-
-  controls: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 5,
-  },
-
-  btn: {
-    width: 30,
-    height: 30,
-    backgroundColor: "#ddd",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-  },
-
-  qtd: {
-    marginHorizontal: 10,
-  },
-
-  footer: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    backgroundColor: "#fff",
-    padding: 15,
-    borderTopWidth: 1,
-    borderColor: "#ddd",
-  },
-
-  total: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-
-  checkout: {
-    backgroundColor: "#790000",
-    padding: 12,
-    borderRadius: 8,
-    marginTop: 10,
+  dressCard: {
+    width: "30%",
     alignItems: "center",
   },
 
-  checkoutText: {
-    color: "#fff",
-    fontWeight: "bold",
+  dressImage: {
+    width: 100,
+    height: 120,
+    borderRadius: 10,
+    marginBottom: 5,
   },
 
+  dressName: {
+    fontSize: 12,
+    textAlign: "center",
+  },
 });

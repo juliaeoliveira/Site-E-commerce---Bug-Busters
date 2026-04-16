@@ -1,102 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { styles } from "./style";
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 
-export default function Carrinho({ navigation }) {
-
-  const [cart, setCart] = useState([
-    { 
-      id: 1, 
-      nome: "Camaleão dourado", 
-      preco: 359.90, 
-      qtd: 1, 
-      img: require("../../assets/images/coleção3.jpg") 
-    },
-    { 
-      id: 2, 
-      nome: "Amor sem fim", 
-      preco: 199.90, 
-      qtd: 1, 
-      img: require("../../assets/images/coleção4.jpg")
-    }
-
+export default function HomeScreen() {
+  const [dresses, setDresses] = useState([
+    { id: 1, name: "Vestido Floral", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+    { id: 2, name: "Vestido Elegante", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+    { id: 3, name: "Vestido Verão", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
   ]);
 
-  function aumentar(id) {
-    setCart(cart.map(item =>
-      item.id === id ? { ...item, qtd: item.qtd + 1 } : item
-    ));
-  }
+  const [collections] = useState([
+    { id: 1, image: require("../../assets/images/coleção1.jpg") },
+    { id: 2, image: require("../../assets/images/coleção2.jpg") },
+    { id: 3, image: require("../../assets/images/coleção3.jpg") },
+    { id: 4, image: require("../../assets/images/coleção4.jpg") },
+  ]);
 
-  function diminuir(id) {
-    setCart(cart.map(item =>
-      item.id === id && item.qtd > 1
-        ? { ...item, qtd: item.qtd - 1 }
-        : item
-    ));
-  }
-
-  function remover(id) {
-    setCart(cart.filter(item => item.id !== id));
-  }
-
-  const total = cart.reduce((sum, item) => sum + item.preco * item.qtd, 0);
+  const [selected, setSelected] = useState(null);
 
   return (
-    <View style={styles.body}>
+    <View style={styles.container}>
+      <StatusBar style="auto" />
 
       <View style={styles.header}>
-        <Ionicons name="cart-outline" size={35} />
-        <Text style={styles.title}>Meu Carrinho</Text>
+        <Text style={styles.title}>Coleção</Text>
       </View>
 
-      <View style={styles.card}>
-        {cart.map(item => (
-          <View key={item.id} style={styles.item}>
-
-            {/* 👇 AGORA FUNCIONA */}
-            <Image source={item.img} style={styles.image} />
-
-            <View style={styles.info}>
-              <Text style={styles.nome}>{item.nome}</Text>
-              <Text style={styles.preco}>R$ {item.preco.toFixed(2)}</Text>
-
-              <View style={styles.controls}>
-                <TouchableOpacity onPress={() => diminuir(item.id)} style={styles.btn}>
-                  <Text>-</Text>
-                </TouchableOpacity>
-
-                <Text style={styles.qtd}>{item.qtd}</Text>
-
-                <TouchableOpacity onPress={() => aumentar(item.id)} style={styles.btn}>
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
-
-              <Text style={styles.linha}>
-                _________________________________________
-              </Text>
-            </View>
-
-            <TouchableOpacity onPress={() => remover(item.id)}>
-              <Ionicons name="trash-outline" size={22} color="red" />
-            </TouchableOpacity>
-
-          </View>
+      <View style={styles.circlesContainer}>
+        {collections.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={[
+              styles.circle,
+              selected === item.id && styles.circleActive
+            ]}
+            onPress={() => setSelected(item.id)}
+          >
+            <Image source={item.image} style={styles.circleImage} />
+          </TouchableOpacity>
         ))}
       </View>
 
-      <View style={styles.footer}>
-        <Text style={styles.total}>Total: R$ {total.toFixed(2)}</Text>
+      <ScrollView contentContainerStyle={styles.dressContainer}>
+        {dresses.map((dress) => (
+          <View key={dress.id} style={styles.dressCard}>
+            <Image source={dress.image} style={styles.dressImage} />
+            <Text style={styles.dressName}>{dress.name}</Text>
+          </View>
+        ))}
+      </ScrollView>
 
-        <TouchableOpacity style={styles.checkout}>
-          <Text style={styles.checkoutText}>Finalizar Compra</Text>
-        </TouchableOpacity>
-      </View>
-
-      <StatusBar style="auto" />
     </View>
   );
 }
