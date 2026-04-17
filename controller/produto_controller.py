@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Request,Form,UploadFile,File,Depends
+from fastapi import APIRouter,Request,Form,UploadFile,File,Depends, HTTPException
 # APIRouter=rota api para o front-end,
 # Request=Requesição HTTP,
 # Form=Formulário para criar e editar,
@@ -89,6 +89,20 @@ def list_products(request: Request, skip: int = 0, limit: int = 100, db: Session
     base_url = str(request.base_url)
     return [_build_product_response(product, base_url) for product in products]
 
+@router.get("/products/{id_produto}")
+async def details_products(request: Request,id_produto: int, db: Session = Depends(get_db)):
+    # 1. Consulta(Query) do Produto
+    product = db.query(Produto).filter(Produto.id == id_produto).first()
+
+    # 2. Validação de existencia de produto 
+    if not product:
+        raise HTTPException(status_code=404, detail="produto não encontrado")
+
+    base_url = str(request.base_url)
+    return {
+        "produtos": _build_product_response(product, base_url),
+        
+    }
 
 @router.get("/products/search", response_model=list[Products])
 def search_products(request: Request, q: Optional[str] = None, db: Session = Depends(get_db)):

@@ -8,6 +8,20 @@ export async function getProducts() {
     return data;
 }
 
+export async function getDetailsProduct(id_product) {
+    try {
+        const response = await fetch(`${BASE_URL}/products/${id_produto}`)
+        if (!response.ok) {
+            throw new Error('Produto não encontrado!')
+        }
+        const data = await response.json()
+        return data;
+    } catch (error) {
+        console.error("Erro ao buscar detalhes: ", error)
+        return null
+    }
+}
+
 export async function searchProducts(query) {
     const url = query
         ? `${BASE_URL}/products/search?q=${encodeURIComponent(query)}`
