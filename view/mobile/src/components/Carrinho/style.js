@@ -1,73 +1,72 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  container: {
+  body: {
     flex: 1,
     backgroundColor: "#eae4d8",
+    padding:10,
   },
 
   header: {
-    marginTop: 60,
-    height: 80,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    marginTop: 50,
+    alignItems: 'center',
+    marginBottom: 20,
   },
 
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
+  foto: {
+    color: '#000000ff',
+    marginBottom: 10,
   },
 
-
-  circlesContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 15,
+  username: {
+    fontSize: 23,
+    fontWeight: 'bold',
+    color: '#333',
   },
 
-  circle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    overflow: "hidden",
-    borderWidth: 2,
-    borderColor: "transparent",
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 3,
   },
 
-  circleActive: {
-    borderColor: '#790000',
-    height: 65,
-    width: 60,
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    color: '#333',
   },
 
-  circleImage: {
-    width: "100%",
-    height: "100%",
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
   },
 
-
-  dressContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 10,
+  label: {
+    fontSize: 16,
+    color: '#666',
+    flex: 1,
   },
 
-  dressCard: {
-    width: "30%",
-    alignItems: "center",
+  value: {
+    fontSize: 16,
+    color: '#333',
+    flex: 1,
+    textAlign: 'right',
+    marginRight: 10,
   },
 
-  dressImage: {
-    width: 100,
-    height: 120,
-    borderRadius: 10,
-    marginBottom: 5,
-  },
-
-  dressName: {
-    fontSize: 12,
-    textAlign: "center",
+  botaoEditar: {
+    padding: 4,
   },
 });

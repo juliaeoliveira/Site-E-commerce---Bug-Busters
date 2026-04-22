@@ -1,122 +1,92 @@
-import { useState } from "react";
-import { Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { styles } from "./style";
+import { useState } from 'react';
 
-export default function Tasks() {
+export default function HomeScreen() {
 
-  const [selecionado, setSelecionado] = useState(null);
+  const dressCollections = {
+    1: [
+      { id: 1, name: "Vestido Floral", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+      { id: 2, name: "Vestido Leve", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+      { id: 3, name: "Vestido Casual", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+      { id: 4, name: "Vestido Solto", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+      { id: 5, name: "Vestido Praia", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+      { id: 6, name: "Vestido Curto", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+    ],
+    2: [
+      { id: 7, name: "Vestido Elegante", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+      { id: 8, name: "Vestido Festa", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+      { id: 9, name: "Vestido Noite", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+      { id: 10, name: "Vestido Luxo", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+      { id: 11, name: "Vestido Social", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+      { id: 12, name: "Vestido Gala", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+    ],
+    3: [
+      { id: 13, name: "Vestido Verão", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+      { id: 14, name: "Vestido Tropical", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+      { id: 15, name: "Vestido Colorido", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+      { id: 16, name: "Vestido Fresco", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+      { id: 17, name: "Vestido Dia", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+      { id: 18, name: "Vestido Light", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+    ],
+    4: [
+      { id: 19, name: "Vestido Premium", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+      { id: 20, name: "Vestido Sofisticado", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+      { id: 21, name: "Vestido Exclusivo", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+      { id: 22, name: "Vestido Moderno", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
+      { id: 23, name: "Vestido Chic", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
+      { id: 24, name: "Vestido Estilo", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
+    ]
+  };
+
+  const collections = [
+    { id: 1, image: require("../../assets/images/coleção1.jpg") },
+    { id: 2, image: require("../../assets/images/coleção2.jpg") },
+    { id: 3, image: require("../../assets/images/coleção3.jpg") },
+    { id: 4, image: require("../../assets/images/coleção4.jpg") },
+  ];
+
+  const [selected, setSelected] = useState(1);
+
+  const dresses = dressCollections[selected];
 
   return (
-    <View style={{ flex: 1 }}>
-      
-      <ScrollView style={styles.container}
-        contentContainerStyle={{ paddingBottom: 20 }}
-        showsVerticalScrollIndicator={false} 
-        bounces={false} 
-        overScrollMode="never" 
-      >
-      
-      <Text style={styles.titulo}>Nossas Coleções</Text>
+    <View style={styles.container}>
+      <StatusBar style="auto" />
 
-      <View style={styles.grid}>
-
-        {/* CARD 1 */}
-        <TouchableOpacity 
-          style={styles.card}
-          onPress={() => setSelecionado({
-            nome: "Brisa do altar",
-            estacao: "VERÃO",
-            descricao: "No calor do Verão, o amor é celebrado sob o sol intenso e a leveza do vento...",
-            imagem: require('../../assets/images/coleção1.jpg')
-          })}
-        >
-          <Image source={require('../../assets/images/coleção1.jpg')} style={styles.cardImage}/>
-          <Text style={styles.cardNome}>Brisa do altar</Text>
-        </TouchableOpacity>
-
-        {/* CARD 2 */}
-        <TouchableOpacity 
-          style={styles.card}
-          onPress={() => setSelecionado({
-            nome: "Sussurros",
-            estacao: "OUTONO",
-            descricao: "Detalhes delicados que contam histórias silenciosas e encantadoras.",
-            imagem: require('../../assets/images/coleção2.jpg')
-          })}
-        >
-          <Image source={require('../../assets/images/coleção2.jpg')} style={styles.cardImage}/>
-          <Text style={styles.cardNome}>Sussurros</Text>
-        </TouchableOpacity>
-
-        {/* CARD 3 */}
-        <TouchableOpacity 
-          style={styles.card}
-          onPress={() => setSelecionado({
-            nome: "Encanto",
-            estacao: "INVERNO",
-            descricao: "Peças que despertam beleza, charme e fascínio em cada detalhe.",
-            imagem: require('../../assets/images/coleção3.jpg')
-          })}
-        >
-          <Image source={require('../../assets/images/coleção3.jpg')} style={styles.cardImage}/>
-          <Text style={styles.cardNome}>Encanto</Text>
-        </TouchableOpacity>
-
-        {/* CARD 4 */}
-        <TouchableOpacity 
-          style={styles.card}
-          onPress={() => setSelecionado({
-            nome: "O Desabrochar",
-            estacao: "PRIMAVERA",
-            descricao: "Inspirada no florescer e na transformação de momentos únicos.",
-            imagem: require('../../assets/images/coleção4.jpg')
-          })}
-        >
-          <Image source={require('../../assets/images/coleção4.jpg')} style={styles.cardImage}/>
-          <Text style={styles.cardNome}>O Desabrochar</Text>
-        </TouchableOpacity>
-
+      <View style={styles.header}>
+        <Text style={styles.title}>Coleção</Text>
       </View>
-      </ScrollView>
 
-      {/* MODAL */}
-      {selecionado && (
-        <View style={styles.overlay}>
+      <View style={styles.circlesContainer}>
+        {collections.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={[
+              styles.circle,
+              selected === item.id && styles.circleActive
+            ]}
+            onPress={() => setSelected(item.id)}
+          >
+            <Image source={item.image} style={styles.circleImage} />
+          </TouchableOpacity>
+        ))}
+      </View>
 
-          <View style={styles.modalCard}>
-
-            {/* X */}
-            <TouchableOpacity 
-              style={styles.closeInside}
-              onPress={() => setSelecionado(null)}
-            >
-              <Text style={styles.closeText}>✕</Text>
-            </TouchableOpacity>
-
-            {/* IMAGEM */}
-            <Image source={selecionado.imagem} style={styles.modalImage} />
-
-            {/* TEXTO */}
-            <View style={styles.modalText}>
-              <Text style={styles.tituloModal}>{selecionado.nome}</Text>
-
-         
-              <Text style={styles.estacao}>
-                Estação: {selecionado.estacao}
-              </Text>
-
-              <Text style={styles.descricao}>
-                {selecionado.descricao}
-              </Text>
-
-              <TouchableOpacity style={styles.botao}>
-                <Text style={styles.botaoTexto}>VER COLEÇÃO</Text>
-              </TouchableOpacity>
-            </View>
-
+      <FlatList
+        data={dresses}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={3}
+        contentContainerStyle={styles.dressContainer}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <View style={styles.dressCard}>
+            <Image source={item.image} style={styles.dressImage} />
+            <Text style={styles.dressName}>{item.name}</Text>
           </View>
-        </View>
-      )}
+        )}
+      />
 
     </View>
   );

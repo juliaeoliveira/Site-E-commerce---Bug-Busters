@@ -1,57 +1,76 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from "./style";
-import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { getPerfil } from "../../services/api";
 
-export default function HomeScreen() {
-  const [dresses, setDresses] = useState([
-    { id: 1, name: "Vestido Floral", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
-    { id: 2, name: "Vestido Elegante", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
-    { id: 3, name: "Vestido Verão", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
-  ]);
+export default function DadosConta({ navigation }) {
+  const [perfil, setPerfil] = useState({
+    nome: '',
+    email: '',
+    telefone: ''
+  });
 
-  const [collections] = useState([
-    { id: 1, image: require("../../assets/images/coleção1.jpg") },
-    { id: 2, image: require("../../assets/images/coleção2.jpg") },
-    { id: 3, image: require("../../assets/images/coleção3.jpg") },
-    { id: 4, image: require("../../assets/images/coleção4.jpg") },
-  ]);
+  async function carregarPerfil() {
+    try {
+      const data = await getPerfil();
+      setPerfil({
+        nome: data.nome,
+        email: data.email,
+        telefone: data.telefone
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
-  const [selected, setSelected] = useState(null);
+  useFocusEffect(
+    useCallback(() => {
+      carregarPerfil();
+    }, [])
+  );
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-
+    <ScrollView style={styles.body}>
       <View style={styles.header}>
-        <Text style={styles.title}>Coleção</Text>
+        <Ionicons name="person-circle-outline" style={styles.foto} size={60} />
+        <Text style={styles.username}>{perfil.nome || 'eai, Pedro'}</Text>
       </View>
 
-      <View style={styles.circlesContainer}>
-        {collections.map((item) => (
-          <TouchableOpacity
-            key={item.id}
-            style={[
-              styles.circle,
-              selected === item.id && styles.circleActive
-            ]}
-            onPress={() => setSelected(item.id)}
-          >
-            <Image source={item.image} style={styles.circleImage} />
+      <View style={styles.card}>
+        <Text style={styles.sectionTitle}>Dados da Conta</Text>
+
+        {/* Nome */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Nome completo: </Text>
+          <Text style={styles.value}>{perfil.nome || '-'}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('EditarNome')}>
+            <MaterialIcons name="edit" size={24} />
           </TouchableOpacity>
-        ))}
+        </View>
+
+        {/* Email */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Email: </Text>
+          <Text style={styles.value}>{perfil.email || '-'}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('EditarEmail')}>
+            <MaterialIcons name="edit" size={24} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Telefone */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Telefone: </Text>
+          <Text style={styles.value}>{perfil.telefone || '-'}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('EditarTelefone')}>
+            <MaterialIcons name="edit" size={24} />
+          </TouchableOpacity>
+        </View>
       </View>
 
-      <ScrollView contentContainerStyle={styles.dressContainer}>
-        {dresses.map((dress) => (
-          <View key={dress.id} style={styles.dressCard}>
-            <Image source={dress.image} style={styles.dressImage} />
-            <Text style={styles.dressName}>{dress.name}</Text>
-          </View>
-        ))}
-      </ScrollView>
-
-    </View>
+      <StatusBar style="auto" />
+    </ScrollView>
   );
 }
