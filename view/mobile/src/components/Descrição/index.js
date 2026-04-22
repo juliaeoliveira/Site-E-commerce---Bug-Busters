@@ -1,10 +1,22 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { 
+  View, 
+  Text, 
+  Image, 
+  TouchableOpacity, 
+  ScrollView, 
+  Alert 
+} from "react-native";
 import { styles } from "./style";
 import { useState } from "react";
 
 export default function Descricao({ route, navigation }) {
   const { product } = route.params;
   const [tab, setTab] = useState("details");
+
+  // 👉 FUNÇÃO DO BOTÃO
+  function adicionarCarrinho() {
+    Alert.alert("Sucesso", "Produto adicionado ao carrinho 🛒");
+  }
 
   return (
     <View style={styles.container}>
@@ -14,8 +26,7 @@ export default function Descricao({ route, navigation }) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.icon}>←</Text>
         </TouchableOpacity>
-
-        </View>
+      </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
 
@@ -25,12 +36,10 @@ export default function Descricao({ route, navigation }) {
           style={styles.image}
         />
 
-
-
         {/* INFO */}
         <View style={styles.info}>
           <Text style={styles.nome}>{product.nome_produto}</Text>
-          <Text style={styles.categoria}>Women clothing</Text>
+          <Text style={styles.categoria}>Coleção </Text>
 
           {/* PREÇO */}
           <View style={styles.priceRow}>
@@ -49,7 +58,7 @@ export default function Descricao({ route, navigation }) {
               onPress={() => setTab("details")}
             >
               <Text style={tab === "details" && { color: "#fff" }}>
-                Details
+                Detalhes
               </Text>
             </TouchableOpacity>
 
@@ -58,7 +67,8 @@ export default function Descricao({ route, navigation }) {
               onPress={() => setTab("reviews")}
             >
               <Text style={tab === "reviews" && { color: "#fff" }}>
-                Reviews
+                avaliações
+
               </Text>
             </TouchableOpacity>
           </View>
@@ -78,8 +88,13 @@ export default function Descricao({ route, navigation }) {
       </ScrollView>
 
       {/* BOTÃO FIXO */}
-      <TouchableOpacity style={styles.botao}>
-        <Text style={styles.botaoTexto}>Adicionar ao Carrinho</Text>
+      <TouchableOpacity 
+        style={styles.botao} 
+        onPress={adicionarCarrinho}
+      >
+        <Text style={styles.botaoTexto}>
+          Adicionar ao Carrinho
+        </Text>
       </TouchableOpacity>
 
     </View>
