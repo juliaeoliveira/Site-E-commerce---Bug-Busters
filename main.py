@@ -66,5 +66,6 @@ def historico(request: Request):
     return templates.TemplateResponse("historico.html", {"request":request})
 
 # python -m uvicorn main:app --reload
+# pip install -r requirements.txt
 
 

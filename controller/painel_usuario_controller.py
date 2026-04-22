@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import func
 from database import get_db
-from controller.usuario_autenticacao import verificar_token
+from controller.usuario_autenticacao import verificar_token , obter_usuario_logado_mobile
 from models import Usuario_Model, Produto, Endereco, Pedido ,Pagamento
 import random
 
@@ -141,6 +141,30 @@ def meus_dados(request: Request, db: Session = Depends(get_db)):
         "endereco": endereco,
         "primeiro_nome" : primeiro_nome
     })
+
+# rota para exibição de dados da conta no mobile
+@caminho_prefixo_painelUsuario.get("/dados_conta")
+def dados_conta(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile)):
+    return{
+        "nome" : usuario.nome_cliente,
+        "email" : usuario.email, 
+        "data_nascimento" : usuario.data_nascimento,
+        "telefone" : usuario.telefone
+    }
+
+# rota para exibição dos endereços cadastrado no app
+@caminho_prefixo_painelUsuario.get("/enderecos_cadastrados")
+def enderecos_cadastrados(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
+        endereco = db.query(Endereco).filter(Endereco.usuario_id == usuario.id).first()
+        return{
+            "cep" : endereco.cep,
+            "rua" : endereco.rua, 
+            "numero" : endereco.numero,
+            "complementto" : endereco.complemento,
+            "bairro" : endereco.bairro,
+            "cidade" : endereco.cidade,
+            "estado" : endereco.estado
+        }
 
 @caminho_prefixo_painelUsuario.get("/editar_usuario")
 def editar_usuario(request: Request, db: Session = Depends(get_db)):
