@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
 
   icon: {
-    fontSize: 20,
+    fontSize: 30,
     backgroundColor: "#eee",
     padding: 5,
     borderRadius: 20,
@@ -26,8 +26,7 @@ export const styles = StyleSheet.create({
 
   image: {
     width: "100%",
-    height: 450,
-    marginTop: 30,
+    height: 550,  
   },
 
 
@@ -87,7 +86,7 @@ export const styles = StyleSheet.create({
   },
 
   tabActive: {
-    backgroundColor: "#000",
+    backgroundColor: "#790000",
   },
 
   desc: {
@@ -100,7 +99,7 @@ export const styles = StyleSheet.create({
     bottom: 20,
     left: 20,
     right: 20,
-    backgroundColor: "#000",
+    backgroundColor: "#790000",
     padding: 15,
     borderRadius: 30,
     alignItems: "center",

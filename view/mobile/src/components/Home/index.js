@@ -6,6 +6,12 @@ import { getProducts, searchProducts } from "../../services/api";
 
 export default function Home({ navigation }) {
 
+
+
+
+  const handleSearch = () => {
+    navigation.navigate('searchresults', { query: searchText })
+  }
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
 
@@ -101,6 +107,8 @@ export default function Home({ navigation }) {
           style={styles.searchInput}
           value={searchText}
           onChangeText={setSearchText}
+          onSubmitEditing={handleSearch}
+          returnKeyType="search"
         />
       </View>
 

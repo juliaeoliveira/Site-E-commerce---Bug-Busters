@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./components/Home";
 import Descricao from "./components/Descrição";
+import Resultado from './components/Resultado'
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,11 @@ export default function HomeStack() {
         component={Descricao}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+      name="searchresults"
+      component={Resultado}
+      options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
 }

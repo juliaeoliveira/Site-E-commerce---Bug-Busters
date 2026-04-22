@@ -89,21 +89,7 @@ def list_products(request: Request, skip: int = 0, limit: int = 100, db: Session
     base_url = str(request.base_url)
     return [_build_product_response(product, base_url) for product in products]
 
-@router.get("/products/{id_produto}")
-async def details_products(request: Request,id_produto: int, db: Session = Depends(get_db)):
-    # 1. Consulta(Query) do Produto
-    product = db.query(Produto).filter(Produto.id == id_produto).first()
-
-    # 2. Validação de existencia de produto 
-    if not product:
-        raise HTTPException(status_code=404, detail="produto não encontrado")
-
-    base_url = str(request.base_url)
-    return {
-        "produtos": _build_product_response(product, base_url),
-        
-    }
-
+# 1. Primeiro a rota de busca (Específica)
 @router.get("/products/search", response_model=list[Products])
 def search_products(request: Request, q: Optional[str] = None, db: Session = Depends(get_db)):
     query = db.query(Produto)
@@ -116,6 +102,16 @@ def search_products(request: Request, q: Optional[str] = None, db: Session = Dep
     base_url = str(request.base_url)
     return [_build_product_response(product, base_url) for product in products]
 
+# 2. Depois a rota de detalhes (Genérica)
+@router.get("/products/{id_produto}")
+async def details_products(request: Request, id_produto: int, db: Session = Depends(get_db)):
+    product = db.query(Produto).filter(Produto.id == id_produto).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="produto não encontrado")
+    base_url = str(request.base_url)
+    return {
+        "produtos": _build_product_response(product, base_url),
+    }
 #rota detalhe do produto
 @router.get("/produtos/{id_produto}",
             response_class=HTMLResponse)
