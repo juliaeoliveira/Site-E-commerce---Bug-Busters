@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     zIndex: 10,
-    
   },
 
   icon: {
@@ -25,15 +24,10 @@ export const styles = StyleSheet.create({
   },
 
   image: {
-    width: "100%",
-    height: 550,  
+    height: 550,
   },
 
-
-  
-
   info: {
-
     padding: 20,
   },
 
@@ -108,5 +102,85 @@ export const styles = StyleSheet.create({
   botaoTexto: {
     color: "#fff",
     fontWeight: "bold",
+  },
+
+  sectionTitle: {
+    marginTop: 20,
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+
+  sizes: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 10,
+  },
+
+  sizeBtn: {
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#ccc",
+  },
+
+  sizeSelected: {
+    backgroundColor: "#790000",
+    borderColor: "#790000",
+  },
+
+  sizeText: {
+    color: "#333",
+  },
+
+  sizeTextSelected: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+
+  
+  dots: {
+    position: "absolute",
+    bottom: 15,
+    alignSelf: "center",
+    flexDirection: "row",
+  },
+
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#fff",
+    marginHorizontal: 5,
+  },
+
+  dotActive: {
+    backgroundColor: "#790000",
+    width: 10,
+    height: 10,
+  },
+
+ 
+  arrowLeft: {
+    position: "absolute",
+    left: 10,
+    top: "45%",
+  },
+
+  arrowRight: {
+    position: "absolute",
+    right: 10,
+    top: "45%",
+  },
+
+  arrowText: {
+    color: "#fff",
+    fontSize: 35,
+    fontWeight: "bold",
+
+    
+    textShadowColor: "#000",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3,
   },
 });
