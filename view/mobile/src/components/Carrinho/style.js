@@ -1,72 +1,111 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  body: {
+
+  container: {
     flex: 1,
-    backgroundColor: "#eae4d8",
-    padding:10,
+    backgroundColor: '#f4f6f8'
   },
 
   header: {
-    marginTop: 50,
+    height: 200,
+    backgroundColor: '#790000',
+    padding: 25,
     alignItems: 'center',
-    marginBottom: 20,
-  },
-
-  foto: {
-    color: '#000000ff',
-    marginBottom: 10,
+    justifyContent: 'center',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
   },
 
   username: {
-    fontSize: 23,
+    color: '#fff',
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
+    marginTop: 10
   },
 
   card: {
+    height: 500,
     backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 5,
-    elevation: 3,
+    margin: 15,
+    borderRadius: 15,
+    padding: 20,
+    elevation: 5,
+    marginTop: 50,
   },
 
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 12,
-    color: '#333',
-  },
-
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 10,
-    borderBottomColor: '#eee',
-    borderBottomWidth: 1,
-  },
-
-  label: {
-    fontSize: 16,
-    color: '#666',
-    flex: 1,
-  },
-
-  value: {
-    fontSize: 16,
-    color: '#333',
-    flex: 1,
-    textAlign: 'right',
-    marginRight: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 40,
+    color: '#333'
   },
 
   botaoEditar: {
-    padding: 4,
+    marginTop: 20,
+    backgroundColor: '#790000',
+    padding: 12,
+    borderRadius: 10,
+    alignItems: 'center'
   },
+
+  botaoSalvar: {
+    backgroundColor: '#790000',
+    padding: 12,
+    borderRadius: 10,
+    marginTop: 20,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+
+  cancelar: {
+    textAlign: 'center',
+    marginTop: 15,
+    color: '#333'
+  },
+
+  erro: {
+    color: 'red',
+    marginTop: 5
+  },
+
+  infoBox: {
+    marginBottom: 12
+  },
+
+  label: {
+    color: '#888'
+  },
+
+  value: {
+    padding: 1,
+    fontSize: 16
+  },
+
+  inputBox: {
+    marginBottom: 15
+  },
+
+  inputLabel: {
+    marginBottom: 5,
+    color: '#555'
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 10,
+    borderRadius: 8
+  },
+
+  modalContainer: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff'
+  }
+
 });
