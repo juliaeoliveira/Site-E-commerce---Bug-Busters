@@ -12,11 +12,19 @@ import Tasks from "./components/Tasks";
 import Carrinho from "./components/Carrinho";
 import Login from "./components/Login";
 import Cadastro from "./components/Cadastro";
+import Perfil from "./components/Perfil";
+import DadosConta from "./components/DadosConta";
+import Endereco from "./components/Endereco";
+import Pedidos from "./components/Pedidos";
+import DetalhePedido from "./components/DetalhePedido";
+import EditarConta from "./components/EditarConta";
+import ComprarNovamente from "./components/ComprarNovamente";
+import CriarEndereco from "./components/CadastroEndereco";
+import EditarEndereco from "./components/EditarEndereco";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useState } from "react";
-import Perfil from "./components/Perfil";
 
 const Tabs = createBottomTabNavigator();
 
@@ -115,6 +123,74 @@ export function Routes() {
           headerShown: false,
         }}
       />
+      <Tabs.Screen
+        name="dadosConta"
+        component={DadosConta}
+        options={{
+          tabBarItemStyle: { display: 'none' },
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="editarConta"
+        component={EditarConta}
+        options={{
+          tabBarItemStyle: { display: 'none' },
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="endereco"
+        component={Endereco}
+        options={{
+          tabBarItemStyle: { display: 'none' },
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="pedidos"
+        component={Pedidos}
+        options={{
+          tabBarItemStyle: { display: 'none' },
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="detalhePedido"
+        component={DetalhePedido}
+        options={{
+          tabBarItemStyle: { display: 'none' },
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="comprarNovamente"
+        component={ComprarNovamente}
+        options={{
+          tabBarItemStyle: { display: 'none' },
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen 
+      name="criarEndereco" 
+      component={CriarEndereco} 
+      options={{ 
+        tabBarItemStyle: { display: 'none' }, 
+        headerShown: false 
+        }} 
+      />
+      <Tabs.Screen 
+      name="editarEndereco" 
+      component={EditarEndereco} 
+      options={{ tabBarItemStyle: { display: 'none' }, 
+      headerShown: false 
+      }} 
+    />
     </Tabs.Navigator>
   );
 }

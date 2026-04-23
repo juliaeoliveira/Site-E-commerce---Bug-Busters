@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, Form
+from fastapi import APIRouter, Depends, Request, Form , HTTPException
 from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -156,11 +156,14 @@ def dados_conta(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile)):
 @caminho_prefixo_painelUsuario.get("/enderecos_cadastrados")
 def enderecos_cadastrados(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
         endereco = db.query(Endereco).filter(Endereco.usuario_id == usuario.id).first()
+        
+        if not endereco:
+            raise HTTPException(status_code=404, detail="Nenhum endereço cadastrado")
         return{
             "cep" : endereco.cep,
             "rua" : endereco.rua, 
             "numero" : endereco.numero,
-            "complementto" : endereco.complemento,
+            "complemento" : endereco.complemento,
             "bairro" : endereco.bairro,
             "cidade" : endereco.cidade,
             "estado" : endereco.estado
@@ -359,6 +362,22 @@ def meus_pedidos(request:Request,db:Session=Depends(get_db)):
     return templates.TemplateResponse("painel_usuario_meus_pedidos.html",
         {"request":request,"pedidos":pedidos,"primeiro_nome":primeiro_nome})
 
+@caminho_prefixo_painelUsuario.get("/seus_pedidos")
+def seus_pedidos(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
+    pedidos=db.query(Pedido).filter(Pedido.id_usuario == usuario.id).order_by(Pedido.data_pedido.desc()).all()
+    
+    if not pedidos:
+        raise HTTPException(status_code=404, detail="Nenhum pedido encontrado")
+    
+    return [
+        {
+            "id": p.id,
+            "data": p.data_pedido,
+            "valor_total": p.valor_total,
+            "status": p.status
+        } for p in pedidos
+    ]
+
 #detalhes dos pedidos do usuario
 @caminho_prefixo_painelUsuario.get("/meus-pedidos/{id_pedido}", response_class=HTMLResponse)
 def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_db)):
@@ -390,6 +409,36 @@ def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_d
         "itens": itens,
         "primeiro_nome" : primeiro_nome
     })
+
+@caminho_prefixo_painelUsuario.get("/seus_pedidos/{id_pedido}")
+def detalhe_pedido_mobile(id_pedido: int , usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
+    pedido = db.query(Pedido).filter(Pedido.id == id_pedido , Pedido.id_usuario == usuario.id).first()
+    
+    if not pedido:
+        raise HTTPException(status_code=404, detail="Pedido não encontrado")
+    
+    return {
+        "pedido": {
+            "id": pedido.id,
+            "data": pedido.data_pedido,
+            "valor_total": pedido.valor_total,
+            "status": pedido.status
+        },
+        "itens": [
+            {
+                "id": item.id,
+                "tamanho": item.tamanho,
+                "quantidade": item.quantidade,
+                "preco": item.preco_unitario,
+                "produto": {
+                    "id": item.produto.id,
+                    "nome": item.produto.nome_produto,
+                    "preco": item.produto.preco
+                }
+            }
+            for item in pedido.itens_pedido
+        ]
+    }
 
 @caminho_prefixo_painelUsuario.post("/meus-pedidos/cancelar_pedido", response_class=HTMLResponse)
 def cancelar_pedido(request: Request, db: Session = Depends(get_db), id_pedido : int=Form(...)):
@@ -446,7 +495,7 @@ def cancelar_pedido(request: Request, db: Session = Depends(get_db), id_pedido :
 
     return RedirectResponse (url="/painel_usuario/meus_pedidos", status_code=303)
 
-#comprar novamente: Pagina de produtos que usuario já comprou novamente 
+#comprar novamente: Pagina de produtos que usuario já comprou para facilitar a recompra, caso queira comprar o mesmo produto novamente 
 @caminho_prefixo_painelUsuario.get("/comprar_novamente", response_class=HTMLResponse)
 def comprar_novamente(request: Request, db: Session = Depends(get_db)):
     token = request.cookies.get("token")
@@ -491,6 +540,34 @@ def comprar_novamente(request: Request, db: Session = Depends(get_db)):
         "produtos": produtos_unicos,
         "primeiro_nome" : primeiro_nome
     })
+
+@caminho_prefixo_painelUsuario.get("/comprar_novamente_mobile")
+def comprar_novamente_mobile(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
+    pedidos = db.query(Pedido).filter(Pedido.id_usuario == usuario.id).all()
+
+    if not pedidos:
+        return {
+            "mensagem": "Você ainda não realizou nenhum pedido."
+        }
+
+    produtos_comprados = []
+    for pedido in pedidos:
+        for item in pedido.itens_pedido:
+            produtos_comprados.append(item.produto)
+
+    produtos_unicos = {p.id: p for p in produtos_comprados}.values()
+
+    return {
+        "produtos": [
+            {
+                "id": p.id,
+                "nome": p.nome_produto,
+                "preco": p.preco,
+                "imagem": p.imagem1_url
+            }
+            for p in produtos_unicos
+        ]
+    }
 
 
 #remove o cookie do token do usuario

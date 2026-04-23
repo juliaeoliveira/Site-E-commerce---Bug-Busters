@@ -61,13 +61,13 @@ useFocusEffect(
         <Text style={styles.sectionTitle}>Sua Conta</Text>
 
         <View style={styles.row}>
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("dadosConta")}>
 
             <MaterialIcons name="manage-accounts" size={28} />
             <Text>Dados da conta</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("endereco")}>
             <Ionicons name="location-outline" size={28}  />
             <Text>Endereços cadastrados</Text>
           </TouchableOpacity>
@@ -79,12 +79,12 @@ useFocusEffect(
         <Text style={styles.sectionTitle}>Pedidos</Text>
 
         <View style={styles.row}>
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("pedidos")}>
             <FontAwesome5 name="shopping-bag" size={24} />
             <Text>Seus pedidos</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("comprarNovamente")}>
             <Ionicons name="cart-outline" size={28} />
             <Text>Comprar novamente</Text>
           </TouchableOpacity>
