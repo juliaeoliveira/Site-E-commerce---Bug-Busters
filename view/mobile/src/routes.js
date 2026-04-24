@@ -17,7 +17,6 @@ import DadosConta from "./components/DadosConta";
 import Endereco from "./components/Endereco";
 import Pedidos from "./components/Pedidos";
 import DetalhePedido from "./components/DetalhePedido";
-import EditarConta from "./components/EditarConta";
 import ComprarNovamente from "./components/ComprarNovamente";
 import CriarEndereco from "./components/CadastroEndereco";
 import EditarEndereco from "./components/EditarEndereco";
@@ -126,15 +125,6 @@ export function Routes() {
       <Tabs.Screen
         name="dadosConta"
         component={DadosConta}
-        options={{
-          tabBarItemStyle: { display: 'none' },
-          headerShown: false,
-        }}
-      />
-
-      <Tabs.Screen
-        name="editarConta"
-        component={EditarConta}
         options={{
           tabBarItemStyle: { display: 'none' },
           headerShown: false,

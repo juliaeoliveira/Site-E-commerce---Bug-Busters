@@ -191,3 +191,9 @@ class PedidoCreate(BaseModel):
     valor_total: float
     itens_pedido: List[ItemPedidoCreate]
 
+class EditarUsuarioRequest(BaseModel):
+    nome_cliente: str
+    email: str
+    telefone: str
+    data_nascimento: str
+

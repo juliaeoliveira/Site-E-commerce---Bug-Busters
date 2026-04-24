@@ -183,3 +183,24 @@ export async function getComprarNovamente() {
 
     return data;
 }
+
+export async function editarUsuario(dados) {
+  const token = await AsyncStorage.getItem("token");
+
+  const response = await fetch(`${BASE_URL}/painel_usuario/editar_usuario_mobile`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(dados)
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail);
+  }
+
+  return data;
+}

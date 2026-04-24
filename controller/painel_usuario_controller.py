@@ -6,6 +6,8 @@ from sqlalchemy.sql.expression import func
 from database import get_db
 from controller.usuario_autenticacao import verificar_token , obter_usuario_logado_mobile
 from models import Usuario_Model, Produto, Endereco, Pedido ,Pagamento
+from schemas import EditarUsuarioRequest
+from datetime import datetime
 import random
 
 templates=Jinja2Templates(directory="view/templates")
@@ -233,6 +235,25 @@ def editar_usuario(request:Request,
     db.commit()
     db.refresh(usuario)
     return RedirectResponse(url="/painel_usuario/meus_dados",status_code=303)
+
+@caminho_prefixo_painelUsuario.put("/editar_usuario_mobile")
+def editar_usuario_mobile(
+    dados: EditarUsuarioRequest,
+    usuario: Usuario_Model = Depends(obter_usuario_logado_mobile),
+    db: Session = Depends(get_db)
+):
+    # atualizar dados
+    usuario.nome_cliente = dados.nome_cliente
+    usuario.email = dados.email
+    usuario.telefone = dados.telefone
+    usuario.data_nascimento = datetime.strptime(dados.data_nascimento, "%Y-%m-%d")
+
+    db.commit()
+    db.refresh(usuario)
+
+    return {
+        "mensagem": "Dados atualizados com sucesso"
+    }
 
 @caminho_prefixo_painelUsuario.get("/editar_endereco")
 def editar_endereco(request: Request, db: Session = Depends(get_db)):
