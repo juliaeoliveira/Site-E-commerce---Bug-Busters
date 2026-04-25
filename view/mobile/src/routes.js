@@ -14,12 +14,11 @@ import Login from "./components/Login";
 import Cadastro from "./components/Cadastro";
 import Perfil from "./components/Perfil";
 import DadosConta from "./components/DadosConta";
-import Endereco from "./components/Endereco";
+import Endereco from "./components/EnderecosCadastrados";
 import Pedidos from "./components/Pedidos";
 import DetalhePedido from "./components/DetalhePedido";
 import ComprarNovamente from "./components/ComprarNovamente";
 import CriarEndereco from "./components/CadastroEndereco";
-import EditarEndereco from "./components/EditarEndereco";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
@@ -174,13 +173,6 @@ export function Routes() {
         headerShown: false 
         }} 
       />
-      <Tabs.Screen 
-      name="editarEndereco" 
-      component={EditarEndereco} 
-      options={{ tabBarItemStyle: { display: 'none' }, 
-      headerShown: false 
-      }} 
-    />
     </Tabs.Navigator>
   );
 }

@@ -204,3 +204,26 @@ export async function editarUsuario(dados) {
 
   return data;
 }
+
+export async function editarEndereco(dados) {
+  try {
+    const headers = await getAuthHeaders();
+
+    const response = await fetch(`${BASE_URL}/painel_usuario/editar_endereco_mobile`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(dados)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.detail || "Erro ao editar endereço");
+    }
+
+    return data;
+
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}

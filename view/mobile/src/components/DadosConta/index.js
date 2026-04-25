@@ -187,7 +187,7 @@ export default function DadosConta({ navigation }) {
         setModalVisible(false);
         navigation.reset({
           index: 0,
-          routes: [{ name: "home" }],
+          routes: [{ name: "perfil" }],
         });
   
       } catch (error) {

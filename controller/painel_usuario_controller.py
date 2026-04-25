@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, Form , HTTPException
+from fastapi import APIRouter, Depends, Request, Form , Header, HTTPException
 from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -356,6 +356,74 @@ def editar_endereco(request:Request,
     db.refresh(endereco)
     return RedirectResponse(url="/painel_usuario/meus_dados",status_code=303)
 
+@caminho_prefixo_painelUsuario.put("/editar_endereco_mobile")
+def editar_endereco_mobile(
+    dados: dict,
+    usuario: Usuario_Model = Depends(obter_usuario_logado_mobile),
+    db: Session = Depends(get_db)
+):
+    try:
+
+        endereco = usuario.endereco
+
+        # validação básica
+        campos_obrigatorios = ["cep", "rua", "numero", "bairro", "cidade", "estado"]
+        for campo in campos_obrigatorios:
+            if not dados.get(campo):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Campo obrigatório não enviado: {campo}"
+                )
+
+        # dados vindos do app
+        cep = dados.get("cep")
+        rua = dados.get("rua")
+        numero = dados.get("numero")
+        complemento = dados.get("complemento")
+        bairro = dados.get("bairro")
+        cidade = dados.get("cidade")
+        estado = dados.get("estado")
+
+        # cria ou atualiza
+        if endereco is None:
+            endereco = Endereco(
+                usuario_id=usuario.id,
+                cep=cep,
+                rua=rua,
+                numero=numero,
+                complemento=complemento,
+                bairro=bairro,
+                cidade=cidade,
+                estado=estado
+            )
+            db.add(endereco)
+        else:
+            endereco.cep = cep
+            endereco.rua = rua
+            endereco.numero = numero
+            endereco.complemento = complemento
+            endereco.bairro = bairro
+            endereco.cidade = cidade
+            endereco.estado = estado
+
+        db.commit()
+        db.refresh(endereco)
+
+        return {
+            "mensagem": "Endereço atualizado com sucesso",
+            "endereco": {
+                "cep": endereco.cep,
+                "rua": endereco.rua,
+                "numero": endereco.numero,
+                "complemento": endereco.complemento,
+                "bairro": endereco.bairro,
+                "cidade": endereco.cidade,
+                "estado": endereco.estado
+            }
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 #listar pedidos do usuário
 @caminho_prefixo_painelUsuario.get("/meus_pedidos",response_class=HTMLResponse)
