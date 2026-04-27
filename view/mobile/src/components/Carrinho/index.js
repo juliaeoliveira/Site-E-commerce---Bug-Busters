@@ -1,177 +1,131 @@
-import { StatusBar } from 'expo-status-bar';
+import React, { useState } from "react";
 import {
-  Text,
   View,
+  Text,
   TouchableOpacity,
-  ScrollView,
   TextInput,
-  Modal
-} from 'react-native';
+  ScrollView
+} from "react-native";
 import { styles } from "./style";
-import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { Ionicons } from "@expo/vector-icons";
 
-export default function DadosConta() {
+export default function Endereco() {
+  const [tela, setTela] = useState("lista");
+  const [endereco, setEndereco] = useState(null);
 
-  const [perfil, setPerfil] = useState({
-    nome: 'Pedro Silva',
-    email: 'pedro@email.com',
-    telefone: '(11) 99999-9999',
-    senha: '',
-    senha_confirmar: ''
+  const [form, setForm] = useState({
+    rua: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+    cep: "",
   });
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [perfilEditando, setPerfilEditando] = useState(perfil);
-  const [erroSenha, setErroSenha] = useState('');
-
-  function abrirModal() {
-    setPerfilEditando(perfil);
-    setErroSenha('');
-    setModalVisible(true);
+  function salvarEndereco() {
+    setEndereco(form);
+    setTela("lista");
   }
 
-  function validarSenha() {
-    if (perfilEditando.senha.length < 6) {
-      setErroSenha('Senha precisa ter pelo menos 6 caracteres');
-      return false;
-    }
+  // ===== TELA PRINCIPAL =====
+  if (tela === "lista") {
+    return (
+      <View style={styles.container}>
+       
+        <View style={styles.header}>
+          <Ionicons name="location-sharp" size={50} color="#fff" />
+          <Text style={styles.titulo}>Endereço</Text>
+        </View>
 
-    if (perfilEditando.senha !== perfilEditando.senha_confirmar) {
-      setErroSenha('As senhas não coincidem');
-      return false;
-    }
+      
+        <View style={styles.box}>
+          {!endereco ? (
+            <>
+              <Text style={styles.texto}>
+                Você ainda não possui um endereço cadastrado.
+              </Text>
 
-    setErroSenha('');
-    return true;
+              <TouchableOpacity onPress={() => setTela("form")}>
+                <Text style={styles.link}>Cadastrar endereço</Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
+              <Text style={styles.texto}>Seu endereço:</Text>
+              <Text style={styles.dado}>Rua: {endereco.rua}, {endereco.numero}</Text>
+              <Text style={styles.dado}>Bairro: {endereco.bairro}</Text>
+              <Text style={styles.dado}>Cidade: {endereco.cidade}   -   Estado: {endereco.estado}</Text>
+              <Text style={styles.dado}>CEP: {endereco.cep}</Text>
+              <Text style={styles.dado}>Complemento: {endereco.complemento}</Text>
+
+              <TouchableOpacity onPress={() => setTela("form")}>
+                <Text style={styles.link}>Editar endereço</Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
+      </View>
+    );
   }
 
-  function salvar() {
-    if (!validarSenha()) return;
-
-    setPerfil(perfilEditando);
-    setModalVisible(false);
-  }
-
+  
   return (
     <ScrollView style={styles.container}>
-
-      {/* HEADER */}
       <View style={styles.header}>
-        <Ionicons name="person-circle-outline" size={80} color="#fff" marginTop={30} />
-        <Text style={styles.username}>
-          {perfil.nome || 'Usuário'}
-        </Text>
+        <Text style={styles.titulo}>Cadastrar Endereço</Text>
       </View>
 
-      {/* CARD */}
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>Dados da Conta</Text>
+      <View style={styles.form}>
+        <TextInput
+          placeholder="Rua:"
+          style={styles.input}
+          onChangeText={(t) => setForm({ ...form, rua: t })}
+        />
 
-        <Info label="Nome:" value={perfil.nome} />
-        <Info label="Email:" value={perfil.email} />
-        <Info label="Telefone:" value={perfil.telefone} />
-        <Info label="Senha:" value={perfil.senha ? '••••••••' : '-'} />
+        <TextInput
+          placeholder="Número:"
+          style={styles.input}
+          onChangeText={(t) => setForm({ ...form, numero: t })}
+        />
 
-        <TouchableOpacity
-          style={styles.botaoEditar}
-          onPress={abrirModal}
-        >
-          <Text style={styles.textoBotao}>Editar dados</Text>
+        <TextInput
+          placeholder="Bairro:"
+          style={styles.input}
+          onChangeText={(t) => setForm({ ...form, bairro: t })}
+        />
+
+        <TextInput
+          placeholder="Cidade:"
+          style={styles.input}
+          onChangeText={(t) => setForm({ ...form, cidade: t })}  
+        />
+
+        <TextInput
+          placeholder="Estado:"
+          style={styles.input}
+          onChangeText={(t) => setForm({ ...form, estado: t })}
+        />
+
+        <TextInput
+          placeholder="CEP:"
+          style={styles.input}
+          onChangeText={(t) => setForm({ ...form, cep: t })}
+        />
+
+        <TextInput
+          placeholder="Complemento (opcional):"
+          style={styles.input}
+          onChangeText={(t) => setForm({ ...form, complemento: t })}
+        />
+
+        <TouchableOpacity style={styles.botao} onPress={salvarEndereco}>
+          <Text style={styles.botaoTexto}>Salvar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setTela("lista")}>
+          <Text style={styles.cancelar}>Cancelar</Text>
         </TouchableOpacity>
       </View>
-
-      {/* MODAL */}
-      <Modal visible={modalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-
-          <Text style={styles.sectionTitle}>
-            Editar Perfil
-          </Text>
-''
-          <Input label="Nome" value={perfilEditando.nome}
-            onChange={(t) =>
-              setPerfilEditando(p => ({ ...p, nome: t }))
-            }
-          />
-
-          <Input label="Email" value={perfilEditando.email}
-            onChange={(t) =>
-              setPerfilEditando(p => ({ ...p, email: t }))
-            }
-          />
-
-          <Input label="Telefone" value={perfilEditando.telefone}
-            onChange={(t) =>
-              setPerfilEditando(p => ({ ...p, telefone: t }))
-            }
-          />
-
-          <Input label="Senha" secure
-            value={perfilEditando.senha}
-            onChange={(t) =>
-              setPerfilEditando(p => ({ ...p, senha: t }))
-            }
-          />
-
-          <Input label="Confirmar senha" secure
-            value={perfilEditando.senha_confirmar}
-            onChange={(t) =>
-              setPerfilEditando(p => ({ ...p, senha_confirmar: t }))
-            }
-          />
-
-          {erroSenha ? (
-            <Text style={styles.erro}>
-              {erroSenha}
-            </Text>
-          ) : null}
-
-          <TouchableOpacity
-            style={styles.botaoSalvar}
-            onPress={salvar}
-          >
-            <Text style={styles.textoBotao}>
-              Salvar
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-            <Text style={styles.cancelar}>
-              Cancelar
-            </Text>
-          </TouchableOpacity>
-
-        </View>
-      </Modal>
-
-      <StatusBar style="auto" />
     </ScrollView>
-  );
-}
-
-/* COMPONENTES AUXILIARES */
-
-function Info({ label, value }) {
-  return (
-    <View style={styles.infoBox}>
-      <Text style={styles.label}>{label}</Text>
-      <Text style={styles.value}>{value || '-'}</Text>
-    </View>
-  );
-}
-
-function Input({ label, value, onChange, secure }) {
-  return (
-    <View style={styles.inputBox}>
-      <Text style={styles.inputLabel}>{label}</Text>
-
-      <TextInput
-        value={value}
-        secureTextEntry={secure}
-        onChangeText={onChange}
-        style={styles.input}
-      />
-    </View>
   );
 }

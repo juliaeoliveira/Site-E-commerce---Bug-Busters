@@ -1,111 +1,81 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-
   container: {
     flex: 1,
-    backgroundColor: '#f4f6f8'
+    backgroundColor: "#f2f2f2",
   },
 
   header: {
+    backgroundColor: '#790000',
     height: 200,
-    backgroundColor: '#790000',
-    padding: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20
+    borderBottomRightRadius: 20,
   },
 
-  username: {
-    color: '#fff',
+  titulo: {
+    color: "#fff",
     fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 10
+    marginTop: 5,
+    fontWeight: "bold",
   },
 
-  card: {
-    height: 500,
-    backgroundColor: '#fff',
-    margin: 15,
-    borderRadius: 15,
+  box: {
+    backgroundColor: "#fff",
+    margin: 20,
     padding: 20,
-    elevation: 5,
-    marginTop: 50,
+    borderRadius: 15,
+    elevation: 3,
   },
 
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 40,
-    color: '#333'
+  texto: {
+    color: '#790000',
+    fontSize: 17,
   },
 
-  botaoEditar: {
+  link: {
+    color: "#d32f2f",
+    marginTop: 30,
+    fontWeight: "bold",
+  },
+
+  dado: {
+    fontSize: 16,
+    marginTop: 5,
+    padding:5,
+  },
+
+  form: {
+    padding: 20,
     marginTop: 20,
-    backgroundColor: '#790000',
-    padding: 12,
-    borderRadius: 10,
-    alignItems: 'center'
-  },
-
-  botaoSalvar: {
-    backgroundColor: '#790000',
-    padding: 12,
-    borderRadius: 10,
-    marginTop: 20,
-    alignItems: 'center'
-  },
-
-  textoBotao: {
-    color: '#fff',
-    fontWeight: 'bold'
-  },
-
-  cancelar: {
-    textAlign: 'center',
-    marginTop: 15,
-    color: '#333'
-  },
-
-  erro: {
-    color: 'red',
-    marginTop: 5
-  },
-
-  infoBox: {
-    marginBottom: 12
-  },
-
-  label: {
-    color: '#888'
-  },
-
-  value: {
-    padding: 1,
-    fontSize: 16
-  },
-
-  inputBox: {
-    marginBottom: 15
-  },
-
-  inputLabel: {
-    marginBottom: 5,
-    color: '#555'
   },
 
   input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 10,
-    borderRadius: 8
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    elevation: 2,
   },
 
-  modalContainer: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff'
-  }
+  botao: {
+    backgroundColor: '#790000',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 10,
+  },
 
+  botaoTexto: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+
+  cancelar: {
+    textAlign: "center",
+    marginTop: 15,
+    color: "#777",
+  },
 });
