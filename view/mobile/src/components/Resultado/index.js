@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, Image } from "react-native";
 import { searchProducts } from "../../services/api";
 
 export default function Resultado({ route }) {
@@ -45,6 +45,8 @@ export default function Resultado({ route }) {
         renderItem={({ item }) => (
           <View style={{ padding: 10, borderBottomWidth: 1, borderColor: '#eee' }}>
              {/* Use o nome da propriedade que vem da sua API (ex: nome_produto) */}
+
+             <Image style={{width: 100, height: 150 }} source={{ uri: item.imagem1_url }}/>
             <Text style={{ fontSize: 16 }}>{item.nome_produto || item.nome || item.title}</Text>
             <Text style={{ color: 'green' }}>R$ {item.preco}</Text>
           </View>

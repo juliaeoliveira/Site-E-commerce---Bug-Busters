@@ -22,8 +22,9 @@ export default function Descricao({ route, navigation }) {
 
   const imagens = [
     product.imagem1_url,
-    product.imagem1_url,
-    product.imagem1_url,
+    product.imagem2_url,
+    product.imagem3_url,
+    product.imagem4_url
   ];
 
   const tamanhos = ["P", "M", "G", "GG"];
