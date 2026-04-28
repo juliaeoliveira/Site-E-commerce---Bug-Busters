@@ -25,9 +25,8 @@ export const styles = StyleSheet.create({
   },
 
   card: {
-    height: 500,
     backgroundColor: '#fff',
-    margin: 15,
+    margin: 20,
     borderRadius: 15,
     padding: 20,
     elevation: 5,
@@ -106,6 +105,17 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff'
+  },
+
+  emptyText: {
+    color: '#790000',
+    fontSize: 17,
+  },
+
+  buttonText: {
+    color: "#d32f2f",
+    marginTop: 30,
+    fontWeight: "bold",
   }
 
 });

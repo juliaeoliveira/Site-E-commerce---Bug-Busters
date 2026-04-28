@@ -58,6 +58,27 @@ export async function CreateUser(userData) {
     return await response.json();
 }
 
+export async function criarEndereco(dados) {
+  const token = await AsyncStorage.getItem("token");
+
+  const response = await fetch(`${BASE_URL}/usuario/criar_endereco_mobile`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(dados)
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail);
+  }
+
+  return data;
+}
+
 export async function Login(email, senha) {
     const response = await fetch(`${BASE_URL}/usuario/login_mobile`, {
         method: "POST",

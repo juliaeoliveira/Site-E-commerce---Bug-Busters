@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import {
   Text,
   View,
+  editable,
   TouchableOpacity,
   ScrollView,
   TextInput,
@@ -92,6 +93,32 @@ export default function Endereco({ navigation }) {
     setModalVisible(true);
   }
 
+  function normalizarEstado(estado) {
+  if (!estado) return "";
+
+  const estados = {
+    "acre": "AC", "alagoas": "AL", "amapá": "AP", "amazonas": "AM",
+    "bahia": "BA", "ceará": "CE", "distrito federal": "DF",
+    "espírito santo": "ES", "goiás": "GO", "maranhão": "MA",
+    "mato grosso": "MT", "mato grosso do sul": "MS",
+    "minas gerais": "MG", "pará": "PA", "paraíba": "PB",
+    "paraná": "PR", "pernambuco": "PE", "piauí": "PI",
+    "rio de janeiro": "RJ", "rio grande do norte": "RN",
+    "rio grande do sul": "RS", "rondônia": "RO",
+    "roraima": "RR", "santa catarina": "SC",
+    "são paulo": "SP", "sergipe": "SE", "tocantins": "TO"
+  };
+
+  const estadoFormatado = estado.trim().toLowerCase();
+
+  // se já vier tipo "SP", mantém
+  if (estadoFormatado.length === 2) {
+    return estadoFormatado.toUpperCase();
+  }
+
+  return estados[estadoFormatado] || estado.toUpperCase();
+}
+
   async function handleSalvar() {
     try {
       if (!cep || !rua || !numero || !bairro || !cidade || !estado) {
@@ -106,7 +133,7 @@ export default function Endereco({ navigation }) {
         complemento,
         bairro,
         cidade,
-        estado
+        estado: normalizarEstado(estado)
       };
 
       await editarEndereco(dadosEnvio);
@@ -219,12 +246,12 @@ export default function Endereco({ navigation }) {
               }
             }}
           />
-          <Input label="Rua" value={rua} onChange={setRua} />
+          <Input label="Rua" value={rua} onChange={setRua} editable={false} />
           <Input label="Número" value={numero} onChange={setNumero} />
           <Input label="Complemento" value={complemento} onChange={setComplemento} />
-          <Input label="Bairro" value={bairro} onChange={setBairro} />
-          <Input label="Cidade" value={cidade} onChange={setCidade} />
-          <Input label="Estado" value={estado} onChange={setEstado} />
+          <Input label="Bairro" value={bairro} onChange={setBairro} editable={false} />
+          <Input label="Cidade" value={cidade} onChange={setCidade} editable={false} />
+          <Input label="Estado" value={estado} onChange={setEstado} editable={false} />
 
           <TouchableOpacity
             style={styles.botaoSalvar}
@@ -262,7 +289,7 @@ function Info({ label, value, placeholder }) {
   );
 }
 
-function Input({ label, value, onChange }) {
+function Input({ label, value, onChange, editable = true }) {
   return (
     <View style={styles.inputBox}>
       <Text style={styles.inputLabel}>{label}</Text>
@@ -271,6 +298,7 @@ function Input({ label, value, onChange }) {
         value={value}
         onChangeText={onChange}
         style={styles.input}
+        editable={editable}
       />
     </View>
   );

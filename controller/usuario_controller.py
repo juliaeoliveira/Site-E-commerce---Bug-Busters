@@ -120,6 +120,62 @@ def cadastrar_usuario_no_mobile(usuario: Usuario, db: Session = Depends(get_db))
 
     return usuario
 
+@caminho_prefixo_usuario.post("/criar_endereco_mobile")
+def criar_endereco_mobile(
+    dados: dict,
+    usuario: Usuario_Model = Depends(obter_usuario_logado_mobile),
+    db: Session = Depends(get_db)
+):
+    try:
+
+        # verifica se já tem endereço
+        if usuario.endereco:
+            raise HTTPException(
+                status_code=400,
+                detail="Usuário já possui endereço cadastrado"
+            )
+
+        # validação básica
+        campos_obrigatorios = ["cep", "rua", "numero", "bairro", "cidade", "estado"]
+        for campo in campos_obrigatorios:
+            if not dados.get(campo):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Campo obrigatório não enviado: {campo}"
+                )
+
+        # cria endereço
+        novo_endereco = Endereco_Model(
+            usuario_id=usuario.id,
+            cep=dados.get("cep"),
+            rua=dados.get("rua"),
+            numero=dados.get("numero"),
+            complemento=dados.get("complemento"),
+            bairro=dados.get("bairro"),
+            cidade=dados.get("cidade"),
+            estado=dados.get("estado")
+        )
+
+        db.add(novo_endereco)
+        db.commit()
+        db.refresh(novo_endereco)
+
+        return {
+            "mensagem": "Endereço criado com sucesso",
+            "endereco": {
+                "cep": novo_endereco.cep,
+                "rua": novo_endereco.rua,
+                "numero": novo_endereco.numero,
+                "complemento": novo_endereco.complemento,
+                "bairro": novo_endereco.bairro,
+                "cidade": novo_endereco.cidade,
+                "estado": novo_endereco.estado
+            }
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 #rota login usuário
 @caminho_prefixo_usuario.get("/login",response_class=HTMLResponse)
 def home(request:Request):
