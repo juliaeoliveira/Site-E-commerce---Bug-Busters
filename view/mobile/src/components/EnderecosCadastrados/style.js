@@ -96,9 +96,11 @@ export const styles = StyleSheet.create({
 
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#999', // mais escuro
     padding: 10,
-    borderRadius: 8
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    color: '#000' // garante texto visível
   },
 
   modalContainer: {

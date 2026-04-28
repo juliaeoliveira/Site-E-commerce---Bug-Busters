@@ -228,7 +228,6 @@ export default function DadosConta({ navigation }) {
         <Info label="Email:" value={dados?.email} />
         <Info label="Telefone:" value={formatarTelefoneParaInput(dados?.telefone)} />
         <Info label="Data de Nascimento:" value={formatarDataParaInput(dados?.data_nascimento)} />
-        <Info label="Senha:" placeholder='••••••••'/>
 
         <TouchableOpacity
           style={styles.botaoEditar}
@@ -246,11 +245,11 @@ export default function DadosConta({ navigation }) {
             Editar Perfil
           </Text>
 
-          <Input label="Nome" value={nome}
+          <Input style={styles.input} label="Nome" value={nome}
             onChange={setNome}
           />
 
-          <Input label="Email" value={email}
+          <Input style={styles.input} label="Email" value={email}
             onChange={setEmail}
           />
 
@@ -262,26 +261,6 @@ export default function DadosConta({ navigation }) {
             onChange={(text) => setDataNascimento(formatarInputData(text))}
             keyboardType="numeric"
           />
-
-          <Input label="Senha" secure
-            value={perfilEditando.senha}
-            onChange={(t) =>
-              setPerfilEditando(p => ({ ...p, senha: t }))
-            }
-          />
-
-          <Input label="Confirmar senha" secure
-            value={perfilEditando.senha_confirmar}
-            onChange={(t) =>
-              setPerfilEditando(p => ({ ...p, senha_confirmar: t }))
-            }
-          />
-
-          {erroSenha ? (
-            <Text style={styles.erro}>
-              {erroSenha}
-            </Text>
-          ) : null}
 
           <TouchableOpacity
             style={styles.botaoSalvar}
