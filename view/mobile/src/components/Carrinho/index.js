@@ -1,131 +1,102 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  ScrollView
-} from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { styles } from "./style";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
 
-export default function Endereco() {
-  const [tela, setTela] = useState("lista");
-  const [endereco, setEndereco] = useState(null);
+export default function Carrinho({ navigation }) {
 
-  const [form, setForm] = useState({
-    rua: "",
-    numero: "",
-    bairro: "",
-    cidade: "",
-    estado: "",
-    cep: "",
-  });
+  const [cart, setCart] = useState([
+    { 
+      id: 1, 
+      nome: "Camaleão dourado", 
+      preco: 359.90, 
+      qtd: 1, 
+      img: require("../../assets/images/coleção3.jpg") 
+    },
+    { 
+      id: 2, 
+      nome: "Amor sem fim", 
+      preco: 199.90, 
+      qtd: 1, 
+      img: require("../../assets/images/coleção4.jpg")
+    }
 
-  function salvarEndereco() {
-    setEndereco(form);
-    setTela("lista");
+  ]);
+
+  function aumentar(id) {
+    setCart(cart.map(item =>
+      item.id === id ? { ...item, qtd: item.qtd + 1 } : item
+    ));
   }
 
-  // ===== TELA PRINCIPAL =====
-  if (tela === "lista") {
-    return (
-      <View style={styles.container}>
-       
-        <View style={styles.header}>
-          <Ionicons name="location-sharp" size={50} color="#fff" />
-          <Text style={styles.titulo}>Endereço</Text>
-        </View>
-
-      
-        <View style={styles.box}>
-          {!endereco ? (
-            <>
-              <Text style={styles.texto}>
-                Você ainda não possui um endereço cadastrado.
-              </Text>
-
-              <TouchableOpacity onPress={() => setTela("form")}>
-                <Text style={styles.link}>Cadastrar endereço</Text>
-              </TouchableOpacity>
-            </>
-          ) : (
-            <>
-              <Text style={styles.texto}>Seu endereço:</Text>
-              <Text style={styles.dado}>Rua: {endereco.rua}, {endereco.numero}</Text>
-              <Text style={styles.dado}>Bairro: {endereco.bairro}</Text>
-              <Text style={styles.dado}>Cidade: {endereco.cidade}   -   Estado: {endereco.estado}</Text>
-              <Text style={styles.dado}>CEP: {endereco.cep}</Text>
-              <Text style={styles.dado}>Complemento: {endereco.complemento}</Text>
-
-              <TouchableOpacity onPress={() => setTela("form")}>
-                <Text style={styles.link}>Editar endereço</Text>
-              </TouchableOpacity>
-            </>
-          )}
-        </View>
-      </View>
-    );
+  function diminuir(id) {
+    setCart(cart.map(item =>
+      item.id === id && item.qtd > 1
+        ? { ...item, qtd: item.qtd - 1 }
+        : item
+    ));
   }
 
-  
+  function remover(id) {
+    setCart(cart.filter(item => item.id !== id));
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.preco * item.qtd, 0);
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.body}>
+
       <View style={styles.header}>
-        <Text style={styles.titulo}>Cadastrar Endereço</Text>
+        <Ionicons name="cart-outline" size={35} />
+        <Text style={styles.title}>Meu Carrinho</Text>
       </View>
 
-      <View style={styles.form}>
-        <TextInput
-          placeholder="Rua:"
-          style={styles.input}
-          onChangeText={(t) => setForm({ ...form, rua: t })}
-        />
+      <View style={styles.card}>
+        {cart.map(item => (
+          <View key={item.id} style={styles.item}>
 
-        <TextInput
-          placeholder="Número:"
-          style={styles.input}
-          onChangeText={(t) => setForm({ ...form, numero: t })}
-        />
+         
+            <Image source={item.img} style={styles.image} />
 
-        <TextInput
-          placeholder="Bairro:"
-          style={styles.input}
-          onChangeText={(t) => setForm({ ...form, bairro: t })}
-        />
+            <View style={styles.info}>
+              <Text style={styles.nome}>{item.nome}</Text>
+              <Text style={styles.preco}>R$ {item.preco.toFixed(2)}</Text>
 
-        <TextInput
-          placeholder="Cidade:"
-          style={styles.input}
-          onChangeText={(t) => setForm({ ...form, cidade: t })}  
-        />
+              <View style={styles.controls}>
+                <TouchableOpacity onPress={() => diminuir(item.id)} style={styles.btn}>
+                  <Text>-</Text>
+                </TouchableOpacity>
 
-        <TextInput
-          placeholder="Estado:"
-          style={styles.input}
-          onChangeText={(t) => setForm({ ...form, estado: t })}
-        />
+                <Text style={styles.qtd}>{item.qtd}</Text>
 
-        <TextInput
-          placeholder="CEP:"
-          style={styles.input}
-          onChangeText={(t) => setForm({ ...form, cep: t })}
-        />
+                <TouchableOpacity onPress={() => aumentar(item.id)} style={styles.btn}>
+                  <Text>+</Text>
+                </TouchableOpacity>
+              </View>
 
-        <TextInput
-          placeholder="Complemento (opcional):"
-          style={styles.input}
-          onChangeText={(t) => setForm({ ...form, complemento: t })}
-        />
+              <Text style={styles.linha}>
+                _________________________________________
+              </Text>
+            </View>
 
-        <TouchableOpacity style={styles.botao} onPress={salvarEndereco}>
-          <Text style={styles.botaoTexto}>Salvar</Text>
-        </TouchableOpacity>
+            <TouchableOpacity onPress={() => remover(item.id)}>
+              <Ionicons name="trash-outline" size={22} color="red" />
+            </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setTela("lista")}>
-          <Text style={styles.cancelar}>Cancelar</Text>
+          </View>
+        ))}
+      </View>
+
+      <View style={styles.footer}>
+        <Text style={styles.total}>Total: R$ {total.toFixed(2)}</Text>
+
+        <TouchableOpacity style={styles.checkout}>
+          <Text style={styles.checkoutText}>Finalizar Compra</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+
+      <StatusBar style="auto" />
+    </View>
   );
 }

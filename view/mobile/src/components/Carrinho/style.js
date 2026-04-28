@@ -1,81 +1,105 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {
+
+  body: {
     flex: 1,
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#eae4d8",
+    paddingTop: 40,
   },
 
   header: {
-    backgroundColor: '#790000',
-    height: 200,
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 15,
+    gap: 10,
+    marginTop: 25,
+  },
+
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    margin: 15,
+    borderRadius: 12,
+    padding: 10,
+  },
+
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+  },
+
+  info: {
+    flex: 1,
+    marginLeft: 10,
+  },
+
+  nome: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  preco: {
+    color: "green",
+    marginTop: 2,
+  },
+
+  controls: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+  },
+
+  btn: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#ddd",
     justifyContent: "center",
     alignItems: "center",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderRadius: 5,
   },
 
-  titulo: {
-    color: "#fff",
-    fontSize: 20,
-    marginTop: 5,
+  qtd: {
+    marginHorizontal: 10,
+  },
+
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    backgroundColor: "#fff",
+    padding: 15,
+    borderTopWidth: 1,
+    borderColor: "#ddd",
+  },
+
+  total: {
+    fontSize: 18,
     fontWeight: "bold",
   },
 
-  box: {
-    backgroundColor: "#fff",
-    margin: 20,
-    padding: 20,
-    borderRadius: 15,
-    elevation: 3,
-  },
-
-  texto: {
-    color: '#790000',
-    fontSize: 17,
-  },
-
-  link: {
-    color: "#d32f2f",
-    marginTop: 30,
-    fontWeight: "bold",
-  },
-
-  dado: {
-    fontSize: 16,
-    marginTop: 5,
-    padding:5,
-  },
-
-  form: {
-    padding: 20,
-    marginTop: 20,
-  },
-
-  input: {
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-    elevation: 2,
-  },
-
-  botao: {
-    backgroundColor: '#790000',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
+  checkout: {
+    backgroundColor: "#790000",
+    padding: 12,
+    borderRadius: 8,
     marginTop: 10,
+    alignItems: "center",
   },
 
-  botaoTexto: {
+  checkoutText: {
     color: "#fff",
     fontWeight: "bold",
   },
 
-  cancelar: {
-    textAlign: "center",
-    marginTop: 15,
-    color: "#777",
-  },
 });
