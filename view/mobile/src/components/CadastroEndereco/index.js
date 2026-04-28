@@ -165,11 +165,11 @@ export default function CadastrarEndereco({ navigation }) {
             keyboardType="numeric"
           />
 
-          <TextInput label="Rua:"    placeholder="Ex: Rua das Flores" style={styles.input} value={rua} onChangeText={setRua} editable={false}/>
+          <TextInput label="Rua:"    placeholder="Ex: Rua das Flores" style={styles.input} value={rua} onChangeText={setRua} />
           <TextInput label="Número:" placeholder="Ex: 123" style={styles.input} value={numero} onChangeText={setNumero} />
-          <TextInput label="Bairro:" placeholder="Ex: Vila Madalena" style={styles.input} value={bairro} onChangeText={setBairro} editable={false}/>
-          <TextInput label="Cidade:" placeholder="Ex: São Paulo" style={styles.input} value={cidade} onChangeText={setCidade} editable={false}/>
-          <TextInput label="Estado:" placeholder="Ex: São Paulo"style={styles.input} value={estado} onChangeText={setEstado} editable={false} />
+          <TextInput label="Bairro:" placeholder="Ex: Vila Madalena" style={styles.input} value={bairro} onChangeText={setBairro} />
+          <TextInput label="Cidade:" placeholder="Ex: São Paulo" style={styles.input} value={cidade} onChangeText={setCidade} />
+          <TextInput label="Estado:" placeholder="Ex: São Paulo"style={styles.input} value={estado} onChangeText={setEstado} />
 
           <TextInput
             placeholder="Complemento (opcional):"
