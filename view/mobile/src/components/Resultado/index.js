@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, ActivityIndicator, Image } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, Image, TouchableOpacity } from "react-native";
 import { searchProducts } from "../../services/api";
 
-export default function Resultado({ route }) {
+export default function Resultado({ route, navigation }) {
+
+  const handleSearch = () => {
+    navigation.navigate('searchresults', { query: searchText })
+  }
   const { query } = route.params; // Pega aquilo que foi digitado na home
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,12 +47,15 @@ export default function Resultado({ route }) {
         data={products}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
+          
           <View style={{ padding: 10, borderBottomWidth: 1, borderColor: '#eee' }}>
+            <TouchableOpacity onPress={() => navigation.navigate("detalhes", { product: item })}>
              {/* Use o nome da propriedade que vem da sua API (ex: nome_produto) */}
 
              <Image style={{width: 100, height: 150 }} source={{ uri: item.imagem1_url }}/>
             <Text style={{ fontSize: 16 }}>{item.nome_produto || item.nome || item.title}</Text>
             <Text style={{ color: 'green' }}>R$ {item.preco}</Text>
+            </TouchableOpacity>
           </View>
         )}
         ListEmptyComponent={
@@ -57,6 +64,8 @@ export default function Resultado({ route }) {
           </Text>
         }
       />
+      
     </View>
+    
   );
 }

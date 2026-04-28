@@ -41,6 +41,26 @@ export async function searchProducts(query) {
     return data;
 }
 
+export async function getColecoes() {
+    try {
+        console.log("Buscando coleções de:", `${BASE_URL}/products/colecoes`);
+        const response = await fetch(`${BASE_URL}/products/colecoes`)
+        console.log("Status da resposta:", response.status);
+        
+        if (!response.ok) {
+            const errorData = await response.text();
+            console.error("Erro da API:", errorData);
+            throw new Error(`Erro HTTP ${response.status}: ${errorData}`)
+        }
+        const data = await response.json()
+        console.log("Dados recebidos:", data);
+        return data.colecoes || data
+    } catch (error) {
+        console.error("Erro ao buscar coleções:", error)
+        return []
+    }
+}
+
 export async function CreateUser(userData) {
     const response = await fetch(`${BASE_URL}/usuario/create_user`, {
         method: "POST",

@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { styles } from "./style";
 import { useState } from 'react';
 
-export default function HomeScreen() {
+export default function Tasks({ navigation }) {
 
   const dressCollections = {
     1: [
