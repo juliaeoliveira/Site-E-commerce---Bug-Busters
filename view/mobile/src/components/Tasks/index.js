@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { styles } from "./style";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getProdutosByCategoria } from "../../services/api";
 
-export default function HomeScreen() {
+export default function Tasks({ navigation }) {
 
   const dressCollections = {
     1: [
@@ -22,24 +23,19 @@ export default function HomeScreen() {
       { id: 11, name: "Vestido Social", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
       { id: 12, name: "Vestido Gala", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
     ],
-    3: [
-      { id: 13, name: "Vestido Verão", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
-      { id: 14, name: "Vestido Tropical", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
-      { id: 15, name: "Vestido Colorido", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
-      { id: 16, name: "Vestido Fresco", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
-      { id: 17, name: "Vestido Dia", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
-      { id: 18, name: "Vestido Light", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
-    ],
-    4: [
-      { id: 19, name: "Vestido Premium", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
-      { id: 20, name: "Vestido Sofisticado", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
-      { id: 21, name: "Vestido Exclusivo", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
-      { id: 22, name: "Vestido Moderno", image: require("../../assets/images/pexels-jonathanborba-30822468.jpg") },
-      { id: 23, name: "Vestido Chic", image: require("../../assets/images/pexels-rnnzeravac-12573815.jpg") },
-      { id: 24, name: "Vestido Estilo", image: require("../../assets/images/pexels-daisatj-5062276.jpg") },
-    ]
+    3: [], // Será preenchido com produtos da categoria "encanto"
+    4: []  // Será preenchido com produtos da categoria "o_desabrochar"
   };
 
+  // Mapeamento das coleções para categorias do banco
+  const collectionCategories = {
+    1: "brisa_do_altar",    // Coleção 1 -> categoria "brisa_do_altar"
+    2: "sussurros",         // Coleção 2 -> categoria "sussurros"
+    3: "encanto",           // Coleção 3 -> categoria "encanto"
+    4: "o_desabrochar"      // Coleção 4 -> categoria "o_desabrochar"
+  };
+
+  
   const collections = [
     { id: 1, image: require("../../assets/images/coleção1.jpg") },
     { id: 2, image: require("../../assets/images/coleção2.jpg") },
@@ -48,8 +44,49 @@ export default function HomeScreen() {
   ];
 
   const [selected, setSelected] = useState(1);
+  const [realProducts, setRealProducts] = useState({});
 
-  const dresses = dressCollections[selected];
+  useEffect(() => {
+    async function loadRealProducts() {
+      const loadedProducts = {};
+
+      // Tenta carregar produtos reais para todas as coleções
+      for (const [collectionId, category] of Object.entries(collectionCategories)) {
+        try {
+          const products = await getProdutosByCategoria(category);
+          if (products && products.length > 0) {
+            loadedProducts[collectionId] = products;
+          }
+        } catch (error) {
+          console.log(`Categoria "${category}" não encontrada no banco, usando dados mockados`);
+        }
+      }
+
+      setRealProducts(loadedProducts);
+    }
+
+    loadRealProducts();
+  }, []);
+
+  // Combina produtos mockados com reais
+  const getDressesForCollection = (collectionId) => {
+    const category = collectionCategories[collectionId];
+
+    // Se há produtos reais para esta categoria, usa eles
+    if (realProducts[collectionId]?.length > 0) {
+      return realProducts[collectionId].map(product => ({
+        id: product.id,
+        name: product.nome_produto,
+        image: { uri: product.imagem1_url },
+        price: product.preco
+      }));
+    } else {
+      // Caso contrário, usa dados mockados
+      return dressCollections[collectionId] || [];
+    }
+  };
+
+  const dresses = getDressesForCollection(selected);
 
   return (
     <View style={styles.container}>
@@ -81,10 +118,26 @@ export default function HomeScreen() {
         contentContainerStyle={styles.dressContainer}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <View style={styles.dressCard}>
+          <TouchableOpacity
+            style={styles.dressCard}
+            onPress={() => {
+              // Se for produto real da API, navega para detalhes
+              if (item.price !== undefined) {
+                navigation.navigate("detalhes", { product: {
+                  id: item.id,
+                  nome_produto: item.name,
+                  preco: item.price,
+                  imagem1_url: item.image.uri
+                } });
+              }
+            }}
+          >
             <Image source={item.image} style={styles.dressImage} />
             <Text style={styles.dressName}>{item.name}</Text>
-          </View>
+            {item.price !== undefined && (
+              <Text style={styles.dressPrice}>R$ {Number(item.price).toFixed(2)}</Text>
+            )}
+          </TouchableOpacity>
         )}
       />
 

@@ -89,7 +89,7 @@ def list_products(request: Request, skip: int = 0, limit: int = 100, db: Session
     base_url = str(request.base_url)
     return [_build_product_response(product, base_url) for product in products]
 
-# 1. Primeiro a rota de busca (Específica)
+# Primeiro a rota de busca (Específica)
 @router.get("/products/search", response_model=list[Products])
 def search_products(request: Request, q: Optional[str] = None, db: Session = Depends(get_db)):
     query = db.query(Produto)
@@ -102,7 +102,41 @@ def search_products(request: Request, q: Optional[str] = None, db: Session = Dep
     base_url = str(request.base_url)
     return [_build_product_response(product, base_url) for product in products]
 
-# 2. Depois a rota de detalhes (Genérica)
+# Rota de coleções (Específica) - deve estar ANTES da rota genérica
+@router.get("/products/colecoes")
+async def products_category(request: Request, db: Session = Depends(get_db)):
+    """Retorna produtos agrupados por categoria (coleções).
+    
+    Útil para o aplicativo mobile listar todas as coleções disponíveis.
+    """
+    try:
+        products = db.query(Produto).all()
+        base_url = str(request.base_url)
+
+        colecoes_dict = {}
+        for p in products:
+            categoria = (p.categoria or "Sem Categoria").strip()
+            if categoria not in colecoes_dict:
+                colecoes_dict[categoria] = []
+            colecoes_dict[categoria].append(_build_product_response(p, base_url))
+
+        # Ordenar categorias alfabeticamente
+        colecoes_ordenadas = sorted(colecoes_dict.items(), key=lambda x: x[0].lower())
+
+        colecoes_list = [
+            {
+                "nome": categoria,
+                "produtos": lista_produtos
+            }
+            for categoria, lista_produtos in colecoes_ordenadas
+        ]
+
+        return {"colecoes": colecoes_list}
+    except Exception as e:
+        print(f"Erro ao buscar coleções: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao buscar coleções: {str(e)}")
+
+# Depois a rota de detalhes (Genérica)
 @router.get("/products/{id_produto}")
 async def details_products(request: Request, id_produto: int, db: Session = Depends(get_db)):
     product = db.query(Produto).filter(Produto.id == id_produto).first()
@@ -112,6 +146,8 @@ async def details_products(request: Request, id_produto: int, db: Session = Depe
     return {
         "produtos": _build_product_response(product, base_url),
     }
+
+
 #rota detalhe do produto
 @router.get("/produtos/{id_produto}",
             response_class=HTMLResponse)

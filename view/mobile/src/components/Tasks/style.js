@@ -62,5 +62,12 @@ export const styles = StyleSheet.create({
   dressName: {
     fontSize: 12,
     textAlign: "center",
+    marginBottom: 3,
+  },
+
+  dressPrice: {
+    fontSize: 11,
+    color: "#777",
+    textAlign: "center",
   },
 });
