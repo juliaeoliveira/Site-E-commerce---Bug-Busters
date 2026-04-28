@@ -61,6 +61,24 @@ export async function getColecoes() {
     }
 }
 
+export async function getProdutosByCategoria(categoria) {
+    try {
+        const response = await fetch(`${BASE_URL}/products/colecoes`)
+        if (!response.ok) {
+            throw new Error(`Erro HTTP ${response.status}`)
+        }
+        const data = await response.json()
+        const colecoes = data.colecoes || data
+        
+        // Encontra a coleção pela categoria
+        const colecaoEncontrada = colecoes.find(c => c.nome.toLowerCase() === categoria.toLowerCase())
+        return colecaoEncontrada ? colecaoEncontrada.produtos : []
+    } catch (error) {
+        console.error(`Erro ao buscar produtos da categoria ${categoria}:`, error)
+        return []
+    }
+}
+
 export async function CreateUser(userData) {
     const response = await fetch(`${BASE_URL}/usuario/create_user`, {
         method: "POST",
