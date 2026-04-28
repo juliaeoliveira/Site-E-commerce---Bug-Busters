@@ -246,12 +246,12 @@ export default function Endereco({ navigation }) {
               }
             }}
           />
-          <Input label="Rua" value={rua} onChange={setRua} editable={false} />
+          <Input label="Rua" value={rua} onChange={setRua} />
           <Input label="Número" value={numero} onChange={setNumero} />
           <Input label="Complemento" value={complemento} onChange={setComplemento} />
-          <Input label="Bairro" value={bairro} onChange={setBairro} editable={false} />
-          <Input label="Cidade" value={cidade} onChange={setCidade} editable={false} />
-          <Input label="Estado" value={estado} onChange={setEstado} editable={false} />
+          <Input label="Bairro" value={bairro} onChange={setBairro} />
+          <Input label="Cidade" value={cidade} onChange={setCidade} />
+          <Input label="Estado" value={estado} onChange={setEstado} />
 
           <TouchableOpacity
             style={styles.botaoSalvar}
