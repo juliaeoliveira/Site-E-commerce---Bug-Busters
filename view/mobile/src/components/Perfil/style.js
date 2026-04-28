@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
 
   username: {
     color: '#000000',
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: "900",
   },
 

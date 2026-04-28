@@ -44,7 +44,7 @@ useFocusEffect(
     <View style={styles.body}>
 
    <View style={styles.header}>
-  <Ionicons name="person-circle-outline" style={styles.foto} size={40} />
+  <Ionicons name="person-circle-outline" style={styles.foto} size={65} />
 
   <View>
     <Text style={styles.username}>{nome ? nome : "Carregando..."}</Text>
@@ -97,7 +97,7 @@ useFocusEffect(
 
         <View style={styles.supportItem}>
           <Ionicons name="logo-whatsapp" size={20} color="white"/>
-          <Text style={styles.supportText}>(11) 98291-1653</Text>
+          <Text style={styles.supportText}>(11) 95329-2976</Text>
         </View>
 
         <View style={styles.supportItem}>
