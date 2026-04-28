@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import Descricao from "./components/Descrição";
 import Resultado from './components/Resultado'
 import Colecoes from './components/Colecoes'
+import Tasks from './components/Tasks'
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,11 @@ export default function HomeStack() {
       <Stack.Screen
       name="searchresults"
       component={Resultado}
+      options={{ headerShown: false }}/>
+
+      <Stack.Screen
+      name="tasks"
+      component={Tasks}
       options={{ headerShown: false }}/>
     </Stack.Navigator>
 

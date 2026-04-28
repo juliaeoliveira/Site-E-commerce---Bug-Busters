@@ -8,7 +8,6 @@ import {
 // import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 // import AntDesign from '@expo/vector-icons/AntDesign';
 import HomeStack from "./home.routes";
-import Tasks from "./components/Tasks";
 import Carrinho from "./components/Carrinho";
 import Login from "./components/Login";
 import Cadastro from "./components/Cadastro";
@@ -51,7 +50,7 @@ export function Routes() {
 
       <Tabs.Screen
         name="bars"
-        component={Tasks}
+        component={HomeStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
@@ -62,6 +61,12 @@ export function Routes() {
             return <Ionicons name="list-outline" size={size} color={color} />;
           },
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.navigate("bars", { screen: "tasks" });
+          },
+        })}
       />
       <Tabs.Screen
         name="shop"

@@ -35,6 +35,7 @@ export default function Tasks({ navigation }) {
     4: "o_desabrochar"      // Coleção 4 -> categoria "o_desabrochar"
   };
 
+  
   const collections = [
     { id: 1, image: require("../../assets/images/coleção1.jpg") },
     { id: 2, image: require("../../assets/images/coleção2.jpg") },
