@@ -91,7 +91,10 @@ export default function Carrinho({ navigation }) {
       <View style={styles.footer}>
         <Text style={styles.total}>Total: R$ {total.toFixed(2)}</Text>
 
-        <TouchableOpacity style={styles.checkout}>
+        <TouchableOpacity 
+          style={styles.checkout}
+          onPress={() => navigation.navigate("Checkout")}
+        >
           <Text style={styles.checkoutText}>Finalizar Compra</Text>
         </TouchableOpacity>
       </View>
