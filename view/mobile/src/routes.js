@@ -19,6 +19,7 @@ import DetalhePedido from "./components/DetalhePedido";
 import ComprarNovamente from "./components/ComprarNovamente";
 import CriarEndereco from "./components/CadastroEndereco";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Checkout from "./components/Checkout";
 import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useState } from "react";
@@ -177,6 +178,12 @@ export function Routes() {
         tabBarItemStyle: { display: 'none' }, 
         headerShown: false 
         }} 
+      />
+
+      <Tabs.Screen
+              name="Checkout"
+              component={Checkout}
+              options={{ headerShown: false }}
       />
     </Tabs.Navigator>
   );

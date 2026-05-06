@@ -166,6 +166,51 @@ async def detalhe(request:Request,id_produto:int,
         "request":request,"produto":produto,"sugestoes": sugestoes
     })
 
+# Rota do carrinho do usuário, validação para verificar se o usuário está logado, caso contrário exibe mensagem com link para login
+@router.get("/api/carrinho")
+async def api_get_cart(
+    request: Request,
+    id_produto: Optional[int] = None,
+    db: Session = Depends(get_db)
+):
+    # 1. Validação do Token via Header (Mobile utiliza Authorization: Bearer <token>)
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Token de autenticação ausente")
+    
+    token = auth_header.split(" ")[1]
+    payload = verificar_token(token)
+    
+    if not payload:
+        raise HTTPException(status_code=401, detail="Sessão expirada ou inválida")
+
+    # 2. Busca do usuário
+    usuario = db.query(Usuario_Model).filter(Usuario_Model.email == payload["sub"]).first()
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+    # 3. Lógica de Sugestões (Mantendo o padrão da sua rota web)
+    # Filtra o produto atual das sugestões se um id_produto for enviado
+    query_sugestoes = db.query(Produto)
+    if id_produto:
+        query_sugestoes = query_sugestoes.filter(Produto.id != id_produto)
+    
+    outros_produtos = query_sugestoes.all()
+    
+    # Seleciona 3 aleatórios
+    sugestoes_raw = random.sample(outros_produtos, min(3, len(outros_produtos)))
+    
+    # 4. Formatação da Resposta usando sua função auxiliar
+    base_url = str(request.base_url)
+    return {
+        "usuario": {
+            "primeiro_nome": usuario.nome_cliente.split(' ')[0],
+            "email": usuario.email
+        },
+        "sugestoes": [
+            _build_product_response(p, base_url) for p in sugestoes_raw
+        ]
+    }
 @router.get("/painel_usuario/carrinho", response_class=HTMLResponse)
 async def pagina_carrinho(request: Request,id_produto:Optional[int]=None,
                   db:Session=Depends(get_db)):

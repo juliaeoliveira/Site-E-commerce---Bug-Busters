@@ -5,6 +5,7 @@ import Resultado from './components/Resultado'
 import Colecoes from './components/Colecoes'
 import Tasks from './components/Tasks'
 
+
 const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
@@ -37,9 +38,11 @@ export default function HomeStack() {
       name="tasks"
       component={Tasks}
       options={{ headerShown: false }}/>
-    </Stack.Navigator>
+   
 
+    
 
-
+      
+     </Stack.Navigator>
   );
 }
