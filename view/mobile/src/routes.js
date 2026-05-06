@@ -178,6 +178,7 @@ export function Routes() {
         headerShown: false 
         }} 
       />
+      <Tabs.Screen name="Carrinho" component={Carrinho} />
     </Tabs.Navigator>
   );
 }
