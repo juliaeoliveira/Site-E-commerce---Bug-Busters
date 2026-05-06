@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     marginTop: 25,
   },
 
+
   title: {
     fontSize: 25,
     fontWeight: "bold",
@@ -35,22 +36,24 @@ export const styles = StyleSheet.create({
   },
 
   image: {
-    width: 60,
-    height: 60,
+    width: 90,
+    height: 150,
     borderRadius: 8,
   },
 
   info: {
     flex: 1,
     marginLeft: 10,
+    marginTop: 30,
   },
 
   nome: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "bold",
   },
 
   preco: {
+    fontSize: 15,
     color: "green",
     marginTop: 2,
   },
@@ -61,17 +64,24 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
 
-  btn: {
-    width: 30,
-    height: 30,
-    backgroundColor: "#ddd",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-  },
+btn: {
+  width: 25,
+  height: 25,
+  backgroundColor: "#f2f2f2",
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: "#ddd"
+},
 
+btnText: {
+  fontSize: 18,
+  fontWeight: "bold",
+  color: "#333"
+},
   qtd: {
-    marginHorizontal: 10,
+    marginHorizontal: 20,
   },
 
   footer: {
@@ -101,5 +111,62 @@ export const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
+tamanhoContainer: {
+  flexDirection: "row",
+  marginTop: 8
+},
+
+tamanhoBtn: {
+  width: 25,
+  height: 25,
+  borderRadius: 50,
+  borderWidth: 1,
+  borderColor: "#ccc",
+  marginRight: 8,
+  justifyContent: "center",
+  alignItems: "center"
+},
+
+tamanhoSelecionado: {
+  backgroundColor: "#000",
+  borderColor: "#000"
+},
+
+tamanhoTexto: {
+  fontSize: 13
+},
+
+tamanhoTextoSelecionado: {
+  color: "#fff",
+  fontWeight: "bold"
+},
+
+linha: {
+  height: 2,
+  backgroundColor: "black",
+  marginTop: 30,
+  width: "100%"
+},
+
+emptyContainer: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  paddingHorizontal: 20
+},
+
+emptyText: {
+  fontSize: 18,
+  fontWeight: "bold",
+  marginTop: 10,
+  color: "#333"
+},
+
+emptySubText: {
+  fontSize: 14,
+  color: "#888",
+  marginTop: 5,
+  textAlign: "center"
+}
 
 });
