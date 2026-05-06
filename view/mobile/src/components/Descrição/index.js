@@ -29,18 +29,31 @@ export default function Descricao({ route, navigation }) {
 
   const tamanhos = ["P", "M", "G", "GG"];
 
-  function adicionarCarrinho() {
-    if (!tamanhoSelecionado) {
-      Alert.alert("Atenção", "Selecione um tamanho");
-      return;
-    }
 
-    Alert.alert(
-      "Sucesso",
-      `Produto adicionado 🛒\nTamanho: ${tamanhoSelecionado}`
-    );
+
+// Na tela Descricao.js
+function adicionarCarrinho() {
+  if (!tamanhoSelecionado) {
+    Alert.alert("Atenção", "Selecione um tamanho");
+    return;
   }
 
+  const novoItem = {
+    id: product.id, 
+    nome: product.nome_produto,
+    preco: Number(product.preco),
+    qtd: 1,
+    tamanho: tamanhoSelecionado,
+    // Note: usamos { uri } para imagens da rede e require para locais. 
+    // Como vem da API, usamos uri:
+    img: { uri: product.imagem1_url } 
+  };
+
+  Alert.alert("Sucesso", `Produto adicionado!`, [
+    { text: "Continuar Comprando" },
+    { text: "Ir para o Carrinho", onPress: () => navigation.navigate("Carrinho", { itemAdicionado: novoItem }) }
+  ]);
+}
   function handleScroll(event) {
     const position = event.nativeEvent.contentOffset.x;
     const index = Math.round(position / width);

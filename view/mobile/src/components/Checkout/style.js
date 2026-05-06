@@ -33,7 +33,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  /* 📝 FORMULÁRIO */
   input: {
     backgroundColor: "#f1f1f1",
     padding: 10,

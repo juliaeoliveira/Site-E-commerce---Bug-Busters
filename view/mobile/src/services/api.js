@@ -79,6 +79,37 @@ export async function getProdutosByCategoria(categoria) {
     }
 }
 
+// Rota do Carrinho 
+// No seu arquivo de API do React Native
+
+export async function getCartData(id_produto = null) {
+    try {
+        const headers = await getAuthHeaders(); // Usa sua função que pega o token do AsyncStorage
+        
+        let url = `${BASE_URL}/api/carrinho`;
+        if (id_produto) {
+            url += `?id_produto=${id_produto}`;
+        }
+
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            // Se o backend retornar 401, você pode tratar o logout aqui
+            throw new Error(data.detail || "Erro ao carregar dados do carrinho");
+        }
+
+        return data; // Retorna { usuario: {...}, sugestoes: [...] }
+    } catch (error) {
+        console.error("Erro getCartData:", error);
+        throw error;
+    }
+}
+
 export async function CreateUser(userData) {
     const response = await fetch(`${BASE_URL}/usuario/create_user`, {
         method: "POST",
