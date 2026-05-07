@@ -7,8 +7,11 @@ import {
   Alert,
   Dimensions
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./style";
 import { useState, useRef } from "react";
+
+
 
 export default function Descricao({ route, navigation }) {
   const { product } = route.params;
@@ -32,27 +35,43 @@ export default function Descricao({ route, navigation }) {
 
 
 // Na tela Descricao.js
-function adicionarCarrinho() {
+async function adicionarCarrinho() {
   if (!tamanhoSelecionado) {
     Alert.alert("Atenção", "Selecione um tamanho");
     return;
   }
 
   const novoItem = {
-    id: product.id, 
+    id: product.id,
     nome: product.nome_produto,
     preco: Number(product.preco),
     qtd: 1,
     tamanho: tamanhoSelecionado,
-    // Note: usamos { uri } para imagens da rede e require para locais. 
-    // Como vem da API, usamos uri:
-    img: { uri: product.imagem1_url } 
+    img: { uri: product.imagem1_url }
   };
 
-  Alert.alert("Sucesso", `Produto adicionado!`, [
-    { text: "Continuar Comprando" },
-    { text: "Ir para o Carrinho", onPress: () => navigation.navigate("Carrinho", { itemAdicionado: novoItem }) }
-  ]);
+  try {
+    const storedCart = await AsyncStorage.getItem("carrinho");
+    const currentCart = storedCart ? JSON.parse(storedCart) : [];
+    const cartItems = Array.isArray(currentCart) ? currentCart : [];
+
+    const itemIndex = cartItems.findIndex(
+      (item) => item.id === novoItem.id && item.tamanho === novoItem.tamanho
+    );
+
+    if (itemIndex >= 0) {
+      cartItems[itemIndex].qtd += 1;
+    } else {
+      cartItems.push(novoItem);
+    }
+
+    await AsyncStorage.setItem("carrinho", JSON.stringify(cartItems));
+    Alert.alert("Sucesso", "Produto adicionado ao carrinho!");
+    navigation.navigate("shop");
+  } catch (error) {
+    console.error("Erro ao adicionar no carrinho:", error);
+    Alert.alert("Erro", "Não foi possível adicionar o produto ao carrinho.");
+  }
 }
   function handleScroll(event) {
     const position = event.nativeEvent.contentOffset.x;
