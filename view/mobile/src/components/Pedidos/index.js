@@ -37,7 +37,7 @@ export default function Recomprar({ navigation }) {
   async function comprarNovamente(pedido) {
     try {
       await AsyncStorage.setItem("carrinho", JSON.stringify(pedido.itens));
-      navigation.navigate("carrinho");
+      navigation.navigate("shop");
     } catch (error) {
       console.log("Erro ao recriar carrinho:", error);
     }
