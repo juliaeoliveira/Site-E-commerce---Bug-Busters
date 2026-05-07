@@ -1,51 +1,82 @@
-import { StyleSheet } from "react-native";
+// style.js
 
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
-  // BARRA DE PESQUISA
+
+  /* CONTAINER */
   container: {
-    flex: 1, // ocupa toda a tela disponível
-    
+    flex: 1,
   },
 
+  /* HEADER */
   header: {
-    width: '100%', // ocupa toda a largura da tela
-    padding: 10, // espaço interno (respiro em todos os lados)
-    backgroundColor: '#eae4d8', // cor de fundo branca
-    marginTop: 40, // empurra o header pra baixo (pra não ficar na status bar)
+    width: '100%',
+    padding: 10,
+    backgroundColor: '#eae4d8',
+    marginTop: 40,
   },
 
   searchInput: {
-    backgroundColor: '#eee', // fundo cinza claro do input
+    backgroundColor: '#eee',
     borderWidth: 1,
     borderColor: "#523800",
-    padding: 10, // espaço interno (deixa o input maior)
-    borderRadius: 8, // bordas arredondadas
+    padding: 10,
+    borderRadius: 8,
   },
-  // BANNER
-  image: {
-    width: '100%',
-    height: 200,
+
+  /* CARROSSEL */
+  bannerImage: {
+    width: width,
+    height: 220,
+    resizeMode: "cover",
   },
-  // CATEGORIAS BOLINHAS
+
+  pagination: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 5,
+  },
+
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#ccc",
+    marginHorizontal: 4,
+  },
+
+  dotAtivo: {
+    width: 18,
+    backgroundColor: "#790000",
+  },
+
+  /* CATEGORIAS */
   categorias: {
-    flexDirection: 'row', // deixa lado a lado
-    justifyContent: 'space-around', // distribui bem na tela
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     marginTop: 25,
   },
+
   circulo: {
     width: 60,
     height: 60,
     borderRadius: 30,
     overflow: 'hidden',
   },
+
   imgCirculo: {
     width: '100%',
     height: '100%',
   },
-  // BANNER AGENDAMENTOS
+
+  /* AGENDAMENTO */
   agendamento: {
-    backgroundColor: '#DFCAA4', // cor parecida com a da imagem
+    backgroundColor: '#DFCAA4',
     padding: 20,
     alignItems: 'center',
     marginTop: 25,
@@ -79,12 +110,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  // PRODUTOS
-  produtos: {
-    marginTop: 20,
-    paddingLeft: 16,
-  },
-
+  /* TITULO */
   tituloProdutos: {
     fontFamily: 'Aboreto_400Regular',
     marginTop: 16,
@@ -93,7 +119,12 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: 'center',
     marginRight: 10,
+  },
 
+  /* PRODUTOS */
+  produtos: {
+    marginTop: 20,
+    paddingLeft: 16,
   },
 
   card: {
@@ -106,8 +137,6 @@ export const styles = StyleSheet.create({
     width: 170,
     height: 200,
     borderRadius: 3,
-
-
   },
 
   cardNome: {
@@ -122,14 +151,12 @@ export const styles = StyleSheet.create({
     color: '#777',
     marginHorizontal: 12,
   },
+
   linhaCards: {
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 20,
     alignItems: 'center',
   },
-  
 
-
-},
-);
+});
