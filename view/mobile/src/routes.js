@@ -70,7 +70,7 @@ export function Routes() {
         })}
       />
       <Tabs.Screen
-        name="shop"
+        name="Carrinho"
         component={Carrinho}
         options={{
           tabBarShowLabel: false,
@@ -183,7 +183,9 @@ export function Routes() {
       <Tabs.Screen
               name="Checkout"
               component={Checkout}
-              options={{ headerShown: false }}
+              options={{ tabBarItemStyle: { display: 'none' }, 
+              headerShown: false 
+              }}
       />
     </Tabs.Navigator>
   );
