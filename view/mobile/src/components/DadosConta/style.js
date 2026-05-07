@@ -108,6 +108,27 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff'
-  }
+  },
+  topBar: {
+  paddingTop: 50,
+  paddingHorizontal: 20,
+  marginBottom: 10,
+},
+
+botaoVoltar: {
+  position: "absolute",
+  top: 50,
+  left: 20,
+  zIndex: 10,
+
+  width: 45,
+  height: 45,
+  borderRadius: 25,
+
+  backgroundColor: "rgba(0,0,0,0.3)",
+
+  justifyContent: "center",
+  alignItems: "center",
+},
 
 });

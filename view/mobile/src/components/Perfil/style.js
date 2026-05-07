@@ -117,4 +117,53 @@ textoBotaoSair: {
   fontWeight: '600'
 },
 
+// MODAL
+
+modalBackground: {
+  flex: 1,
+  backgroundColor: "rgba(0,0,0,0.7)",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: 20,
+},
+
+modalContainer: {
+  width: "100%",
+  backgroundColor: "#1C1C1E",
+  borderRadius: 20,
+  padding: 22,
+  maxHeight: "70%",
+  borderWidth: 1,
+  borderColor: "#2C2C2E",
+},
+
+modalTitle: {
+  color: "#fff",
+  fontSize: 22,
+  fontWeight: "bold",
+  marginBottom: 15,
+  textAlign: "center",
+},
+
+modalText: {
+  color: "#DDD",
+  fontSize: 16,
+  lineHeight: 24,
+  textAlign: "justify",
+},
+
+closeButton: {
+  marginTop: 20,
+  backgroundColor: '#790000',
+  borderRadius: 12,
+  paddingVertical: 12,
+  alignItems: "center",
+},
+
+closeButtonText: {
+  color: "#fff",
+  fontSize: 16,
+  fontWeight: "bold",
+},
+
 });

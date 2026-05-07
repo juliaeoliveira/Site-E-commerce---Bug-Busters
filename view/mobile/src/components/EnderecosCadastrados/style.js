@@ -118,6 +118,22 @@ export const styles = StyleSheet.create({
     color: "#d32f2f",
     marginTop: 30,
     fontWeight: "bold",
-  }
+  },
+
+  botaoVoltar: {
+  position: "absolute",
+  top: 50,
+  left: 20,
+  zIndex: 10,
+
+  width: 45,
+  height: 45,
+  borderRadius: 25,
+
+  backgroundColor: "rgba(0,0,0,0.3)",
+
+  justifyContent: "center",
+  alignItems: "center",
+},
 
 });

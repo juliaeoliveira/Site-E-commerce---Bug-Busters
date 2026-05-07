@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
 
   title: {
-    marginTop: 35,
+    marginTop: 60,
     marginLeft: 75,
     fontSize: 24,
     fontWeight: "bold",
@@ -49,6 +49,6 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "#777",
     textAlign: "center",
-    marginTop: 30,
+    marginTop: 330,
   },
 });

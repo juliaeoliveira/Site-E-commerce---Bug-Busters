@@ -9,20 +9,21 @@ import {
   Alert,
   ActivityIndicator
 } from 'react-native';
+
 import { styles } from "./style";
 import { Ionicons } from '@expo/vector-icons';
-import { useState, useCallback  } from 'react';
+import { useState, useCallback } from 'react';
 import { useFocusEffect } from "@react-navigation/native";
 import { getDadosConta, editarUsuario } from "../../services/api";
 
 export default function DadosConta({ navigation }) {
+
   const [dados, setDados] = useState(null);
   const [nome, setNome] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
-
 
   const [modalVisible, setModalVisible] = useState(false);
   const [perfilEditando, setPerfilEditando] = useState({});
@@ -42,9 +43,9 @@ export default function DadosConta({ navigation }) {
 
   function formatarTelefoneParaInput(numero) {
     if (!numero) return "";
-    
+
     let numeros = numero.replace(/\D/g, "").slice(0, 11);
-    
+
     if (numeros.length > 10) {
       return `(${numeros.slice(0,2)}) ${numeros.slice(2,7)}-${numeros.slice(7)}`;
     } else if (numeros.length > 6) {
@@ -52,15 +53,17 @@ export default function DadosConta({ navigation }) {
     } else if (numeros.length > 2) {
       return `(${numeros.slice(0,2)}) ${numeros.slice(2)}`;
     }
-  
+
     return numeros;
   }
 
   function formatarData(data) {
     const partes = data.split("/");
+
     if (partes.length !== 3) return data;
 
     const [dia, mes, ano] = partes;
+
     return `${ano}-${mes}-${dia}`;
   }
 
@@ -111,10 +114,14 @@ export default function DadosConta({ navigation }) {
   async function carregarDados() {
     try {
       setLoading(true);
+
       const response = await getDadosConta();
+
       setDados(response);
+
     } catch (error) {
       console.log(error.message);
+
     } finally {
       setLoading(false);
     }
@@ -136,6 +143,7 @@ export default function DadosConta({ navigation }) {
   }
 
   function validarSenha() {
+
     if (perfilEditando.senha.length < 6) {
       setErroSenha('Senha precisa ter pelo menos 6 caracteres');
       return false;
@@ -151,6 +159,7 @@ export default function DadosConta({ navigation }) {
   }
 
   function salvar() {
+
     if (!validarSenha()) return;
 
     setPerfil(perfilEditando);
@@ -158,42 +167,46 @@ export default function DadosConta({ navigation }) {
   }
 
   async function handleSalvar() {
-      try {
-        if (!nome || !email) {
-          Alert.alert("Erro", "Preencha todos os campos!");
-          return;
-        }
-  
-        if (!validarData(dataNascimento)) {
-          Alert.alert("Erro", "Data inválida!");
-          return;
-        }
-  
-        if (!validarEmail(email)) {
-          Alert.alert("Erro", "Email inválido!");
-          return;
-        }
-  
-        const dados = {
-          nome_cliente: nome,
-          email,
-          data_nascimento: formatarData(dataNascimento),
-          telefone
-        };
-  
-        await editarUsuario(dados);
-  
-        Alert.alert("Sucesso", "Dados atualizados!");
-        setModalVisible(false);
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "perfil" }],
-        });
-  
-      } catch (error) {
-        Alert.alert("Erro", error.message);
+
+    try {
+
+      if (!nome || !email) {
+        Alert.alert("Erro", "Preencha todos os campos!");
+        return;
       }
+
+      if (!validarData(dataNascimento)) {
+        Alert.alert("Erro", "Data inválida!");
+        return;
+      }
+
+      if (!validarEmail(email)) {
+        Alert.alert("Erro", "Email inválido!");
+        return;
+      }
+
+      const dados = {
+        nome_cliente: nome,
+        email,
+        data_nascimento: formatarData(dataNascimento),
+        telefone
+      };
+
+      await editarUsuario(dados);
+
+      Alert.alert("Sucesso", "Dados atualizados!");
+
+      setModalVisible(false);
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "perfil" }],
+      });
+
+    } catch (error) {
+      Alert.alert("Erro", error.message);
     }
+  }
 
   useFocusEffect(
     useCallback(() => {
@@ -201,89 +214,134 @@ export default function DadosConta({ navigation }) {
     }, [])
   );
 
-    if (loading) {
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator size="large" />
-        </View>
-      );
-    }
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container}>
 
       {/* HEADER */}
       <View style={styles.header}>
-        <Ionicons name="person-circle-outline" size={80} color="#fff" marginTop={30} />
+
+        {/* BOTÃO VOLTAR */}
+        <TouchableOpacity
+          style={styles.botaoVoltar}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+
+        <Ionicons
+          name="person-circle-outline"
+          size={80}
+          color="#fff"
+          style={{ marginTop: 30 }}
+        />
+
         <Text style={styles.username}>
           {dados?.nome || 'Usuário'}
         </Text>
+
       </View>
 
       {/* CARD */}
       <View style={styles.card}>
-        <Text style={styles.sectionTitle}>Dados da Conta</Text>
+
+        <Text style={styles.sectionTitle}>
+          Dados da Conta
+        </Text>
 
         <Info label="Nome:" value={dados?.nome} />
+
         <Info label="Email:" value={dados?.email} />
-        <Info label="Telefone:" value={formatarTelefoneParaInput(dados?.telefone)} />
-        <Info label="Data de Nascimento:" value={formatarDataParaInput(dados?.data_nascimento)} />
+
+        <Info
+          label="Telefone:"
+          value={formatarTelefoneParaInput(dados?.telefone)}
+        />
+
+        <Info
+          label="Data de Nascimento:"
+          value={formatarDataParaInput(dados?.data_nascimento)}
+        />
 
         <TouchableOpacity
           style={styles.botaoEditar}
           onPress={abrirModal}
         >
-          <Text style={styles.textoBotao}>Editar dados</Text>
+          <Text style={styles.textoBotao}>
+            Editar dados
+          </Text>
         </TouchableOpacity>
+
       </View>
 
       {/* MODAL */}
       <Modal visible={modalVisible} animationType="slide">
+
         <View style={styles.modalContainer}>
 
           <Text style={styles.sectionTitle}>
             Editar Perfil
           </Text>
 
-          <Input style={styles.input} label="Nome" value={nome}
+          <Input
+            label="Nome"
+            value={nome}
             onChange={setNome}
           />
 
-          <Input style={styles.input} label="Email" value={email}
+          <Input
+            label="Email"
+            value={email}
             onChange={setEmail}
           />
 
-          <Input label="Telefone" value={formatarTelefoneParaInput(telefone)}
+          <Input
+            label="Telefone"
+            value={formatarTelefoneParaInput(telefone)}
             onChange={(text) => setTelefone(formatarTelefone(text))}
           />
 
-          <Input label="Data de Nascimento" value={dataNascimento}
-            onChange={(text) => setDataNascimento(formatarInputData(text))}
-            keyboardType="numeric"
+          <Input
+            label="Data de Nascimento"
+            value={dataNascimento}
+            onChange={(text) =>
+              setDataNascimento(formatarInputData(text))
+            }
           />
 
           <TouchableOpacity
             style={styles.botaoSalvar}
-            onPress={() => { 
-            handleSalvar(); 
-            salvar();
-          }}
+            onPress={() => {
+              handleSalvar();
+              salvar();
+            }}
           >
             <Text style={styles.textoBotao}>
               Salvar alterações
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <TouchableOpacity
+            onPress={() => setModalVisible(false)}
+          >
             <Text style={styles.cancelar}>
               Cancelar
             </Text>
           </TouchableOpacity>
 
         </View>
+
       </Modal>
 
       <StatusBar style="auto" />
+
     </ScrollView>
   );
 }
@@ -294,7 +352,9 @@ function Info({ label, value, placeholder }) {
   return (
     <View style={styles.infoBox}>
       <Text style={styles.label}>{label}</Text>
-      <Text style={styles.value}>{value || placeholder || '-'}</Text>
+      <Text style={styles.value}>
+        {value || placeholder || '-'}
+      </Text>
     </View>
   );
 }
@@ -302,7 +362,10 @@ function Info({ label, value, placeholder }) {
 function Input({ label, value, onChange, secure }) {
   return (
     <View style={styles.inputBox}>
-      <Text style={styles.inputLabel}>{label}</Text>
+
+      <Text style={styles.inputLabel}>
+        {label}
+      </Text>
 
       <TextInput
         value={value}
@@ -310,6 +373,7 @@ function Input({ label, value, onChange, secure }) {
         onChangeText={onChange}
         style={styles.input}
       />
+
     </View>
   );
 }
