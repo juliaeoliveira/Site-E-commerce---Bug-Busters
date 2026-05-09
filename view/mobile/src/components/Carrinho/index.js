@@ -15,13 +15,6 @@ import { useState, useEffect } from 'react';
 import { getCartData } from '../../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-// Importações internas
-import { styles } from "./style";
-import { getCartData } from '../../services/api';
-
 export default function Carrinho({ navigation, route }) {
 
   const [loading, setLoading] = useState(true);
@@ -62,7 +55,7 @@ export default function Carrinho({ navigation, route }) {
         
         if (!token) {
           setLoading(false);
-          navigation.navigate("Login");
+          navigation.navigate("login");
           return;
         }
 
