@@ -258,20 +258,29 @@ export async function getDetalhePedido(id_pedido) {
 }
 
 export async function getComprarNovamente() {
-    const headers = await getAuthHeaders();
+    try {
+        const headers = await getAuthHeaders();
 
-    const response = await fetch(`${BASE_URL}/painel_usuario/comprar_novamente_mobile`, {
-        method: "GET",
-        headers
-    });
+        const response = await fetch(
+            `${BASE_URL}/painel_usuario/comprar_novamente_mobile`,
+            {
+                method: "GET",
+                headers
+            }
+        );
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (!response.ok) {
-        throw new Error(data.detail);
+        if (!response.ok) {
+            throw new Error(data.detail || "Erro ao buscar produtos comprados anteriormente");
+        }
+
+        return data;
+
+    } catch (error) {
+        console.error("Erro getComprarNovamente:", error);
+        return [];
     }
-
-    return data;
 }
 
 export async function editarUsuario(dados) {

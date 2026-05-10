@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.sql.expression import func
 from database import get_db
 from controller.usuario_autenticacao import verificar_token, obter_usuario_logado_mobile
+from controller.produto_controller import _build_product_response, Products
 from models import Usuario_Model, Produto, Endereco, Pedido, Pagamento, ItemPedido
 from schemas import EditarUsuarioRequest
 from datetime import datetime
@@ -651,33 +652,38 @@ def comprar_novamente(request: Request, db: Session = Depends(get_db)):
         "primeiro_nome" : primeiro_nome
     })
 
-@caminho_prefixo_painelUsuario.get("/comprar_novamente_mobile")
-def comprar_novamente_mobile(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
-    pedidos = db.query(Pedido).filter(Pedido.id_usuario == usuario.id).all()
+@caminho_prefixo_painelUsuario.get("/comprar_novamente_mobile", response_model=list[Products])
+def comprar_novamente_mobile(
+    request: Request,
+    usuario: Usuario_Model = Depends(obter_usuario_logado_mobile),
+    db: Session = Depends(get_db)
+):
 
-    if not pedidos:
-        return {
-            "mensagem": "Você ainda não realizou nenhum pedido."
-        }
+    pedidos = (
+        db.query(Pedido)
+        .options(
+            joinedload(Pedido.itens_pedido)
+            .joinedload(ItemPedido.produto)
+        )
+        .filter(Pedido.id_usuario == usuario.id)
+        .all()
+    )
 
-    produtos_comprados = []
+    produtos_unicos = {}
+
     for pedido in pedidos:
         for item in pedido.itens_pedido:
-            produtos_comprados.append(item.produto)
+            produto = item.produto
 
-    produtos_unicos = {p.id: p for p in produtos_comprados}.values()
+            if produto and produto.id not in produtos_unicos:
+                produtos_unicos[produto.id] = produto
 
-    return {
-        "produtos": [
-            {
-                "id": p.id,
-                "nome": p.nome_produto,
-                "preco": p.preco,
-                "imagem": p.imagem1_url
-            }
-            for p in produtos_unicos
-        ]
-    }
+    base_url = str(request.base_url)
+
+    return [
+        _build_product_response(produto, base_url)
+        for produto in produtos_unicos.values()
+    ]
 
 
 #remove o cookie do token do usuario

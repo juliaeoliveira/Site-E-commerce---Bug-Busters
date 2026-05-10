@@ -20,6 +20,7 @@ import ComprarNovamente from "./components/ComprarNovamente";
 import CriarEndereco from "./components/CadastroEndereco";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Checkout from "./components/Checkout";
+import Descricao from "./components/Descrição"
 import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useState } from "react";
@@ -168,9 +169,19 @@ export function Routes() {
         component={ComprarNovamente}
         options={{
           tabBarItemStyle: { display: 'none' },
-          headerShown: false,
+          headerShown: false
         }}
       />
+
+      <Tabs.Screen
+        name="detalhes"
+        component={Descricao}
+        options={{ 
+          tabBarItemStyle: { display: 'none' },
+          headerShown: false
+        }}
+      />
+      
       <Tabs.Screen 
       name="criarEndereco" 
       component={CriarEndereco} 
