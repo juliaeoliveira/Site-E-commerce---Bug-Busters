@@ -1,11 +1,11 @@
-from fastapi import APIRouter, Depends, Request, Form , Header, HTTPException
-from fastapi.responses import HTMLResponse,RedirectResponse
+from fastapi import APIRouter, Depends, Request, Form, Header, HTTPException
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.sql.expression import func
 from database import get_db
-from controller.usuario_autenticacao import verificar_token , obter_usuario_logado_mobile
-from models import Usuario_Model, Produto, Endereco, Pedido ,Pagamento
+from controller.usuario_autenticacao import verificar_token, obter_usuario_logado_mobile
+from models import Usuario_Model, Produto, Endereco, Pedido, Pagamento, ItemPedido
 from schemas import EditarUsuarioRequest
 from datetime import datetime
 import random
@@ -500,12 +500,31 @@ def detalhe_pedido(id_pedido: int, request: Request, db: Session = Depends(get_d
     })
 
 @caminho_prefixo_painelUsuario.get("/seus_pedidos/{id_pedido}")
-def detalhe_pedido_mobile(id_pedido: int , usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
-    pedido = db.query(Pedido).filter(Pedido.id == id_pedido , Pedido.id_usuario == usuario.id).first()
-    
+def detalhe_pedido_mobile(
+    id_pedido: int,
+    usuario: Usuario_Model = Depends(obter_usuario_logado_mobile),
+    db: Session = Depends(get_db)
+):
+
+    pedido = (
+        db.query(Pedido)
+        .options(
+            joinedload(Pedido.itens_pedido)
+            .joinedload(ItemPedido.produto)
+        )
+        .filter(
+            Pedido.id == id_pedido,
+            Pedido.id_usuario == usuario.id
+        )
+        .first()
+    )
+
     if not pedido:
-        raise HTTPException(status_code=404, detail="Pedido não encontrado")
-    
+        raise HTTPException(
+            status_code=404,
+            detail="Pedido não encontrado"
+        )
+
     return {
         "pedido": {
             "id": pedido.id,
@@ -513,22 +532,24 @@ def detalhe_pedido_mobile(id_pedido: int , usuario: Usuario_Model = Depends(obte
             "valor_total": pedido.valor_total,
             "status": pedido.status
         },
+
         "itens": [
             {
                 "id": item.id,
                 "tamanho": item.tamanho,
                 "quantidade": item.quantidade,
                 "preco": item.preco_unitario,
+
                 "produto": {
                     "id": item.produto.id,
                     "nome": item.produto.nome_produto,
                     "preco": item.produto.preco
                 }
             }
+
             for item in pedido.itens_pedido
         ]
     }
-
 @caminho_prefixo_painelUsuario.post("/meus-pedidos/cancelar_pedido", response_class=HTMLResponse)
 def cancelar_pedido(request: Request, db: Session = Depends(get_db), id_pedido : int=Form(...)):
     token = request.cookies.get("token")
