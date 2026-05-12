@@ -1,19 +1,21 @@
-
-import { StatusBar } from 'expo-status-bar';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  ActivityIndicator
+import React, { useState, useEffect } from 'react';
+import { 
+  Text, 
+  View, 
+  TouchableOpacity, 
+  Image, 
+  ScrollView, 
+  ActivityIndicator,
+  Alert 
 } from 'react-native';
-
-import { styles } from "./style";
+import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import { useState, useEffect } from 'react';
-import { getCartData } from '../../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+
+// Importações internas
+import { styles } from "./style";
+import { getCartData } from '../../services/api';
 
 export default function Carrinho({ navigation, route }) {
 
@@ -53,21 +55,17 @@ export default function Carrinho({ navigation, route }) {
         setLoading(true);
         const token = await AsyncStorage.getItem("token");
         
-        if (!token) {
-          setLoading(false);
-          navigation.navigate("login");
-          return;
-        }
-
-        const data = await getCartData();
-        setNomeUsuario(data.usuario.primeiro_nome);
-        setSugestoes(data.sugestoes);
         await loadCartFromStorage();
+
+        if (token) {
+          const data = await getCartData();
+          setNomeUsuario(data.usuario.primeiro_nome);
+          setSugestoes(data.sugestoes);
+        }
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
         if (error.message.includes("401")) {
           await AsyncStorage.removeItem("token");
-          navigation.navigate("login");
         }
 
       } finally {
@@ -77,6 +75,13 @@ export default function Carrinho({ navigation, route }) {
 
     carregarDados();
   }, []);
+
+  // Recarregar carrinho sempre que a tela for focada
+  useFocusEffect(
+    React.useCallback(() => {
+      loadCartFromStorage();
+    }, [])
+  );
 
   // Funções de Controle
   function aumentar(id, tamanho) {
@@ -231,7 +236,22 @@ export default function Carrinho({ navigation, route }) {
           </View>
           <TouchableOpacity
             style={styles.checkout}
-            onPress={() => navigation.navigate("Checkout")}
+            onPress={async () => {
+              const token = await AsyncStorage.getItem("token");
+              if (!token) {
+                Alert.alert(
+                  "Atenção",
+                  "Você precisa se cadastrar ou fazer login para finalizar a compra",
+                  [
+                    { text: "Fazer Login", onPress: () => navigation.navigate("login") },
+                    { text: "Cadastrar", onPress: () => navigation.navigate("cadastro") },
+                    { text: "Cancelar", style: "cancel" }
+                  ]
+                );
+                return;
+              }
+              navigation.navigate("Checkout");
+            }}
           >
             <Text style={styles.checkoutText}>Finalizar</Text>
           </TouchableOpacity>

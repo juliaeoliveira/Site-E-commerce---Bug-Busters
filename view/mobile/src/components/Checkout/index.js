@@ -1,17 +1,13 @@
-// index.js
-
-import {
-  View,
-  Text,
-  TouchableOpacity,
+import { 
+  View, 
+  Text, 
+  TouchableOpacity, 
   ScrollView,
-  TextInput,
-  Image,
+  TextInput 
 } from "react-native";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./style";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function Checkout({ navigation }) {
 
@@ -29,18 +25,17 @@ export default function Checkout({ navigation }) {
 
   const [pagamento, setPagamento] = useState(null);
 
-  const carrinho = [
-    {
-      nome: "Vestido Noiva Clássico",
-      preco: 1200,
-      img: require("../../assets/images/coleção3.jpg"),
-    },
-    {
-      nome: "Vestido Elegante",
-      preco: 900,
-      img: require("../../assets/images/coleção4.jpg"),
-    },
-  ];
+  const [carrinho, setCarrinho] = useState([]);
+
+  useEffect(() => {
+    const loadCart = async () => {
+      const storedCart = await AsyncStorage.getItem("carrinho");
+      if (storedCart) {
+        setCarrinho(JSON.parse(storedCart));
+      }
+    };
+    loadCart();
+  }, []);
 
   const frete = 50;
 
@@ -49,6 +44,23 @@ export default function Checkout({ navigation }) {
     0
   );
 
+=======
+  const [carrinho, setCarrinho] = useState([]);
+
+  useEffect(() => {
+    const loadCart = async () => {
+      const storedCart = await AsyncStorage.getItem("carrinho");
+      if (storedCart) {
+        setCarrinho(JSON.parse(storedCart));
+      }
+    };
+    loadCart();
+  }, []);
+
+  const frete = 50;
+
+  const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.qtd), 0);
+>>>>>>> 88879b1 (Final do carrinho)
   const total = subtotal + frete;
 
   function salvarEndereco() {
@@ -274,35 +286,10 @@ export default function Checkout({ navigation }) {
         </Text>
 
         {carrinho.map((item, index) => (
-
-          <View
-            key={index}
-            style={styles.resumoItem}
-          >
-
-            <View style={styles.produtoInfo}>
-
-              <Image
-                source={item.img}
-                style={styles.produtoImagem}
-              />
-
-              <View>
-
-                <Text style={styles.produtoNome}>
-                  {item.nome}
-                </Text>
-
-                <Text style={styles.produtoPreco}>
-                  R$ {item.preco}
-                </Text>
-
-              </View>
-
-            </View>
-
+          <View key={index} style={styles.item}>
+            <Text>{item.nome} (x{item.qtd})</Text>
+            <Text>R$ {(item.preco * item.qtd).toFixed(2)}</Text>
           </View>
-
         ))}
 
       </View>
