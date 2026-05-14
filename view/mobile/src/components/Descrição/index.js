@@ -67,7 +67,7 @@ async function adicionarCarrinho() {
 
     await AsyncStorage.setItem("carrinho", JSON.stringify(cartItems));
     Alert.alert("Sucesso", "Produto adicionado ao carrinho!");
-    navigation.navigate("shop");
+    navigation.navigate("Carrinho");
   } catch (error) {
     console.error("Erro ao adicionar no carrinho:", error);
     Alert.alert("Erro", "Não foi possível adicionar o produto ao carrinho.");

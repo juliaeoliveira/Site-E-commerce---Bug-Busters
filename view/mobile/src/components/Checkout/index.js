@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from '@expo/vector-icons';
 import { styles } from "./style";
 
 export default function Checkout({ navigation }) {
@@ -39,28 +40,7 @@ export default function Checkout({ navigation }) {
 
   const frete = 50;
 
-  const subtotal = carrinho.reduce(
-    (acc, item) => acc + item.preco,
-    0
-  );
-
-=======
-  const [carrinho, setCarrinho] = useState([]);
-
-  useEffect(() => {
-    const loadCart = async () => {
-      const storedCart = await AsyncStorage.getItem("carrinho");
-      if (storedCart) {
-        setCarrinho(JSON.parse(storedCart));
-      }
-    };
-    loadCart();
-  }, []);
-
-  const frete = 50;
-
   const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.qtd), 0);
->>>>>>> 88879b1 (Final do carrinho)
   const total = subtotal + frete;
 
   function salvarEndereco() {
