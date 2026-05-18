@@ -1,132 +1,108 @@
 // style.js
 
-import { StyleSheet, Dimensions } from "react-native";
-
-const { width } = Dimensions.get("window");
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
-  /* CONTAINER */
   container: {
     flex: 1,
+    backgroundColor: "#fff",
   },
 
   /* HEADER */
   header: {
-    width: '100%',
+    width: "100%",
     padding: 10,
-    backgroundColor: '#eae4d8',
+    backgroundColor: "#eae4d8",
     marginTop: 40,
   },
 
   searchInput: {
-    backgroundColor: '#eee',
+    backgroundColor: "#eee",
     borderWidth: 1,
     borderColor: "#523800",
     padding: 10,
     borderRadius: 8,
+    fontSize: 14,
   },
 
-  /* CARROSSEL */
-  bannerImage: {
-    width: width,
-    height: 220,
+  /* BANNER */
+  image: {
+    width: "100%",
+    height: 180,
     resizeMode: "cover",
-  },
-
-  pagination: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 5,
-  },
-
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#ccc",
-    marginHorizontal: 4,
-  },
-
-  dotAtivo: {
-    width: 18,
-    backgroundColor: "#790000",
   },
 
   /* CATEGORIAS */
   categorias: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 25,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 20,
+    paddingHorizontal: 10,
   },
 
   circulo: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 
   imgCirculo: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
 
   /* AGENDAMENTO */
   agendamento: {
-    backgroundColor: '#DFCAA4',
+    backgroundColor: "#DFCAA4",
     padding: 20,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 25,
   },
 
   titulo: {
-    color: '#790000',
+    color: "#790000",
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
 
   subtitulo: {
-    color: '#790000',
+    color: "#790000",
     fontSize: 12,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 15,
+    lineHeight: 18,
   },
 
   botao: {
     borderWidth: 1,
     backgroundColor: "#790000",
-    borderColor: '#790000',
-    paddingVertical: 6,
-    paddingHorizontal: 15,
-    borderRadius: 4,
+    borderColor: "#790000",
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+    borderRadius: 5,
   },
 
   textoBotao: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 12,
+    fontWeight: "bold",
   },
 
-  /* TITULO */
+  /* TITULO PRODUTOS */
   tituloProdutos: {
-    fontFamily: 'Aboreto_400Regular',
-    marginTop: 16,
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    textAlign: 'center',
-    marginRight: 10,
-  },
-
-  /* PRODUTOS */
-  produtos: {
     marginTop: 20,
-    paddingLeft: 16,
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 16,
+    textAlign: "center",
+    color: "#222",
   },
 
+  /* CARDS */
   card: {
     width: 170,
     marginBottom: 20,
@@ -136,27 +112,23 @@ export const styles = StyleSheet.create({
   cardImage: {
     width: 170,
     height: 200,
-    borderRadius: 3,
+    borderRadius: 5,
+    resizeMode: "cover",
   },
 
   cardNome: {
-    marginTop: 6,
+    marginTop: 8,
     fontSize: 14,
-    fontWeight: '500',
-    marginHorizontal: 12,
+    fontWeight: "500",
+    marginHorizontal: 4,
+    color: "#222",
   },
 
   cardPreco: {
     fontSize: 13,
-    color: '#777',
-    marginHorizontal: 12,
-  },
-
-  linhaCards: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 20,
-    alignItems: 'center',
+    color: "#777",
+    marginHorizontal: 4,
+    marginTop: 2,
   },
 
 });
