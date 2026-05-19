@@ -9,6 +9,7 @@ from controller.produto_controller import _build_product_response, Products
 from models import Usuario_Model, Produto, Endereco, Pedido, Pagamento, ItemPedido
 from schemas import EditarUsuarioRequest
 from datetime import datetime
+from decimal import Decimal
 import random
 
 templates=Jinja2Templates(directory="view/templates")
@@ -467,6 +468,74 @@ def seus_pedidos(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) ,
             "status": p.status
         } for p in pedidos
     ]
+
+@caminho_prefixo_painelUsuario.post("/checkout")
+async def checkout_mobile(
+    request: Request,
+    usuario: Usuario_Model = Depends(obter_usuario_logado_mobile),
+    db: Session = Depends(get_db)
+):
+    dados = await request.json()
+    metodo_pagamento = dados.get("metodo_pagamento")
+    itens = dados.get("itens")
+    frete_recebido = dados.get("frete", 0)
+
+    if not metodo_pagamento or not itens:
+        raise HTTPException(status_code=400, detail="Método de pagamento e itens são obrigatórios.")
+
+    try:
+        frete_decimal = Decimal(str(frete_recebido))
+    except Exception:
+        frete_decimal = Decimal("0")
+
+    valor_total = sum(Decimal(str(item.get("subtotal", 0))) for item in itens) + frete_decimal
+
+    if metodo_pagamento in ["debito", "pix"]:
+        status = "pago"
+        pagamento_status = True
+    elif metodo_pagamento in ["credito", "boleto"]:
+        status = "pendente"
+        pagamento_status = False
+    else:
+        raise HTTPException(status_code=400, detail="Método de pagamento inválido.")
+
+    novo_pedido = Pedido(
+        id_usuario=usuario.id,
+        valor_total=valor_total,
+        status=status,
+        data_pedido=datetime.now()
+    )
+    db.add(novo_pedido)
+    db.flush()
+
+    for item in itens:
+        item_pedido = ItemPedido(
+            id_pedido=novo_pedido.id,
+            id_produto=item.get("id_produto"),
+            tamanho=item.get("tamanho"),
+            quantidade=item.get("quantidade"),
+            preco_unitario=Decimal(str(item.get("preco_unitario", 0))),
+            subtotal=item.get("subtotal", 0)
+        )
+        db.add(item_pedido)
+
+    pagamento = Pagamento(
+        valor=valor_total,
+        metodo_pagamento=metodo_pagamento,
+        id_usuario=usuario.id,
+        id_pedido=novo_pedido.id,
+        cnpj_loja="03.774.819/0005-28",
+        status=pagamento_status
+    )
+    db.add(pagamento)
+
+    db.commit()
+
+    return {
+        "mensagem": "Pedido criado com sucesso.",
+        "id_pedido": novo_pedido.id,
+        "status": status
+    }
 
 #detalhes dos pedidos do usuario
 @caminho_prefixo_painelUsuario.get("/meus-pedidos/{id_pedido}", response_class=HTMLResponse)
