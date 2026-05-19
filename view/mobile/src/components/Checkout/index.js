@@ -3,12 +3,14 @@ import {
   Text, 
   TouchableOpacity, 
   ScrollView,
-  TextInput 
+  TextInput,
+  Alert
 } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from "./style";
+import { checkoutMobile } from "../../services/api";
 
 export default function Checkout({ navigation }) {
 
@@ -42,6 +44,41 @@ export default function Checkout({ navigation }) {
 
   const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.qtd), 0);
   const total = subtotal + frete;
+
+  async function finalizarCompra() {
+    if (!pagamento) {
+      Alert.alert("Atenção", "Selecione um método de pagamento antes de finalizar.");
+      return;
+    }
+
+    const metodoPagamento = pagamento === "Pix"
+      ? "pix"
+      : pagamento === "Cartão"
+      ? "debito"
+      : "boleto";
+
+    const dados = {
+      metodo_pagamento: metodoPagamento,
+      frete,
+      itens: carrinho.map((item) => ({
+        id_produto: item.id,
+        tamanho: item.tamanho,
+        quantidade: item.qtd,
+        preco_unitario: item.preco,
+        subtotal: item.preco * item.qtd
+      }))
+    };
+
+    try {
+      const resposta = await checkoutMobile(dados);
+      await AsyncStorage.removeItem("carrinho");
+      Alert.alert("Sucesso", `Pedido enviado com sucesso! ID: ${resposta.id_pedido}`);
+      navigation.navigate("pedidos");
+    } catch (error) {
+      console.error("Erro checkout:", error);
+      Alert.alert("Erro", error.message || "Não foi possível finalizar o pedido.");
+    }
+  }
 
   function salvarEndereco() {
 
@@ -312,7 +349,7 @@ export default function Checkout({ navigation }) {
       </View>
 
       {/* 🔥 BOTÃO */}
-      <TouchableOpacity style={styles.botao}>
+      <TouchableOpacity style={styles.botao} onPress={finalizarCompra}>
 
         <Text style={styles.botaoTexto}>
           Finalizar Compra

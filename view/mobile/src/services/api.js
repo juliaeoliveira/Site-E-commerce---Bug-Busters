@@ -110,6 +110,24 @@ export async function getCartData(id_produto = null) {
     }
 }
 
+export async function checkoutMobile(dados) {
+    const headers = await getAuthHeaders();
+
+    const response = await fetch(`${BASE_URL}/painel_usuario/checkout`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(dados)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.detail || "Erro ao finalizar o pedido");
+    }
+
+    return data;
+}
+
 export async function CreateUser(userData) {
     const response = await fetch(`${BASE_URL}/usuario/create_user`, {
         method: "POST",
