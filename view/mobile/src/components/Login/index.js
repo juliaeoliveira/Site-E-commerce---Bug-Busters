@@ -23,7 +23,7 @@ export default function Login({ navigation }) {
         const token = await AsyncStorage.getItem("token");
 
         if (token) {
-          navigation.navigate("Main");
+          navigation.navigate("perfil");
         }
       }
 
@@ -54,7 +54,7 @@ export default function Login({ navigation }) {
       // força atualização
      navigation.reset({
       index: 0,
-      routes: [{ name: "Main" }],
+      routes: [{ name: "login" }],
     });
     } catch (error) {
           Alert.alert("Erro", error.message);
