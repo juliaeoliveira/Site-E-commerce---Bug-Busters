@@ -12,6 +12,8 @@ import {
 } from "react-native";
 
 import { useState } from "react";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./style";
 
 import { checkoutMobile } from "../../services/api";
@@ -35,23 +37,22 @@ export default function Checkout({ navigation }) {
 
   const [pagamento, setPagamento] = useState(null);
 
-  const carrinho = [
-    {
-      nome: "Vestido Noiva Clássico",
-      preco: 1200,
-      img: require("../../assets/images/coleção3.jpg"),
-    },
-    {
-      nome: "Vestido Elegante",
-      preco: 900,
-      img: require("../../assets/images/coleção4.jpg"),
-    },
-  ];
+  const [carrinho, setCarrinho] = useState([]);
+
+  useEffect(() => {
+    const loadCart = async () => {
+      const storedCart = await AsyncStorage.getItem("carrinho");
+      if (storedCart) {
+        setCarrinho(JSON.parse(storedCart));
+      }
+    };
+    loadCart();
+  }, []);
 
   const frete = 50;
 
   const subtotal = carrinho.reduce(
-    (acc, item) => acc + item.preco,
+    (acc, item) => acc + (item.preco * item.qtd),
     0
   );
 
