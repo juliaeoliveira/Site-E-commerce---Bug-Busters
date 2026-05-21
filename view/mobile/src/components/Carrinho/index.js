@@ -135,7 +135,7 @@ export default function Carrinho({ navigation, route }) {
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView 
         style={styles.body} 
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{ paddingBottom: 180 }}
         showsVerticalScrollIndicator={false}
       >
         {/* HEADER */}
@@ -153,7 +153,9 @@ export default function Carrinho({ navigation, route }) {
               onPress={() => navigation.navigate("home")}
               style={{ marginTop: 10 }}
             >
-              <Text style={{ color: '#007AFF' }}>Explorar produtos</Text>
+              <TouchableOpacity style={styles.fundoexplorar}>
+                <Text style={styles.explorar}>Explorar produtos</Text>
+              </TouchableOpacity>
             </TouchableOpacity>
           </View>
         ) : (
@@ -209,16 +211,16 @@ export default function Carrinho({ navigation, route }) {
         )}
 
         {/* SEÇÃO DE SUGESTÕES */}
-        <View style={{ padding: 20 }}>
-          <Text style={styles.sectionTitleSugestoes}>Sugestões para você</Text>
+        <View style={{ padding: 10 }}>
+          <Text style={styles.sugestoes}>Sugestões para você</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {sugestoes.map(prod => (
               <TouchableOpacity
                 key={prod.id}
-                style={{ marginRight: 15, width: 120 }}
+                style={{ marginRight: 5, width: 130 }}
                 onPress={() => navigation.navigate("detalhes", { product: prod })}
               >
-                <Image source={{ uri: prod.imagem1_url }} style={{ width: 120, height: 120, borderRadius: 10 }} />
+                <Image source={{ uri: prod.imagem1_url }} style={{ width: 120, height: 150, borderRadius: 10 }} />
                 <Text numberOfLines={1} style={{ fontSize: 12, marginTop: 5 }}>{prod.nome_produto}</Text>
                 <Text style={{ fontWeight: 'bold' }}>R$ {prod.preco.toFixed(2)}</Text>
               </TouchableOpacity>

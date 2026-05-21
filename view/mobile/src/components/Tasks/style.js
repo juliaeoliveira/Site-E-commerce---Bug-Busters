@@ -8,15 +8,24 @@ export const styles = StyleSheet.create({
 
   header: {
     marginTop: 60,
-    height: 80,
-    paddingHorizontal: 20,
     justifyContent: "center",
   },
 
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-  },
+titleContainer: {
+  width: "100%",
+  backgroundColor: "#790000", // cor da faixa
+  paddingVertical: 12,
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: 15,
+},
+
+title: {
+  fontSize: 22,
+  fontWeight: "bold",
+  color: "#fff4f4",
+  textAlign: "center",
+},
 
   circlesContainer: {
     flexDirection: "row",
@@ -25,9 +34,9 @@ export const styles = StyleSheet.create({
   },
 
   circle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 70,
+    height: 65,
+    borderRadius: 40,
     overflow: "hidden",
     borderWidth: 2,
     borderColor: "transparent",
@@ -46,28 +55,30 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   dressCard: {
+  marginTop: 30,
   width: "30%",
-  marginHorizontal: "1.5%",
+  marginHorizontal: "10%",
   marginBottom: 25,
-  alignItems: "center",
 },
 
   dressImage: {
-    width: "100%",
-    height: 120,
+    marginLeft: -25,
+    width: "140%",
+    height: 260,
     borderRadius: 10,
     marginBottom: 5,
   },
 
   dressName: {
-    fontSize: 12,
-    textAlign: "center",
+    marginRight: 0,
+    fontSize: 14,
     marginBottom: 3,
   },
 
   dressPrice: {
-    fontSize: 11,
+     marginRight: 40,
+    fontSize: 12,
     color: "#777",
-    textAlign: "center",
+
   },
 });

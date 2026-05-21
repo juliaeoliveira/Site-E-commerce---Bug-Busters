@@ -93,7 +93,9 @@ export default function Tasks({ navigation }) {
       <StatusBar style="auto" />
 
       <View style={styles.header}>
-        <Text style={styles.title}>Coleção</Text>
+        <View style={styles.titleContainer}>
+  <Text style={styles.title}>Coleções</Text>
+</View>
       </View>
 
       <View style={styles.circlesContainer}>

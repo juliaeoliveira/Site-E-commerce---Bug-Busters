@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   info: {
     flex: 1,
     marginLeft: 10,
-    marginTop: 30,
+    marginTop: -25,
   },
 
   nome: {
@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
   controls: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 5,
+    marginTop: 15,
   },
 
 btn: {
@@ -113,7 +113,7 @@ btnText: {
   },
 tamanhoContainer: {
   flexDirection: "row",
-  marginTop: 8
+  marginTop: 10
 },
 
 tamanhoBtn: {
@@ -167,6 +167,38 @@ emptySubText: {
   color: "#888",
   marginTop: 5,
   textAlign: "center"
-}
+},
+
+sugestoes: {
+  color: "#790000",
+  fontWeight: "bold",
+  marginTop: 30,
+  fontSize: 18,
+  marginBottom: 26,
+},
+
+explorar: {
+  color: "white",
+    fontSize: 14,
+    fontWeight: "bold",
+},
+
+fundoexplorar: {
+  backgroundColor: "#790000",
+  paddingVertical: 12,
+  paddingHorizontal: 25,
+  borderRadius: 12,
+  marginTop: 15,
+  alignItems: "center",
+  justifyContent: "center",
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.2,
+  shadowRadius: 4,
+  elevation: 4,
+},
 
 });
