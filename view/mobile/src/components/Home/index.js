@@ -1,6 +1,6 @@
 // index.js
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StatusBar } from "expo-status-bar";
 
 import {
@@ -11,22 +11,39 @@ import {
   TouchableOpacity,
   Linking,
   FlatList,
+  ScrollView,
+  Dimensions,
 } from "react-native";
+
+import { Ionicons } from "@expo/vector-icons";
 
 import { styles } from "./style";
 import { getProducts, searchProducts } from "../../services/api";
+
+const { width } = Dimensions.get("window");
 
 export default function Home({ navigation }) {
 
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  // CARROSSEL
+  const scrollRef = useRef(null);
+  const [bannerAtivo, setBannerAtivo] = useState(0);
+
+  const banners = [
+    require("../../assets/images/banner1.png"),
+    require("../../assets/images/banner2.png"),
+  ];
+
   const handleSearch = () => {
+
     navigation.navigate("searchresults", {
       query: searchText,
     });
   };
 
+  // PRODUTOS
   useEffect(() => {
 
     async function loadProducts() {
@@ -47,6 +64,29 @@ export default function Home({ navigation }) {
     loadProducts();
 
   }, [searchText]);
+
+  // AUTO PLAY DO CARROSSEL
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+
+      const proximoBanner =
+        bannerAtivo === banners.length - 1
+          ? 0
+          : bannerAtivo + 1;
+
+      scrollRef.current?.scrollTo({
+        x: proximoBanner * width,
+        animated: true,
+      });
+
+      setBannerAtivo(proximoBanner);
+
+    }, 4000);
+
+    return () => clearInterval(interval);
+
+  }, [bannerAtivo]);
 
   function renderItem({ item }) {
 
@@ -83,11 +123,55 @@ export default function Home({ navigation }) {
     return (
       <>
 
-        {/* BANNER */}
-        <Image
-          source={require("../../assets/images/foto.jpg")}
-          style={styles.image}
-        />
+        {/* CARROSSEL */}
+        <View>
+
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            ref={scrollRef}
+            onMomentumScrollEnd={(event) => {
+
+              const slide = Math.round(
+                event.nativeEvent.contentOffset.x / width
+              );
+
+              setBannerAtivo(slide);
+            }}
+          >
+
+            {banners.map((banner, index) => (
+
+              <Image
+                key={index}
+                source={banner}
+                style={styles.image}
+              />
+
+            ))}
+
+          </ScrollView>
+
+          {/* BOLINHAS */}
+          <View style={styles.pagination}>
+
+            {banners.map((_, index) => (
+
+              <View
+                key={index}
+                style={[
+                  styles.dot,
+                  bannerAtivo === index &&
+                  styles.dotActive,
+                ]}
+              />
+
+            ))}
+
+          </View>
+
+        </View>
 
         {/* CATEGORIAS */}
         <View style={styles.categorias}>
@@ -170,19 +254,32 @@ export default function Home({ navigation }) {
 
     <View style={styles.container}>
 
+      {/* BARRA DE BUSCA */}
       <View style={styles.header}>
 
-        <TextInput
-          placeholder="Buscar produtos..."
-          placeholderTextColor="#999"
-          style={styles.searchInput}
-          onChangeText={setSearchText}
-          onSubmitEditing={handleSearch}
-          returnKeyType="search"
-        />
+        <View style={styles.searchContainer}>
+
+          <Ionicons
+            name="search"
+            size={18}
+            color="#777"
+            style={styles.searchIcon}
+          />
+
+          <TextInput
+            placeholder="Buscar produtos..."
+            placeholderTextColor="#999"
+            style={styles.searchInput}
+            onChangeText={setSearchText}
+            onSubmitEditing={handleSearch}
+            returnKeyType="search"
+          />
+
+        </View>
 
       </View>
 
+      {/* PRODUTOS */}
       <FlatList
         data={products}
         renderItem={renderItem}

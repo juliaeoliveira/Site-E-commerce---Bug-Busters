@@ -1,9 +1,12 @@
 // style.js
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
 
+  /* CONTAINER */
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -13,24 +16,62 @@ export const styles = StyleSheet.create({
   header: {
     width: "100%",
     padding: 10,
-    backgroundColor: "#eae4d8",
     marginTop: 40,
   },
 
-  searchInput: {
-    backgroundColor: "#eee",
+  /* BARRA DE BUSCA */
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: "#523800",
-    padding: 10,
-    borderRadius: 8,
-    fontSize: 14,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    backgroundColor: "#fff",
+
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+
+    elevation: 2,
   },
 
-  /* BANNER */
+  searchIcon: {
+    marginRight: 8,
+  },
+
+  searchInput: {
+    flex: 1,
+    paddingVertical: 12,
+    fontSize: 14,
+    color: "#222",
+  },
+
+  /* CARROSSEL */
   image: {
-    width: "100%",
-    height: 180,
+    width: width,
+    height: 230,
     resizeMode: "cover",
+  },
+
+  pagination: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
+
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#ccc",
+    marginHorizontal: 4,
+  },
+
+  dotActive: {
+    width: 18,
+    backgroundColor: "#790000",
   },
 
   /* CATEGORIAS */
@@ -92,7 +133,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  /* TITULO PRODUTOS */
+  /* TITULO */
   tituloProdutos: {
     marginTop: 20,
     fontSize: 18,
@@ -102,7 +143,7 @@ export const styles = StyleSheet.create({
     color: "#222",
   },
 
-  /* CARDS */
+  /* PRODUTOS */
   card: {
     width: 170,
     marginBottom: 20,
