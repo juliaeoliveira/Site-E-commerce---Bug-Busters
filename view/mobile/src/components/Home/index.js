@@ -1,6 +1,4 @@
-// index.js
-
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 
 import {
@@ -11,8 +9,6 @@ import {
   TouchableOpacity,
   Linking,
   FlatList,
-  ScrollView,
-  Dimensions,
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -20,30 +16,42 @@ import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./style";
 import { getProducts, searchProducts } from "../../services/api";
 
-const { width } = Dimensions.get("window");
-
 export default function Home({ navigation }) {
 
+  // PRODUTOS
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  // CARROSSEL
-  const scrollRef = useRef(null);
-  const [bannerAtivo, setBannerAtivo] = useState(0);
-
+  // BANNERS
   const banners = [
     require("../../assets/images/banner1.png"),
     require("../../assets/images/banner2.png"),
+    
   ];
 
-  const handleSearch = () => {
+  const [bannerAtivo, setBannerAtivo] = useState(0);
+
+  // TROCAR BANNER
+  function trocarBanner() {
+
+    let proximo = bannerAtivo + 1;
+
+    if (proximo >= banners.length) {
+      proximo = 0;
+    }
+
+    setBannerAtivo(proximo);
+  }
+
+  // BUSCA
+  function handleSearch() {
 
     navigation.navigate("searchresults", {
       query: searchText,
     });
-  };
+  }
 
-  // PRODUTOS
+  // CARREGAR PRODUTOS
   useEffect(() => {
 
     async function loadProducts() {
@@ -57,6 +65,7 @@ export default function Home({ navigation }) {
         setProducts(data);
 
       } catch (error) {
+
         console.log(error);
       }
     }
@@ -65,35 +74,14 @@ export default function Home({ navigation }) {
 
   }, [searchText]);
 
-  // AUTO PLAY DO CARROSSEL
-  useEffect(() => {
-
-    const interval = setInterval(() => {
-
-      const proximoBanner =
-        bannerAtivo === banners.length - 1
-          ? 0
-          : bannerAtivo + 1;
-
-      scrollRef.current?.scrollTo({
-        x: proximoBanner * width,
-        animated: true,
-      });
-
-      setBannerAtivo(proximoBanner);
-
-    }, 4000);
-
-    return () => clearInterval(interval);
-
-  }, [bannerAtivo]);
-
+  // CARD PRODUTO
   function renderItem({ item }) {
 
     return (
 
       <TouchableOpacity
         style={styles.card}
+        activeOpacity={0.85}
         onPress={() =>
           navigation.navigate("detalhes", {
             product: item,
@@ -118,40 +106,22 @@ export default function Home({ navigation }) {
     );
   }
 
+  // HEADER
   function ListHeader() {
 
     return (
       <>
 
         {/* CARROSSEL */}
-        <View>
+        <TouchableOpacity
+          activeOpacity={0.95}
+          onPress={trocarBanner}
+        >
 
-          <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            ref={scrollRef}
-            onMomentumScrollEnd={(event) => {
-
-              const slide = Math.round(
-                event.nativeEvent.contentOffset.x / width
-              );
-
-              setBannerAtivo(slide);
-            }}
-          >
-
-            {banners.map((banner, index) => (
-
-              <Image
-                key={index}
-                source={banner}
-                style={styles.image}
-              />
-
-            ))}
-
-          </ScrollView>
+          <Image
+            source={banners[bannerAtivo]}
+            style={styles.image}
+          />
 
           {/* BOLINHAS */}
           <View style={styles.pagination}>
@@ -162,6 +132,8 @@ export default function Home({ navigation }) {
                 key={index}
                 style={[
                   styles.dot,
+
+                  // BOLINHA ATIVA
                   bannerAtivo === index &&
                   styles.dotActive,
                 ]}
@@ -171,7 +143,7 @@ export default function Home({ navigation }) {
 
           </View>
 
-        </View>
+        </TouchableOpacity>
 
         {/* CATEGORIAS */}
         <View style={styles.categorias}>
@@ -254,7 +226,7 @@ export default function Home({ navigation }) {
 
     <View style={styles.container}>
 
-      {/* BARRA DE BUSCA */}
+      {/* HEADER */}
       <View style={styles.header}>
 
         <View style={styles.searchContainer}>
@@ -279,7 +251,7 @@ export default function Home({ navigation }) {
 
       </View>
 
-      {/* PRODUTOS */}
+      {/* LISTA */}
       <FlatList
         data={products}
         renderItem={renderItem}

@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     marginTop: 40,
   },
 
-  /* BARRA DE BUSCA */
+  /* BUSCA */
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -54,23 +54,29 @@ export const styles = StyleSheet.create({
     resizeMode: "cover",
   },
 
+  /* PAGINAÇÃO */
   pagination: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 12,
+    marginBottom: 5,
   },
 
+  /* BOLINHAS */
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "#ccc",
+    backgroundColor: "#d1c7b7",
     marginHorizontal: 4,
   },
 
+  /* BOLINHA ATIVA */
   dotActive: {
-    width: 18,
+    width: 24,
+    height: 8,
+    borderRadius: 4,
     backgroundColor: "#790000",
   },
 
