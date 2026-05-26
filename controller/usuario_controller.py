@@ -127,14 +127,6 @@ def criar_endereco_mobile(
     db: Session = Depends(get_db)
 ):
     try:
-
-        # verifica se já tem endereço
-        if usuario.endereco:
-            raise HTTPException(
-                status_code=400,
-                detail="Usuário já possui endereço cadastrado"
-            )
-
         # validação básica
         campos_obrigatorios = ["cep", "rua", "numero", "bairro", "cidade", "estado"]
         for campo in campos_obrigatorios:

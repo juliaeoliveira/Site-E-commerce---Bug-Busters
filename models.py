@@ -34,7 +34,7 @@ class Usuario_Model(Base):             #-----> Nova tabela clientes
     pagamentos = relationship("Pagamento", back_populates="usuarios") #N:1
     pedidos = relationship("Pedido", back_populates="usuarios") #N:1
     loja = relationship("Loja", back_populates="usuarios") #1:N
-    endereco = relationship("Endereco", back_populates="usuario", cascade="all, delete-orphan", uselist=False)  # porque um usuario tem 1 endereço
+    endereco = relationship("Endereco", back_populates="usuario", cascade="all, delete-orphan")  # um usuario pode ter multiplos endereços
 
 class Loja(Base):
     __tablename__="loja"

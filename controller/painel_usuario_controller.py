@@ -159,19 +159,25 @@ def dados_conta(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile)):
 # rota para exibição dos endereços cadastrado no app
 @caminho_prefixo_painelUsuario.get("/enderecos_cadastrados")
 def enderecos_cadastrados(usuario: Usuario_Model = Depends(obter_usuario_logado_mobile) , db: Session = Depends(get_db)):
-        endereco = db.query(Endereco).filter(Endereco.usuario_id == usuario.id).first()
+        enderecos = db.query(Endereco).filter(Endereco.usuario_id == usuario.id).all()
         
-        if not endereco:
+        if not enderecos:
             raise HTTPException(status_code=404, detail="Nenhum endereço cadastrado")
-        return{
-            "cep" : endereco.cep,
-            "rua" : endereco.rua, 
-            "numero" : endereco.numero,
-            "complemento" : endereco.complemento,
-            "bairro" : endereco.bairro,
-            "cidade" : endereco.cidade,
-            "estado" : endereco.estado
-        }
+        
+        enderecos_formatados = [
+            {
+                "cep" : endereco.cep,
+                "rua" : endereco.rua, 
+                "numero" : endereco.numero,
+                "complemento" : endereco.complemento,
+                "bairro" : endereco.bairro,
+                "cidade" : endereco.cidade,
+                "estado" : endereco.estado
+            }
+            for endereco in enderecos
+        ]
+        
+        return enderecos_formatados
 
 @caminho_prefixo_painelUsuario.get("/editar_usuario")
 def editar_usuario(request: Request, db: Session = Depends(get_db)):

@@ -8,6 +8,8 @@ import {
   TextInput,
   Alert,
   Image,
+  Modal,
+  FlatList,
 
 } from "react-native";
 
@@ -16,16 +18,19 @@ import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./style";
 
-import { checkoutMobile } from "../../services/api";
+import { checkoutMobile, getEnderecos, criarEndereco } from "../../services/api";
 
 import { Ionicons } from "@expo/vector-icons";
 
 
 export default function Checkout({ navigation }) {
 
-  const [editandoEndereco, setEditandoEndereco] = useState(true);
+  const [enderecosSalvos, setEnderecosSalvos] = useState([]);
+  const [enderecoSelecionado, setEnderecoSelecionado] = useState(null);
+  const [adicionandoNovoEndereco, setAdicionandoNovoEndereco] = useState(false);
+  const [carregandoEnderecos, setCarregandoEnderecos] = useState(true);
 
-  const [endereco, setEndereco] = useState({
+  const [novoEndereco, setNovoEndereco] = useState({
     cep: "",
     rua: "",
     numero: "",
@@ -40,13 +45,36 @@ export default function Checkout({ navigation }) {
   const [carrinho, setCarrinho] = useState([]);
 
   useEffect(() => {
-    const loadCart = async () => {
-      const storedCart = await AsyncStorage.getItem("carrinho");
-      if (storedCart) {
-        setCarrinho(JSON.parse(storedCart));
+    const carregarDados = async () => {
+      try {
+        // Carrega carrinho do AsyncStorage
+        const storedCart = await AsyncStorage.getItem("carrinho");
+        if (storedCart) {
+          setCarrinho(JSON.parse(storedCart));
+        }
+
+        // Carrega endereços salvos
+        const enderecos = await getEnderecos();
+        if (enderecos && Array.isArray(enderecos)) {
+          setEnderecosSalvos(enderecos);
+          if (enderecos.length > 0) {
+            // Seleciona o primeiro endereço como padrão
+            setEnderecoSelecionado(enderecos[0]);
+          }
+        } else if (enderecos) {
+          // Se retornar um único endereço (não é array)
+          setEnderecosSalvos([enderecos]);
+          setEnderecoSelecionado(enderecos);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+        Alert.alert("Aviso", "Nenhum endereço cadastrado. Adicione um para continuar.");
+      } finally {
+        setCarregandoEnderecos(false);
       }
     };
-    loadCart();
+
+    carregarDados();
   }, []);
 
   const frete = 50;
@@ -59,6 +87,11 @@ export default function Checkout({ navigation }) {
   const total = subtotal + frete;
 
   async function finalizarCompra() {
+    if (!enderecoSelecionado) {
+      Alert.alert("Atenção", "Selecione um endereço antes de finalizar.");
+      return;
+    }
+
     if (!pagamento) {
       Alert.alert("Atenção", "Selecione um método de pagamento antes de finalizar.");
       return;
@@ -93,19 +126,37 @@ export default function Checkout({ navigation }) {
     }
   }
 
-  function salvarEndereco() {
-
+  async function salvarNovoEndereco() {
     if (
-      !endereco.cep ||
-      !endereco.rua ||
-      !endereco.numero
+      !novoEndereco.cep ||
+      !novoEndereco.rua ||
+      !novoEndereco.numero
     ) {
-
       alert("Preencha os campos obrigatórios!");
       return;
     }
 
-    setEditandoEndereco(false);
+    try {
+      const enderecoCriado = await criarEndereco(novoEndereco);
+      
+      setEnderecosSalvos([...enderecosSalvos, enderecoCriado]);
+      setEnderecoSelecionado(enderecoCriado);
+      setAdicionandoNovoEndereco(false);
+      setNovoEndereco({
+        cep: "",
+        rua: "",
+        numero: "",
+        complemento: "",
+        bairro: "",
+        cidade: "",
+        estado: "",
+      });
+      
+      Alert.alert("Sucesso", "Endereço adicionado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao criar endereço:", error);
+      Alert.alert("Erro", error.message || "Não foi possível adicionar o endereço.");
+    }
   }
 
   return (
@@ -138,128 +189,189 @@ export default function Checkout({ navigation }) {
       <View style={styles.card}>
 
         <Text style={styles.titulo}>
-          Endereço
+          Endereço de Envio
         </Text>
 
-        {!editandoEndereco ? (
-
+        {carregandoEnderecos ? (
+          <Text>Carregando endereços...</Text>
+        ) : enderecosSalvos.length > 0 ? (
           <>
-            <Text>
-              {endereco.rua}, {endereco.numero}
-            </Text>
+            {/* Lista de endereços salvos */}
+            <FlatList
+              scrollEnabled={false}
+              data={enderecosSalvos}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => setEnderecoSelecionado(item)}
+                  style={[
+                    styles.opcao,
+                    enderecoSelecionado === item && styles.opcaoSelecionada,
+                  ]}
+                >
+                  <View style={styles.opcaoEsquerda}>
+                    <View
+                      style={[
+                        styles.radioOuter,
+                        enderecoSelecionado === item &&
+                        styles.radioOuterSelecionado,
+                      ]}
+                    >
+                      {enderecoSelecionado === item && (
+                        <View style={styles.radioInner} />
+                      )}
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.opcaoTexto}>
+                        {item.rua}, {item.numero}
+                      </Text>
+                      <Text style={{ fontSize: 12, color: "#666" }}>
+                        {item.bairro} - {item.cidade}/{item.estado}
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
 
-            <Text>
-              {endereco.bairro} - {endereco.cidade}/{endereco.estado}
-            </Text>
-
-            <Text>
-              CEP: {endereco.cep}
-            </Text>
-
-            {endereco.complemento ? (
-              <Text>
-                Compl: {endereco.complemento}
-              </Text>
-            ) : null}
-
+            {/* Botão para adicionar novo endereço */}
             <TouchableOpacity
-              onPress={() => setEditandoEndereco(true)}
+              style={[styles.botaoSalvar, { marginTop: 15 }]}
+              onPress={() => setAdicionandoNovoEndereco(true)}
             >
-
-              <Text style={styles.link}>
-                Alterar endereço
+              <Text style={styles.botaoTexto}>
+                + Adicionar outro endereço
               </Text>
-
             </TouchableOpacity>
-
           </>
-
         ) : (
-
-          <View>
-
-            <TextInput
-              placeholder="CEP"
-              style={styles.input}
-              value={endereco.cep}
-              onChangeText={(v) =>
-                setEndereco({ ...endereco, cep: v })
-              }
-            />
-
-            <TextInput
-              placeholder="Rua"
-              style={styles.input}
-              value={endereco.rua}
-              onChangeText={(v) =>
-                setEndereco({ ...endereco, rua: v })
-              }
-            />
-
-            <TextInput
-              placeholder="Número"
-              style={styles.input}
-              keyboardType="numeric"
-              value={endereco.numero}
-              onChangeText={(v) =>
-                setEndereco({ ...endereco, numero: v })
-              }
-            />
-
-            <TextInput
-              placeholder="Complemento"
-              style={styles.input}
-              value={endereco.complemento}
-              onChangeText={(v) =>
-                setEndereco({
-                  ...endereco,
-                  complemento: v,
-                })
-              }
-            />
-
-            <TextInput
-              placeholder="Bairro"
-              style={styles.input}
-              value={endereco.bairro}
-              onChangeText={(v) =>
-                setEndereco({ ...endereco, bairro: v })
-              }
-            />
-
-            <TextInput
-              placeholder="Cidade"
-              style={styles.input}
-              value={endereco.cidade}
-              onChangeText={(v) =>
-                setEndereco({ ...endereco, cidade: v })
-              }
-            />
-
-            <TextInput
-              placeholder="Estado"
-              style={styles.input}
-              value={endereco.estado}
-              onChangeText={(v) =>
-                setEndereco({ ...endereco, estado: v })
-              }
-            />
-
+          <>
+            <Text style={{ marginBottom: 15 }}>Nenhum endereço cadastrado.</Text>
             <TouchableOpacity
               style={styles.botaoSalvar}
-              onPress={salvarEndereco}
+              onPress={() => setAdicionandoNovoEndereco(true)}
             >
-
               <Text style={styles.botaoTexto}>
-                Salvar endereço
+                + Adicionar endereço
               </Text>
-
             </TouchableOpacity>
-
-          </View>
+          </>
         )}
 
       </View>
+
+      {/* MODAL - Adicionar Novo Endereço */}
+      <Modal
+        visible={adicionandoNovoEndereco}
+        animationType="slide"
+        transparent={true}
+      >
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "flex-end" }}>
+          <View style={[styles.card, { borderRadius: 20, margin: 15 }]}>
+            <TouchableOpacity
+              onPress={() => setAdicionandoNovoEndereco(false)}
+              style={{ alignSelf: "flex-end", padding: 10 }}
+            >
+              <Ionicons name="close" size={24} color="#790000" />
+            </TouchableOpacity>
+
+            <Text style={styles.titulo}>
+              Novo Endereço
+            </Text>
+
+            <ScrollView
+              scrollEnabled={true}
+              style={{ maxHeight: 400 }}
+              showsVerticalScrollIndicator={false}
+            >
+              <TextInput
+                placeholder="CEP"
+                style={styles.input}
+                value={novoEndereco.cep}
+                onChangeText={(v) =>
+                  setNovoEndereco({ ...novoEndereco, cep: v })
+                }
+              />
+
+              <TextInput
+                placeholder="Rua"
+                style={styles.input}
+                value={novoEndereco.rua}
+                onChangeText={(v) =>
+                  setNovoEndereco({ ...novoEndereco, rua: v })
+                }
+              />
+
+              <TextInput
+                placeholder="Número"
+                style={styles.input}
+                keyboardType="numeric"
+                value={novoEndereco.numero}
+                onChangeText={(v) =>
+                  setNovoEndereco({ ...novoEndereco, numero: v })
+                }
+              />
+
+              <TextInput
+                placeholder="Complemento"
+                style={styles.input}
+                value={novoEndereco.complemento}
+                onChangeText={(v) =>
+                  setNovoEndereco({
+                    ...novoEndereco,
+                    complemento: v,
+                  })
+                }
+              />
+
+              <TextInput
+                placeholder="Bairro"
+                style={styles.input}
+                value={novoEndereco.bairro}
+                onChangeText={(v) =>
+                  setNovoEndereco({ ...novoEndereco, bairro: v })
+                }
+              />
+
+              <TextInput
+                placeholder="Cidade"
+                style={styles.input}
+                value={novoEndereco.cidade}
+                onChangeText={(v) =>
+                  setNovoEndereco({ ...novoEndereco, cidade: v })
+                }
+              />
+
+              <TextInput
+                placeholder="Estado"
+                style={styles.input}
+                value={novoEndereco.estado}
+                onChangeText={(v) =>
+                  setNovoEndereco({ ...novoEndereco, estado: v })
+                }
+              />
+            </ScrollView>
+
+            <TouchableOpacity
+              style={styles.botaoSalvar}
+              onPress={salvarNovoEndereco}
+            >
+              <Text style={styles.botaoTexto}>
+                Salvar endereço
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.botaoSalvar, { backgroundColor: "#ccc", marginTop: 10 }]}
+              onPress={() => setAdicionandoNovoEndereco(false)}
+            >
+              <Text style={[styles.botaoTexto, { color: "#333" }]}>
+                Cancelar
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       {/* 💳 PAGAMENTO */}
       <View style={styles.card}>
