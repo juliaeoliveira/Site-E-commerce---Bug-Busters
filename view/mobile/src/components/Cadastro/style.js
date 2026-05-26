@@ -35,9 +35,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "#f8f3eb",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-
     marginTop: -35,
+  },
+
+  formContent: {
     padding: 20,
+    paddingBottom: 40,
   },
 
   label: {
@@ -62,6 +65,10 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
 
+  botaoInativo: {
+    backgroundColor: "#bbb",
+  },
+
   textoBotao: {
     color: "#fff",
     fontWeight: "bold",
@@ -73,5 +80,52 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 15,
     textDecorationLine: "none",
+  },
+
+  requisitosContainer: {
+    marginTop: 8,
+    gap: 4,
+  },
+
+  requisitoLinha: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+
+  requisitoIconOk: {
+    color: "#2e7d32",
+    fontSize: 12,
+    fontWeight: "bold",
+    width: 14,
+  },
+
+  requisitoIconFail: {
+    color: "#c0392b",
+    fontSize: 12,
+    fontWeight: "bold",
+    width: 14,
+  },
+
+  requisitoTextoOk: {
+    color: "#2e7d32",
+    fontSize: 12,
+  },
+
+  requisitoTextoFail: {
+    color: "#c0392b",
+    fontSize: 12,
+  },
+
+  senhaOk: {
+    color: "#2e7d32",
+    fontSize: 12,
+    marginTop: 5,
+  },
+
+  senhaFail: {
+    color: "#c0392b",
+    fontSize: 12,
+    marginTop: 5,
   },
 });

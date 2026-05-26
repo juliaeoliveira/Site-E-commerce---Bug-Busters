@@ -1,7 +1,7 @@
-import { View, Text, TextInput, TouchableOpacity, ImageBackground } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
 import { styles } from "./style";
 import { CreateUser } from "../../services/api";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Alert } from "react-native";
 
 export default function Cadastro({ navigation }) {
@@ -11,6 +11,19 @@ export default function Cadastro({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
+
+  const requisitossenha = useMemo(() => [
+    { id: "len",     ok: senha.length >= 8,                   label: "Mínimo 8 caracteres" },
+    { id: "upper",   ok: /[A-Z]/.test(senha),                 label: "Uma letra maiúscula" },
+    { id: "lower",   ok: /[a-z]/.test(senha),                 label: "Uma letra minúscula" },
+    { id: "num",     ok: /\d/.test(senha),                    label: "Um número" },
+    { id: "special", ok: /[@#$%^&+=!\-]/.test(senha),         label: "Um caractere especial (@#$%^&+=!-)" },
+    { id: "space",   ok: senha.length > 0 && !/ /.test(senha), label: "Sem espaços" },
+  ], [senha]);
+
+  const senhaValida = requisitossenha.every((r) => r.ok);
+  const senhasIguais = senha === confirmarSenha && confirmarSenha.length > 0;
+  const formularioValido = senhaValida && senhasIguais;
 
   function formatarData(data) {
   const partes = data.split("/"); // ["25","12","2000"]
@@ -84,8 +97,8 @@ function validarData(data) {
     }
 // para que nao seja uma data maluca tipo 99/99/9999
 
-    if (senha.length < 6) {
-      Alert.alert("Erro", "A senha deve ter no mínimo 6 caracteres!");
+    if (!senhaValida) {
+      Alert.alert("Erro", "A senha não atende aos requisitos!");
       return;
     }
 
@@ -136,7 +149,12 @@ function validarData(data) {
       </ImageBackground>
 
       {/* FORMULÁRIO */}
-      <View style={styles.formContainer}>
+      <ScrollView
+        style={styles.formContainer}
+        contentContainerStyle={styles.formContent}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
 
         <Text style={styles.title}>Realize seu cadastro</Text>
 
@@ -155,10 +173,37 @@ function validarData(data) {
         <Text style={styles.label}>Senha</Text>
         <TextInput style={styles.input} value={senha} onChangeText={setSenha} secureTextEntry />
 
+        {/* REQUISITOS DA SENHA */}
+        {senha.length > 0 && (
+          <View style={styles.requisitosContainer}>
+            {requisitossenha.map((req) => (
+              <View key={req.id} style={styles.requisitoLinha}>
+                <Text style={req.ok ? styles.requisitoIconOk : styles.requisitoIconFail}>
+                  {req.ok ? "✓" : "✗"}
+                </Text>
+                <Text style={req.ok ? styles.requisitoTextoOk : styles.requisitoTextoFail}>
+                  {req.label}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
+
         <Text style={styles.label}>Confirmar senha</Text>
         <TextInput style={styles.input} value={confirmarSenha} onChangeText={setConfirmarSenha} secureTextEntry />
 
-        <TouchableOpacity style={styles.botao} onPress={handleCadastro}>
+        {/* FEEDBACK CONFIRMAÇÃO */}
+        {confirmarSenha.length > 0 && (
+          <Text style={senhasIguais ? styles.senhaOk : styles.senhaFail}>
+            {senhasIguais ? "✓ Senhas coincidem" : "✗ Senhas não coincidem"}
+          </Text>
+        )}
+
+        <TouchableOpacity
+          style={[styles.botao, !formularioValido && styles.botaoInativo]}
+          onPress={handleCadastro}
+          disabled={!formularioValido}
+        >
           <Text style={styles.textoBotao}>Criar conta</Text>
         </TouchableOpacity>
 
@@ -173,7 +218,7 @@ function validarData(data) {
         </Text>
 
 
-      </View>
+      </ScrollView>
     </View>
   );
 }
