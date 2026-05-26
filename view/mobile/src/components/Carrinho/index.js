@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Text, 
-  View, 
-  TouchableOpacity, 
-  Image, 
-  ScrollView, 
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
   ActivityIndicator,
-  Alert 
+  Alert
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,7 +22,7 @@ export default function Carrinho({ navigation, route }) {
   const [loading, setLoading] = useState(true);
   const [nomeUsuario, setNomeUsuario] = useState("");
   const [sugestoes, setSugestoes] = useState([]);
-  
+
   // 1. Estado do carrinho começa VAZIO
   const [cart, setCart] = useState([]);
 
@@ -54,7 +54,7 @@ export default function Carrinho({ navigation, route }) {
 
         setLoading(true);
         const token = await AsyncStorage.getItem("token");
-        
+
         await loadCartFromStorage();
 
         if (token) {
@@ -110,8 +110,8 @@ export default function Carrinho({ navigation, route }) {
 
   function alterarTamanho(id, antigoTamanho, novoTamanho) {
     const updatedCart = cart.map(item =>
-      (item.id === id && item.tamanho === antigoTamanho) 
-        ? { ...item, tamanho: novoTamanho } 
+      (item.id === id && item.tamanho === antigoTamanho)
+        ? { ...item, tamanho: novoTamanho }
         : item
     );
     setCart(updatedCart);
@@ -133,8 +133,8 @@ export default function Carrinho({ navigation, route }) {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <ScrollView 
-        style={styles.body} 
+      <ScrollView
+        style={styles.body}
         contentContainerStyle={{ paddingBottom: 180 }}
         showsVerticalScrollIndicator={false}
       >
@@ -149,22 +149,22 @@ export default function Carrinho({ navigation, route }) {
           <View style={styles.emptyContainer}>
             <Ionicons name="basket-outline" size={80} color="#ccc" />
             <Text style={styles.emptyText}>Seu carrinho está vazio</Text>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => navigation.navigate("home")}
-              style={{ marginTop: 10 }}
+              style={styles.fundoexplorar}
             >
-              <TouchableOpacity style={styles.fundoexplorar}>
-                <Text style={styles.explorar}>Explorar produtos</Text>
-              </TouchableOpacity>
+
+              <Text style={styles.explorar}>Explorar produtos</Text>
+
             </TouchableOpacity>
           </View>
         ) : (
           <View style={styles.card}>
             {cart.map((item, index) => (
               <View key={`${item.id}-${item.tamanho}-${index}`} style={styles.item}>
-                <Image 
-                  source={item.img?.uri ? { uri: item.img.uri } : item.img} 
-                  style={styles.image} 
+                <Image
+                  source={item.img?.uri ? { uri: item.img.uri } : item.img}
+                  style={styles.image}
                 />
 
                 <View style={styles.info}>

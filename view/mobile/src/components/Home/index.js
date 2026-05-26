@@ -26,12 +26,10 @@ export default function Home({ navigation }) {
   const banners = [
     require("../../assets/images/banner1.png"),
     require("../../assets/images/banner2.png"),
-    
   ];
 
   const [bannerAtivo, setBannerAtivo] = useState(0);
 
-  // TROCAR BANNER
   function trocarBanner() {
 
     let proximo = bannerAtivo + 1;
@@ -43,7 +41,6 @@ export default function Home({ navigation }) {
     setBannerAtivo(proximo);
   }
 
-  // BUSCA
   function handleSearch() {
 
     navigation.navigate("searchresults", {
@@ -51,7 +48,6 @@ export default function Home({ navigation }) {
     });
   }
 
-  // CARREGAR PRODUTOS
   useEffect(() => {
 
     async function loadProducts() {
@@ -74,7 +70,6 @@ export default function Home({ navigation }) {
 
   }, [searchText]);
 
-  // CARD PRODUTO
   function renderItem({ item }) {
 
     return (
@@ -106,7 +101,6 @@ export default function Home({ navigation }) {
     );
   }
 
-  // HEADER
   function ListHeader() {
 
     return (
@@ -133,7 +127,6 @@ export default function Home({ navigation }) {
                 style={[
                   styles.dot,
 
-                  // BOLINHA ATIVA
                   bannerAtivo === index &&
                   styles.dotActive,
                 ]}
@@ -145,46 +138,71 @@ export default function Home({ navigation }) {
 
         </TouchableOpacity>
 
+
         {/* CATEGORIAS */}
         <View style={styles.categorias}>
 
-          <TouchableOpacity style={styles.circulo}>
-
+          <TouchableOpacity
+            style={styles.circulo}
+            onPress={() =>
+              navigation.navigate("tasks", {
+                categoria: "Noivas"
+              })
+            }
+          >
             <Image
               source={require("../../assets/images/coleção1.jpg")}
               style={styles.imgCirculo}
             />
-
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.circulo}>
 
+          <TouchableOpacity
+            style={styles.circulo}
+            onPress={() =>
+              navigation.navigate("tasks", {
+                categoria: "Festa"
+              })
+            }
+          >
             <Image
               source={require("../../assets/images/coleção2.jpg")}
               style={styles.imgCirculo}
             />
-
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.circulo}>
 
+          <TouchableOpacity
+            style={styles.circulo}
+            onPress={() =>
+              navigation.navigate("tasks", {
+                categoria: "Princesa"
+              })
+            }
+          >
             <Image
               source={require("../../assets/images/coleção3.jpg")}
               style={styles.imgCirculo}
             />
-
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.circulo}>
 
+          <TouchableOpacity
+            style={styles.circulo}
+            onPress={() =>
+              navigation.navigate("tasks", {
+                categoria: "Luxo"
+              })
+            }
+          >
             <Image
               source={require("../../assets/images/coleção4.jpg")}
               style={styles.imgCirculo}
             />
-
           </TouchableOpacity>
 
         </View>
+
 
         {/* AGENDAMENTO */}
         <View style={styles.agendamento}>
@@ -213,7 +231,6 @@ export default function Home({ navigation }) {
 
         </View>
 
-        {/* TITULO */}
         <Text style={styles.tituloProdutos}>
           Vestidos
         </Text>
@@ -226,7 +243,6 @@ export default function Home({ navigation }) {
 
     <View style={styles.container}>
 
-      {/* HEADER */}
       <View style={styles.header}>
 
         <View style={styles.searchContainer}>
@@ -251,7 +267,6 @@ export default function Home({ navigation }) {
 
       </View>
 
-      {/* LISTA */}
       <FlatList
         data={products}
         renderItem={renderItem}
