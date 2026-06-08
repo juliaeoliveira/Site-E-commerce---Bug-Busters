@@ -60,6 +60,8 @@ export default function Checkout({ navigation }) {
           if (enderecos.length > 0) {
             // Seleciona o primeiro endereço como padrão
             setEnderecoSelecionado(enderecos[0]);
+            // calcula frete para o endereço padrão
+            calcularFretePorEndereco(enderecos[0]);
           }
         } else if (enderecos) {
           // Se retornar um único endereço (não é array)
@@ -77,7 +79,12 @@ export default function Checkout({ navigation }) {
     carregarDados();
   }, []);
 
-  const frete = 50;
+  const [frete, setFrete] = useState(50);
+  const [distanciaKm, setDistanciaKm] = useState(null);
+
+  // CEP do armazém (base para cálculo de distância)
+  const warehouseCep = "03008-020";
+  const [warehouseCoord, setWarehouseCoord] = useState(null);
 
   const subtotal = carrinho.reduce(
     (acc, item) => acc + (item.preco * item.qtd),
@@ -85,6 +92,80 @@ export default function Checkout({ navigation }) {
   );
 
   const total = subtotal + frete;
+
+  // Geocoding simples usando Nominatim (OpenStreetMap)
+  async function geocode(query) {
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}, Brasil`;
+      const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (CheckoutApp)" } });
+      const data = await res.json();
+      if (data && data.length > 0) {
+        return {
+          lat: parseFloat(data[0].lat),
+          lon: parseFloat(data[0].lon),
+        };
+      }
+    } catch (e) {
+      console.error("Geocode error:", e);
+    }
+    return null;
+  }
+
+  function haversineKm(a, b) {
+    if (!a || !b) return null;
+    const toRad = (v) => (v * Math.PI) / 180;
+    const R = 6371; // km
+    const dLat = toRad(b.lat - a.lat);
+    const dLon = toRad(b.lon - a.lon);
+    const lat1 = toRad(a.lat);
+    const lat2 = toRad(b.lat);
+    const sinDLat = Math.sin(dLat / 2);
+    const sinDLon = Math.sin(dLon / 2);
+    const aHarv = sinDLat * sinDLat + sinDLon * sinDLon * Math.cos(lat1) * Math.cos(lat2);
+    const c = 2 * Math.atan2(Math.sqrt(aHarv), Math.sqrt(1 - aHarv));
+    return R * c;
+  }
+
+  async function calcularFretePorEndereco(endereco) {
+    try {
+      // Ensure warehouse coord cached
+      if (!warehouseCoord) {
+        const w = await geocode(warehouseCep);
+        setWarehouseCoord(w);
+        if (!w) {
+          console.warn("Não foi possível geocodificar o CEP do armazém");
+        }
+      }
+
+      // Prefer usar CEP do endereço se disponível
+      const query = endereco.cep && endereco.cep.length > 0
+        ? endereco.cep
+        : `${endereco.rua || ""}, ${endereco.numero || ""}, ${endereco.cidade || ""}, ${endereco.estado || ""}`;
+
+      const dest = await geocode(query);
+
+      const baseCoord = warehouseCoord || (await geocode(warehouseCep));
+      if (!dest || !baseCoord) {
+        // fallback para valor padrão
+        setFrete(50);
+        setDistanciaKm(null);
+        return;
+      }
+
+      const km = haversineKm(baseCoord, dest);
+      setDistanciaKm(km);
+
+      // Fórmula de frete: mínima de R$10 + R$0.8 por km, arredondado
+      const base = 10;
+      const perKm = 0.8;
+      const calc = Math.max(10, Math.round(base + km * perKm));
+      setFrete(calc);
+    } catch (err) {
+      console.error("Erro calcularFretePorEndereco:", err);
+      setFrete(50);
+      setDistanciaKm(null);
+    }
+  }
 
   async function finalizarCompra() {
     if (!enderecoSelecionado) {
@@ -141,6 +222,8 @@ export default function Checkout({ navigation }) {
       
       setEnderecosSalvos([...enderecosSalvos, enderecoCriado]);
       setEnderecoSelecionado(enderecoCriado);
+      // calcula frete para o novo endereço
+      calcularFretePorEndereco(enderecoCriado);
       setAdicionandoNovoEndereco(false);
       setNovoEndereco({
         cep: "",
@@ -203,7 +286,7 @@ export default function Checkout({ navigation }) {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  onPress={() => setEnderecoSelecionado(item)}
+                  onPress={() => { setEnderecoSelecionado(item); calcularFretePorEndereco(item); }}
                   style={[
                     styles.opcao,
                     enderecoSelecionado === item && styles.opcaoSelecionada,
