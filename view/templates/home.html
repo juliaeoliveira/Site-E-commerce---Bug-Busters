@@ -181,77 +181,116 @@
     </div>
 </section>
 
-    <footer>
-      <!-- LOGO -->
-      <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
+<footer>
+  <!-- LOGO -->
+  <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
 
-      <!-- COLUNA 1 -->
-      <div class="coluna">
-        <p class="titulo">Contatos</p>
-        <ul>
-          <li>
-            <img
-              class="telefone"
-              src="/static/img_home/telefone.png"
-              alt="Telefone"
-            />
-            (11) 4002-8922
-          </li>
+  <!-- CONTATOS -->
+  <div class="coluna">
+    <p class="titulo">Contatos</p>
+    <ul>
+      <li>
+        <img class="telefone" src="/static/img_home/telefone.png" alt="Telefone">
+        (11) 4002-8922
+      </li>
 
-          <li>
-            <img
-              class="whatsapp"
-              src="/static/img_home/speech-bubble--v2-Photoroom.png"
-              alt="WhatsApp"
-            />
-            (11) 98291-1653
-          </li>
+      <li>
+        <img class="whatsapp" src="/static/img_home/speech-bubble--v2-Photoroom.png" alt="WhatsApp">
+        (11) 98291-1653
+      </li>
 
-          <li>sobveuoficial@gmail.com</li>
-        </ul>
-      </div>
+      <li>sobveuoficial@gmail.com</li>
+    </ul>
+  </div>
 
-      <div class="linha"></div>
+  <div class="linha"></div>
 
-      <!-- COLUNA 2 -->
-      <div class="coluna">
-        <p class="titulo">Sobre a loja</p>
-        <ul>
-          <li>Sobre nós</li>
-          <li>Trocas e Devoluções</li>
-          <li>Fretes e Entregas</li>
-        </ul>
-      </div>
+  <!-- SOBRE A LOJA -->
+  <div class="coluna">
+    <p class="titulo">Sobre a loja</p>
 
-      <div class="linha"></div>
+    <ul>
+      <li onclick="abrirPopup(
+        'Sobre Nós',
+        'A Sob Véu é especializada em vestidos de noiva exclusivos, oferecendo atendimento personalizado para tornar seu momento único.'
+      )">
+        Sobre nós
+      </li>
 
-      <!-- COLUNA 3 -->
-      <div class="coluna">
-        <p class="titulo">Informações</p>
-        <ul>
-          <li>Política de Privacidade</li>
-          <li>Termos de Uso</li>
-          <br /><br />
-        </ul>
-      </div>
+      <li onclick="abrirPopup(
+        'Trocas e Devoluções',
+        'Você pode solicitar trocas ou devoluções em até 7 dias após o recebimento do produto.'
+      )">
+        Trocas e Devoluções
+      </li>
 
-      <!-- REDES SOCIAIS -->
-      <section class="midia">
-        <img
-          class="instagram"
-          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
-          alt="Instagram"
-        />
-        <img
-          class="facebook"
-          src="/static/img_home/facebook-f-Photoroom.png"
-          alt="Facebook"
-        />
-      </section>
+      <li onclick="abrirPopup(
+        'Fretes e Entregas',
+        'Realizamos entregas para todo o Brasil. O prazo varia conforme a região e a modalidade escolhida.'
+      )">
+        Fretes e Entregas
+      </li>
+    </ul>
+  </div>
 
-      <!-- DIREITOS -->
-      <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
-    </footer>
+  <div class="linha"></div>
+
+  <!-- INFORMAÇÕES -->
+  <div class="coluna">
+    <p class="titulo">Informações</p>
+
+    <ul>
+      <li onclick="abrirPopup(
+        'Política de Privacidade',
+        'Seus dados são protegidos e utilizados apenas para processar pedidos e melhorar sua experiência.'
+      )">
+        Política de Privacidade
+      </li>
+
+      <li onclick="abrirPopup(
+        'Termos de Uso',
+        'Ao utilizar nosso site você concorda com os termos e condições de uso da Sob Véu.'
+      )">
+        Termos de Uso
+      </li>
+    </ul>
+  </div>
+
+  <!-- REDES -->
+  <section class="midia">
+    <img
+      class="instagram"
+      src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+      alt="Instagram"
+    />
+
+    <img
+      class="facebook"
+      src="/static/img_home/facebook-f-Photoroom.png"
+      alt="Facebook"
+    />
+  </section>
+
+  <p class="direitos">
+    &copy; 2025 Sob Véu. Todos os direitos reservados.
+  </p>
+</footer>
+
+<!-- MODAL -->
+<div id="popup" class="popup">
+  <div class="popup-conteudo">
+
+    <button class="fechar" onclick="fecharPopup()">
+      ×
+    </button>
+
+    <h2 id="popupTitulo"></h2>
+
+    <p id="popupTexto"></p>
+
+  </div>
+</div>
+
   <script>
     const nav = document.getElementById("nav-menu");
     const btn = document.getElementById("hamburger");
@@ -377,7 +416,24 @@ function iniciarCarrosselMobile() {
 iniciarCarrosselMobile();
 </script>
 
+<script>
+function abrirPopup(titulo, texto) {
+  document.getElementById("popupTitulo").textContent = titulo;
+  document.getElementById("popupTexto").textContent = texto;
 
+  document.getElementById("popup").classList.add("ativo");
+}
+
+function fecharPopup() {
+  document.getElementById("popup").classList.remove("ativo");
+}
+
+document.getElementById("popup").addEventListener("click", function(e){
+  if(e.target === this){
+    fecharPopup();
+  }
+});
+</script>
 
 </body>
 </main>

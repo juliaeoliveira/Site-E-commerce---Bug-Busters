@@ -1556,4 +1556,56 @@ footer li {
   filter: blur(8px);
 }
 
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
 
+  background:rgba(0,0,0,.7);
+
+  justify-content:center;
+  align-items:center;
+
+  z-index:999999;
+}
+
+.popup.ativo{
+  display:flex;
+}
+
+.popup-conteudo{
+  width:500px;
+  max-width:90%;
+
+  background:#fff;
+
+  padding:30px;
+
+  border-radius:16px;
+
+  text-align:center;
+
+  position:relative;
+
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.fechar{
+  position:absolute;
+  top:10px;
+  right:15px;
+
+  border:none;
+  background:none;
+
+  font-size:30px;
+  cursor:pointer;
+}
+
+.coluna li{
+  cursor:pointer;
+}
+
+.coluna li:hover{
+  color:#790000;
+}
