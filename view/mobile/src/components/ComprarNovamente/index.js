@@ -58,7 +58,7 @@ export default function ComprarNovamente({ navigation }) {
     return (
 
       <TouchableOpacity
-        style={styles.card}
+        style={styles.dressCard}
         onPress={() =>
           navigation.navigate("detalhes", {
             product: item
@@ -68,14 +68,14 @@ export default function ComprarNovamente({ navigation }) {
 
         <Image
           source={{ uri: item.imagem1_url }}
-          style={styles.cardImage}
+          style={styles.dressImage}
         />
 
-        <Text style={styles.cardNome}>
+        <Text style={styles.dressName}>
           {item.nome_produto}
         </Text>
 
-        <Text style={styles.cardPreco}>
+        <Text style={styles.dressPrice}>
           R$ {Number(item.preco).toFixed(2)}
         </Text>
 
@@ -102,11 +102,11 @@ export default function ComprarNovamente({ navigation }) {
     <View style={styles.container}>
 
       <View style={styles.header}>
-
+        <View style={styles.titleContainer}>
         <Text style={styles.titulo}>
           Comprar Novamente
         </Text>
-
+        </View>
       </View>
 
       {products.length === 0 ? (
@@ -127,9 +127,7 @@ export default function ComprarNovamente({ navigation }) {
           keyExtractor={(item) => String(item.id)}
           numColumns={2}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingBottom: 20
-          }}
+          contentContainerStyle={styles.dressContainer}
         />
 
       )}

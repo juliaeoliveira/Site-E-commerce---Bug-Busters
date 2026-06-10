@@ -11,21 +11,21 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-titleContainer: {
-  width: "100%",
-  backgroundColor: "#790000", // cor da faixa
-  paddingVertical: 12,
-  alignItems: "center",
-  justifyContent: "center",
-  marginBottom: 15,
-},
+  titleContainer: {
+    width: "100%",
+    backgroundColor: "#790000", // cor da faixa
+    paddingVertical: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 15,
+  },
 
-title: {
-  fontSize: 22,
-  fontWeight: "bold",
-  color: "#fff4f4",
-  textAlign: "center",
-},
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#fff4f4",
+    textAlign: "center",
+  },
 
   circlesContainer: {
     flexDirection: "row",
@@ -55,11 +55,11 @@ title: {
     paddingHorizontal: 10,
   },
   dressCard: {
-  marginTop: 30,
-  width: "30%",
-  marginHorizontal: "10%",
-  marginBottom: 25,
-},
+    marginTop: 30,
+    width: "30%",
+    marginHorizontal: "10%",
+    marginBottom: 25,
+  },
 
   dressImage: {
     marginLeft: -25,
@@ -76,9 +76,8 @@ title: {
   },
 
   dressPrice: {
-     marginRight: 40,
+    marginRight: 40,
     fontSize: 12,
     color: "#777",
-
   },
 });
