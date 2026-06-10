@@ -481,55 +481,55 @@ main h1 a {
 
 /*==================FOOTER==================*/
 
-/*======================VAREDADE==============*/
-
-/*======================VAREDADE==============*/
-
-.espacovariedades {
-  width: 100%;
+/*===================VARIEDADES======*/
+.conteinervariedade {
+  background-color: #fff9ed;
+  padding: 60px 20px;
   text-align: center;
-  margin-top: 80px;
 }
 
-.conteinervariedade {
-  width: 100%;
-  text-align: center;
-  padding: 20px 0;
+.conteinervariedade h3 {
+  color: #681616;
+  font-family: "Aboreto", system-ui;
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 
 .variedades {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   gap: 40px;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .imagem-container {
-  width: 260px;
+  width: 280px;
   text-align: center;
 }
 
 .imagem-container a {
   text-decoration: none;
+  color: #000;
 }
 
 .imagem-container img {
   width: 100%;
-  height: 380px;
+  height: 400px;
   object-fit: cover;
-  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 }
 
-.variedades .nome {
-  color: #000;
-  text-align: center;
+.imagem-container:hover img {
+  transform: scale(1.05);
+}
+
+.imagem-container .nome {
   font-family: "Libre Caslon Text";
   font-size: 18px;
-  letter-spacing: 1px;
+  color: #523800;
   margin-top: 15px;
-  font-weight: 500;
 }
 
 /* .midia {
