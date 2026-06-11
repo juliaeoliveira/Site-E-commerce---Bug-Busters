@@ -202,13 +202,14 @@ body {
 main {
   flex: 1;
   width: 100%;
-  padding: 120px 20px 60px;
+  
 }
 
 /* ===================== CARRINHO ===================== */
 #carrinho {
   min-height: 400px;
   background-color: #eae4d8;
+  margin-top: 130px;
 }
 
 .localizacao {
