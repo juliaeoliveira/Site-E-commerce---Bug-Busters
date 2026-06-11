@@ -137,7 +137,7 @@ body {
   /* 3. Estilos Visuais */
   padding: 60px 40px;
   text-align: center;
-  background: white;
+  background: #fff;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(82, 56, 0, 0.12);
   animation: fadeInUp 0.6s ease;
