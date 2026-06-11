@@ -243,7 +243,6 @@
 
 /*tirar se der problema*/
 
-
 /*=============================================*/
 
 html {
@@ -268,16 +267,14 @@ body {
   /* Impede rolagem horizontal */
   background-color: #eae4d8;
   color: #3a2d20;
+  font-family: "Afacad";
 }
 
 /*==================================MAIN=====================*/
 
-
 .paginas a:hover {
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
-
-
 
 /* Container principal */
 main {
@@ -290,18 +287,36 @@ main {
 
 /* Caminho inicial */
 
-
-main h1 a {
+main .guia .links {
   padding: 50px;
   text-align: center;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: normal;
   color: #5a4635;
   margin-bottom: 20px;
   margin-top: 80px;
 }
 
+.guia {
+  margin-top: 5%;
+  font-family: "Afacad";
+  text-align: center;
+  margin-bottom: 5%;
+  gap: 40px;
+}
 
+.guia a {
+  text-decoration: none;
+  color: #3a2d20;
+  font-size: 20px;
+}
+.guia a:hover {
+  color: #5a0101;
+}
+
+.links {
+  gap: 30px;
+}
 /* Grid das fotos */
 .fotos {
   display: grid;
@@ -314,13 +329,15 @@ main h1 a {
 .fotos img {
   width: 100%;
   padding: -10;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px 3px rgba(0, 0, 0, 0.15);
 }
 
 /* Área de descrição */
 .descricao {
   float: right;
   width: 40%;
-  background-color: #DBCAA94D;
+  background-color: #dbcaa94d;
   padding: 20px;
   border-radius: 5px;
   height: 600px;
@@ -329,7 +346,6 @@ main h1 a {
 
 .descricao li {
   border-color: black;
-
 }
 
 .descricao .nome {
@@ -349,12 +365,12 @@ main h1 a {
 .carrinho,
 .ver {
   margin: 40px 0;
-  padding: 10px 15px;
-  border: 1px solid #4E390299;
+  /* padding: 10px 15px; */
+  border: 1px solid #4e390299;
   background: #ede2d2;
-  font-size: 15px;
+  font-size: 18px;
   border-radius: 4px;
-
+  font-family: "Afacad";
 }
 
 .botoes {
@@ -365,36 +381,39 @@ main h1 a {
 
 .compra {
   color: black;
-  margin-left: -10px;
-  width: 300px;
+  /* margin-left: ; */
+  width: 240px;
   height: 50px;
   flex-shrink: 0;
   background: none;
 }
 
 .carrinho {
-  margin-left: 17px;
+  /* margin-left: 17px; */
   width: 240px;
   height: 60px;
   flex-shrink: 0;
   margin-top: -20px;
-  background: #d5c3a5;
+  background: #5a0101;
+  color: #f1f1f1;
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.carrinho img {
+  width: 20px;
 }
 
-
 .ver {
-  font-family: "Libre Caslon Text";
   height: 50px;
   width: 300px;
-  color: darkred;
-  background: rgba(237, 219, 190, 0.80);
+  color: #5a0101;
+  font-weight: 500;
+  background: rgba(237, 219, 190, 0.8);
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
   margin-top: 100px;
   cursor: pointer;
   transition: all 0.3s ease;
-
 }
 
 /* Mais variedades */
@@ -410,27 +429,26 @@ main h1 a {
 .linhavariedade {
   text-align: center;
   color: #000000;
-
 }
-
 
 .variedades {
   text-align: center;
   margin-top: 20px;
   padding: 30px;
-
 }
 
 .subtitulo {
-  color: #790000;
   font-size: 22px;
-  font-family: "Libre Caslon Text";
+  font-family: "Afacad";
+}
+.subtitulo span {
+  font-family: "Junge", serif;
 }
 
 .descricaovestido {
-  font-size: 18px;
-  font-family: "Libre Caslon Text";
-  font-weight: 200;
+  font-size: 20px;
+  font-family: "Afacad";
+  font-weight: 400;
 }
 
 .descricao .nome {
@@ -439,14 +457,13 @@ main h1 a {
 
 .linhadescricao {
   font-size: 18px;
-
 }
 
 .nomevestido {
   letter-spacing: 2.5px;
   font-family: "Aboreto", system-ui;
   color: #790000;
-  text-shadow: 2px 4px 4px color(display-p3 0 0 0 / 0.30);
+  text-shadow: 2px 4px 4px color(display-p3 0 0 0 / 0.3);
   -webkit-text-stroke-width: 0.5px;
   margin-top: -5px;
 }
@@ -462,7 +479,7 @@ main h1 a {
 } */
 .carrinho:focus {
   border-color: darkred;
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 .carrinho:hover {
@@ -471,7 +488,7 @@ main h1 a {
 }
 .ver:focus {
   border-color: darkred;
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 .ver:hover {
@@ -730,7 +747,6 @@ footer div p {
   color: #bdb0ae;
 }
 
-
 /* LISTAS */
 footer ul {
   list-style: none;
@@ -784,6 +800,7 @@ footer li {
 
 /* Tablet e telas intermediárias */
 @media (max-width: 850px) {
+
   .linha {
     display: none;
   }
@@ -812,12 +829,10 @@ footer li {
   }
 }
 
-
 /* ==========================================================
    RESPONSIVIDADE TOTAL PARA CELULAR - ATÉ 600px
    ========================================================== */
 @media (max-width: 600px) {
-
   /* ===== MAIN ===== */
   main {
     max-width: 100%;
@@ -825,13 +840,13 @@ footer li {
     margin-top: 120px; /* afastar do menu fixo */
   }
 
-  main h1 {
+  main .links {
     font-size: 14px;
     line-height: 20px;
     padding: 0;
   }
 
-  main h1 a {
+  main .links a {
     font-size: 14px;
     padding: 0;
   }
@@ -879,7 +894,7 @@ footer li {
 
   /* ===== BOTÕES ===== */
   .botoes {
-    margin: 20px 0 30px 0;
+    margin: 20px 0 10px 0;
     padding: 0;
     width: 100%;
     display: flex;
@@ -897,32 +912,36 @@ footer li {
   .carrinho {
     width: 100%;
     margin-left: 0;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     height: 55px;
     font-size: 16px;
+  }
+  .compra,
+  .carrinho {
+    width: 210px;
   }
 
   /* ===== CONTINUAR VENDO ===== */
   .outrosvestidos {
-    margin: 40px auto;
+    margin: 15px auto;
     text-align: center;
   }
 
   .ver {
-    width: 56%;
+    width: 70%;
     max-width: 350px;
     height: 50px;
-    font-size: 15px;
+    font-size: 16px;
     margin-right: 200px;
   }
 
   /* ===== VARIEDADES ===== */
   .variedades {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 80px; /* mais distância */
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 80px; /* mais distância */
+    flex-wrap: wrap;
     margin-top: 40px;
   }
 
@@ -951,13 +970,21 @@ footer li {
     display: none;
   }
 
+  .guia {
+    margin-top: 3%;
+    font-size: 16px;
+  }
+
   /* ===== CORRIGE FLOATS ===== */
-  .descricao, .fotos, .botoes {
+  .descricao,
+  .fotos,
+  .botoes {
     float: none !important;
   }
 
   /* ===== EVITAR SCROLL HORIZONTAL ===== */
-  body, html {
+  body,
+  html {
     overflow-x: hidden !important;
   }
 }
@@ -970,7 +997,7 @@ footer li {
   top: 20px;
   right: 50px;
   z-index: 1050; /* Garante que fique acima de outros elementos */
-  
+
   /* Largura e Estilo */
   width: 90%; /* Responsivo: 90% da tela */
   max-width: 400px; /* Limita a largura em telas grandes */
@@ -978,7 +1005,7 @@ footer li {
   /* Outros estilos visuais */
   padding: 15px;
   color: #523800;
-  background-color: #EAE4D8;
+  background-color: #eae4d8;
   box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: 1px solid #5238007e;
   border-radius: 4px;
@@ -994,21 +1021,6 @@ footer li {
   }
 }
 
-.guia {
-  margin-top: 60px;
-  text-align: center;
-  margin-bottom: 30px;
-  gap: 40px;
-  
-}
-
-.guia a {
-  text-decoration: none;
-  color:#000;
-  font-size: 28px;
-  
-}
-
-.links{
-  gap: 30px;
+.guia p a {
+  font-family: "Afacad";
 }

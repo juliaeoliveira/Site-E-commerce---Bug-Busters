@@ -291,10 +291,10 @@ main {
 /* Caminho inicial */
 
 
-main h1 a {
+main .links {
   padding: 50px;
   text-align: center;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: normal;
   color: #5a4635;
   margin-bottom: 20px;
@@ -743,13 +743,13 @@ footer li {
     margin-top: 120px; /* afastar do menu fixo */
   }
 
-  main h1 {
+  main .links {
     font-size: 14px;
     line-height: 20px;
     padding: 0;
   }
 
-  main h1 a {
+  main .links{
     font-size: 14px;
     padding: 0;
   }

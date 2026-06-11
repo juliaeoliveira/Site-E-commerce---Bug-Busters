@@ -28,6 +28,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Jim+Nightshade&family=Judson:ital,wght@0,400;0,700;1,400&family=Junge&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -61,10 +62,10 @@
 
     <nav class="icons">
       <a href="/usuario/login" >
-        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+        <img src="/static/img_home/login.png" width="24px" title="login" alt="login"/>
       </a>
       <a href="/painel_usuario/carrinho" >
-        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
+        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="24px" title="Carrinho" alt="Carrinho"/>
       </a>
     </nav>
   </header>
@@ -74,10 +75,9 @@
 
   <main>
     <div class="guia"
-        <h1 class="links">
-          <a href="/painel_usuario">Início</a> > <a href="/painel_usuario/produtos"> Vestidos </a> > <a
-            href="/painel_usuario/produtos/{{produto.id}}"> Detalhes do Vestido </a>
-        </h1>
+        <p class="links">
+          <a href="/">Início</a> > <a href="/produtos"> Vestidos </a> > <a href="/produtos/{{produto.id}}"> Detalhes do Vestido </a>
+        </p>
     </div>
 
     <center>
@@ -94,9 +94,9 @@
     <section>
       <div class="descricao">
         <h2 class="nomevestido">{{produto.nome_produto}}</h2> <br> <br>
-        <h2 class="descricaovestido">DETALHES DO VESTIDO</h2>
+        <h2 class="descricaovestido">Detalhes do vestido:</h2>
         <br>
-        <b class="subtitulo">Coleção: {{produto.categoria}}</b>
+        <b class="subtitulo">Coleção: <span>{{produto.categoria}}</span></b>
 
         <ul>
           <p>{{produto.descricao}}</p>
@@ -110,15 +110,15 @@
           </a>
         </div>
         <div>
-          <button class="carrinho" data-id="{{ produto.id }}"> Adicionar no carrinho 🛒 </button>
+          <button class="carrinho" data-id="{{ produto.id }}"> Adicionar ao carrinho <img src="/static/img_home/carrinho-button.png" alt="" ></button>
         </div>
       </div>
         
-        <nav>
-            <div class="outrosvestidos">
-                <a href="/painel_usuario/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
-            </div> 
-        </nav>
+      <nav>
+        <div class="outrosvestidos">
+          <a href="/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
+          </div> 
+      </nav>
 
         <section class="espacovariedades">
         <div class="conteinervariedade">
@@ -129,7 +129,7 @@
           {% for sugestao in sugestoes %}
             {% if sugestao.quantidade_estoque > 0 %}
               <div class="imagem-container">
-                <a href="/painel_usuario/produtos/{{ sugestao.id }}">
+                <a href="/produtos/{{ sugestao.id }}">
                   <img src="{{url_for('static', path= 'uploads/' + sugestao.imagem1_url)}}"
                   alt="{{ sugestao.nome_produto }}">
                   <p class="nome">{{ sugestao.nome_produto }}</p>
