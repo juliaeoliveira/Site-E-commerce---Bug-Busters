@@ -369,7 +369,7 @@ main .guia .links {
   border: 1px solid #4e390299;
   background: #ede2d2;
   font-size: 18px;
-  border-radius: 4px;
+  border-radius: 5px;
   font-family: "Afacad";
 }
 
@@ -397,6 +397,7 @@ main .guia .links {
   background: #5a0101;
   color: #f1f1f1;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.5s ease;
 }
 .carrinho img {
   width: 20px;
@@ -407,13 +408,13 @@ main .guia .links {
   width: 300px;
   color: #5a0101;
   font-weight: 500;
-  background: rgba(237, 219, 190, 0.8);
+  background: #eadcc1cc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
   margin-top: 100px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 /* Mais variedades */
@@ -477,23 +478,23 @@ main .guia .links {
   border-color: darkred;
   transform: scale(1.05);
 } */
-.carrinho:focus {
+/* .carrinho:focus {
   border-color: darkred;
   transform: scale(1.1);
-}
+} */
 
 .carrinho:hover {
   border-color: darkred;
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
-.ver:focus {
+/* .ver:focus {
   border-color: darkred;
   transform: scale(1.1);
-}
+} */
 
 .ver:hover {
   border-color: darkred;
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 /*==================FOOTER==================*/
@@ -501,15 +502,16 @@ main .guia .links {
 /*===================VARIEDADES======*/
 .conteinervariedade {
   background-color: #fff9ed;
-  padding: 60px 20px;
+  padding: 4%;
   text-align: center;
+  border-radius: 5px;
 }
 
 .conteinervariedade h3 {
   color: #681616;
   font-family: "Aboreto", system-ui;
   font-size: 28px;
-  margin-bottom: 20px;
+  /* margin-bottom: 50px; */
 }
 
 .variedades {
@@ -517,12 +519,20 @@ main .guia .links {
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .imagem-container {
+  background-color: #ffffff;
   width: 280px;
   text-align: center;
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+  /* border: solid 1px #3a2d20; */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding-bottom: 20px;
 }
 
 .imagem-container a {
@@ -534,19 +544,21 @@ main .guia .links {
   width: 100%;
   height: 400px;
   object-fit: cover;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+  border-radius: 5px;
+  /* transition: transform 0.3s ease; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.imagem-container:hover img {
-  transform: scale(1.05);
+.imagem-container:hover {
+  transform: translateY(-5px);
 }
 
 .imagem-container .nome {
-  font-family: "Libre Caslon Text";
+  font-family: "Junge", serif;
   font-size: 18px;
   color: #523800;
-  margin-top: 15px;
+  margin-top: 16px;
+  font-weight: 600;
 }
 
 /* .midia {
@@ -718,19 +730,17 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   gap: 30px;
-  margin-top: 100px;
+  margin-top: 60px;
   font-family: "Inter", sans-serif;
 }
 
-/* LOGO */
 .sob {
   height: 100px;
   width: auto;
-  flex: 0 1 150px; /* permite dividir a linha */
-  margin-bottom: 0; /* evita empurrar para baixo */
+  flex: 0 1 150px;
+  margin-bottom: 0;
 }
 
-/* COLUNAS */
 footer .coluna {
   text-align: center;
   flex: 0 0 auto;
@@ -747,7 +757,6 @@ footer div p {
   color: #bdb0ae;
 }
 
-/* LISTAS */
 footer ul {
   list-style: none;
   padding: 0;
@@ -758,7 +767,6 @@ footer li {
   font-size: 14px;
 }
 
-/* LINHAS VERTICAIS */
 .linha {
   width: 1px;
   transform: rotate(0deg);
@@ -767,20 +775,19 @@ footer li {
   flex: 0 0 auto;
 }
 
-/* ÍCONES DE CONTATO */
 .telefone,
 .whatsapp {
   height: 18px;
   margin-right: 6px;
   vertical-align: middle;
 }
+
 .instagram,
 .facebook {
   height: 40px;
   text-align: right;
 }
 
-/* REDES SOCIAIS */
 .midia {
   display: flex;
   flex-direction: column;
@@ -788,7 +795,6 @@ footer li {
   align-items: center;
 }
 
-/* TEXTO FINAL */
 .direitos {
   width: 100%;
   text-align: left;
@@ -800,13 +806,13 @@ footer li {
 
 /* Tablet e telas intermediárias */
 @media (max-width: 850px) {
-
   .linha {
     display: none;
   }
 
   footer {
     justify-content: center;
+    margin-top: 40px;
   }
 
   footer .coluna {
@@ -894,7 +900,7 @@ footer li {
 
   /* ===== BOTÕES ===== */
   .botoes {
-    margin: 20px 0 10px 0;
+    margin: 0;
     padding: 0;
     width: 100%;
     display: flex;
@@ -904,6 +910,7 @@ footer li {
 
   .compra {
     width: 100%;
+    /* margin-top: 0px; */
     margin-left: 0;
     font-size: 16px;
     height: 50px;
@@ -932,27 +939,32 @@ footer li {
     max-width: 350px;
     height: 50px;
     font-size: 16px;
+    margin-top: -5px;
     margin-right: 200px;
   }
 
   /* ===== VARIEDADES ===== */
+  .conteinervariedade h3{
+    font-weight: 600;
+  }
   .variedades {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 80px; /* mais distância */
+    gap: 40px; /* mais distância */
     flex-wrap: wrap;
     margin-top: 40px;
+
   }
 
   .imagem-container {
-    width: 340px; /* imagem maior */
+    width: 300px; /* imagem maior */
     text-align: center;
   }
 
   .imagem-container img {
     width: 100%;
-    height: 500px; /* altura maior */
+    height: 350px; /* altura maior */
     object-fit: cover;
     display: block;
   }
@@ -987,6 +999,7 @@ footer li {
   html {
     overflow-x: hidden !important;
   }
+  
 }
 
 /*============================================================*/
@@ -1023,4 +1036,61 @@ footer li {
 
 .guia p a {
   font-family: "Afacad";
+}
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999999;
+}
+
+.popup.ativo {
+  display: flex;
+}
+
+.popup-conteudo {
+  width: 500px;
+  max-width: 90%;
+
+  background: #fff;
+
+  padding: 30px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  position: relative;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+
+  border: none;
+  background: none;
+
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.coluna li {
+  cursor: pointer;
+}
+
+.coluna li:hover {
+  color: #790000;
+}
+
+.popupTexto {
+  font-size: 18px;
 }
