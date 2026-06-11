@@ -79,7 +79,7 @@ export default function Checkout({ navigation }) {
     carregarDados();
   }, []);
 
-  const [frete, setFrete] = useState(50);
+  const [frete, setFrete] = useState(13.9);
   const [distanciaKm, setDistanciaKm] = useState(null);
 
   // CEP do armazém (base para cálculo de distância)
@@ -95,18 +95,24 @@ export default function Checkout({ navigation }) {
 
   // Geocoding simples usando Nominatim (OpenStreetMap)
   async function geocode(query) {
-    try {
-      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}, Brasil`;
-      const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (CheckoutApp)" } });
-      const data = await res.json();
-      if (data && data.length > 0) {
-        return {
-          lat: parseFloat(data[0].lat),
-          lon: parseFloat(data[0].lon),
-        };
+    // tenta duas vezes antes de falhar (pequeno retry)
+    const attempts = 2;
+    for (let i = 0; i < attempts; i++) {
+      try {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)} Brasil&limit=1&countrycodes=br`;
+        const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (CheckoutApp)" } });
+        const data = await res.json();
+        if (data && data.length > 0) {
+          return {
+            lat: parseFloat(data[0].lat),
+            lon: parseFloat(data[0].lon),
+          };
+        }
+      } catch (e) {
+        console.error("Geocode error (attempt", i + 1, "):", e);
       }
-    } catch (e) {
-      console.error("Geocode error:", e);
+      // aguarda um pouco antes de nova tentativa
+      await new Promise((r) => setTimeout(r, 300));
     }
     return null;
   }
@@ -137,17 +143,24 @@ export default function Checkout({ navigation }) {
         }
       }
 
-      // Prefer usar CEP do endereço se disponível
-      const query = endereco.cep && endereco.cep.length > 0
-        ? endereco.cep
-        : `${endereco.rua || ""}, ${endereco.numero || ""}, ${endereco.cidade || ""}, ${endereco.estado || ""}`;
-
-      const dest = await geocode(query);
+      // Tenta geocodificar: primeiro CEP (se houver), se falhar tenta o endereço completo
+      const addressQuery = `${endereco.rua || ""} ${endereco.numero || ""} ${endereco.bairro || ""} ${endereco.cidade || ""} ${endereco.estado || ""}`.trim();
+      let dest = null;
+      if (endereco.cep && endereco.cep.length > 0) {
+        dest = await geocode(endereco.cep);
+        if (!dest) {
+          console.warn("Geocode com CEP falhou, tentando endereço completo", { cep: endereco.cep, addressQuery });
+          dest = await geocode(addressQuery);
+        }
+      } else {
+        dest = await geocode(addressQuery);
+      }
 
       const baseCoord = warehouseCoord || (await geocode(warehouseCep));
       if (!dest || !baseCoord) {
-        // fallback para valor padrão
-        setFrete(50);
+        // fallback para valor padrão (13.90)
+        console.warn("Geocoding falhou, usando frete padrão 13.90", { dest, baseCoord, addressQuery });
+        setFrete(13.9);
         setDistanciaKm(null);
         return;
       }
@@ -155,14 +168,22 @@ export default function Checkout({ navigation }) {
       const km = haversineKm(baseCoord, dest);
       setDistanciaKm(km);
 
-      // Fórmula de frete: mínima de R$10 + R$0.8 por km, arredondado
-      const base = 10;
-      const perKm = 0.8;
-      const calc = Math.max(10, Math.round(base + km * perKm));
+      // Nova regra de frete:
+      // - Se distância <= 10km -> frete = 13.90
+      // - Se distância > 10km -> frete = 13.90 + 0.50 por km acima dos 10km
+      let calc;
+      if (km <= 10) {
+        calc = 13.9;
+      } else {
+        const extraKm = km - 10;
+        calc = 13.9 + extraKm * 0.5;
+        // arredonda para 2 casas decimais
+        calc = Math.round(calc * 100) / 100;
+      }
       setFrete(calc);
     } catch (err) {
       console.error("Erro calcularFretePorEndereco:", err);
-      setFrete(50);
+      setFrete(13.9);
       setDistanciaKm(null);
     }
   }
@@ -562,8 +583,8 @@ export default function Checkout({ navigation }) {
           <Text>Frete</Text>
 
           <Text style={styles.freteTexto}>
-            R$ {frete}
-          </Text>
+              R$ {typeof frete === 'number' ? frete.toFixed(2) : frete}
+            </Text>
 
         </View>
 
