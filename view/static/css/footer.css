@@ -1,0 +1,175 @@
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  background-color: #5a0101;
+  color: white;
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* LOGO */
+.sob {
+  height: 100px;
+  width: auto;
+  flex: 0 1 150px; /* permite dividir a linha */
+  margin-bottom: 0; /* evita empurrar para baixo */
+}
+
+/* COLUNAS */
+footer .coluna {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+footer div p {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  color: #bdb0ae;
+}
+
+
+/* LISTAS */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* LINHAS VERTICAIS */
+.linha {
+  width: 1px;
+  transform: rotate(0deg);
+  background-color: white;
+  height: 150px;
+  flex: 0 0 auto;
+}
+
+/* ÍCONES DE CONTATO */
+.telefone,
+.whatsapp {
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.instagram,
+.facebook {
+  height: 40px;
+  text-align: right;
+}
+
+/* REDES SOCIAIS */
+.midia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* TEXTO FINAL */
+.direitos {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+
+/* Tablet e telas intermediárias */
+@media (max-width: 850px) {
+  .linha {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+
+  footer .coluna {
+    min-width: 35%;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 500px) {
+  /* .menu .hamburger {
+    margin: 25px;
+  } */
+
+  footer .coluna {
+    min-width: 100%;
+  }
+
+  .midia {
+    flex-direction: row;
+  }
+}
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.7);
+
+  justify-content:center;
+  align-items:center;
+
+  z-index:999999;
+}
+
+.popup.ativo{
+  display:flex;
+}
+
+.popup-conteudo{
+  width:80%;
+  max-width:500px;
+
+  background:#fff;
+
+  padding:30px;
+  color: #3a2d20;
+  border-radius:16px;
+
+  text-align:center;
+
+  position:relative;
+
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.fechar{
+  position:absolute;
+  top:10px;
+  right:15px;
+
+  border:none;
+  background:none;
+
+  font-size:30px;
+  cursor:pointer;
+}
+
+.coluna li{
+  cursor:pointer;
+}
+
+.coluna li:hover{
+  color:#790000;
+}

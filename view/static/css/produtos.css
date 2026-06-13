@@ -559,7 +559,7 @@ footer li {
     
   }
   .nome {
-    margin: 8px: ;
+    margin: 8px;
   }
 }
 
@@ -585,7 +585,7 @@ footer li {
   max-width: 90%;
 
   background: #fff;
-
+  color: #3a2d20;
   padding: 30px;
 
   border-radius: 16px;
