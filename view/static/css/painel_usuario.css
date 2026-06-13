@@ -1564,6 +1564,8 @@ footer li {
   filter: blur(8px);
 }
 
+/* =========POPUP--FOOTER=== */
+
 .popup{
   display:none;
   position:fixed;
