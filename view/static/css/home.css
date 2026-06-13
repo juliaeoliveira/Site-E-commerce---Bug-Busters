@@ -36,6 +36,9 @@ body {
   display: flex;
   padding-right: 150px;
 }
+.icons img{
+  width: 22px;
+}
 
 
 

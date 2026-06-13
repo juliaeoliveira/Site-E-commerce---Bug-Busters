@@ -17,7 +17,7 @@ body {
   overflow-x: hidden;
   /* Impede rolagem horizontal */
   background-color: #FBFCF7;
-
+  font-family: "Afacad";
 }
 
 
@@ -35,6 +35,9 @@ body {
   justify-content: center;
   display: flex;
   padding-right: 150px;
+}
+.icons img{
+  width: 22px;
 }
 
 .menu {
@@ -643,6 +646,7 @@ h1 {
   vertical-align: top;
   text-align: left;
   background-color: #FBFCF7;
+  border-radius: 5px;
 }
 
 .box-depoimentos p {
@@ -748,6 +752,9 @@ h1 {
 .items-colecao {
   position: relative;
 }
+.items-colecoes img{
+  border-radius: 5px;
+}
 
 /* BOTÃO SOBRE A IMAGEM */
 .btn-overlay {
@@ -760,7 +767,8 @@ h1 {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   color: white;
-  font-size: 18px;
+  font-family: "Aboreto", serif;
+  font-size: 18px;  
   letter-spacing: 1px;
   text-transform: uppercase;
   border-radius: 3px;
@@ -772,13 +780,13 @@ h1 {
 /* TEXTO DO BOTÃO */
 .btn-overlay span {
   display: block;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* BOTÃO CENTRAL — CHAMA SERENA — fonte serif elegante */
 .btn-overlay.centro span {
-  font-family: "Georgia", serif;
-  font-size: 32px;
+  font-family: "Aboreto", serif;
+  font-size: 24px;
   text-transform: none;
   letter-spacing: 1px;
 }

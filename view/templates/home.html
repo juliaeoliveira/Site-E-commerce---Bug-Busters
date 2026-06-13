@@ -36,10 +36,10 @@
 
     <nav class="icons">
       <a href="/usuario/login" >
-        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+        <img src="/static/img_home/login.png"  title="login" alt="login"/>
       </a>
       <a href="/painel_usuario/carrinho" >
-        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
+        <img id="icone-carrinho" src="/static/img_home/carrinho.png"  title="Carrinho" alt="Carrinho"/>
       </a>
     </nav>
   </header>
@@ -92,13 +92,17 @@
 
       <div class="items-produto">
         <div class="wrap1">
-          <img id="vestido1" src="/static/img_home/vestido-1.png" alt="">
+          <a href="/produtos">
+            <img id="vestido1" src="/static/img_home/vestido-1.png" alt="" >
+          </a>
         </div>
       </div>
 
       <div class="items-produto">
         <div class="wrap2">
-          <img id="vestido2" src="/static/img_home/vestido 2.png" alt="">
+          <a href="/produtos">
+            <img id="vestido2" src="/static/img_home/vestido 2.png" alt="">
+          </a>
         </div>
       </div>
 
@@ -210,23 +214,27 @@
     <p class="titulo">Sobre a loja</p>
 
     <ul>
-      <li onclick="abrirPopup(
-        'Sobre Nós',
-        'A Sob Véu é especializada em vestidos de noiva exclusivos, oferecendo atendimento personalizado para tornar seu momento único.'
-      )">
+      <li
+        onclick="
+          abrirPopup(
+            'Sobre Nós',
+            'A Sob Véu nasceu com a missão de transformar sonhos em realidade por meio de vestidos de noiva exclusivos e atendimento personalizado. Selecionamos cuidadosamente cada modelo, priorizando qualidade, conforto e elegância para que cada noiva se sinta única em seu grande dia. Nossa equipe especializada acompanha você em cada etapa da escolha, oferecendo suporte, atenção aos detalhes e uma experiência acolhedora e inesquecível.',
+            )
+            "
+      >
         Sobre nós
       </li>
 
       <li onclick="abrirPopup(
         'Trocas e Devoluções',
-        'Você pode solicitar trocas ou devoluções em até 7 dias após o recebimento do produto.'
+        'Caso o produto não atenda às suas expectativas, você poderá solicitar a troca ou devolução em até 7 dias corridos após o recebimento. Os produtos devem ser devolvidos sem uso, em sua embalagem original e acompanhados de todos os acessórios e etiquetas. Após a análise e aprovação da solicitação, o reembolso ou a troca será realizado conforme nossa política de atendimento. Entre em contato com nossa equipe para receber orientações detalhadas.',
       )">
         Trocas e Devoluções
       </li>
 
       <li onclick="abrirPopup(
         'Fretes e Entregas',
-        'Realizamos entregas para todo o Brasil. O prazo varia conforme a região e a modalidade escolhida.'
+        'Realizamos entregas para todo o território nacional por meio de transportadoras e serviços de logística parceiros. O valor do frete e o prazo estimado são calculados automaticamente durante a finalização da compra, de acordo com o CEP informado. Após o envio do pedido, um código de rastreamento será disponibilizado para que você acompanhe cada etapa da entrega. Trabalhamos para garantir que seu produto seja transportado com total segurança, qualidade e pontualidade.',
       )">
         Fretes e Entregas
       </li>
@@ -242,14 +250,15 @@
     <ul>
       <li onclick="abrirPopup(
         'Política de Privacidade',
-        'Seus dados são protegidos e utilizados apenas para processar pedidos e melhorar sua experiência.'
-      )">
+        'A Sob Véu valoriza a sua privacidade e protege todas as informações fornecidas em nosso site. Seus dados pessoais são utilizados exclusivamente para processar pedidos, realizar atendimentos, enviar comunicações relacionadas às suas compras e melhorar sua experiência de navegação. Não compartilhamos informações com terceiros sem autorização, exceto quando necessário para a prestação dos serviços ou cumprimento de obrigações legais.',
+        )
+      ">
         Política de Privacidade
       </li>
 
       <li onclick="abrirPopup(
         'Termos de Uso',
-        'Ao utilizar nosso site você concorda com os termos e condições de uso da Sob Véu.'
+        'Ao acessar e utilizar o site da Sob Véu, você concorda com os presentes termos e condições de uso. Todo o conteúdo disponibilizado, incluindo imagens, textos e informações sobre produtos, é protegido por direitos autorais e não pode ser reproduzido sem autorização. A Sob Véu reserva-se o direito de atualizar estes termos a qualquer momento para garantir a melhor experiência e segurança aos seus usuários.',
       )">
         Termos de Uso
       </li>
