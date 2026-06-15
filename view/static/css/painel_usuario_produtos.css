@@ -1,3 +1,4 @@
+/* Para não esconder o conteúdo atrás do menu */
 
 * {
   margin: 0;
@@ -5,15 +6,6 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-    background-color: #EAE4D8;
-    width: 100%;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
 /* MENU */
 #logo {
   height: 80px;
@@ -79,254 +71,147 @@ body {
   color: #523800;
 }
 
-#login-dropdown {
-  /*alterado*/
-  position: absolute;
-  top: 90px;
-  /* aparece logo abaixo do header fixo */
-  right: 0;
-  /* alinhado ao canto direito, sempre certo */
-  width: 260px;
-  background-color: hsla(0, 0%, 100%, 0.89);
-  border-radius: 10px;
-  padding: 20px 0;
-  display: none;
-  z-index: 300;
-  /* MAIOR que o menu, ícones e o hambúrguer */
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-#login-dropdown h3 {
-  margin-top: 60px;
-  font-size: 16px;
-  /* Tamanho da fonte */
-  color: #7a4a1c;
-  /* Cor marrom (estilo elegante) */
-  margin-bottom: 80px;
-  /* Espaço abaixo do título */
-}
-
-#login-dropdown ul {
-  list-style: none;
-  /* Remove marcadores (bolinhas) da lista */
-  margin: 0;
-  /* Remove espaçamento externo padrão */
-}
-
-#login-dropdown ul li a:hover {
-  text-decoration: underline;
-  color: #7a4a1c;
-  /* Cor marrom ao passar o mouse (hover) */
-}
-
-#logout-btn {
-  background-color: #790000;
-  color: white;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  width: 160px;
-  cursor: pointer;
-  height: 40px;
-  font-family: "Libre Caslon Text";
-  color: rgb(255, 255, 255);
-  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
-  font-size: 15px;
-}
-
-#logout-btn:hover {
-  background-color: #5a0000;
-}
-
-/* Ajuste do painel para telas pequenas (vertical) */
-#login-dropdown {
-  max-height: calc(100vh - 120px);
-  /* cabe sempre na tela */
-  overflow-y: auto;
-  /* ativa rolagem se necessário */
-  padding: 20px;
-}
-
-/* Reduz os espaçamentos internos no mobile */
-@media (max-height: 800px) {
-  #login-dropdown h3 {
-    margin-top: 20px;
-    margin-bottom: 30px;
-  }
-
-  .opcoes {
-    margin: 12px 0;
-  }
-
-  #logout-btn {
-    margin: 25px;
-  }
-}
-
-.carrinho {
-  margin-right: 90px;
-}
-
-/* .login{
- margin-left: 270px;
-} */
-/*alterado*/
-
-/* Animação de pulsação */
-@keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0.4);
-  }
-
-  70% {
-    box-shadow: 0 0 0 10px rgba(121, 0, 0, 0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(121, 0, 0, 0);
-  }
-}
-
-/* Classe para o efeito visual no ícone */
-.login-active {
-  border-radius: 50%;
-  animation: pulse-ring 1.5s infinite;
-  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.3);
-  /* anel visível mesmo quando não está no pico */
-}
-
-/*TEXTO ESTILIZAÇÂO DO DA TELA DE LOGIN*/
-/* Caixa de cada opção */
-.opcoes {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.3);
-  /* leve transparência */
-  backdrop-filter: blur(5px);
-  border: 2px solid #6e0606;
-  border-radius: 5px;
-  margin: 20px 0px;
-  /* espaçamento entre as caixas */
-  text-align: center;
-}
-
-/* Texto das opções */
-.opcoes a {
-  display: block;
-  padding: 10px;
-  color: #3d0b0b;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
-
-/* Efeito hover — destaca ao passar o mouse */
-.opcoes:hover {
-  background: rgba(255, 255, 255, 0.6);
-  transform: scale(1.02);
-}
-
-.opcoes a:hover {
-  color: #800000;
-}
-
-.login-dropdown-wrapper {
-  /*alterado*/
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  /* distância natural entre login e carrinho */
-}
-
-.login {
-  /*alterado*/
-  margin: 0;
-  /* Remove o margin-left: 270px que quebrava TUDO */
-}
-
 #hamburger {
   appearance: none;
   -webkit-appearance: none;
 }
-/* ============================= */
-/* ========= CONTEÚDO ========= */
-/* ============================= */
 
+html {
+  background-color: #eae4d8;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens na vertical (coluna) */
+  min-height: 100vh;
+  /* Garante que o corpo ocupe toda a altura da tela */
+  margin: 0;
+  /* Remove a margem padrão */
+  padding: 0;
+  /* Remove o preenchimento padrão */
+  overflow-x: hidden;
+  /* Impede rolagem horizontal */
+  background-color: #eae4d8;
+  color: #3a2d20;
+  font-family: "Afacad";
+}
+
+/*===========================MAIN=======================*/
 
 main {
-    margin-top: 140px;
+  margin-top: 140px;
 }
 
 main h1 {
-    color: #790000;
-    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.30);
-    font-family: "Aboreto", system-ui;
-    font-weight: 600;
-    letter-spacing: 2.4px;
-    font-size: 50px;
-    padding-left: 120px;
+  color: #790000;
+  text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  font-family: "Aboreto", system-ui;
+  font-weight: 600;
+  letter-spacing: 2.4px;
+  font-size: 42px;
+
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  text-align: center;
 }
 
 /* GRADE DE VESTIDOS */
 main section {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    place-items: center;
-    margin-top: 40px;
+  display: grid;
+  max-width: 1500px;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 40px;
+  place-items: center;
+  margin-top: 6%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
 }
 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
 .vestido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 40px;
-    transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .vestido img {
-    width: 330px;
-    height: 600px;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
+  width: 300px;
+  height: 450px;
+  object-fit: cover;
+  /* transition: transform 0.3s ease-in-out; */
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px 3px rgba(0, 0, 0, 0.15);
 }
 
-.vestido:hover img {
-    transform: scale(1.1);
+/* .vestido:hover img {
+  transform: scale(1.1);
 }
 
 .vestido:hover {
-    transform: scale(1.05);
-}
+  transform: scale(1.05);
+} */
 
 .nome {
-    margin-top: 25px;
-    color: #000;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    font-weight: 500;
+  margin-top: 25px;
+  color: #000;
+  font-family: "Junge", serif;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  color: #523800;
+}
+.valor {
+  font-family: "Afacad";
+  font-size: 16px;
+  color: #523800;
 }
 
 /* Botão voltar */
 main button {
-    font-family: "Inter", sans-serif;
-    height: 50px;
-    width: 240px;
-    margin: 80px auto;
-    color: darkred;
-    background-color: #EADCC1CC;
-    box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
+  font-family: "Afacad";
+  height: 50px;
+  width: 240px;
+  margin: 60px 20px;
+  color: #5a0101;
+  background-color: #eadcc1cc;
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  transition: all 0.5s ease;
 }
-
+main button:hover {
+  transform: scale(1.03);
+}
 
 /* ========================= */
 /*   RESPONSIVIDADE DO MAIN  */
 /* ========================= */
+@media (max-width: 1500px) {
+  main section {
+    max-width: 1200px;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 40px;
+  }
+}
 
 @media (max-width: 1200px) {
   main h1 {
@@ -335,21 +220,26 @@ main button {
   }
 
   main section {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    /* grid-template-columns: repeat(2, 1fr); */
+    max-width: 900px;
+    /* row-gap: 50px; */
   }
 
   .vestido img {
-    width: 260px;
-    height: 480px;
+    width: 200px;
+    height: 300px;
   }
 
-  .nome {
-    font-size: 26px;
+  /* .nome {
+    font-size: 18px;
+  } */
+  .card {
+    max-width: 240px;
+    max-height: 421px;
   }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   main h1 {
     font-size: 32px;
     text-align: center;
@@ -380,23 +270,13 @@ main button {
     height: 45px;
     font-size: 18px;
   }
-}
+} */
 
-@media (max-width: 480px) {
-  .vestido img {
-    width: 90%;
-  }
-
-  .nome {
-    font-size: 20px;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-}
+/*=============================FOOTER====================*/
 
 /* ------ CONFIG DO MENU RESPONSIVO ------ */
+
+/* botão hamburguer */
 .hamburger {
   display: none;
   background: transparent;
@@ -407,6 +287,7 @@ main button {
   color: #523800;
 }
 
+/* overlay (fundo escuro no mobile) */
 .overlay {
   display: none;
   position: fixed;
@@ -422,18 +303,21 @@ main button {
   opacity: 1;
 }
 
-/* ===================== RESPONSIVO MENU ===================== */
+/* MENU DESKTOP PERMANECE COMO ESTÁ */
+
+/* ===================== RESPONSIVO ===================== */
 @media (max-width: 900px) {
   .menu {
     justify-content: space-between;
     padding: 0 15px;
   }
-  
+
   #logo {
     padding-left: 0 !important;
     height: 70px;
   }
-  
+
+  /* botão hamburguer */
   .menu .hamburger {
     display: block;
     background: transparent;
@@ -443,17 +327,20 @@ main button {
     padding: 10px;
     color: #523800;
     z-index: 11;
+    /* margin: 30px; */
   }
-  
+
+  /* overlay */
   .overlay {
     display: none;
   }
-  
+
   .overlay.active {
     display: block;
     opacity: 1;
   }
-  
+
+  /* NAV vira painel lateral */
   .text-menu {
     position: fixed;
     top: 90px;
@@ -468,67 +355,25 @@ main button {
     transition: left 0.25s ease;
     z-index: 10;
   }
-  
+
   .text-menu.active {
     left: 0;
   }
-  
+
   .text-menu a {
     font-size: 20px;
     padding: 10px;
   }
-  
+
+  /* ÍCONES fixos à direita SEM SUMIR */
   .login-dropdown-wrapper {
     gap: 18px;
     margin-right: 0 !important;
     z-index: 12;
   }
-  
-  #logout-btn {
-    margin: 25px;
-  }
-}
 
-@media (max-width: 1116px) and (min-width: 901px) {
-  .text-menu {
-    gap: 60px !important;
-  }
-  
-  .menu nav a {
-    font-size: 20px;
-    padding: 15px;
-  }
-  
-  .menu {
-    padding: 0 15px;
-  }
-  
-  #logo {
-    height: 70px;
-  }
-  
-  .login-dropdown-wrapper {
-    gap: 15px;
-  }
-}
-
-@media (min-width: 901px) {
-  #login-dropdown {
-    padding-top: 40px;
-    padding-bottom: 50px;
-  }
-  
-  #login-dropdown h3 {
-    margin-top: 20px;
-    margin-bottom: 40px;
-  }
-  
-  .opcoes {
-    margin: 25px 0;
-  }
-  
   #logout-btn {
-    margin: 30px;
+    margin: 25px; /* distância agradável do último item */
   }
 }
 
@@ -543,7 +388,7 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   gap: 30px;
-  margin-top: 100px;
+  margin-top: 60px;
   font-family: "Inter", sans-serif;
 }
 
@@ -620,22 +465,165 @@ footer li {
   .linha {
     display: none;
   }
-  
+
   footer {
     justify-content: center;
+    margin-top: 40px;
   }
-  
+
   footer .coluna {
     min-width: 35%;
   }
+}
+
+
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 110px;
+  }
+
+  main h1 {
+    font-size: 28px;
+    text-align: center;
+    padding: 0 15px;
+    margin: 20px 0 35px;
+  }
+
+  main section {
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* gap: 12px; */
+    max-width: 700px;
+    padding: 0 10px;
+    /* margin-top: 30px; */
+  }
+
+  .vestido {
+    margin: 0;
+  }
+
+  .vestido img {
+    width: 180px;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .nome {
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: center;
+  }
+  .valor{
+    font-size: 14px;
+  }
+
+  main button {
+    max-width: 300px;
+    margin-left: 60px auto;
+    font-size: 16px;
+  }
+
+  .vestido,
+  .vestido img,
+  .vestido a {
+    transition: none !important;
+  }
+
+  .vestido:hover,
+  .vestido:hover img {
+    transform: none !important;
+  }
+  .card {
+    width: 180px;
+    height: 320px;
+  }
+
+  /* .vestido a:focus,
+  .vestido a:active {
+    outline: none;
+  } */
 }
 
 @media (max-width: 500px) {
   footer .coluna {
     min-width: 100%;
   }
-  
+
   .midia {
     flex-direction: row;
   }
+  main section {
+    grid-template-columns: repeat(2, 1fr);
+    /* gap: 12px; */
+    padding: 0 10px;
+    /* margin-top: 30px; */
+  }
+  .vestido img {
+    width: 170px;
+    height: 230px;
+    object-fit: cover;
+  }
+
+  .card {
+    width: 170px;
+    height: 300px;
+    
+  }
+  .nome {
+    margin: 8px;
+  }
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999999;
+}
+
+.popup.ativo {
+  display: flex;
+}
+
+.popup-conteudo {
+  width: 500px;
+  max-width: 90%;
+
+  background: #fff;
+  color: #3a2d20;
+  padding: 30px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  position: relative;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+
+  border: none;
+  background: none;
+
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.coluna li {
+  cursor: pointer;
+}
+
+.coluna li:hover {
+  color: #790000;
 }

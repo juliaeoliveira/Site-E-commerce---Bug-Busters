@@ -1,14 +1,13 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* MENU */
+/* ======== MENU ======== */
 #logo {
   height: 80px;
   padding-left: 0;
-  /*padding-left: 130px;  Espaço à esquerda do logo */
-  /*alterado*/
 }
 
 .icons {
@@ -19,49 +18,36 @@
 }
 
 .menu {
-  /*alterado*/
   height: 90px;
   position: fixed;
-  /*original*/
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  /*original*/
   background-color: hsla(0, 0%, 100%, 0.75);
-
+  /* backdrop-filter: blur(6px); */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 25px;
-  /* controla o respiro nas laterais */
-  /* position: fixed;
-  z-index: 9999; */
+  border-bottom: 1px solid rgba(82, 56, 0, 0.1);
 }
 
-/* Estilo dos links dentro do nav */
 .menu nav a {
   color: #523800;
   font-size: 20px;
-  /* Define o tamanho da fonte */
   padding: 20px;
-  /* Espaçamento interno */
   text-decoration: underline;
-  /* Ativa o sublinhado */
   text-decoration-color: rgba(82, 56, 0, 0.192);
-  /* Cor do sublinhado com transparência */
 }
 
 .text-menu {
-  /*alterado*/
   display: flex;
   gap: 200px;
-  /* mais elegante que gap 200px (quebrava tudo) */
   font-family: "Libre Caslon Text";
 }
 
 .text-menu a {
-  /*alterado*/
   font-size: 20px;
   text-decoration: underline;
   text-decoration-color: rgba(82, 56, 0, 0.192);
@@ -73,25 +59,234 @@
   -webkit-appearance: none;
 }
 
+/* ======== BASE ======== */
 html {
   background-color: #eae4d8;
 }
 
 body {
   display: flex;
-  flex-direction: column; /* Organiza os itens na vertical (coluna) */
-  min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
-  margin: 0; /* Remove a margem padrão */
-  padding: 0; /* Remove o preenchimento padrão */
-  overflow-x: hidden; /* Impede rolagem horizontal */
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background-color: #eae4d8;
-  background-image: url("/static/assets/img_cadastro/fundo-cadastro.png");
-  background-repeat: no-repeat;
 }
 
-/* ------ CONFIG DO MENU RESPONSIVO ------ */
+/* ======== LAYOUT PRINCIPAL ======== */
+main {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 90px; /* altura do menu */
+}
 
-/* botão hamburguer */
+/* Coluna esquerda: imagem/fundo */
+.lado-imagem {
+  flex: 0 0 42%;
+  background-image: url("/static/assets/img_cadastro/criar-conta-img.jpg");
+  background-size: cover;
+  background-position: top;
+  position: sticky;
+  top: 90px;
+  height: calc(100vh - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 36px;
+}
+
+.voltar-login {
+  margin-bottom: 28px;
+}
+
+.ver {
+  height: 38px;
+  width: 180px;
+  font-family: "Afacad";
+  font-size: 18px;
+  font-weight: 500;
+  color: #5a0101;
+  background: rgba(237, 219, 190, 0.88);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border: transparent;
+  /* border: 1px solid rgba(82, 56, 0, 0.2); */
+  border-radius: 5px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.5s ease;
+}
+
+.ver:hover {
+  transform: scale(1.03);
+}
+
+/* Coluna direita: formulário */
+.lado-formulario {
+  flex: 1;
+  background-color: #f5f0e8;
+  padding: 48px 52px 60px;
+  overflow-y: auto;
+}
+
+/* ======== CABEÇALHO DO FORM ======== */
+.titulo_cadastro {
+  color: #790000;
+  font-family: "Aboreto", system-ui;
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitulo_cadastro {
+  text-align: center;
+  font-family: "Afacad";
+  font-size: 13px;
+  color: #8a7050;
+  margin-bottom: 36px;
+  letter-spacing: 0.3px;
+}
+
+/* ======== CARD SEÇÃO ======== */
+.card-secao {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(82, 56, 0, 0.12);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.secao-titulo {
+  font-family: "Junge", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #790000;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(121, 0, 0, 0.15);
+}
+
+/* ======== GRID DE CAMPOS ======== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+
+.form-grid .campo-full {
+  grid-column: 1 / -1;
+}
+
+/* ======== CAMPO INDIVIDUAL ======== */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+label {
+  font-family: "Afacad";
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a3520;
+  letter-spacing: 0.3px;
+  display: block;
+}
+
+.obrigatorio {
+  color: #790000;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 10px 13px;
+  font-family: "Afacad";
+  font-size: 14px;
+  color: #2c1a00;
+  background-color: rgba(219, 202, 169, 0.35);
+  border: 1px solid rgba(82, 56, 0, 0.22);
+  border-radius: 7px;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder,
+select::placeholder {
+  color: #b0956e;
+  font-weight: 400;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #790000;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0 3px rgba(121, 0, 0, 0.09);
+}
+
+select {
+  cursor: pointer;
+}
+
+/* ======== DICA DE SENHA ======== */
+.hint-senha {
+  font-size: 11px;
+  color: #8a7050;
+  font-family: "Afacad";
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+/* ======== MENSAGENS DE ERRO ======== */
+#mensagem_erro,
+#mensagem_cep {
+  font-size: 12px;
+  font-family: "Afacad";
+  color: #c0392b;
+  line-height: 1.5;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+/* ======== BOTÃO CRIAR CONTA ======== */
+.btn-cadastrar {
+  display: block;
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px;
+  font-family: "Afacad";
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #fff;
+  background: #790000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 28px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 3px 10px rgba(121, 0, 0, 0.25);
+}
+
+.btn-cadastrar:hover {
+  background: #5a0000;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(121, 0, 0, 0.32);
+}
+
+.btn-cadastrar:active {
+  transform: translateY(0);
+}
+
+/* ======== MENU RESPONSIVO ======== */
 .hamburger {
   display: none;
   background: transparent;
@@ -102,7 +297,6 @@ body {
   color: #523800;
 }
 
-/* overlay (fundo escuro no mobile) */
 .overlay {
   display: none;
   position: fixed;
@@ -118,42 +312,43 @@ body {
   opacity: 1;
 }
 
-/* ===================== RESPONSIVO ===================== */
+/* ======== RESPONSIVO ======== */
 @media (max-width: 900px) {
+  main {
+    flex-direction: column;
+    padding-top: 90px;
+  }
+
+  .lado-imagem {
+    display: none; /* esconde imagem no mobile */
+  }
+
+  .lado-formulario {
+    padding: 32px 20px 48px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid .campo-full {
+    grid-column: 1;
+  }
+
   .menu {
     justify-content: space-between;
     padding: 0 15px;
   }
 
   #logo {
-    padding-left: 0 !important;
     height: 70px;
   }
 
-  /* botão hamburguer */
   .menu .hamburger {
     display: block;
-    background: transparent;
-    border: none;
-    font-size: 32px;
-    cursor: pointer;
-    padding: 10px;
-    color: #523800;
     z-index: 11;
-    /* margin: 30px; */
   }
 
-  /* overlay */
-  .overlay {
-    display: none;
-  }
-
-  .overlay.active {
-    display: block;
-    opacity: 1;
-  }
-
-  /* NAV vira painel lateral */
   .text-menu {
     position: fixed;
     top: 90px;
@@ -178,346 +373,33 @@ body {
     padding: 10px;
   }
 
-  /* ÍCONES fixos à direita SEM SUMIR */
-  .login-dropdown-wrapper {
-    gap: 18px;
-    margin-right: 0 !important;
-    z-index: 12;
+  .icons {
+    padding-right: 0;
+    gap: 8px;
+    margin-right: 10px;
   }
 
-  #logout-btn {
-    margin: 25px; /* distância agradável do último item */
+  /* Botão voltar ao login no mobile: aparece no rodapé do form */
+  .voltar-login-mobile {
+    text-align: center;
+    margin-top: 24px;
   }
 }
-/* ====== BREAKPOINT INTERMEDIÁRIO (telas entre 1116px e 901px) ====== */
+
 @media (max-width: 1116px) and (min-width: 901px) {
   .text-menu {
-    gap: 60px !important; /* reduz o espaço entre os links */
-  }
-
-  .menu nav a {
-    font-size: 20px;
-    padding: 15px;
+    gap: 60px !important;
   }
 
   .menu {
-    padding: 0 15px; /* ajusta respiro lateral */
+    padding: 0 15px;
   }
 
   #logo {
-    height: 70px; /* logo menor */
+    height: 70px;
   }
 
-  .login-dropdown-wrapper {
-    gap: 15px;
-  }
-}
-
-/* Painel maior no desktop */
-@media (min-width: 901px) {
-  #login-dropdown {
-    padding-top: 40px; /* antes era 20px */
-    padding-bottom: 50px; /* antes era 20px */
-  }
-
-  #login-dropdown h3 {
-    margin-top: 20px; /* ajustado */
-    margin-bottom: 40px; /* reduzido para ficar proporcional */
-  }
-
-  .opcoes {
-    margin: 25px 0; /* mais espaçamento entre os itens */
-  }
-
-  #logout-btn {
-    margin: 30px; /* distância agradável do último item */
-  }
-}
-
-/*======================================================================*/
-main h1 {
-  color: #000;
-  font-family: "Aboreto", system-ui;
-  font-size: 20px;
-  font-weight: 0;
-  margin-left: 150px;
-}
-
-.cadastro {
-  margin-left: 1050px;
-  margin-top: 90px;
-}
-
-.informacoes {
-  float: left;
-  font-size: 20px;
-  margin-top: 10px;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 0;
-}
-
-label,
-input {
-  display: block; /*Ocupar toda largura*/
-  width: 500px; /*Largura*/
-  padding: 10px; /*Espaçamento interno*/
-  font-family: "Anton", serif;
-  border-radius: 8px; /*Arredonda as bordas*/
-  margin-bottom: 0px; /*Espaçamento inferior*/
-}
-
-input {
-  background-color: #dbcaa966;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-  margin-right: 0; /*remove margen da direita*/
-  margin-left: 15px; /*remove margem da esquerda*/
-  transform: scale(1.2); /*Aumentar escala*/
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none; /*Remover borda*/
-  border: solid 2px rgb(153, 153, 153); /*Cria uma cor na borda*/
-}
-
-label {
-  height: 20px;
-}
-
-#acao {
-  width: 130px;
-  margin-left: 210px;
-  background: #790000;
-  color: white;
-  /* margin-top: 20px; */
-}
-
-.posicao {
-  margin-left: 40px;
-}
-
-.cadastrar {
-  text-align: center;
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  font-weight: 0;
-  height: 50px;
-  border-radius: 5px;
-  background: #790000;
-  margin-top: 40px;
-}
-
-.senhas {
-  display: flex;
-  gap: 20px; /* espaço entre os dois campos */
-  align-items: flex-end;
-  flex-wrap: wrap;
-}
-
-.senhas div {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.posicao {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.outrosvestidos {
-  position: absolute;
-  margin-left: 30px;
-  margin-top: 700px;
-}
-
-.ver {
-  height: 35px;
-  width: 200px;
-  font-family: "Inter", sans-serif;
-  color: darkred;
-  background: rgba(237, 219, 190, 0.8);
-  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
-  border: none;
-  border-radius: 5px;
-}
-
-button:focus {
-  border-color: darkred;
-  transform: scale(1.1);
-}
-button:hover {
-  border-color: darkred;
-  transform: scale(1.05);
-}
-
-.endereco {
-  display: grid;
-  grid-template-columns: repeat(2, 230px); /* duas colunas de 200px */
-  grid-gap: 10px 40px; /* espaçamento entre linhas e colunas */
-}
-
-.campo {
-  display: flex;
-  flex-direction: column;
-}
-
-#bairro,
-#complemento,
-#numero,
-#cep,
-#cidade,
-#estado {
-  width: 250px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: #dbcaa966;
-  box-sizing: border-box;
-  padding: 8px;
-}
-
-#mensagem_erro,
-#mensagem_cep {
-  margin-top: 10px;
-  font-size: 15px;
-  margin-left: 40px;
-}
-
-/* =====================================================
-   RESPONSIVIDADE COMPLETA — TELAS ATÉ 600px (CELULAR)
-   ===================================================== */
-@media (max-width: 600px) {
-  /* ----------- Layout Geral ----------- */
-  body {
-    background-image: none !important;
-    background-size: cover;
-    background-position: center;
-    padding: 0;
-    overflow-x: hidden;
-  }
-
-  main {
-    width: 100%;
-    padding: 20px 10px;
-    margin: 0 auto;
-    margin-top: 120px; /* espaço por causa do menu fixo */
-  }
-
-  /* ----------- Título ----------- */
-  .titulo_cadastro {
-    font-size: 18px !important;
-    text-align: center;
-    margin: 0 auto 25px auto;
-    margin-right: 70 !important;
-  }
-
-  /* ----------- Estrutura do formulário ----------- */
-  /* Reset margins and padding for mobile layout */
-  .cadastro {
-    margin: 0 !important;
-    padding: 0;
-    width: 100%;
-    margin-left: 0 !important;
-  }
-
-  .informacoes {
-    float: none !important;
-    width: 100%;
-    padding: 0 5px;
-    font-size: 14px;
-  }
-
-  label {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-bottom: 8px !important;
-  }
-
-  input,
-  select {
-    width: 85% !important;
-    margin-left: 0 !important;
-    margin-bottom: 12px !important;
-    font-size: 15px;
-  }
-
-  /* ----------- Senhas (coluna única no celular) ----------- */
-  .senhas {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .senhas div {
-    width: 100%;
-  }
-
-  /* ------- Campos de endereço (duas colunas no celular) ------- */
-  .endereco {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
-    gap: 12px;
-    width: 100%;
-  }
-
-  .campo {
-    width: 100%;
-  }
-
-  #bairro,
-  #complemento,
-  #numero,
-  #cep,
-  #cidade,
-  #estado {
-    width: 85% !important; /* Cada input ocupa sua coluna inteira */
-    margin-bottom: 12px !important;
-  }
-
-  /* ----------- Botão Criar Conta ----------- */
-  /* Improved spacing and sizing for button */
-  .cadastrar {
-    width: 60%;
-    height: 40px;
-    font-size: 16px;
-    margin: 35px auto 20px auto !important;
-    display: block;
-  }
-
-  #acao {
-    width: 40% !important;
-    margin: 25px auto !important;
-  }
-
-  /* ----------- Botão "Voltar à Página Inicial" ----------- */
-  /* Increased top margin for better spacing from button */
-  .outrosvestidos {
-    position: relative !important;
-    margin: 60px auto 0 auto !important;
-    text-align: center;
-    width: 100%;
-  }
-
-  .ver {
-    width: 70%;
-    max-width: 280px;
-    height: 45px;
-    font-size: 14px;
-  }
-
-  /* ----------- Mensagens de erro ----------- */
-  #mensagem_erro,
-  #mensagem_cep {
-    margin-left: 0 !important;
-    font-size: 13px;
-    margin-bottom: 10px !important;
+  .lado-formulario {
+    padding: 40px 36px 56px;
   }
 }
