@@ -15,6 +15,7 @@ import {
 
 import { useState } from "react";
 import { useEffect } from "react";
+import { useRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./style";
 
@@ -95,26 +96,117 @@ export default function Checkout({ navigation }) {
 
   // Geocoding simples usando Nominatim (OpenStreetMap)
   async function geocode(query) {
-    // tenta duas vezes antes de falhar (pequeno retry)
+    // tenta variações (ex.: 01001000, 01001-000, "CEP 01001-000")
     const attempts = 2;
-    for (let i = 0; i < attempts; i++) {
-      try {
-        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)} Brasil&limit=1&countrycodes=br`;
-        const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (CheckoutApp)" } });
-        const data = await res.json();
-        if (data && data.length > 0) {
-          return {
-            lat: parseFloat(data[0].lat),
-            lon: parseFloat(data[0].lon),
-          };
-        }
-      } catch (e) {
-        console.error("Geocode error (attempt", i + 1, "):", e);
-      }
-      // aguarda um pouco antes de nova tentativa
-      await new Promise((r) => setTimeout(r, 300));
+    const onlyDigits = (String(query).match(/\d/g) || []).join("");
+    const isPotentialCep = onlyDigits.length === 8;
+
+    const candidates = [];
+    if (isPotentialCep) {
+      const hyphen = onlyDigits.slice(0, 5) + "-" + onlyDigits.slice(5);
+      candidates.push(`${hyphen} Brasil`);
+      candidates.push(`${onlyDigits} Brasil`);
+      candidates.push(`CEP ${hyphen} Brasil`);
+      candidates.push(`CEP ${onlyDigits} Brasil`);
+    } else {
+      candidates.push(`${query} Brasil`);
     }
+
+    for (const q of candidates) {
+      for (let i = 0; i < attempts; i++) {
+        try {
+          const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1&countrycodes=br`;
+          const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (CheckoutApp)" } });
+          const data = await res.json();
+          if (data && data.length > 0) {
+            return {
+              lat: parseFloat(data[0].lat),
+              lon: parseFloat(data[0].lon),
+              raw: data[0]
+            };
+          }
+        } catch (e) {
+          console.error("Geocode error (attempt", i + 1, ", query", q, "):", e);
+        }
+        // aguarda um pouco antes de nova tentativa
+        await new Promise((r) => setTimeout(r, 300));
+      }
+    }
+
     return null;
+  }
+
+  // Ref para debouncing ao digitar CEP
+  const cepTimeoutRef = useRef(null);
+
+  // Verifica o CEP e preenche campos se encontrado
+  async function verifyCepAndFill(cep) {
+    try {
+      const res = await geocode(cep);
+      if (!res) {
+        Alert.alert("CEP inválido", "CEP não existe. Verifique e tente novamente.");
+        // limpa campos que dependem do CEP
+        setNovoEndereco((prev) => ({ ...prev, rua: "", bairro: "", cidade: "", estado: "" }));
+        return;
+      }
+
+      // Tenta extrair informações do endereço retornado pelo Nominatim
+      const addr = res.raw && res.raw.address ? res.raw.address : {};
+
+      // rua: preferir tipos de rua conhecidos e incluir número quando disponível
+      let rua = "";
+      if (addr.road || addr.pedestrian || addr.cycleway || addr.footway) {
+        rua = addr.road || addr.pedestrian || addr.cycleway || addr.footway;
+        if (addr.house_number) rua = `${rua}, ${addr.house_number}`;
+      } else if (addr.house_number) {
+        rua = addr.house_number;
+      }
+
+      let bairro = addr.suburb || addr.neighbourhood || addr.village || addr.hamlet || "";
+      let cidade = addr.city || addr.town || addr.village || addr.county || "";
+      let estado = addr.state || addr.region || "";
+
+      // Fallback: se os campos estiverem vazios, tenta quebrar display_name
+      if ((!rua || rua === "") && res.raw && res.raw.display_name) {
+        const parts = res.raw.display_name.split(',').map(p => p.trim()).filter(Boolean);
+        if (parts.length > 0 && !rua) rua = parts[0];
+        if (parts.length > 1 && !bairro) {
+          // às vezes o segundo pedaço é bairro ou complemento
+          // não sobrescreve se já tivermos bairro
+        }
+        if (parts.length > 2 && !cidade) cidade = parts[2];
+        if (parts.length > 3 && !estado) estado = parts[3];
+      }
+
+      setNovoEndereco((prev) => ({
+        ...prev,
+        rua: rua || prev.rua,
+        bairro: bairro || prev.bairro,
+        cidade: cidade || prev.cidade,
+        estado: estado || prev.estado,
+      }));
+    } catch (err) {
+      console.error("Erro verifyCepAndFill:", err);
+    }
+  }
+
+  function handleCepChange(text) {
+    // atualiza campo cep imediatamente
+    setNovoEndereco((prev) => ({ ...prev, cep: text }));
+
+    // limpa timeout anterior
+    if (cepTimeoutRef.current) {
+      clearTimeout(cepTimeoutRef.current);
+    }
+
+    // Só verifica quando houver pelo menos 8 dígitos
+    const cleaned = text.replace(/\D/g, "");
+    if (cleaned.length < 8) return;
+
+    // debounce: aguardar 700ms após última digitação
+    cepTimeoutRef.current = setTimeout(() => {
+      verifyCepAndFill(cleaned);
+    }, 700);
   }
 
   function haversineKm(a, b) {
@@ -239,8 +331,15 @@ export default function Checkout({ navigation }) {
     }
 
     try {
+      // Verifica se o CEP digitado realmente existe usando geocoding
+      const cepGeo = await geocode(novoEndereco.cep);
+      if (!cepGeo) {
+        Alert.alert("CEP inválido", "CEP não existe. Verifique e tente novamente.");
+        return;
+      }
+
       const enderecoCriado = await criarEndereco(novoEndereco);
-      
+
       setEnderecosSalvos([...enderecosSalvos, enderecoCriado]);
       setEnderecoSelecionado(enderecoCriado);
       // calcula frete para o novo endereço
@@ -255,7 +354,7 @@ export default function Checkout({ navigation }) {
         cidade: "",
         estado: "",
       });
-      
+
       Alert.alert("Sucesso", "Endereço adicionado com sucesso!");
     } catch (error) {
       console.error("Erro ao criar endereço:", error);
@@ -392,9 +491,7 @@ export default function Checkout({ navigation }) {
                 placeholder="CEP"
                 style={styles.input}
                 value={novoEndereco.cep}
-                onChangeText={(v) =>
-                  setNovoEndereco({ ...novoEndereco, cep: v })
-                }
+                onChangeText={handleCepChange}
               />
 
               <TextInput
