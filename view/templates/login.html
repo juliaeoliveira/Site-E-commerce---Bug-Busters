@@ -1,101 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - SOB Noiva</title>
-    <link rel="stylesheet" href="/static/css/login.css"> <!-- Link para o arquivo CSS externo -->
-</head>
-<body>
-
-  <!-- MENU FIXO RESPONSIVO -->
-  <header class="menu">
-    <!-- LOGO -->
-    <a href="/">
-      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
-    </a>
-
-    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
-    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-      ☰
-    </button>
-
-    <!-- NAV PRINCIPAL -->
-    <nav class="text-menu" id="nav-menu">
-      <a href="/produtos">Vestidos</a>
-      <a href="/colecoes">Coleções</a>
-      <a href="/#Agendamentos">Agendamentos</a>
-    </nav>
-
-    <nav class="icons">
-      <a href="/usuario/login" >
-        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aboreto&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Jim+Nightshade&family=Judson:ital,wght@0,400;0,700;1,400&family=Junge&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    
+    <link rel="stylesheet" href="/static/css/login.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <!-- Link para o arquivo CSS externo -->
+  </head>
+  <body>
+    <!-- MENU FIXO RESPONSIVO -->
+    <header class="menu">
+      <!-- LOGO -->
+      <a href="/">
+        <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
       </a>
-      <a href="/painel_usuario/carrinho" >
-        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
-      </a>
-    </nav>
-  </header>
 
-  <!-- Overlay para escurecer o fundo no mobile -->
-  <div class="overlay" id="overlay"></div>
+      <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        ☰
+      </button>
+
+      <!-- NAV PRINCIPAL -->
+      <nav class="text-menu" id="nav-menu">
+        <a href="/produtos">Vestidos</a>
+        <a href="/colecoes">Coleções</a>
+        <a href="/#Agendamentos">Agendamentos</a>
+      </nav>
+
+      <nav class="icons">
+        <a href="/usuario/login">
+          <img
+            src="/static/img_home/login.png"
+            
+            title="login"
+            alt="login"
+          />
+        </a>
+        <a href="/painel_usuario/carrinho">
+          <img
+            id="icone-carrinho"
+            src="/static/img_home/carrinho.png"
+            
+            title="Carrinho"
+            alt="Carrinho"
+          />
+        </a>
+      </nav>
+    </header>
+
+    <!-- Overlay para escurecer o fundo no mobile -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- CONTEÚDO PRINCIPAL DIVIDIDO EM DUAS PARTES -->
     <main class="container">
-        <!-- IMAGEM À ESQUERDA -->
-        <div class="imagem-esquerda">
-            <img src="/static/assets/img_login/fundo-login.jpg" alt="Imagem de mãos com alianças">
-            <a href="/" class="voltar-btn">← Voltar à página inicial</a>
-        </div>
+      <!-- IMAGEM À ESQUERDA -->
+      <div class="imagem-esquerda">
+        <img
+          src="/static/assets/img_login/fundo-login.jpg"
+          alt="Imagem de mãos com alianças"
+        />
+        <a href="/" class="voltar-btn">← Voltar à página inicial</a>
+      </div>
 
-        <!-- FORMULÁRIO DE LOGIN -->
-        <div class="formulario-login">
-            <h2>LOGIN</h2> <br><br><br><br><br>
-            <form action="/usuario/login" method="post">
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
+      <!-- FORMULÁRIO DE LOGIN -->
+      <div class="formulario-login">
+        <h2>LOGIN</h2>
+        <br /><br /><br /><br /><br />
+        <form action="/usuario/login" method="post">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required />
 
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" required>
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required />
 
-                <button type="submit" class="entrar-btn">Entrar</button> <br> <br>
-            </form>
+          <button type="submit" class="entrar-btn">Entrar</button> <br />
+          <br />
+        </form>
 
-            <p class="criar-conta-texto">Não possui uma conta?</p> <br>
-            <a href="/usuario/registrar" class="criar-conta-btn">Criar conta</a>
-        </div>
+        <p class="criar-conta-texto">Não possui uma conta?</p>
+        <br />
+        <a href="/usuario/registrar" class="criar-conta-btn">Criar conta</a>
+      </div>
     </main>
-  <script>
-    const nav = document.getElementById("nav-menu");
-    const btn = document.getElementById("hamburger");
-    const overlay = document.getElementById("overlay");
+    <script>
+      const nav = document.getElementById("nav-menu");
+      const btn = document.getElementById("hamburger");
+      const overlay = document.getElementById("overlay");
 
-    function openMenu() {
-      nav.classList.add("active");
-      overlay.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeMenu() {
-      nav.classList.remove("active");
-      overlay.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-
-    btn.addEventListener("click", () => {
-      if (nav.classList.contains("active")) {
-        closeMenu();
-      } else {
-        openMenu();
+      function openMenu() {
+        nav.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
-    });
 
-    overlay.addEventListener("click", closeMenu);
+      function closeMenu() {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
 
-    // fecha no ESC
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-  </script>
-</body>
+      btn.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      overlay.addEventListener("click", closeMenu);
+
+      // fecha no ESC
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    </script>
+  </body>
 </html>

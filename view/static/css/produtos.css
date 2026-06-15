@@ -121,8 +121,8 @@ main h1 {
 main section {
   display: grid;
   max-width: 1500px;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 150px;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 40px;
   place-items: center;
   margin-top: 6%;
   margin-left: auto;
@@ -204,6 +204,13 @@ main button:hover {
 /* ========================= */
 /*   RESPONSIVIDADE DO MAIN  */
 /* ========================= */
+@media (max-width: 1500px) {
+  main section {
+    max-width: 1200px;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 40px;
+  }
+}
 
 @media (max-width: 1200px) {
   main h1 {
@@ -213,7 +220,8 @@ main button:hover {
 
   main section {
     /* grid-template-columns: repeat(2, 1fr); */
-    row-gap: 50px;
+    max-width: 900px;
+    /* row-gap: 50px; */
   }
 
   .vestido img {
@@ -484,6 +492,7 @@ footer li {
   main section {
     /* grid-template-columns: repeat(2, 1fr); */
     /* gap: 12px; */
+    max-width: 700px;
     padding: 0 10px;
     /* margin-top: 30px; */
   }

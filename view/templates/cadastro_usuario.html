@@ -1,341 +1,446 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro</title>
-    <link rel="stylesheet" href="/static/css/cadastro_usuario.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!-- MENU FIXO RESPONSIVO -->
-  <header class="menu">
-    <!-- LOGO -->
-    <a href="/">
-      <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
-    </a>
-
-    <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
-    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-      ☰
-    </button>
-
-    <!-- NAV PRINCIPAL -->
-    <nav class="text-menu" id="nav-menu">
-      <a href="/produtos">Vestidos</a>
-      <a href="/colecoes">Coleções</a>
-      <a href="/#Agendamentos">Agendamentos</a>
-    </nav>
-
-    <nav class="icons">
-      <a href="/usuario/login" >
-        <img src="/static/img_home/login.png" width="20px" title="login" alt="login"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aboreto&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Jim+Nightshade&family=Judson:ital,wght@0,400;0,700;1,400&family=Junge&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/cadastro_usuario.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+  </head>
+  <body>
+    <!-- MENU FIXO RESPONSIVO -->
+    <header class="menu">
+      <!-- LOGO -->
+      <a href="/">
+        <img id="logo" src="/static/img_home/Sob.png" alt="Logo" />
       </a>
-      <a href="/painel_usuario/carrinho" >
-        <img id="icone-carrinho" src="/static/img_home/carrinho.png" width="20px" title="Carrinho" alt="Carrinho"/>
-      </a>
-    </nav>
-  </header>
 
-  <!-- Overlay para escurecer o fundo no mobile -->
-  <div class="overlay" id="overlay"></div>
+      <!-- BOTÃO HAMBÚRGUER (aparece só no mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        ☰
+      </button>
+
+      <!-- NAV PRINCIPAL -->
+      <nav class="text-menu" id="nav-menu">
+        <a href="/produtos">Vestidos</a>
+        <a href="/colecoes">Coleções</a>
+        <a href="/#Agendamentos">Agendamentos</a>
+      </nav>
+
+      <nav class="icons">
+        <a href="/usuario/login">
+          <img src="/static/img_home/login.png" title="login" alt="login" />
+        </a>
+        <a href="/painel_usuario/carrinho">
+          <img
+            id="icone-carrinho"
+            src="/static/img_home/carrinho.png"
+            title="Carrinho"
+            alt="Carrinho"
+          />
+        </a>
+      </nav>
+    </header>
+
+    <!-- Overlay para escurecer o fundo no mobile -->
+    <div class="overlay" id="overlay"></div>
     <main>
-        <form action="/usuario/registrar" method="post" id="formCadastro">
-            <section class="cadastro">
-                <h1 class="titulo_cadastro">CADASTRO DE USUÁRIO</h1>
-                <div class="informacoes">
-                    <label for="Nome">Nome completo: *</label>
-                    <input class="posicao" type="text" id="Nome" name="nome_cliente" required placeholder="Digite seu nome completo" />
-         
+      <form action="/usuario/registrar" method="post" id="formCadastro">
+        <section class="cadastro">
+          <h1 class="titulo_cadastro">CADASTRO DE USUÁRIO</h1>
+          <div class="informacoes">
+            <label for="Nome">Nome completo: *</label>
+            <input
+              class="posicao"
+              type="text"
+              id="Nome"
+              name="nome_cliente"
+              required
+              placeholder="Digite seu nome completo"
+            />
 
-                    <!-- Agrupamento lado a lado -->
-                    <div class="senhas">
-                      <div>
-                        <label for="senha">Senha: *</label>
-                        <input class="posicao" type="password" id="senha" name="senha" required placeholder="Mínimo 8 caracteres" />
+            <!-- Agrupamento lado a lado -->
+            <div class="senhas">
+              <div>
+                <label for="senha">Senha: *</label>
+                <input
+                  class="posicao"
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  required
+                  placeholder="Mínimo 8 caracteres"
+                />
 
-                          <!-- Aqui vai aparecer as mensagens -->
-                          <p id="mensagem_erro" style="color:red;"></p>
-                        </div>
-                      </div>
-                      <label for="confirmacao_senha">Confirmação de senha: *</label>
-                      <input class="posicao" type="password" id="confirmacao_senha" name="confirmar_senha" required placeholder="Digite a senha novamente" />
+                <!-- Aqui vai aparecer as mensagens -->
+                <p id="mensagem_erro" style="color: red"></p>
+              </div>
+            </div>
+            <label for="confirmacao_senha">Confirmação de senha: *</label>
+            <input
+              class="posicao"
+              type="password"
+              id="confirmacao_senha"
+              name="confirmar_senha"
+              required
+              placeholder="Digite a senha novamente"
+            />
 
-               
-                      <label for="email">E-mail: *</label>
-                      <input class="posicao" type="email" id="email" name="email" required placeholder="seu.email@exemplo.com" />
-                      
+            <label for="email">E-mail: *</label>
+            <input
+              class="posicao"
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="seu.email@exemplo.com"
+            />
 
-                      <label for="data_nascimento">Data de Nascimento: *</label>
-                      <input class="posicao" type="date" id="data_nascimento" name="data_nascimento" required />
-                      
+            <label for="data_nascimento">Data de Nascimento: *</label>
+            <input
+              class="posicao"
+              type="date"
+              id="data_nascimento"
+              name="data_nascimento"
+              required
+            />
 
-                      <label for="Telefone">Telefone: *</label>
-                      <input class="posicao" type="tel" id="Telefone" name="telefone" required placeholder="(11) 99999-9999" />
+            <label for="Telefone">Telefone: *</label>
+            <input
+              class="posicao"
+              type="tel"
+              id="Telefone"
+              name="telefone"
+              required
+              placeholder="(11) 99999-9999"
+            />
 
-                      <div >
-                        <label for="rua">Rua: *</label>
-                        <input class="posicao" type="text" id="rua" name="rua" required placeholder="Nome da rua, avenida, etc." />
-                      </div>
-                      <div class="endereco">
+            <div>
+              <label for="rua">Rua: *</label>
+              <input
+                class="posicao"
+                type="text"
+                id="rua"
+                name="rua"
+                required
+                placeholder="Nome da rua, avenida, etc."
+              />
+            </div>
+            <div class="endereco">
+              <div class="campo">
+                <label for="cep">CEP: *</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="cep"
+                  name="cep"
+                  required
+                  placeholder="00000-000"
+                  pattern="\d{5}-\d{3}"
+                  title="Digite o CEP no formato: XXXXX-XXX"
+                />
+                <p id="mensagem_cep" style="color: rgb(255, 0, 0)"></p>
+              </div>
 
+              <div class="campo">
+                <label for="numero">N°: *</label>
+                <input
+                  class="posicao"
+                  type="number"
+                  id="numero"
+                  name="numero"
+                  required
+                  placeholder="123"
+                  min="1"
+                />
+              </div>
 
-                        <div class="campo">
-                          <label for="cep">CEP: *</label>
-                          <input class="posicao" type="text" id="cep" name="cep" required 
-                          placeholder="00000-000" 
-                          pattern="\d{5}-\d{3}"
-                          title="Digite o CEP no formato: XXXXX-XXX" />
-                          <p id="mensagem_cep" style="color:rgb(255, 0, 0);"></p>
-                        </div>
+              <div class="campo">
+                <label for="bairro">Bairro: *</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="bairro"
+                  name="bairro"
+                  required
+                  placeholder="Nome do bairro"
+                />
+              </div>
 
-                        <div class="campo">
-                          <label for="numero">N°: *</label>
-                          <input class="posicao" type="number" id="numero" name="numero" required placeholder="123" min="1" />
-                        </div>
+              <div class="campo">
+                <label for="complemento">Complemento <b>(opcional)</b>:</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="complemento"
+                  placeholder="Apto 123, Bloco B, Casa, etc."
+                />
+              </div>
 
-                      <div class="campo">
-                        <label for="bairro">Bairro: *</label>
-                        <input class="posicao" type="text" id="bairro" name="bairro" required placeholder="Nome do bairro" />
-                      </div>
+              <div class="campo">
+                <label for="uf">Estado (UF): *</label>
+                <select class="posicao" id="estado" name="estado" required>
+                  <option value="" disabled selected>
+                    Selecione um estado
+                  </option>
+                  <option value="AC">Acre</option>
+                  <option value="AL">Alagoas</option>
+                  <option value="AP">Amapá</option>
+                  <option value="AM">Amazonas</option>
+                  <option value="BA">Bahia</option>
+                  <option value="CE">Ceará</option>
+                  <option value="DF">Distrito Federal</option>
+                  <option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option>
+                  <option value="MA">Maranhão</option>
+                  <option value="MT">Mato Grosso</option>
+                  <option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option>
+                  <option value="PA">Pará</option>
+                  <option value="PB">Paraíba</option>
+                  <option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option>
+                  <option value="PI">Piauí</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                  <option value="RN">Rio Grande do Norte</option>
+                  <option value="RS">Rio Grande do Sul</option>
+                  <option value="RO">Rondônia</option>
+                  <option value="RR">Roraima</option>
+                  <option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option>
+                  <option value="SE">Sergipe</option>
+                  <option value="TO">Tocantins</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label for="cidade">Cidade: *</label>
+                <input
+                  class="posicao"
+                  type="text"
+                  id="cidade"
+                  name="cidade"
+                  required
+                  placeholder="Nome da cidade"
+                />
+              </div>
+            </div>
 
-                      <div class="campo">
-                        <label for="complemento">Complemento <b>(opcional)</b>:</label>
-                        <input class="posicao" type="text" id="complemento" placeholder="Apto 123, Bloco B, Casa, etc." />
-                      </div>
-
-                      <div class="campo">
-                        <label  for="uf">Estado (UF): *</label>
-                        <select class="posicao" id="estado" name="estado" required>
-                          <option value="" disabled selected>Selecione um estado</option>
-                          <option value="AC">Acre</option>
-                          <option value="AL">Alagoas</option>
-                          <option value="AP">Amapá</option>
-                          <option value="AM">Amazonas</option>
-                          <option value="BA">Bahia</option>
-                          <option value="CE">Ceará</option>
-                          <option value="DF">Distrito Federal</option>
-                          <option value="ES">Espírito Santo</option>
-                          <option value="GO">Goiás</option>
-                          <option value="MA">Maranhão</option>
-                          <option value="MT">Mato Grosso</option>
-                          <option value="MS">Mato Grosso do Sul</option>
-                          <option value="MG">Minas Gerais</option>
-                          <option value="PA">Pará</option>
-                          <option value="PB">Paraíba</option>
-                          <option value="PR">Paraná</option>
-                          <option value="PE">Pernambuco</option>
-                          <option value="PI">Piauí</option>
-                          <option value="RJ">Rio de Janeiro</option>
-                          <option value="RN">Rio Grande do Norte</option>
-                          <option value="RS">Rio Grande do Sul</option>
-                          <option value="RO">Rondônia</option>
-                          <option value="RR">Roraima</option>
-                          <option value="SC">Santa Catarina</option>
-                          <option value="SP">São Paulo</option>
-                          <option value="SE">Sergipe</option>
-                          <option value="TO">Tocantins</option>
-                        </select>
-                     </div>
-                       <div class="campo">
-                        <label for="cidade">Cidade: *</label>
-                        <input class="posicao" type="text" id="cidade" name="cidade" required placeholder="Nome da cidade"/>
-                      </div>
-                  </div>
-
-                    <button class="cadastrar" type="submit" id="acao">Criar conta</button>
-                </div>
-            </section>
-        </form>
-        <div class="outrosvestidos">
-           <a href="/usuario/login"><button class="ver"> ← Voltar ao Login</button></a>
-       </div> 
+            <button class="cadastrar" type="submit" id="acao">
+              Criar conta
+            </button>
+          </div>
+        </section>
+      </form>
+      <div class="outrosvestidos">
+        <a href="/usuario/login"
+          ><button class="ver">← Voltar ao Login</button></a
+        >
+      </div>
     </main>
 
-    <p id="mensagem_erro" style="color:red;"></p>
+    <p id="mensagem_erro" style="color: red"></p>
 
-<script>
-const senha = document.getElementById('senha');
-const mensagem_erro = document.getElementById('mensagem_erro');
+    <script>
+      const senha = document.getElementById("senha");
+      const mensagem_erro = document.getElementById("mensagem_erro");
 
-senha.addEventListener('input', () => {
-    const s = senha.value;
-    let mensagens = [];
+      senha.addEventListener("input", () => {
+        const s = senha.value;
+        let mensagens = [];
 
-    if (s.length < 8) mensagens.push("A senha deve ter pelo menos 8 caracteres.");
-    if (!/[A-Z]/.test(s)) mensagens.push("A senha deve conter pelo menos uma letra maiúscula.");
-    if (!/[a-z]/.test(s)) mensagens.push("A senha deve conter pelo menos uma letra minúscula.");
-    if (!/[0-9]/.test(s)) mensagens.push("A senha deve conter pelo menos um número.");
-    if (!/[@#$%^&+=!-]/.test(s)) mensagens.push("A senha deve conter pelo menos um caractere especial (@#$%^&+=!-).");
-    if (/\s/.test(s)) mensagens.push("A senha não pode conter espaços.");
+        if (s.length < 8)
+          mensagens.push("A senha deve ter pelo menos 8 caracteres.");
+        if (!/[A-Z]/.test(s))
+          mensagens.push("A senha deve conter pelo menos uma letra maiúscula.");
+        if (!/[a-z]/.test(s))
+          mensagens.push("A senha deve conter pelo menos uma letra minúscula.");
+        if (!/[0-9]/.test(s))
+          mensagens.push("A senha deve conter pelo menos um número.");
+        if (!/[@#$%^&+=!-]/.test(s))
+          mensagens.push(
+            "A senha deve conter pelo menos um caractere especial (@#$%^&+=!-).",
+          );
+        if (/\s/.test(s)) mensagens.push("A senha não pode conter espaços.");
 
-    // Se todas as regras forem cumpridas, a mensagem some
-    mensagem_erro.innerHTML = mensagens.length ? mensagens.join("<br>") : "";
-});
-</script>
+        // Se todas as regras forem cumpridas, a mensagem some
+        mensagem_erro.innerHTML = mensagens.length
+          ? mensagens.join("<br>")
+          : "";
+      });
+    </script>
 
-<script>
-const cepInput = document.getElementById('cep');
-const mensagemCep = document.getElementById('mensagem_cep');
-const form = document.getElementById('formCadastro');
+    <script>
+      const cepInput = document.getElementById("cep");
+      const mensagemCep = document.getElementById("mensagem_cep");
+      const form = document.getElementById("formCadastro");
 
-// Função para validar o formato do CEP
-function validarCEP(cep) {
-    const cepRegex = /^\d{5}-\d{3}$/;
-    return cepRegex.test(cep);
-}
+      // Função para validar o formato do CEP
+      function validarCEP(cep) {
+        const cepRegex = /^\d{5}-\d{3}$/;
+        return cepRegex.test(cep);
+      }
 
-// Auto-formatação enquanto o usuário digita
-cepInput.addEventListener('input', function(e) {
-    let valor = e.target.value.replace(/\D/g, '');
-    
-    if (valor.length > 5) {
-        valor = valor.substring(0, 5) + '-' + valor.substring(5, 8);
-    } else if (valor.length === 5) {
-        valor += '-';
-    }
-    
-    e.target.value = valor;
-    
-    // Validação em tempo real
-    if (valor.length === 9 && validarCEP(valor)) {
-        mensagemCep.textContent = "";
-        buscarEnderecoPorCEP(valor);
-    } else if (valor.length > 0 && !validarCEP(valor)) {
-        mensagemCep.textContent = ""; // Formato inválido. Use: XXXXX-XXX
-    } else {
-        mensagemCep.textContent = "";
-    }
-});
+      // Auto-formatação enquanto o usuário digita
+      cepInput.addEventListener("input", function (e) {
+        let valor = e.target.value.replace(/\D/g, "");
 
-// Função para buscar endereço via API ViaCEP
-function buscarEnderecoPorCEP(cep) {
-    const cepNumeros = cep.replace('-', '');
-    
-    fetch(`https://viacep.com.br/ws/${cepNumeros}/json/`)
-        .then(response => response.json())
-        .then(data => {
+        if (valor.length > 5) {
+          valor = valor.substring(0, 5) + "-" + valor.substring(5, 8);
+        } else if (valor.length === 5) {
+          valor += "-";
+        }
+
+        e.target.value = valor;
+
+        // Validação em tempo real
+        if (valor.length === 9 && validarCEP(valor)) {
+          mensagemCep.textContent = "";
+          buscarEnderecoPorCEP(valor);
+        } else if (valor.length > 0 && !validarCEP(valor)) {
+          mensagemCep.textContent = ""; // Formato inválido. Use: XXXXX-XXX
+        } else {
+          mensagemCep.textContent = "";
+        }
+      });
+
+      // Função para buscar endereço via API ViaCEP
+      function buscarEnderecoPorCEP(cep) {
+        const cepNumeros = cep.replace("-", "");
+
+        fetch(`https://viacep.com.br/ws/${cepNumeros}/json/`)
+          .then((response) => response.json())
+          .then((data) => {
             if (!data.erro) {
-                // Preenche automaticamente os campos
-                document.getElementById('rua').value = data.logradouro || '';
-                document.getElementById('bairro').value = data.bairro || '';
-                document.getElementById('cidade').value = data.localidade || '';
-                document.getElementById('estado').value = data.uf || '';
+              // Preenche automaticamente os campos
+              document.getElementById("rua").value = data.logradouro || "";
+              document.getElementById("bairro").value = data.bairro || "";
+              document.getElementById("cidade").value = data.localidade || "";
+              document.getElementById("estado").value = data.uf || "";
             } else {
-                mensagemCep.textContent = "CEP não encontrado. Verifique o número.";
-                mensagemCep.style.color = "red";
+              mensagemCep.textContent =
+                "CEP não encontrado. Verifique o número.";
+              mensagemCep.style.color = "red";
             }
-        })
-        .catch(error => {
-            console.error('Erro ao buscar CEP:', error);
-            mensagemCep.textContent = "Erro ao validar CEP. Verifique sua conexão.";
+          })
+          .catch((error) => {
+            console.error("Erro ao buscar CEP:", error);
+            mensagemCep.textContent =
+              "Erro ao validar CEP. Verifique sua conexão.";
             mensagemCep.style.color = "orange";
+          });
+      }
+
+      // Validação do CEP quando o campo perde o foco
+      cepInput.addEventListener("blur", function () {
+        const cep = cepInput.value.trim();
+
+        if (cep && !validarCEP(cep)) {
+          mensagemCep.textContent = "Formato inválido. Use: XXXXX-XXX";
+          mensagemCep.style.color = "red";
+        } else if (cep && validarCEP(cep)) {
+          // Já foi validado no input, mas verifica novamente
+          buscarEnderecoPorCEP(cep);
+        }
+      });
+
+      // Validação antes do envio do formulário
+      form.addEventListener("submit", function (e) {
+        const cep = cepInput.value.trim();
+
+        if (!validarCEP(cep)) {
+          e.preventDefault();
+          alert(
+            "❌ Formato de CEP inválido!\n\nUse o formato: XXXXX-XXX\nExemplo: 08161-540",
+          );
+          cepInput.focus();
+          cepInput.select();
+          return false;
+        }
+
+        // Verifica se as senhas coincidem
+        const senha = document.getElementById("senha").value;
+        const confirmacaoSenha =
+          document.getElementById("confirmacao_senha").value;
+
+        if (senha !== confirmacaoSenha) {
+          e.preventDefault();
+          alert("❌ As senhas não coincidem!");
+          document.getElementById("senha").focus();
+          return false;
+        }
+
+        return true;
+      });
+    </script>
+
+    <script>
+      // No campo de telefone
+      document
+        .getElementById("Telefone")
+        .addEventListener("input", function (e) {
+          let valor = e.target.value.replace(/\D/g, "");
+          if (valor.length > 10) {
+            valor =
+              "(" +
+              valor.substring(0, 2) +
+              ") " +
+              valor.substring(2, 7) +
+              "-" +
+              valor.substring(7, 11);
+          } else if (valor.length > 6) {
+            valor =
+              "(" +
+              valor.substring(0, 2) +
+              ") " +
+              valor.substring(2, 6) +
+              "-" +
+              valor.substring(6, 10);
+          } else if (valor.length > 2) {
+            valor = "(" + valor.substring(0, 2) + ") " + valor.substring(2);
+          } else if (valor.length > 0) {
+            valor = "(" + valor;
+          }
+          e.target.value = valor;
         });
-}
+    </script>
 
-// Validação do CEP quando o campo perde o foco
-cepInput.addEventListener('blur', function() {
-    const cep = cepInput.value.trim();
-    
-    if (cep && !validarCEP(cep)) {
-        mensagemCep.textContent = "Formato inválido. Use: XXXXX-XXX";
-        mensagemCep.style.color = "red";
-    } else if (cep && validarCEP(cep)) {
-        // Já foi validado no input, mas verifica novamente
-        buscarEnderecoPorCEP(cep);
-    }
-});
+    <script>
+      const nav = document.getElementById("nav-menu");
+      const btn = document.getElementById("hamburger");
+      const overlay = document.getElementById("overlay");
 
-// Validação antes do envio do formulário
-form.addEventListener('submit', function(e) {
-    const cep = cepInput.value.trim();
-    
-    if (!validarCEP(cep)) {
-        e.preventDefault();
-        alert('❌ Formato de CEP inválido!\n\nUse o formato: XXXXX-XXX\nExemplo: 08161-540');
-        cepInput.focus();
-        cepInput.select();
-        return false;
-    }
-    
-    // Verifica se as senhas coincidem
-    const senha = document.getElementById('senha').value;
-    const confirmacaoSenha = document.getElementById('confirmacao_senha').value;
-    
-    if (senha !== confirmacaoSenha) {
-        e.preventDefault();
-        alert('❌ As senhas não coincidem!');
-        document.getElementById('senha').focus();
-        return false;
-    }
-    
-    return true;
-});
-</script>
-
-<script>
-  // No campo de telefone
-  document.getElementById('Telefone').addEventListener('input', function(e) {
-      let valor = e.target.value.replace(/\D/g, '');
-      if (valor.length > 10) {
-          valor = '(' + valor.substring(0, 2) + ') ' + 
-                  valor.substring(2, 7) + '-' + 
-                  valor.substring(7, 11);
-      } else if (valor.length > 6) {
-          valor = '(' + valor.substring(0, 2) + ') ' + 
-                  valor.substring(2, 6) + '-' + 
-                  valor.substring(6, 10);
-      } else if (valor.length > 2) {
-          valor = '(' + valor.substring(0, 2) + ') ' + valor.substring(2);
-      } else if (valor.length > 0) {
-          valor = '(' + valor;
+      function openMenu() {
+        nav.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
-      e.target.value = valor;
-  });
-</script>
 
-  <script>
-    const nav = document.getElementById("nav-menu");
-    const btn = document.getElementById("hamburger");
-    const overlay = document.getElementById("overlay");
-
-    function openMenu() {
-      nav.classList.add("active");
-      overlay.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeMenu() {
-      nav.classList.remove("active");
-      overlay.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-
-    btn.addEventListener("click", () => {
-      if (nav.classList.contains("active")) {
-        closeMenu();
-      } else {
-        openMenu();
+      function closeMenu() {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
       }
-    });
 
-    overlay.addEventListener("click", closeMenu);
+      btn.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
 
-    // fecha no ESC
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-  </script>
+      overlay.addEventListener("click", closeMenu);
 
-</body>
+      // fecha no ESC
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    </script>
+  </body>
 </html>

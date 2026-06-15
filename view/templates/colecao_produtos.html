@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ nome_colecao }} - Sob Véu</title>
     <link rel="stylesheet" href="/static/css/colecao.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/colecao_produtos.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,18 +37,12 @@
 
       <nav class="icons">
         <a href="/usuario/login">
-          <img
-            src="/static/img_home/login.png"
-            
-            title="login"
-            alt="login"
-          />
+          <img src="/static/img_home/login.png" title="login" alt="login" />
         </a>
         <a href="/painel_usuario/carrinho">
           <img
             id="icone-carrinho"
             src="/static/img_home/carrinho.png"
-            
             title="Carrinho"
             alt="Carrinho"
           />
@@ -60,9 +55,7 @@
 
     <main>
       <section id="colecao">
-        <h1 class="localizacao">
-          {{ nome_colecao }}
-        </h1>
+        <h1 class="localizacao">{{ nome_colecao }}</h1>
         <br /><br />
 
         <div class="area-colecao">
@@ -105,16 +98,16 @@
 
     <footer>
       <!-- LOGO -->
-      <img class="sob" src="/img_colecao/Sob.png" alt="Logo" />
+      <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />
 
-      <!-- COLUNA 1 -->
+      <!-- CONTATOS -->
       <div class="coluna">
         <p class="titulo">Contatos</p>
         <ul>
           <li>
             <img
               class="telefone"
-              src="/img_colecao/2gokRbP1IDl3BuRCfgic0r5CGMf-desktop-Photoroom.png"
+              src="/static/img_home/telefone.png"
               alt="Telefone"
             />
             (11) 4002-8922
@@ -123,7 +116,7 @@
           <li>
             <img
               class="whatsapp"
-              src="/img_colecao/speech-bubble--v2-Photoroom.png"
+              src="/static/img_home/speech-bubble--v2-Photoroom.png"
               alt="WhatsApp"
             />
             (11) 98291-1653
@@ -135,46 +128,123 @@
 
       <div class="linha"></div>
 
-      <!-- COLUNA 2 -->
+      <!-- SOBRE A LOJA -->
       <div class="coluna">
         <p class="titulo">Sobre a loja</p>
+
         <ul>
-          <li>Sobre nós</li>
-          <li>Trocas e Devoluções</li>
-          <li>Fretes e Entregas</li>
+          <li
+            onclick="
+              abrirPopup(
+                'Sobre Nós',
+                'A Sob Véu nasceu com a missão de transformar sonhos em realidade por meio de vestidos de noiva exclusivos e atendimento personalizado. Selecionamos cuidadosamente cada modelo, priorizando qualidade, conforto e elegância para que cada noiva se sinta única em seu grande dia. Nossa equipe especializada acompanha você em cada etapa da escolha, oferecendo suporte, atenção aos detalhes e uma experiência acolhedora e inesquecível.',
+              )
+            "
+          >
+            Sobre nós
+          </li>
+
+          <li
+            onclick="
+              abrirPopup(
+                'Trocas e Devoluções',
+                'Caso o produto não atenda às suas expectativas, você poderá solicitar a troca ou devolução em até 7 dias corridos após o recebimento. Os produtos devem ser devolvidos sem uso, em sua embalagem original e acompanhados de todos os acessórios e etiquetas. Após a análise e aprovação da solicitação, o reembolso ou a troca será realizado conforme nossa política de atendimento. Entre em contato com nossa equipe para receber orientações detalhadas.',
+              )
+            "
+          >
+            Trocas e Devoluções
+          </li>
+
+          <li
+            onclick="
+              abrirPopup(
+                'Fretes e Entregas',
+                'Realizamos entregas para todo o território nacional por meio de transportadoras e serviços de logística parceiros. O valor do frete e o prazo estimado são calculados automaticamente durante a finalização da compra, de acordo com o CEP informado. Após o envio do pedido, um código de rastreamento será disponibilizado para que você acompanhe cada etapa da entrega. Trabalhamos para garantir que seu produto seja transportado com total segurança, qualidade e pontualidade.',
+              )
+            "
+          >
+            Fretes e Entregas
+          </li>
         </ul>
       </div>
 
       <div class="linha"></div>
 
-      <!-- COLUNA 3 -->
+      <!-- INFORMAÇÕES -->
       <div class="coluna">
         <p class="titulo">Informações</p>
+
         <ul>
-          <li>Política de Privacidade</li>
-          <li>Termos de Uso</li>
-          <br /><br />
+          <li
+            onclick="
+              abrirPopup(
+                'Política de Privacidade',
+                'A Sob Véu valoriza a sua privacidade e protege todas as informações fornecidas em nosso site. Seus dados pessoais são utilizados exclusivamente para processar pedidos, realizar atendimentos, enviar comunicações relacionadas às suas compras e melhorar sua experiência de navegação. Não compartilhamos informações com terceiros sem autorização, exceto quando necessário para a prestação dos serviços ou cumprimento de obrigações legais.',
+              )
+            "
+          >
+            Política de Privacidade
+          </li>
+
+          <li
+            onclick="
+              abrirPopup(
+                'Termos de Uso',
+                'Ao acessar e utilizar o site da Sob Véu, você concorda com os presentes termos e condições de uso. Todo o conteúdo disponibilizado, incluindo imagens, textos e informações sobre produtos, é protegido por direitos autorais e não pode ser reproduzido sem autorização. A Sob Véu reserva-se o direito de atualizar estes termos a qualquer momento para garantir a melhor experiência e segurança aos seus usuários.',
+              )
+            "
+          >
+            Termos de Uso
+          </li>
         </ul>
       </div>
 
-      <!-- REDES SOCIAIS -->
+      <!-- REDES -->
       <section class="midia">
         <img
           class="instagram"
-          src="/img_colecao/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
+          src="/static/img_home/pngtree-instagram-black-and-white-icon-png-image_6618439-Photoroom.png"
           alt="Instagram"
         />
+
         <img
           class="facebook"
-          src="/img_colecao/facebook-f-Photoroom.png"
+          src="/static/img_home/facebook-f-Photoroom.png"
           alt="Facebook"
         />
       </section>
 
-      <!-- DIREITOS -->
       <p class="direitos">&copy; 2025 Sob Véu. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- MODAL -->
+    <div id="popup" class="popup">
+      <div class="popup-conteudo">
+        <button class="fechar" onclick="fecharPopup()">×</button>
+
+        <h2 id="popupTitulo"></h2>
+
+        <p id="popupTexto"></p>
+      </div>
+    </div>
+    <script>
+      function abrirPopup(titulo, texto) {
+        document.getElementById("popupTitulo").textContent = titulo;
+        document.getElementById("popupTexto").textContent = texto;
+
+        document.getElementById("popup").classList.add("ativo");
+      }
+
+      function fecharPopup() {
+        document.getElementById("popup").classList.remove("ativo");
+      }
+
+      document.getElementById("popup").addEventListener("click", function (e) {
+        if (e.target === this) {
+          fecharPopup();
+        }
+      });
+    </script>
     <script>
       const loginIcon = document.getElementById("login-icon");
       const loginDropdown = document.getElementById("login-dropdown");
