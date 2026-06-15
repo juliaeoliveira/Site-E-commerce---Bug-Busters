@@ -196,7 +196,7 @@ body {
   overflow-x: hidden;
   background-color: #eae4d8;
   color: #3a2d20;
-  font-family: "Inter", sans-serif;
+  font-family: "Afacad";
 }
 
 main {
@@ -213,13 +213,39 @@ main {
 
 .localizacao {
   text-align: center;
-  font-size: 20px;
   margin-bottom: 30px;
-  font-family: "Libre Caslon Text";
+  font-family: "Afacad";
   color: #4e3902;
   font-size: 18px;
 }
+main .guia .links {
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  color: #5a4635;
+  margin-bottom: 20px;
+}
 
+.guia {
+  margin-top: 130px;
+  font-family: "Afacad";
+  text-align: center;
+  margin-bottom: 5%;
+  gap: 40px;
+}
+
+.guia a {
+  text-decoration: none;
+  color: #3a2d20;
+  font-size: 20px;
+}
+.guia a:hover {
+  color: #5a0101;
+}
+
+.links {
+  gap: 30px;
+}
 .area-carrinho {
   display: flex;
   flex-direction: row;
@@ -227,7 +253,7 @@ main {
   align-items: flex-start;
   gap: 60px;
   width: 100%;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 /* Coluna esquerda com os 3 cards empilhados */
@@ -239,7 +265,7 @@ main {
 
 /* CARDS */
 .produto-vestido {
-  background-color: #e3d2ac;
+  background-color: #dbcaa94d;
   width: 710px;
   color: #000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -286,13 +312,16 @@ main {
 .linha-dupla2 {
   margin-bottom: 30px;
 }
-
+.form-endereco {
+  text-align: center;
+}
 .form-endereco label {
-  font-family: "Libre Caslon Text";
+  font-family: "Afacad";
   color: #4e3902;
   margin-bottom: 5px;
-  font-size: 14px;
+  font-size: 16px;
   display: block;
+  text-align: start;
 }
 
 .form-endereco input {
@@ -317,20 +346,21 @@ main {
 
 .botao-enviar {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 20px ;
   width: 200px;
   background-color: #790000;
   color: white;
   border: none;
   border-radius: 4px;
   padding: 10px 25px;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
+  font-family: "Afacad";
+  font-size: 18px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   text-decoration: none;
   text-align: center;
+  transition: all 0.5s ease;
 }
 
 .botao-enviar:hover {
@@ -344,9 +374,9 @@ main {
   flex-direction: column;
   gap: 20px;
   padding: 20px 40px;
-  font-family: "Inter", sans-serif;
+  font-family: "Afacad";
   color: #4e3902;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .opcao-pagamento {
@@ -448,14 +478,13 @@ main {
 
 .pedido-total h3 {
   color: #523800;
-  font-family: "Inter", sans-serif;
-  font-size: 24px;
-  font-weight: 500;
+  font-family: "Aboreto", system-ui;
+  font-size: 20px;
+  text-align: center;
   margin-bottom: 20px;
 }
 
 .pedido-total h2 {
-  font-family: "Inter", sans-serif;
   color: #4e3902;
   font-size: 18px;
   display: flex;
@@ -497,32 +526,34 @@ main {
 
 
 .botao-confirmar-final {
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Afacad";
   height: 50px;
   width: 300px;
-  color: darkred;
-  background-color:rgba(237, 219, 190, 0.80);
-  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  color: #790000;
+  background-color:#eadcc1cc;
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   
 }
 
 .botao-voltar {
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Afacad";
   height: 50px;
   width: 300px;
-  color: darkred;
-  background-color:rgba(237, 219, 190, 0.80);
-  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
+  color: #790000;
+  background-color:#eadcc1cc;
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .botao-voltar:hover{
@@ -534,63 +565,80 @@ main {
 }
 
 /* ===================== VARIEDADES ===================== */
-#variedades {
-  min-height: 100vh;
-  height: auto;
+
+.conteinervariedade {
   background-color: #fff9ed;
+  margin-top: 70px;
+  padding: 4%;
   text-align: center;
-  padding: 60px 20px;
+  border-radius: 5px;
 }
 
-#variedades h1 {
+.conteinervariedade h3 {
   color: #681616;
-  font-family: "Aboreto";
-  font-size: 24px;
+  font-family: "Aboreto", system-ui;
+  font-size: 28px;
   font-weight: 400;
-  margin-bottom: 20px;
+  /* margin-bottom: 50px; */
 }
 
-.linha-titulo3 {
-  width: 456px;
-  max-width: 90%;
-  color: #4e3902;
-  margin: 0 auto 40px;
-}
-
-.lista-vestidos {
+.variedades {
   display: flex;
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-top: 30px;
 }
-
-.vestido {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-  padding-bottom: 20px;
-  margin: 20px;
+.linhavariedade {
+  text-align: center;
+  color: #000000;
 }
-
-.vestido img {
-  width: 352px;
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform 0.3s ease-in-out;
+.imagem-container {
+  background-color: #ffffff;
+  width: 280px;
+  text-align: center;
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+  /* border: solid 1px #3a2d20; */
   border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding-bottom: 20px;
 }
 
-.vestido:hover img {
-  transform: scale(1.05);
-}
-
-.lista-vestidos a {
+.imagem-container a {
   text-decoration: none;
   color: #000;
 }
+
+.imagem-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+  /* transition: transform 0.3s ease; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.imagem-container:hover {
+  transform: translateY(-5px);
+}
+
+.imagem-container .nome {
+  font-family: "Junge", serif;
+  font-size: 18px;
+  color: #523800;
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+/* .midia {
+  float: right;
+  display: grid;
+  gap: 15px;
+} */
+
+
 
 .nome {
   color: #000;
@@ -599,20 +647,24 @@ main {
   margin-top: 15px;
   font-family: "Libre Caslon Text";
 }
+.outrosvestidos{
+  margin-top: 90px;
+  text-align: start;
+}
 
 .ver {
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Afacad";
   height: 50px;
   width: 300px;
   color: darkred;
-  background-color:rgba(237, 219, 190, 0.80);
+  background-color:#eadcc1cc;
   box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 18px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: 1000px;
+  transition: all 0.5s ease;
+  
 }
 
 .ver:hover {
@@ -783,9 +835,8 @@ footer li {
     padding: 100px 15px 40px;
   }
 
-  .localizacao {
-    font-size: 16px;
-    margin-top: 20px;
+  .guia{
+    margin-top: 5%;
   }
 
   /* ÁREA DO CARRINHO VIRA COLUNA */

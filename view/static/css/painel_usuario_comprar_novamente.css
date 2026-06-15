@@ -192,7 +192,7 @@
 /* ==================== CORPO (MAIN) - RESPONSIVO ==================== */
 
 main {
-  margin-top: 50px;
+  margin-top: 140px;
 }
 
 body {
@@ -216,16 +216,13 @@ main div {
 }
 
 h1 {
-  margin-top: 50px;
   color: #790000;
   text-shadow: 2px 4px 4px color(display-p3 0 0 0 / 0.3);
-  -webkit-text-stroke-width: 0.5px;
   font-family: "Aboreto", system-ui;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 2.4px;
-  margin-left: 120px;
-  padding-top: 100px;
-  font-size: 50px;
+  font-size: 42px;
+  text-align: center;
 }
 
 /* <CHANGE> Adicionando flexbox na section para layout responsivo dos cards */
