@@ -15,7 +15,11 @@
     <link rel="stylesheet" href="/static/css/footer.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
 </head>
-
+<style>
+    footer{
+      margin-top: 0;
+    }
+</style>
 <body>
 
   <!-- MENU FIXO RESPONSIVO -->
@@ -73,7 +77,7 @@
   <div class="overlay" id="overlay"></div>
 
   <main>
-      <div class="guia"
+      <div class="guia">
         <h1 class="links">
           <a href="/painel_usuario">Início</a> > <a href="/painel_usuario/produtos"> Vestidos </a> > <a
             href="/painel_usuario/produtos/{{produto.id}}"> Detalhes do Vestido </a>
@@ -118,6 +122,7 @@
                 <a href="/painel_usuario/produtos"><button class="ver"> ← Continuar vendo outros vestidos</button></a>
             </div> 
         </nav>
+  </main>
       <section class="espacovariedades">
         <div class="conteinervariedade">
           <h3>MAIS VARIEDADES</h3>
@@ -139,7 +144,7 @@
         </div>
       </section>
 
-  </main>
+  
     <footer>
       <!-- LOGO -->
       <img class="sob" src="/static/img_home/Sob copy.png" alt="Logo" />

@@ -196,13 +196,12 @@ body {
   overflow-x: hidden;
   background-color: #eae4d8;
   color: #3a2d20;
-  font-family: "Inter", sans-serif;
+  font-family: "Afacad";
 }
 
 main {
   flex: 1;
   width: 100%;
-  
 }
 
 /* ===================== CARRINHO ===================== */
@@ -219,7 +218,36 @@ main {
   font-family: "Libre Caslon Text", serif;
   color: #4e3902;
 }
+/* Caminho inicial */
 
+main .guia .links {
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  color: #5a4635;
+  margin-bottom: 20px;
+}
+
+.guia {
+  margin-top: 5%;
+  font-family: "Afacad";
+  text-align: center;
+  margin-bottom: 5%;
+  gap: 40px;
+}
+
+.guia a {
+  text-decoration: none;
+  color: #3a2d20;
+  font-size: 20px;
+}
+.guia a:hover {
+  color: #5a0101;
+}
+
+.links {
+  gap: 30px;
+}
 .area-carrinho {
   display: flex;
   justify-content: center;
@@ -233,11 +261,11 @@ main {
 
 /* PRODUTO VESTIDO */
 .produto-vestido {
-  background-color: #e3d2ac;
+  background-color: #dbcaa94d;
   width: 100%;
   max-width: 710px;
   color: #000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15);
   padding: 20px;
   border-radius: 8px;
   display: flex;
@@ -256,7 +284,7 @@ main {
   font-family: "Aboreto", system-ui;
   font-size: 24px;
   font-weight: bold;
-  color: #4e3902;
+  color: #790000;
 }
 
 .linha-selecao {
@@ -318,7 +346,6 @@ main {
 .texto h3 {
   font-size: 20px;
   color: #523800;
-  font-family: "Inter", sans-serif;
   font-weight: 600;
   margin-bottom: 5px;
 }
@@ -351,10 +378,9 @@ main {
 
 .tamanho-label,
 .quantidade {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #523800;
-  margin-top: 5px;
 }
 
 .tamanho {
@@ -401,13 +427,12 @@ main {
 .pedido-total h3 {
   font-family: "Aboreto", system-ui;
   font-size: 20px;
-  color: #4e3902;
+  color: #790000;
   text-align: center;
   margin-bottom: 20px;
 }
 
 .pedido-total h2 {
-  font-family: "Inter", sans-serif;
   color: #4e3902;
   font-size: 18px;
   display: flex;
@@ -419,10 +444,10 @@ main {
   width: 100%;
   height: 50px;
   background-color: #790000;
+  font-family: "Afacad";
   color: white;
   border: none;
   border-radius: 5px;
-  font-family: "Inter", sans-serif;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -438,10 +463,11 @@ main {
 /* ===================== VARIEDADES ===================== */
 #variedades {
   background-color: #fff9ed;
+  margin-top: 70px;
   padding: 60px 20px;
   text-align: center;
   min-height: 400px;
-  height:100vh;
+  height: 100vh;
 }
 
 #variedades h1 {
@@ -449,13 +475,14 @@ main {
   font-family: "Aboreto", system-ui;
   font-size: 28px;
   margin-bottom: 20px;
+  font-weight: 400;
 }
 
 .linha-titulo3 {
   width: 456px;
-  max-width: 90%;
+  max-width: 70%;
   border: none;
-  border-top: 2px solid #4e3902;
+  border-top: 1px solid #4e3902;
   margin: 0 auto 40px;
 }
 
@@ -502,32 +529,101 @@ main {
 }
 
 .ver {
-  font-family: "Libre Caslon Text", serif;
   height: 50px;
   width: 300px;
-  color: darkred;
-  background-color:rgba(237, 219, 190, 0.80);
-  box-shadow: 4px 5px 3px rgba(0, 0, 0, 0.25);
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: 900px;
-  /* qq
-  font-family: "Libre Caslon Text";
-  height: 50px;
-  width: 300px;
-  color: darkred;
-  background: rgba(237, 219, 190, 0.80);
+  color: #5a0101;
+  font-family: "Afacad";
+  font-size: 18px;
+  font-weight: 500;
+  background: #eadcc1cc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
   border: none;
-  border-radius: 5px; */
+  border-radius: 5px;
+  margin-top: 50px;
+  cursor: pointer;
+  transition: all 0.5s ease;
 }
 
 .ver:hover {
   transform: scale(1.05);
   box-shadow: 6px 7px 5px rgba(0, 0, 0, 0.3);
+}
+
+/*===================VARIEDADES======*/
+.conteinervariedade {
+  background-color: #fff9ed;
+  margin-top: 70px;
+  padding: 4%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.conteinervariedade h3 {
+  color: #681616;
+  font-family: "Aboreto", system-ui;
+  font-size: 28px;
+  font-weight: 400;
+  /* margin-bottom: 50px; */
+}
+
+.variedades {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.linhavariedade {
+  text-align: center;
+  color: #000000;
+}
+.imagem-container {
+  background-color: #ffffff;
+  width: 280px;
+  text-align: center;
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+  /* border: solid 1px #3a2d20; */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding-bottom: 20px;
+}
+
+.imagem-container a {
+  text-decoration: none;
+  color: #000;
+}
+
+.imagem-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+  /* transition: transform 0.3s ease; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.imagem-container:hover {
+  transform: translateY(-5px);
+}
+
+.imagem-container .nome {
+  font-family: "Junge", serif;
+  font-size: 18px;
+  color: #523800;
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+/* .midia {
+  float: right;
+  display: grid;
+  gap: 15px;
+} */
+
+.outrosvestidos {
+  margin-right: 900px;
 }
 
 /* ===================== FOOTER ===================== */
@@ -725,7 +821,7 @@ footer li {
   }
 
   .ver {
-    width: 100%;
+    margin-bottom: 20px;
     max-width: 300px;
   }
 
@@ -750,6 +846,53 @@ footer li {
   }
 }
 
+@media (max-width: 600px) {
+  .conteinervariedade h3 {
+    font-weight: 600;
+  }
+  .variedades {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px; /* mais distância */
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .imagem-container {
+    width: 300px; /* imagem maior */
+    text-align: center;
+  }
+
+  .imagem-container img {
+    width: 100%;
+    height: 350px; /* altura maior */
+    object-fit: cover;
+    display: block;
+  }
+
+  .variedades .nome {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .conteinervariedade h3 {
+    font-size: 18px;
+  }
+
+  .linhavariedade {
+    display: none;
+  }
+
+  .guia {
+    margin-top: 3%;
+    font-size: 16px;
+  }
+  #carrinho {
+    margin-top: 20px;
+  }
+}
+
 /* CELULARES PEQUENOS */
 @media (max-width: 480px) {
   #logo {
@@ -771,9 +914,9 @@ footer li {
     padding: 20px 15px;
   }
 
-  #variedades h1 {
+  /* #variedades h1 {
     font-size: 22px;
-  }
+  } */
 
   .produto-vestido h1 {
     font-size: 20px;
@@ -787,10 +930,10 @@ footer li {
     height: 45px;
     font-size: 16px;
   }
-
+  /* 
   .fotovariedades {
     height: 300px;
-  }
+  } */
 }
 
 /* ANIMAÇÕES E TRANSIÇÕES */
