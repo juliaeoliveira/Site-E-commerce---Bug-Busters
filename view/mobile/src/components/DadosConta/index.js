@@ -231,7 +231,7 @@ export default function DadosConta({ navigation }) {
         {/* BOTÃO VOLTAR */}
         <TouchableOpacity
           style={styles.botaoVoltar}
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate("perfil")}
         >
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>

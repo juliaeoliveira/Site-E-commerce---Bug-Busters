@@ -141,7 +141,7 @@ export default function Carrinho({ navigation, route }) {
         {/* HEADER */}
         <View style={styles.header}>
           <Ionicons name="cart-outline" size={35} />
-          <Text style={styles.title}>Carrinho de {nomeUsuario}</Text>
+          <Text style={styles.title}>Carrinho</Text>
         </View>
 
         {/* LISTA DE ITENS OU MENSAGEM DE VAZIO */}
