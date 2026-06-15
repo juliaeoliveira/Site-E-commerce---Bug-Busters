@@ -270,6 +270,7 @@ body {
   /* Impede rolagem horizontal */
   background-color: #eae4d8;
   color: #3a2d20;
+  font-family: "Afacad";
 }
 
 /*===============================================================*/
@@ -299,7 +300,7 @@ h1 {
   text-align: center;
   color: #523800; /* Cor consistente com o tema */
   margin-bottom: 40px;
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Aboreto", system-ui;
   font-size: 32px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -335,7 +336,7 @@ h1 {
 .pedido-header h2 {
   font-size: 20px;
   color: #7a4a1c; /* Marrom elegante */
-  font-family: "Libre Caslon Text", serif;
+  font-family: "Afacad";
   font-weight: 600;
   margin: 0;
 }
@@ -343,7 +344,7 @@ h1 {
 .pedido-header span {
   font-size: 14px;
   color: #8b7355; /* Marrom claro para data */
-  font-family: "Inter", sans-serif;
+  font-family: "Afacad";
   background: #f5efe5; /* Fundo para destacar a data */
   padding: 6px 12px;
   border-radius: 6px;
@@ -351,9 +352,9 @@ h1 {
 
 .pedido-info {
   margin-top: 0;
-  font-size: 16px;
+  font-size: 18px;
   color: #523800;
-  font-family: "Inter", sans-serif;
+  font-family: "Afacad";
   display: flex;
   gap: 32px; /* Espaçamento entre informações */
 }
@@ -363,6 +364,7 @@ h1 {
 }
 
 .pedido-info strong {
+  font-family: "Afacad";
   color: #3d2a0f; /* Marrom escuro para labels */
   font-weight: 600;
 }
@@ -371,7 +373,7 @@ h1 {
   text-align: center;
   color: #8b7355;
   font-size: 18px;
-  font-family: "Inter", sans-serif;
+  font-family: "Afacad";
   padding: 60px 20px;
   background: #faf8f5; /* Fundo sutil */
   border-radius: 12px;
