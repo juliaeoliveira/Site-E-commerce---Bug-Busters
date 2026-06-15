@@ -160,7 +160,7 @@ def pagina_checkout(request: Request, db: Session = Depends(get_db)):
             "link_login": "/usuario/login"
         })
     
-    endereco = usuario.endereco
+    endereco = usuario.endereco[0] if usuario.endereco else None
 
     #caso o usuário ainda não tenha endereço cadastrado
     if not endereco:
@@ -262,10 +262,10 @@ async def salvar_dados_pedido(
     valor_total = sum(Decimal(str(i["subtotal"])) for i in itens) + frete_decimal
 
     if (metodo_pagamento == "debito") or (metodo_pagamento == "pix"):
-        status = "pago"
+        status = True
     
     if metodo_pagamento == "credito":
-        status = "pendente"
+        status = False
 
     # Cria o pedido
     novo_pedido = Pedido(
@@ -331,7 +331,7 @@ def editar_endereco(request: Request, db: Session = Depends(get_db)):
             "link_login": "/usuario/login"
         })
     
-    endereco = usuario.endereco
+    endereco = usuario.endereco[0] if usuario.endereco else None
 
     #caso o usuário ainda não tenha endereço cadastrado
     if not endereco:
@@ -381,7 +381,9 @@ def editar_endereco(request:Request,
             "link_login": "/usuario/login"
         })
     
-    if not usuario.endereco:
+    endereco_existente = usuario.endereco[0] if usuario.endereco else None
+    
+    if not endereco_existente:
         endereco = Endereco(
             cep=cep,
             rua=rua,
@@ -394,7 +396,7 @@ def editar_endereco(request:Request,
         )
         db.add(endereco)
     else:
-        endereco = usuario.endereco
+        endereco = endereco_existente
         endereco.cep = cep
         endereco.rua = rua
         endereco.numero = numero
@@ -404,7 +406,6 @@ def editar_endereco(request:Request,
         endereco.estado = estado
 
     db.commit()
-    db.refresh(endereco)
     return RedirectResponse(url="/pedido/checkout",status_code=303)
 
 @router.get("/{pedido_id}")
