@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const BASE_URL = "http://10.0.2.2:8000"
+const BASE_URL = "https://sobveu-vestidos-de-noiva.eastus2.cloudapp.azure.com";
 
 async function getAuthHeaders() {
     const token = await AsyncStorage.getItem("token");
