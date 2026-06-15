@@ -139,21 +139,59 @@ export default function Checkout({ navigation }) {
   // Ref para debouncing ao digitar CEP
   const cepTimeoutRef = useRef(null);
 
+  // Consulta ViaCEP para validar e obter dados do CEP (uso para preencher campos)
+  async function fetchCepViaCep(cepDigits) {
+    try {
+      const cepClean = String(cepDigits).replace(/\D/g, "");
+      if (cepClean.length !== 8) return null;
+      const url = `https://viacep.com.br/ws/${cepClean}/json/`;
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (data.erro) return null;
+      return data;
+    } catch (err) {
+      console.error("Erro fetchCepViaCep:", err);
+      return null;
+    }
+  }
+
   // Verifica o CEP e preenche campos se encontrado
   async function verifyCepAndFill(cep) {
     try {
-      const res = await geocode(cep);
+      const cleaned = String(cep).replace(/\D/g, "");
+      if (cleaned.length !== 8) return;
+
+      // Primeiro tenta ViaCEP (mais confiável para CEPs brasileiros)
+      const viaData = await fetchCepViaCep(cleaned);
+      if (viaData) {
+        const rua = viaData.logradouro || "";
+        const bairro = viaData.bairro || "";
+        const cidade = viaData.localidade || "";
+        const estado = viaData.uf || "";
+
+        setNovoEndereco((prev) => ({
+          ...prev,
+          rua: rua || prev.rua,
+          bairro: bairro || prev.bairro,
+          cidade: cidade || prev.cidade,
+          estado: estado || prev.estado,
+        }));
+        // calcula frete imediatamente usando os dados do ViaCEP
+        calcularFretePorEndereco({ cep: cleaned, rua, bairro, cidade, estado });
+        return;
+      }
+
+      // Se ViaCEP não retornou, tenta fallback com Nominatim
+      const res = await geocode(cleaned);
       if (!res) {
         Alert.alert("CEP inválido", "CEP não existe. Verifique e tente novamente.");
-        // limpa campos que dependem do CEP
         setNovoEndereco((prev) => ({ ...prev, rua: "", bairro: "", cidade: "", estado: "" }));
         return;
       }
 
-      // Tenta extrair informações do endereço retornado pelo Nominatim
       const addr = res.raw && res.raw.address ? res.raw.address : {};
 
-      // rua: preferir tipos de rua conhecidos e incluir número quando disponível
       let rua = "";
       if (addr.road || addr.pedestrian || addr.cycleway || addr.footway) {
         rua = addr.road || addr.pedestrian || addr.cycleway || addr.footway;
@@ -162,21 +200,9 @@ export default function Checkout({ navigation }) {
         rua = addr.house_number;
       }
 
-      let bairro = addr.suburb || addr.neighbourhood || addr.village || addr.hamlet || "";
-      let cidade = addr.city || addr.town || addr.village || addr.county || "";
-      let estado = addr.state || addr.region || "";
-
-      // Fallback: se os campos estiverem vazios, tenta quebrar display_name
-      if ((!rua || rua === "") && res.raw && res.raw.display_name) {
-        const parts = res.raw.display_name.split(',').map(p => p.trim()).filter(Boolean);
-        if (parts.length > 0 && !rua) rua = parts[0];
-        if (parts.length > 1 && !bairro) {
-          // às vezes o segundo pedaço é bairro ou complemento
-          // não sobrescreve se já tivermos bairro
-        }
-        if (parts.length > 2 && !cidade) cidade = parts[2];
-        if (parts.length > 3 && !estado) estado = parts[3];
-      }
+      const bairro = addr.suburb || addr.neighbourhood || addr.village || addr.hamlet || "";
+      const cidade = addr.city || addr.town || addr.village || addr.county || "";
+      const estado = addr.state || addr.region || "";
 
       setNovoEndereco((prev) => ({
         ...prev,
@@ -185,6 +211,8 @@ export default function Checkout({ navigation }) {
         cidade: cidade || prev.cidade,
         estado: estado || prev.estado,
       }));
+      // calcula frete com os dados obtidos pelo Nominatim
+      calcularFretePorEndereco({ cep: cleaned, rua, bairro, cidade, estado });
     } catch (err) {
       console.error("Erro verifyCepAndFill:", err);
     }
@@ -235,17 +263,34 @@ export default function Checkout({ navigation }) {
         }
       }
 
-      // Tenta geocodificar: primeiro CEP (se houver), se falhar tenta o endereço completo
-      const addressQuery = `${endereco.rua || ""} ${endereco.numero || ""} ${endereco.bairro || ""} ${endereco.cidade || ""} ${endereco.estado || ""}`.trim();
+      // Construir tentativa de lookup mais precisa:
+      // 1) se existir CEP, consultar ViaCEP para obter logradouro/bairro/cidade/uf e geocodificar o endereço completo
+      // 2) se ViaCEP não disponível, tentar geocodificar o CEP diretamente (fallback)
+      const cepClean = endereco && endereco.cep ? String(endereco.cep).replace(/\D/g, "") : null;
       let dest = null;
-      if (endereco.cep && endereco.cep.length > 0) {
-        dest = await geocode(endereco.cep);
+
+      if (cepClean && cepClean.length === 8) {
+        const viaData = await fetchCepViaCep(cepClean);
+        if (viaData) {
+          const parts = [viaData.logradouro, viaData.bairro, viaData.localidade, viaData.uf, 'Brasil']
+            .filter(Boolean)
+            .join(', ');
+          dest = await geocode(parts);
+          if (!dest) {
+            // se falhar, geocodifica só cidade/estado
+            const cityParts = [viaData.localidade, viaData.uf, 'Brasil'].filter(Boolean).join(', ');
+            dest = await geocode(cityParts);
+          }
+        }
+
         if (!dest) {
-          console.warn("Geocode com CEP falhou, tentando endereço completo", { cep: endereco.cep, addressQuery });
-          dest = await geocode(addressQuery);
+          // fallback: tenta geocodificar somente o CEP (alguns resultados são melhores)
+          dest = await geocode(cepClean);
         }
       } else {
-        dest = await geocode(addressQuery);
+        // sem CEP, tenta geocodificar a composição do endereço enviada
+        const addressQuery = `${endereco.rua || ""} ${endereco.numero || ""} ${endereco.bairro || ""} ${endereco.cidade || ""} ${endereco.estado || ""}`.trim();
+        if (addressQuery) dest = await geocode(addressQuery);
       }
 
       const baseCoord = warehouseCoord || (await geocode(warehouseCep));
@@ -331,9 +376,10 @@ export default function Checkout({ navigation }) {
     }
 
     try {
-      // Verifica se o CEP digitado realmente existe usando geocoding
-      const cepGeo = await geocode(novoEndereco.cep);
-      if (!cepGeo) {
+      // Verifica se o CEP digitado realmente existe usando ViaCEP (mais confiável)
+      const cepDigits = String(novoEndereco.cep).replace(/\D/g, "");
+      const viaData = await fetchCepViaCep(cepDigits);
+      if (!viaData) {
         Alert.alert("CEP inválido", "CEP não existe. Verifique e tente novamente.");
         return;
       }
